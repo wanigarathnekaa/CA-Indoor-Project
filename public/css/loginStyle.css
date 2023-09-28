@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+*{
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #EAF3F4;
+}
+
+.loginContainer .container{
+    position: relative;
+    left: 75%;
+    width: 420px;
+    background: #A7D8d7;
+    color: black;
+    border-radius: 40px;
+    padding: 30px 40px;
+    box-shadow: 0 0 10px #2E8A99;
+}
+
+.loginContainer .imgcontainer{
+    position: absolute;
+    top: 30%;
+    right: 55%;
+}
+
+.loginContainer .imgcontainer1{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+}
+
+.loginContainer .imgcontainer2{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.imgcontainer .logo{
+    width: 400px;
+    height: 250px;
+}
+
+.imgcontainer1 .sidepic1{
+    height:100vh;
+    background: no-repeat;
+    background: cover;
+}
+
+.loginContainer h1{
+    font-size: 36px;
+    font-weight: 800;
+    text-align: center;   
+}
+
+.loginContainer .input-box{
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid #2E8A99;
+    border-radius: 40px;
+    font-size: 16px;
+    color: black;
+    padding: 20px;
+}
+
+.input-box input::placeholder{
+    color: black;
+}
+
+.input-box i{
+    position: relative;
+    right: -300px;
+    top: -50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+
+}
+
+.loginContainer .remember-forget{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    margin: -15px 0px 15px;
+}
+
+.remember-forget label input{
+    accent-color: black;
+    margin-right: 3px;
+}
+
+.remember-forget a{
+    color: black;
+    text-decoration: none;
+}
+
+.remember-forget a:hover{
+    text-decoration: underline;
+}
+
+.loginContainer .btn{
+    width: 100%;
+    height: 45px;
+    background: #2E8A99;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #A7D8d7;
+    font-size: 16px;
+    color: black;
+    font-weight: 600;
+}
+
+.loginContainer .registerLink{
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0px 15px;
+
+}
+
+
+.registerLink a{
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.registerLink a:hover{
+    text-decoration: underline;
+}
+
+@media (max-width: 600px){
+    * {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #EAF3F4;
+        background-color: #2E8A99;
+    }
+    
+    .loginContainer {
+        width: 90%; /* Adjust the width to your preference */
+        max-width: 420px; /* Set a maximum width for larger screens */
+        background: #A7D8d7;
+        color: black;
+        border-radius: 40px;
+        padding: 30px 20px; /* Adjust padding for smaller screens */
+        box-shadow: 0 0 10px #2E8A99;
+        text-align: center; /* Center content on small screens */
+    }
+    
+    .loginContainer .imgcontainer {
+        display: none; /* Hide the image container on small screens */
+    }
+    
+    .loginContainer .imgcontainer1 {
+        position: absolute; /* Hide the image container on small screens */
+    }
+    
+    .loginContainer .imgcontainer2 {
+        display: none; /* Hide the image container on small screens */
+        top: 5px;
+        left: 10px;
+    }
+    
+    .imgcontainer .logo {
+        width: 100%; /* Make the logo responsive */
+        max-width: 330px; /* Limit the logo's maximum size */
+        height: auto;
+    }
+    
+    .imgcontainer1 .sidepic1 {
+        display: none; /* Hide the background image on small screens */
+    }
+    
+    .loginContainer h1 {
+        font-size: 24px; /* Adjust font size for smaller screens */
+        font-weight: 800;
+        text-align: center;
+    }
+    
+    .loginContainer .input-box {
+        width: 100%;
+        height: 50px;
+        margin: 20px 0; /* Adjust margin for smaller screens */
+    }
+    
+    .input-box input {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        border: 2px solid #2E8A99;
+        border-radius: 40px;
+        font-size: 16px;
+        color: black;
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+    
+    .input-box input::placeholder {
+        color: black;
+    }
+    
+    .input-box i {
+        display: none; /* Hide the icon on small screens */
+    }
+    
+    .loginContainer .remember-forget {
+        display: block; /* Display the labels and links vertically on small screens */
+        font-size: 1rem;
+        margin: 10px 0; /* Adjust margin for smaller screens */
+    }
+    
+    .remember-forget label input {
+        accent-color: black;
+        margin-right: 3px;
+    }
+    
+    .remember-forget a {
+        color: black;
+        text-decoration: none;
+        display: block; /* Display links vertically on small screens */
+        margin-top: 10px; /* Adjust margin for smaller screens */
+    }
+    
+    .loginContainer .btn {
+        width: 100%;
+        height: 45px;
+        background: #2E8A99;
+        border: none;
+        outline: none;
+        border-radius: 40px;
+        cursor: pointer;
+        box-shadow: 0 0 10px #A7D8d7;
+        font-size: 16px;
+        color: black;
+        font-weight: 600;
+    }
+    
+    .loginContainer .registerLink {
+        font-size: 14.5px;
+        text-align: center;
+        margin: 20px 0 15px;
+    }
+    
+    .registerLink a {
+        color: black;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    
+    .registerLink a:hover {
+        text-decoration: underline;
+    }
+}
+
+
+
