@@ -1,0 +1,42 @@
+<?php 
+    class M_Users{
+        private $db;
+        public function __construct(){
+            $this->db = new Database;
+        }
+
+        //Register User
+        public function register($data){
+            $this->db->query('INSERT INTO user (name, user_name, email, phoneNumber, password) VALUES (:name, :user_name, :email, :phoneNumber, :password)');
+            $this->db->bind(':name', $data['name']);
+            $this->db->bind(':user_name', $data['user_name']);
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':phoneNumber', $data['phoneNumber']);
+            $this->db->bind(':password', $data['pwd']);
+
+            if($this->db->execute()){
+                return true;
+            }
+            else{
+                return false;
+            }
+            
+        }
+        public function findUserByEmail($email){
+            $this->db->query('SELECT * FROM user WHERE email = :email');
+            $this->db->bind(':email', $email);
+
+
+            $row = $this->db->single();
+
+            if($this->db->rowCount() > 0){
+                return true;
+            }else{
+                return false;
+            }
+
+        }
+
+
+    }
+?>
