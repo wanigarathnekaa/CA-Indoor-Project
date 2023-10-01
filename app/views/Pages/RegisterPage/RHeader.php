@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo URLROOT;?>/css/loginStyle.css">
+    <link rel="stylesheet" href="<?php echo URLROOT;?>/css/registerStyle.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Login Page</title>
+    <title>Registration Page</title>
 </head>
 <body>
     <div  class="loginContainer" >
-    <!-- Modal Container -->
-        <form action="#" method="POST">
-            <div class="imgcontainer">
-                <img src="<?php echo URLROOT;?>/images/Logo3.png" alt="Avatar" class="logo">
+        <div class="imgcontainer">
+            <img src="<?php echo URLROOT;?>/images/Logo3.png" alt="Avatar" class="logo">
             </div>
             <div class="imgcontainer1">
                 <img src="<?php echo URLROOT;?>/images/Group 89.png" alt="Avatar" class="sidepic1">

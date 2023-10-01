@@ -1,5 +1,6 @@
             <div class="container">
                 <h1>Login</h1>
+                
                 <div class="input-box">
                     <!-- <label for="uname"><b>Username</b></label> -->
                     <input type="text" placeholder="Username" name="uname" required>
