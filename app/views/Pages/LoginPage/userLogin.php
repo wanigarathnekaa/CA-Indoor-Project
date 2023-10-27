@@ -3,13 +3,13 @@
                 
                 <div class="input-box">
                     <!-- <label for="uname"><b>Username</b></label> -->
-                    <input type="text" placeholder="Username" name="uname" required>
+                    <input type="text" placeholder="Email" name="email" id="email"  required>
                     <i class='bx bxs-user'></i>
                 </div>
                 
                 <div class="input-box">
                     <!-- <label for="psw"><b>Password</b></label> -->
-                    <input type="password" placeholder="Password" name="psw" required>
+                    <input type="password" placeholder="Password" name="pwd" id="pwd" required>
                     <i class='bx bxs-low-vision'></i>
                 </div>
                 <div class="remember-forget">

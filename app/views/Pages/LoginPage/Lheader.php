@@ -10,7 +10,7 @@
 <body>
     <div  class="loginContainer" >
     <!-- Modal Container -->
-        <form action="#" method="POST">
+        <form action="<?php echo URLROOT;?>/Users/login" method="POST">
             <div class="imgcontainer">
                 <img src="<?php echo URLROOT;?>/images/Logo3.png" alt="Avatar" class="logo">
             </div>

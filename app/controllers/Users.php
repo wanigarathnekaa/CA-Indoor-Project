@@ -112,6 +112,78 @@
             //Load the view
             $this->view('Page/RegisterPage/register');
         }
+
+        public function login(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                //submitting form
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+
+                //Input data
+                $data = [
+                    'email' => trim($_POST['email']),
+                    'pwd' => trim($_POST['pwd']),
+
+                    'email_err' => "",
+                    'pwd_err' => "",
+                ];
+
+                //validate the email
+                if(empty($data['email'])){
+                    $data['email_err'] = "Please enter an email";
+                }
+                else{
+                    //check email already registered or not
+                    if($this->userModel->findUserByEmail($data['email'])){
+                       echo "user is found";
+                    }else{
+                        $data['email_err'] = "User Not Found";
+                    }
+                }
+
+                //validate the user
+                if(empty($data['pwd'])){
+                    $data['pwd_err'] = "Please enter a password";
+                }
+
+                //If no error found then login user
+                if(empty($data['email_err']) && empty($data['pwd_err'])){
+                    $loginUser = $this->userModel->login($data['email'], $data['pwd']);
+
+                    if($loginUser){
+                        //Authenticate User
+                        die('Access granted!');
+                    }
+                    else{
+                        $data['pwd_err'] = "Invalid Password";
+                        echo $data['pwd_err'];
+                        //Load View
+                        $this->view('Pages/LoginPage/login');
+                    }
+                }
+                else{
+                    //Load View
+                    $this->view('Pages/LoginPage/login');
+                }
+
+            }
+            else{
+                //initial form
+                $data = [
+                    'email' => "",
+                    'pwd' => "",
+
+                    'email_err' => "",
+                    'pwd_err' => "",
+                ];
+
+                //Load View
+                $this->view('Page/LoginPage/login');
+
+
+            }
+
+        }
     }
 
 ?>
