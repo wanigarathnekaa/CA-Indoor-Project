@@ -58,6 +58,20 @@ class Pages extends Controller{
 
         $this->view('Pages/UserProfiles/editProfile');
     }
+
+    public function Advertisements($name){
+        // $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        // print_r($user);
+
+        $this->view('Pages/Advertisement/advertisement');
+    }
+
+    public function AdvertisementDetails($name){
+        // $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        // print_r($user);
+
+        $this->view('Pages/Advertisement/advertisementDetails');
+    }
 }
 
 ?>
