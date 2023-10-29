@@ -1,0 +1,81 @@
+ * {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+}
+
+body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+}
+
+.container{
+      height: 200px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+.ad-box {
+      background: #eaf3f4;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: row;
+      gap: 0px;
+      align-items: flex-start;
+      justify-content: flex-start;
+      position: relative;
+}
+.pic {
+  background: #a7d8d7;
+  border-radius: 12px 0px 0px 12px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 437px;
+  height: 580px;
+  position: relative;
+  overflow: hidden;
+}
+.download-2 {
+  flex-shrink: 0;
+  width: 377px;
+  height: 521px;
+  position: relative;
+}
+.details {
+  background: #eaf3f4;
+  border-radius: 0px 12px 12px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 323px;
+  height: 580px;
+  position: relative;
+}
+.title {
+  color: #000000;
+  text-align: left;
+  font: 700 16px "Inter", sans-serif;
+  position: relative;
+  width: 307px;
+  height: 52px;
+}
+.description{
+  color: #000000;
+  text-align: left;
+  font: 300 14px "Inter", sans-serif;
+  position: relative;
+  width: 304px;
+  height: 192px;
+}

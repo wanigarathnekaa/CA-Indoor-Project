@@ -83,7 +83,7 @@
                     <br>
                     <br>
                     <br>
-                    <a href="" class="btn" type="button">Edit Profile</a>
+                    <a href="<?php echo URLROOT;?>/Pages/editProfile/user" class="btn" type="button">Edit Profile</a>
                    
                 </ul>
             </div>
