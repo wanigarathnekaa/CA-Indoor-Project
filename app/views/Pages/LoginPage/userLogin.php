@@ -3,14 +3,16 @@
                 
                 <div class="input-box">
                     <!-- <label for="uname"><b>Username</b></label> -->
-                    <input type="text" placeholder="Email" name="email" id="email"  required>
+                    <input type="text" name="email" id="email" placeholder="<?php echo $data1['email_err']; ?>">
                     <i class='bx bxs-user'></i>
+                    <!-- <span class="form-invalid"></span> -->
                 </div>
                 
                 <div class="input-box">
                     <!-- <label for="psw"><b>Password</b></label> -->
-                    <input type="password" placeholder="Password" name="pwd" id="pwd" required>
+                    <input type="password" name="pwd" id="pwd" placeholder="<?php echo $data1['pwd_err']; ?>">
                     <i class='bx bxs-low-vision'></i>
+                    <!-- <span class="form-invalid"></span> -->
                 </div>
                 <div class="remember-forget">
                     <label><input type="checkbox" checked="checked" name="remember"> Remember me</label>

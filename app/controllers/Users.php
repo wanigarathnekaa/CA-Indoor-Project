@@ -79,7 +79,7 @@
 
                     //create user
                     if($this->userModel->register($data)){
-                        die('registered Successfully');
+                        redirect('Users/login');
                     }
                     else{
                         die('Something Went wrong');
@@ -87,13 +87,13 @@
                 }
                 else{
                     //Load the view
-                    $this->view('Pages/RegisterPage/register');
+                    $this->view('Pages/RegisterPage/register', $data);
                 }
             }
             else{
                 //initial form
                 $data = [
-                    'name' => "",
+                    'name' => "heee",
                     'user_name' => "",
                     'email' => "",
                     'phoneNumber' => "",
@@ -110,7 +110,7 @@
             }
 
             //Load the view
-            $this->view('Page/RegisterPage/register');
+            $this->view('Pages/RegisterPage/register', $data);
         }
 
         public function login(){
@@ -152,18 +152,18 @@
 
                     if($loginUser){
                         //Authenticate User
-                        die('Access granted!');
+                        $this->createUserSession($loginUser);
                     }
                     else{
                         $data['pwd_err'] = "Invalid Password";
                         echo $data['pwd_err'];
                         //Load View
-                        $this->view('Pages/LoginPage/login');
+                        $this->view('Pages/LoginPage/login', $data);
                     }
                 }
                 else{
                     //Load View
-                    $this->view('Pages/LoginPage/login');
+                    $this->view('Pages/LoginPage/login', $data);
                 }
 
             }
@@ -178,12 +178,37 @@
                 ];
 
                 //Load View
-                $this->view('Page/LoginPage/login');
+                $this->view('Pages/LoginPage/login', $data);
 
 
             }
 
         }
+
+        public function createUserSession($user){
+            $_SESSION['user_id'] = $user->uid;
+            $_SESSION['user_name'] = $user->name;
+            $_SESSION['user_email'] = $user->email;
+
+            redirect('Pages/Dashboard/user');
+        }
+        public function logout(){
+            unset($_SESSION['user_id']);
+            unset($_SESSION['user_name']);
+            unset($_SESSION['user_email']);
+            session_destroy();
+
+            redirect('Users/login');
+        }
+
+        public function isloggedin(){
+            if(isset($_SESSION['user_id'])){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
+
 
 ?>
