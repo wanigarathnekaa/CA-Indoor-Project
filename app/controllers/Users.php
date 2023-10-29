@@ -156,7 +156,7 @@
                     }
                     else{
                         $data['pwd_err'] = "Invalid Password";
-                        echo $data['pwd_err'];
+                        // echo $data['pwd_err'];
                         //Load View
                         $this->view('Pages/LoginPage/login', $data);
                     }
