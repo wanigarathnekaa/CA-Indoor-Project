@@ -1,7 +1,7 @@
 
 <div class="bottom-content">
                 <li class="profile">
-                    <a href="#">
+                    <a href="C&A_Indoor_Project/Pages/Profile/user">
                         <i class='bx bx-user-circle icon'></i>
                         <span class="text nav-text">Profile</span>
                     </a>

@@ -44,6 +44,13 @@ class Pages extends Controller{
         // $role = $name;
         $this->view('Pages/RegisterPage/register');
     }
+
+    public function Profile($name){
+        $user = $this->pagesModel->findUser($_SESSION['user_email']);
+
+        // print_r($user);
+        $this->view('Pages/UserProfiles/userProfile', $user);
+    }
 }
 
 ?>
