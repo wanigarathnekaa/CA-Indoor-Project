@@ -17,6 +17,11 @@
             return $this->db->single();
         }
 
+        public function getCoaches(){
+            $this->db->query('SELECT * FROM coaches');
+
+            return $this->db->resultSet();
+        }
 
     }
 ?>

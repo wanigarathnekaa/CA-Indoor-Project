@@ -11,12 +11,14 @@
 <body>
     <div class="coaches">
         <div class="profiles">
-            <div class="coachcard">
-                <a href="<?php echo URLROOT?>/Pages/CoachCard/user"><img class="image" src="<?php echo URLROOT; ?>/images/image1.jpg" /></a>
-                <div class="Name">Mahela Jayawardhana</div>
-            </div>
+            <?php foreach($data as $coach):?>
+                <div class="coachcard">
+                    <a href="<?php echo URLROOT?>/Pages/CoachCard/user"><img class="image" src="<?php echo URLROOT; ?>/images/image1.jpg" /></a>
+                    <div class="Name"><?php echo "{$coach->name}"?></div>
+                </div>
+            <?php endforeach;?>
 
-            <div class="coachcard">
+            <!-- <div class="coachcard">
                 <img class="image" src="<?php echo URLROOT; ?>/images/image2.jpg" />
                 <div class="Name">Kamal Gunarathne</div>
             </div>
@@ -31,7 +33,7 @@
             <div class="coachcard">
                 <img class="image" src="<?php echo URLROOT; ?>/images/image5.jpg" />
                 <div class="Name">Mahela Jayawardhana</div>
-            <!-- </div>
+            </div>
             <div class="coachcard">
                 <img class="image" src="./coachesimage//image1.jpg" />
                 <div class="Name">Kamal Gunarathne</div>
