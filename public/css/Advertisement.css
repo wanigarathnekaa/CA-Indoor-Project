@@ -1,105 +1,150 @@
 * {
-  font-size: 14px;
-  list-style: none;
-  text-decoration: none;
-  font-family: "Poppins", sans-serif;
-  
-  }
-  
-  body {
-        background-image: url(../images/background.png);
-        margin: 0;
-        padding: 0;
-  }
-  
-  .adbar{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-  
-  }
-  
-  .ad {
-        display: flex;
-        flex-direction: row;
-        gap: 20px 50px;
-        align-items: start;
-        justify-content: center;
-        padding-left: 50px;
-        padding-right: 50px;
-        flex-wrap: wrap;    
-  }
-  
-  .adblock {
-        background-color: #A7D8D7;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        align-items: center;
-        justify-content: middle;
-        flex-shrink: 0;
-        position: relative;  
-        padding: 20px;
-        align-items: middle;
-        border-radius: 20px;
-  }
-  
-  .adimage {
-        flex-shrink: 0;
-        width: 306.71px;
-        height: 340px;
-        position: relative;
-        border-radius: 20px;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  
-  }
-  
-  .btnmore {
-        background: #4F9DA9;
-        border-radius: 20px;
-        padding: 7px 10px 7px 10px;
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        width: 116px;
-        position: relative;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  }
-  
-  .btnmore:hover {
-        background: #2E8A99;
-        color: #4F9DA9;
-        transition: 0.5s;
-  }
-  .more-details {
-        color: #fff6f6;
-        text-align: left;
-        position: relative;
-        width: 79px;
-  }
-  
-  .bx {
-        color: #fff6f6;
-  }
-  
-  .topic{
-        display: flex;
-        flex-direction: row;
-        gap: 45px;
-        align-items: center;
-        justify-content: center;
-        padding-left: 50px;
-        padding-right: 50px;
-        flex-wrap: wrap;    
-  }
-  
-  .topic h1{
-        color: #fff6f6;
-        font-size: 40px;
-        font-weight: 600;
-        text-align: center;
-  }
+      font-size: 14px;
+      list-style: none;
+      text-decoration: none;
+      font-family: "Poppins", sans-serif;
+      
+      }
+      
+      body {
+            background-image: url(../images/background.png);
+            margin: 0;
+            padding: 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+      }
+      
+      .adbar{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+      
+      }
+      
+      .ad {
+            display: flex;
+            flex-direction: row;
+            gap: 20px 50px;
+            align-items: start;
+            justify-content: center;
+            padding-left: 50px;
+            padding-right: 50px;
+            flex-wrap: wrap; 
+            padding-bottom: 50px;;   
+      }
+      
+      .adblock {
+            background-color: #A7D8D7;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            justify-content: middle;
+            flex-shrink: 0;
+            position: relative;  
+            padding: 20px;
+            align-items: middle;
+            border-radius: 20px;
+      }
+      
+      .adimage {
+            flex-shrink: 0;
+            width: 306.71px;
+            height: 340px;
+            position: relative;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      
+      }
+      
+      
+      
+      .addbtn{
+            background: #4F9DA9;
+            width: 80px;
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 10px 5px 10px;
+            flex-wrap: wrap;
+            border-radius: 20px;
+      }
+      
+      .addbtn:hover {
+            background: #2E8A99;
+            color: #4F9DA9;
+            transition: 0.5s;
+      }
+      
+      .btnrow{
+            display: flex;
+            align-items: end;
+            justify-content: end;
+            padding-right: 100px;
+            padding-bottom: 30px;
+      }
+      .addtext{
+            color: #fff6f6;
+            text-align: left;
+            position: relative;
+            width: 50px;
+      }
+      .btnmore {
+            background: #4F9DA9;
+            border-radius: 20px;
+            padding: 7px 10px 7px 10px;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 116px;
+            position: relative;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      }
+      
+      .btnmore:hover {
+            background: #2E8A99;
+            color: #4F9DA9;
+            transition: 0.5s;
+      }
+      
+      
+      .more-details {
+            color: #fff6f6;
+            text-align: left;
+            position: relative;
+            width: 80px;
+      }
+      
+      
+      
+      .bx {
+            color: #fff6f6;
+      }
+      
+      .topic{
+            display: flex;
+            flex-direction: row;
+            gap: 45px;
+            align-items: center;
+            justify-content: center;
+            padding-left: 50px;
+            padding-right: 50px;
+            flex-wrap: wrap;    
+      }
+      
+      .topic h1{
+            color: #fff6f6;
+            font-size: 40px;
+            font-weight: 600;
+            text-align: center;
+      }
+      
+      

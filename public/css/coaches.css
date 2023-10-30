@@ -1,49 +1,66 @@
 * {
-      list-style: none;
-      text-decoration: none;
-      font-family: "Poppins", sans-serif;   
+  list-style: none;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;   
 }
-
+body{
+  background-image: url(../images/background.png);
+  }
 .profiles {
-  display: flex;
-  flex-direction: row;
-  gap: 30px;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  position: relative;
+display: flex;
+flex-direction: row;
+gap: 30px;
+align-items: center;
+justify-content: center;
+flex-wrap: wrap;
+position: relative;
 }
 
 .coachcard {
-  background: #a7d8d7;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 198px;
-  height: 199px;
-  position: relative;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px gray;
+background: #a7d8d7;
+display: flex;
+flex-direction: column;
+gap: 14px;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+width: 198px;
+height: 199px;
+position: relative;
+border-radius: 12px;
+box-shadow: 0 3px 10px gray;
 }
 
-
+.topic{
+  display: flex;
+  flex-direction: row;
+  gap: 45px;
+  align-items: center;
+  justify-content: center;
+  padding-left: 50px;
+  padding-right: 50px;
+  flex-wrap: wrap;    
+}
+.topic h1{
+  color: #fff6f6;
+  font-size: 40px;
+  font-weight: 600;
+  text-align: center;
+}
 .image {
-  border-radius: 12px;
-  flex-shrink: 0;
-  width: 180px;
-  height: 150px;
-  position: relative;
-  object-fit: cover;
+border-radius: 12px;
+flex-shrink: 0;
+width: 180px;
+height: 150px;
+position: relative;
+object-fit: cover;
 }
 
 
 .name {
-  color: #000000;
-  text-align: left;
-  font-size: 16px;
-  position: relative;
+color: #000000;
+text-align: left;
+font-size: 16px;
+position: relative;
 }
 

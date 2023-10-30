@@ -11,6 +11,19 @@
 </head>
 
 <body>
+    <div class="topic">
+        <h1>Advertisement</h1>
+    </div>
+
+    <div class="btnrow">
+            <div class="addbtn">
+                  <a type="button" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement">
+                        <div class="addtext">add</div>
+                  </a>
+                  <i class='bx bx-add-to-queue'></i>
+            </div>
+    </div>
+
     <div class="adbar">
         <div class="ad">
             <div class="adblock">
@@ -36,12 +49,6 @@
                     <div class="more-details">more details</div>
                     <i class='bx bxs-chevrons-right'></i>
                 </div>
-            </div>
-
-            <div>
-                <a type="button" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/coach">
-                    <div class="more-details">Add Advertisements</div>
-                </a>
             </div>
         </div>
     </div>

@@ -13,6 +13,8 @@ body{
     align-items: center;
     background: url(../images/background.png);
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .container{
@@ -131,3 +133,71 @@ body{
     color: #FFFFFF;
     background: #2E8A99;
   }
+
+  @media only screen and (max-width: 720px) {
+    
+
+.container {
+    width: 100%;
+    max-width: 650px;
+    background-color: #EAF3F4;
+    padding: 28px;
+    margin: 0 28px;
+    border-radius: 10px;
+    box-shadow: inset -2px 2px 2px white;
+    height: auto; 
+}
+
+
+
+
+    .main-user-info, .user-input-box {
+        width: 100%;
+    }
+
+    .user-input-box:nth-child(2n) {
+        justify-content: start; 
+    }
+
+    .user-input-box label {
+        width: 100%;
+        text-align: left;
+    }
+
+    .form-submit-btn input {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .group-138, .edit-profile3 {
+        width: 100%;
+        float: none;
+        margin-top: 0;
+    }
+    .line-1{
+        display:none;
+    }
+    
+
+.line-1 {
+    border-style: solid;
+    border-color: #000000;
+    border-width: 1px 0 0 0;
+    width: 100%;
+    height: 0px;
+    margin-top: 20px; 
+}
+
+.group-138 {
+    width: 100%;
+    float: none;
+    margin-top: 20px; 
+}
+
+.edit-profile3 {
+    width: 100%;
+    float: none;
+    margin-top: 20px;
+}
+
+}
