@@ -13,6 +13,8 @@ body{
     align-items: center;
     background: url(../images/background.png);
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .container{
