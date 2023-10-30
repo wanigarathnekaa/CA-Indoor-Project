@@ -74,7 +74,16 @@ class Pages extends Controller{
     }
 
     public function Coach($name){
-        $this->view('Pages/Coach/coach');
+        $coaches = $this->pagesModel->getCoaches();
+        $data = [
+            'users' => $coaches,
+        ];
+        $res = [];
+        foreach($data['users'] as $user){
+            $res[] = $this->pagesModel->findUser($user->email);
+        }
+
+        $this->view('Pages/Coach/coach', $res);
     }
 
     public function CoachCard($name){
