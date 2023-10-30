@@ -132,7 +132,7 @@
                         </a>
                         </li>
                         <li class="nav-link">
-                        <a href="#">
+                        <a href="C&A_Indoor_Project/Pages/Coach_Advertisements/user">
                             <i class="bx bxs-cricket-ball icon"></i>
                             <span class="text nav-text">Advertisement</span>
                         </a>
