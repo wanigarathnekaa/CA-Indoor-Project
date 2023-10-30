@@ -81,6 +81,20 @@ class Pages extends Controller{
         $this->view('Pages/Coach/coachCard');
     }
 
+    public function Coach_Advertisements($name){
+        // $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        // print_r($user);
+
+        $this->view('Pages/Advertisement/coachAdvertisements');
+    }
+
+    public function Add_Advertisements($name){
+        // $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        // print_r($user);
+
+        $this->view('Pages/Advertisement/addAdvertisement');
+    }
+
 }
 
 ?>
