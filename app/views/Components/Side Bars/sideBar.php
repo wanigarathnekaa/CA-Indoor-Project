@@ -165,7 +165,7 @@
                         </a>
                         </li>
                             <li class="nav-link">
-                                <a href="#">
+                                <a href="C&A_Indoor_Project/Pages/Coach_Registration/coach">
                                     <i class= "bx bxs-user-plus icon"></i>
                                     <span class="text nav-text">Registration</span>
                                 </a>
