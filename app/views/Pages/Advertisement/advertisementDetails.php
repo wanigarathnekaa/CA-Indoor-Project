@@ -10,7 +10,7 @@
       <div class="container">
             <div class="ad-box">
                   <div class="pic">
-                    <img class="download-2" src="<?php echo URLROOT; ?>/images/ad1.jpeg" />
+                    <img class="image" src="<?php echo URLROOT; ?>/images/ad1.jpeg" />
                   </div>
                   <div class="details">
                     <div class="title">
@@ -19,6 +19,10 @@
                     <div class="description">
                       asdwfwe fwef def wde e5ryt rtergf hefeesn hbhhbbnnjd fbehu efnujnwj
                       ejdnnefndsjf efbhhsd bhhbef ebhdjw hdw hbhjrne whbbjwn hbjenjw hbhjb
+                    </div>
+                    <div class="btnrow">
+                    <button class="btn">Edit</button>
+                    <button class="btn">Delete</button>
                     </div>
                   </div>
                 </div>

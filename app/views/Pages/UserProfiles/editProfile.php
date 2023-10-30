@@ -13,8 +13,9 @@
         <h1 class="form-title">Edit profile</h1>
         <form action="#">
             <img src="<?php echo URLROOT;?>/images/user.png" class="picture"><button class="btn1"><u>Change/Delete Profile Picture</u></button>
-
-            <div class="main-user-info">
+            <?php
+                if($role == "User" || $role == "Coach"){
+                        echo '<div class="main-user-info">
                 <div class="user-input-box">
                     <label for="fullName">Name:</label>
                     <input type="text" id="fullName" name="fullName" placeholder="Enter Name" />
@@ -34,8 +35,10 @@
                 <div class="user-input-box">
                     <label for="Address">Address:</label>
                     <input type="Address" id="Address" name="Address" placeholder="Enter Address" />
-                </div>
-                <div class="user-input-box">
+                </div>';
+                    }
+                if($role == "Coach"){
+                        echo '<div class="user-input-box">
                     <label for="Specialization">Specialization:</label>
                     <input type="Specialization" id="Specialization" name="Specialization"
                         placeholder="Specialization" />
@@ -48,19 +51,24 @@
                     <label for="Experience">Experience:</label>
                     <input type="Experience" id="Experience" name="Experience" placeholder="Experience" />
                 </div>
-            </div>
+                
+                </div>';
+                    }
+                    
+                
+            
+                if($role == "User" || $role == "Coach"){
+                     echo '<div class="form-submit-btn">
+                     <input type="submit" class="btn2" value="Save">
+                     <input type="submit" class="btn3" value="Delete profile">
 
-            <div class="form-submit-btn">
-                <input type="submit" class="btn2" value="Save">
-                <input type="submit" class="btn3" value="Delete profile">
+                </div>
 
-            </div>
-
-            <div class="line-1"></div>
-            <div class="edit-profile3">
+                <div class="line-1"></div>
+                <div class="edit-profile3">
                 <div class="delete-profile">Change password</div>
-            </div>
-            <div class="group-138">
+                </div>
+                <div class="group-138">
                 <div class="group-135">
                     <label for="CurrentPaaword">Current Paaword:</label>
                     <input type="CurrentPaaword" id="CurrentPaaword" name="CurrentPaaword" />
@@ -78,7 +86,9 @@
 
 
                 </div>
-            </div>
+            </div>';
+        }
+        ?>
         </form>
     </div>
 </body>
