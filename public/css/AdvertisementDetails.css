@@ -10,8 +10,9 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-image: url(background.png);
+  background-image: url(../images/background.png);
 }
+
 
 .container{
   height: 200px;
