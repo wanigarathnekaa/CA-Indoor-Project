@@ -17,7 +17,7 @@
 
     <div class="btnrow">
             <div class="addbtn">
-                  <a type="button" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement">
+                  <a type="button" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/advertisement">
                         <div class="addtext">add</div>
                   </a>
                   <i class='bx bx-add-to-queue'></i>
