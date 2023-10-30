@@ -144,7 +144,7 @@
                                 </a>
                             </li>';
                     }
-                    else if($role == "Manager" || $role == "Owner"){
+                    else if($role == "Manager"){
                         echo '
                         <li class="nav-link">
                         <a href="#">
@@ -166,6 +166,46 @@
                         </li>
                             <li class="nav-link">
                                 <a href="C&A_Indoor_Project/Pages/Coach_Registration/coach">
+                                    <i class= "bx bxs-user-plus icon"></i>
+                                    <span class="text nav-text">Registration</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-link">
+                                <a href="#">
+                                    <i class="bx bx-store icon"></i>
+                                    <span class="text nav-text">Cricket Store</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-link">
+                                <a href="#">
+                                    <i class="bx bxs-report icon"></i>
+                                    <span class="text nav-text">Report</span>
+                                </a>
+                            </li> ';
+                    }else if($role == "Owner"){
+                        echo '
+                        <li class="nav-link">
+                        <a href="#">
+                            <i class="bx bx-home-alt icon"></i>
+                            <span class="text nav-text">Dashboard</span>
+                        </a> 
+                        </li>
+                        <li class="nav-link">
+                        <a href="#">
+                            <i class="bx bxs-calendar icon"></i>
+                            <span class="text nav-text">Schedule</span>
+                        </a>
+                        </li>
+                        <li class="nav-link">
+                        <a href="#">
+                            <i class="bx bxs-cricket-ball icon"></i>
+                            <span class="text nav-text">Advertisement</span>
+                        </a>
+                        </li>
+                            <li class="nav-link">
+                                <a href="C&A_Indoor_Project/Pages/Manager_Registration/manager">
                                     <i class= "bx bxs-user-plus icon"></i>
                                     <span class="text nav-text">Registration</span>
                                 </a>
