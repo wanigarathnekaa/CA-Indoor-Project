@@ -72,6 +72,15 @@ class Pages extends Controller{
 
         $this->view('Pages/Advertisement/advertisementDetails');
     }
+
+    public function Coach($name){
+        $this->view('Pages/Coach/coach');
+    }
+
+    public function CoachCard($name){
+        $this->view('Pages/Coach/coachCard');
+    }
+
 }
 
 ?>

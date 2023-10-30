@@ -40,7 +40,7 @@
                         </li>
                         
                         <li class="nav-link">
-                            <a href="#">
+                            <a href="C&A_Indoor_Project/Pages/Coach/user">
                                 <i class="bx bx-body icon"></i>
                                 <span class="text nav-text">Coach</span>
                             </a>
