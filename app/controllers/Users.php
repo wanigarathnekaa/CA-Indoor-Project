@@ -205,6 +205,8 @@
             if(isset($_SESSION['user_id'])){
                 return true;
             }else{
+                //echo 'No Session';
+                //redirect('Users/login');
                 return false;
             }
         }
