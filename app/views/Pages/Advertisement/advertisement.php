@@ -11,6 +11,9 @@
 </head>
 
 <body>
+    <div class="topic">
+        <h1>Advertisement</h1>
+    </div>
     <div class="adbar">
         <div class="ad">
             <div class="adblock">
