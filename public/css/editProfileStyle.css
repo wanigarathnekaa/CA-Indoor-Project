@@ -113,6 +113,8 @@ body{
     transform: rotate(-90deg) scale(1, 1);
   }
   .group-138{
+    position: relative;
+    top: 14rem;
     width: 40%;
     float: right;
     margin-top: -450px;

@@ -25,7 +25,7 @@
                     if($role == "User"){
                         echo '<div class="registerLink">
                                 <p>Don\'t have an account?</p>
-                                <a href="#">Register</a>
+                                <a href="register">Register</a>
                             </div>';
                     }
                 ?>

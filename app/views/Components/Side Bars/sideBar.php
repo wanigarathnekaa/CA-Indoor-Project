@@ -49,6 +49,12 @@
                                 <i class="bx bx-store icon"></i>
                                 <span class="text nav-text">Cricket Store</span>
                             </a>
+                        </li>
+                        <li class="profile">
+                            <a href="C&A_Indoor_Project/Pages/Profile/user">
+                                <i class="bx bx-user-circle icon"></i>
+                                <span class="text nav-text">Profile</span>
+                            </a>
                         </li>';
                 } else if ($role == "Admin") {
                     echo '
@@ -69,8 +75,7 @@
                             <i class="bx bxs-cricket-ball icon"></i>
                             <span class="text nav-text">Advertisement</span>
                           </a>
-                        </li>
-                        
+                        </li> 
                             <li class="nav-link">
                                 <a href="#">
                                     <i class="bx bxs-user-detail icon"></i>
@@ -83,7 +88,14 @@
                                     <i class="bx bxs-detail icon"></i>
                                     <span class="text nav-text">System Logs</span>
                                 </a>
-                            </li>';
+                            </li>
+                            <li class="profile">
+                                <a href="C&A_Indoor_Project/Pages/Profile/user">
+                                    <i class="bx bx-user-circle icon"></i>
+                                    <span class="text nav-text">Profile</span>
+                                </a>
+                            </li>
+                            ';
                 } else if ($role == "Cashier") {
                     echo '
 
@@ -111,6 +123,12 @@
                                 <span class="text nav-text">Payment</span>
                             </a>
                         </li>
+                        <li class="profile">
+                            <a href="C&A_Indoor_Project/Pages/Profile/user">
+                                <i class="bx bx-user-circle icon"></i>
+                                <span class="text nav-text">Profile</span>
+                            </a>
+                        </li>
                         ';
                 } else if ($role == "Coach") {
                     echo '
@@ -136,6 +154,12 @@
                                 <a href="#">
                                     <i class="bx bx-store icon"></i>
                                     <span class="text nav-text">Cricket Store</span>
+                                </a>
+                            </li>
+                            <li class="profile">
+                                <a href="C&A_Indoor_Project/Pages/Profile/user">
+                                    <i class="bx bx-user-circle icon"></i>
+                                    <span class="text nav-text">Profile</span>
                                 </a>
                             </li>';
                 } else if ($role == "Manager") {
@@ -176,6 +200,12 @@
                                 <a href="#">
                                     <i class="bx bxs-report icon"></i>
                                     <span class="text nav-text">Report</span>
+                                </a>
+                            </li>
+                            <li class="profile">
+                                <a href="C&A_Indoor_Project/Pages/Manager_Profile/manager">
+                                    <i class="bx bx-user-circle icon"></i>
+                                    <span class="text nav-text">Profile</span>
                                 </a>
                             </li> ';
                 } else if ($role == "Owner") {
@@ -225,6 +255,12 @@
                                 <a href="#">
                                     <i class="bx bx-money icon"></i>
                                     <span class="text nav-text">Confirmation Fee</span>
+                                </a>
+                            </li>
+                                <li class="profile">
+                                <a href="C&A_Indoor_Project/Pages/Profile/user">
+                                    <i class="bx bx-user-circle icon"></i>
+                                    <span class="text nav-text">Profile</span>
                                 </a>
                             </li>';
                 }

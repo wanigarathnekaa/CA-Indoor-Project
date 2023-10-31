@@ -106,7 +106,7 @@ class Coach extends Controller
 
                 //create user
                 if ($this->coachModel->coachRegister($data) && $this->coachUserModel->register($data)) {
-                    die('Coach registered Successfully');
+                    redirect('Users/login');
                 } else {
                     die('Something Went wrong');
                 }
@@ -230,7 +230,7 @@ class Coach extends Controller
 
                 //create user
                 if ($this->coachModel->updateCoach($data) && $this->coachUserModel->updateUser($data)) {
-                    die('Coach updated Successfully');
+                    redirect('Pages/Profile/user');
                 } else {
                     die('Something Went wrong');
                 }
@@ -246,9 +246,8 @@ class Coach extends Controller
     public function delete()
     {
         // var_dump($_POST);
-        if($this->coachModel->deleteCoach($_POST["submit"]) && $this->coachUserModel->deleteUser($_POST["submit"])) {
-            die("User Deleted Successfully");
-            // redirect("Users/register");
+        if($this->coachModel->deleteCoach($_POST["submit"]) && $this->coachUserModel->deleteUser($_POST["submit"])) {  
+            redirect("Users/register");
         }else{
             die("Something Went Wrong");
         }

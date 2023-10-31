@@ -43,6 +43,34 @@ class M_Manager
 
     }
 
+    public function updateManager($data)
+    {
+        $this->db->query('UPDATE managers SET name=:name, email=:email ,nic= :nic, address= :address, phoneNumber=:phoneNumber WHERE email = :email');
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':nic', $data['nic']);
+        $this->db->bind(':address', $data['address']);
+        $this->db->bind(':phoneNumber', $data['phoneNumber']);
+
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function deleteManager($email){
+        $this->db->query('DELETE FROM managers WHERE email=:email');
+        $this->db->bind(':email', $email);
+
+        if($this->db->execute()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
 }
 ?>

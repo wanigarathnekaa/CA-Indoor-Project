@@ -60,29 +60,47 @@ class Pages extends Controller
         // print_r($user);
         $coachAsCoach = $this->pagesModel->findCoach($_SESSION['user_email']);
         $coachAsUser = $this->pagesModel->findUser($_SESSION['user_email']);
-
-        $data = [
-            'name' => $coachAsUser->name,
-            'user_name' => $coachAsUser->user_name,
-            'email' => $_SESSION['user_email'],
-            'phoneNumber' => $coachAsUser->phoneNumber,
-            'pwd' => $coachAsUser->password,
-            'nic' => $coachAsCoach->nic,
-            'address' => $coachAsCoach->address,
-            'experience' => $coachAsCoach->experience,
-            'specialty' => $coachAsCoach->specialty,
-            'certificate' => $coachAsCoach->certificate,
-
-            'name_err' => "",
-            'user_name_err' => "",
-            'email_err' => "",
-            'phoneNumber_err' => "",
-            'nic_err' => "",
-            'address_err' => "",
-            'experience_err' => "",
-            'specialty_err' => "",
-            'certificate_err' => ""
-        ];
+        $role = "Users";
+        if($coachAsCoach){
+            $role = "Coach";
+            $data = [
+                'name' => $coachAsUser->name,
+                'user_name' => $coachAsUser->user_name,
+                'email' => $_SESSION['user_email'],
+                'phoneNumber' => $coachAsUser->phoneNumber,
+                'pwd' => $coachAsUser->password,
+                'nic' => $coachAsCoach->nic,
+                'address' => $coachAsCoach->address,
+                'experience' => $coachAsCoach->experience,
+                'specialty' => $coachAsCoach->specialty,
+                'certificate' => $coachAsCoach->certificate,
+                'role' => $role,
+    
+                'name_err' => "",
+                'user_name_err' => "",
+                'email_err' => "",
+                'phoneNumber_err' => "",
+                'nic_err' => "",
+                'address_err' => "",
+                'experience_err' => "",
+                'specialty_err' => "",
+                'certificate_err' => ""
+            ];
+        }else{
+            $data = [
+                'name' => $coachAsUser->name,
+                'user_name' => $coachAsUser->user_name,
+                'email' => $_SESSION['user_email'],
+                'phoneNumber' => $coachAsUser->phoneNumber,
+                'pwd' => $coachAsUser->password,
+                'role' => $role,
+    
+                'name_err' => "",
+                'user_name_err' => "",
+                'email_err' => "",
+                'phoneNumber_err' => "",
+            ];
+        }
         // print_r($data);
 
         $this->view('Pages/UserProfiles/editProfile', $data);
@@ -162,6 +180,46 @@ class Pages extends Controller
 
         $this->view('Pages/UserProfiles/deleteProfile', $user);
     }
+
+    public function Manager_Edit_Profile($name)
+    {
+        $manager = $this->pagesModel->findManager($_SESSION['user_email']);
+        $data = [
+            'name' => $manager->name,
+            'email' => $_SESSION['user_email'],
+            'phoneNumber' => $manager->phoneNumber,
+            'pwd' => $manager->password,
+            'nic' => $manager->nic,
+            'address' => $manager->address,
+
+            'name_err' => "",
+            'email_err' => "",
+            'phoneNumber_err' => "",
+            'nic_err' => "",
+            'address_err' => "",
+        ];
+
+        $this->view('Pages/Manager/managerEditProfile', $data);
+    }
+
+    public function Manager_Profile($name)
+    {
+        // echo $_SESSION['user_email'];
+        $user = $this->pagesModel->findManager($_SESSION['user_email']);
+        // print_r($user);
+
+        $this->view('Pages/Manager/managerProfile', $user);
+    }
+
+    public function Manager_Delete_Profile($name)
+    {
+        $user = $this->pagesModel->findManager($_SESSION['user_email']);
+        // print_r($user);
+
+        $this->view('Pages/Manager/managerDeleteProfile', $user);
+    }
+
+    
 }
 
 ?>

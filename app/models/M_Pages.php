@@ -24,6 +24,13 @@
             return $this->db->single();
         }
 
+        public function findManager($email){
+            $this->db->query('SELECT * FROM managers WHERE email = :email');
+            $this->db->bind(':email', $email);
+
+            return $this->db->single();
+        }
+
         public function getCoaches(){
             $this->db->query('SELECT * FROM coaches');
 
