@@ -52,9 +52,9 @@
             
         }
 
-        public function deleteCoach($data){
+        public function deleteCoach($email){
             $this->db->query('DELETE FROM coaches WHERE email=:email');
-            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':email', $email);
 
             if($this->db->execute()){
                 return true;

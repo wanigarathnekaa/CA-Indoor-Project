@@ -157,10 +157,10 @@ class Pages extends Controller
 
     public function Delete_Profile($name)
     {
-        // $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        $user = $this->pagesModel->findUser($_SESSION['user_email']);
         // print_r($user);
 
-        $this->view('Pages/UserProfiles/deleteProfile');
+        $this->view('Pages/UserProfiles/deleteProfile', $user);
     }
 }
 

@@ -86,10 +86,15 @@ class M_Users
 
     }
 
-    public function delete()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    public function deleteUser($email){
+        $this->db->query('DELETE FROM user WHERE email=:email');
+        $this->db->bind(':email', $email);
 
+        if($this->db->execute()){
+            return true;
+        }
+        else{
+            return false;
         }
     }
 
