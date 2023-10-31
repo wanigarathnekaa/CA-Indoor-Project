@@ -122,6 +122,11 @@ body{
     float: right;
     margin-top: -500px;
   }
+  .btn2:hover,
+  .btn3:hover,
+  .btn4:hover{
+    cursor: pointer;
+  }
   .btn4{
     width: 30%;
     margin-top: 5px;
