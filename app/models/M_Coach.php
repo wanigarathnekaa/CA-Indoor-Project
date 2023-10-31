@@ -10,6 +10,19 @@
             $this->db->bind(':email', $email);
 
             return $this->db->single();
+
+        }
+
+        public function findUserByEmail($email){
+            $this->db->query('SELECT * FROM coaches WHERE email =:email');
+            $this->db->bind(':email', $email);
+
+            $row = $this->db->single();
+            if($this->db->rowCount() > 0){
+                return true;
+            }else{
+                return false;
+            }
     
         }
 
