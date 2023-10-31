@@ -17,6 +17,13 @@
             return $this->db->single();
         }
 
+        public function findCoach($email){
+            $this->db->query('SELECT * FROM coaches WHERE email = :email');
+            $this->db->bind(':email', $email);
+
+            return $this->db->single();
+        }
+
         public function getCoaches(){
             $this->db->query('SELECT * FROM coaches');
 

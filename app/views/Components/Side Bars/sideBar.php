@@ -1,25 +1,23 @@
-
 <nav class="sidebar close">
-        <header>
-            <div class="image-text">
-                <span class="image">
-                    <img src="<?php echo URLROOT;?>/images/Logo3.png" alt="logo">
-                </span>
-            </div>
+    <header>
+        <div class="image-text">
+            <span class="image">
+                <img src="<?php echo URLROOT; ?>/images/Logo3.png" alt="logo">
+            </span>
+        </div>
 
-            <i class='bx bx-chevron-right toggle'></i>
-        </header>
+        <i class='bx bx-chevron-right toggle'></i>
+    </header>
 
-        <div class="menu-bar">
-            <div class="menu">
-                <ul class="menu-links">
-                    
+    <div class="menu-bar">
+        <div class="menu">
+            <ul class="menu-links">
 
-                   
-                    <?php
 
-                    if($role == "User"){
-                        echo '
+
+                <?php
+                if ($role == "User") {
+                    echo '
                         <li class="nav-link">
                             <a href="#">
                                  <i class="bx bx-home-alt icon"></i>
@@ -52,9 +50,8 @@
                                 <span class="text nav-text">Cricket Store</span>
                             </a>
                         </li>';
-                    }
-                    else if($role == "Admin"){
-                        echo '
+                } else if ($role == "Admin") {
+                    echo '
                         <li class="nav-link">
                           <a href="#">
                             <i class="bx bx-home-alt icon"></i>
@@ -87,9 +84,8 @@
                                     <span class="text nav-text">System Logs</span>
                                 </a>
                             </li>';
-                    }
-                    else if($role == "Cashier"){
-                        echo '
+                } else if ($role == "Cashier") {
+                    echo '
 
                         <li class="nav-link">
                         <a href="#">
@@ -116,9 +112,8 @@
                             </a>
                         </li>
                         ';
-                    }
-                    else if($role == "Coach"){
-                        echo '
+                } else if ($role == "Coach") {
+                    echo '
                         <li class="nav-link">
                         <a href="#">
                             <i class="bx bx-home-alt icon"></i>
@@ -143,9 +138,8 @@
                                     <span class="text nav-text">Cricket Store</span>
                                 </a>
                             </li>';
-                    }
-                    else if($role == "Manager"){
-                        echo '
+                } else if ($role == "Manager") {
+                    echo '
                         <li class="nav-link">
                         <a href="#">
                             <i class="bx bx-home-alt icon"></i>
@@ -184,8 +178,8 @@
                                     <span class="text nav-text">Report</span>
                                 </a>
                             </li> ';
-                    }else if($role == "Owner"){
-                        echo '
+                } else if ($role == "Owner") {
+                    echo '
                         <li class="nav-link">
                         <a href="#">
                             <i class="bx bx-home-alt icon"></i>
@@ -224,20 +218,20 @@
                                     <span class="text nav-text">Report</span>
                                 </a>
                             </li> ';
-                    }  
-                    
-                    if($role == "Owner"){
-                        echo '<li class="nav-link">
+                }
+
+                if ($role == "Owner") {
+                    echo '<li class="nav-link">
                                 <a href="#">
                                     <i class="bx bx-money icon"></i>
                                     <span class="text nav-text">Confirmation Fee</span>
                                 </a>
                             </li>';
-                    }
+                }
 
 
-                    if($role != "Cashier"){
-                        echo '
+                if ($role != "Cashier") {
+                    echo '
                         <li class="nav-link">
                             <a href="#">
                                 <i class="bx bxs-alarm-exclamation icon"></i>
@@ -245,13 +239,10 @@
                             </a>
                         </li>
                         ';
-                    }
-                    
-                    
-
-                    ?>
-                </ul>
-            </div>
+                }
 
 
-    
+
+                ?>
+            </ul>
+        </div>
