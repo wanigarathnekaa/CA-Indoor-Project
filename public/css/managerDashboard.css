@@ -5,15 +5,16 @@ main {
 .containers{
       padding: 8px;
       margin-bottom: 20px;
-      align-items: center;
+      /* align-items: center; */
+      margin-left: 250px;
 }
 
 .cards {
       display: flex;
       flex-direction: row;
-      gap: 30px;
-      align-items: center;
-      justify-content: center;
+      gap: 50px;
+      /* align-items: center;
+      justify-content: center; */
       flex-wrap: wrap;
       position: relative;
 }
@@ -88,7 +89,7 @@ main {
 @media screen and (max-width: 520px) {
       .card {
             flex-direction: column;
-            width: 100px;
+            width: 150px;
       }
       .card h2{
             font-size: 15px;
