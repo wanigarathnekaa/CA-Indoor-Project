@@ -11,7 +11,7 @@
 
 <body>
     <div class="container">
-        <h1 class="form-title">REGISTRATION FORM</h1>
+        <h1 class="form-title">COACH REGISTRATION FORM</h1>
         <form action="<?php echo URLROOT;?>/Coach/register" method="POST">
             <div class="main-user-info">
                 <div class="user-input-box">

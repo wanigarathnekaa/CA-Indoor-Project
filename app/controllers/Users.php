@@ -158,6 +158,7 @@ class Users extends Controller
             if (empty($data['email_err']) && empty($data['pwd_err'])) {
 
                 $loginUser = $this->userModel->login($data['email'], $data['pwd']);
+                $loginmanager = $this->userModel->loginManager($data['email'], $data['pwd']);
 
                 if ($loginUser) {
                     //Authenticate User
@@ -169,7 +170,7 @@ class Users extends Controller
                     }
                 } else {
                     if ($this->userManagerModel->findUserByEmail($data['email'])) {
-                        $this->createUserSession($loginUser, $role);
+                        $this->createUserSession($loginmanager , $role);
                     }else{
                         $data['pwd_err'] = "Invalid Password";
                         $this->view('Pages/LoginPage/login', $data);
@@ -230,6 +231,77 @@ class Users extends Controller
             //redirect('Users/login');
             return false;
         }
+    }
+
+    public function edit()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //form is submitting
+
+            //Valid input
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+
+            //Input data
+            $data = [
+                'name' => trim($_POST['name']),
+                'user_name' => trim($_POST['name']),
+                'email' => trim($_POST['email']),
+                'phoneNumber' => trim($_POST['phoneNumber']),
+                'pwd' => "12345678",
+
+                'name_err' => "",
+                'user_name_err' => "",
+                'email_err' => "",
+                'phoneNumber_err' => "",
+            ];
+
+            //validate name
+            if (empty($data['name'])) {
+                $data['name_err'] = "Please enter a name";
+            }
+
+            //validate user_name
+            if (empty($data['user_name'])) {
+                $data['user_name_err'] = "Please enter an user_name";
+            }
+
+            //validate email
+            if (empty($data['email'])) {
+                $data['email_err'] = "Please enter an email";
+            }
+
+            //validate phone number
+            if (empty($data['phoneNumber'])) {
+                $data['phoneNumber_err'] = "Please enter a phone number";
+            }
+
+            //validate password
+            if (empty($data['pwd'])) {
+                $data['pwd_err'] = "Please enter a password";
+            }
+
+
+            //If validation is completed and no error, then register the user
+            if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err'])) {
+                //Hash the password
+                $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
+                
+                //create user
+                if($this->userModel->updateUser($data)) {
+                    redirect('Pages/Profile/user');
+                }else{
+                    die('Something Went wrong');
+                }
+
+
+            } else {
+                //Load the view
+                $this->view('Pages/UserProfiles/editProfile', $data);
+            }
+        }
+        //Load the view
+        $this->view('Pages/UserProfiles/editProfile', $data);
     }
 
 
