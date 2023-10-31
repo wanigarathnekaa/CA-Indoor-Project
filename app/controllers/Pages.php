@@ -154,6 +154,14 @@ class Pages extends Controller
 
         $this->view('Pages/ManagerRegistration/managerRegistration');
     }
+
+    public function Delete_Profile($name)
+    {
+        $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        // print_r($user);
+
+        $this->view('Pages/UserProfiles/deleteProfile', $user);
+    }
 }
 
 ?>
