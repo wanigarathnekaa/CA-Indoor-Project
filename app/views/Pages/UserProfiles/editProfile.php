@@ -64,7 +64,7 @@
             <?php if ($role == "User" || $role == "Coach"): ?>
                 <div class="form-submit-btn">
                     <input type="submit" name="submit" class="btn2" value="Save">
-                    <input type="submit" name="submit" class="btn3" value="Delete profile">
+                    <a href="<?php echo URLROOT; ?>/Pages/Delete_Profile/coach"><input name="submit" class="btn3" value="Delete profile"></a>
 
                 </div>
 
