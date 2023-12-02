@@ -34,6 +34,11 @@ class Pages extends Controller
         }
     }
 
+    public function LandingPage($name)
+    {
+        $this->view('Pages/LandingPage/landingPage');
+    }
+
     public function Login($name)
     {
         // $role = $name;

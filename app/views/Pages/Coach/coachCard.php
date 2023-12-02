@@ -12,7 +12,7 @@
             <div>
                   <h2>Mahela Gamge</h2>
                   <div class="details">
-                        <div class="infor"><b>Email</b> : kamal@gmail.com</div>
+                        <div class="infor"><b>Email</b> : kavisha.abhishake@gmail.com</div>
                         <div class="infor"><b>Mobile Number</b> : 0711234567</div>
                         <div class="infor"><b>Experience</b> : 5 year experience in coaching</div>
                         <div class="infor"><b>Speciality</b> : Level 02 cricket coach</div>
