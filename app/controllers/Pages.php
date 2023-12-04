@@ -17,6 +17,11 @@ class Pages extends Controller
         $this->view('v_about', $data);
     }
 
+    public function AboutUs($name)
+    {
+        $this->view('Pages/AboutUs/aboutUs');
+    }
+
     public function Dashboard($name)
     {
         if ($name == "user") {
@@ -164,17 +169,11 @@ class Pages extends Controller
 
     public function Coach_Registration($name)
     {
-        // $user = $this->pagesModel->findUser($_SESSION['user_email']);
-        // print_r($user);
-
         $this->view('Pages/CoachRegistration/coachRegistration');
     }
 
     public function Manager_Registration($name)
     {
-        // $user = $this->pagesModel->findUser($_SESSION['user_email']);
-        // print_r($user);
-
         $this->view('Pages/ManagerRegistration/managerRegistration');
     }
 
