@@ -22,9 +22,14 @@ class Pages extends Controller
         $this->view('Pages/AboutUs/aboutUs');
     }
 
-    public function calendar($name)
+    public function Calendar($name)
     {
         $this->view('Pages/Calendar/calender');
+    }
+
+    public function Booking($name)
+    {
+        $this->view('Pages/Calendar/booking');
     }
 
     public function Dashboard($name)
