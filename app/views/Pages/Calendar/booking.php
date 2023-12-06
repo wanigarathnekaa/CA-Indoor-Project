@@ -56,7 +56,7 @@ function time_slot($duration, $cleanup, $start, $end) {
             foreach($timeslots as $ts) {
                 ?>
                 <div class="col-md-2">
-                    <div class="form-group">
+                    <div class="form-group" style = "margin-bottom:20px;">
                         <button class="btn btn-success">
                             <?php echo $ts; ?>
                         </button>
@@ -71,7 +71,7 @@ function time_slot($duration, $cleanup, $start, $end) {
             foreach($timeslots as $ts) {
                 ?>
                 <div class="col-md-2">
-                    <div class="form-group">
+                    <div class="form-group" style = "margin-bottom:20px;">
                         <button class="btn btn-success">
                             <?php echo $ts; ?>
                         </button>
@@ -86,7 +86,7 @@ function time_slot($duration, $cleanup, $start, $end) {
             foreach($timeslots as $ts) {
                 ?>
                 <div class="col-md-2">
-                    <div class="form-group">
+                    <div class="form-group" style = "margin-bottom:20px;">
                         <button class="btn btn-success">
                             <?php echo $ts; ?>
                         </button>
