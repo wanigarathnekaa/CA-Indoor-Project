@@ -22,6 +22,11 @@ class Pages extends Controller
         $this->view('Pages/AboutUs/aboutUs');
     }
 
+    public function calendar($name)
+    {
+        $this->view('Pages/Calendar/calender');
+    }
+
     public function Dashboard($name)
     {
         if ($name == "user") {
