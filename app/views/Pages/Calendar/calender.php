@@ -51,7 +51,7 @@ function build_calendar($month, $year)
         //     $calendar.= "<td class='$today'><h4>$currentDay</h4><a class = 'btn btn-success btn-xs'>Book</a></td>";
         // }
 
-        $calendar.= "<td class='$today'><h4>$currentDay</h4><a class = 'btn btn-success btn-xs'>Book</a></td>";
+        $calendar.= "<td class='$today'><h4>$currentDay</h4><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user' class = 'btn btn-success btn-xs'>Book</a></td>";
         $currentDay++;
         $dayOfWeek++;
     }
