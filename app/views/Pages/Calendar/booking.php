@@ -56,16 +56,17 @@ function time_slot($duration, $cleanup, $start, $end) {
             foreach($timeslots as $ts) {
                 ?>
                 <div class="col-md-2">
-                    <div class="form-group" style = "margin-bottom:20px;">
-                        <button class="btn btn-success">
-                            <?php echo $ts; ?>
-                        </button>
+                    <div class="form-group" style="margin-bottom:20px;">
+                        <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user"
+                            style="text-decoration: none; color:inherit;"><button class="btn btn-success">
+                                <?php echo $ts; ?>
+                            </button> </a>
                     </div>
                 </div>
             <?php } ?>
         </div>
 
-        <div class="row">
+        <!-- <div class="row">
             <h1>Normal Net B</h1>
             <?php $timeslots = time_slot($duration, $cleanup, $start, $end);
             foreach($timeslots as $ts) {
@@ -93,7 +94,7 @@ function time_slot($duration, $cleanup, $start, $end) {
                     </div>
                 </div>
             <?php } ?>
-        </div>
+        </div> -->
     </div>
 
 </body>
