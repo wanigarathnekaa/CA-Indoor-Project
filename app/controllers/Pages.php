@@ -66,6 +66,12 @@ class Pages extends Controller
         $this->view('Pages/RegisterPage/register');
     }
 
+    public function Booking_Register($name)
+    {
+        // $role = $name;
+        $this->view('Pages/Booking/bookingRegistration');
+    }
+
     public function Profile($name)
     {
         $user = $this->pagesModel->findUser($_SESSION['user_email']);
