@@ -1,6 +1,6 @@
 <?php
 function build_calendar($month, $year)
-{  
+{
     $daysOfWeek = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
     $firstDayOfMonth = mktime(0, 0, 0, $month, 1, $year);
     $numberDays = date('t', $firstDayOfMonth);
@@ -9,61 +9,65 @@ function build_calendar($month, $year)
     $dayOfWeek = $dateComponents['wday'];
     $dateToday = date('Y-m-d');
 
-    $prev_month = date('m', mktime(0, 0, 0, $month-1, 1, $year));
-    $prev_year = date('Y', mktime(0, 0, 0, $month-1, 1, $year));
-    $next_month = date('m', mktime(0, 0, 0, $month+1, 1, $year));
-    $next_year = date('Y', mktime(0, 0, 0, $month+1, 1, $year));
+    $prev_month = date('m', mktime(0, 0, 0, $month - 1, 1, $year));
+    $prev_year = date('Y', mktime(0, 0, 0, $month - 1, 1, $year));
+    $next_month = date('m', mktime(0, 0, 0, $month + 1, 1, $year));
+    $next_year = date('Y', mktime(0, 0, 0, $month + 1, 1, $year));
 
     $calendar = "<center><h2>$monthName $year</h2>";
     $calendar .= "<a class='btn btn-primary btn-xs' href = '?month=" . $prev_month . " &year=" . $prev_year . "'>Prev Month</a> ";
     $calendar .= "<a class='btn btn-primary btn-xs' href = '?month=" . date('m') . " &year=" . date('Y') . "'>Current Month</a> ";
     $calendar .= "<a class='btn btn-primary btn-xs' href = '?month=" . $next_month . " &year=" . $next_year . "'>NextMonth</a></center> ";
 
-    $calendar.= "<br><table class='table table-bordered'> ";
-    $calendar.= "<tr>";
-    foreach($daysOfWeek as $day){
-        $calendar.= "<th class='header'>$day</th>";
+    $calendar .= "<br><table class='table table-bordered'> ";
+    $calendar .= "<tr>";
+    foreach ($daysOfWeek as $day) {
+        $calendar .= "<th class='header'>$day</th>";
     }
 
-    $calendar.= "</tr><tr>";
+    $calendar .= "</tr><tr>";
     $currentDay = 1;
-    if($dayOfWeek > 0){
-        for($k = 0; $k < $dayOfWeek; $k++){
-            $calendar.= "<td class='empty'></td>";
+    if ($dayOfWeek > 0) {
+        for ($k = 0; $k < $dayOfWeek; $k++) {
+            $calendar .= "<td class='empty'></td>";
         }
     }
 
     $month = str_pad($month, 2, "0", STR_PAD_LEFT);
-    while($currentDay <= $numberDays){
-        if($dayOfWeek == 7){
+
+    // echo "Today's date: $dateToday";
+    while ($currentDay <= $numberDays) {
+        if ($dayOfWeek == 7) {
             $dayOfWeek = 0;
-            $calendar.= "</tr><tr>";
+            $calendar .= "</tr><tr>";
         }
 
         $currentDayRel = str_pad($currentDay, 2, "0", STR_PAD_LEFT);
         $date = "$year-$month-$currentDayRel";
         $dayName = strtolower(date('l', strtotime($date)));
-        $today = "$date==date('Y-m-d')?'today':";
+        $today = ($date == $dateToday) ? 'today' : '';
 
-        // if(in_array($date, $bookings)){
-        //     $calendar.= "<td class='$today'><h4>$currentDay</h4><a class = 'btn btn-danger btn-xs'>Booked</a></td>"; 
-        // }else{
-        //     $calendar.= "<td class='$today'><h4>$currentDay</h4><a class = 'btn btn-success btn-xs'>Book</a></td>";
+        // if ($date < date('Y-m-d')) {
+        //     $calendar .= "<td class='$today'><h4>$currentDay</h4><a class = 'btn btn-danger btn-xs'>Not Available</a></td>";
+        // } else {
+        //     $calendar .= "<td class='$today'><h4>$currentDay</h4><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user' class = 'btn btn-success btn-xs'>Book</a></td>";
         // }
 
-        $calendar.= "<td class='$today'><h4>$currentDay</h4><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user' class = 'btn btn-success btn-xs'>Book</a></td>";
+        $calendar .= "<td class='$today'><h4>$currentDay</h4><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user' class = 'btn btn-success btn-xs'>Book</a></td>";
+
+
         $currentDay++;
         $dayOfWeek++;
     }
 
-    if($dayOfWeek < 7){
+    if ($dayOfWeek < 7) {
         $remainingDays = 7 - $dayOfWeek;
-        for($i = 0; $i < $remainingDays; $i++){
-            $calendar.= "<td class='empty'></td>";
+        for ($i = 0; $i < $remainingDays; $i++) {
+            $calendar .= "<td class='empty'></td>";
         }
     }
 
-    $calendar.= "</tr></table>";
+    $calendar .= "</tr></table>";
 
     return $calendar;
 }
@@ -166,7 +170,7 @@ function build_calendar($month, $year)
             }
 
             .today {
-                background: yellow;
+                background: yellow !important;
 
             }
         }
@@ -185,7 +189,7 @@ function build_calendar($month, $year)
                 } else {
                     $month = $dateComponent['mon'];
                     $year = $dateComponent['year'];
-                }              
+                }
 
                 echo build_calendar($month, $year);
                 ?>

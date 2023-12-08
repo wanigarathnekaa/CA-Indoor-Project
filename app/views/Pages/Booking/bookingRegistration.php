@@ -1,24 +1,31 @@
+<?php
+$selectedTimeSlot = isset($_GET['timeslot']) ? urldecode($_GET['timeslot']) : '7.00 - 8.00';
+$selectedDate = date('Y-m-d');
+?>
+
 <!DOCTYPE html>
 <!-- Coding By CodingNepal - codingnepalweb.com -->
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/Booking_Styles.css">
-     
+
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
-   <title>Booking Regisration Form </title>
+    <title>Booking Regisration Form </title>
 </head>
+
 <body>
     <div class="container">
         <header>Make Your Book</header>
 
-        <form action="#">
+        <form action="<?php echo URLROOT;?>/Bookings/register" method="POST">
             <div class="form first">
                 <div class="details personal">
                     <span class="title">Book only nets</span>
@@ -26,17 +33,17 @@
                     <div class="fields">
                         <div class="input-field">
                             <label>Full Name</label>
-                            <input type="text" placeholder="Enter your name" required>
+                            <input type="text" name="name" placeholder="Enter your name" required>
                         </div>
 
                         <div class="input-field">
                             <label>Email</label>
-                            <input type="text" placeholder="Enter your email" required>
+                            <input type="text" name="email" placeholder="Enter your email" required>
                         </div>
 
                         <div class="input-field">
                             <label>Mobile Number</label>
-                            <input type="number" placeholder="Enter mobile number" required>
+                            <input type="number" name="phoneNumber" placeholder="Enter mobile number" required>
                         </div>
 
 
@@ -48,32 +55,17 @@
 
                         <div class="input-field">
                             <label>Booking Date</label>
-                            <input type="date" placeholder="Enter birth date" required>
+                            <input type="date" name="date" value="<?php echo $selectedDate; ?>">
                         </div>
 
                         <div class="input-field">
                             <label>Time Slot</label>
-                            <select required>
-                                <option disabled selected>Select a time slot</option>
-                                <option>7.00 - 8.00</option>
-                                <option>8.00 - 9.00</option>
-                                <option>9.00 - 10.00</option>
-                                <option>10.00 - 11.00</option>
-                                <option>11.00 - 12.00</option>
-                                <option>12.00 - 13.00</option>
-                                <option>13.00 - 14.00</option>
-                                <option>14.00 - 15.00</option>
-                                <option>15.00 - 16.00</option>
-                                <option>16.00 - 17.00</option>
-                                <option>17.00 - 18.00</option>
-                                <option>18.00 - 19.00</option>
-                                <option>19.00 - 20.00</option>
-                            </select>
+                            <input type="text" name="timeSlot" value="<?php echo $selectedTimeSlot; ?>">
                         </div>
 
                         <div class="input-field">
                             <label>Who is the coach?</label>
-                            <select required>
+                            <select name="coach" required>
                                 <option disabled selected>Select the coach</option>
                                 <option>Mr. Kamal</option>
                                 <option>Mr. Namal</option>
@@ -83,17 +75,27 @@
                             </select>
                         </div>
 
+                        <div class="input-field">
+                            <label>Net Type?</label>
+                            <select name="net" required>
+                                <option disabled selected>Select the Net</option>
+                                <option>Normal Net A</option>
+                                <option>Normal Net B</option>
+                                <option>Machine Net</option>
+                            </select>
+                        </div>
+
 
                     </div>
                 </div>
 
                 <div class="details ID">
- 
-                    <button class="nextBtn">
-                        <span class="btnText">Submit</span>
+
+                    <button type="submit" name="booking">
+                        <span class="btnText">Confirm</span>
                         <i class="uil uil-navigator"></i>
                     </button>
-                </div> 
+                </div>
             </div>
         </form>
     </div>
@@ -102,4 +104,5 @@
 
     <script src="<?php echo URLROOT; ?>/js/bookingScript.js"></script>
 </body>
+
 </html>
