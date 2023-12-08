@@ -1,6 +1,6 @@
 <?php
 $selectedTimeSlot = isset($_GET['timeslot']) ? urldecode($_GET['timeslot']) : '7.00 - 8.00';
-$selectedDate = date('Y-m-d');
+$selected_date = isset($_GET['timedate']) ? urldecode($_GET['timedate']) : date('Y-m-d');
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +55,7 @@ $selectedDate = date('Y-m-d');
 
                         <div class="input-field">
                             <label>Booking Date</label>
-                            <input type="date" name="date" value="<?php echo $selectedDate; ?>">
+                            <input type="date" name="date" value="<?php echo $selected_date; ?>">
                         </div>
 
                         <div class="input-field">
