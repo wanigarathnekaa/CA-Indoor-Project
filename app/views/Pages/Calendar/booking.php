@@ -1,4 +1,9 @@
 <?php
+$selected_date = isset($_GET['fulldate']) ? urldecode($_GET['fulldate']) : date('Y-m-d');
+?>
+
+
+<?php
 if (isset($_GET['date'])) {
     $date = $_GET['date'];
 }
@@ -48,7 +53,7 @@ function time_slot($duration, $cleanup, $start, $end)
 <body>
     <div class="container">
         <h1 class="text-center">Book on Date:
-            <?php echo date('m/d/Y', strtotime(date("Y/m/d"))); ?>
+            <?php echo date($selected_date, strtotime(date("Y/m/d"))); ?>
         </h1>
         <hr>
         <div class="row">
@@ -58,7 +63,7 @@ function time_slot($duration, $cleanup, $start, $end)
                 ?>
                 <div class="col-md-2">
                     <div class="form-group" style="margin-bottom:20px;">
-                        <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>"
+                        <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date;?>"
                             style="text-decoration: none; color:inherit;">
                             <button class="btn btn-success">
                                 <?php echo $ts; ?>
