@@ -45,7 +45,8 @@ function time_slot($duration, $cleanup, $start, $end)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="<?php echo URLROOT;?>/css/bookingtimes_style.css">
 
     <title>Booking</title>
 </head>
@@ -56,53 +57,55 @@ function time_slot($duration, $cleanup, $start, $end)
             <?php echo date($selected_date, strtotime(date("Y/m/d"))); ?>
         </h1>
         <hr>
-        <div class="row">
-            <h1>Normal Net A</h1>
-            <?php $timeslots = time_slot($duration, $cleanup, $start, $end);
-            foreach ($timeslots as $ts) {
-                ?>
-                <div class="col-md-2">
-                    <div class="form-group" style="margin-bottom:20px;">
-                        <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date;?>"
-                            style="text-decoration: none; color:inherit;">
+        <div class="timeSlots">
+            <div class="row">
+                <h1>Normal Net A</h1>
+                <?php $timeslots = time_slot($duration, $cleanup, $start, $end);
+                foreach ($timeslots as $ts) {
+                    ?>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date;?>"
+                                style="text-decoration: none; color:inherit;">
+                                <button class="btn btn-success">
+                                    <?php echo $ts; ?>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+
+            <div class="row">
+                <h1>Normal Net B</h1>
+                <?php $timeslots = time_slot($duration, $cleanup, $start, $end);
+                foreach ($timeslots as $ts) {
+                    ?>
+                    <div class="col-md-2">
+                        <div class="form-group">
                             <button class="btn btn-success">
                                 <?php echo $ts; ?>
                             </button>
-                        </a>
+                        </div>
                     </div>
-                </div>
-            <?php } ?>
-        </div>
+                <?php } ?>
+            </div>
 
-        <!-- <div class="row">
-            <h1>Normal Net B</h1>
-            <?php $timeslots = time_slot($duration, $cleanup, $start, $end);
-            foreach ($timeslots as $ts) {
-                ?>
-                <div class="col-md-2">
-                    <div class="form-group" style = "margin-bottom:20px;">
-                        <button class="btn btn-success">
-                            <?php echo $ts; ?>
-                        </button>
+            <div class="row">
+                <h1>Machine Net</h1>
+                <?php $timeslots = time_slot($duration, $cleanup, $start, $end);
+                foreach ($timeslots as $ts) {
+                    ?>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <button class="btn btn-success">
+                                <?php echo $ts; ?>
+                            </button>
+                        </div>
                     </div>
-                </div>
-            <?php } ?>
+                <?php } ?>
+            </div>
         </div>
-
-        <div class="row">
-            <h1>Machine Net</h1>
-            <?php $timeslots = time_slot($duration, $cleanup, $start, $end);
-            foreach ($timeslots as $ts) {
-                ?>
-                <div class="col-md-2">
-                    <div class="form-group" style = "margin-bottom:20px;">
-                        <button class="btn btn-success">
-                            <?php echo $ts; ?>
-                        </button>
-                    </div>
-                </div>
-            <?php } ?>
-        </div> -->
     </div>
 
 </body>
