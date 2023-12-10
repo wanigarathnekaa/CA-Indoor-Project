@@ -18,7 +18,7 @@ $selected_date = isset($_GET['timedate']) ? urldecode($_GET['timedate']) : date(
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
-    <title>Booking Regisration Form </title>
+    <title>Booking Registration Form </title>
 </head>
 
 <body>
@@ -55,12 +55,12 @@ $selected_date = isset($_GET['timedate']) ? urldecode($_GET['timedate']) : date(
 
                         <div class="input-field">
                             <label>Booking Date</label>
-                            <input type="date" name="date" value="<?php echo $selected_date; ?>">
+                            <input type="date" name="date" value="<?php echo $selected_date; ?>" required>
                         </div>
 
                         <div class="input-field">
                             <label>Time Slot</label>
-                            <input type="text" name="timeSlot" value="<?php echo $selectedTimeSlot; ?>">
+                            <input type="text" name="timeSlot" value="<?php echo $selectedTimeSlot; ?>" required>
                         </div>
 
                         <div class="input-field">
