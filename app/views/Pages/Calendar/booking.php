@@ -46,7 +46,7 @@ function time_slot($duration, $cleanup, $start, $end)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="<?php echo URLROOT;?>/css/bookingtimes_style.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/bookingtimes_style.css">
 
     <title>Booking</title>
 </head>
@@ -65,7 +65,7 @@ function time_slot($duration, $cleanup, $start, $end)
                     ?>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date;?>"
+                            <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date; ?>"
                                 style="text-decoration: none; color:inherit;">
                                 <button class="btn btn-success">
                                     <?php echo $ts; ?>
@@ -83,9 +83,12 @@ function time_slot($duration, $cleanup, $start, $end)
                     ?>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <button class="btn btn-success">
-                                <?php echo $ts; ?>
-                            </button>
+                            <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date; ?>"
+                                style="text-decoration: none; color:inherit;">
+                                <button class="btn btn-success">
+                                    <?php echo $ts; ?>
+                                </button>
+                            </a>
                         </div>
                     </div>
                 <?php } ?>
@@ -98,9 +101,12 @@ function time_slot($duration, $cleanup, $start, $end)
                     ?>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <button class="btn btn-success">
-                                <?php echo $ts; ?>
-                            </button>
+                            <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date; ?>"
+                                style="text-decoration: none; color:inherit;">
+                                <button class="btn btn-success">
+                                    <?php echo $ts; ?>
+                                </button>
+                            </a>
                         </div>
                     </div>
                 <?php } ?>
