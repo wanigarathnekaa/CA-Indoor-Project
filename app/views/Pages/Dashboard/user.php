@@ -6,30 +6,28 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/landingStyle.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/sideBar.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
 
 
 </head>
 
 <body>
-    <!-- partial:index.partial.html -->
-    <!-- <header id="header">
-        <a href="#"><img src="<?php echo URLROOT;?>/images/logo.png" class="logo"></a>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </header> -->
-    <main>
-        <Section>
+    <?php
+    $role = "User";
+    require APPROOT . '/views/Pages/Dashboard/header.php';
+    require APPROOT . '/views/Components/Side Bars/sideBar.php';
+    ?>
+
+    <section class="home">
+        <div class="sec-landing">
             <div class="companyName">
                 <h1>C&A<BR>INDOOR CRICKET NET</h1>
             </div>
             <div class="btnrow">
                 <a href="#" class="btn">Explore</a>
             </div>
-        </Section>
+        </div>
 
         <div class="sec">
             <div class="tagrow">
@@ -175,9 +173,7 @@
             </div>
         </div>
 
-    </main>
 
-    <footer>
         <div class="footer">
             <div class="tagrow">
                 <h4>KEEP IN TOUCH</h4>
@@ -201,15 +197,14 @@
                 </div>
             </div>
         </div>
+    </section>
+        
 
-    </footer>
+        
+
+    <!-- side bar -->
+    <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
 </body>
-
 </html>
 
-<?php
-$role = "User";
-require APPROOT . '/views/Pages/Dashboard/header.php';
-require APPROOT . '/views/Components/Side Bars/sideBar.php';
-?>
-<?php require APPROOT . '/views/Pages/Dashboard/Footer.php'; ?>
+

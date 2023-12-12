@@ -5,6 +5,10 @@
                 <img src="<?php echo URLROOT; ?>/images/Logo3.png" alt="logo">
             </span>
         </div>
+        <!-- <div class="text logo-text">
+            <span class="name">Milan Bhanuka </span>
+            <span class="profession">Web developer</span>
+        </div> -->
 
         <i class='bx bx-chevron-right toggle'></i>
     </header>
@@ -12,9 +16,6 @@
     <div class="menu-bar">
         <div class="menu">
             <ul class="menu-links">
-
-
-
                 <?php
                 if ($role == "User") {
                     echo '
@@ -282,3 +283,13 @@
                 ?>
             </ul>
         </div>
+        <div class="bottom-content">
+                <li class="logout">
+                    <a href="#">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">logout</span>
+                    </a>
+                </li>
+            </div>
+        </div>
+    </nav>

@@ -20,56 +20,11 @@ body {
     min-height: 100vh;
 }
 
-body main{
-    margin-left: 100px;
-}
 
 
-/* header.......................................................................................... */
-#header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-    background-color: #fff;
-}
-
-.logo {
-    width: 100px;
-    height: 50px;
-}
-
-#header ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#header ul li {
-    list-style: none;
-    margin-left: 20px;
-}
-
-#header ul li a {
-    text-decoration: none;
-    font-size: 1.2em;
-    padding: 6px 15px;
-    color: var(--primary);
-    border-radius: 20px;
-}
-
-#header ul li a:hover {
-    background: var(--primary);
-    color: #fff;
-}
 
 /* ............................................................................................... */
-section {
+.sec-landing {
     position: relative;
     width: 100%;
     height: 100vh;
@@ -82,7 +37,7 @@ section {
     background-position: center;
 }
 
-section::before {
+.sec-landing::before {
     content: "";
     position: absolute;
     bottom: 0;
