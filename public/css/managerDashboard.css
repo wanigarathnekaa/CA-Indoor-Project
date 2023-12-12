@@ -1,64 +1,57 @@
-main {
-      padding: 10px;
-}
-
-.containers{
-      padding: 8px;
+.cardscontainer {
+      padding: 30px;
       margin-bottom: 20px;
-      /* align-items: center; */
-      margin-left: 250px;
-}
-
-.cards {
       display: flex;
       flex-direction: row;
-      gap: 50px;
-      /* align-items: center;
-      justify-content: center; */
+      gap: 30px;
+      align-items: center;
+      align-items: center;
+      /* justify-content: center; */
       flex-wrap: wrap;
       position: relative;
+      /* background-color: antiquewhite; */
 }
 
-.card {
-      background: #a7d8d7;
+.cardscontainer .card {
+      background: #e7e7e7;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 10px;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       flex-shrink: 0;
       width: 200px;
-      height: 150px;
+      height: 100px;
       position: relative;
       border-radius: 12px;
-      box-shadow: 0 3px 10px gray;
+      box-shadow: 0 3px 10px rgb(163, 163, 163);
       text-decoration: none;
       color: #000;
-      padding: 10px;
+      padding: 5px;
 }
 
-.card:hover {
-      background: #4F9DA9;
+.cardscontainer .card:hover {
+      /* background: #4F9DA9; */
       text-decoration: none;
-      color: #fffefe;
+      /* color: #fffefe; */
+      transform: scale(105%);
 }
 
-.card h2 {
-      font-size: 20px;
+.cardscontainer .card h2 {
+      font-size: 15px;
       margin-top: 0;    
 }
 
-.card p {
-      margin-bottom: 0;
-      font-size: 18px;
-}
-
-.fa-solid {
+.cardscontainer .icon {
+      align-self: center;
       font-size: 30px;
-      margin-bottom: 10px;
+      padding: 20px;
+      border-radius: 12px;
+      /* margin-bottom: 10px; */
+      background-color: #4F9DA9;
 }
 
-.titlecontainer{
+.cardscontainer .titlecontainer{
       display: flex;
       flex-direction: row;
       gap: 30px;
@@ -71,7 +64,7 @@ main {
       color: aliceblue;
 }
 
-.titlecontainer h2{
+.cardscontainer .titlecontainer h2{
       margin-top: 0;
       margin-bottom: 0;
       padding: 10px;
@@ -80,25 +73,4 @@ main {
       text-align: center;
       width: 100%;
       color: aliceblue;
-}
-
-
-
-
-/* ................................................................... */
-@media screen and (max-width: 520px) {
-      .card {
-            flex-direction: column;
-            width: 150px;
-      }
-      .card h2{
-            font-size: 15px;
-      }
-
-      .card p {
-            font-size: 10px;
-      }
-      .fa-solid {
-            font-size: 20px;
-      }
 }
