@@ -251,12 +251,7 @@
   
   
   
-  /* ===== Media Queries ===== */
-  @media (max-width: 920px) {
-    .sidebar header .toggle {
-      display: none;
-    }
-  }
+ 
   
   
   
