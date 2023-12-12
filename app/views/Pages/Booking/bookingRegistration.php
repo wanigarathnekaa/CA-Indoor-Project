@@ -4,7 +4,6 @@ $selected_date = isset($_GET['timedate']) ? urldecode($_GET['timedate']) : date(
 ?>
 
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - codingnepalweb.com -->
 <html lang="en">
 
 <head>
@@ -55,12 +54,12 @@ $selected_date = isset($_GET['timedate']) ? urldecode($_GET['timedate']) : date(
 
                         <div class="input-field">
                             <label>Booking Date</label>
-                            <input type="date" name="date" value="<?php echo $selected_date; ?>" required>
+                            <input type="text" name="date" value="<?php echo date($selected_date, strtotime(date("Y/m/d"))); ?>" readonly required>
                         </div>
 
                         <div class="input-field">
                             <label>Time Slot</label>
-                            <input type="text" name="timeSlot" value="<?php echo $selectedTimeSlot; ?>" required>
+                            <input type="text" name="timeSlot" value="<?php echo $selectedTimeSlot; ?>" readonly required>
                         </div>
 
                         <div class="input-field">

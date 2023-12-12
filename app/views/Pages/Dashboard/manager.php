@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Manager Dashboard</title>
-      <link rel="stylesheet" href="<?php echo URLROOT;?>/css/managerDashboard.css">
-      <link rel="stylesheet" href="<?php echo URLROOT;?>/css/sideBar.css">
+      <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/managerDashboard.css">
+      <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/sideBar.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 </head>
+
 <body>
       <?php
-            $role = "Manager";
-            require APPROOT.'/views/Pages/Dashboard/header.php';
-            require APPROOT . '/views/Components/Side Bars/sideBar.php';
+      $role = "Manager";
+      require APPROOT . '/views/Pages/Dashboard/header.php';
+      require APPROOT . '/views/Components/Side Bars/sideBar.php';
       ?>
 
       <section class="home">
@@ -60,12 +62,18 @@
                               <h2>Registration</h2>
                               <!-- <p>Total Advertisement: 10</p> -->
                         </div>
-                  </a>    
+                  </a>
             </div>
+            <?php
+            require APPROOT . '/views/Pages/Calendar/calender.php';
+            ?>
+
+
       </section>
 
-      <script src="<?php echo URLROOT;?>/js/sideBar.js"></script>
-        
-</body>
-</html>
 
+      <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
+
+</body>
+
+</html>
