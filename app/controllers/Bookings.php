@@ -44,6 +44,9 @@ class Bookings extends Controller
             if (empty($data['net'])) {
                 $data['net_err'] = "Please enter the net";
             }
+            else if($this->bookingModel->findBooking($data['date'], $data['timeSlot'], $data['net'])){
+                $data['net_err'] = "Net has been booked already.";
+            }
 
             //validate email
             if (empty($data['email'])) {
@@ -59,6 +62,7 @@ class Bookings extends Controller
                 }
             } else {
                 //Load the view
+                // echo '<script>alert("Net has been booked already")</script>'; 
                 $this->view('Pages/Booking/bookingRegistration', $data);
             }
         } else {

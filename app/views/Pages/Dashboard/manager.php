@@ -68,7 +68,7 @@
                   <a class="card" href="#">
                         <div>
                               <div class="numbers"></div>
-                              <div class="cardName">Enventory Management</div>
+                              <div class="cardName">Inventory Management</div>
                         </div>
                         <div class="iconBx">
                               <i class="fa-solid fa-store icon"></i>

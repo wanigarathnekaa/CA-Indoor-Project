@@ -16,8 +16,8 @@ function build_calendar($month, $year)
 
     $calendar = "<center><h2>$monthName $year</h2>";
     $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/User?month=" . $prev_month . "&year=" . $prev_year . "'>Prev Month</a> ";
-    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/User?month=" . date('m') . " &year=" . date('Y') . "'>Current Month</a> ";
-    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/User?month=" . $next_month . " &year=" . $next_year . "'>NextMonth</a></center> ";
+    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/User'>Current Month</a> ";
+    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/User?month=" . $next_month . "&year=" . $next_year . "'>NextMonth</a></center> ";
 
     $calendar .= "<br><table class='table table-bordered'> ";
     $calendar .= "<tr>";
@@ -47,13 +47,14 @@ function build_calendar($month, $year)
         $dayName = strtolower(date('l', strtotime($date)));
         $today = ($date == $dateToday) ? 'today' : '';
 
-        // if ($date < date('Y-m-d')) {
-        //     $calendar .= "<td class='$today'><h4>$currentDay</h4><a class = 'btn btn-danger btn-xs'>Not Available</a></td>";
-        // } else {
-        //     $calendar .= "<td class='$today'><h4>$currentDay</h4><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user' class = 'btn btn-success btn-xs'>Book</a></td>";
-        // }
+        if ($date < date('Y-m-d')) {
+            $calendar .= "<td class='$today'><h4>$currentDay</h4><a class = 'btn btn-danger btn-xs'>Not Available</a></td>";
+        }
+        else {
+            //$calendar .= "<td class='$today'><h4>$currentDay</h4><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user' class = 'btn btn-success btn-xs'>Book</a></td>";
+            $calendar .= "<td class='$today'><h4>$currentDay</h4><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user?fulldate=$date' class = 'btn btn-success btn-xs'>Book</a></td>";
+        }
         // echo $today;
-        $calendar .= "<td class='$today'><h4>$currentDay</h4><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user?fulldate=$date' class = 'btn btn-success btn-xs'>Book</a></td>";
  
 
         $currentDay++;
