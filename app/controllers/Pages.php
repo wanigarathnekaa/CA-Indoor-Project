@@ -33,8 +33,15 @@ class Pages extends Controller
         $this->view('Pages/Calendar/booking', $bookings);
     }
 
+    public function Table($name)
+    {
+        $bookings = $this->pagesModel->getBookings();
+        $this->view('Pages/Tables/dailyReservation', $bookings);
+    }
+
     public function Dashboard($name)
     {
+        $bookings = $this->pagesModel->getBookings();
         if ($name == "user") {
             $this->view('Pages/Dashboard/user');
         } else if ($name == "admin") {
@@ -44,7 +51,7 @@ class Pages extends Controller
         } else if ($name == "coach") {
             $this->view('Pages/Dashboard/coach');
         } else if ($name == "manager") {
-            $this->view('Pages/Dashboard/manager');
+            $this->view('Pages/Dashboard/manager', $bookings);
         } else if ($name == "owner") {
             $this->view('Pages/Dashboard/owner');
         }
