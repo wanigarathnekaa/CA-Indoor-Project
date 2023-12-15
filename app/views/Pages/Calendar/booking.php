@@ -1,5 +1,22 @@
 <?php
 $selected_date = isset($_GET['fulldate']) ? urldecode($_GET['fulldate']) : date('Y-m-d');
+
+$filter_date = $selected_date;
+$filter_net_M = 'Machine Net';
+$filter_net_A = 'Normal Net A';
+$filter_net_B = 'Normal Net B';
+
+$new_array_1 = array_filter($data, function ($data) use ($filter_date, $filter_net_M) {
+    return $data->date === $filter_date && $data->net === $filter_net_M;
+});
+
+$new_array_2 = array_filter($data, function ($data) use ($filter_date, $filter_net_A) {
+    return $data->date === $filter_date && $data->net === $filter_net_A;
+});
+
+$new_array_3 = array_filter($data, function ($data) use ($filter_date, $filter_net_B) {
+    return $data->date === $filter_date && $data->net === $filter_net_B;
+});
 ?>
 
 
@@ -60,17 +77,32 @@ function time_slot($duration, $cleanup, $start, $end)
         <div class="timeSlots">
             <div class="row">
                 <h1>Normal Net A</h1>
-                <?php $timeslots = time_slot($duration, $cleanup, $start, $end);
+                <?php
+                $timeslots = time_slot($duration, $cleanup, $start, $end);
                 foreach ($timeslots as $ts) {
                     ?>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date; ?>&net=Normal Net A"
-                                style="text-decoration: none; color:inherit;">
-                                <button class="btn btn-success">
+                            <?php
+                            $found = false;
+                            foreach ($new_array_2 as $reservation) {
+                                if ($reservation->timeSlot === $ts) {
+                                    $found = true;
+                                    break;
+                                }
+                            }
+                            if ($found) { ?>
+                                <button class="btn btn-danger">
                                     <?php echo $ts; ?>
                                 </button>
-                            </a>
+                            <?php } else { ?>
+                                <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date; ?>&net=Normal Net A"
+                                    style="text-decoration: none; color:inherit;">
+                                    <button class="btn btn-success">
+                                        <?php echo $ts; ?>
+                                    </button>
+                                </a>
+                            <?php } ?>
                         </div>
                     </div>
                 <?php } ?>
@@ -78,17 +110,32 @@ function time_slot($duration, $cleanup, $start, $end)
 
             <div class="row">
                 <h1>Normal Net B</h1>
-                <?php $timeslots = time_slot($duration, $cleanup, $start, $end);
+                <?php
+                $timeslots = time_slot($duration, $cleanup, $start, $end);
                 foreach ($timeslots as $ts) {
                     ?>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date; ?>&net=Normal Net B"
-                                style="text-decoration: none; color:inherit;">
-                                <button class="btn btn-success">
+                            <?php
+                            $found = false;
+                            foreach ($new_array_3 as $reservation) {
+                                if ($reservation->timeSlot === $ts) {
+                                    $found = true;
+                                    break;
+                                }
+                            }
+                            if ($found) { ?>
+                                <button class="btn btn-danger">
                                     <?php echo $ts; ?>
                                 </button>
-                            </a>
+                            <?php } else { ?>
+                                <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date; ?>&net=Normal Net A"
+                                    style="text-decoration: none; color:inherit;">
+                                    <button class="btn btn-success">
+                                        <?php echo $ts; ?>
+                                    </button>
+                                </a>
+                            <?php } ?>
                         </div>
                     </div>
                 <?php } ?>
@@ -96,17 +143,32 @@ function time_slot($duration, $cleanup, $start, $end)
 
             <div class="row">
                 <h1>Machine Net</h1>
-                <?php $timeslots = time_slot($duration, $cleanup, $start, $end);
+                <?php
+                $timeslots = time_slot($duration, $cleanup, $start, $end);
                 foreach ($timeslots as $ts) {
                     ?>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date; ?>&net=Machine Net"
-                                style="text-decoration: none; color:inherit;">
-                                <button class="btn btn-success">
+                            <?php
+                            $found = false;
+                            foreach ($new_array_1 as $reservation) {
+                                if ($reservation->timeSlot === $ts) {
+                                    $found = true;
+                                    break;
+                                }
+                            }
+                            if ($found) { ?>
+                                <button class="btn btn-danger">
                                     <?php echo $ts; ?>
                                 </button>
-                            </a>
+                            <?php } else { ?>
+                                <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date; ?>&net=Normal Net A"
+                                    style="text-decoration: none; color:inherit;">
+                                    <button class="btn btn-success">
+                                        <?php echo $ts; ?>
+                                    </button>
+                                </a>
+                            <?php } ?>
                         </div>
                     </div>
                 <?php } ?>

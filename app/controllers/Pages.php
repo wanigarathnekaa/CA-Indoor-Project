@@ -29,7 +29,8 @@ class Pages extends Controller
 
     public function Booking($name)
     {
-        $this->view('Pages/Calendar/booking');
+        $bookings = $this->pagesModel->getBookings();
+        $this->view('Pages/Calendar/booking', $bookings);
     }
 
     public function Dashboard($name)
