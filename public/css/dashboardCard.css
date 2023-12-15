@@ -40,8 +40,6 @@
       font-weight: 500;
       font-size: 2.5rem;
       color: var(--black1);
-
-      
     }
     
     .cardBox .card .cardName {
@@ -74,7 +72,28 @@
 }
 @media (max-width: 480px) {
       .cardBox {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .cardBox .card {
+        padding: 20px;
+        height: 100px;
+        border-radius: 20px;  
+        justify-content: space-between;
+      }
+      .cardBox .card .numbers {
+        position: relative;
+        font-weight: 500;
+        font-size: 1.5rem;
+        color: var(--black1);
+      }
+      
+      .cardBox .card .cardName {
+        font-size: 1.2rem;
+        margin-top: 3px;
+      }
+      
+      .cardBox .card .iconBx {
+        font-size: 2rem;
       }
 }
 
