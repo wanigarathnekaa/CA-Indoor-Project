@@ -175,7 +175,7 @@
   }
   .sidebar li a:hover .icon,
   .sidebar li a:hover .text {
-    color: var(--sidebar-color);
+    color: var(--body-color);
   }
   
   
@@ -189,8 +189,6 @@
   .menu-bar::-webkit-scrollbar {
     display: none;
   }
-  
-  
   
   .home {
     position: absolute;
@@ -216,7 +214,20 @@
     width: calc(100% - 80px);
   }
   
-  
+  @media (max-width: 480px) {
+    .sidebar{
+      display: none;
+    }
+    .home{
+      left: 0;
+      width: 100%;
+    }
+
+    .sidebar.close ~ .home {
+      left: 0;
+      width: 100%;
+    }
+  }
 
   
   
