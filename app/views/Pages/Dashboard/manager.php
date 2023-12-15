@@ -51,7 +51,7 @@
                               <div class="cardName">Advertisement</div>
                         </div>
                         <div class="iconBx">
-                              <i class="fa-solid fa-file-image"></i>
+                              <i class="fa-brands fa-adversal"></i>
                         </div>
                   </a>
 

@@ -10,47 +10,97 @@
 </head>
 
 <body>
-    <!-- <div class="titlecontainer">
-        <h2>Owner Dashboard</h2>
-    </div> -->
-    <div class="containers">
-        <div class="cards">
+
+    <!-- Sidebar -->
+    <?php
+        $role = "Owner";
+        require APPROOT . '/views/Pages/Dashboard/header.php';
+        require APPROOT . '/views/Components/Side Bars/sideBar.php';
+    ?>
+
+    <!-- Content -->
+    <section class="home">
+
+        <!-- Cards -->
+        <div class="cardBox">
             <a class="card" href="#">
-                <i class="fa-solid fa-image-portrait"></i>
-                <h2>Managers</h2>
-                <p>Total Managers: 2</p>
+                <div>
+                    <div class="numbers">3</div>
+                    <div class="cardName">Managers</div>
+                </div>
+                <div class="iconBx">
+                <i class="fa-solid fa-user-tie"></i>
+                </div>
             </a>
-            <a class="card" href="#">
-                <i class="fa-solid fa-image-portrait"></i>
-                <h2>Coachers</h2>
-                <p>Total Coaches: 5</p>
+
+            <a class="card" href=#>
+                <div>
+                    <div class="numbers">15</div>
+                    <div class="cardName">Coaches</div>
+                </div>
+                <div class="iconBx">
+                    <i class="fa-solid fa-user-group"></i>
+                </div>
             </a>
+
             <a class="card" href="#">
-                <i class="fa-solid fa-image-portrait"></i>
-                <h2>Players</h2>
-                <p>Total Players: 23</p>
+                <div>
+                    <div class="numbers">80</div>
+                    <div class="cardName">Players</div>
+                </div>
+                <div class="iconBx">
+                        <i class="fa-solid fa-users"></i>
+                </div>
             </a>
+
             <a class="card" href="#">
-                <i class="fa-solid fa-file-image"></i>
-                <h2>Advertisement</h2>
-                <p>Total Advertisement: 10</p>
+                <div>
+                    <div class="numbers">284</div>
+                    <div class="cardName">Advertisement</div>
+                </div>
+                <div class="iconBx">
+                        <i class="fa-brands fa-adversal"></i>
+                </div>
+            </a>
+
+            <a class="card" href="#">
+                <div>
+                    <div class="numbers"></div>
+                    <div class="cardName">Reports</div>
+                </div>
+                <div class="iconBx">
+                    <i class='bx bxs-report'></i>
+                </div>
+            </a>
+
+            <a class="card" href="#">
+                <div>
+                    <div class="numbers"></div>
+                    <div class="cardName">Registration</div>
+                </div>
+
+                <div class="iconBx">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+            </a>
+
+            <a class="card" href="#">
+                <div>
+                    <div class="numbers"></div>
+                    <div class="cardName">Confirmation Fee</div>
+                </div>
+
+                <div class="iconBx">
+                    <i class="fa-solid fa-comments-dollar"></i>
+                </div>
             </a>
         </div>
-    </div>
 
 
-    <section class="">
     </section>
 
+    <!-- javascripts -->
+    <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
+
 </body>
-
 </html>
-
-<?php
-$role = "Owner";
-require APPROOT . '/views/Pages/Dashboard/header.php';
-require APPROOT . '/views/Components/Side Bars/sideBar.php';
-?>
-<?php
-require APPROOT . '/views/Pages/Dashboard/Footer.php';
-?>

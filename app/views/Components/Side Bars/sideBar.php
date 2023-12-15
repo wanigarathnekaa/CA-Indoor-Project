@@ -16,6 +16,7 @@
     <div class="menu-bar">
         <div class="menu">
             <ul class="menu-links">
+                
                 <?php if ($role == "User") { ?>
                     <li class="nav-link">
                         <a href="#">
@@ -31,7 +32,7 @@
                     </li>
                     <li class="nav-link">
                         <a href="C&A_Indoor_Project/Pages/Advertisements/advertisement">
-                            <i class="bx bxs-cricket-ball icon"></i>
+                            <i class="fa-brands fa-adversal icon"></i>
                             <span class="text nav-text">Advertisement</span>
                         </a>
                     </li>
@@ -70,7 +71,7 @@
                         </li>
                         <li class="nav-link">
                             <a href="#">
-                                <i class="bx bxs-cricket-ball icon"></i>
+                                <i class="fa-brands fa-adversal icon"></i>
                                 <span class="text nav-text">Advertisement</span>
                             </a>
                         </li>
@@ -108,7 +109,7 @@
                             </li>
                             <li class="nav-link">
                                 <a href="#">
-                                    <i class="bx bxs-cricket-ball icon"></i>
+                                    <i class="fa-brands fa-adversal icon"></i>
                                     <span class="text nav-text">Advertisement</span>
                                 </a>
                             </li>
@@ -139,7 +140,7 @@
                                 </li>
                                 <li class="nav-link">
                                     <a href="C&A_Indoor_Project/Pages/Coach_Advertisements/user">
-                                        <i class="bx bxs-cricket-ball icon"></i>
+                                        <i class="fa-brands fa-adversal icon"></i>
                                         <span class="text nav-text">Advertisement</span>
                                     </a>
                                 </li>
@@ -170,7 +171,7 @@
                                     </li>
                                     <li class="nav-link">
                                         <a href="#">
-                                            <i class="bx bxs-cricket-ball icon"></i>
+                                            <i class="fa-brands fa-adversal icon"></i>
                                             <span class="text nav-text">Advertisement</span>
                                         </a>
                                     </li>
@@ -215,7 +216,7 @@
                                         </li>
                                         <li class="nav-link">
                                             <a href="#">
-                                                <i class="bx bxs-cricket-ball icon"></i>
+                                                <i class="fa-brands fa-adversal icon"></i>
                                                 <span class="text nav-text">Advertisement</span>
                                             </a>
                                         </li>
@@ -242,7 +243,7 @@
 
                                         <li class="nav-link">
                                             <a href="#">
-                                                <i class="bx bx-money icon"></i>
+                                                <i class="fa-solid fa-comments-dollar icon"></i>
                                                 <span class="text nav-text">Confirmation Fee</span>
                                             </a>
                                         </li>
