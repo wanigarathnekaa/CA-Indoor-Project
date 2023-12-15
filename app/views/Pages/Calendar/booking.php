@@ -65,7 +65,7 @@ function time_slot($duration, $cleanup, $start, $end)
                     ?>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date; ?>"
+                            <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date; ?>&net=Normal Net A"
                                 style="text-decoration: none; color:inherit;">
                                 <button class="btn btn-success">
                                     <?php echo $ts; ?>
@@ -83,7 +83,7 @@ function time_slot($duration, $cleanup, $start, $end)
                     ?>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date; ?>"
+                            <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date; ?>&net=Normal Net B"
                                 style="text-decoration: none; color:inherit;">
                                 <button class="btn btn-success">
                                     <?php echo $ts; ?>
@@ -101,7 +101,7 @@ function time_slot($duration, $cleanup, $start, $end)
                     ?>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date; ?>"
+                            <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date; ?>&net=Machine Net"
                                 style="text-decoration: none; color:inherit;">
                                 <button class="btn btn-success">
                                     <?php echo $ts; ?>

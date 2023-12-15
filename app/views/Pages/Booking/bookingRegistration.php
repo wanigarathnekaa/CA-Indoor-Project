@@ -1,6 +1,7 @@
 <?php
 $selectedTimeSlot = isset($_GET['timeslot']) ? urldecode($_GET['timeslot']) : '7.00 - 8.00';
 $selected_date = isset($_GET['timedate']) ? urldecode($_GET['timedate']) : date('Y-m-d');
+$selected_net = isset($_GET['net']) ? urldecode($_GET['net']) : "Normal Net A";
 ?>
 
 <!DOCTYPE html>
@@ -49,12 +50,12 @@ $selected_date = isset($_GET['timedate']) ? urldecode($_GET['timedate']) : date(
 
                         <!-- <div class="input-field">
                             <label>NIC Number</label>
-                            <input type="number" placeholder="Enter your ccupation" required>
+                            <input type="number" placeholder="Enter your ocupation" required>
                         </div> -->
 
                         <div class="input-field">
                             <label>Booking Date</label>
-                            <input type="text" name="date" value="<?php echo date($selected_date, strtotime(date("Y/m/d"))); ?>" readonly required>
+                            <input type="date" name="date" value="<?php echo $selected_date; ?>" readonly required>
                         </div>
 
                         <div class="input-field">
@@ -76,12 +77,7 @@ $selected_date = isset($_GET['timedate']) ? urldecode($_GET['timedate']) : date(
 
                         <div class="input-field">
                             <label>Net Type?</label>
-                            <select name="net" required>
-                                <option disabled selected>Select the Net</option>
-                                <option>Normal Net A</option>
-                                <option>Normal Net B</option>
-                                <option>Machine Net</option>
-                            </select>
+                            <input type="text" name="net" value="<?php echo $selected_net; ?>" readonly required>
                         </div>
 
 

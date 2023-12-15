@@ -5,10 +5,10 @@
                 <img src="<?php echo URLROOT; ?>/images/Logo3.png" alt="logo">
             </span>
         </div>
-        <div class="text logo-text">
+        <!-- <div class="text logo-text">
             <span class="name">Milan Bhanuka </span>
             <span class="profession">Web developer</span>
-        </div>
+        </div> -->
 
         <i class='bx bx-chevron-right toggle'></i>
     </header>
