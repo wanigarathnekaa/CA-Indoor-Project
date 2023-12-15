@@ -39,7 +39,7 @@
 
                     <li class="nav-link">
                         <a href="C&A_Indoor_Project/Pages/Coach/user">
-                            <i class="bx bx-body icon"></i>
+                            <i class="fa-solid fa-user-group icon"></i>
                             <span class="text nav-text">Coach</span>
                         </a>
                     </li>

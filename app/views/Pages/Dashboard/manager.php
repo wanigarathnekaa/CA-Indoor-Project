@@ -26,7 +26,7 @@
             <!-- Cards -->
             <div class="cardBox">
                   <a class="card" href=#>
-                        <div>
+                        <div class="infor">
                               <div class="numbers">15</div>
                               <div class="cardName">Coaches</div>
                         </div>
@@ -87,7 +87,7 @@
                   </a>
             </div>
 
-
+            
             <div class="details">
 
                   <!-- Recent Reservations -->
@@ -100,9 +100,9 @@
                   
                   <!-- Calander -->
                   <div class="calanderdiv">
-                        <!-- <?php
+                        <?php
                         require APPROOT . '/views/Pages/Calendar/calender.php';
-                        ?> -->
+                        ?> 
                   </div>
                   
 

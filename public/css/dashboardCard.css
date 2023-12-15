@@ -34,6 +34,9 @@
       text-decoration: none;
 
     }
+    .cardBox .card .infor{
+      align-self: center;
+    }
     
     .cardBox .card .numbers {
       position: relative;
@@ -52,6 +55,7 @@
     .cardBox .card .iconBx {
       font-size: 3.5rem;
       color: var(--color01);
+      align-self: center;
     }
     
     .cardBox .card:hover {
@@ -72,27 +76,30 @@
 }
 @media (max-width: 480px) {
       .cardBox {
+
         grid-template-columns: repeat(2, 1fr);
+        justify-content: space-between;
       }
       .cardBox .card {
-        padding: 20px;
-        height: 100px;
-        border-radius: 20px;  
+        padding: 10px;
+        height: 100%;
+        border-radius: 10px;  
         justify-content: space-between;
       }
       .cardBox .card .numbers {
         position: relative;
         font-weight: 500;
-        font-size: 1.5rem;
+        font-size: 1rem;
         color: var(--black1);
       }
       
       .cardBox .card .cardName {
-        font-size: 1.2rem;
+        font-size: 0.8rem;
         margin-top: 3px;
       }
       
       .cardBox .card .iconBx {
+        margin-left: 10px;
         font-size: 2rem;
       }
 }

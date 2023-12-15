@@ -20,68 +20,73 @@
   justify-content: center;
   align-items: center;
 } */
-.container {
-  /* margin-top: 20px; */
-  margin: 10px;
-}
+/* .container {
+  height: 500px;
+} */
 
-.col-md-12 {
+/* .col-md-12 {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-}
+} */
 
-.row {
+/* .row {
   margin-top: 20px;
+} */
+
+.date{
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 600;
+  color: #2c6b74;
 }
 
-h2 {
-  font-size: 30px;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
 
 /* Calendar styles */
-table {
+.calander {
   width: 100%;
   border-collapse: collapse;
-  padding: 0 50px;
+  /* padding: 0 50px; */
   table-layout: fixed;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3); */
 }
 
-.header {
+.calander .header {
   background-color: #2c6b74;
   color: #fff;
   border: 1px solid #999;
   padding: 10px 0;
+  font-size: 10px;
+  
 }
 
-td {
+.calander td {
   border: 1px solid #bababa;
-  height: 5em;
-  padding: 5px;
+  height: 3.5em;
+  width: 3.5em;
+  /* padding: 5px; */
   text-align: center;
 }
 
-td:hover {
+/* td:hover {
   background-color: #a7d8d7;
   cursor: pointer;
-}
+} */
 
 .today {
   background-color: #4f9da9 !important;
 }
 
-.empty {
+/* .empty {
   background-color: #ffffff;
-}
+} */
 
-.empty:hover {
+/* .empty:hover {
   background-color: #ffffff;
-}
+} */
 
 /* .today {
       background: #a7d8d7 !important;
@@ -92,7 +97,7 @@ td:hover {
 /* month button */
 .btn-primary {
   display: inline-block;
-  padding: 10px 16px;
+  padding: 5px 8px;
   text-align: center;
   text-decoration: none;
   color: #fff;
@@ -102,6 +107,7 @@ td:hover {
   transition: background-color 0.3s;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
   margin: 0 5px;
+  font-size: 12px;
 }
 
 .btn-primary:hover {
@@ -112,11 +118,11 @@ td:hover {
 /* Book btn */
 .btn-success {
   display: inline-block;
-  padding: 5px 10px;
+  padding: 10px 20px;
   text-align: center;
   text-decoration: none;
   color: #fff;
-  background-color: #4f9da9;
+  background-color: #4F9DA9;
   border: none;
   border-radius: 4px;
   transition: background-color 0.3s;
@@ -142,43 +148,38 @@ td:hover {
   text-decoration: none;
 }
 
-/* Media queries */
+/* Media queries ....................................................*/
 @media only screen and (max-width: 992px) {
   /* Styles for tablets */
 
-  .container {
-    padding: 20px;
-  }
-
-  table {
-    padding: 0 30px;
-  }
-
-  td {
-    height: 4.5em;
+  .calander td {
+    height: 3.5em;
+    width: 3.5em;
     font-size: 13px;
     width: 33%;
   }
 
-  .header {
-    font-size: 13px;
+  .calander .header {
+    font-size: 10px;
+  }  
+  .date{
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+    color: #2c6b74;
   }
 
-  h2 {
-    font-size: 28px;
-  }
-
-  .btn-primary,
-  .btn-success {
+  .btn-primary {
     padding: 3px 7px;
     font-size: 13px;
   }
 }
 
-@media only screen and (max-width: 768px) and (min-width: 480px) {
+@media only screen and (max-width: 768px){
   /* Styles for mobile devices */
 
-  .container {
+  /* .container {
     padding: 10px;
   }
 
@@ -189,19 +190,19 @@ td:hover {
   .col-md-12,
   .row {
     width: 100%;
-  }
+  } */
 
-  td {
+  /* td {
     height: 4em;
     font-size: 12px;
+  } */
+
+  .date {
+    font-size: 20px;
   }
 
-  h2 {
-    font-size: 25px;
-  }
-
-  .header {
-    font-size: 10px;
+  .calander .header {
+    font-size: 0.4em;
   }
 
   .btn-primary {
@@ -209,36 +210,16 @@ td:hover {
     font-size: 12px;
     margin: 0 5px;
   }
-
-  .btn-success {
-    padding: 2px 5px;
-    font-size: 10px;
-  }
 }
 
-@media screen and (max-device-width: 480px) and (orientation: portrait) {
+@media screen and (max-device-width: 480px) {
   /* Styles for mobile devices */
-
-  .container {
-    padding: 0px;
-  }
-
-  table {
-    padding: 0px;
-  }
-
-  .col-md-12,
-  .row {
-    width: 100%;
-    padding: 0px;
-  }
-
   td {
     height: 4em;
     font-size: 12px;
   }
 
-  h2 {
+  .date {
     font-size: 25px;
   }
 
@@ -253,7 +234,7 @@ td:hover {
   }
 
   .btn-success {
-    padding: 2px 5px;
+    padding: 8px 10px;
     font-size: 7px;
-  }
+  } 
 }

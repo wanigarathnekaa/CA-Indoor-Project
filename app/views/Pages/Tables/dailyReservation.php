@@ -14,7 +14,8 @@
             <a href="#" class="btn">View All</a>
       </div>
 
-      <table>
+      <div class="table-container">
+            <table>
             <!-- table header -->
             <thead>
             <tr>
@@ -112,5 +113,6 @@
 
             </tbody>
       </table>
+      </div>
 </div>
 </body>

@@ -1,5 +1,6 @@
 @import url(./dashboardCard.css);
 @import url(./sideBar.css);
+@import url(./calander_style.css);
 
 :root {
       --color01: #2e8a99;
@@ -18,7 +19,7 @@
       /* width: 100%; */
       /* padding: 20px; */
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 1.5fr 1fr;
       grid-gap: 30px;
       /* margin-top: 10px; */
       /* box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08); */

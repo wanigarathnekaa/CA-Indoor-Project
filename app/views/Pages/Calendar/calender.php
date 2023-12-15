@@ -14,12 +14,12 @@ function build_calendar($month, $year)
     $next_month = date('m', mktime(0, 0, 0, $month + 1, 1, $year));
     $next_year = date('Y', mktime(0, 0, 0, $month + 1, 1, $year));
 
-    $calendar = "<center><h2>$monthName $year</h2>";
+    $calendar = "<center><h2 class='date'>$monthName $year</h2>";
     $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/User?month=" . $prev_month . "&year=" . $prev_year . "'>Prev Month</a> ";
     $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/User'>Current Month</a> ";
     $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/User?month=" . $next_month . "&year=" . $next_year . "'>NextMonth</a></center> ";
 
-    $calendar .= "<br><table class='table table-bordered'> ";
+    $calendar .= "<br><table class='calander'> ";
     $calendar .= "<tr>";
     foreach ($daysOfWeek as $day) {
         $calendar .= "<th class='header'>$day</th>";
@@ -83,9 +83,7 @@ function build_calendar($month, $year)
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
+    <div class="calander-container">
                 <?php
                 $dateComponent = getdate();
                 if (isset($_GET['month']) && isset($_GET['year'])) {
@@ -98,8 +96,6 @@ function build_calendar($month, $year)
 
                 echo build_calendar($month, $year);
                 ?>
-            </div>
-        </div>
     </div>
 </body>
 
