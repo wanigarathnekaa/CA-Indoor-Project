@@ -37,5 +37,11 @@
             return $this->db->resultSet();
         }
 
+        public function getBookings(){
+            $this->db->query('SELECT * FROM reservation');
+
+            return $this->db->resultSet();
+        }
+
     }
 ?>
