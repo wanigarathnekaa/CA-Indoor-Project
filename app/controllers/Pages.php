@@ -172,7 +172,15 @@ class Pages extends Controller
 
     public function CoachCard($name)
     {
-        $this->view('Pages/Coach/coachCard');
+        $coaches = $this->pagesModel->getCoaches();
+        $data = [
+            'users' => $coaches,
+        ];
+        $res = [];
+        foreach ($data['users'] as $user) {
+            $res[] = $this->pagesModel->findUser($user->email);
+        }
+        $this->view('Pages/Coach/coachCard', $res, $coaches);
     }
 
     public function Coach_Advertisements($name)
