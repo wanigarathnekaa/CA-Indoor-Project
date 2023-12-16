@@ -74,42 +74,49 @@ function time_slot($duration, $cleanup, $start, $end)
             <?php echo date($selected_date, strtotime(date("Y/m/d"))); ?>
         </h1>
         <hr>
+        
         <div class="timeSlots">
-            <div class="row">
-                <h1>Normal Net A</h1>
-                <?php
-                $timeslots = time_slot($duration, $cleanup, $start, $end);
-                foreach ($timeslots as $ts) {
-                    ?>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <?php
-                            $found = false;
-                            foreach ($new_array_2 as $reservation) {
-                                if ($reservation->timeSlot === $ts) {
-                                    $found = true;
-                                    break;
+
+            <!-- net A -->
+            <div class="slot">
+                <h1 class="netType">Normal Net A</h1>
+                <div class="row">
+                    <?php
+                    $timeslots = time_slot($duration, $cleanup, $start, $end);
+                    foreach ($timeslots as $ts) {
+                        ?>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <?php
+                                $found = false;
+                                foreach ($new_array_2 as $reservation) {
+                                    if ($reservation->timeSlot === $ts) {
+                                        $found = true;
+                                        break;
+                                    }
                                 }
-                            }
-                            if ($found) { ?>
-                                <button class="btn btn-danger">
-                                    <?php echo $ts; ?>
-                                </button>
-                            <?php } else { ?>
-                                <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date; ?>&net=Normal Net A"
-                                    style="text-decoration: none; color:inherit;">
-                                    <button class="btn btn-success">
+                                if ($found) { ?>
+                                    <button class="btn btn-danger">
                                         <?php echo $ts; ?>
                                     </button>
-                                </a>
-                            <?php } ?>
+                                <?php } else { ?>
+                                    <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/user?timeslot=<?php echo urlencode($ts); ?>&timedate=<?php echo $selected_date; ?>&net=Normal Net A"
+                                        style="text-decoration: none; color:inherit;">
+                                        <button class="btn btn-success">
+                                            <?php echo $ts; ?>
+                                        </button>
+                                    </a>
+                                <?php } ?>
+                            </div>
                         </div>
-                    </div>
-                <?php } ?>
+                    <?php } ?>
+                </div>
             </div>
-
-            <div class="row">
-                <h1>Normal Net B</h1>
+            
+            <!-- net B -->
+            <div class="slot">
+                <h1 class="netType">Normal Net B</h1>
+                <div class="row">
                 <?php
                 $timeslots = time_slot($duration, $cleanup, $start, $end);
                 foreach ($timeslots as $ts) {
@@ -139,10 +146,13 @@ function time_slot($duration, $cleanup, $start, $end)
                         </div>
                     </div>
                 <?php } ?>
+                </div>
             </div>
-
-            <div class="row">
-                <h1>Machine Net</h1>
+            
+            <!-- Machine net -->
+            <div class="slot">
+                <h1 class="netType">Machine Net</h1>
+                <div class="row">
                 <?php
                 $timeslots = time_slot($duration, $cleanup, $start, $end);
                 foreach ($timeslots as $ts) {
@@ -172,10 +182,11 @@ function time_slot($duration, $cleanup, $start, $end)
                         </div>
                     </div>
                 <?php } ?>
+                </div>
             </div>
+   
         </div>
     </div>
 
 </body>
-
 </html>
