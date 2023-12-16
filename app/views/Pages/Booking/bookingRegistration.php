@@ -67,11 +67,9 @@ $selected_net = isset($_GET['net']) ? urldecode($_GET['net']) : "Normal Net A";
                             <label>Who is the coach?</label>
                             <select name="coach" required>
                                 <option disabled selected>Select the coach</option>
-                                <option>Mr. Kamal</option>
-                                <option>Mr. Namal</option>
-                                <option>Mr. Wimal</option>
-                                <option>Mr. Sunil</option>
-                                <option>Mr. Nimal</option>
+                                <?php foreach($data as $coach):?>
+                                    <option><?php echo "Mr.{$coach->name}"?></option>
+                                <?php endforeach;?>
                             </select>
                         </div>
 
