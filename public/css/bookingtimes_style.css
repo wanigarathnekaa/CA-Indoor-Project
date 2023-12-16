@@ -27,6 +27,11 @@ body{
       align-items: center;
 }
 
+.container{
+      margin-left: 20px;
+      margin-right: 20px;
+}
+
 .text-center{
       text-align: center;
       padding-bottom: 10px;
@@ -42,15 +47,16 @@ body{
       align-items: center;
       padding-top: 10px;
       padding-bottom: 10px;
-      margin-left: 10%;
-      margin-right: 10%;
+      /* margin-left: 10%;
+      margin-right: 10%; */
 }
 .timeSlots .slot{
       background-color: var(--color04);
-      padding:20px 50px 20px 50px ;
+      padding: 10px 20px 20px 20px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       border-radius: 10px;
       margin-bottom: 10px;
+      /* margin-left: 10px; */
       font-size: 1em;
 }
 
@@ -63,6 +69,7 @@ body{
 
 .timeSlots .slot .netType{
       font-size: 20px;
+      text-align: center;
 }
 
 .timeSlots .slot .row .form-group .btn {
