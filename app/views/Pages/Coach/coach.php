@@ -16,7 +16,7 @@
         <div class="profiles">
             <?php foreach($data as $coach):?>
                 <div class="coachcard">
-                    <a href="<?php echo URLROOT?>/Pages/CoachCard/user"><img class="image" src="<?php echo URLROOT; ?>/images/image1.jpg" /></a>
+                    <a href="<?php echo URLROOT?>/Pages/CoachCard/user?email=<?php echo $coach->email; ?>"><img class="image" src="<?php echo URLROOT; ?>/images/image1.jpg" /></a>
                     <div class="Name"><?php echo "{$coach->name}"?></div>
                 </div>
             <?php endforeach;?>
