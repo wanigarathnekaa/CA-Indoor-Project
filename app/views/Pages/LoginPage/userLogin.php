@@ -3,14 +3,14 @@
                 
                 <div class="input-box">
                     <!-- <label for="uname"><b>Username</b></label> -->
-                    <input type="text" name="email" id="email" placeholder="<?php echo $data1['email_err']; ?>">
+                    <input type="text" name="email" id="email" placeholder="<?php echo $data['email_err']; ?>">
                     <i class='bx bxs-user'></i>
                     <!-- <span class="form-invalid"></span> -->
                 </div>
                 
                 <div class="input-box">
                     <!-- <label for="psw"><b>Password</b></label> -->
-                    <input type="password" name="pwd" id="pwd" placeholder="<?php echo $data1['pwd_err']; ?>">
+                    <input type="password" name="pwd" id="pwd" placeholder="<?php echo $data['pwd_err']; ?>">
                     <i class='bx bxs-low-vision'></i>
                     <!-- <span class="form-invalid"></span> -->
                 </div>
