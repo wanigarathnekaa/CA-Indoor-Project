@@ -76,8 +76,15 @@ class Pages extends Controller
 
     public function Booking_Register($name)
     {
-        // $role = $name;
-        $this->view('Pages/Booking/bookingRegistration');
+        $coaches = $this->pagesModel->getCoaches();
+        $data = [
+            'users' => $coaches,
+        ];
+        $res = [];
+        foreach ($data['users'] as $user) {
+            $res[] = $this->pagesModel->findUser($user->email);
+        }
+        $this->view('Pages/Booking/bookingRegistration', $res);
     }
 
     public function Profile($name)
