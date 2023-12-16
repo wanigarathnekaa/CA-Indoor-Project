@@ -277,3 +277,5 @@
         </div>
     </div>
 </nav>
+ <!-- javascripts -->
+ <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
