@@ -56,6 +56,7 @@ class Bookings extends Controller
             if (empty($data['name_err']) && empty($data['net_err']) && empty($data['email_err'])) {
                 //create user
                 if ($this->bookingModel->Booking_Register($data)) {
+                    $_SESSION['booking_success'] = true;
                     redirect("Pages/Booking/user?fulldate={$data['date']}");
                 } else {
                     die('Something Went wrong');

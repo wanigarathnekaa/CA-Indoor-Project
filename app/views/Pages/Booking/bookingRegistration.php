@@ -4,6 +4,7 @@ $selected_date = isset($_GET['timedate']) ? urldecode($_GET['timedate']) : date(
 $selected_net = isset($_GET['net']) ? urldecode($_GET['net']) : "Normal Net A";
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
