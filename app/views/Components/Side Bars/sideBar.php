@@ -269,7 +269,7 @@
         </div>
         <div class="bottom-content">
             <li class="logout">
-                <a href="#">
+                <a href="http://localhost/C&A_Indoor_Project/Users/login">
                     <i class='bx bx-log-out icon'></i>
                     <span class="text nav-text">logout</span>
                 </a>

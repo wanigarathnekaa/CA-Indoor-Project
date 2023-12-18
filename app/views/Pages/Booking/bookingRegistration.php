@@ -39,12 +39,12 @@ $selected_net = isset($_GET['net']) ? urldecode($_GET['net']) : "Normal Net A";
 
                         <div class="input-field">
                             <label>Email</label>
-                            <input type="text" name="email" placeholder="Enter your email" required>
+                            <input type="email" name="email" placeholder="Enter your email" required>
                         </div>
 
                         <div class="input-field">
                             <label>Mobile Number</label>
-                            <input type="number" name="phoneNumber" placeholder="Enter mobile number" required>
+                            <input type="tel" name="phoneNumber" placeholder="Enter mobile number" required>
                         </div>
 
 
