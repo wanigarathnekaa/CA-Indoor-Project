@@ -17,6 +17,13 @@ $new_array_2 = array_filter($data, function ($data) use ($filter_date, $filter_n
 $new_array_3 = array_filter($data, function ($data) use ($filter_date, $filter_net_B) {
     return $data->date === $filter_date && $data->net === $filter_net_B;
 });
+
+if (isset($_SESSION['booking_success']) && $_SESSION['booking_success'] === true) {
+    echo '<div class="alert">';
+    echo '<script>alert("You have confirmed your booking!");</script>';
+    echo '</div>';
+    unset($_SESSION['booking_success']);
+}
 ?>
 
 

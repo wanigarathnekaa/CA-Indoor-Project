@@ -158,7 +158,7 @@
                                 </li>
                 <?php } else if ($role == "Manager") { ?>
                                     <li class="nav-link">
-                                        <a href="#">
+                                        <a href="http://localhost/C&A_Indoor_Project/Pages/Dashboard/manager">
                                             <i class="bx bx-home-alt icon"></i>
                                             <span class="text nav-text">Dashboard</span>
                                         </a>
