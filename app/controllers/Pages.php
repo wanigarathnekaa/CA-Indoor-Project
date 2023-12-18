@@ -39,6 +39,12 @@ class Pages extends Controller
         $this->view('Pages/Tables/dailyReservation', $bookings);
     }
 
+    // coach table
+    public function coachTable($name){
+        $coaches = $this->pagesModel->getCoaches();
+        $this->view('Pages/Tables/coaches_Table', $coaches);
+    }
+
     public function Dashboard($name)
     {
         $bookings = $this->pagesModel->getBookings();
