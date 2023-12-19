@@ -217,6 +217,18 @@
   /* responsive */
 
   @media (max-width: 768px) {
+    .sidebar{
+      display: none;
+    }
+    .home{
+      left: 0;
+      width: 100%;
+    }
+
+    .sidebar.close ~ .home {
+      left: 0;
+      width: 100%;
+    }
     
   }
 

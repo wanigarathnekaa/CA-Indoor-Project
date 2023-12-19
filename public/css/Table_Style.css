@@ -34,7 +34,7 @@ table {
       border-collapse: collapse;
       /* margin-top: 10px; */
       margin-bottom: 10px;
-      padding-bottom: 20px;
+      /* padding-bottom: 20px; */
       overflow-y: scroll;
       min-width: 80%;
 }
@@ -54,10 +54,12 @@ table thead td {
 
 table tr {
       color: var(--black1);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 table tbody td{
       font-size: 14px;
+      padding-top: 5px;
+      padding-bottom: 15px;
 }
 /* table tbody tr:nth-child(even) {
       background: var(--color03);
@@ -101,6 +103,10 @@ tbody .delete{
 
       .table-container{
             margin: 10px;
+      }
+
+      table {
+            width: 95%;
       }
 
       table thead td {
