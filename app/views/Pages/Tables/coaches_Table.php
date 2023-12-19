@@ -43,21 +43,7 @@
 
                         <!-- table body -->
                         <tbody>
-                              <a href="#">
-                                    <tr>
-                                          <td>Milan Bhanuka</td>
-                                          <td>vgmbhanuka@gmail.com</td>
-                                          <td>0716720864</td>
-                                          <td>1 year year experience in coaching</td>
-                                          <td>level1, sara player, devision3 player</td>
-                                          <td>lavel4 cricket coach</td>
-                                          <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
-                                          <td><a href="#"><i class="fa-solid fa-user-slash delete icon"></i><a></td>
-                                          
-                                    </tr>
-                              </a>
-
-                              <tr>
+                              <tr onclick="window.location.href='#';">
                                     <td>Milan Bhanuka</td>
                                     <td>vgmbhanuka@gmail.com</td>
                                     <td>0716720864</td>
@@ -68,7 +54,6 @@
                                     <td><a href="#"><i class="fa-solid fa-user-slash delete icon"></i><a></td>
                                     
                               </tr>
-
                         </tbody>
                   </table>
             </div>
