@@ -100,9 +100,8 @@
                   
                   <!-- Calander -->
                   <div class="calanderdiv">
-                        <?php
-                        require APPROOT . '/views/Pages/Calendar/calender.php';
-                        ?> 
+                        <iframe src="http://localhost/C&A_Indoor_Project/Pages/Calendar/User" frameborder="0"></iframe>
+                        
                   </div>
                   
 
