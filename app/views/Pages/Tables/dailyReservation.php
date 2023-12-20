@@ -68,32 +68,30 @@ $new_data = array_filter($data, function ($data) use ($filter_date) {
                   <span class="close" onclick="closePopup()"><i class="fa-solid fa-xmark"></i></span>
                   <h2>Reservation</h2>
                   <hr>
-                  <div class="details">
-                        <div class="detail">
-                              <h2 class="topic">Reservation ID : </h2>
-                              <h2>123456789</h2>
+                  <div class="popupdetails">
+                        <div class="popupdetail">
+                              <h2><b>Reservation ID :</b> 123456789</h2>
                         </div>
-                        <!-- <div class="detail">
-                              <h2 class="topic">Customer : </h2>
-                              <h2>Milan Bhanuka</h2>
-                        </div> -->
-                        <!-- <div class="detail">
-                              <h2 class="topic">Reservation Date : </h2>
-                              <h2>12/12/2021</h2>
+
+                        <div class="popupdetail">
+                              <h2><b>Customer Name :</b> Milan Bhanuka</h2>
                         </div>
-                        <div class="detail">
-                              <h2 class="topic">Reservation Time : </h2>
-                              <h2>12:00-01.00</h2>
+
+                        <div class="popupdetail">
+                              <h2><b>Reservation Date :</b> 2023-12-30</h2>
                         </div>
-                        <div class="detail">
-                              <h2 class="topic">Net : </h2>
-                              <h2>Normal Net A</h2>
+
+                        <div class="popupdetail">
+                              <h2><b>Reservation Time :</b> 10AM-12PM</h2>
                         </div>
-                        <div class="detail">
-                              <h2 class="topic">Status : </h2>
-                              <h2>Paid</h2>
-                        </div> -->
-                        dfevfuwevfyiw
+
+                        <div class="popupdetail">
+                              <h2><b>Net :</b> Normal Net A</h2>
+                        </div>
+
+                        <div class="popupdetail">
+                              <h2><b>Status :</b> Paid</h2>
+                        </div>
                   </div>
 
                   <div class="btns">
