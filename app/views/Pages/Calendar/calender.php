@@ -15,9 +15,9 @@ function build_calendar($month, $year)
     $next_year = date('Y', mktime(0, 0, 0, $month + 1, 1, $year));
 
     $calendar = "<center><h2 class='date'>$monthName $year</h2>";
-    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/User?month=" . $prev_month . "&year=" . $prev_year . "'>Prev Month</a> ";
-    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/User'>Current Month</a> ";
-    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/User?month=" . $next_month . "&year=" . $next_year . "'>NextMonth</a></center> ";
+    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Dashboard/manager?month=" . $prev_month . "&year=" . $prev_year . "'>Prev Month</a> ";
+    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Dashboard/manager'>Current Month</a> ";
+    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Dashboard/manager?month=" . $next_month . "&year=" . $next_year . "'>NextMonth</a></center> ";
 
     $calendar .= "<br><table class='calander'> ";
     $calendar .= "<tr>";
