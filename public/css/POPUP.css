@@ -89,18 +89,11 @@
 
 .popup .popupdetails{
       justify-content: center;
-      margin-top: 15px;
+      margin-top: 5px;
 
 }
 
-.popup .popupdetails .popupdetail{
-      /* background-color: #b8b8b8; */
-      margin-bottom: 5px;
-}
 
-.popup .popupdetails .popupdetail h2{
-      font-size: 15px;
-}
 
 
 
@@ -113,10 +106,6 @@
       .popup h2{
             font-size: 20px;
             
-      }
-
-      .popup .popupdetails .popupdetail h2{
-            font-size: 13px;
       }
 
       
