@@ -71,7 +71,7 @@
                               <div class="cardName">Inventory Management</div>
                         </div>
                         <div class="iconBx">
-                              <i class="fa-solid fa-store icon"></i>
+                              <i class="fa-solid fa-store"></i>
                         </div>
                   </a>
 

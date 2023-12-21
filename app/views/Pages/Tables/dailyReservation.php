@@ -10,7 +10,7 @@ $new_data = array_filter($data, function ($data) use ($filter_date) {
 <head>
       <meta name="viewport" content="width = device-width, initial-scale=1.0">
       <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/dailyReservation_Table_Style.css">
-      <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/reservationPopup.css">
+      <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_reservation.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 
 
