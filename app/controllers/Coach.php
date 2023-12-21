@@ -27,7 +27,9 @@ class Coach extends Controller
                 'phoneNumber' => trim($_POST['phoneNumber']),
                 'pwd' => "12345678",
                 'nic' => trim($_POST['nic']),
-                'address' => trim($_POST['address']),
+                'srtAddress' => trim($_POST['srtAddress']),
+                'city' => trim($_POST['city']),
+                'achivements' => trim($_POST['achivements']),
                 'experience' => trim($_POST['experience']),
                 'specialty' => trim($_POST['specialty']),
                 'certificate' => trim($_POST['certificate']),
@@ -37,7 +39,9 @@ class Coach extends Controller
                 'email_err' => "",
                 'phoneNumber_err' => "",
                 'nic_err' => "",
-                'address_err' => "",
+                'srtAddress_err' => "",
+                'city_err' => "",
+                'achivements_err' => "",
                 'experience_err' => "",
                 'specialty_err' => "",
                 'certificate_err' => ""
@@ -82,8 +86,14 @@ class Coach extends Controller
                 $data['nic_err'] = "Please enter the NIC number";
             }
 
-            if (empty($data['address'])) {
-                $data['address_err'] = "Please enter the Address";
+            if (empty($data['srtAddress'])) {
+                $data['address_err'] = "Please enter the Street Address";
+            }
+            if (empty($data['city'])) {
+                $data['address_err'] = "Please enter the City";
+            }
+            if (empty($data['achivements'])) {
+                $data['address_err'] = "Please enter the Achievements of the ";
             }
 
             if (empty($data['experience'])) {
@@ -100,7 +110,7 @@ class Coach extends Controller
 
 
             //If validation is completed and no error, then register the user
-            if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err']) && empty($data['nic_err']) && empty($data['address_err'])) {
+            if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err']) && empty($data['nic_err'])) {
                 //Hash the password
                 $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
 
@@ -117,13 +127,15 @@ class Coach extends Controller
         } else {
             //initial form
             $data = [
-                'name' => "",
+                'name' =>"",
                 'user_name' => "",
                 'email' => "",
                 'phoneNumber' => "",
                 'pwd' => "",
                 'nic' => "",
-                'address' => "",
+                'srtAddress' => "",
+                'city' => "",
+                'achivements' => "",
                 'experience' => "",
                 'specialty' => "",
                 'certificate' => "",
@@ -133,7 +145,9 @@ class Coach extends Controller
                 'email_err' => "",
                 'phoneNumber_err' => "",
                 'nic_err' => "",
-                'address_err' => "",
+                'srtAddress_err' => "",
+                'city_err' => "",
+                'achivements_err' => "",
                 'experience_err' => "",
                 'specialty_err' => "",
                 'certificate_err' => ""
@@ -161,7 +175,9 @@ class Coach extends Controller
                 'phoneNumber' => trim($_POST['phoneNumber']),
                 'pwd' => "12345678",
                 'nic' => trim($_POST['nic']),
-                'address' => trim($_POST['address']),
+                'srtAddress' => trim($_POST['srtAddress']),
+                'city' => trim($_POST['city']),
+                'achivements' => trim($_POST['achivements']),
                 'experience' => trim($_POST['experience']),
                 'specialty' => trim($_POST['specialty']),
                 'certificate' => trim($_POST['certificate']),
@@ -171,7 +187,9 @@ class Coach extends Controller
                 'email_err' => "",
                 'phoneNumber_err' => "",
                 'nic_err' => "",
-                'address_err' => "",
+                'srtAddress_err' => "",
+                'city_err' => "",
+                'achivements_err' => "",
                 'experience_err' => "",
                 'specialty_err' => "",
                 'certificate_err' => ""
@@ -206,8 +224,14 @@ class Coach extends Controller
                 $data['nic_err'] = "Please enter the NIC number";
             }
 
-            if (empty($data['address'])) {
-                $data['address_err'] = "Please enter the Address";
+            if (empty($data['srtAddress'])) {
+                $data['address_err'] = "Please enter the Street Address";
+            }
+            if (empty($data['city'])) {
+                $data['address_err'] = "Please enter the City";
+            }
+            if (empty($data['achivements'])) {
+                $data['address_err'] = "Please enter the Achievements of the ";
             }
 
             if (empty($data['experience'])) {
@@ -224,7 +248,7 @@ class Coach extends Controller
 
 
             //If validation is completed and no error, then register the user
-            if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err']) && empty($data['nic_err']) && empty($data['address_err'])) {
+            if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err']) && empty($data['nic_err'])) {
                 //Hash the password
                 $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
 

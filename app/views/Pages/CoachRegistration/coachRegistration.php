@@ -1,70 +1,92 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <title>Responsive Registration Form</title>
-    <meta name="viewport" content="width=device-width,
-      initial-scale=1.0" />
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!---<title> Responsive Registration Form | CodingLab </title>--->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/coachRegistration.css" />
-</head>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+ 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Registration Form</title>
+   </head>
 <body>
-    <div class="container">
-        <h1 class="form-title">COACH REGISTRATION FORM</h1>
-        <form action="<?php echo URLROOT;?>/Coach/register" method="POST">
-            <div class="main-user-info">
-                <div class="user-input-box">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter Full Name" />
-                </div>
-
-                <div class="user-input-box">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter Email" />
-                </div>
-                <div class="user-input-box">
-                    <label for="phoneNumber">Phone Number</label>
-                    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Enter Phone Number" />
-                </div>
-                <div class="user-input-box">
-                    <label for="NIC">NIC</label>
-                    <input type="text" id="nic" name="nic" placeholder="Enter NIC" />
-                </div>
-                <div class="user-input-box">
-                    <label for="Address">Address</label>
-                    <input type="Address" id="address" name="address" placeholder="Enter Address" />
-                </div>
-                <div class="user-input-box">
-                    <label for="Experience">Experience</label>
-                    <input type="Experience" id="experience" name="experience" placeholder="Enter Experience" />
-                </div>
-                <div class="user-input-box">
-                    <label for="Speciality">Speciality</label>
-                    <input type="Speciality" id="specialty" name="specialty" placeholder="Enter Speciality" />
-                </div>
-                <div class="user-input-box">
-                    <label for="Certificates">Certificates</label>
-                    <input type="Certificates" id="certificate" name="certificate" placeholder="Enter Certificates" />
-                </div>
-
+  <div class="container">
+    <div class="title">Registration Form</div>
+   
+   
+      <div class="upload">
+        <button class=" btn">
+          <i class="fa fa-upload"></i>Upload File
+          <input type="file">
+        </button>
+      </div>
+    
+    <div class="content">
+    <form action="<?php echo URLROOT;?>/Coach/register" method="POST">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Full Name</span>
+            <input type="text" placeholder="Enter your name"  name="name" required>
+          </div>
+         
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="text" placeholder="Enter your email" name="email" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text" placeholder="Enter your number" name="phoneNumber" required>
+          </div>
+          <div class="input-box">
+            <span class="details">NIC</span>
+            <input type="text" placeholder="Enter your NIC number" name="nic" required>
+          </div>
+         
+          <div class="input-box">
+            <span class="details">Expeience</span>
+            <input type="text" placeholder="Confirm your Expeience" name="experience" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Speciality</span>
+            <input type="text" placeholder="Enter your Speciality" name="speciality" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Certificates</span>
+            <input type="text" placeholder="Enter your Certificates" name="certificate" required>
+          </div>
+         
+          <!-- <label>Address</label> -->
+          <div class="input-box">
+            <label for="address">Achivements</label>
+            <div>
+              <input type="text" name="achivements" id="address" placeholder="Enter your Achivements" required>
             </div>
-            <div class="gender-details-box">
-                <span class="gender-title">Gender</span>
-                <div class="gender-category">
-                    <input type="radio" name="gender" id="male">
-                    <label for="male">Male</label>
-                    <input type="radio" name="gender" id="female">
-                    <label for="female">Female</label>
-                    <input type="radio" name="gender" id="other">
-                    <label for="other">Other</label>
-                </div>
+          </div>
+          <!-- <div class="input-box">
+            <div class="topic">Address</div>
+          </div>
+          <div></div>
+          <div></div> -->
+          
+          <div class="input-box">
+            <label for="address">Street Address</label>
+            <div>
+              <input type="text" name="srtAddress" id="address" placeholder="Enter your Address" required>
             </div>
-            <div class="form-submit-btn">
-                <input type="submit" value="Register">
+          </div>
+          <div class="input-box">
+            <label for="address">city</label>
+            <div>
+              <input type="text" name="city" id="address" placeholder="Enter your Address" required>
             </div>
-        </form>
+          </div>
+        </div>
+        
+        <div class="button">
+          <input type="submit" value="Register" >
+        </div>       
+      </form>
     </div>
+  </div>
 </body>
-
 </html>
