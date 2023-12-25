@@ -75,7 +75,7 @@
                         </div>
                   </a>
 
-                  <a class="card" href="#">
+                  <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/Coach_Registration/coach">
                         <div>
                               <div class="numbers"></div>
                               <div class="cardName">Registration</div>

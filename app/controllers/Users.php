@@ -12,6 +12,7 @@ class Users extends Controller
 
     }
 
+    //Register function.....................................................
     public function register()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -45,13 +46,14 @@ class Users extends Controller
 
             //validate user_name
             if (empty($data['user_name'])) {
-                $data['user_name_err'] = "Please enter an user_name";
+                $data['user_name_err'] = "Please enter an user name";
             }
 
             //validate email
             if (empty($data['email'])) {
                 $data['email_err'] = "Please enter an email";
-            } else {
+            } 
+            else {
                 //check email already registered or not
                 if ($this->userModel->findUserByEmail($data['email'])) {
                     $data['email_err'] = "This email is already in use";
@@ -62,19 +64,26 @@ class Users extends Controller
             if (empty($data['phoneNumber'])) {
                 $data['phoneNumber_err'] = "Please enter a phone number";
             }
+            elseif(strlen($data['phoneNumber']) != 10){
+                    $data['phoneNumber_err'] = "Please enter a valid phone number";
+            }
+            else{
+                // if ($this->userModel->findUserByPhoneNumber($data['phoneNumber'])) {
+                //     $data['phoneNumber_err'] = "This phone number is already in use";
+                // }
+            }
 
             //validate password
             if (empty($data['pwd'])) {
                 $data['pwd_err'] = "Please enter a password";
-            } else {
-                if ($data['pwd'] != $data['confirmPwd']) {
-                    $data['pwd_err'] = "Not Matching Passwords";
-                }
             }
-
-            //validate confirm passowrd
-            if (empty($data['confirmPwd'])) {
+            elseif(empty($data['confirmPwd'])){
                 $data['confirmPwd_err'] = "Please confirm your password";
+            }
+            else{
+                if($data['pwd'] != $data['confirmPwd']){
+                    $data['confirmPwd_err'] = "Not Matching Passwords";
+                }
             }
 
 
@@ -145,13 +154,14 @@ class Users extends Controller
                     $role = 2;
                     echo "user is found";
                 } else {
+                    //user not found
                     $data['email_err'] = "User Not Found";
                 }
             }
 
-            //validate the user
+            //validate password
             if (empty($data['pwd'])) {
-                $data['pwd_err'] = "Please enter a password";
+                $data['pwd_err'] = "Please enter the password";
             }
 
             //If no error found then login user

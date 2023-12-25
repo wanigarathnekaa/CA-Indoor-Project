@@ -10,6 +10,7 @@ class Coach extends Controller
     }
 
 
+    // register function.....................................................
     public function register()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -158,6 +159,9 @@ class Coach extends Controller
         $this->view('Pages/CoachRegistration/coachRegistration', $data);
     }
 
+
+
+    // edit function.....................................................
     public function edit()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -267,6 +271,11 @@ class Coach extends Controller
         $this->view('Pages/UserProfiles/editProfile', $data);
     }
 
+
+
+
+    
+    // delete function.....................................................
     public function delete()
     {
         // var_dump($_POST);

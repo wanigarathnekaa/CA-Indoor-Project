@@ -95,11 +95,16 @@ body{
 
 }
 
+.input-box .form-invalid{
+    color: rgb(172,5,5);
+}
+
 .loginContainer .remember-forget{
     display: flex;
     justify-content: space-between;
     font-size: 1rem;
     margin: -15px 0px 15px;
+    margin-top: 10px;
 }
 
 .remember-forget label input{
@@ -138,6 +143,7 @@ body{
 }
 
 
+
 .registerLink a{
     color: black;
     text-decoration: none;
@@ -147,6 +153,7 @@ body{
 .registerLink a:hover{
     text-decoration: underline;
 }
+
 
 @media (max-width: 600px){
     * {
