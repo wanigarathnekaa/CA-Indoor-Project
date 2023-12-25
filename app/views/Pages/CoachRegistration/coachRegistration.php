@@ -34,12 +34,13 @@
             <div class="user-details">
               <div class="input-box">
                 <span class="details">Full Name</span>
-                <input type="text" placeholder="Enter your name"  name="name" required>
+                <input type="text" placeholder="Enter your name"  name="name" required >
               </div>
             
               <div class="input-box">
                 <span class="details">Email</span>
                 <input type="text" placeholder="Enter your email" name="email" required>
+                <!-- <span class="form-invalid"><?php echo $data['email_err']; ?></span> -->
               </div>
               <div class="input-box">
                 <span class="details">Phone Number</span>
