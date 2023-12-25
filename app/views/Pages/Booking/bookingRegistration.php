@@ -44,17 +44,18 @@ $selected_net = isset($_GET['net']) ? urldecode($_GET['net']) : "Normal Net A";
                         <div class="fields">
                             <div class="input-field">
                                 <label>Full Name</label>
-                                <input type="text" name="name" placeholder="Enter your name" required>
+                                <input type="text" name="name" placeholder="Enter your name" required >
+                                <!-- <span class="form-invalid"><?php echo $data['name_err']; ?></span> -->
                             </div>
 
                             <div class="input-field">
                                 <label>Email</label>
-                                <input type="email" name="email" placeholder="Enter your email" required>
+                                <input type="email" name="email" placeholder="Enter your email" required >
                             </div>
 
                             <div class="input-field">
                                 <label>Mobile Number</label>
-                                <input type="tel" name="phoneNumber" placeholder="Enter mobile number" required>
+                                <input type="text" name="phoneNumber" placeholder="Enter mobile number" required maxlength="10">
                             </div>
 
                             <!-- <div class="input-field">
@@ -92,12 +93,12 @@ $selected_net = isset($_GET['net']) ? urldecode($_GET['net']) : "Normal Net A";
                     </div>
 
                     <div class="details ID">
-
                         <button type="submit" name="booking">
                             <span class="btnText">Confirm</span>
                             <i class="uil uil-navigator"></i>
                         </button>
                     </div>
+
                 </div>
             </form>
         </div>   
