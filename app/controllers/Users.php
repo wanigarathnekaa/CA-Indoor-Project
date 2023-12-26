@@ -105,7 +105,7 @@ class Users extends Controller
         } else {
             //initial form
             $data = [
-                'name' => "heee",
+                'name' => "",
                 'user_name' => "",
                 'email' => "",
                 'phoneNumber' => "",
