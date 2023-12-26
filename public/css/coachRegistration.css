@@ -95,15 +95,14 @@ form .input-box span.details{
   border-bottom-width: 2px;
   transition: all 0.3s ease;
 }
-.user-details .input-box input:focus,
-.user-details .input-box input:valid{
+.user-details .input-box input:focus{
   border-color: #2E8A99;
 }
 
 /* if user dont not fill the feld the board become red*/
-.user-details .input-box input:user-invalid{
+/* .user-details .input-box input:user-invalid{
   border-color: rgb(172,5,5);
-}
+} */
  
 form .category{
   display: flex;

@@ -109,17 +109,13 @@
             
 
             <!-- chart -->
-            <div style="text-align: center; margin-top: 40px;">
-                  <div id="chartContainer" style="height: 370px; width: 90%; margin: 0 auto;"></div>
-            </div>
+            
 
       </section>
 
 
       <!-- javascripts -->
       <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
-      <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
-      <script src="<?php echo URLROOT; ?>/js/chart.js"></script>
 </body>
 
 </html>
