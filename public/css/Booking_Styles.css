@@ -103,22 +103,35 @@ form .fields .input-field{
     font-weight: 400;
     color: #333;
     border-radius: 5px;
-    border: 1px solid #aaa;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
     padding: 0 15px;
     height: 42px;
     margin: 8px 0;
 }
-.input-field input :focus,
-.input-field select:focus{
-    box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+
+
+.input-field input:user-invalid{
+    border-color: rgb(172,5,5);
 }
-.input-field select,
+
+.input-field input:focus,
+.input-field input:valid{
+    border-color: #2d8491;
+}
+
+select:focus{
+    border-color: #2E8A99;
+}
+
+
+/* .input-field select,
 .input-field input[type="date"]{
     color: #707070;
-}
-.input-field input[type="date"]:valid{
+} */
+/* .input-field input[type="date"]:valid{
     color: #333;
-}
+} */
 .container form button, .backBtn{
     display: flex;
     align-items: center;
@@ -155,6 +168,11 @@ form .buttons{
 }
 form .buttons button , .backBtn{
     margin-right: 14px;
+}
+
+form .form-invalid{
+    color: rgb(172,5,5);
+    font-size: 10px;
 }
 
 

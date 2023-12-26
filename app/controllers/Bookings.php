@@ -66,7 +66,8 @@ class Bookings extends Controller
                 // echo '<script>alert("Net has been booked already")</script>'; 
                 $this->view('Pages/Booking/bookingRegistration', $data);
             }
-        } else {
+        } 
+        else {
             //initial form
             $data = [
                 'name' => "",
@@ -74,12 +75,18 @@ class Bookings extends Controller
                 'net' => "",
                 'timeSlot' => "",
                 'date' => "",
+                'coach' => "",
+                'phoneNumber' => "",
+
 
                 'name_err' => "",
                 'email_err' => "",
                 'net_err' => "",
                 'timeSlot_err' => "",
                 'date_err' => "",
+                'coach_err' => "",
+                'phoneNumber_err' => "",
+
             ];
         }
 

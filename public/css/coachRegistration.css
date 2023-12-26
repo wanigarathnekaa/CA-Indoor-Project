@@ -99,6 +99,11 @@ form .input-box span.details{
 .user-details .input-box input:valid{
   border-color: #2E8A99;
 }
+
+/* if user dont not fill the feld the board become red*/
+.user-details .input-box input:user-invalid{
+  border-color: rgb(172,5,5);
+}
  
 form .category{
   display: flex;
@@ -153,14 +158,14 @@ form .button input{
 form .button input:hover{
   background-color: #2e8a99;
 }
-textarea{
+/* textarea{
     width: 100%;
     outline: #2E8A99;
     border: 1px solid #2E8A99;
     padding: 10px;
     box-sizing: border-box;
     resize: none;
-}
+} */
   .profilepic form input[type="file"] {
     display: none;
     cursor: pointer;

@@ -39,12 +39,13 @@
             
               <div class="input-box">
                 <span class="details">Email</span>
-                <input type="text" placeholder="Enter your email" name="email" required>
-                <!-- <span class="form-invalid"><?php echo $data['email_err']; ?></span> -->
+                <input type="email" placeholder="Enter your email" name="email" required>
+                <!-- validation -->
+                <span class="form-invalid"><?php echo $data['email_err']; ?></span>
               </div>
               <div class="input-box">
                 <span class="details">Phone Number</span>
-                <input type="text" placeholder="Enter your number" name="phoneNumber" required>
+                <input type="tel" placeholder="Enter your number" name="phoneNumber" required>
               </div>
               <div class="input-box">
                 <span class="details">NIC</span>
