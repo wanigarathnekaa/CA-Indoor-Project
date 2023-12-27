@@ -99,6 +99,7 @@
   .sidebar header .image-text {
     display: flex;
     align-items: center;
+    justify-content: center;
   }
   .sidebar header .logo-text {
     display: flex;
@@ -236,6 +237,7 @@
     .sidebar{
       display: none;
     }
+  
     .home{
       left: 0;
       width: 100%;

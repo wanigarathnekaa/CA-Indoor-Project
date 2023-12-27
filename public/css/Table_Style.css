@@ -10,9 +10,77 @@
       --black2: #000000;
 }
 
-.home{
-      /* margin: 10px; */
+/* margin 30px */
+
+/* ........................................................................................................... */
+.table-topic{
+      margin: 30px;
+      display: flex;
+      justify-content: space-around;
+      /* background-color: #373ae0; */
 }
+
+.table-topic .topic-name h1{
+      font-size: 25px;
+}
+
+.table-topic .add-btn{
+      display: flex;
+      align-items: center;
+}
+
+.table-topic .add-btn .icon{
+      color: #000000;
+      font-size: large;
+
+}
+
+.table-topic .add-btn a{
+      text-decoration: none;
+      /* color: var(--black1); */
+
+}
+
+
+.table-topic .search {
+      display: flex;
+      align-items: center;
+      position: relative;
+      width: 200px;
+      /* margin: 0 10px; */
+}
+    
+.table-topic .search label {
+      display: flex;
+      align-items: center;
+      position: relative;
+      width: 100%;
+
+}
+    
+.table-topic .search label input {
+      width: 100%;
+      /* height: 30px; */
+      border-radius: 40px;
+      padding: 5px 20px;
+      padding-left: 35px;
+      font-size: 10px;
+      outline: none;
+      border: 1px solid var(--black2);
+}
+    
+.table-topic .search label .icon {
+      position: absolute;
+      /* top: 5px; */
+      left: 10px;
+      font-size: 0.8rem;
+}
+
+
+
+
+
+/*  table  ..................................................................... */
 .table-container {
       /* width: 100%; */
       position: relative;
@@ -68,8 +136,8 @@ table tbody tr:nth-child(odd) {
       background: var(--color04);
 } */
 table tbody tr:hover {
-      background: var(--color01);
-      color: var(--white); 
+      background: var(--color03);
+      color: var(--black1); 
 }
 table tr td {
       padding: 10px;
@@ -77,17 +145,18 @@ table tr td {
 table tr td:last-child {
       text-align: end;
 }
+
 tbody a{
       text-decoration: none;
       /* color: var(--black1); */
 
 }
+
 tbody td .icon {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-left: 10px;
-      
+      /* padding-left: 10px;      */
 }
 
 tbody .edit{
@@ -99,21 +168,88 @@ tbody .delete{
 }
 
 
+
+
+
+/* responsive__________________________________________________________________________________________ */
+
 @media (max-width: 768px) {
+
+      /* margin: 10px; */
+      .table-topic{
+            margin: 10px;
+            /* width: 100%; */
+      }
+
+      .table-topic .topic-name h1{
+            font-size: 20px;
+      }
 
       .table-container{
             margin: 10px;
       }
 
       table {
-            width: 95%;
-      }
+            width: 100%;
+            display: block;
 
+      }
       table thead td {
             font-size: 12px;
       }
 
-      tbody td{
+      table tbody td{
             font-size: 12px;
       }
+
+}
+
+
+
+@media (max-width:480px){
+
+      /* margin: 10px; */
+      .table-topic{
+            margin: 5px;
+            justify-content: space-around
+            /* width: 100%; */
+      }
+      .table-topic .topic-name h1{
+            font-size: 18px;
+      }
+
+      .table-topic .search{
+            width: 100px;
+
+      }
+      .table-topic .search label input{
+            font-size: 8px;
+            padding-left: 25px;
+      }
+
+      .table-topic .add-btn .icon{
+      font-size: small;
+      }
+
+      .table-container{
+            margin: 5px;
+      }
+
+      table thead td {
+            font-size: 10px;
+      }
+
+      table tbody td{
+            font-size: 10px;
+      }
+
+      table tr td:nth-child(4),
+      table tr td:nth-child(5),
+      table tr td:nth-child(6)
+      {
+            text-align: center;
+            background-color: red;
+            display: none;
+      }
+
 }
