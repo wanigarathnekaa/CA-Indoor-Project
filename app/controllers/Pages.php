@@ -42,12 +42,24 @@ class Pages extends Controller
     // coach table
     public function coachTable($name){
         $coaches = $this->pagesModel->getCoaches();
-        $this->view('Pages/Tables/coaches_Table', $coaches);
+        $coaches = $this->pagesModel->getCoachCount();
+        // $users = $this->pagesModel->getUserCount();
+        $data = [
+            'CoachCount' => $coaches,
+            // 'UserCount' => $users,
+        ];
+        $this->view('Pages/Tables/coaches_Table', $coaches,$data);
     }
 
     public function Dashboard($name)
     {
         $bookings = $this->pagesModel->getBookings();
+        $coaches = $this->pagesModel->getCoachCount();
+        $users = $this->pagesModel->getUserCount();
+        $data = [
+            'CoachCount' => $coaches,
+            'UserCount' => $users,
+        ];
         if ($name == "user") {
             $this->view('Pages/Dashboard/user');
         } else if ($name == "admin") {
@@ -57,7 +69,7 @@ class Pages extends Controller
         } else if ($name == "coach") {
             $this->view('Pages/Dashboard/coach');
         } else if ($name == "manager") {
-            $this->view('Pages/Dashboard/manager', $bookings);
+            $this->view('Pages/Dashboard/manager', $bookings, $data);
         } else if ($name == "owner") {
             $this->view('Pages/Dashboard/owner');
         }
