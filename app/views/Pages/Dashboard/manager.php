@@ -89,7 +89,6 @@
 
             
             <div class="details">
-
                   <!-- Recent Reservations -->
                   <div class="tablediv">
                         <?php
@@ -97,19 +96,15 @@
                         ?>
                   </div>
                   
-                  
                   <!-- Calander -->
                   <div class="calanderdiv">
                         <iframe src="http://localhost/C&A_Indoor_Project/Pages/Calendar/User" frameborder="0"></iframe>                        
                   </div>
-                  
-
             </div> 
 
             
 
             <!-- chart -->
-            
 
       </section>
 
