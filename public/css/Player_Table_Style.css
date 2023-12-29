@@ -195,7 +195,7 @@ tbody .delete{
 
       table {
             width: 100%;
-            display: block;
+            /* display: block; */
 
       }
       table thead td {

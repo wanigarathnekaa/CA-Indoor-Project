@@ -27,7 +27,7 @@
             <!-- Table Topic -->
             <div class="table-topic">
                   <div class="topic-name">
-                        <h1>Players : 25 </h1>
+                        <h1>Players : <?php echo $data1["UserCount"]?>  </h1>
                   </div>
                   <div class="search">
                         <label>
@@ -46,6 +46,7 @@
                         <!-- table header -->
                         <thead>
                               <tr>
+                                    <td>Player ID</td>
                                     <td>Name</td>
                                     <td>Email</td>
                                     <td>Mobile</td>
@@ -58,9 +59,11 @@
                         <!-- table body -->
                         <tbody>
                               <tr onclick="window.location.href='#';">
+                                    <td>1</td>
                                     <td>Milan Bhanuka</td>
                                     <td>vgmbhanuka@gmail.com</td>
                                     <td>0716720864</td>
+                                    <td>Colombo</td>
                                     <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
                                     <td><a href="#"><i class="fa-solid fa-user-slash delete icon"></i><a></td>    
                               </tr>
