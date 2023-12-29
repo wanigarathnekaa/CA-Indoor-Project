@@ -247,13 +247,13 @@ tbody .delete{
             font-size: 10px;
       }
 
-      table tr td:nth-child(4),
+      /* table tr td:nth-child(4),
       table tr td:nth-child(5),
       table tr td:nth-child(6)
       {
             text-align: center;
             background-color: red;
             display: none;
-      }
+      } */
 
 }

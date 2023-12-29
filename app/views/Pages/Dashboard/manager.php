@@ -35,7 +35,7 @@
                         </div>
                   </a>
 
-                  <a class="card" href="#">
+                  <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/playerTable/user">
                         <div>
                               <div class="numbers">80</div>
                               <div class="cardName">Players</div>
