@@ -20,7 +20,9 @@ $new_data = array_filter($data, function ($data) use ($filter_date) {
       <div class="recentOrders">
             <div class="cardHeader">
                   <!-- date -->
-                  <h2><?php echo date('Y-m-d');?></h2>
+                  <h2>
+                        <?php echo date('Y-m-d'); ?>
+                  </h2>
                   <!-- veiw all button -->
                   <a href="#" class="btn">View All</a>
             </div>
@@ -42,12 +44,16 @@ $new_data = array_filter($data, function ($data) use ($filter_date) {
                               <?php
                               foreach ($new_data as $reservation) {
                                     ?>
-                                    <tr onclick="openPopup()">
+                                    <tr onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
                                           <td>
                                                 <?php echo $reservation->name; ?>
                                           </td>
-                                          <td><?php echo $reservation->timeSlot; ?></td>
-                                          <td><?php echo $reservation->net; ?></td>
+                                          <td>
+                                                <?php echo $reservation->timeSlot; ?>
+                                          </td>
+                                          <td>
+                                                <?php echo $reservation->net; ?>
+                                          </td>
                                           <td><span class="status paid">Paid</span></td>
                                     </tr>
                                     <?php
@@ -64,33 +70,33 @@ $new_data = array_filter($data, function ($data) use ($filter_date) {
 
       <!-- Popup message -->
       <div class="popupcontainer" id="popupcontainer">
-            <div class="popup" id="popup">      
+            <div class="popup" id="popup">
                   <span class="close" onclick="closePopup()"><i class="fa-solid fa-xmark"></i></span>
                   <h2>Reservation</h2>
                   <hr>
                   <div class="popupdetails">
                         <div class="popupdetail">
-                              <h2><b>Reservation ID :</b> 123456789</h2>
+                              <h2><b>Reservation ID :</b> <span class = "r_id"></span></h2>
                         </div>
 
                         <div class="popupdetail">
-                              <h2><b>Customer Name :</b> Milan Bhanuka</h2>
+                              <h2><b>Customer Name :</b> <span class = "r_name"></span></h2>
                         </div>
 
                         <div class="popupdetail">
-                              <h2><b>Reservation Date :</b> 2023-12-30</h2>
+                              <h2><b>Reservation Date :</b> <span class = "r_date"></span></h2>
                         </div>
 
                         <div class="popupdetail">
-                              <h2><b>Reservation Time :</b> 10AM-12PM</h2>
+                              <h2><b>Reservation Time :</b> <span class = "r_timeSlot"></span></h2>
                         </div>
 
                         <div class="popupdetail">
-                              <h2><b>Net :</b> Normal Net A</h2>
+                              <h2><b>Net :</b> <span class = "r_net"></span></h2>
                         </div>
 
                         <div class="popupdetail">
-                              <h2><b>Status :</b> Paid</h2>
+                              <h2><b>Status :</b> <span class = "r_payment">Paid</span></h2>
                         </div>
                   </div>
 
@@ -102,10 +108,10 @@ $new_data = array_filter($data, function ($data) use ($filter_date) {
       </div>
 
 
-      
+
 
 
       <!-- javascript -->
       <script src="<?php echo URLROOT; ?>/js/popup.js"></script>
-      
+
 </body>
