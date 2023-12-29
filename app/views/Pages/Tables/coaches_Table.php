@@ -27,7 +27,7 @@
             <!-- Table Topic -->
             <div class="table-topic">
                   <div class="topic-name">
-                        <h1>Coachers : 25 </h1>
+                        <h1>Coachers : <?php echo $data1["CoachCount"]?> </h1>
                   </div>
                   <div class="search">
                         <label>

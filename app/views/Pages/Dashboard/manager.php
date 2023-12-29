@@ -27,7 +27,7 @@
             <div class="cardBox">
                   <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/coachTable/user">
                         <div class="infor">
-                              <div class="numbers">15</div>
+                              <div class="numbers"><?php echo $data1["CoachCount"]?></div>
                               <div class="cardName">Coaches</div>
                         </div>
                         <div class="iconBx">
@@ -37,7 +37,7 @@
 
                   <a class="card" href="#">
                         <div>
-                              <div class="numbers">80</div>
+                              <div class="numbers"><?php echo $data1["UserCount"]?></div>
                               <div class="cardName">Players</div>
                         </div>
                         <div class="iconBx">
