@@ -79,7 +79,7 @@
          
 
           <div class="input-box">
-            <span class="details">Addvertisement Name</span>
+            <span class="details">Advertisement Name</span>
             <input type="text" placeholder="Enter your number" required>
           </div>
          
