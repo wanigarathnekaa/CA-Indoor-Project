@@ -1,0 +1,126 @@
+
+/* ........................................................ */
+.popupcontainer{
+      background-color: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      opacity: 0;
+      pointer-events: none;
+      top: 0;
+      left: 0;
+      width:100vw;
+      height: 100vh;
+      transition: all 0.3s ease;
+}
+
+.open-popupcontainer{
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 100;
+}
+
+.popup,
+.deletepopup{
+      width: 500px;
+      background: #fff;
+      border-radius: 6px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.1);
+      text-align: center;
+      padding: 10px;
+      color: #333;
+      visibility: hidden;
+      transition: transform 0.4s;  
+}
+
+.open-popup,
+.open-deletepopup{
+      visibility: visible;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(1);
+}
+
+/* close icon */
+.close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+
+}
+
+/* ........................................................ */
+
+
+.popup h2{
+      font-size: 25px;
+      font-weight: 500;
+      /* margin: 30px 0 10px; */
+}
+
+.btns{
+      display: flex;
+      justify-content: space-between;
+      margin: 20px;
+}
+
+.btns button{
+      background: #109289;
+      color: #f8f8f8;
+      width: 100px;
+      font-family: inherit;
+      padding: 8px;
+      font-size: 11px;
+      border-radius: 40px;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.btns button:hover{
+      background: #0d6e7a;
+      cursor: pointer;
+}
+
+
+/* ........................................................ */
+
+.popup .popupdetails{
+      justify-content: center;
+      margin-top: 15px;
+
+}
+
+.popup .popupdetails .popupdetail{
+      /* background-color: #b8b8b8; */
+      margin-bottom: 5px;
+}
+
+.popup .popupdetails .popupdetail h2{
+      font-size: 15px;
+}
+
+
+
+
+
+@media screen and (max-device-width: 480px){
+      .popup,
+      .deletepopup{
+            width: 300px;
+      }
+      .popup h2{
+            font-size: 20px;
+            
+      }
+
+      .popup .popupdetails .popupdetail h2{
+            font-size: 13px;
+      }
+
+      
+}
