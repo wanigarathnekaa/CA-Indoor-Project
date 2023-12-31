@@ -68,6 +68,10 @@
       outline: none;
       border: 1px solid var(--black2);
 }
+
+.table-topic .search label input:focus{
+      border: 2px solid #000000;
+}
     
 .table-topic .search label .icon {
       position: absolute;
