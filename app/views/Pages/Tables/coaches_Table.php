@@ -68,12 +68,12 @@
                               <?php $i = 0; ?>
                               <?php foreach ($data['users'] as $coach): ?>
                                     <tr>
-                                          <td onclick="openPopup()"><?php echo $data1[$i]->name ?></td>
-                                          <td onclick="openPopup()"><?php echo $data1[$i]->email ?></td>
-                                          <td onclick="openPopup()"><?php echo $data1[$i]->phoneNumber ?></td>
-                                          <td onclick="openPopup()"><?php echo $coach->experience ?></td>
-                                          <td onclick="openPopup()"><?php echo $coach->specialty ?></td>
-                                          <td onclick="openPopup()"><?php echo $coach->certificate?></td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $data1[$i]->name ?></td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $data1[$i]->email ?></td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $data1[$i]->phoneNumber ?></td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $coach->experience ?></td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $coach->specialty ?></td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $coach->certificate?></td>
                                           <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
                                           <td onclick="openDeletePopup()"><i class="fa-solid fa-user-slash delete icon"></i></td>
                                     </tr>
@@ -89,23 +89,23 @@
                   <!-- details popup -->
                   <div class="popup" id="popup">
                         <span class="close" onclick="closePopup()"><i class="fa-solid fa-xmark"></i></span>
-                        <h2>Milan Bhanuka</h2>
+                        <h2><span class="c_name"></span></h2>
                         <hr>
                         <div class="popupdetails">
                               <div class="popupdetail">
-                                    <h2><b>Email :</b> </h2>
+                                    <h2><b>Email : </b><span class="c_email"></span> </h2>
                               </div>
                               <div class="popupdetail">
-                                    <h2><b>Mobile :</b> </h2>
+                                    <h2><b>Mobile : </b><span class="c_mobile"></span> </h2>
                               </div>
                               <div class="popupdetail">
-                                    <h2><b>Experience :</b> </h2>
+                                    <h2><b>Experience : </b><span class="c_exp"></span> </h2>
                               </div>
                               <div class="popupdetail">
-                                    <h2><b>Speciality :</b> </h2>
+                                    <h2><b>Speciality : </b><span class="c_spl"></span> </h2>
                               </div>
                               <div class="popupdetail">
-                                    <h2><b>Certificate :</b> </h2>
+                                    <h2><b>Certificate : </b><span class="c_cert"></span> </h2>
                               </div>
                         </div>
 
