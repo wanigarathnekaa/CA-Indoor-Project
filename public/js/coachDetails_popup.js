@@ -15,7 +15,7 @@ function openPopup(coach, user) {
       c_email.textContent = user.email;
 
       const c_mobile = document.querySelector(".c_mobile");
-      c_mobile.textContent = user.mobile;
+      c_mobile.textContent = user.phoneNumber;
 
       const c_exp = document.querySelector(".c_exp");
       c_exp.textContent = coach.experience;
