@@ -94,7 +94,8 @@
                                 <span class="text nav-text">Profile</span>
                             </a>
                         </li>
-                <?php } else if ($role == "Cashier") { ?>
+                <?php }
+                 else if ($role == "Cashier") { ?>
                             <li class="nav-link">
                                 <a href="#">
                                     <i class="bx bx-home-alt icon"></i>
@@ -139,7 +140,11 @@
                                     </a>
                                 </li>
                                 <li class="nav-link">
-                                    <a href="C&A_Indoor_Project/Pages/Coach_Advertisements/user">
+                                <!-- <a href="C&A_Indoor_Project/Pages/Advertisements/advertisement"> -->
+
+                                    <!-- <a href="C&A_Indoor_Project/Pages/Coach_Advertisements/user"> -->
+                                    <a href="C&A_Indoor_Project/Pages/Advertisements/advertisement">
+
                                         <i class="fa-brands fa-adversal icon"></i>
                                         <span class="text nav-text">Advertisement</span>
                                     </a>
