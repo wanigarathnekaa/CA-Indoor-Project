@@ -65,19 +65,13 @@
                 <input type="text" placeholder="Enter your Certificates" name="certificate" required>
               </div>
             
-              <!-- <label>Address</label> -->
-              <div class="input-box">
-                <label for="address">Achivements</label>
-                <div>
-                  <input type="text" name="achivements" id="address" placeholder="Enter your Achivements" required>
-                </div>
-              </div>
-              <!-- <div class="input-box">
-                <div class="topic">Address</div>
-              </div>
-              <div></div>
-              <div></div> -->
               
+              <div class="input-box">
+                  <span class="details">Achivements</span>
+                  <input type="text" name="achivements" id="address" placeholder="Enter your Achivements" required>              
+              </div>
+
+              <!-- <label>Address</label> -->
               <div class="input-box">
                 <label for="address">Street Address</label>
                 <div>

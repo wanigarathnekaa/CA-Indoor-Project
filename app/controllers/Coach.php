@@ -19,7 +19,6 @@ class Coach extends Controller
             //Valid input
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-
             //Input data
             $data = [
                 'name' => trim($_POST['name']),
@@ -77,11 +76,6 @@ class Coach extends Controller
             if (empty($data['pwd'])) {
                 $data['pwd_err'] = "Please enter a password";
             }
-            // else{
-            //     if($data['pwd'] != $data['confirmPwd']){
-            //         $data['pwd_err'] = "Not Matching Passwords";
-            //     }
-            // }
 
             if (empty($data['nic'])) {
                 $data['nic_err'] = "Please enter the NIC number";
@@ -114,11 +108,13 @@ class Coach extends Controller
             if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err']) && empty($data['nic_err'])) {
                 //Hash the password
                 $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
-
+                echo $this->coachModel->coachRegister($data);
                 //create user
                 if ($this->coachModel->coachRegister($data) && $this->coachUserModel->register($data)) {
+                    
                     redirect('Users/login');
                 } else {
+                    
                     die('Something Went wrong');
                 }
             } else {

@@ -42,13 +42,18 @@ class Pages extends Controller
     // coach table
     public function coachTable($name){
         $coaches = $this->pagesModel->getCoaches();
-        $coaches = $this->pagesModel->getCoachCount();
+        $coach = $this->pagesModel->getCoachCount();
         // $users = $this->pagesModel->getUserCount();
         $data = [
-            'CoachCount' => $coaches,
+            'CoachCount' => $coach,
+            'users' => $coaches,
             // 'UserCount' => $users,
         ];
-        $this->view('Pages/Tables/coaches_Table', $coaches,$data);
+        $res = [];
+        foreach ($data['users'] as $user) {
+            $res[] = $this->pagesModel->findUser($user->email);
+        }
+        $this->view('Pages/Tables/coaches_Table', $data, $res);
     }
 
     // Player table
