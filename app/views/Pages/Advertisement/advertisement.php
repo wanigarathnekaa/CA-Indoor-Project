@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>addvertisement slider</title>
+    <title>advertisement slider</title>
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/Advertisement.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
@@ -18,7 +18,7 @@
  
 
       <div>
-      <h1>Addvertisement</h1> 
+      <h1>Advertisement</h1> 
 
       <?php if ($role == "User") { ?>
       <a   class="btn2" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/advertisement">

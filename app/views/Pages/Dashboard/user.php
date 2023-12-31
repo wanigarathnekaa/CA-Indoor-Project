@@ -262,7 +262,7 @@ function build_calendar($month, $year)
         </div>
 
         <div class="tagrow">
-                <h2>ADDVERTISEMENT</h2>
+                <h2>ADVERTISEMENT</h2>
             </div>
             <div class="wrapper">
       
