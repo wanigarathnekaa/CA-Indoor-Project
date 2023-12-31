@@ -191,11 +191,12 @@ tbody .delete{
 
       .table-container{
             margin: 10px;
+            /* background-color: #000000; */
       }
 
       table {
             width: 100%;
-            display: block;
+            /* display: block; */
 
       }
       table thead td {

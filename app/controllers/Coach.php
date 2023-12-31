@@ -111,7 +111,7 @@ class Coach extends Controller
                 //create user
                 if ($this->coachModel->coachRegister($data) && $this->coachUserModel->register($data)) { 
                     echo "User Registered";
-                    redirect('Users/login');
+                    redirect('Pages/Dashboard/manager');
                 } else {
                     
                     die('Something Went wrong');

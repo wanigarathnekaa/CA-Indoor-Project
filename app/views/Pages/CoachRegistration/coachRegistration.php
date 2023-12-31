@@ -79,7 +79,7 @@
                 </div>
               </div>
               <div class="input-box">
-                <label for="address">city</label>
+                <label for="address">City</label>
                 <div>
                   <input type="text" name="city" id="address" placeholder="Enter your Address" required>
                 </div>
