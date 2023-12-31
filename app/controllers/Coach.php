@@ -108,10 +108,10 @@ class Coach extends Controller
             if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err']) && empty($data['nic_err'])) {
                 //Hash the password
                 $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
-                // echo $this->coachUserModel->register($data);
                 //create user
                 if ($this->coachModel->coachRegister($data) && $this->coachUserModel->register($data)) { 
-                    redirect('Pages/Dashboard/manager');
+                    echo "User Registered";
+                    redirect('Users/login');
                 } else {
                     
                     die('Something Went wrong');
