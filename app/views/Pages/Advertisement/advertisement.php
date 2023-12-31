@@ -10,62 +10,85 @@
   </head>
   <body>
     <div class="wrapper">
+      
+      <div><h1>Addvertisemnet</h1> 
+      <a   class="btn2" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
+              ADD +
+              </a>     
+</div>
+
+      
       <i id="left" class="fa-solid fa-angle-left"></i>
       <ul class="carousel">
         <li class="card">
 
           <div class="img">
-          <img src="<?php echo URLROOT; ?>/images/ad1.jpeg" /></div>
+          <img src="<?php echo URLROOT; ?>/images/ad3.jpg" /></div>
           <h2>Practice Session</h2>
           <span>Coach Bhanuka</span>
           
-        <div class="btn1">
-              <a href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
+          <div >
+              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
               View more
-    </a>
-</div>
+              </a>
+        </div>
 
 
 
         </li>
         <li class="card">
           <div class="img">
-          <img src="<?php echo URLROOT; ?>/images/ad3.jpg" /></div>
+          <img src="<?php echo URLROOT; ?>/images/ad1.jpEg" /></div>
           <h2>Interactive Workshop</h2>
           <span>Coach Lasantha</span>
-          <button class="btn1">View more</button>
-
+          <div >
+              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
+              View more
+              </a>
+        </div>
         </li>
         <li class="card">
           <div class="img">
           <img src="<?php echo URLROOT; ?>/images/ad2.jpeg" /></div>
           <h2>Team approach</h2>
           <span>Coach Kasun</span>
-          <button class="btn1">View more</button>
-        </li>
+          <div >
+              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
+              View more
+              </a>
+        </div>       </li>
         <li class="card">
           <div class="img">
           <img src="<?php echo URLROOT; ?>/images/ad2.jpeg" /></div>
           <h2>Individual learning</h2>
           <span>Coach Shantha</span>
-          <button class="btn1">View more</button>
-
+          <div >
+              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
+              View more
+              </a>
+        </div>
         </li>
         <li class="card">
           <div class="img">
           <img src="<?php echo URLROOT; ?>/images/ad1.jpeg" /></div>
           <h2>Team approach</h2>
           <span>Coach Shantha</span>
-          <button class="btn1">View more</button>
-
+          <div >
+              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
+              View more
+              </a>
+        </div>
         </li>
         <li class="card">
           <div class="img">
           <img src="<?php echo URLROOT; ?>/images/ad3.jpg" /></div>
           <h2>Individual learning</h2>
           <span>Coach Shantha</span>
-          <button class="btn1">View more</button>
-
+          <div >
+              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
+              View more
+              </a>
+        </div>
         </li>
       </ul>
       <i id="right" class="fa-solid fa-angle-right"></i>
