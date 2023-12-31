@@ -342,8 +342,12 @@ function build_calendar($month, $year)
         </div>
         </li>
       </ul>
+
       <i id="right" class="fa-solid fa-angle-right"></i>
+
     </div>
+    <script  src="<?php echo URLROOT; ?>/js/advertisment.js"></script>
+
         <div class="sec">
             <div class="tagrow">
                 <h2>PRICING INFORMATION</h2>

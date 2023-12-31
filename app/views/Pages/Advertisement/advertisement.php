@@ -93,7 +93,7 @@
       </ul>
       <i id="right" class="fa-solid fa-angle-right"></i>
     </div>
-    <script  src="<?php echo URLROOT; ?>/js/advertisement.js"></script>
+    <script  src="<?php echo URLROOT; ?>/js/advertisment.js"></script>
 
   </body>
 </html>
