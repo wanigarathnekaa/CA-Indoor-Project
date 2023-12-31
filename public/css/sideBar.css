@@ -47,7 +47,7 @@
   }
   
   .sidebar.close {
-    width: 88px;
+    width: 90px;
   }
   
   /* ===== Reusable code - Here ===== */
@@ -210,9 +210,9 @@
   }
   
   .sidebar.close ~ .home {
-    left: 80px;
+    left: 90px;
     height: 100vh;
-    width: calc(100% - 80px);
+    width: calc(100% - 90px);
   }
   
   /* responsive */
