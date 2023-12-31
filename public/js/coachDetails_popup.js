@@ -18,7 +18,6 @@ function closePopup() {
 // delete popup
 function openDeletePopup(){
       deletePopup.classList.add("open-deletepopup");
-      popup.classList.remove("open-popup");
       popupcontainer.classList.add("open-popupcontainer");
 }
 

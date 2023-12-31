@@ -67,16 +67,15 @@
                         <tbody>
                               <?php $i = 0; ?>
                               <?php foreach ($data['users'] as $coach): ?>
-                                    <tr onclick="openPopup()">
-                                          <td><?php echo $data1[$i]->name ?></td>
-                                          <td><?php echo $data1[$i]->email ?></td>
-                                          <td><?php echo $data1[$i]->phoneNumber ?></td>
-                                          <td><?php echo $coach->experience ?></td>
-                                          <td><?php echo $coach->specialty ?></td>
-                                          <td><?php echo $coach->certificate?></td>
+                                    <tr>
+                                          <td onclick="openPopup()"><?php echo $data1[$i]->name ?></td>
+                                          <td onclick="openPopup()"><?php echo $data1[$i]->email ?></td>
+                                          <td onclick="openPopup()"><?php echo $data1[$i]->phoneNumber ?></td>
+                                          <td onclick="openPopup()"><?php echo $coach->experience ?></td>
+                                          <td onclick="openPopup()"><?php echo $coach->specialty ?></td>
+                                          <td onclick="openPopup()"><?php echo $coach->certificate?></td>
                                           <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
                                           <td onclick="openDeletePopup()"><i class="fa-solid fa-user-slash delete icon"></i></td>
-
                                     </tr>
                                     <?php $i = $i + 1;
                               endforeach; ?>
