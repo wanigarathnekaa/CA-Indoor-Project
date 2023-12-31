@@ -9,13 +9,24 @@
     <script src="script.js" defer></script>
   </head>
   <body>
+  <?php
+      $role = "User";
+      require APPROOT . '/views/Pages/Dashboard/header.php';
+      require APPROOT . '/views/Components/Side Bars/sideBar.php';
+      ?>
     <div class="wrapper">
-      
-      <div><h1>Addvertisemnet</h1> 
-      <a   class="btn2" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
-              ADD +
+ 
+
+      <div>
+      <h1>Addvertisement</h1> 
+
+      <?php if ($role == "User") { ?>
+      <a   class="btn2" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/advertisement">
+              ADD +                  
+
               </a>     
-</div>
+              <?php } ?>
+            </div>
 
       
       <i id="left" class="fa-solid fa-angle-left"></i>
