@@ -4,6 +4,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/Coach_Table_Style.css">
+      <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_coaches.css">
       <title>Coaches</title>
 </head>
 <body>
@@ -59,7 +60,7 @@
 
                         <!-- table body -->
                         <tbody>
-                              <tr onclick="window.location.href='#';">
+                              <tr onclick="openPopup()">
                                     <td>Milan Bhanuka</td>
                                     <td>vgmbhanuka@gmail.com</td>
                                     <td>0716720864</td>
@@ -67,22 +68,49 @@
                                     <td>level1, sara player, devision3 player</td>
                                     <td>lavel4 cricket coach</td>
                                     <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
-                                    <td><a href="#"><i class="fa-solid fa-user-slash delete icon"></i><a></td>
-                                    
-                              </tr>
-                              <tr onclick="window.location.href='#';">
-                                    <td>Milan Bhanuka</td>
-                                    <td>vgmbhanuka@gmail.com</td>
-                                    <td>0716720864</td>
-                                    <td>1 year year experience in coaching</td>
-                                    <td>level1, sara player, devision3 player</td>
-                                    <td>lavel4 cricket coach</td>
-                                    <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
-                                    <td><a href="#"><i class="fa-solid fa-user-slash delete icon"></i><a></td>
+                                    <td onclick="openDeletePopup()"><i class="fa-solid fa-user-slash delete icon"></i></td>
                                     
                               </tr>
                         </tbody>
                   </table>
             </div>
+
+
+            <!-- popup -->
+            <div class="popupcontainer" id="popupcontainer">
+                  <!-- details popup -->
+                  <div class="popup" id="popup">
+                        <span class="close" onclick="closePopup()"><i class="fa-solid fa-xmark"></i></span>
+                        <h2>Reservation</h2>
+                        <hr>
+                        <div class="popupdetails">
+                              <div class="popupdetail">
+                                    <h2><b>Reservation ID :</b> </h2>
+                              </div>
+                        </div>
+
+                        <!-- <div class="btns">
+                              <button type="button">Reshedule</button>
+                              <button type="button">Cancel</button>
+                        </div> -->
+                  </div>
+
+
+
+                  <!-- delete message -->
+                  <div class="deletepopup" id=deletepopup>
+                        <span class="close" onclick="closeDeletePopup()"><i class="fa-solid fa-xmark"></i></span>
+                        <h2>confirm delete</h2>
+
+                        <div class="btns">
+                              <button type="button">Delete</button>
+                              <button type="button" onclick="closeDeletePopup()">Cancel</button>
+                        </div>
+                  </div>
+            </div>
+
       </section>
+
+      <!-- javascript -->
+      <script src="<?php echo URLROOT; ?>/js/coachDetails_popup.js"></script>
 </body>
