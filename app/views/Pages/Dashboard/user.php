@@ -37,7 +37,7 @@
             <div class="box">
                 <div>
                     <h4>Business Hours</h4>
-                    <!-- <table class="table">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col" class='lead'><strong>Day</strong></th>
@@ -74,10 +74,67 @@
                                 <td>7 a.m - 11 p.m</td>
                             </tr>
                         </tbody>
-                    </table> -->
+                    </table>
 
 
-                    <?php
+
+<!-- </body>
+
+</html> -->
+
+
+                </div>
+                <div class="mainbox">
+                    <div class="parking">
+                        <i class='bx bxs-car'></i>
+                        <h3>Parking Available</h3>
+                    </div><br>
+                    <div>
+                        <h4>Reservations have to be made through phone calls and to see the booking confirmations on the
+                            calendar, please refresh the page</h4>
+                    </div>
+                    <br>
+                    <div class="box2">
+                        <div>
+                            <h4>Available Bookings</h4>
+                            <ul>
+                                <li>Normal Booking</li>
+                                <li>Recurring Booking (Daily, Weekly) </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>What you can get</h4>
+                            <ul>
+                                <li>Net Practice</li>
+                                <li>Bowling Machine</li>
+                                <li>Private Coaching</li>
+                                <li>Baseball Practice</li>
+                                <li>Buddy Cricket</li>
+                                <li>Cricket Academy</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sec">
+            <div class="tagrow">
+                <h2>FIND US HERE</h2>
+            </div>
+            <div class="google-map">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.982584570147!2d79.92213817448265!3d6.892686118764102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25138514423cb%3A0x981f4120a1d021d1!2sC%26A%20Indoor%20Cricket%20Net!5e0!3m2!1sen!2slk!4v1698731444163!5m2!1sen!2slk"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+
+        <div class="sec">
+            <div class="tagrow">
+                <h2>AVAILABLE DATES</h2>
+            </div>
+            <?php
 function build_calendar($month, $year)
 {
     $daysOfWeek = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
@@ -176,69 +233,13 @@ function build_calendar($month, $year)
                 echo build_calendar($month, $year);
                 ?>
     </div>
-<!-- </body>
-
-</html> -->
-
-
-                </div>
-                <div class="mainbox">
-                    <div class="parking">
-                        <i class='bx bxs-car'></i>
-                        <h3>Parking Available</h3>
-                    </div><br>
-                    <div>
-                        <h4>Reservations have to be made through phone calls and to see the booking confirmations on the
-                            calendar, please refresh the page</h4>
-                    </div>
-                    <br>
-                    <div class="box2">
-                        <div>
-                            <h4>Available Bookings</h4>
-                            <ul>
-                                <li>Normal Booking</li>
-                                <li>Recurring Booking (Daily, Weekly) </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4>What you can get</h4>
-                            <ul>
-                                <li>Net Practice</li>
-                                <li>Bowling Machine</li>
-                                <li>Private Coaching</li>
-                                <li>Baseball Practice</li>
-                                <li>Buddy Cricket</li>
-                                <li>Cricket Academy</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="sec">
-            <div class="tagrow">
-                <h2>FIND US HERE</h2>
-            </div>
-            <div class="google-map">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.982584570147!2d79.92213817448265!3d6.892686118764102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25138514423cb%3A0x981f4120a1d021d1!2sC%26A%20Indoor%20Cricket%20Net!5e0!3m2!1sen!2slk!4v1698731444163!5m2!1sen!2slk"
-                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </div>
-
-        <div class="sec">
-            <div class="tagrow">
-                <h2>AVAILABLE DATES</h2>
-            </div>
 
             <div class="box">
-                <div class="calander">
+                <!-- <div class="calander">
                     <iframe
                         src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FColombo&showTitle=0&showDate=1&showPrint=0&showCalendars=0&mode=WEEK&src=Y2FpbmRvb3I0NEBnbWFpbC5jb20&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4tZ2IubGsjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%2333B679&color=%230B8043"
                         frameBorder="0" scrolling="no" title='Bookings'></iframe>
-                </div>
+                </div> -->
                 <div class="mainbox2">
                     <div class="mainbox3">
                         <div class="box2">
@@ -260,6 +261,92 @@ function build_calendar($month, $year)
             </div>
         </div>
 
+        <div class="tagrow">
+                <h2>ADVERTISEMENT</h2>
+            </div>
+            <div class="wrapper">
+      
+      
+
+      
+      <i id="left" class="fa-solid fa-angle-left"></i>
+      <ul class="carousel">
+        <li class="card">
+
+          <div class="img">
+          <img src="<?php echo URLROOT; ?>/images/ad3.jpg" /></div>
+          <h2>Practice Session</h2>
+          <span>Coach Bhanuka</span>
+          
+          <div >
+              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
+              View more
+              </a>
+        </div>
+
+
+
+        </li>
+        <li class="card">
+          <div class="img">
+          <img src="<?php echo URLROOT; ?>/images/ad1.jpeg" /></div>
+          <h2>Interactive Workshop</h2>
+          <span>Coach Lasantha</span>
+          <div >
+              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
+              View more
+              </a>
+        </div>
+        </li>
+        <li class="card">
+          <div class="img">
+          <img src="<?php echo URLROOT; ?>/images/ad2.jpeg" /></div>
+          <h2>Team approach</h2>
+          <span>Coach Kasun</span>
+          <div >
+              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
+              View more
+              </a>
+        </div>       </li>
+        <li class="card">
+          <div class="img">
+          <img src="<?php echo URLROOT; ?>/images/ad2.jpeg" /></div>
+          <h2>Individual learning</h2>
+          <span>Coach Shantha</span>
+          <div >
+              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
+              View more
+              </a>
+        </div>
+        </li>
+        <li class="card">
+          <div class="img">
+          <img src="<?php echo URLROOT; ?>/images/ad1.jpeg" /></div>
+          <h2>Team approach</h2>
+          <span>Coach Shantha</span>
+          <div >
+              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
+              View more
+              </a>
+        </div>
+        </li>
+        <li class="card">
+          <div class="img">
+          <img src="<?php echo URLROOT; ?>/images/ad3.jpg" /></div>
+          <h2>Individual learning</h2>
+          <span>Coach Shantha</span>
+          <div >
+              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
+              View more
+              </a>
+        </div>
+        </li>
+      </ul>
+
+      <i id="right" class="fa-solid fa-angle-right"></i>
+
+    </div>
+    <script  src="<?php echo URLROOT; ?>/js/advertisment.js"></script>
 
         <div class="sec">
             <div class="tagrow">
