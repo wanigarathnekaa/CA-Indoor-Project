@@ -49,6 +49,8 @@
       require APPROOT . '/views/Pages/Dashboard/header.php';
       require APPROOT . '/views/Components/Side Bars/sideBar.php';
       ?>
+        <section class="home">
+
     <div class = "card-wrapper">
       <div class = "card">
         <!-- card left -->
@@ -109,6 +111,6 @@
       </div>
     </div>
 
-    
+   </ 
   </body>
 </html>

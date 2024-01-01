@@ -14,9 +14,10 @@
       require APPROOT . '/views/Pages/Dashboard/header.php';
       require APPROOT . '/views/Components/Side Bars/sideBar.php';
       ?>
+  <section class="home">
+
     <div class="wrapper">
  
-
       <div>
       <h1>Advertisement</h1> 
 
@@ -105,6 +106,6 @@
       <i id="right" class="fa-solid fa-angle-right"></i>
     </div>
     <script  src="<?php echo URLROOT; ?>/js/advertisment.js"></script>
-
+          </section>
   </body>
 </html>

@@ -58,6 +58,7 @@
       require APPROOT . '/views/Pages/Dashboard/header.php';
       require APPROOT . '/views/Components/Side Bars/sideBar.php';
       ?>
+      <section class="home">
   <div class="container">
     <div class="title">ADD advertisement</div>
 <!--    
@@ -112,5 +113,6 @@
       </form>
     </div>
   </div>
+      </section>
 </body>
 </html>

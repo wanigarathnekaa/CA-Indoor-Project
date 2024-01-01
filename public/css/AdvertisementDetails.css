@@ -21,8 +21,9 @@ img{
     overflow: hidden;
 }
 .img-showcase{
+    height: 90%;
     display: flex;
-    width: 100%;
+    width: 90%;
     transition: all 0.5s ease;
 }
 .img-showcase img{
@@ -174,7 +175,7 @@ img{
         grid-gap: 1.5rem;
     }
     .card-wrapper{
-        height: 92vh;
+        height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
