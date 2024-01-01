@@ -12,8 +12,8 @@
 
         <i class='bx bx-chevron-right toggle'></i>
     </header>
-
-    <div class="menu-bar">
+ 
+       <div class="menu-bar">
         <div class="menu">
             <ul class="menu-links">
                 
@@ -282,5 +282,27 @@
         </div>
     </div>
 </nav>
+<section class="navbar"> 
+    <div class="titlecontainer">
+                
+                  <input type="checkbox" id="check">
+      <header>
+        <div class="navigation">
+          <a href="#">Profile</a></li>
+          <a href="#">Shedule</a></li>
+          <a href="#">Advertisement</a></li>
+          <a href="#">Cricket Shop</a></li>
+          <a href="#">Feedback</a></li>
+          <a href="#">Registration</a></li>
+          <a href="#">Report</a></li>
+    
+      </div>
+      <label for="check">
+        <i class="fas fa-bars menu-btn"></i>
+        <i class="fas fa-times close-btn"></i>
+    
+      </label>
+      </header>
+            </div></section>
  <!-- javascripts -->
  <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
