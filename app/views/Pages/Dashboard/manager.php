@@ -9,7 +9,7 @@
       <!-- Stylesheets -->
       <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/managerDashboard.css">
       
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">      
 </head>
 
 <body>
@@ -88,6 +88,7 @@
             </div>
 
             
+
             <div class="details">
                   <!-- Recent Reservations -->
                   <div class="tablediv">
@@ -105,12 +106,20 @@
             
 
             <!-- chart -->
+            <div class="charts">
+                  <!-- Weekly Reservations chart -->
+                  <?php
+                        require APPROOT . '/views/Pages/Charts/weeklyReservationsChart.php';
+                  ?>
+            </div>
 
       </section>
 
 
       <!-- javascripts -->
       <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 
 </html>
