@@ -282,7 +282,8 @@
         </div>
     </div>
 </nav>
-<section class="navbar"> 
+
+<!-- <section class="navbar"> 
     <div class="titlecontainer">
                 
                   <input type="checkbox" id="check">
@@ -303,6 +304,6 @@
     
       </label>
       </header>
-            </div></section>
+            </div></section> -->
  <!-- javascripts -->
  <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
