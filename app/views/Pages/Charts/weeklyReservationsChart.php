@@ -1,13 +1,13 @@
-<div>
+<div class="chart1">
       <h1>Weekly Reservations</h1>
-      <canvas id="myChart"></canvas>
+      <canvas id="weeklyReservations"></canvas>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 <script>
-      const ctx = document.getElementById('myChart');
+      const ctx = document.getElementById('weeklyReservations');
       new Chart(ctx, {
             type: 'bar',
             data: {

@@ -1,0 +1,17 @@
+.charts h1{
+      color: #2e8a99;
+}
+
+/* #customerCountChart{
+      background: red;
+      padding: 100px;
+      box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+      border-radius: 20px;
+      width: 200px;
+      height: 200px;
+      display: flex;
+} */
+
+@media (max-width: 1024px) {
+      
+}
