@@ -57,6 +57,17 @@
                         </div>
                   </a>
 
+                  <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/reservationTable/user">
+                        <div>
+                              <div class="numbers">26</div>
+                              <div class="cardName">Reservations</div>
+                        </div>
+
+                        <div class="iconBx">
+                              <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                  </a>
+
                   <a class="card" href="#">
                         <div>
                               <div class="numbers"></div>

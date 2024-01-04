@@ -1,0 +1,264 @@
+
+:root {
+      --color01: #2e8a99;
+      --color02: #4F9DA9;
+      --color03: #A7D8D7;
+      --color04: #EAF3F4;
+      --white: #fff;
+      --gray: #f5f5f5;
+      --black1: #222;
+      --black2: #000000;
+}
+
+/* margin 30px */
+
+/* ........................................................................................................... */
+.table-topic{
+      margin: 30px;
+      display: flex;
+      justify-content: space-around;
+      /* background-color: #373ae0; */
+}
+
+.table-topic .topic-name h1{
+      font-size: 25px;
+}
+
+.table-topic .add-btn{
+      display: flex;
+      align-items: center;
+}
+
+.table-topic .add-btn .icon{
+      color: #000000;
+      font-size: large;
+
+}
+
+.table-topic .add-btn a{
+      text-decoration: none;
+      /* color: var(--black1); */
+
+}
+
+
+.table-topic .search {
+      display: flex;
+      align-items: center;
+      position: relative;
+      width: 300px;
+      /* margin: 0 10px; */
+}
+    
+.table-topic .search label {
+      display: flex;
+      align-items: center;
+      position: relative;
+      width: 100%;
+
+}
+    
+.table-topic .search label input {
+      width: 100%;
+      /* height: 30px; */
+      border-radius: 40px;
+      padding: 5px 20px;
+      padding-left: 35px;
+      font-size: 10px;
+      outline: none;
+      border: 1px solid var(--black2);
+}
+
+.table-topic .search label input:focus{
+      border: 2px solid #000000;
+}
+    
+.table-topic .search label .icon {
+      position: absolute;
+      /* top: 5px; */
+      left: 10px;
+      font-size: 0.8rem;
+}
+
+
+
+
+
+/*  table  ..................................................................... */
+.table-container {
+      /* width: 100%; */
+      position: relative;
+      display: block;
+      /* overflow-y: scroll; */
+      /* height: 100%;   */
+      /* border-radius: 12px; */
+      /* background-color: #A7D8D7; */
+      align-items: center;
+      justify-content: center;
+      /* background-color: #A7D8D7; */
+      /* width: 94%; */
+      margin: 30px;
+}
+
+table {
+      width: 100%;
+      display: table;
+      border-collapse: collapse;
+      /* margin-top: 10px; */
+      margin-bottom: 10px;
+      /* padding-bottom: 20px; */
+      overflow-y: scroll;
+      min-width: 80%;
+}
+
+table thead {
+      display: table-header-group;
+      vertical-align: middle;
+      border-color: inherit;
+      background-color: var(--color02);
+}
+
+table thead td {
+      font-weight: 600;
+      font-size: 14px;
+
+}
+
+table tr {
+      color: var(--black1);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+table tbody td{
+      font-size: 14px;
+      padding-top: 5px;
+      padding-bottom: 15px;
+}
+/* table tbody tr:nth-child(even) {
+      background: var(--color03);
+}
+table tbody tr:nth-child(odd) {
+      background: var(--color04);
+} */
+table tbody tr:hover {
+      background: var(--color03);
+      color: var(--black1); 
+}
+table tr td {
+      padding: 10px;
+}
+table tr td:last-child {
+      text-align: end;
+}
+
+tbody a{
+      text-decoration: none;
+      /* color: var(--black1); */
+
+}
+
+tbody td .icon {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      /* padding-left: 10px;      */
+}
+
+tbody .edit{
+      color:#373ae0;;
+}
+
+tbody .delete{
+      color:#e03737;
+}
+
+
+
+
+
+/* responsive__________________________________________________________________________________________ */
+
+@media (max-width: 768px) {
+
+      /* margin: 10px; */
+      .table-topic{
+            margin: 10px;
+            /* width: 100%; */
+      }
+
+      .table-topic .topic-name h1{
+            font-size: 20px;
+      }
+
+      .table-topic .search {
+            width: 200px;
+      }
+
+      .table-container{
+            margin: 10px;
+            /* background-color: #000000; */
+      }
+
+      table {
+            width: 100%;
+            /* display: block; */
+
+      }
+      table thead td {
+            font-size: 12px;
+      }
+
+      table tbody td{
+            font-size: 12px;
+      }
+
+}
+
+
+
+@media (max-width:480px){
+
+      /* margin: 10px; */
+      .table-topic{
+            margin: 5px;
+            justify-content: space-around
+            /* width: 100%; */
+      }
+      .table-topic .topic-name h1{
+            font-size: 18px;
+      }
+
+      .table-topic .search{
+            width: 100px;
+
+      }
+      .table-topic .search label input{
+            font-size: 8px;
+            padding-left: 25px;
+      }
+
+      .table-topic .add-btn .icon{
+      font-size: small;
+      }
+
+      .table-container{
+            margin: 5px;
+      }
+
+      table thead td {
+            font-size: 10px;
+      }
+
+      table tbody td{
+            font-size: 10px;
+      }
+
+      table tr td:nth-child(4),
+      table tr td:nth-child(5),
+      table tr td:nth-child(6)
+      {
+            text-align: center;
+            background-color: red;
+            display: none;
+      }
+
+}
