@@ -21,7 +21,8 @@
       z-index: 100;
 }
 
-.popup{
+.popup,
+.deletepopup{
       width: 500px;
       background: #fff;
       border-radius: 6px;
@@ -36,7 +37,8 @@
       transition: transform 0.4s;  
 }
 
-.open-popup{
+.open-popup,
+.open-deletepopup{
       visibility: visible;
       top: 50%;
       transform: translate(-50%, -50%) scale(1);
@@ -66,7 +68,7 @@
       margin: 20px;
 }
 
-.popup button{
+.btns button{
       background: #109289;
       color: #f8f8f8;
       width: 100px;
@@ -79,7 +81,7 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
 
-.popup button:hover{
+.btns button:hover{
       background: #0d6e7a;
       cursor: pointer;
 }

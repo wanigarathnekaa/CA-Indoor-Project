@@ -68,6 +68,15 @@ class Pages extends Controller
         $this->view('Pages/Tables/players_Table', $players,$data);
     }
 
+
+    //reservation table
+    public function reservationTable($name){
+        $bookings = $this->pagesModel->getBookings();
+        $this->view('Pages/Tables/reservations_Table', $bookings);
+    }
+
+
+    // dashboard
     public function Dashboard($name)
     {
         $bookings = $this->pagesModel->getBookings();
@@ -92,23 +101,27 @@ class Pages extends Controller
         }
     }
 
+    //landing page
     public function LandingPage($name)
     {
         $this->view('Pages/LandingPage/landingPage');
     }
 
+    //login page
     public function Login($name)
     {
         // $role = $name;
         $this->view('Pages/LoginPage/login');
     }
 
+    //register page
     public function Register($name)
     {
         // $role = $name;
         $this->view('Pages/RegisterPage/register');
     }
 
+    //reservation register page
     public function Booking_Register($name)
     {
         $coaches = $this->pagesModel->getCoaches();
