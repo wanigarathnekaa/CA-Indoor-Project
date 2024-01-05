@@ -27,18 +27,28 @@
 .table-topic .add-btn{
       display: flex;
       align-items: center;
+      background: #2e8a99;
+      padding: 5px 10px;
+      border-radius: 40px;
+}
+
+.table-topic .add-btn:hover{
+      background: #4F9DA9;
+      cursor: pointer;
 }
 
 .table-topic .add-btn .icon{
       color: #000000;
       font-size: large;
+}
 
+.table-topic .add-btn .icon:hover{
+      color: #ffffff;
 }
 
 .table-topic .add-btn a{
       text-decoration: none;
       /* color: var(--black1); */
-
 }
 
 
@@ -79,6 +89,63 @@
       left: 10px;
       font-size: 0.8rem;
 }
+
+
+/* Table Sort..................................................................... */
+.tableSort {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin: 30px; /* Adjust margin as needed */
+      box-shadow: 0 7px 25px rgba(0, 0, 0, 0.112);
+      border-radius: 15px;
+      background-color: #2e8b9948;
+      padding: 10px 20px 10px 20px;
+    }
+    
+    .sort {
+      display: flex;
+      align-items: center;
+      /* margin-bottom: 10px; */
+    }
+    
+    .sort label {
+      margin-right: 10px;
+      font-weight: bold;
+      font-size: 12px;
+      width: 50px;
+    }
+    
+    .sort select,
+    .sort input {
+      /* padding: 8px; */
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      font-size: 12px; /* Adjust font size as needed */
+      padding: 5px;
+    }
+    
+    /* Adjust styles for the search input */
+    .sort input {
+      width: 200px; /* Adjust width as needed */
+    }
+    
+    /* Adjust styles for the select dropdowns */
+    .sort select {
+      width: 200px; /* Adjust width as needed */
+    }
+    
+    /* Add hover/focus styles for better user experience */
+    .sort select:hover,
+    .sort input:hover,
+    .sort select:focus,
+    .sort input:focus {
+      border-color: #333;
+    }
+    
+
+
 
 
 
@@ -146,6 +213,9 @@ table tbody tr:hover {
 table tr td {
       padding: 10px;
 }
+table tr td:nth-child(1) {
+      text-align:center;
+}
 table tr td:last-child {
       text-align: end;
 }
@@ -171,6 +241,30 @@ tbody .delete{
       color:#e03737;
 }
 
+.status.paid {
+      padding: 2px 4px;
+      background: #8de02c;
+      color: var(--black1);
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+}
+.status.canceled {
+      padding: 2px 4px;
+      background: #f00;
+      color: var(--black1);
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+}
+.status.confirmation {
+      padding: 2px 4px;
+      background: #1795ce;
+      color: var(--black1);
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+}
 
 
 
@@ -192,6 +286,13 @@ tbody .delete{
       .table-topic .search {
             width: 200px;
       }
+
+      .tableSort{
+            margin: 10px;
+            align-items: stretch;
+      }
+
+
 
       .table-container{
             margin: 10px;
@@ -260,5 +361,4 @@ tbody .delete{
             background-color: red;
             display: none;
       }
-
 }

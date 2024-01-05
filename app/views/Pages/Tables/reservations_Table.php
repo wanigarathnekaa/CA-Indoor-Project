@@ -34,14 +34,43 @@
                         <h1>Reservations : 25
                         </h1>
                   </div>
-                  <div class="search">
+                  <!-- <div class="search">
                         <label>
                               <input type="text" placeholder="Search here">
                               <i class="fa-solid fa-magnifying-glass icon"></i>
                         </label>
-                  </div>
+                  </div> -->
                   <div class="add-btn">
                         <a href="#"><i class="fa-solid fa-calendar-plus icon"></i></i></a>
+                  </div>
+            </div>
+
+            <!-- Table Sort -->
+            <div class="tableSort">
+                  <div class="sort">
+                        <label>Sort By :</label>
+                        <select name="sort" id="sort">
+                              <option value="all">All</option>
+                              <option value="date">Date</option>
+                              <option value="time">Time</option>
+                              <option value="net">Net</option>
+                        </select>
+                  </div>
+
+                  <div class="sort">
+                        <label>Filter By :</label>
+                        <select name="filter" id="filter">
+                              <option value="all">All</option>
+                              <option value="date">Date</option>
+                              <option value="time">Time</option>
+                              <option value="net">Net</option>
+                              <option value="status">Status</option>
+                        </select>
+                  </div>
+
+                  <div class="sort">
+                        <label>Search :</label>
+                        <input type="text" placeholder="Search here">
                   </div>
             </div>
 
@@ -70,7 +99,7 @@
                                     <td onclick="openPopup()">2021/10/10</td>
                                     <td onclick="openPopup()">10.00 AM</td>
                                     <td onclick="openPopup()">Net A</td>
-                                    <td onclick="openPopup()">Paid</td>
+                                    <td onclick="openPopup()"><span class="status paid">Paid</span></td>
                                     <td><a href="#"><i class="fa-solid fa-pen-to-square edit icon"></i></a></td>
                                     <td onclick="openDeletePopup()"><i class="fa-solid fa-trash-can delete icon"></i></td>
                               </tr>
@@ -88,23 +117,23 @@
                         <hr>
                         <div class="popupdetails">
                               <div class="popupdetail">
-                                    <h2><b>Reservation ID :</b> <span class = "r_id"></span></h2>
+                                    <h2><b>Reservation ID :</b></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Customer Name :</b> <span class = "r_name"></span></h2>
+                                    <h2><b>Customer Name :</b></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Reservation Date :</b> <span class = "r_date"></span></h2>
+                                    <h2><b>Reservation Date :</b></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Reservation Time :</b> <span class = "r_timeSlot"></span></h2>
+                                    <h2><b>Reservation Time :</b></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Net :</b> <span class = "r_net"></span></h2>
+                                    <h2><b>Net :</b></h2>
                               </div>
 
                               <div class="popupdetail">
