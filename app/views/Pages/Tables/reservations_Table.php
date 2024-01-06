@@ -34,60 +34,58 @@
                         <h1>Reservations : 25
                         </h1>
                   </div>
-                  <!-- <div class="search">
-                        <label>
-                              <input type="text" placeholder="Search here">
-                              <i class="fa-solid fa-magnifying-glass icon"></i>
-                        </label>
-                  </div> -->
-                  <div class="add-btn">
+                  
+                  <!-- <div class="add-btn">
                         <a href="#"><i class="fa-solid fa-calendar-plus icon"></i></i></a>
-                  </div>
+                  </div> -->
             </div>
 
             <!-- Table Sort -->
             <div class="tableSort">
                   <div class="sort">
-                        <label>Sort By :</label>
-                        <select name="sort" id="sort">
-                              <option value="all">All</option>
-                              <option value="date">Date</option>
-                              <option value="time">Time</option>
-                              <option value="net">Net</option>
-                        </select>
-                  </div>
-
-                  <div class="sort">
-                        <label>Filter By :</label>
+                        <label>Status :</label>
                         <select name="filter" id="filter">
                               <option value="all">All</option>
-                              <option value="date">Date</option>
-                              <option value="time">Time</option>
-                              <option value="net">Net</option>
-                              <option value="status">Status</option>
+                              <option value="paid">Paid</option>
+                              <option value="unpaid">Unpaid</option>
+                              <option value="cancelled">Cancelled</option>
                         </select>
                   </div>
-
                   <div class="sort">
-                        <label>Search :</label>
-                        <input type="text" placeholder="Search here">
+                        <label>Net :</label>
+                        <select name="filter" id="filter">
+                              <option value="all">All</option>
+                              <option value="netA">Net A</option>
+                              <option value="netB">Net B</option>
+                              <option value="netC">Net C</option>
+                        </select>   
+                  </div>
+                  <div class="sort">
+                        <label>Date :</label>
+                        <input type="date" id="date" name="date">
+                  </div>
+                  <div class="search">
+                        <label>
+                              <input type="text" placeholder="Search here" id="searchInput" onkeyup="search()">
+                              <i class="fa-solid fa-magnifying-glass icon"></i>
+                        </label>
                   </div>
             </div>
 
             <!-- Table -->
             <div class="table-container">
-                  <table>
+                  <table id=reservationTable>
                         <!-- table header -->
                         <thead>
                               <tr>
-                                    <td>Reservation ID</td>
-                                    <td>Customer Name</td>
-                                    <td>Reservation Date</td>
-                                    <td>Reservation Time</td>
-                                    <td>Net</td>
-                                    <td>Status</td>
-                                    <td></td>
-                                    <td></td>
+                                    <th>Reservation ID</th>
+                                    <th>Customer Name</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Net</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                    <th></th>
                               </tr>
                         </thead>
 
@@ -103,6 +101,16 @@
                                     <td><a href="#"><i class="fa-solid fa-pen-to-square edit icon"></i></a></td>
                                     <td onclick="openDeletePopup()"><i class="fa-solid fa-trash-can delete icon"></i></td>
                               </tr>
+
+                              <tr>
+                                    <td onclick="openPopup()">2</td>
+                                    <td onclick="openPopup()">Milan</td>
+                                    <td onclick="openPopup()">2021/10/10</td>
+                                    <td onclick="openPopup()">10.00 AM</td>
+                                    <td onclick="openPopup()">Net A</td>
+                                    <td onclick="openPopup()"><span class="status paid">Paid</span></td>
+                                    <td><a href="#"><i class="fa-solid fa-pen-to-square edit icon"></i></a></td>
+                                    <td onclick="openDeletePopup()"><i class="fa-solid fa-trash-can delete icon"></i></td>
                         </tbody>
                   </table>
             </div>
@@ -166,4 +174,5 @@
 
       <!-- javascript -->
       <script src="<?php echo URLROOT; ?>/js/coachDetails_popup.js"></script>
+      <script src="<?php echo URLROOT; ?>/js/reservation_Table.js"></script>
 </body>
