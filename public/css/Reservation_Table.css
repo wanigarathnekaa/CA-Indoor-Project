@@ -16,7 +16,7 @@
 .table-topic{
       margin: 30px;
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       /* background-color: #373ae0; */
 }
 
@@ -52,43 +52,6 @@
 }
 
 
-.table-topic .search {
-      display: flex;
-      align-items: center;
-      position: relative;
-      width: 300px;
-      /* margin: 0 10px; */
-}
-    
-.table-topic .search label {
-      display: flex;
-      align-items: center;
-      position: relative;
-      width: 100%;
-
-}
-    
-.table-topic .search label input {
-      width: 100%;
-      /* height: 30px; */
-      border-radius: 40px;
-      padding: 5px 20px;
-      padding-left: 35px;
-      font-size: 10px;
-      outline: none;
-      border: 1px solid var(--black2);
-}
-
-.table-topic .search label input:focus{
-      border: 2px solid #000000;
-}
-    
-.table-topic .search label .icon {
-      position: absolute;
-      /* top: 5px; */
-      left: 10px;
-      font-size: 0.8rem;
-}
 
 
 /* Table Sort..................................................................... */
@@ -102,6 +65,7 @@
       border-radius: 15px;
       background-color: #2e8b9948;
       padding: 10px 20px 10px 20px;
+      gap: 10px;
     }
     
     .sort {
@@ -114,29 +78,28 @@
       margin-right: 10px;
       font-weight: bold;
       font-size: 12px;
-      width: 50px;
+      width: 45px;
+
     }
     
     .sort select,
     .sort input {
       /* padding: 8px; */
       border: 1px solid #ccc;
-      border-radius: 12px;
-      font-size: 12px; /* Adjust font size as needed */
-      padding: 5px;
+      border-radius: 40px;
+      font-size: 12px; 
+      padding: 5px 20px;
+      border: 1px solid var(--black2);
     }
     
-    /* Adjust styles for the search input */
     .sort input {
-      width: 200px; /* Adjust width as needed */
+      width: 200px; 
     }
     
-    /* Adjust styles for the select dropdowns */
     .sort select {
-      width: 200px; /* Adjust width as needed */
+      width: 200px;
     }
     
-    /* Add hover/focus styles for better user experience */
     .sort select:hover,
     .sort input:hover,
     .sort select:focus,
@@ -144,6 +107,43 @@
       border-color: #333;
     }
     
+    .tableSort .search {
+      display: flex;
+      align-items: center;
+      position: relative;
+      width: 300px;
+      /* margin: 0 10px; */
+}
+    
+.tableSort .search label {
+      display: flex;
+      align-items: center;
+      position: relative;
+      width: 100%;
+
+}
+    
+.tableSort .search label input {
+      width: 100%;
+      /* height: 30px; */
+      border-radius: 40px;
+      padding: 5px 20px;
+      padding-left: 35px;
+      font-size: 12px;
+      outline: none;
+      border: 1px solid var(--black2);
+}
+
+.tableSort .search label input:focus{
+      border: 2px solid #000000;
+}
+    
+.tableSort .search label .icon {
+      position: absolute;
+      /* top: 5px; */
+      left: 10px;
+      font-size: 0.8rem;
+}
 
 
 
@@ -185,9 +185,10 @@ table thead {
       background-color: var(--color02);
 }
 
-table thead td {
+table thead th {
       font-weight: 600;
       font-size: 14px;
+      text-align: center
 
 }
 
@@ -199,26 +200,18 @@ table tbody td{
       font-size: 14px;
       padding-top: 5px;
       padding-bottom: 15px;
+      text-align: center
 }
-/* table tbody tr:nth-child(even) {
-      background: var(--color03);
-}
-table tbody tr:nth-child(odd) {
-      background: var(--color04);
-} */
+
 table tbody tr:hover {
       background: var(--color03);
       color: var(--black1); 
 }
-table tr td {
+table tr td,
+table tr th {
       padding: 10px;
 }
-table tr td:nth-child(1) {
-      text-align:center;
-}
-table tr td:last-child {
-      text-align: end;
-}
+
 
 tbody a{
       text-decoration: none;
@@ -283,15 +276,22 @@ tbody .delete{
             font-size: 20px;
       }
 
-      .table-topic .search {
-            width: 200px;
+      .tableSort .search {
+            width: 300px;
       }
 
       .tableSort{
             margin: 10px;
             align-items: stretch;
+            gap: 10px;
       }
 
+      .sort label{
+            font-size: 12px;
+            width: 50px;
+            margin-right: 5px;
+
+      }
 
 
       .table-container{
@@ -304,7 +304,8 @@ tbody .delete{
             /* display: block; */
 
       }
-      table thead td {
+
+      table thead th {
             font-size: 12px;
       }
 
@@ -328,15 +329,38 @@ tbody .delete{
             font-size: 18px;
       }
 
-      .table-topic .search{
-            width: 100px;
+      .tableSort{
+            margin: 5px;
+            align-items: stretch;
+            padding:10px;
+            margin-bottom: 20px;
+      }
+
+      .tableSort .search{
+            width: 150px;
 
       }
-      .table-topic .search label input{
+      .sort label{
+            font-size: 8px;
+            width: 35px;
+            margin-right: 5px;
+
+      }
+
+
+      .tableSort .search label input{
             font-size: 8px;
             padding-left: 25px;
       }
 
+      .sort select,
+      .sort input{
+            width: 100px;
+            font-size: 8px;
+            padding: 5px 10px;
+      }
+
+      
       .table-topic .add-btn .icon{
       font-size: small;
       }
@@ -345,7 +369,7 @@ tbody .delete{
             margin: 5px;
       }
 
-      table thead td {
+      table thead th {
             font-size: 10px;
       }
 
@@ -353,12 +377,24 @@ tbody .delete{
             font-size: 10px;
       }
 
-      table tr td:nth-child(4),
+      /* table tr th:nth-child(4), */
+      table tr th:nth-child(5),
+      table tr th:nth-child(6),
+      /* table tr td:nth-child(4), */
       table tr td:nth-child(5),
       table tr td:nth-child(6)
       {
             text-align: center;
             background-color: red;
             display: none;
+      }
+      .status.paid {
+            font-size: 10px;
+      }
+      .status.canceled {
+            font-size: 10px;
+      }
+      .status.confirmation {
+            font-size: 10px;
       }
 }

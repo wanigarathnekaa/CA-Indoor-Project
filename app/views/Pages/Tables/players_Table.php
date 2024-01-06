@@ -30,29 +30,46 @@
             <div class="table-topic">
                   <div class="topic-name">
                         <h1>Players : <?php echo $data1["UserCount"]?>  </h1>
-                  </div>
+                  </div>                
+            </div>
+
+
+
+            <!-- Table Sort -->
+            <div class="tableSort">
+                  <!-- <div class="sort">
+                        <label>Status :</label>
+                        <select name="filter" id="filter">
+                              <option value="all">All</option>
+                              <option value="paid">Paid</option>
+                              <option value="unpaid">Unpaid</option>
+                              <option value="cancelled">Cancelled</option>
+                        </select>
+                  </div> -->
+                  
                   <div class="search">
                         <label>
-                              <input type="text" placeholder="Search here">
+                              <input type="text" placeholder="Search here" id="searchInput" onkeyup="search()">
                               <i class="fa-solid fa-magnifying-glass icon"></i>
                         </label>
                   </div>
-                  
             </div>
+
+
 
             <!-- Table -->
             <div class="table-container">
-                  <table >
+                  <table id="playerTable">
                         <!-- table header -->
                         <thead>
                               <tr>
-                                    <td>Player ID</td>
-                                    <td>Name</td>
-                                    <td>Email</td>
-                                    <td>Mobile</td>
-                                    <td>Address</td>
-                                    <td></td>
-                                    <td></td>
+                                    <th>Player ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Mobile Number</th>
+                                    <th>Address</th>
+                                    <th></th>
+                                    <th></th>
                               </tr>
                         </thead>
 
@@ -118,4 +135,5 @@
 
       <!-- javascript -->
       <script src="<?php echo URLROOT; ?>/js/playerDetails_popup.js"></script>
+      <script src="<?php echo URLROOT; ?>/js/player_table.js"></script>
 </body>

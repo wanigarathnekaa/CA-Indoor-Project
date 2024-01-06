@@ -35,31 +35,46 @@
                               <?php echo $data["CoachCount"] ?>
                         </h1>
                   </div>
-                  <div class="search">
-                        <label>
-                              <input type="text" placeholder="Search here">
-                              <i class="fa-solid fa-magnifying-glass icon"></i>
-                        </label>
-                  </div>
+            
                   <div class="add-btn">
                         <a href="<?php echo URLROOT; ?>/Coach/register"><i class="fa-solid fa-user-plus  icon"></i></a>
                   </div>
             </div>
 
+            <!-- Table Sort -->
+            <div class="tableSort">
+                  <!-- <div class="sort">
+                        <label>Status :</label>
+                        <select name="filter" id="filter">
+                              <option value="all">All</option>
+                              <option value="paid">Paid</option>
+                              <option value="unpaid">Unpaid</option>
+                              <option value="cancelled">Cancelled</option>
+                        </select>
+                  </div> -->
+                  
+                  <div class="search">
+                        <label>
+                              <input type="text" placeholder="Search here" id="searchInput" onkeyup="search()">
+                              <i class="fa-solid fa-magnifying-glass icon"></i>
+                        </label>
+                  </div>
+            </div>
+
             <!-- Table -->
             <div class="table-container">
-                  <table>
+                  <table id="coachTable">
                         <!-- table header -->
                         <thead>
                               <tr>
-                                    <td>Name</td>
-                                    <td>Email</td>
-                                    <td>Mobile</td>
-                                    <td>Experience</td>
-                                    <td>Speciality</td>
-                                    <td>Certificate</td>
-                                    <td></td>
-                                    <td></td>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Experience</th>
+                                    <th>Speciality</th>
+                                    <th>Certificate</th>
+                                    <th></th>
+                                    <th></th>
                               </tr>
                         </thead>
 
@@ -134,4 +149,5 @@
 
       <!-- javascript -->
       <script src="<?php echo URLROOT; ?>/js/coachDetails_popup.js"></script>
+      <script src="<?php echo URLROOT; ?>/js/coach_Table.js"></script>
 </body>
