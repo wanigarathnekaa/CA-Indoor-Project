@@ -16,7 +16,7 @@
 .table-topic{
       margin: 30px;
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       /* background-color: #373ae0; */
 }
 
@@ -52,7 +52,62 @@
 }
 
 
-.table-topic .search {
+    
+/* Table Sort..................................................................... */
+
+.tableSort {
+      display: flex;
+      /* flex-wrap: wrap; */
+      justify-content: end;
+      align-items: center;
+      margin: 30px; /* Adjust margin as needed */
+      box-shadow: 0 7px 25px rgba(0, 0, 0, 0.112);
+      border-radius: 15px;
+      background-color: #2e8b9948;
+      padding: 10px 20px 10px 20px;
+      gap: 10px;
+    }
+    
+    .sort {
+      display: flex;
+      align-items: center;
+      /* margin-bottom: 10px; */
+    }
+    
+    .sort label {
+      margin-right: 10px;
+      font-weight: bold;
+      font-size: 12px;
+      width: 45px;
+
+    }
+    
+    .sort select,
+    .sort input {
+      /* padding: 8px; */
+      border: 1px solid #ccc;
+      border-radius: 40px;
+      font-size: 12px; 
+      padding: 5px 20px;
+      border: 1px solid var(--black2);
+    }
+    
+    .sort input {
+      width: 200px; 
+    }
+    
+    .sort select {
+      width: 200px;
+    }
+    
+    .sort select:hover,
+    .sort input:hover,
+    .sort select:focus,
+    .sort input:focus {
+      border-color: #333;
+    }
+    
+    .tableSort .search {
       display: flex;
       align-items: center;
       position: relative;
@@ -60,7 +115,7 @@
       /* margin: 0 10px; */
 }
     
-.table-topic .search label {
+.tableSort .search label {
       display: flex;
       align-items: center;
       position: relative;
@@ -68,7 +123,7 @@
 
 }
     
-.table-topic .search label input {
+.tableSort .search label input {
       width: 100%;
       /* height: 30px; */
       border-radius: 40px;
@@ -79,16 +134,19 @@
       border: 1px solid var(--black2);
 }
 
-.table-topic .search label input:focus{
+.tableSort .search label input:focus{
       border: 2px solid #000000;
 }
     
-.table-topic .search label .icon {
+.tableSort .search label .icon {
       position: absolute;
       /* top: 5px; */
       left: 10px;
       font-size: 0.8rem;
 }
+
+
+
 
 
 
@@ -122,14 +180,15 @@ table {
 
 table thead {
       display: table-header-group;
-      vertical-align: middle;
+      /* vertical-align: middle; */
       border-color: inherit;
       background-color: var(--color02);
 }
 
-table thead td {
+table thead th {
       font-weight: 600;
       font-size: 14px;
+      text-align: left
 
 }
 
@@ -141,28 +200,18 @@ table tbody td{
       font-size: 14px;
       padding-top: 5px;
       padding-bottom: 15px;
+      text-align: left;
 }
-/* table tbody tr:nth-child(even) {
-      background: var(--color03);
-}
-table tbody tr:nth-child(odd) {
-      background: var(--color04);
-} */
+
 table tbody tr:hover {
       background: var(--color03);
       color: var(--black1); 
 }
-table tr td {
+table tr td,
+table tr th {
       padding: 10px;
 }
 
-table tr td:nth-child(1) {
-      text-align:center;
-}
-
-table tr td:last-child {
-      text-align: end;
-}
 
 tbody a{
       text-decoration: none;
@@ -204,11 +253,26 @@ tbody .delete{
       }
 
       .table-topic .search {
-            width: 200px;
+            width: 300px;
       }
+
+      .tableSort{
+            margin: 10px;
+            align-items: stretch;
+            gap: 10px;
+      }
+
+      .sort label{
+            font-size: 12px;
+            width: 50px;
+            margin-right: 5px;
+
+      }
+
 
       .table-container{
             margin: 10px;
+            /* background-color: #000000; */
       }
 
       table {
@@ -216,7 +280,7 @@ tbody .delete{
             /* display: block; */
 
       }
-      table thead td {
+      table thead th {
             font-size: 12px;
       }
 
@@ -239,14 +303,35 @@ tbody .delete{
       .table-topic .topic-name h1{
             font-size: 18px;
       }
+      .tableSort{
+            margin: 5px;
+            align-items: stretch;
+            padding:10px;
+            margin-bottom: 20px;
+      }
 
-      .table-topic .search{
-            width: 100px;
+      .tableSort .search{
+            width: 150px;
 
       }
-      .table-topic .search label input{
+      .sort label{
+            font-size: 8px;
+            width: 35px;
+            margin-right: 5px;
+
+      }
+
+
+      .tableSort .search label input{
             font-size: 8px;
             padding-left: 25px;
+      }
+
+      .sort select,
+      .sort input{
+            width: 100px;
+            font-size: 8px;
+            padding: 5px 10px;
       }
 
       .table-topic .add-btn .icon{
@@ -257,7 +342,7 @@ tbody .delete{
             margin: 5px;
       }
 
-      table thead td {
+      table thead th {
             font-size: 10px;
       }
 
@@ -265,13 +350,16 @@ tbody .delete{
             font-size: 10px;
       }
 
-      /* table tr td:nth-child(4),
-      table tr td:nth-child(5),
-      table tr td:nth-child(6)
-      {
-            text-align: center;
-            background-color: red;
-            display: none;
-      } */
+     /* table tr th:nth-child(4),
+     table tr th:nth-child(5),
+     table tr th:nth-child(6),
+     table tr td:nth-child(4),
+     table tr td:nth-child(5),
+     table tr td:nth-child(6)
+     {
+           text-align: center;
+           background-color: red;
+           display: none;
+     } */
 
 }
