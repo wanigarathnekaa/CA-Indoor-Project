@@ -188,7 +188,7 @@ table thead {
 table thead th {
       font-weight: 600;
       font-size: 14px;
-      text-align: center
+      text-align: left;
 
 }
 
@@ -200,7 +200,7 @@ table tbody td{
       font-size: 14px;
       padding-top: 5px;
       padding-bottom: 15px;
-      text-align: center
+      text-align: left;
 }
 
 table tbody tr:hover {
@@ -236,26 +236,29 @@ tbody .delete{
 
 .status.paid {
       padding: 2px 4px;
-      background: #8de02c;
+      background: #8ce02c5e;
+      border: 1px solid #8ce02c;
       color: var(--black1);
       border-radius: 4px;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 500;
 }
 .status.canceled {
       padding: 2px 4px;
-      background: #f00;
+      background: rgba(255, 0, 0, 0.326);
+      border: 1px solid #f00;
       color: var(--black1);
       border-radius: 4px;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 500;
 }
 .status.confirmation {
       padding: 2px 4px;
-      background: #1795ce;
+      background: #1794ce57;
+      border: 1px solid #1795ce;
       color: var(--black1);
       border-radius: 4px;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 500;
 }
 

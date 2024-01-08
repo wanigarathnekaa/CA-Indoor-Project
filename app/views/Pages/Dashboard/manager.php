@@ -54,6 +54,7 @@
                         </div>
                         <div class="iconBx">
                               <i class="fa-brands fa-adversal"></i>
+                              <!-- <i class="fa-solid fa-file-contract"></i> -->
                         </div>
                   </a>
 
