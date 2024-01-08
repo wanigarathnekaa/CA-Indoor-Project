@@ -226,6 +226,11 @@ tbody td .icon {
       /* padding-left: 10px;      */
 }
 
+tbody td .icon:hover{
+      cursor: pointer;
+      
+}
+
 tbody .edit{
       color:#373ae0;;
 }
