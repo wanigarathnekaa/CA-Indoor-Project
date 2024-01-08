@@ -65,27 +65,27 @@
         <div class="container">
           <div class="title">ADD advertisement</div>
           <div class="content">
-            <form action="<?php echo URLROOT; ?>/Advertisement/add_Advertisement" class="addform">
+            <form action="<?php echo URLROOT; ?>/Advertisement/add_Advertisement" method="POST" enctype="multipart/form-data">
               <div class="user-details">
                 <div class="input-box">
                   <span class="details">Coach Name</span>
-                  <input type="text" placeholder="Enter your name" required>
+                  <input type="text" name="name" placeholder="Enter your name" required>
                 </div>
                 <div class="input-box">
                   <span class="details">Advertisement Title</span>
-                  <input type="text" placeholder="Enter your number" required>
+                  <input type="text" name="title" placeholder="Title" required>
                 </div>   
                 <div class="input-box">
-                  <span class="details">Date</span>
-                  <input type="text" placeholder="Confirm your Expeience" >
+                  <span class="details">Date</span> 
+                  <input type="date" name="date" placeholder="Date" required>
                 </div>
                 <div class="input-box " id="content">
                   <span class="details">Content</span>
-                  <input type="text" placeholder="Enter your Certificates" required>
+                  <input type="text" name="content" placeholder="Description">
                 </div>
                 <div class="textbox">
                   <label for="img">Post:</label><br>
-                  <input type="file" id="img" name="img" accept="image/*">
+                  <input type="file" name="file" required>
                 </div>
               </div>
         

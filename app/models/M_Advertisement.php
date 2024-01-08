@@ -6,12 +6,12 @@
         }
 
         public function addAdvertisement($data){
-            $this->db->query('INSERT INTO advertisement (title, create_date, discription, post_url) VALUES (:title, :create_date, :discription, :post_url)');
+            $this->db->query('INSERT INTO advert (title, date, content, name, img) VALUES (:title, :date, :content, :name, :img)');
             $this->db->bind(':title', $data['title']);
-            $this->db->bind(':create_date', $data['create_date']);
-            $this->db->bind(':discription', $data['discription']);
-            $this->db->bind(':post_url', $data['post_url']);
-
+            $this->db->bind(':date', $data['date']);
+            $this->db->bind(':content', $data['content']);
+            $this->db->bind(':name', $data['name']);
+            $this->db->bind(':img', $data['filename']);
 
             if($this->db->execute()){
                 return true;
