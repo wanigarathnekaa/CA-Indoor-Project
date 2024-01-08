@@ -13,16 +13,28 @@
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
 
+
                 //Input data
                 $data = [
                     'title' => trim($_POST['title']),
-                    'description' => trim($_POST['description']),
-                    'img' => trim($_POST['img']),
+                    'name' => trim($_POST['name']),
+                    'date' => trim($_POST['date']),
+                    'content' => trim($_POST['content']),
+                    'filename' => trim($_FILES['file']['name']),
+                    'filetmp' => trim($_FILES['file']['tmp_name']),
 
-                    'title_err' => "",
-                    'description_err' => "",
-                    'img_err' => ""
+
+                    'title_err' =>"",
+                    'name_err' => "",
+                    'date_err' => "",
+                    'content_err' => "",
+                    'filename_err' => "",
+                    'filetmp_err' => "",
                 ];
+
+                $newfilename = uniqid()."-".$data['filename'];
+                move_uploaded_file($data['filetmp'],"../app/views/Pages/Advertisement/uploads/".$newfilename);
+                $data['filename'] = $newfilename;
 
                 //validate name
                 if(empty($data['title'])){
@@ -30,25 +42,21 @@
                 }
 
                 //validate user_name
-                if(empty($data['description'])){
-                    $data['description_err'] = "Please enter the Description";
+                if(empty($data['content'])){
+                    $data['content_err'] = "Please enter the Description";
                 }
                 
                 //validate email
-                if(empty($data['img'])){
-                    $data['img_err'] = "Please upload the image";
+                if(empty($data['filename'])){
+                    $data['filename_err'] = "Please upload the image";
                 }
                 
 
 
                 //If validation is completed and no error, then register the user
-                if(empty($data['title_err']) && empty($data['description_err']) && empty($data['img_err'])) {
-                    //Hash the password
-                    $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
-
-                    //create user
+                if(empty($data['title_err']) && empty($data['content_err'])) {
                     if($this->advertiseModel->addAdvertisement($data)){
-                        die('Advertisement Added Successfully');
+                        $this->view('Pages/Advertisements/advertisement', $data);
                     }
                     else{
                         die('Something Went wrong');
@@ -63,17 +71,24 @@
                 //initial form
                 $data = [
                     'title' => "",
-                    'description' => "",
-                    'img' => "",
+                    'name' => "",
+                    'date' => "",
+                    'content' => "",
+                    'filename' => "",
+                    'filetmp' => "",
 
-                    'title_err' => "",
-                    'description_err' => "",
-                    'img_err' => ""
+
+                    'title_err' =>"",
+                    'name_err' => "",
+                    'date_err' => "",
+                    'content_err' => "",
+                    'filename_err' => "",
+                    'filetmp_err' => "",
                 ];
             }
 
             //Load the view
-            $this->view('Pages/Advertisement/coachAdvertisements', $data);;
+            $this->view('Pages/Advertisements/advertisement', $data);
         }
 
         

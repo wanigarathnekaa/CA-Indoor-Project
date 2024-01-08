@@ -3,7 +3,7 @@
     //Database Configuration
     define('DB_HOST', 'localhost');
     define('DB_USER', 'root');
-    define('DB_PASSWORD', '71571698');
+    define('DB_PASSWORD', '');
    define('DB_NAME', 'c&a_indoor_net');
     
 
