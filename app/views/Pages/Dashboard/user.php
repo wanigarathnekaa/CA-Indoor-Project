@@ -78,7 +78,7 @@
 
 
 
-<!-- </body>
+                    <!-- </body>
 
 </html> -->
 
@@ -117,7 +117,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="sec">
             <div class="tagrow">
                 <h2>FIND US HERE</h2>
@@ -135,91 +135,90 @@
                 <h2>AVAILABLE DATES</h2>
             </div>
             <?php
-function build_calendar($month, $year)
-{
-    $daysOfWeek = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-    $firstDayOfMonth = mktime(0, 0, 0, $month, 1, $year);
-    $numberDays = date('t', $firstDayOfMonth);
-    $dateComponents = getdate($firstDayOfMonth);
-    $monthName = $dateComponents['month'];
-    $dayOfWeek = $dateComponents['wday'];
-    $dateToday = date('Y-m-d');
+            function build_calendar($month, $year)
+            {
+                $daysOfWeek = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                $firstDayOfMonth = mktime(0, 0, 0, $month, 1, $year);
+                $numberDays = date('t', $firstDayOfMonth);
+                $dateComponents = getdate($firstDayOfMonth);
+                $monthName = $dateComponents['month'];
+                $dayOfWeek = $dateComponents['wday'];
+                $dateToday = date('Y-m-d');
 
-    $prev_month = date('m', mktime(0, 0, 0, $month - 1, 1, $year));
-    $prev_year = date('Y', mktime(0, 0, 0, $month - 1, 1, $year));
-    $next_month = date('m', mktime(0, 0, 0, $month + 1, 1, $year));
-    $next_year = date('Y', mktime(0, 0, 0, $month + 1, 1, $year));
+                $prev_month = date('m', mktime(0, 0, 0, $month - 1, 1, $year));
+                $prev_year = date('Y', mktime(0, 0, 0, $month - 1, 1, $year));
+                $next_month = date('m', mktime(0, 0, 0, $month + 1, 1, $year));
+                $next_year = date('Y', mktime(0, 0, 0, $month + 1, 1, $year));
 
-    $calendar = "<center><h2 class='date'>$monthName $year</h2>";
-    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $prev_month . "&year=" . $prev_year . "' target='_self'_>Prev Month</a> ";
-    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender'>Current Month</a> ";
-    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $next_month . "&year=" . $next_year . "'>NextMonth</a></center> ";
+                $calendar = "<center><h2 class='date'>$monthName $year</h2>";
+                $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $prev_month . "&year=" . $prev_year . "' target='_self'_>Prev Month</a> ";
+                $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender'>Current Month</a> ";
+                $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $next_month . "&year=" . $next_year . "'>NextMonth</a></center> ";
 
-    $calendar .= "<br><table class='calander'> ";
-    $calendar .= "<tr>";
-    foreach ($daysOfWeek as $day) {
-        $calendar .= "<th class='header'>$day</th>";
-    }
+                $calendar .= "<br><table class='calander'> ";
+                $calendar .= "<tr>";
+                foreach ($daysOfWeek as $day) {
+                    $calendar .= "<th class='header'>$day</th>";
+                }
 
-    $calendar .= "</tr><tr>";
-    $currentDay = 1;
-    if ($dayOfWeek > 0) {
-        for ($k = 0; $k < $dayOfWeek; $k++) {
-            $calendar .= "<td class='empty'></td>";
-        }
-    }
+                $calendar .= "</tr><tr>";
+                $currentDay = 1;
+                if ($dayOfWeek > 0) {
+                    for ($k = 0; $k < $dayOfWeek; $k++) {
+                        $calendar .= "<td class='empty'></td>";
+                    }
+                }
 
-    $month = str_pad($month, 2, "0", STR_PAD_LEFT);
+                $month = str_pad($month, 2, "0", STR_PAD_LEFT);
 
-    // echo "Today's date: $dateToday";
-    while ($currentDay <= $numberDays) {
-        if ($dayOfWeek == 7) {
-            $dayOfWeek = 0;
-            $calendar .= "</tr><tr>";
-        }
+                // echo "Today's date: $dateToday";
+                while ($currentDay <= $numberDays) {
+                    if ($dayOfWeek == 7) {
+                        $dayOfWeek = 0;
+                        $calendar .= "</tr><tr>";
+                    }
 
-        $currentDayRel = str_pad($currentDay, 2, "0", STR_PAD_LEFT);
-        $date = "$year-$month-$currentDayRel";
-        $dayName = strtolower(date('l', strtotime($date)));
-        $today = ($date == $dateToday) ? 'today' : '';
+                    $currentDayRel = str_pad($currentDay, 2, "0", STR_PAD_LEFT);
+                    $date = "$year-$month-$currentDayRel";
+                    $dayName = strtolower(date('l', strtotime($date)));
+                    $today = ($date == $dateToday) ? 'today' : '';
 
-        if ($date < date('Y-m-d')) {
-            $calendar .= "<a class = 'btn btn-danger btn-xs'><td class='$today'><h4>$currentDay</h4></td></a>";
-        }
-        else {
-            // $calendar .= "<td class='$today'><h4>$currentDay</h4><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user' class = 'btn btn-success btn-xs' target='_top'>Book</a></td>";
-            $calendar .= "<td class='$today'><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user?fulldate=$date' class = 'btn btn-success btn-xs' target='_top'><h4>$currentDay</h4></a></td>";
-        }
-        // echo $today;
- 
+                    if ($date < date('Y-m-d')) {
+                        $calendar .= "<a class = 'btn btn-danger btn-xs'><td class='$today'><h4>$currentDay</h4></td></a>";
+                    } else {
+                        // $calendar .= "<td class='$today'><h4>$currentDay</h4><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user' class = 'btn btn-success btn-xs' target='_top'>Book</a></td>";
+                        $calendar .= "<td class='$today'><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user?fulldate=$date' class = 'btn btn-success btn-xs' target='_top'><h4>$currentDay</h4></a></td>";
+                    }
+                    // echo $today;
+            
 
-        $currentDay++;
-        $dayOfWeek++;
-    }
+                    $currentDay++;
+                    $dayOfWeek++;
+                }
 
-    if ($dayOfWeek < 7) {
-        $remainingDays = 7 - $dayOfWeek;
-        for ($i = 0; $i < $remainingDays; $i++) {
-            $calendar .= "<td class='empty'></td>";
-        }
-    }
+                if ($dayOfWeek < 7) {
+                    $remainingDays = 7 - $dayOfWeek;
+                    for ($i = 0; $i < $remainingDays; $i++) {
+                        $calendar .= "<td class='empty'></td>";
+                    }
+                }
 
-    $calendar .= "</tr></table>";
+                $calendar .= "</tr></table>";
 
-    return $calendar;
-}
+                return $calendar;
+            }
 
-?>
+            ?>
 
-<!-- <html> -->
+            <!-- <html> -->
 
-<head>
-    <meta name="viewport" content="width = device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo URLROOT;?>/css/calander_style.css">
-</head>
+            <head>
+                <meta name="viewport" content="width = device-width, initial-scale=1.0">
+                <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/calander_style.css">
+            </head>
 
-<!-- <body> -->
-    <div class="calander-container">
+            <!-- <body> -->
+            <div class="calander-container">
                 <?php
                 $dateComponent = getdate();
                 if (isset($_GET['month']) && isset($_GET['year'])) {
@@ -232,7 +231,7 @@ function build_calendar($month, $year)
 
                 echo build_calendar($month, $year);
                 ?>
-    </div>
+            </div>
 
             <div class="box">
                 <!-- <div class="calander">
@@ -262,142 +261,67 @@ function build_calendar($month, $year)
         </div>
 
         <div class="tagrow">
-                <h2>ADVERTISEMENT</h2>
-            </div>
-            <div class="wrapper">
-      
-      
-
-      
-      <i id="left" class="fa-solid fa-angle-left"></i>
-      <ul class="carousel">
-        <li class="card">
-
-          <div class="img">
-          <img src="<?php echo URLROOT; ?>/images/ad3.jpg" /></div>
-          <h2>Practice Session</h2>
-          <span>Coach Bhanuka</span>
-          
-          <div >
-              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
-              View more
-              </a>
+            <h2>ADVERTISEMENT</h2>
         </div>
+        <div class="wrapper">
 
 
 
-        </li>
-        <li class="card">
-          <div class="img">
-          <img src="<?php echo URLROOT; ?>/images/ad1.jpeg" /></div>
-          <h2>Interactive Workshop</h2>
-          <span>Coach Lasantha</span>
-          <div >
-              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
-              View more
-              </a>
-        </div>
-        </li>
-        <li class="card">
-          <div class="img">
-          <img src="<?php echo URLROOT; ?>/images/ad2.jpeg" /></div>
-          <h2>Team approach</h2>
-          <span>Coach Kasun</span>
-          <div >
-              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
-              View more
-              </a>
-        </div>       </li>
-        <li class="card">
-          <div class="img">
-          <img src="<?php echo URLROOT; ?>/images/ad2.jpeg" /></div>
-          <h2>Individual learning</h2>
-          <span>Coach Shantha</span>
-          <div >
-              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
-              View more
-              </a>
-        </div>
-        </li>
-        <li class="card">
-          <div class="img">
-          <img src="<?php echo URLROOT; ?>/images/ad1.jpeg" /></div>
-          <h2>Team approach</h2>
-          <span>Coach Shantha</span>
-          <div >
-              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
-              View more
-              </a>
-        </div>
-        </li>
-        <li class="card">
-          <div class="img">
-          <img src="<?php echo URLROOT; ?>/images/ad3.jpg" /></div>
-          <h2>Individual learning</h2>
-          <span>Coach Shantha</span>
-          <div >
-              <a  class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
-              View more
-              </a>
-        </div>
-        </li>
-      </ul>
+            <?php
+            require APPROOT . '/views/Pages/Advertisement/advertisementBody.php';
+            ?>
 
-      <i id="right" class="fa-solid fa-angle-right"></i>
 
-    </div>
-    <script  src="<?php echo URLROOT; ?>/js/advertisment.js"></script>
 
-        <div class="sec">
-            <div class="tagrow">
-                <h2>PRICING INFORMATION</h2>
-            </div>
-
-            <div class="box">
-                <div class="box4">
-                    <h3>Normal<br>Rs. 700 per hour</h3>
+            <div class="sec">
+                <div class="tagrow">
+                    <h2>PRICING INFORMATION</h2>
                 </div>
-                <div class="box4">
-                    <h3>Machine Net without Operator<br>Rs. 1100 per hour</h3>
-                </div>
-                <div class="box4">
-                    <h3>Machine Net Operator<br>Rs. 1200 per hour</h3>
+
+                <div class="box">
+                    <div class="box4">
+                        <h3>Normal<br>Rs. 700 per hour</h3>
+                    </div>
+                    <div class="box4">
+                        <h3>Machine Net without Operator<br>Rs. 1100 per hour</h3>
+                    </div>
+                    <div class="box4">
+                        <h3>Machine Net Operator<br>Rs. 1200 per hour</h3>
+                    </div>
                 </div>
             </div>
-        </div>
 
 
-        <div class="footer">
-            <div class="tagrow">
-                <h4>KEEP IN TOUCH</h4>
+            <div class="footer">
+                <div class="tagrow">
+                    <h4>KEEP IN TOUCH</h4>
+                </div>
+                <div class="content">
+                    <div class="contentbox">
+                        <i class='bx bxs-phone'></i>
+                        <a href="tel:077-072-2933">077-072-2933</a>
+                    </div>
+                    <div class="contentbox">
+                        <i class='bx bxs-envelope'></i>
+                        <a href="mailto: caindoor44@gmail.com">caindoor44@gmail.com</a>
+                    </div>
+                    <div class="contentbox">
+                        <i class='bx bxs-map-pin'></i>
+                        <address>
+                            Singhepura,<br>
+                            Battaramulla, 10120,<br>
+                            Sri Lanka.
+                        </address>
+                    </div>
+                </div>
             </div>
-            <div class="content">
-                <div class="contentbox">
-                    <i class='bx bxs-phone'></i>
-                    <a href="tel:077-072-2933">077-072-2933</a>
-                </div>
-                <div class="contentbox">
-                    <i class='bx bxs-envelope'></i>
-                    <a href="mailto: caindoor44@gmail.com">caindoor44@gmail.com</a>
-                </div>
-                <div class="contentbox">
-                    <i class='bx bxs-map-pin'></i>
-                    <address>
-                        Singhepura,<br>
-                        Battaramulla, 10120,<br>
-                        Sri Lanka.
-                    </address>
-                </div>
-            </div>
-        </div>
     </section>
-        
 
-        
+
+
 
     <!-- side bar -->
     <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
 </body>
+
 </html>
-
-
