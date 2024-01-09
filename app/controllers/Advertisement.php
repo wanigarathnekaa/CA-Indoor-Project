@@ -56,7 +56,7 @@
                 //If validation is completed and no error, then register the user
                 if(empty($data['title_err']) && empty($data['content_err'])) {
                     if($this->advertiseModel->addAdvertisement($data)){
-                        $this->view('Pages/Advertisement/advertisement', $data);
+                        $this->view('Pages/Advertisement/advertisement');
                     }
                     else{
                         die('Something Went wrong');

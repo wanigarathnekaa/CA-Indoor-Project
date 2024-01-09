@@ -86,8 +86,14 @@ class Pages extends Controller
             'CoachCount' => $coaches,
             'UserCount' => $users,
         ];
+
+        $advertisement = $this->pagesModel->getAdvertisement();
+        $data1 = [
+            'adverts' => $advertisement,
+        ];
+
         if ($name == "user") {
-            $this->view('Pages/Dashboard/user');
+            $this->view('Pages/Dashboard/user', $data1);
         } else if ($name == "admin") {
             $this->view('Pages/Dashboard/admin');
         } else if ($name == "cashier") {
@@ -197,10 +203,22 @@ class Pages extends Controller
 
     public function Advertisements($name)
     {
-        // $user = $this->pagesModel->findUser($_SESSION['user_email']);
-        // print_r($user);
+        $advertisement = $this->pagesModel->getAdvertisement();
+        $data = [
+            'adverts' => $advertisement,
+        ];
 
-        $this->view('Pages/Advertisement/advertisement');
+        $this->view('Pages/Advertisement/advertisement', $data);
+    }
+
+    public function Advertisement_Body($name)
+    {
+        $advertisement = $this->pagesModel->getAdvertisement();
+        $data = [
+            'adverts' => $advertisement,
+        ];
+
+        $this->view('Pages/Advertisement/advertisementBody', $data);
     }
 
     public function AdvertisementDetails($name)
