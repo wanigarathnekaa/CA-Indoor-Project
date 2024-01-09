@@ -2,25 +2,30 @@
 
 <i id="left" class="fa-solid fa-angle-left"></i>
 <ul class="carousel">
-    <!-- <li class="card">
-        <?php foreach ($data["adverts"] as $advert): ?>
+
+    <?php foreach ($data["adverts"] as $advert): ?>
+        <li class="card">
             <div class="img">
-                <img src="<?php echo URLROOT;?>/Pages/Advertisement/uploads/<?php echo $advert->img; ?>" width="200" height="200"/>
+                <img src="<?php echo URLROOT; ?>/public/uploads/<?php echo $advert->img; ?>" width="200" height="200" />
             </div>
-            <h2><?php echo $advert->title ?></h2>
-            <span><?php echo $advert->name ?></span>
+            <h2>
+                <?php echo $advert->title ?>
+            </h2>
+            <span>
+                <?php echo $advert->name ?>
+            </span>
             <div>
                 <a class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement" class="more-details">
                     View more
                 </a>
             </div>
         </li>
-    <?php endforeach; ?> -->
+    <?php endforeach; ?>
 
 
 
-    
-    <li class="card">
+
+    <!-- <li class="card">
         <div class="img">
             <img src="<?php echo URLROOT; ?>/images/ad1.jpEg" />
         </div>
@@ -79,7 +84,7 @@
                 View more
             </a>
         </div>
-    </li>
+    </li> -->
 </ul>
 <i id="right" class="fa-solid fa-angle-right"></i>
 </div>
