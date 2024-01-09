@@ -33,7 +33,7 @@
                 ];
 
                 $newfilename = uniqid()."-".$data['filename'];
-                move_uploaded_file($data['filetmp'],"../app/views/Pages/Advertisement/uploads/".$newfilename);
+                move_uploaded_file($data['filetmp'],"../public/uploads/".$newfilename);
                 $data['filename'] = $newfilename;
 
                 //validate name
