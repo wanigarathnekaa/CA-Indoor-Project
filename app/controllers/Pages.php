@@ -33,6 +33,12 @@ class Pages extends Controller
         $this->view('Pages/Calendar/booking', $bookings);
     }
 
+    public function User_Booking($name)
+    {
+        $bookings = $this->pagesModel->getBookings();
+        $this->view('Pages/Calendar/userBooking', $bookings);
+    }
+
     public function Table($name)
     {
         $bookings = $this->pagesModel->getBookings();
