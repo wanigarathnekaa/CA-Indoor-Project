@@ -19,7 +19,7 @@
                 
                 <?php if ($role == "User") { ?>
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="C&A_Indoor_Project/Pages/Dashboard/user">
                             <i class="bx bx-home-alt icon"></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
