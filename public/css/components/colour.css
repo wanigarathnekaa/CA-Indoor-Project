@@ -10,3 +10,8 @@
       --black1: #222;
       --black2: #000000;
 }
+
+
+::-webkit-scrollbar {
+      width: 0px;
+}
