@@ -39,10 +39,18 @@ class Pages extends Controller
         $this->view('Pages/Calendar/userBooking', $bookings);
     }
 
+    // daily reservation table for manager, owner
     public function Table($name)
     {
         $bookings = $this->pagesModel->getBookings();
         $this->view('Pages/Tables/dailyReservation', $bookings);
+    }
+
+    // personal reservation table for player
+    public function Personal_Reservation($name)
+    {
+        $bookings = $this->pagesModel->getBookings();
+        $this->view('Pages/Tables/personal_reservation', $bookings);
     }
 
     // coach table
