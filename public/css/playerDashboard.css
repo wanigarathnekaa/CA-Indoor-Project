@@ -20,7 +20,7 @@
 }
 
 ::-webkit-scrollbar {
-      width: 0px;
+      display: none;
 }
 
 /*LANDING SECTION--------------------------------------------------------------------------------------------------*/
@@ -208,8 +208,6 @@
 
 
 /* Our Coaches---------------------------------------------------------------------------------- */
-
-
 .coaches{
       position: relative;
       overflow: hidden;
@@ -217,7 +215,6 @@
       box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
       /* border-radius: 20px; */
       margin: 20px 0;
-
 }
 
 .coaches .tagrow{
@@ -228,10 +225,10 @@
 }
 
 .tag{
-      margin-left: 5vw;
+      margin-left: 10vw;
 }
 
-.btn {
+.tagrow .btn {
       position: relative;
       padding: 5px 10px;
       background: var(--color02);
@@ -239,9 +236,9 @@
       color: var(--white);
       border-radius: 6px;
       cursor: pointer;
-      margin-right: 5vw;
+      margin-right: 10vw;
 }
-.btn:hover{
+.tagrow .btn:hover{
       background-color: var(--color01);
 }
 
@@ -252,6 +249,7 @@
       overflow: auto;
       scroll-behavior: smooth;
       /* background: #A7D8D7; */
+      transition: all 0.5s ease;
 }
 
 .coaches-container::-webkit-scrollbar{
@@ -263,7 +261,7 @@
       width: 250px;
       height: 300px;
       margin-right:40px;
-      background: #4F9DA9;
+      /* background: #4F9DA9; */
       border-radius: 20px;
       display: flex;
       flex-direction: column;
@@ -289,6 +287,8 @@
       /* height: 50px; */
       padding: 10px;
       text-align: center;
+      background:var(--color02);
+      border-radius: 0 0 20px 20px;
 }
 
 .coach-name{
@@ -298,7 +298,8 @@
 }
 
 /* btns */
-.pre-btn, .nxt-btn{
+.pre-btn, .nxt-btn,
+.adspre-btn, .adsnxt-btn{
       border: none;
       width: 10vw;
       height: 100%;
@@ -312,22 +313,247 @@
       z-index: 8;
   }
 
-.pre-btn{
+.pre-btn, .adspre-btn{
       left: 0;
       transform: rotate(180deg);
   }
   
-  .nxt-btn{
+  .nxt-btn, .adsnxt-btn{
       right: 0;
   }
   
-  .pre-btn img, .nxt-btn img{
+  .pre-btn img, .nxt-btn img,
+  .adspre-btn img, .adsnxt-btn img{
       opacity: 0.2;
   }
   
-  .pre-btn:hover img, .nxt-btn:hover img{
+  .pre-btn:hover img, .nxt-btn:hover img,
+  .adspre-btn:hover img, .adsnxt-btn:hover img{
       opacity: 1;
   }
+
+
+
+/* Advertisement---------------------------------------------------------------------------------- */
+.advertisement{
+      position: relative;
+      overflow: hidden;
+      padding: 20px 0;
+      box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+      /* border-radius: 20px; */
+      margin: 20px 0;
+}
+
+.advertisement .tagrow{
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      
+}
+
+.ads-container{
+      padding: 0 8vw;
+      height: 450px;
+      display: flex;
+      overflow: auto;
+      scroll-behavior: smooth;
+      /* background: #A7D8D7; */
+}
+
+.ads-container::-webkit-scrollbar{
+      display: none;
+}
+
+.ads-card{
+      flex:0 0 auto;
+      width: 400px;
+      height: 450px;
+      margin-right:40px;
+      /* background: #4F9DA9; */
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.ads-img{
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 20px;
+}
+
+.ads-thum{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+}
+
+
+/* About Us---------------------------------------------------------------------------------- */
+.sec-about{
+      position: relative;
+      overflow: hidden;
+      padding: 0 20px;
+      background: none;
+      /* box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08); */
+      /* border-radius: 20px; */
+      /* margin: 20px 0; */
+      margin-bottom: 20px;
+}
+
+.about-content{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 20px;
+      /* padding: 0 8vw;        */
+}
+
+.map-div{
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+      padding: 10px;
+}
+
+.google-map iframe{
+      border-radius: 20px;
+      width: 100%;
+      height: 500px;
+}
+
+.about-div{
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+      padding: 10px;
+}
+
+.aboutDetails{
+      display: flex;
+      flex-direction: column;
+}
+
+.aboutDetails .detail{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 10px;
+      font-size: 18px;
+}
+
+.aboutDetails .detail .tick{
+      font-size: 20px;
+      color: var(--color01);
+}
+
+
+/* footer---------------------------------------------------------------------------------- */
+.footer{
+      position: relative;
+      width: 100%;
+      height: 250px;
+      background: var(--color03);
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      margin-top: 20px;
+      margin-bottom: 0;
+}
+
+.footer .footer-content{
+      display: flex;
+      justify-content: start;
+      align-items: start;
+      flex-direction: column;
+      font-size: 20px;
+      font-weight: 600;
+      text-align: center;
+      padding: 10px;
+}
+
+.footer .footer-content .footerlogo{
+      width: 100%;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+.footer .footer-content h3{
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--color01);
+
+}
+
+.footer .footer-content .footer-links{
+      display: flex;
+      justify-content: start;
+      align-items: start;
+      flex-direction: column;
+}
+
+.footer .footer-content  li{
+      list-style: none;
+      margin: 0;
+}
+
+.footer .footer-content  a{
+      text-decoration: none;
+      color: var(--color02);
+      font-size: 15px;
+      font-weight: 400;
+      text-align: start;
+}
+
+.footer .footer-content  a:hover{
+      color: var(--color01);
+}
+
+.footer-item{
+      display: flex;
+      justify-content:start;
+      align-items: start;
+      font-size: 20px;
+      font-weight: 600;
+      text-align: start;
+      margin-top: 10px;
+}
+
+.footer-item .icon{
+      font-size: 20px;
+      color: var(--color01);
+      margin-right: 10px;
+}
+
+.footer-content .socials{
+      display: flex;
+      flex-direction: row;
+      margin-top: 10px;
+}
+
+.socials .icon{
+      font-size: 40px;
+      color: var(--color02);
+      margin-right: 30px;
+}
+
+.socials .icon:hover{
+      color: var(--color01);
+}
+
+
+
+
 
 
 
@@ -368,6 +594,10 @@
             font-size: 15px;
       }
       
+      .about-content{
+            display: flex;
+            flex-direction: column;
+      }
 }
 
 @media (max-width: 768px) {
@@ -408,6 +638,57 @@
             font-size: 15px;
       }
       
+
+
+      /* coaches */
+      .coaches-container{
+            padding: 0 5vw;
+      }
+
+      .coach-card{
+            width: 200px;
+            height: 250px;
+      }
+
+      .coach-img{
+            height: 200px;
+      }
+
+      .coach-details{
+            height: 50px;
+      }
+
+      .coach-name{
+            font-size: 15px;
+      }
+
+      .pre-btn, .nxt-btn,
+      .adspre-btn, .adsnxt-btn{
+            width: 5vw;
+      }
+
+
+      /* advertisement */
+      .ads-container{
+            padding: 0 5vw;
+      }
+
+      .ads-card{
+            width: 320px;
+            height: 350px;
+      }
+
+      .ads-img{
+            height: 350px;
+      }
+
+      .ads-thum{
+            height: 100%;
+      }
+
+
+
+
       
 }
 
@@ -435,5 +716,58 @@
       .sec-service .service-cards .card .cardName{
             font-size: 10px;
       }
+
+
+      /* coaches */
+
+      .coaches-container{
+            padding: 0 2vw;
+      }
+
+      .coach-card{
+            width: 200px;
+            height: 250px;
+      }
+
+      .coach-img{
+            height: 220px;
+
+      }
+
+      .coach-details{
+            height: 40px;
+      }
+
+      .coach-name{
+            font-size: 12px;
+      }
+
+      .pre-btn, .nxt-btn,
+      .adspre-btn, .adsnxt-btn{
+            width: 5vw;
+      }
+
+
+      /* advertisement */
+
+      .ads-container{
+            padding: 0 2vw;
+      }
+
+      .ads-card{
+            width: 320px;
+            height: 350px;
+      }
+
+      .ads-img{
+            height: 350px;
+      }
+
+      .ads-thum{
+            height: 100%;
+      }
+
+
+
       
 }
