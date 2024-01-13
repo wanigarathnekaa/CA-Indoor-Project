@@ -95,6 +95,79 @@
                 </div>
             </div>
         </div>
+
+
+        <!-- OUR COACHES -->
+        <section class="coaches">
+            <div class="tagrow">
+                <div class="tag"><h2>OUR COACHES</h2></div>
+                <div><a href="#" class="btn">View All</a></div>  
+            </div>
+            <button class="pre-btn"><img src="<?php echo URLROOT; ?>/images/arrow.png" alt=""></button>
+            <button class="nxt-btn"><img src="<?php echo URLROOT; ?>/images/arrow.png" alt=""></button>
+
+            <div class="coaches-container">
+                <div class="coach-card">
+                    <div class="coach-img">
+                        <img src="<?php echo URLROOT; ?>/images/image1.jpg" class="coach-thum" alt="">
+                    </div>
+                    <div class="coach-details">
+                        <h3 class="coach-name">Milan Bhanuka</h3>
+                    </div>
+                </div>
+
+                <div class="coach-card">
+                    <div class="coach-img">
+                        <img src="<?php echo URLROOT; ?>/images/image1.jpg" class="coach-thum" alt="">
+                    </div>
+                    <div class="coach-details">
+                        <h3 class="coach-name">Milan Bhanuka</h3>
+                    </div>
+                </div>
+
+                <div class="coach-card">
+                    <div class="coach-img">
+                        <img src="<?php echo URLROOT; ?>/images/image1.jpg" class="coach-thum" alt="">
+                    </div>
+                    <div class="coach-details">
+                        <h3 class="coach-name">Milan Bhanuka</h3>
+                    </div>
+                </div>
+
+                <div class="coach-card">
+                    <div class="coach-img">
+                        <img src="<?php echo URLROOT; ?>/images/image1.jpg" class="coach-thum" alt="">
+                    </div>
+                    <div class="coach-details">
+                        <h3 class="coach-name">Milan Bhanuka</h3>
+                    </div>
+                </div>
+
+                <div class="coach-card">
+                    <div class="coach-img">
+                        <img src="<?php echo URLROOT; ?>/images/image1.jpg" class="coach-thum" alt="">
+                    </div>
+                    <div class="coach-details">
+                        <h3 class="coach-name">Milan Bhanuka</h3>
+                    </div>
+                </div>
+
+                <div class="coach-card">
+                    <div class="coach-img">
+                        <img src="<?php echo URLROOT; ?>/images/image1.jpg" class="coach-thum" alt="">
+                    </div>
+                    <div class="coach-details">
+                        <h3 class="coach-name">Milan Bhanuka</h3>
+                    </div>
+                </div>
+
+                
+
+                
+
+            </div>
+
+        </section>
         
         
         
@@ -129,6 +202,7 @@
 
     <!-- side bar -->
     <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
+    <script src="<?php echo URLROOT; ?>/js/coachContainer.js"></script>
 </body>
 
 </html>
