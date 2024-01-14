@@ -11,14 +11,6 @@
 </head>
 
 <body>
-
-</body>
-
-</html>
-<html>
-
-
-<body>
       <!-- Sidebar -->
       <?php
       $role = "Manager";
