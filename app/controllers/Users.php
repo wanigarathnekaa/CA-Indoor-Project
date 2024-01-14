@@ -314,6 +314,18 @@ class Users extends Controller
         $this->view('Pages/UserProfiles/editProfile', $data);
     }
 
+    public function delete()
+    {
+        var_dump($_POST);
+        if($this->userModel->deleteUser($_POST["submit"])) {  
+            echo "deleted";
+            redirect("Users/register");
+        }else{
+            die("Something Went Wrong");
+        }
+        
+    }
+
 
 }
 
