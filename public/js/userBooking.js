@@ -74,7 +74,7 @@ class CustomSelect {
             date: optionElement.getAttribute("data-date"),
         };
         this.selectedSlots.push(selectedSlot);
-        
+
         this.updateButtonVisibility();
     }
 
@@ -113,3 +113,33 @@ class CustomSelect {
 document.querySelectorAll(".custom-select").forEach((selectElement) => {
     new CustomSelect(selectElement);
 });
+
+
+let popup = document.getElementById('popup');
+let popupcontainer = document.getElementById('popupcontainer');
+
+function openPopup() {
+    console.log("Open popup");
+    popup.classList.add("open-popup");
+    popupcontainer.classList.add("open-popupcontainer");
+
+    // Set event listener for Make Payment button
+    document.getElementById('makePaymentBtn').addEventListener('click', makePayment);
+    
+    // Set event listener for Cancel button
+    document.getElementById('cancelBtn').addEventListener('click', closePopup);
+}
+
+function closePopup() {
+    popup.classList.remove("open-popup");
+    popupcontainer.classList.remove("open-popupcontainer");
+
+    // Remove event listeners when closing the popup
+    document.getElementById('makePaymentBtn').removeEventListener('click', makePayment);
+    document.getElementById('cancelBtn').removeEventListener('click', closePopup);
+}
+
+function makePayment() {
+    console.log("Payment logic goes here");
+}
+
