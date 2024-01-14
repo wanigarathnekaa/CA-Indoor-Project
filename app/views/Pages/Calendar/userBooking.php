@@ -70,7 +70,7 @@ function time_slot($duration, $cleanup, $start, $end)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/userbooking_style.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_reservation.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_userbooking.css">
 
     <title>Booking</title>
 </head>
@@ -183,6 +183,8 @@ function time_slot($duration, $cleanup, $start, $end)
             <button class="confBut" onclick="openPopup()">Confirm Reservation</button>
         </div>
 
+
+
         <!-- Popup message -->
         <div class="popupcontainer" id="popupcontainer">
             <div class="popup" id="popup">
@@ -190,14 +192,14 @@ function time_slot($duration, $cleanup, $start, $end)
                 <h2>Chosen Time Slots</h2>
                 <hr>
                 <div class="popupdetails">
-                    <table class="popupdetails">
+                    <table class="popupdetailtable">
                         <thead>
                             <tr>
                                 <th>Time Slot</th>
                                 <th>Net</th>
                             </tr>
                         </thead>
-                        <tbody class="popupdetails" id="popupTableBody"></tbody>
+                        <tbody class="popupTableBody" id="popupTableBody"></tbody>
                     </table>
                 </div>
 
