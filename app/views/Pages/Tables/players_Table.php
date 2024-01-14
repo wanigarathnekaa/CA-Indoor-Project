@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,11 @@
       <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_coaches.css">
       <title>Players</title>
 </head>
+
 <body>
-      
+
 </body>
+
 </html>
 <html>
 
@@ -18,10 +21,25 @@
 <body>
       <!-- Sidebar -->
       <?php
-            $role = "Manager";
-            require APPROOT . '/views/Pages/Dashboard/header.php';
-            require APPROOT . '/views/Components/Side Bars/sideBar.php';
+      $role = "Manager";
+      require APPROOT . '/views/Pages/Dashboard/header.php';
+      require APPROOT . '/views/Components/Side Bars/sideBar.php';
+
       ?>
+
+      <?php
+      // Extract emails from the coaches
+      $emailsArray1 = array_map(function ($item) {
+            return $item->email;
+      }, $data1['Coaches']);
+
+      // Filter the Players from users table
+      $players = array_filter($data, function ($item) use ($emailsArray1) {
+            return !in_array($item->email, $emailsArray1);
+      });
+
+      ?>
+
 
       <!-- Content -->
       <section class="home">
@@ -29,8 +47,10 @@
             <!-- Table Topic -->
             <div class="table-topic">
                   <div class="topic-name">
-                        <h1>Players : <?php echo $data1["UserCount"]?>  </h1>
-                  </div>                
+                        <h1>Players :
+                              <?php echo count($players) ?>
+                        </h1>
+                  </div>
             </div>
 
 
@@ -46,7 +66,7 @@
                               <option value="cancelled">Cancelled</option>
                         </select>
                   </div> -->
-                  
+
                   <div class="search">
                         <label>
                               <input type="text" placeholder="Search here" id="searchInput" onkeyup="search()">
@@ -67,7 +87,6 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Mobile Number</th>
-                                    <th>Address</th>
                                     <th></th>
                                     <th></th>
                               </tr>
@@ -75,15 +94,17 @@
 
                         <!-- table body -->
                         <tbody>
-                              <tr>
-                                    <td onclick="openPopup()">1</td>
-                                    <td onclick="openPopup()">Milan Bhanuka</td>
-                                    <td onclick="openPopup()">vgmbhanuka@gmail.com</td>
-                                    <td onclick="openPopup()">0716720864</td>
-                                    <td onclick="openPopup()">Colombo</td>
-                                    <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
-                                    <td onclick="openDeletePopup()"><i class="fa-solid fa-user-slash delete icon"></i></td>    
-                              </tr>
+                              <?php foreach ($players as $player): ?>
+                                    <tr>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($player)); ?>"><?php echo $player->uid?></td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($player)); ?>"><?php echo $player->name?></td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($player)); ?>)"><?php echo $player->email ?></td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($player)); ?>"><?php echo $player->phoneNumber?></td>
+                                          <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
+                                          <td onclick="openDeletePopup()"><i class="fa-solid fa-user-slash delete icon"></i></td>
+                                    </tr>
+                                    <?php 
+                              endforeach; ?>
                         </tbody>
                   </table>
             </div>
@@ -99,24 +120,21 @@
                         <hr>
                         <div class="popupdetails">
                               <div class="popupdetail">
-                                    <h2><b>Player ID : </b></h2>
+                                    <h2><b>Player ID : </b><span class="p_id"></span></h2>
                               </div>
                               <div class="popupdetail">
-                                    <h2><b>User Name : </b></h2>
+                                    <h2><b>Name : </b><span class="p_name"></span></h2>
                               </div>
                               <div class="popupdetail">
-                                    <h2><b>Email : </b></h2>
+                                    <h2><b>Email : </b><span class="p_email"></span></h2>
                               </div>
                               <div class="popupdetail">
-                                    <h2><b>Mobile Number : </b></h2>
-                              </div>
-                              <div class="popupdetail">
-                                    <h2><b>Address : </b></h2>
+                                    <h2><b>Mobile Number : </b><span class="p_number"></span></h2>
                               </div>
                         </div>
                   </div>
 
-                  
+
                   <!-- confirm delete popup window -->
                   <div class="deletepopup" id=deletepopup>
                         <span class="close" onclick="closeDeletePopup()"><i class="fa-solid fa-xmark"></i></span>
