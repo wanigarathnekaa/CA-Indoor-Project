@@ -70,8 +70,7 @@ function time_slot($duration, $cleanup, $start, $end)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/userbooking_style.css">
-
-
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_reservation.css">
 
     <title>Booking</title>
 </head>
@@ -109,7 +108,8 @@ function time_slot($duration, $cleanup, $start, $end)
                                 <?php echo $ts; ?>
                             </option>
                         <?php } else { ?>
-                            <option value="<?php echo $ts; ?>" data-net-type="Normal Net A" data-date="<?php echo $filter_date;?>">
+                            <option value="<?php echo $ts; ?>" data-net-type="Normal Net A"
+                                data-date="<?php echo $filter_date; ?>">
                                 <?php echo $ts; ?>
                             </option>
                         <?php } ?>
@@ -139,7 +139,8 @@ function time_slot($duration, $cleanup, $start, $end)
                                 <?php echo $ts; ?>
                             </option>
                         <?php } else { ?>
-                            <option value="<?php echo $ts; ?>" data-net-type="Normal Net B" data-date="<?php echo $filter_date;?>">
+                            <option value="<?php echo $ts; ?>" data-net-type="Normal Net B"
+                                data-date="<?php echo $filter_date; ?>">
                                 <?php echo $ts; ?>
                             </option>
                         <?php } ?>
@@ -169,7 +170,8 @@ function time_slot($duration, $cleanup, $start, $end)
                                 <?php echo $ts; ?>
                             </option>
                         <?php } else { ?>
-                            <option value="<?php echo $ts; ?>" data-net-type="Machine Net" data-date="<?php echo $filter_date;?>">
+                            <option value="<?php echo $ts; ?>" data-net-type="Machine Net"
+                                data-date="<?php echo $filter_date; ?>">
                                 <?php echo $ts; ?>
                             </option>
                         <?php } ?>
@@ -177,9 +179,40 @@ function time_slot($duration, $cleanup, $start, $end)
                 </select>
             </div>
         </div>
-        <form action="" id="confirmationForm" style="display: none;">
-            <button type="submit" class="confBut">Confirm Reservation</button>
+        <form id="confirmationForm" style="display: none;">
+            <button type="submit" class="confBut" onclick="openPopup()">Confirm Reservation</button>
         </form>
+
+        <!-- Popup message -->
+        <div class="popupcontainer" id="popupcontainer">
+            <div class="popup" id="popup">
+                <span class="close" onclick="closePopup()"><i class="fa-solid fa-xmark"></i></span>
+                <h2>Chosen Time Slots</h2>
+                <hr>
+                <div class="popupdetails">
+                    <table class="popupdetails">
+                        <thead>
+                            <tr>
+                                <th>Time Slot</th>
+                                <th>Net</th>
+                            </tr>
+                        </thead>
+                        <tbody class="popupdetails" id="popupTableBody">
+                            <tr>
+                                <td>07:00AM - 08:00AM</td>
+                                <td>Machine Net</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="btns">
+                    <button id="makePaymentBtn" type="button">Make Payment</button>
+                    <button id="cancelBtn" type="button">Cancel</button>
+                </div>
+            </div>
+        </div>
+
     </section>
 
     <script src="<?php echo URLROOT; ?>/js/userBooking.js"></script>
