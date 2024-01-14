@@ -179,9 +179,9 @@ function time_slot($duration, $cleanup, $start, $end)
                 </select>
             </div>
         </div>
-        <form id="confirmationForm" style="display: none;">
-            <button type="submit" class="confBut" onclick="openPopup()">Confirm Reservation</button>
-        </form>
+        <div id="confirmationForm" style="display: none;">
+            <button class="confBut" onclick="openPopup()">Confirm Reservation</button>
+        </div>
 
         <!-- Popup message -->
         <div class="popupcontainer" id="popupcontainer">
@@ -197,12 +197,7 @@ function time_slot($duration, $cleanup, $start, $end)
                                 <th>Net</th>
                             </tr>
                         </thead>
-                        <tbody class="popupdetails" id="popupTableBody">
-                            <tr>
-                                <td>07:00AM - 08:00AM</td>
-                                <td>Machine Net</td>
-                            </tr>
-                        </tbody>
+                        <tbody class="popupdetails" id="popupTableBody"></tbody>
                     </table>
                 </div>
 
