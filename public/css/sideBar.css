@@ -5,6 +5,10 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
   }
+
+  ::-webkit-scrollbar {
+    width: 0px;
+}
   
   :root {
     /* ===== Colors ===== */
