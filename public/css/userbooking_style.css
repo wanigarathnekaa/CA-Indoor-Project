@@ -48,6 +48,27 @@ body {
   text-align: center;
 }
 
+#confirmationForm {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.confBut {
+    background-color: var(--color01); 
+    color: var(--white);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.confBut:hover {
+    background-color: var(--color02);
+}
+
 /* .form-group {
     background-color: var(--color02);
     color: #fff;

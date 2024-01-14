@@ -79,110 +79,107 @@ function time_slot($duration, $cleanup, $start, $end)
 <body>
     <!-- Sidebar -->
     <?php
-      $role = "User";
-      require APPROOT . '/views/Pages/Dashboard/header.php';
-      require APPROOT . '/views/Components/Side Bars/sideBar.php';
+    $role = "User";
+    require APPROOT . '/views/Pages/Dashboard/header.php';
+    require APPROOT . '/views/Components/Side Bars/sideBar.php';
     ?>
 
     <section class="home">
-    <h1 class="text-center">Book on Date:
-        <?php echo date($selected_date, strtotime(date("Y/m/d"))); ?>
-    </h1>
-    <div class="slot">
-        <h1 class="netType">Normal Net A</h1>
-        <div class="form-group">
-            <select name="language" class="custom-select" multiple>
-                <?php
-                $timeslots = time_slot($duration, $cleanup, $start, $end);
-                foreach ($timeslots as $ts) {
-                    ?>
+        <h1 class="text-center">Book on Date:
+            <?php echo date($selected_date, strtotime(date("Y/m/d"))); ?>
+        </h1>
+        <div class="slot">
+            <h1 class="netType">Normal Net A</h1>
+            <div class="form-group">
+                <select name="language" class="custom-select" multiple>
                     <?php
-                    $found = false;
-                    foreach ($new_array_2 as $reservation) {
-                        if ($reservation->timeSlot === $ts) {
-                            $found = true;
-                            break;
+                    $timeslots = time_slot($duration, $cleanup, $start, $end);
+                    foreach ($timeslots as $ts) {
+                        ?>
+                        <?php
+                        $found = false;
+                        foreach ($new_array_2 as $reservation) {
+                            if ($reservation->timeSlot === $ts) {
+                                $found = true;
+                                break;
+                            }
                         }
-                    }
-                    if ($found) { ?>
-                        <option value="<?php echo $ts; ?>" data-booked="true">
-                            <?php echo $ts; ?>
-                        </option>
-                    <?php } else { ?>
-                        <option value="<?php echo $ts; ?>">
-                            <?php echo $ts; ?>
-                        </option>
+                        if ($found) { ?>
+                            <option value="<?php echo $ts; ?>" data-booked="true">
+                                <?php echo $ts; ?>
+                            </option>
+                        <?php } else { ?>
+                            <option value="<?php echo $ts; ?>" data-net-type="Normal Net A" data-date="<?php echo $filter_date;?>">
+                                <?php echo $ts; ?>
+                            </option>
+                        <?php } ?>
                     <?php } ?>
-
-
-                <?php } ?>
-            </select>
+                </select>
+            </div>
         </div>
-    </div>
 
-    <div class="slot">
-        <h1 class="netType">Normal Net B</h1>
-        <div class="form-group">
-            <select name="language" class="custom-select" multiple>
-                <?php
-                $timeslots = time_slot($duration, $cleanup, $start, $end);
-                foreach ($timeslots as $ts) {
-                    ?>
+        <div class="slot">
+            <h1 class="netType">Normal Net B</h1>
+            <div class="form-group">
+                <select name="language" class="custom-select" multiple>
                     <?php
-                    $found = false;
-                    foreach ($new_array_3 as $reservation) {
-                        if ($reservation->timeSlot === $ts) {
-                            $found = true;
-                            break;
+                    $timeslots = time_slot($duration, $cleanup, $start, $end);
+                    foreach ($timeslots as $ts) {
+                        ?>
+                        <?php
+                        $found = false;
+                        foreach ($new_array_3 as $reservation) {
+                            if ($reservation->timeSlot === $ts) {
+                                $found = true;
+                                break;
+                            }
                         }
-                    }
-                    if ($found) { ?>
-                        <option value="<?php echo $ts; ?>" data-booked="true">
-                            <?php echo $ts; ?>
-                        </option>
-                    <?php } else { ?>
-                        <option value="<?php echo $ts; ?>">
-                            <?php echo $ts; ?>
-                        </option>
+                        if ($found) { ?>
+                            <option value="<?php echo $ts; ?>" data-booked="true">
+                                <?php echo $ts; ?>
+                            </option>
+                        <?php } else { ?>
+                            <option value="<?php echo $ts; ?>" data-net-type="Normal Net B" data-date="<?php echo $filter_date;?>">
+                                <?php echo $ts; ?>
+                            </option>
+                        <?php } ?>
                     <?php } ?>
-
-
-                <?php } ?>
-            </select>
+                </select>
+            </div>
         </div>
-    </div>
 
-    <div class="slot">
-        <h1 class="netType">Machine Net</h1>
-        <div class="form-group">
-            <select name="language" class="custom-select" multiple>
-                <?php
-                $timeslots = time_slot($duration, $cleanup, $start, $end);
-                foreach ($timeslots as $ts) {
-                    ?>
+        <div class="slot">
+            <h1 class="netType">Machine Net</h1>
+            <div class="form-group">
+                <select name="language" class="custom-select" multiple>
                     <?php
-                    $found = false;
-                    foreach ($new_array_1 as $reservation) {
-                        if ($reservation->timeSlot === $ts) {
-                            $found = true;
-                            break;
+                    $timeslots = time_slot($duration, $cleanup, $start, $end);
+                    foreach ($timeslots as $ts) {
+                        ?>
+                        <?php
+                        $found = false;
+                        foreach ($new_array_1 as $reservation) {
+                            if ($reservation->timeSlot === $ts) {
+                                $found = true;
+                                break;
+                            }
                         }
-                    }
-                    if ($found) { ?>
-                        <option value="<?php echo $ts; ?>" data-booked="true">
-                            <?php echo $ts; ?>
-                        </option>
-                    <?php } else { ?>
-                        <option value="<?php echo $ts; ?>">
-                            <?php echo $ts; ?>
-                        </option>
+                        if ($found) { ?>
+                            <option value="<?php echo $ts; ?>" data-booked="true">
+                                <?php echo $ts; ?>
+                            </option>
+                        <?php } else { ?>
+                            <option value="<?php echo $ts; ?>" data-net-type="Machine Net" data-date="<?php echo $filter_date;?>">
+                                <?php echo $ts; ?>
+                            </option>
+                        <?php } ?>
                     <?php } ?>
-
-
-                <?php } ?>
-            </select>
+                </select>
+            </div>
         </div>
-    </div>
+        <form action="" id="confirmationForm" style="display: none;">
+            <button type="submit" class="confBut">Confirm Reservation</button>
+        </form>
     </section>
 
     <script src="<?php echo URLROOT; ?>/js/userBooking.js"></script>
