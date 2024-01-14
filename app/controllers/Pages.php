@@ -73,10 +73,10 @@ class Pages extends Controller
     // Player table
     public function playerTable($name){
         $players = $this->pagesModel->getUsers();
-        // $coaches = $this->pagesModel->getCoachCount();
+        $coaches = $this->pagesModel->getCoaches();
         $users = $this->pagesModel->getUserCount();
         $data = [
-            // 'CoachCount' => $coaches,
+            'Coaches' => $coaches,
             'UserCount' => $users,
         ];
         $this->view('Pages/Tables/players_Table', $players,$data);

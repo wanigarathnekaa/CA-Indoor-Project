@@ -4,9 +4,21 @@ let deletePopup = document.getElementById('deletepopup');
 
 
 // details popup
-function openPopup() {
+function openPopup(player) {
       popup.classList.add("open-popup");
       popupcontainer.classList.add("open-popupcontainer");
+
+      const p_id = document.querySelector(".p_id");
+      p_id.textContent = player.uid;
+
+      const p_name = document.querySelector(".p_name");
+      p_name.textContent = player.name;
+
+      const p_email = document.querySelector(".p_email");
+      p_email.textContent = player.email;
+
+      const p_number = document.querySelector(".p_number");
+      p_number.textContent = player.phoneNumber;
 }
 
 function closePopup() {
