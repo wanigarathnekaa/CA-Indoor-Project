@@ -116,25 +116,13 @@
             <button class="adspre-btn"><img src="<?php echo URLROOT; ?>/images/arrow.png" alt=""></button>
             <button class="adsnxt-btn"><img src="<?php echo URLROOT; ?>/images/arrow.png" alt=""></button>
             <div class="ads-container">
-                <div class="ads-card">
-                    <div class="ads-img">
-                        <img src="<?php echo URLROOT; ?>/images/ad1.jpeg" class="ads-thum" alt="">
+                <?php foreach ($data["adverts"] as $advert): ?>
+                    <div class="ads-card">
+                        <div class="ads-img">
+                            <img src="<?php echo URLROOT; ?>/public/uploads/<?php echo $advert->img; ?>" class="ads-thum" alt="">
+                        </div>
                     </div>
-                </div>
-
-                <div class="ads-card">
-                    <div class="ads-img">
-                        <img src="<?php echo URLROOT; ?>/images/ad2.jpeg" class="ads-thum" alt="">
-                    </div>
-                </div>
-
-
-                <div class="ads-card">
-                    <div class="ads-img">
-                        <img src="<?php echo URLROOT; ?>/images/ad3.jpg" class="ads-thum" alt="">
-                    </div>
-                </div>
-
+                <?php endforeach; ?>
             </div>
         </section>
 
