@@ -134,23 +134,34 @@ function openPopup() {
   document.getElementById("cancelBtn").addEventListener("click", closePopup);
   
   let row = "";
+  let totalPrice = 0;
   tbody = document.getElementById("popupTableBody");
 
   selectedSlots.forEach(data_to_table);
 
   function data_to_table(item) {
-    row +=
-      "<tr>" +
-      "<td>" +
-      item.timeSlot +
-      "</td>" +
-      "<td>" +
-      item.netType +
-      "</td>" +
-      "</tr>";
-  }
+      if(item.netType === "Normal Net A" || item.netType === "Normal Net B"){
+        totalPrice += 1000;
+      }else{
+        totalPrice += 1500;
+      }
+      row +=
+        "<tr>" +
+        "<td>" +
+        item.timeSlot +
+        "</td>" +
+        "<td>" +
+        item.netType +
+        "</td>" +
+        "</tr>";
+    }
 
   tbody.innerHTML = row;
+  const payment = document.querySelector(".payment");
+  payment.textContent = totalPrice + " LKR";
+
+  const con_payment = document.querySelector(".con_payment");
+  con_payment.textContent = totalPrice*0.3 + " LKR";
 }
 
 function closePopup() {
