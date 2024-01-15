@@ -35,6 +35,12 @@ class Pages extends Controller
         $this->view('Pages/Calendar/booking', $bookings);
     }
 
+    public function Payment($name)
+    {
+        $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        $this->view('Pages/Booking/payGateway', $user);
+    }
+
     public function User_Booking($name)
     {
         $bookings = $this->pagesModel->getBookings();
