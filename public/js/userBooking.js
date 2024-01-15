@@ -1,4 +1,5 @@
 let selectedSlots = [];
+let totPrice = 0;
 
 class CustomSelect {
   constructor(originalSelect) {
@@ -132,7 +133,7 @@ function openPopup() {
 
   // Set event listener for Cancel button
   document.getElementById("cancelBtn").addEventListener("click", closePopup);
-  
+
   let row = "";
   let totalPrice = 0;
   tbody = document.getElementById("popupTableBody");
@@ -140,28 +141,30 @@ function openPopup() {
   selectedSlots.forEach(data_to_table);
 
   function data_to_table(item) {
-      if(item.netType === "Normal Net A" || item.netType === "Normal Net B"){
-        totalPrice += 1000;
-      }else{
-        totalPrice += 1500;
-      }
-      row +=
-        "<tr>" +
-        "<td>" +
-        item.timeSlot +
-        "</td>" +
-        "<td>" +
-        item.netType +
-        "</td>" +
-        "</tr>";
+    if (item.netType === "Normal Net A" || item.netType === "Normal Net B") {
+      totalPrice += 1000;
+    } else {
+      totalPrice += 1500;
     }
+    row +=
+      "<tr>" +
+      "<td>" +
+      item.timeSlot +
+      "</td>" +
+      "<td>" +
+      item.netType +
+      "</td>" +
+      "</tr>";
+  }
 
   tbody.innerHTML = row;
   const payment = document.querySelector(".payment");
   payment.textContent = totalPrice + " LKR";
 
   const con_payment = document.querySelector(".con_payment");
-  con_payment.textContent = totalPrice*0.3 + " LKR";
+  con_payment.textContent = totalPrice * 0.3 + " LKR";
+
+  totPrice = totalPrice;
 }
 
 function closePopup() {
@@ -176,5 +179,63 @@ function closePopup() {
 }
 
 function makePayment() {
-  console.log("Payment logic goes here");
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      // Log the response to the console
+      alert(xhttp.responseText);
+      var obj = JSON.parse(xhttp.responseText);
+
+      // Payment completed. It can be a successful failure.
+      payhere.onCompleted = function onCompleted(orderId) {
+        console.log("Payment completed. OrderID:" + orderId);
+        // Note: validate the payment and show success or failure page to the customer
+      };
+
+      // Payment window closed
+      payhere.onDismissed = function onDismissed() {
+        // Note: Prompt user to pay again or show an error page
+        console.log("Payment dismissed");
+      };
+
+      // Error occurred
+      payhere.onError = function onError(error) {
+        // Note: show an error page
+        console.log("Error:" + error);
+      };
+
+      // Put the payment variables here
+      var payment = {
+        sandbox: true,
+        merchant_id: obj["merchant_id"],
+        return_url:
+          "http://localhost/C&A_Indoor_Project/Pages/User_Booking/user", // Important
+        cancel_url:
+          "http://localhost/C&A_Indoor_Project/Pages/User_Booking/user", // Important
+        notify_url: "http://sample.com/notify",
+        order_id: obj["order_id"],
+        items: obj["items"],
+        amount: totPrice,
+        currency: obj["currency"],
+        hash: obj["hash"], // *Replace with generated hash retrieved from backend
+        first_name: obj["first_name"],
+        last_name: obj["last_name"],
+        email: obj["email"],
+        phone: obj["phone"],
+        address: obj["address"],
+        city: obj["city"],
+        country: "Sri Lanka",
+        delivery_address: "No. 46, Galle road, Kalutara South",
+        delivery_city: "Kalutara",
+        delivery_country: "Sri Lanka",
+        custom_1: "",
+        custom_2: "",
+      };
+      payhere.startPayment(payment);
+    }
+  };
+
+  // xhttp.setRequestHeader('Content-Type', 'application/json');
+  xhttp.open("GET", "C&A_Indoor_Project/Pages/Payment/user", true);
+  xhttp.send();
 }
