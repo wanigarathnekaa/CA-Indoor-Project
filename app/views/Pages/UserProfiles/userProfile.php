@@ -1,96 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-
-    <!-- ===== ===== Custom Css ===== ===== -->
-    <link rel="stylesheet" href="<?php echo URLROOT;?>/css/style.css">
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <!-- <link rel="stylesheet" href="responsive.css"> -->
-
-    <!-- ===== ===== Remix Font Icons Cdn ===== ===== -->
-    <!-- <link rel="stylesheet" href="fonts/remixicon.css"> -->
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>profile</title>
+      <link rel="stylesheet" href="<?php echo URLROOT;?>/css/profile.css">
+      
 </head>
-
 <body>
-    <!-- ===== ===== Body Main-Background ===== ===== -->
-    <span class="main_bg"></span>
+
+    <!-- side bar -->
+    <?php
+        $role = "User";
+        require APPROOT . '/views/Pages/Dashboard/header.php';
+        require APPROOT . '/views/Components/Side Bars/sideBar.php';
+    ?>
 
 
-    <!-- ===== ===== Main-Container ===== ===== -->
-    <div class="container">
+    <!-- content -->
+    <section class="home">
+      <div class="profilecontainer">
+            <div class="profile-block">
+                  <div class="profile-pic">
 
-
-
-        <!-- ===== ===== User Main-Profile ===== ===== -->
-        <section class="userProfile card">
-            <div class="profile">
-                <figure><img src="<?php echo URLROOT;?>/images/user.png"  alt="profilepic" width="250px" height="500px"></figure>
+                        <div class="imgBox">
+                              <img class="profile-image" src="<?php echo URLROOT;?>/images/user.png">
+                        </div>
+                        <div class="name"><?php echo $data->name ?></div>
+                        <!-- <div class="role">Player</div> -->
+                  </div>
+                  <div class="details-block">
+                        <div class="details">
+                                <div class="infor"><b>Name</b> : <?php echo $data->name ?></div>
+                                <div class="infor"><b>User Name</b> : <?php echo $data->user_name ?></div>
+                                <div class="infor"><b>Email</b> : <?php echo $data->email?> </div>
+                                <div class="infor"><b>Mobile Number</b> : <?php echo $data->phoneNumber?></div>                              
+                        </div>
+                        <div class="btnrow">
+                            <a href="<?php echo URLROOT;?>/Pages/editProfile/user" type="button" class="button">Edit Profile</a>
+                              <button type="button" class="button">Change Password</button>
+                              <button type="button" class="button">Delete Profile</button>
+                        </div>
+                        
+                  </div>
             </div>
-            <br>
-            <div>
-                
-            </div>
-        </section>
-
-
-        
-
-        <!-- ===== ===== Timeline & About Sections ===== ===== -->
-        <section class="timeline_about card">
-            
-
-            <div class="contact_Info">
-                <ul><br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <li class="name">
-                        <span class="info"><b>Name</b> : <?php echo $data->name ?></span>
-                    </li>
-                    <br>
-                    <li class="email">
-                        <span class="info"><b>Email</b>: <?php echo $data->email?> </span>
-                    </li>
-                    <br>
-
-                    <li class="mobile">
-                        <span class="info"><b>Mobile Number</b>:<?php echo $data->phoneNumber?></span>
-                    </li>
-                    <br>
-                    <li class="Address">
-                        <span class="info"><b>Address</b> : <?php echo $data->uid?></span>
-                    </li>
-                    <br>
-                    <br>
-                    <li class="gender">
-                        <span class="info"><b>Gender</b> :Male</span>
-                    </li>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <a href="<?php echo URLROOT;?>/Pages/editProfile/user" class="btn" type="button">Edit Profile</a>
-                   
-                </ul>
-            </div>
-
-        </section>
-    </div>
-
+      </div>
+    </section>
 </body>
-
 </html>
