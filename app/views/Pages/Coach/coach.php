@@ -23,14 +23,18 @@
                 <h1>Coaches</h1>
         </div>
         <div class="coaches">
-            <!-- <div class="profiles"> -->
+            <div class="profiles">
                 <?php foreach($data as $coach):?>
                     <div class="coachcard">
-                        <a href="<?php echo URLROOT?>/Pages/CoachCard/user?email=<?php echo $coach->email; ?>"><img class="image" src="<?php echo URLROOT; ?>/images/image1.jpg" /></a>
-                        <div class="Name"><?php echo "{$coach->name}"?></div>
+                        <a href="<?php echo URLROOT?>/Pages/CoachCard/user?email=<?php echo $coach->email; ?>">
+                            <div class="coach-img">
+                                <img class="image" src="<?php echo URLROOT; ?>/images/image1.jpg" />
+                            </div>
+                            <div class="Name"><?php echo "{$coach->name}"?></div>
+                        </a>
                     </div>
                 <?php endforeach;?>
-            <!-- </div> -->
+            </div>
         </div>
     </section>
 </body>

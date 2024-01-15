@@ -2,9 +2,11 @@
 class Pages extends Controller
 {
     private $pagesModel;
+    private $advertiseModel;
     public function __construct()
     {
         $this->pagesModel = $this->model('M_Pages');
+        $this->advertiseModel = $this->model('M_Advertisement');
     }
 
     public function about()
@@ -97,7 +99,7 @@ class Pages extends Controller
         $coaches = $this->pagesModel->getCoachCount();
         $users = $this->pagesModel->getUserCount();
         $coach = $this->pagesModel->getCoaches();
-        $advertisement = $this->pagesModel->getAdvertisement();
+        $advertisement = $this->advertiseModel->getAdvertisement();
 
         $data = [
             'CoachCount' => $coaches,
@@ -225,7 +227,7 @@ class Pages extends Controller
 
     public function Advertisements($name)
     {
-        $advertisement = $this->pagesModel->getAdvertisement();
+        $advertisement = $this->advertiseModel->getAdvertisement();
         $data = [
             'adverts' => $advertisement,
         ];
@@ -233,15 +235,15 @@ class Pages extends Controller
         $this->view('Pages/Advertisement/advertisement', $data);
     }
 
-    public function Advertisement_Body($name)
-    {
-        $advertisement = $this->pagesModel->getAdvertisement();
-        $data = [
-            'adverts' => $advertisement,
-        ];
+    // public function Advertisement_Body($name)
+    // {
+    //     $advertisement = $this->advertiseModel->getAdvertisement();
+    //     $data = [
+    //         'adverts' => $advertisement,
+    //     ];
 
-        $this->view('Pages/Advertisement/advertisementBody', $data);
-    }
+    //     $this->view('Pages/Advertisement/advertisementBody', $data);
+    // }
 
     public function AdvertisementDetails($name)
     {
