@@ -23,6 +23,8 @@
     require APPROOT . '/views/Components/Side Bars/sideBar.php';
     ?>
 
+    <?php print_r($data["userCoach"]); ?>
+
     <!-- content -->
     <section class="home">
 
@@ -107,95 +109,16 @@
             <button class="nxt-btn"><img src="<?php echo URLROOT; ?>/images/arrow.png" alt=""></button>
 
             <div class="coaches-container">
+                <?php foreach($data["userCoach"] as $coach): ?>
                 <div class="coach-card">
                     <div class="coach-img">
                         <img src="<?php echo URLROOT; ?>/images/image1.jpg" class="coach-thum" alt="">
                     </div>
                     <div class="coach-details">
-                        <h3 class="coach-name">Milan Bhanuka</h3>
+                        <h3 class="coach-name"><?php echo $coach->name;?></h3>
                     </div>
                 </div>
-
-                <div class="coach-card">
-                    <div class="coach-img">
-                        <img src="<?php echo URLROOT; ?>/images/image2.jpg" class="coach-thum" alt="">
-                    </div>
-                    <div class="coach-details">
-                        <h3 class="coach-name">Milan Bhanuka</h3>
-                    </div>
-                </div>
-
-                <div class="coach-card">
-                    <div class="coach-img">
-                        <img src="<?php echo URLROOT; ?>/images/image1.jpg" class="coach-thum" alt="">
-                    </div>
-                    <div class="coach-details">
-                        <h3 class="coach-name">Milan Bhanuka</h3>
-                    </div>
-                </div>
-
-                <div class="coach-card">
-                    <div class="coach-img">
-                        <img src="<?php echo URLROOT; ?>/images/image1.jpg" class="coach-thum" alt="">
-                    </div>
-                    <div class="coach-details">
-                        <h3 class="coach-name">Milan Bhanuka</h3>
-                    </div>
-                </div>
-
-                <div class="coach-card">
-                    <div class="coach-img">
-                        <img src="<?php echo URLROOT; ?>/images/image1.jpg" class="coach-thum" alt="">
-                    </div>
-                    <div class="coach-details">
-                        <h3 class="coach-name">Milan Bhanuka</h3>
-                    </div>
-                </div>
-
-                <div class="coach-card">
-                    <div class="coach-img">
-                        <img src="<?php echo URLROOT; ?>/images/image1.jpg" class="coach-thum" alt="">
-                    </div>
-                    <div class="coach-details">
-                        <h3 class="coach-name">Milan Bhanuka</h3>
-                    </div>
-                </div>
-
-                <div class="coach-card">
-                    <div class="coach-img">
-                        <img src="<?php echo URLROOT; ?>/images/image1.jpg" class="coach-thum" alt="">
-                    </div>
-                    <div class="coach-details">
-                        <h3 class="coach-name">Milan Bhanuka</h3>
-                    </div>
-                </div>
-
-                <div class="coach-card">
-                    <div class="coach-img">
-                        <img src="<?php echo URLROOT; ?>/images/image1.jpg" class="coach-thum" alt="">
-                    </div>
-                    <div class="coach-details">
-                        <h3 class="coach-name">Milan Bhanuka</h3>
-                    </div>
-                </div>
-
-                <div class="coach-card">
-                    <div class="coach-img">
-                        <img src="<?php echo URLROOT; ?>/images/image1.jpg" class="coach-thum" alt="">
-                    </div>
-                    <div class="coach-details">
-                        <h3 class="coach-name">Milan Bhanuka</h3>
-                    </div>
-                </div>
-
-                <div class="coach-card">
-                    <div class="coach-img">
-                        <img src="<?php echo URLROOT; ?>/images/image1.jpg" class="coach-thum" alt="">
-                    </div>
-                    <div class="coach-details">
-                        <h3 class="coach-name">Milan Bhanuka</h3>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </section>
 

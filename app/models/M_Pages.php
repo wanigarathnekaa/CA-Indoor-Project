@@ -65,12 +65,12 @@ class M_Pages
         return $this->db->rowCount();
     }
 
-    public function getAdvertisement()
-    {
-        $this->db->query('SELECT * FROM advert');
+    // public function getAdvertisement()
+    // {
+    //     $this->db->query('SELECT * FROM advert');
 
-        return $this->db->resultSet();
-    }
+    //     return $this->db->resultSet();
+    // }
 
 
 }

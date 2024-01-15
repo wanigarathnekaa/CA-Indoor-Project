@@ -5,6 +5,8 @@
             $this->advertiseModel = $this->model('M_Advertisement');
         }
 
+
+        // add advertisement
         public function add_Advertisement(){
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 //form is submitting
@@ -90,6 +92,9 @@
             //Load the view
             $this->view('Pages/Advertisements/advertisement', $data);
         }
+
+
+        
 
         
     }
