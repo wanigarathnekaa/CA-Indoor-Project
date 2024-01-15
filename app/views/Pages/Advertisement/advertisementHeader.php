@@ -19,12 +19,9 @@
     <div class="wrapper">
  
       <div>
-      <h1>Advertisement</h1> 
+        <h1>Advertisement</h1> 
 
-      <?php if ($role == "User") { ?>
-      <a   class="btn2" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/advertisement">
-              ADD +                  
-
-              </a>     
+        <?php if ($role != "User") { ?>
+        <a   class="btn2" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/advertisement">ADD +</a>     
               <?php } ?>
-            </div>
+      </div>

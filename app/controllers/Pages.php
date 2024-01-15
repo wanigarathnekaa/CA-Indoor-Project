@@ -96,14 +96,22 @@ class Pages extends Controller
         $bookings = $this->pagesModel->getBookings();
         $coaches = $this->pagesModel->getCoachCount();
         $users = $this->pagesModel->getUserCount();
+        $coach = $this->pagesModel->getCoaches();
+        $advertisement = $this->pagesModel->getAdvertisement();
+
         $data = [
             'CoachCount' => $coaches,
             'UserCount' => $users,
-        ];
+            'coach'=>$coach,
+        ];      
+        $res = [];
+        foreach ($data['coach'] as $user) {
+            $res[] = $this->pagesModel->findUser($user->email);
+        }
 
-        $advertisement = $this->pagesModel->getAdvertisement();
         $data1 = [
             'adverts' => $advertisement,
+            'userCoach' => $res,
         ];
 
         if ($name == "user") {
