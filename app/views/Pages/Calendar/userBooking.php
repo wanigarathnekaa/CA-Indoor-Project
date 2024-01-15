@@ -203,8 +203,14 @@ function time_slot($duration, $cleanup, $start, $end)
                     </table>
                 </div>
 
+                <div>
+                    <h2>Total Payment : <span class="payment"></span></h2>
+                    <h4>To Confirm Your Booking : <span class="con_payment"></span></h4>
+                </div>
+
                 <div class="btns">
-                    <button id="makePaymentBtn" type="button">Make Payment</button>
+                    <button id="makePaymentBtn" type="button">Full Payment</button>
+                    <button id="makePaymentBtn" type="button">Confirmation Payment</button>
                     <button id="cancelBtn" type="button">Cancel</button>
                 </div>
             </div>

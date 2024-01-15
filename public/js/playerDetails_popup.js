@@ -28,9 +28,12 @@ function closePopup() {
 
 
 // delete popup
-function openDeletePopup(){
+function openDeletePopup(player){
       deletePopup.classList.add("open-deletepopup");
       popupcontainer.classList.add("open-popupcontainer");
+
+      var input = document.getElementById("hid_input");
+      input.value = player.email;
 }
 
 function closeDeletePopup(){
