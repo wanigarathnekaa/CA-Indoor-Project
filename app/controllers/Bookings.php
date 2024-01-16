@@ -94,6 +94,17 @@ class Bookings extends Controller
         $this->view('Pages/Booking/bookingRegistration', $data);
     }
 
+    public function delete()
+    {
+        // var_dump($_POST);
+        if($this->bookingModel->deleteBooking($_POST["submit"])) {  
+            redirect("Pages/reservationTable/user");
+        }else{
+            die("Something Went Wrong");
+        }
+        
+    }
+
 }
 
 ?>

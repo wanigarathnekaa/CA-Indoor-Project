@@ -25,7 +25,7 @@
       require APPROOT . '/views/Components/Side Bars/sideBar.php';
       ?>
 
-      <!-- <?php print_r($data);?> -->
+      <!-- <?php print_r($data); ?> -->
 
       <!-- Content -->
       <section class="home">
@@ -33,10 +33,9 @@
             <!-- Table Topic -->
             <div class="table-topic">
                   <div class="topic-name">
-                        <h1>Reservations : 25
-                        </h1>
+                        <h1>Reservations : <?php echo count($data);?></h1>
                   </div>
-                  
+
                   <!-- <div class="add-btn">
                         <a href="#"><i class="fa-solid fa-calendar-plus icon"></i></i></a>
                   </div> -->
@@ -60,7 +59,7 @@
                               <option value="netA">Net A</option>
                               <option value="netB">Net B</option>
                               <option value="netC">Net C</option>
-                        </select>   
+                        </select>
                   </div>
                   <div class="sort">
                         <label>Date :</label>
@@ -95,7 +94,7 @@
 
                         <!-- table body -->
                         <tbody>
-                        <?php foreach ($data as $reservation): ?>
+                              <?php foreach ($data as $reservation): ?>
                                     <tr>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
                                                 <?php echo $reservation->reservation_Id; ?>
@@ -119,10 +118,12 @@
                                                 <?php echo $reservation->net; ?>
                                           </td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
-                                                <?php echo "paid";?>
+                                                <?php echo "paid"; ?>
                                           </td>
                                           <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
-                                          <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($player)); ?>)"><i class="fa-solid fa-user-slash delete icon"></i>
+                                          <td
+                                                onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
+                                                <i class="fa-solid fa-user-slash delete icon"></i>
                                           </td>
                                     </tr>
                                     <?php
@@ -169,7 +170,7 @@
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Status :</b> <span class = "r_payment">Paid</span></h2>
+                                    <h2><b>Status :</b> <span class="r_payment">Paid</span></h2>
                               </div>
                         </div>
 
@@ -181,16 +182,18 @@
 
 
 
-                  
+
                   <!-- delete message -->
                   <div class="deletepopup" id=deletepopup>
                         <span class="close" onclick="closeDeletePopup()"><i class="fa-solid fa-xmark"></i></span>
                         <h2>confirm delete</h2>
-
-                        <div class="btns">
-                              <button type="button">Delete</button>
-                              <button type="button" onclick="closeDeletePopup()">Cancel</button>
-                        </div>
+                        <form action="<?php echo URLROOT; ?>/Bookings/delete" method="POST">
+                              <div class="btns">
+                                    <button type="submit">Delete</button>
+                                    <button type="button" onclick="closeDeletePopup()">Cancel</button>
+                              </div>
+                              <input hidden name='submit' id="hid_input">
+                        </form>
                   </div>
             </div>
 

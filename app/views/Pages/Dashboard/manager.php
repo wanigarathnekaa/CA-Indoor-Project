@@ -60,7 +60,7 @@
 
                   <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/reservationTable/user">
                         <div>
-                              <div class="numbers">26</div>
+                              <div class="numbers"><?php echo $data1["Reserve_Count"]?></div>
                               <div class="cardName">Reservations</div>
                         </div>
 
