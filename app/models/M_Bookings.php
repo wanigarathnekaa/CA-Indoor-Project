@@ -44,6 +44,18 @@ class M_Bookings
 
     }
 
+    public function deleteBooking($reservation__Id){
+        $this->db->query('DELETE FROM reservation WHERE reservation_Id=:reservation_Id');
+        $this->db->bind(':reservation_Id', $reservation__Id);
+
+        if($this->db->execute()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 
 }
 ?>

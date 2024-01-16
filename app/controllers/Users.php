@@ -316,9 +316,8 @@ class Users extends Controller
 
     public function delete()
     {
-        var_dump($_POST);
+        // var_dump($_POST);
         if($this->userModel->deleteUser($_POST["submit"])) {  
-            echo "deleted";
             redirect("Users/register");
         }else{
             die("Something Went Wrong");
