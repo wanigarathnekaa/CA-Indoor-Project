@@ -25,6 +25,8 @@
       require APPROOT . '/views/Components/Side Bars/sideBar.php';
       ?>
 
+      <!-- <?php print_r($data);?> -->
+
       <!-- Content -->
       <section class="home">
 
@@ -80,6 +82,8 @@
                               <tr>
                                     <th>Reservation ID</th>
                                     <th>Customer Name</th>
+                                    <th>email</th>
+                                    <th>Contact Number</th>
                                     <th>Date</th>
                                     <th>Time</th>
                                     <th>Net</th>
@@ -91,26 +95,38 @@
 
                         <!-- table body -->
                         <tbody>
-                              <tr>
-                                    <td onclick="openPopup()">1</td>
-                                    <td onclick="openPopup()">John Doe</td>
-                                    <td onclick="openPopup()">2021/10/10</td>
-                                    <td onclick="openPopup()">10.00 AM</td>
-                                    <td onclick="openPopup()">Net A</td>
-                                    <td onclick="openPopup()"><span class="status paid">Paid</span></td>
-                                    <td><a href="#"><i class="fa-solid fa-pen-to-square edit icon"></i></a></td>
-                                    <td onclick="openDeletePopup()"><i class="fa-solid fa-trash-can delete icon"></i></td>
-                              </tr>
-
-                              <tr>
-                                    <td onclick="openPopup()">2</td>
-                                    <td onclick="openPopup()">Milan</td>
-                                    <td onclick="openPopup()">2021/10/10</td>
-                                    <td onclick="openPopup()">10.00 AM</td>
-                                    <td onclick="openPopup()">Net A</td>
-                                    <td onclick="openPopup()"><span class="status paid">Paid</span></td>
-                                    <td><a href="#"><i class="fa-solid fa-pen-to-square edit icon"></i></a></td>
-                                    <td onclick="openDeletePopup()"><i class="fa-solid fa-trash-can delete icon"></i></td>
+                        <?php foreach ($data as $reservation): ?>
+                                    <tr>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
+                                                <?php echo $reservation->reservation_Id; ?>
+                                          </td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
+                                                <?php echo $reservation->name; ?>
+                                          </td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
+                                                <?php echo $reservation->email; ?>
+                                          </td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
+                                                <?php echo $reservation->phoneNumber; ?>
+                                          </td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
+                                                <?php echo $reservation->date; ?>
+                                          </td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
+                                                <?php echo $reservation->timeSlot; ?>
+                                          </td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
+                                                <?php echo $reservation->net; ?>
+                                          </td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
+                                                <?php echo "paid";?>
+                                          </td>
+                                          <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
+                                          <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($player)); ?>)"><i class="fa-solid fa-user-slash delete icon"></i>
+                                          </td>
+                                    </tr>
+                                    <?php
+                              endforeach; ?>
                         </tbody>
                   </table>
             </div>
@@ -125,23 +141,31 @@
                         <hr>
                         <div class="popupdetails">
                               <div class="popupdetail">
-                                    <h2><b>Reservation ID :</b></h2>
+                                    <h2><b>Reservation ID :</b><span class="r_id"></span></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Customer Name :</b></h2>
+                                    <h2><b>Customer Name :</b><span class="r_name"></span></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Reservation Date :</b></h2>
+                                    <h2><b>Customer Email :</b><span class="r_email"></span></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Reservation Time :</b></h2>
+                                    <h2><b>Customer Contact Number :</b><span class="r_number"></span></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Net :</b></h2>
+                                    <h2><b>Reservation Date :</b><span class="r_date"></span></h2>
+                              </div>
+
+                              <div class="popupdetail">
+                                    <h2><b>Reservation Time :</b><span class="r_time"></span></h2>
+                              </div>
+
+                              <div class="popupdetail">
+                                    <h2><b>Net :</b><span class="r_net"></span></h2>
                               </div>
 
                               <div class="popupdetail">
@@ -173,6 +197,6 @@
       </section>
 
       <!-- javascript -->
-      <script src="<?php echo URLROOT; ?>/js/coachDetails_popup.js"></script>
+      <script src="<?php echo URLROOT; ?>/js/reservationDetails_Popup.js"></script>
       <script src="<?php echo URLROOT; ?>/js/reservation_Table.js"></script>
 </body>
