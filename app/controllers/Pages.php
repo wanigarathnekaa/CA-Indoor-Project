@@ -112,6 +112,7 @@ class Pages extends Controller
             'UserCount' => $users,
             'coach'=>$coach,
             'Reserve_Count'=> count($bookings),
+            'advertCount'=> count($advertisement),
         ];      
         $res = [];
         foreach ($data['coach'] as $user) {
