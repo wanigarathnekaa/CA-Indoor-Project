@@ -49,7 +49,7 @@
 
                   <a class="card" href="#">
                         <div>
-                              <div class="numbers">284</div>
+                              <div class="numbers"><?php echo $data1["advertCount"]?></div>
                               <div class="cardName">Advertisement</div>
                         </div>
                         <div class="iconBx">
