@@ -127,7 +127,7 @@ class Pages extends Controller
         if ($name == "user") {
             $this->view('Pages/Dashboard/user', $data1);
         } else if ($name == "admin") {
-            $this->view('Pages/Dashboard/admin');
+            $this->view('Pages/Dashboard/admin',$data1,$bookings);
         } else if ($name == "cashier") {
             $this->view('Pages/Dashboard/cashier');
         } else if ($name == "coach") {

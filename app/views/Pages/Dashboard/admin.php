@@ -6,8 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="<?php echo URLROOT;?>/css/adminDashboard.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/components/charts.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/managerDashboard.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/components/charts.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 </head>
+
 
 <body>
 
@@ -23,7 +27,7 @@
 
         <!-- Cards -->
         <div class="cardBox">
-            <a class="card" href="#">
+            <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/coachTable/user">
                 <div>
                     <div class="numbers">3</div>
                     <div class="cardName">Managers</div>
@@ -32,10 +36,12 @@
                 <i class="fa-solid fa-user-tie"></i>
                 </div>
             </a>
+        
 
-            <a class="card" href=#>
+            <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/coachTable/user">
+
                 <div>
-                    <div class="numbers">15</div>
+                <div class="numbers"><?php echo isset($data1["CoachCount"]) ? $data1["CoachCount"] : 'N/A'; ?></div>
                     <div class="cardName">Coaches</div>
                 </div>
                 <div class="iconBx">
@@ -43,7 +49,7 @@
                 </div>
             </a>
 
-            <a class="card" href="#">
+            <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/playerTable/user">
                 <div>
                     <div class="numbers">80</div>
                     <div class="cardName">Players</div>
@@ -53,15 +59,16 @@
                 </div>
             </a>
 
-            <a class="card" href="#">
-                <div>
-                    <div class="numbers">284</div>
-                    <div class="cardName">Advertisement</div>
-                </div>
-                <div class="iconBx">
-                        <i class="fa-brands fa-adversal"></i>
-                </div>
-            </a>
+            <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/reservationTable/user">
+                        <div>
+                              <div class="numbers">10</div>
+                              <div class="cardName">Reservations</div>
+                        </div>
+
+                        <div class="iconBx">
+                              <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                  </a>
 
             <a class="card" href="#">
                 <div>
@@ -73,7 +80,7 @@
                 </div>
             </a>
 
-            <a class="card" href="#">
+            <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/Coach_Registration/coach">
                 <div>
                     <div class="numbers"></div>
                     <div class="cardName">Registration</div>
@@ -84,6 +91,36 @@
                 </div>
             </a>
         </div>
+         <!--Reservation Details -->
+         <div class="details">
+                  <!-- Recent Reservations -->
+                  <div class="tablediv">
+                        <?php
+                              require APPROOT . '/views/Pages/Tables/dailyReservation.php';
+                        ?>
+                  </div>
+                  
+                  <!-- Calander -->
+                  <div class="calanderdiv">
+                        <iframe src="http://localhost/C&A_Indoor_Project/Pages/Calendar/User" frameborder="0"></iframe>                        
+                  </div>
+            </div> 
+            <div class="charts">
+                  <!-- Weekly Reservations chart -->
+                  <?php
+                        require APPROOT . '/views/Pages/Charts/weeklyReservationsChart.php';
+                  ?>
+
+                  <!-- Customers Count chart -->
+                  <?php
+                        require APPROOT . '/views/Pages/Charts/customersCountChart.php';
+                  ?>
+
+                  <!-- Reservations Net chart -->
+                  <?php
+                        require APPROOT . '/views/Pages/Charts/reservationsNetChart.php';
+                  ?>
+            </div>
 
 
     </section>

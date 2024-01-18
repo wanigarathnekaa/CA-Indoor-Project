@@ -4,11 +4,14 @@ class Users extends Controller
     private $userModel;
     private $userManagerModel;
     private $userCoachModel;
+    private $userAdminModel;
     public function __construct()
     {
         $this->userModel = $this->model('M_Users');
         $this->userManagerModel = $this->model('M_Manager');
         $this->userCoachModel = $this->model('M_Coach');
+        $this->userAdminModel = $this->model('M_Admin');
+
 
     }
 
