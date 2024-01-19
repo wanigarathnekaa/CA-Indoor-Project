@@ -35,4 +35,4 @@ $jsObj = json_encode($array);
 
 // Output the JSON string
 echo $jsObj;
-?>
+

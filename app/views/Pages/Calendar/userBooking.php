@@ -220,7 +220,7 @@ function time_slot($duration, $cleanup, $start, $end)
         </div>
 
     </section>
-
+    <script src="https://www.payhere.lk/lib/payhere.js"></script>
     <script src="<?php echo URLROOT; ?>/js/userBooking.js"></script>
 </body>
 
