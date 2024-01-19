@@ -183,7 +183,8 @@ function makePayment() {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       // Log the response to the console
-      alert(xhttp.responseText);
+      // alert(xhttp.responseText);
+      console.log(xhttp.responseText);
       var obj = JSON.parse(xhttp.responseText);
 
       // Payment completed. It can be a successful failure.
