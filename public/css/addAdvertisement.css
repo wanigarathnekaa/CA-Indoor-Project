@@ -205,6 +205,12 @@ form .input-box span.details{
     /* position: relative; */
 }
 
+
+.form-invalid{
+  color: rgb(172,5,5);
+    font-size: 0.85em;
+}
+
  @media(max-width: 584px){
  .container{
   margin-left: 10px;

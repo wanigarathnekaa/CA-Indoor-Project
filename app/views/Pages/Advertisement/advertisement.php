@@ -23,7 +23,7 @@
         <div class="topicdiv">
             <h1>Advertisement</h1>
             <?php if ($role = "User") { ?>
-                <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/advertisement"><i class="fa-solid fa-file-circle-plus icon"></i></a>
+                <a class="btn" href="<?php echo URLROOT; ?>/Advertisement/add_Advertisement"><i class="fa-solid fa-file-circle-plus icon"></i></a>
             <?php } ?>
         </div>
 
@@ -43,7 +43,7 @@
                                 <?php echo $advert->name ?>
                             </h4>
                             <div class="viewmore">
-                                <a class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/advertisement">View more</a>
+                                <a class="btn1" href="<?php echo URLROOT; ?>/Advertisement/AdvertisementDetails/advertisement">View more</a>
                             </div>
                         </div>
                     </div>

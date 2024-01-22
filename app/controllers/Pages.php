@@ -235,15 +235,15 @@ class Pages extends Controller
         $this->view('Pages/UserProfiles/editProfile', $data);
     }
 
-    public function Advertisements($name)
-    {
-        $advertisement = $this->advertiseModel->getAdvertisement();
-        $data = [
-            'adverts' => $advertisement,
-        ];
+    // public function Advertisements($name)
+    // {
+    //     $advertisement = $this->advertiseModel->getAdvertisement();
+    //     $data = [
+    //         'adverts' => $advertisement,
+    //     ];
 
-        $this->view('Pages/Advertisement/advertisement', $data);
-    }
+    //     $this->view('Pages/Advertisement/advertisement', $data);
+    // }
 
     // public function Advertisement_Body($name)
     // {
@@ -255,13 +255,13 @@ class Pages extends Controller
     //     $this->view('Pages/Advertisement/advertisementBody', $data);
     // }
 
-    public function AdvertisementDetails($name)
-    {
-        // $user = $this->pagesModel->findUser($_SESSION['user_email']);
-        // print_r($user);
+    // public function AdvertisementDetails($name)
+    // {
+    //     // $user = $this->pagesModel->findUser($_SESSION['user_email']);
+    //     // print_r($user);
 
-        $this->view('Pages/Advertisement/advertisementDetails');
-    }
+    //     $this->view('Pages/Advertisement/advertisementDetails');
+    // }
 
     public function Coach($name)
     {
@@ -290,21 +290,21 @@ class Pages extends Controller
         $this->view('Pages/Coach/coachCard', $res, $coaches);
     }
 
-    public function Coach_Advertisements($name)
-    {
-        // $user = $this->pagesModel->findUser($_SESSION['user_email']);
-        // print_r($user);
+    // public function Coach_Advertisements($name)
+    // {
+    //     // $user = $this->pagesModel->findUser($_SESSION['user_email']);
+    //     // print_r($user);
 
-        $this->view('Pages/Advertisement/coachAdvertisements');
-    }
+    //     $this->view('Pages/Advertisement/coachAdvertisements');
+    // }
 
-    public function Add_Advertisements($name)
-    {
-        // $user = $this->pagesModel->findUser($_SESSION['user_email']);
-        // print_r($user);
+    // public function Add_Advertisements($name)
+    // {
+    //     // $user = $this->pagesModel->findUser($_SESSION['user_email']);
+    //     // print_r($user);
 
-        $this->view('Pages/Advertisement/addAdvertisement');
-    }
+    //     $this->view('Pages/Advertisement/addAdvertisement');
+    // }
 
     public function Coach_Registration($name)
     {
