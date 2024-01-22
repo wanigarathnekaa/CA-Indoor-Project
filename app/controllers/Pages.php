@@ -37,7 +37,9 @@ class Pages extends Controller
 
     public function Payment($name)
     {
+        // echo $_SESSION['user_email'];
         $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        // print_r($user);
         $this->view('Pages/Booking/payGateway', $user);
     }
 
