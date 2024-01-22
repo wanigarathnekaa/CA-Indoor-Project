@@ -69,23 +69,28 @@
               <div class="user-details">
                 <div class="input-box">
                   <span class="details">Coach Name</span>
-                  <input type="text" name="name" placeholder="Enter your name" required>
+                  <input type="text" name="name" placeholder="Enter your name">
+                  <span class="form-invalid"><?php echo $data['name_err']; ?></span>
                 </div>
                 <div class="input-box">
                   <span class="details">Advertisement Title</span>
-                  <input type="text" name="title" placeholder="Title" required>
+                  <input type="text" name="title" placeholder="Title">
+                  <span class="form-invalid"><?php echo $data['title_err']; ?></span>
                 </div>   
                 <div class="input-box">
                   <span class="details">Date</span> 
-                  <input type="date" name="date" placeholder="Date" required>
+                  <input type="date" name="date" placeholder="Date" >
+                  <span class="form-invalid"><?php echo $data['date_err']; ?></span>
                 </div>
                 <div class="input-box " id="content">
                   <span class="details">Content</span>
                   <input type="text" name="content" placeholder="Description">
+                  <span class="form-invalid"><?php echo $data['content_err']; ?></span>
                 </div>
                 <div class="textbox">
                   <label for="img">Post:</label><br>
-                  <input type="file" name="file" required>
+                  <input type="file" name="file">
+                  <span class="form-invalid"><?php echo $data['filename_err']; ?></span>
                 </div>
               </div>
         

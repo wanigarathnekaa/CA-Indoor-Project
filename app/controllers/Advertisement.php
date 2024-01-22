@@ -5,16 +5,23 @@
             $this->advertiseModel = $this->model('M_Advertisement');
         }
 
+        //view advertisement
+        public function index(){
+            $advertisement = $this->advertiseModel->getAdvertisement();
+            $data = [
+                'adverts' => $advertisement
+            ];
+            $this->view('Pages/Advertisement/advertisement', $data);
+        }
 
-        // add advertisement
+
+        // create advertisement
         public function add_Advertisement(){
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 //form is submitting
 
                 //Valid input
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-
 
                 //Input data
                 $data = [
@@ -39,11 +46,21 @@
                 $data['filename'] = $newfilename;
 
                 //validate name
+                if(empty($data['name'])){
+                    $data['name_err'] = "Please enter a name";
+                }
+
+                //validate title
                 if(empty($data['title'])){
                     $data['title_err'] = "Please enter a title";
                 }
 
-                //validate user_name
+                //validate date
+                if(empty($data['date'])){
+                    $data['date_err'] = "Please enter the date";
+                }
+
+                //validate content
                 if(empty($data['content'])){
                     $data['content_err'] = "Please enter the Description";
                 }
@@ -58,7 +75,8 @@
                 //If validation is completed and no error, then register the user
                 if(empty($data['title_err']) && empty($data['content_err'])) {
                     if($this->advertiseModel->addAdvertisement($data)){
-                        $this->view('Pages/Advertisement/advertisement');
+                        // $this->view('Pages/Advertisement/advertisement');
+                        redirect('Advertisement/index');
                     }
                     else{
                         die('Something Went wrong');
@@ -66,7 +84,7 @@
                 }
                 else{
                     //Load the view
-                    $this->view('Pages/Advertisements/advertisement', $data);
+                    $this->view('Pages/Advertisement/addAdvertisement', $data);
                 }
             }
             else{
@@ -90,8 +108,22 @@
             }
 
             //Load the view
-            $this->view('Pages/Advertisements/advertisement', $data);
+            $this->view('Pages/Advertisement/addAdvertisement', $data);
         }
+
+
+        //view advertisement details
+        public function AdvertisementDetails(){
+            $advertisement = $this->advertiseModel->getAdvertisement();
+            $data = [
+                'adverts' => $advertisement
+            ];
+            $this->view('Pages/Advertisement/advertisementDetails', $data);
+        }
+
+       
+
+        
 
 
         
