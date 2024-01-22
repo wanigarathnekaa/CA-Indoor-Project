@@ -31,3 +31,4 @@ function closePopup() {
       popup.classList.remove("open-popup");
       popupcontainer.classList.remove("open-popupcontainer");
 }
+
