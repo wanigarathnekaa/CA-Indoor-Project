@@ -112,14 +112,14 @@
         }
 
 
-        //view advertisement details
-        public function AdvertisementDetails(){
-            $advertisement = $this->advertiseModel->getAdvertisement();
-            $data = [
-                'adverts' => $advertisement
-            ];
-            $this->view('Pages/Advertisement/advertisementDetails', $data);
-        }
+        // //view advertisement details
+        // public function AdvertisementDetails(){
+        //     $advertisement = $this->advertiseModel->getAdvertisement();
+        //     $data = [
+        //         'adverts' => $advertisement
+        //     ];
+        //     $this->view('Pages/Advertisement/advertisementDetails', $data);
+        // }
 
        
 
