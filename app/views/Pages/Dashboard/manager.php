@@ -27,7 +27,7 @@
 
             <!-- Cards -->
             <div class="cardBox">
-                  <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/coachTable/user">
+                  <a class="card" href="C&A_Indoor_Project/Pages/coachTable/user">
                         <div class="infor">
                               <div class="numbers"><?php echo $data1["CoachCount"]?></div>
                               <div class="cardName">Coaches</div>
@@ -37,7 +37,7 @@
                         </div>
                   </a>
 
-                  <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/playerTable/user">
+                  <a class="card" href="C&A_Indoor_Project/Pages/playerTable/user">
                         <div>
                               <div class="numbers"><?php echo $data1["UserCount"]?></div>
                               <div class="cardName">Players</div>
@@ -47,7 +47,7 @@
                         </div>
                   </a>
 
-                  <a class="card" href="#">
+                  <a class="card" href="C&A_Indoor_Project/Advertisement">
                         <div>
                               <div class="numbers"><?php echo $data1["advertCount"]?></div>
                               <div class="cardName">Advertisement</div>
@@ -58,7 +58,7 @@
                         </div>
                   </a>
 
-                  <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/reservationTable/user">
+                  <a class="card" href="C&A_Indoor_Project/Pages/reservationTable/user">
                         <div>
                               <div class="numbers"><?php echo $data1["Reserve_Count"]?></div>
                               <div class="cardName">Reservations</div>

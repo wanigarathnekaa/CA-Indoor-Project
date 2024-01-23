@@ -98,7 +98,7 @@
                 
                 <!-- Calander -->
                 <div class="calanderdiv">
-                    <iframe src="http://localhost/C&A_Indoor_Project/Pages/Calendar/User" frameborder="0"></iframe>                        
+                    <iframe src="http://localhost/C&A_Indoor_Project/Pages/userCalendar/user" frameborder="0"></iframe>                        
                 </div>
             </div>
         </div>
@@ -111,7 +111,7 @@
         <section class="advertisement">
             <div class="tagrow">
                 <div class="tag"><h2>Advertisement</h2></div>
-                <div><a href="C&A_Indoor_Project/Pages/Advertisements/advertisement" class="btn">View All</a></div>  
+                <div><a href="C&A_Indoor_Project/Advertisement" class="btn">View All</a></div>  
             </div>
             <button class="adspre-btn"><img src="<?php echo URLROOT; ?>/images/arrow.png" alt=""></button>
             <button class="adsnxt-btn"><img src="<?php echo URLROOT; ?>/images/arrow.png" alt=""></button>
