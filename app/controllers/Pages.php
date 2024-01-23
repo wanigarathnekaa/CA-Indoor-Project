@@ -24,11 +24,20 @@ class Pages extends Controller
         $this->view('Pages/AboutUs/aboutUs');
     }
 
+
+    //booking calender for company
     public function Calendar($name)
     {
         $this->view('Pages/Calendar/calender');
     }
 
+    //booking calender for users(Players, Coaches)
+    public function userCalendar($name)
+    {
+        $this->view('Pages/Calendar/userCalander');
+    }
+
+    //booking time slots for company
     public function Booking($name)
     {
         $bookings = $this->pagesModel->getBookings();
@@ -43,6 +52,7 @@ class Pages extends Controller
         $this->view('Pages/Booking/payGateway', $user);
     }
 
+    //booking time slots for users(Players, Coaches)
     public function User_Booking($name)
     {
         $bookings = $this->pagesModel->getBookings();
