@@ -265,13 +265,14 @@ class Pages extends Controller
     //     $this->view('Pages/Advertisement/advertisementBody', $data);
     // }
 
-    // public function AdvertisementDetails($name)
-    // {
-    //     // $user = $this->pagesModel->findUser($_SESSION['user_email']);
-    //     // print_r($user);
-
-    //     $this->view('Pages/Advertisement/advertisementDetails');
-    // }
+    //view advertisement details
+        public function AdvertisementDetails(){
+            $advertisement = $this->advertiseModel->getAdvertisement();
+            $data = [
+                'adverts' => $advertisement
+            ];
+            $this->view('Pages/Advertisement/advertisementDetails', $data);
+        }
 
     public function Coach($name)
     {
