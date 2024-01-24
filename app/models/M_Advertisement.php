@@ -7,8 +7,9 @@
 
         // add advertisement.............................................
         public function addAdvertisement($data){
-            $this->db->query('INSERT INTO advert (title, date, content, name, img) VALUES (:title, :date, :content, :name, :img)');
+            $this->db->query('INSERT INTO advert (title, email, date, content, name, img) VALUES (:title, :email, :date, :content, :name, :img)');
             $this->db->bind(':title', $data['title']);
+            $this->db->bind(':email', $data['email']);
             $this->db->bind(':date', $data['date']);
             $this->db->bind(':content', $data['content']);
             $this->db->bind(':name', $data['name']);

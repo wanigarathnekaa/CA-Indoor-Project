@@ -49,6 +49,11 @@
                   <input type="file" name="file">
                   <span class="form-invalid"><?php echo $data['filename_err']; ?></span>
                 </div>
+                <div class="input-box">
+                  <!-- <span class="details"></span> -->
+                  <input type="text" hidden name="email" value="<?php echo $data['email']; ?>">
+                  <!-- <span class="form-invalid"><?php echo $data['email_err']; ?></span> -->
+                </div> 
               </div>
         
               <div class="button">
