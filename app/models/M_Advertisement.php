@@ -23,20 +23,13 @@
             
         }
 
-        // get advertisement.............................................
-        public function getAdvertisement(){
-            $this->db->query('SELECT * FROM advert');
-            $result = $this->db->resultSet();
-            return $result;
-        }
-
         // get advertisement by id.............................................
-        public function getAdvertisementById($id){
-            $this->db->query('SELECT * FROM advert WHERE id = :id');
-            $this->db->bind(':id', $id);
-            $result = $this->db->single();
-            return $result;
-        }
+        // public function getAdvertisementById($id){
+        //     $this->db->query('SELECT * FROM advert WHERE id = :id');
+        //     $this->db->bind(':id', $id);
+        //     $result = $this->db->single();
+        //     return $result;
+        // }
 
         // update advertisement.............................................
         public function updateAdvertisement($data){
