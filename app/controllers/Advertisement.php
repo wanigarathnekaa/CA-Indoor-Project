@@ -19,6 +19,7 @@ class Advertisement extends Controller
             //Input data
             $data = [
                 'title' => trim($_POST['title']),
+                'email' => trim($_POST['email']),
                 'name' => trim($_POST['name']),
                 'date' => trim($_POST['date']),
                 'content' => trim($_POST['content']),
@@ -27,6 +28,7 @@ class Advertisement extends Controller
 
 
                 'title_err' => "",
+                'email_err' => "",
                 'name_err' => "",
                 'date_err' => "",
                 'content_err' => "",
@@ -68,8 +70,8 @@ class Advertisement extends Controller
             //If validation is completed and no error, then register the user
             if (empty($data['title_err']) && empty($data['content_err'])) {
                 if ($this->advertiseModel->addAdvertisement($data)) {
-                    // $this->view('Pages/Advertisement/advertisement');
-                    redirect('Advertisement/index');
+                    $this->view('Pages/View_Advertisement/user');
+                    //redirect('Pages/Advertisement/advertisement');
                 } else {
                     die('Something Went wrong');
                 }
@@ -81,6 +83,7 @@ class Advertisement extends Controller
             //initial form
             $data = [
                 'title' => "",
+                'email' => "",
                 'name' => "",
                 'date' => "",
                 'content' => "",
@@ -89,6 +92,7 @@ class Advertisement extends Controller
 
 
                 'title_err' => "",
+                'email_err' => "",
                 'name_err' => "",
                 'date_err' => "",
                 'content_err' => "",

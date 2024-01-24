@@ -314,7 +314,14 @@ class Pages extends Controller
 
     public function Add_Advertisements($name)
     {
+        $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        if(empty($user)){
+            $user->name = "Manager";
+            $user->email = $_SESSION['user_email'];
+        } 
         $data = [
+                'uname' => $user->name,
+                'email' => $user->email,
                 'title' => "",
                 'name' => "",
                 'date' => "",
