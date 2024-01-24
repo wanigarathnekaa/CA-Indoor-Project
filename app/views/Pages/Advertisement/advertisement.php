@@ -43,7 +43,7 @@
                                 <?php echo $advert->name ?>
                             </h4>
                             <div class="viewmore">
-                                <a class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/coach">View more</a>
+                                <a class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/coach?advert_id=<?php echo $advert->advertisement_id; ?>">View more</a>
                             </div>
                         </div>
                     </div>

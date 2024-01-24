@@ -31,7 +31,7 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="C&A_Indoor_Project/Advertisement">
+                        <a href="C&A_Indoor_Project/Pages/View_Advertisement/user">
                             <i class="fa-brands fa-adversal icon"></i>
                             <span class="text nav-text">Advertisement</span>
                         </a>
@@ -140,7 +140,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-link">
-                                    <a href="C&A_Indoor_Project/Advertisement">
+                                    <a href="C&A_Indoor_Project/Pages/View_Advertisement/user">
 
                                         <i class="fa-brands fa-adversal icon"></i>
                                         <span class="text nav-text">Advertisement</span>
@@ -172,7 +172,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-link">
-                                        <a href="C&A_Indoor_Project/Advertisement">
+                                        <a href="C&A_Indoor_Project/Pages/View_Advertisement/user">
                                             <i class="fa-brands fa-adversal icon"></i>
                                             <span class="text nav-text">Advertisement</span>
                                         </a>
