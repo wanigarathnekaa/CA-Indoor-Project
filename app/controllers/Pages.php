@@ -270,9 +270,15 @@ class Pages extends Controller
 
     public function AdvertisementDetails()
     {
+        $flag = 0;
         $advertisement = $this->pagesModel->getAdvertisement();
+        $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        if(empty($user)){
+            $flag = 1;
+        } 
         $data = [
-            'adverts' => $advertisement
+            'adverts' => $advertisement,
+            'flag' => $flag,
         ];
         $this->view('Pages/Advertisement/advertisementDetails', $data);
     }
