@@ -111,7 +111,7 @@
         <section class="advertisement">
             <div class="tagrow">
                 <div class="tag"><h2>Advertisement</h2></div>
-                <div><a href="C&A_Indoor_Project/Advertisement" class="btn">View All</a></div>  
+                <div><a href="http://localhost/C&A_Indoor_Project/Pages/View_Advertisement/coach" class="btn">View All</a></div>  
             </div>
             <button class="adspre-btn"><img src="<?php echo URLROOT; ?>/images/arrow.png" alt=""></button>
             <button class="adsnxt-btn"><img src="<?php echo URLROOT; ?>/images/arrow.png" alt=""></button>

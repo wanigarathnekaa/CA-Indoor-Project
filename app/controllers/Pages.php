@@ -74,7 +74,8 @@ class Pages extends Controller
     }
 
     // coach table
-    public function coachTable($name){
+    public function coachTable($name)
+    {
         $coaches = $this->pagesModel->getCoaches();
         $coach = $this->pagesModel->getCoachCount();
         // $users = $this->pagesModel->getUserCount();
@@ -91,7 +92,8 @@ class Pages extends Controller
     }
 
     // Player table
-    public function playerTable($name){
+    public function playerTable($name)
+    {
         $players = $this->pagesModel->getUsers();
         $coaches = $this->pagesModel->getCoaches();
         $users = $this->pagesModel->getUserCount();
@@ -99,12 +101,13 @@ class Pages extends Controller
             'Coaches' => $coaches,
             'UserCount' => $users,
         ];
-        $this->view('Pages/Tables/players_Table', $players,$data);
+        $this->view('Pages/Tables/players_Table', $players, $data);
     }
 
 
     //reservation table
-    public function reservationTable($name){
+    public function reservationTable($name)
+    {
         $bookings = $this->pagesModel->getBookings();
         $this->view('Pages/Tables/reservations_Table', $bookings);
     }
@@ -117,15 +120,15 @@ class Pages extends Controller
         $coaches = $this->pagesModel->getCoachCount();
         $users = $this->pagesModel->getUserCount();
         $coach = $this->pagesModel->getCoaches();
-        $advertisement = $this->advertiseModel->getAdvertisement();
+        $advertisement = $this->pagesModel->getAdvertisement();
 
         $data = [
             'CoachCount' => $coaches,
             'UserCount' => $users,
-            'coach'=>$coach,
-            'Reserve_Count'=> count($bookings),
-            'advertCount'=> count($advertisement),
-        ];      
+            'coach' => $coach,
+            'Reserve_Count' => count($bookings),
+            'advertCount' => count($advertisement),
+        ];
         $res = [];
         foreach ($data['coach'] as $user) {
             $res[] = $this->pagesModel->findUser($user->email);
@@ -139,11 +142,11 @@ class Pages extends Controller
         if ($name == "user") {
             $this->view('Pages/Dashboard/user', $data1);
         } else if ($name == "admin") {
-            $this->view('Pages/Dashboard/admin',$data1,$bookings);
+            $this->view('Pages/Dashboard/admin', $data1, $bookings);
         } else if ($name == "cashier") {
             $this->view('Pages/Dashboard/cashier');
         } else if ($name == "coach") {
-            $this->view('Pages/Dashboard/coach',$data1);
+            $this->view('Pages/Dashboard/coach', $data1);
         } else if ($name == "manager") {
             $this->view('Pages/Dashboard/manager', $bookings, $data);
         } else if ($name == "owner") {
@@ -200,7 +203,7 @@ class Pages extends Controller
         $coachAsCoach = $this->pagesModel->findCoach($_SESSION['user_email']);
         $coachAsUser = $this->pagesModel->findUser($_SESSION['user_email']);
         $role = "Users";
-        if($coachAsCoach){
+        if ($coachAsCoach) {
             $role = "Coach";
             $data = [
                 'name' => $coachAsUser->name,
@@ -214,7 +217,7 @@ class Pages extends Controller
                 'specialty' => $coachAsCoach->specialty,
                 'certificate' => $coachAsCoach->certificate,
                 'role' => $role,
-    
+
                 'name_err' => "",
                 'user_name_err' => "",
                 'email_err' => "",
@@ -225,7 +228,7 @@ class Pages extends Controller
                 'specialty_err' => "",
                 'certificate_err' => ""
             ];
-        }else{
+        } else {
             $data = [
                 'name' => $coachAsUser->name,
                 'user_name' => $coachAsUser->user_name,
@@ -233,7 +236,7 @@ class Pages extends Controller
                 'phoneNumber' => $coachAsUser->phoneNumber,
                 'pwd' => $coachAsUser->password,
                 'role' => $role,
-    
+
                 'name_err' => "",
                 'user_name_err' => "",
                 'email_err' => "",
@@ -245,34 +248,34 @@ class Pages extends Controller
         $this->view('Pages/UserProfiles/editProfile', $data);
     }
 
-    // public function Advertisements($name)
-    // {
-    //     $advertisement = $this->advertiseModel->getAdvertisement();
-    //     $data = [
-    //         'adverts' => $advertisement,
-    //     ];
+    // view advertisement
+    public function View_Advertisement($name)
+    {
+        $advertisement = $this->pagesModel->getAdvertisement();
+        $data = [
+            'adverts' => $advertisement
+        ];
+        $this->view('Pages/Advertisement/advertisement', $data);
+    }
 
-    //     $this->view('Pages/Advertisement/advertisement', $data);
-    // }
+    public function Advertisements($name)
+    {
+        $advertisement = $this->pagesModel->getAdvertisement();
+        $data = [
+            'adverts' => $advertisement,
+        ];
 
-    // public function Advertisement_Body($name)
-    // {
-    //     $advertisement = $this->advertiseModel->getAdvertisement();
-    //     $data = [
-    //         'adverts' => $advertisement,
-    //     ];
+        $this->view('Pages/Advertisement/advertisement', $data);
+    }
 
-    //     $this->view('Pages/Advertisement/advertisementBody', $data);
-    // }
-
-    //view advertisement details
-        public function AdvertisementDetails(){
-            $advertisement = $this->advertiseModel->getAdvertisement();
-            $data = [
-                'adverts' => $advertisement
-            ];
-            $this->view('Pages/Advertisement/advertisementDetails', $data);
-        }
+    public function AdvertisementDetails()
+    {
+        $advertisement = $this->pagesModel->getAdvertisement();
+        $data = [
+            'adverts' => $advertisement
+        ];
+        $this->view('Pages/Advertisement/advertisementDetails', $data);
+    }
 
     public function Coach($name)
     {
@@ -301,21 +304,35 @@ class Pages extends Controller
         $this->view('Pages/Coach/coachCard', $res, $coaches);
     }
 
-    // public function Coach_Advertisements($name)
-    // {
-    //     // $user = $this->pagesModel->findUser($_SESSION['user_email']);
-    //     // print_r($user);
+    public function Coach_Advertisements($name)
+    {
+        // $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        // print_r($user);
 
-    //     $this->view('Pages/Advertisement/coachAdvertisements');
-    // }
+        $this->view('Pages/Advertisement/coachAdvertisements');
+    }
 
-    // public function Add_Advertisements($name)
-    // {
-    //     // $user = $this->pagesModel->findUser($_SESSION['user_email']);
-    //     // print_r($user);
+    public function Add_Advertisements($name)
+    {
+        $data = [
+                'title' => "",
+                'name' => "",
+                'date' => "",
+                'content' => "",
+                'filename' => "",
+                'filetmp' => "",
 
-    //     $this->view('Pages/Advertisement/addAdvertisement');
-    // }
+
+                'title_err' => "",
+                'name_err' => "",
+                'date_err' => "",
+                'content_err' => "",
+                'filename_err' => "",
+                'filetmp_err' => "",
+            ];
+
+        $this->view('Pages/Advertisement/addAdvertisement', $data);
+    }
 
     public function Coach_Registration($name)
     {
@@ -373,7 +390,7 @@ class Pages extends Controller
         $this->view('Pages/Manager/managerDeleteProfile', $user);
     }
 
-    
+
 }
 
 ?>
