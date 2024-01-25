@@ -12,7 +12,7 @@
 <body>
       <!-- Sidebar -->
       <?php
-        $role = "Coach";
+        $role = $data['role'];
         require APPROOT . '/views/Pages/Dashboard/header.php';
         require APPROOT . '/views/Components/Side Bars/sideBar.php';
       ?>
