@@ -70,8 +70,7 @@ class Advertisement extends Controller
             //If validation is completed and no error, then register the user
             if (empty($data['title_err']) && empty($data['content_err'])) {
                 if ($this->advertiseModel->addAdvertisement($data)) {
-                    $this->view('Pages/View_Advertisement/user');
-                    //redirect('Pages/Advertisement/advertisement');
+                    $this->view('Pages/Advertisement/advertisement');
                 } else {
                     die('Something Went wrong');
                 }
