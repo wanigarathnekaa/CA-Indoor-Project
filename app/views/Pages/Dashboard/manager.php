@@ -47,7 +47,7 @@
                         </div>
                   </a>
 
-                  <a class="card" href="C&A_Indoor_Project/Advertisement">
+                  <a class="card" href="C&A_Indoor_Project/Pages/View_Advertisement/manager">
                         <div>
                               <div class="numbers"><?php echo $data1["advertCount"]?></div>
                               <div class="cardName">Advertisement</div>
