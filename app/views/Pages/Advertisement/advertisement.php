@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="utf-8">
     <title>advertisement slider</title>
@@ -8,22 +9,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
 
-  <!-- side bar -->
-  <?php
-      $role = "User";
-      require APPROOT . '/views/Pages/Dashboard/header.php';
-      require APPROOT . '/views/Components/Side Bars/sideBar.php';
+    <!-- side bar -->
+    <?php
+
+    $role = $data['role'];
+    require APPROOT . '/views/Pages/Dashboard/header.php';
+    require APPROOT . '/views/Components/Side Bars/sideBar.php';
     ?>
 
-  <!-- content -->
+    <!-- content -->
     <section class="home">
 
         <div class="topicdiv">
             <h1>Advertisement</h1>
-            <?php if ($role = "User") { ?>
-                <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/coach"><i class="fa-solid fa-file-circle-plus icon"></i></a>
+            <?php if ($role == "User") { ?>
+                <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/user"><i
+                        class="fa-solid fa-file-circle-plus icon"></i></a>
+            <?php } else if ($role == "Coach") { ?>
+                    <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/coach"><i
+                            class="fa-solid fa-file-circle-plus icon"></i></a>
+            <?php } else if ($role == "Manager") { ?>
+                        <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/manager"><i
+                                class="fa-solid fa-file-circle-plus icon"></i></a>
             <?php } ?>
         </div>
 
@@ -43,15 +53,18 @@
                                 <?php echo $advert->name ?>
                             </h4>
                             <div class="viewmore">
-                                <a class="btn1" href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/coach?advert_id=<?php echo $advert->advertisement_id; ?>">View more</a>
+                                <a class="btn1"
+                                    href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/coach?advert_id=<?php echo $advert->advertisement_id; ?>">View
+                                    more</a>
                             </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
             </div>
-        </div>     
+        </div>
     </section>
 
-<!-- <script src="<?php echo URLROOT; ?>/js/advertisment.js"></script> -->
+    <!-- <script src="<?php echo URLROOT; ?>/js/advertisment.js"></script> -->
 </body>
+
 </html>

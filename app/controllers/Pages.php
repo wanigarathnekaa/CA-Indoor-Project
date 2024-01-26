@@ -251,17 +251,45 @@ class Pages extends Controller
     // view advertisement
     public function View_Advertisement($name)
     {
+        $role = "User";
+        $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        $coach = $this->pagesModel->findCoach($_SESSION['user_email']);
+        $manager = $this->pagesModel->findManager($_SESSION['user_email']); 
+        if(!empty($user)){
+            $role = "User";
+        } 
+        else if(!empty($coach)){
+            $role = "Coach";
+        }
+        else if(!empty($manager)){
+            $role = "Manager";
+        }
         $advertisement = $this->pagesModel->getAdvertisement();
         $data = [
-            'adverts' => $advertisement
+            'role' => $role,
+            'adverts' => $advertisement,
         ];
         $this->view('Pages/Advertisement/advertisement', $data);
     }
 
     public function Advertisements($name)
     {
+        $role = "User";
+        $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        $coach = $this->pagesModel->findCoach($_SESSION['user_email']);
+        $manager = $this->pagesModel->findManager($_SESSION['user_email']); 
+        if(!empty($user)){
+            $role = "User";
+        } 
+        else if(!empty($coach)){
+            $role = "Coach";
+        }
+        else if(!empty($manager)){
+            $role = "Manager";
+        }
         $advertisement = $this->pagesModel->getAdvertisement();
         $data = [
+            'role' => $role,
             'adverts' => $advertisement,
         ];
 
@@ -320,14 +348,22 @@ class Pages extends Controller
 
     public function Add_Advertisements($name)
     {
+        $role = "User";
         $user = $this->pagesModel->findUser($_SESSION['user_email']);
-        if(empty($user)){
-            $user->name = "Manager";
-            $user->email = $_SESSION['user_email'];
+        $coach = $this->pagesModel->findCoach($_SESSION['user_email']);
+        $manager = $this->pagesModel->findManager($_SESSION['user_email']); 
+        if($user){
+            $role = "User";
         } 
+        else if($coach){
+            $role = "Coach";
+        }
+        else if($manager){
+            $role = "Manager";
+        }
         $data = [
-                'uname' => $user->name,
-                'email' => $user->email,
+                'role' => $role,
+                'email' => $_SESSION['user_email'],
                 'title' => "",
                 'name' => "",
                 'date' => "",
