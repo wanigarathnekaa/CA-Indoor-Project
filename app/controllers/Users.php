@@ -151,10 +151,12 @@ class Users extends Controller
             } else {
                 //check email already registered or not
                 if ($this->userManagerModel->findUserByEmail($data['email'])) {
-                    $role = 1;
+                    // 1
+                    $role = 'Manager'; 
                     echo "user is found";
                 } elseif ($this->userModel->findUserByEmail($data['email'])) {
-                    $role = 2;
+                    // 2
+                    $role = 'User';
                     echo "user is found";
                 } else {
                     //user not found
@@ -176,7 +178,7 @@ class Users extends Controller
                 if ($loginUser) {
                     //Authenticate User
                     if ($this->userCoachModel->findUserByEmail($data['email'])) {
-                        $role = 3;
+                        $role = 'Coach';
                         $this->createUserSession($loginUser, $role);
                     }else{
                         $this->createUserSession($loginUser, $role);
@@ -217,10 +219,11 @@ class Users extends Controller
         $_SESSION['user_id'] = $user->uid;
         $_SESSION['user_name'] = $user->name;
         $_SESSION['user_email'] = $user->email;
+        $_SESSION['user_role'] = $role;
 
-        if($role == 1){
+        if($role == 'Manager'){
             redirect('Pages/Dashboard/manager');
-        }elseif($role == 2){
+        }elseif($role == 'User'){
             redirect('Pages/Dashboard/user');
         }else{
             redirect('Pages/Dashboard/coach');
