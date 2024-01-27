@@ -124,7 +124,7 @@ class Pages extends Controller
 
         $data = [
             'CoachCount' => $coaches,
-            'UserCount' => $users,
+            'UserCount' => $users-$coaches,
             'coach' => $coach,
             'Reserve_Count' => count($bookings),
             'advertCount' => count($advertisement),
