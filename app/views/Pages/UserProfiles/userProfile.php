@@ -11,7 +11,7 @@
 
     <!-- side bar -->
     <?php
-        $role = "User";
+        $role = $_SESSION['user_role'];
         require APPROOT . '/views/Pages/Dashboard/header.php';
         require APPROOT . '/views/Components/Side Bars/sideBar.php';
     ?>
@@ -27,7 +27,7 @@
                               <img class="profile-image" src="<?php echo URLROOT;?>/images/user.png">
                         </div>
                         <div class="name"><?php echo $data->name ?></div>
-                        <!-- <div class="role">Player</div> -->
+                        <!-- <div class="role"><?php echo $role ?></div> -->
                   </div>
                   <div class="details-block">
                         <div class="details">

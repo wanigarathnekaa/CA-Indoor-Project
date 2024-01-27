@@ -70,7 +70,8 @@ class Advertisement extends Controller
             //If validation is completed and no error, then register the user
             if (empty($data['title_err']) && empty($data['content_err'])) {
                 if ($this->advertiseModel->addAdvertisement($data)) {
-                    $this->view('Pages/Advertisement/advertisement');
+                    // $this->view('Pages/Advertisement/advertisement');
+                    redirect('Pages/View_Advertisement/advertisement');
                 } else {
                     die('Something Went wrong');
                 }
@@ -105,7 +106,15 @@ class Advertisement extends Controller
     }
 
 
+    // delete advertisement
+    public function deleteAdvertisement($advertisement_id){
 
+        if ($this->advertiseModel->deleteAdvertisement($advertisement_id)) {
+            redirect('Pages/View_Advertisement/advertisement');
+        } else {
+            die('Something Went wrong');
+        }
+    }
 
 
 
@@ -113,6 +122,5 @@ class Advertisement extends Controller
 
 
 }
-
 
 ?>

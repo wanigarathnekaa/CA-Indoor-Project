@@ -5,7 +5,7 @@
 
 <script>
 var xValues = ["Players", "Coaches"];
-var yValues = [55, 15];
+var yValues = [<?php echo $data1["UserCount"]?>, <?php echo $data1["CoachCount"]?>];
 var barColors = ["#4F9DA9","#A7D8D7"];
 
 new Chart("customerCountChart", {
