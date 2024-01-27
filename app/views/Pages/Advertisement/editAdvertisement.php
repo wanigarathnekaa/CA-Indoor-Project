@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>ADD advertisement</title>
+     <title>Edit advertisement</title>
    </head>
 <body>
       <!-- Sidebar -->
@@ -20,34 +20,34 @@
       <!-- Content -->
       <section class="home">
         <div class="container">
-          <div class="title">ADD advertisement</div>
+          <div class="title">Edit Advertisement</div>
           <div class="content">
-            <form action="<?php echo URLROOT; ?>/Advertisement/add_Advertisement" method="POST" enctype="multipart/form-data">
+            <form action="<?php echo URLROOT; ?>/Advertisement/editAdvertisement/<?php echo $data['advertisement_id'] ?>" method="POST" enctype="multipart/form-data">
               <div class="user-details">
                 <div class="input-box">
                   <span class="details">Coach Name</span>
                   <input type="text" name="name" placeholder="Enter your name" value="<?php echo $data['name']; ?>">
-                  <span class="form-invalid"><?php echo $data['name_err']; ?></span>
+                  <!-- <span class="form-invalid"><?php echo $data['name_err']; ?></span> -->
                 </div>
                 <div class="input-box">
                   <span class="details">Advertisement Title</span>
                   <input type="text" name="title" placeholder="Title" value="<?php echo $data['title']; ?>">
-                  <span class="form-invalid"><?php echo $data['title_err']; ?></span>
+                  <!-- <span class="form-invalid"><?php echo $data['title_err']; ?></span> -->
                 </div>   
                 <div class="input-box">
                   <span class="details">Date</span> 
                   <input type="date" name="date" placeholder="Date" value="<?php echo $data['date']; ?>">
-                  <span class="form-invalid"><?php echo $data['date_err']; ?></span>
+                  <!-- <span class="form-invalid"><?php echo $data['date_err']; ?></span> -->
                 </div>
                 <div class="input-box " id="content">
                   <span class="details">Content</span>
-                  <input type="text" name="content" placeholder="Description"value="<?php echo $data['content']; ?>">
-                  <span class="form-invalid"><?php echo $data['content_err']; ?></span>
+                  <input type="text" name="content" placeholder="Description" value="<?php echo $data['content']; ?>">
+                  <!-- <span class="form-invalid"><?php echo $data['content_err']; ?></span> -->
                 </div>
                 <div class="textbox">
                   <label for="img">Post:</label><br>
-                  <input type="file" name="file" required>
-                  <span class="form-invalid"><?php echo $data['filename_err']; ?></span>
+                  <input type="file" name="file" id="file" value="<?php echo $data['filename']; ?>" required>
+                  <!-- <span class="form-invalid"><?php echo $data['filename_err']; ?></span> -->
                 </div>
                 <div class="input-box">
                   <!-- <span class="details"></span> -->
@@ -57,7 +57,7 @@
               </div>
         
               <div class="button">
-                <input type="submit" value="Publish" >
+                <input type="submit" value="Update" >
               </div>
             </form>
           </div>
