@@ -212,7 +212,7 @@ class Pages extends Controller
                 'phoneNumber' => $coachAsUser->phoneNumber,
                 'pwd' => $coachAsUser->password,
                 'nic' => $coachAsCoach->nic,
-                'address' => $coachAsCoach->address,
+                // 'address' => $coachAsCoach->address,
                 'experience' => $coachAsCoach->experience,
                 'specialty' => $coachAsCoach->specialty,
                 'certificate' => $coachAsCoach->certificate,
@@ -272,29 +272,29 @@ class Pages extends Controller
         $this->view('Pages/Advertisement/advertisement', $data);
     }
 
-    public function Advertisements($name)
-    {
-        $role = "User";
-        $user = $this->pagesModel->findUser($_SESSION['user_email']);
-        $coach = $this->pagesModel->findCoach($_SESSION['user_email']);
-        $manager = $this->pagesModel->findManager($_SESSION['user_email']); 
-        if(!empty($user)){
-            $role = "User";
-        } 
-        else if(!empty($coach)){
-            $role = "Coach";
-        }
-        else if(!empty($manager)){
-            $role = "Manager";
-        }
-        $advertisement = $this->pagesModel->getAdvertisement();
-        $data = [
-            'role' => $role,
-            'adverts' => $advertisement,
-        ];
+    // public function Advertisements($name)
+    // {
+    //     $role = "User";
+    //     $user = $this->pagesModel->findUser($_SESSION['user_email']);
+    //     $coach = $this->pagesModel->findCoach($_SESSION['user_email']);
+    //     $manager = $this->pagesModel->findManager($_SESSION['user_email']); 
+    //     if(!empty($user)){
+    //         $role = "User";
+    //     } 
+    //     else if(!empty($coach)){
+    //         $role = "Coach";
+    //     }
+    //     else if(!empty($manager)){
+    //         $role = "Manager";
+    //     }
+    //     $advertisement = $this->pagesModel->getAdvertisement();
+    //     $data = [
+    //         'role' => $role,
+    //         'adverts' => $advertisement,
+    //     ];
 
-        $this->view('Pages/Advertisement/advertisement', $data);
-    }
+    //     $this->view('Pages/Advertisement/advertisement', $data);
+    // }
 
     public function AdvertisementDetails()
     {
