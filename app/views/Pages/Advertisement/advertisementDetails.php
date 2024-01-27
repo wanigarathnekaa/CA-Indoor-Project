@@ -73,7 +73,9 @@ foreach ($data['adverts'] as $advert) {
 
           <?php if ($advertisement[0]->email == $_SESSION['user_email'] || $data['flag']) { ?>
             <div class="event-info">
+              <a href="<?php echo URLROOT?>/Advertisement/editAdvertisement/<?php echo $advertisement[0]->advertisement_id?>">
               <button type="button" class="btn">Edit</button>
+              </a>
               <!-- <a href="<?php echo URLROOT?>/Advertisement/deleteAdvertisement/<?php echo $advertisement[0]->advertisement_id?>">
               <button type="button" class="btn">Delete</button>
               </a> -->
