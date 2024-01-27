@@ -26,27 +26,27 @@
               <div class="user-details">
                 <div class="input-box">
                   <span class="details">Coach Name</span>
-                  <input type="text" name="name" placeholder="Enter your name">
+                  <input type="text" name="name" placeholder="Enter your name" value="<?php echo $data['name']; ?>">
                   <span class="form-invalid"><?php echo $data['name_err']; ?></span>
                 </div>
                 <div class="input-box">
                   <span class="details">Advertisement Title</span>
-                  <input type="text" name="title" placeholder="Title">
+                  <input type="text" name="title" placeholder="Title" value="<?php echo $data['title']; ?>">
                   <span class="form-invalid"><?php echo $data['title_err']; ?></span>
                 </div>   
                 <div class="input-box">
                   <span class="details">Date</span> 
-                  <input type="date" name="date" placeholder="Date" >
+                  <input type="date" name="date" placeholder="Date" value="<?php echo $data['date']; ?>">
                   <span class="form-invalid"><?php echo $data['date_err']; ?></span>
                 </div>
                 <div class="input-box " id="content">
                   <span class="details">Content</span>
-                  <input type="text" name="content" placeholder="Description">
+                  <input type="text" name="content" placeholder="Description"value="<?php echo $data['content']; ?>">
                   <span class="form-invalid"><?php echo $data['content_err']; ?></span>
                 </div>
                 <div class="textbox">
                   <label for="img">Post:</label><br>
-                  <input type="file" name="file">
+                  <input type="file" name="file" value="<?php echo $data['filename']; ?>">
                   <span class="form-invalid"><?php echo $data['filename_err']; ?></span>
                 </div>
                 <div class="input-box">

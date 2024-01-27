@@ -27,6 +27,8 @@ foreach ($data['adverts'] as $advert) {
   <title>AddMoreDetails</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/AdvertisementDetails.css">
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_coaches.css">
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
     integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
     crossorigin="anonymous" />
@@ -35,7 +37,7 @@ foreach ($data['adverts'] as $advert) {
 <body>
   <!-- Sidebar -->
   <?php
-  $role = "User";
+   $role = $_SESSION['user_role'];
   require APPROOT . '/views/Pages/Dashboard/header.php';
   require APPROOT . '/views/Components/Side Bars/sideBar.php';
   ?>
@@ -72,7 +74,10 @@ foreach ($data['adverts'] as $advert) {
           <?php if ($advertisement[0]->email == $_SESSION['user_email'] || $data['flag']) { ?>
             <div class="event-info">
               <button type="button" class="btn">Edit</button>
+              <!-- <a href="<?php echo URLROOT?>/Advertisement/deleteAdvertisement/<?php echo $advertisement[0]->advertisement_id?>">
               <button type="button" class="btn">Delete</button>
+              </a> -->
+              <button type="button" class="btn" onclick="openDeletePopup()">Delete</button>
             </div>
           <?php } ?>
 
@@ -97,9 +102,30 @@ foreach ($data['adverts'] as $advert) {
         </div>
       </div>
     </div>
+
+
+
+    <!-- popup windows -->
+    <div class="popupcontainer" id="popupcontainer">
+      <!-- confirm delete popup window -->
+      <div class="deletepopup" id=deletepopup>
+        <span class="close" onclick="closeDeletePopup()"><i class="fa-solid fa-xmark"></i></span>
+        <h2>confirm delete</h2>
+        <form action="<?php echo URLROOT?>/Advertisement/deleteAdvertisement/<?php echo $advertisement[0]->advertisement_id?>" method="POST">
+              <div class="btns">
+                    <button type="submit" class="button">Delete</button>
+                    <button type="button" onclick="closeDeletePopup()">Cancel</button>
+              </div>
+              <!-- <div hidden name="submit"><span class="pd_email"></span></div> -->
+              <!-- <input hidden name='submit' id="hid_input"> -->
+        </form>
+      </div>
+    </div>
   </section>
 
 
+  <!-- javascript -->
+  <script src="<?php echo URLROOT; ?>/js/AdvertisementDetails.js"></script>
 </body>
 
 </html>
