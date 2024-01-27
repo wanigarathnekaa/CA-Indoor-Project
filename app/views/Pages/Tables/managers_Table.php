@@ -71,6 +71,7 @@
                                     <th>Email</th>
                                     <th>phoneNumber</th>
                                     <th>NIC</th>
+                                    <th>Address</th>
                                     <th></th>
                                     <th></th>
 
@@ -87,6 +88,7 @@
                                            <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($manager)); ?>)">
                                                 <?php echo $manager->name; ?>
                                            </td>
+
                                            <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($manager)); ?>)">
                                                 <?php echo $manager->email; ?>
                                           </td>
@@ -95,6 +97,9 @@
                                           </td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($manager)); ?>)">
                                                 <?php echo $manager->nic; ?>
+                                          </td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($manager)); ?>)">
+                                                <?php echo $manager->address; ?>
                                           </td>
                                           
                                           <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
@@ -112,32 +117,34 @@
                   <!-- details popup -->
                   <div class="popup" id="popup">
                         <span class="close" onclick="closePopup()"><i class="fa-solid fa-xmark"></i></span>
-                        <h2><span class="c_name"></span></h2>
+                        <h2><span class="m_name"></span></h2>
+
                         <hr>
                         <div class="popupdetails">
+           
+                             
+
                               <div class="popupdetail">
-                                    <h2><b>Email : </b><span class="c_email"></span> </h2>
+                                    <h2><b>Email :</b><span class="m_email"></span></h2>
+                              </div>
+
+                              <div class="popupdetail">
+                                    <h2><b>Contact Number :</b><span class="m_number"></span></h2>
                               </div>
                               <div class="popupdetail">
-                                    <h2><b>Mobile : </b><span class="c_mobile"></span> </h2>
+                                    <h2><b>NIC :</b><span class="m_nic"></span></h2>
                               </div>
-                              <!-- <div class="popupdetail">
-                                    <h2><b>Experience : </b><span class="c_exp"></span> </h2>
-                              </div>
+
                               <div class="popupdetail">
-                                    <h2><b>Speciality : </b><span class="c_spl"></span> </h2>
+                                    <h2><b>Address :</b><span class="m_address"></span></h2>
                               </div>
-                              <div class="popupdetail">
-                                    <h2><b>Certificate : </b><span class="c_cert"></span> </h2>
-                              </div> -->
+
+
+                             
                         </div>
 
-                        <!-- <div class="btns">
-                              <button type="button">Reshedule</button>
-                              <button type="button">Cancel</button>
-                        </div> -->
+                        
                   </div>
-
 
 
                   
@@ -156,6 +163,6 @@
       </section>
 
       <!-- javascript -->
-      <script src="<?php echo URLROOT; ?>/js/coachDetails_popup.js"></script>
+      <script src="<?php echo URLROOT; ?>/js/managerDetails_Popup.js"></script>
       <script src="<?php echo URLROOT; ?>/js/coach_Table.js"></script>
 </body>
