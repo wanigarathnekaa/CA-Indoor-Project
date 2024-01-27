@@ -41,7 +41,9 @@
             <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/coachTable/user">
 
                 <div>
-                <div class="numbers"><?php echo isset($data1["CoachCount"]) ? $data1["CoachCount"] : 'N/A'; ?></div>
+                <!-- <div class="numbers"><?php echo isset($data1["CoachCount"]) ? $data1["CoachCount"] : 'N/A'; ?></div> -->
+                  <div class="numbers">14</div>
+
                     <div class="cardName">Coaches</div>
                 </div>
                 <div class="iconBx">
@@ -69,6 +71,16 @@
                               <i class="fa-solid fa-calendar-days"></i>
                         </div>
                   </a>
+             <a class="card" href="C&A_Indoor_Project/Advertisement">
+                        <div>
+                              <!-- <div class="numbers"><?php echo $data1["advertCount"]?></div> -->
+                              <div class="cardName">Advertisement</div>
+                        </div>
+                        <div class="iconBx">
+                              <i class="fa-brands fa-adversal"></i>
+                              <!-- <i class="fa-solid fa-file-contract"></i> -->
+                        </div>
+              </a>
 
             <a class="card" href="#">
                 <div>
@@ -80,31 +92,19 @@
                 </div>
             </a>
 
-            <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/Coach_Registration/coach">
+          
+            <a class="card" href="">
                 <div>
                     <div class="numbers"></div>
-                    <div class="cardName">Registration</div>
+                    <div class="cardName">Complaints</div>
                 </div>
 
                 <div class="iconBx">
-                    <i class="fa-solid fa-user-plus"></i>
+                    <i class="fa-solid fa-user-question-fill"></i>
                 </div>
             </a>
         </div>
-         <!--Reservation Details -->
-         <div class="details">
-                  <!-- Recent Reservations -->
-                  <div class="tablediv">
-                        <?php
-                              require APPROOT . '/views/Pages/Tables/dailyReservation.php';
-                        ?>
-                  </div>
-                  
-                  <!-- Calander -->
-                  <div class="calanderdiv">
-                        <iframe src="http://localhost/C&A_Indoor_Project/Pages/Calendar/User" frameborder="0"></iframe>                        
-                  </div>
-            </div> 
+         
             <div class="charts">
                   <!-- Weekly Reservations chart -->
                   <?php
