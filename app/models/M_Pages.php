@@ -43,6 +43,12 @@ class M_Pages
 
         return $this->db->resultSet();
     }
+    public function getManagers()
+    {
+        $this->db->query('SELECT * FROM managers');
+
+        return $this->db->resultSet();
+    }
 
     public function getBookings()
     {
@@ -54,6 +60,12 @@ class M_Pages
     public function getCoachCount()
     {
         $this->db->query('SELECT * FROM coaches');
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+    public function getManagerCount()
+    {
+        $this->db->query('SELECT * FROM managers');
         $this->db->execute();
         return $this->db->rowCount();
     }

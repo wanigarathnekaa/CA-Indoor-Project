@@ -27,7 +27,7 @@
 
         <!-- Cards -->
         <div class="cardBox">
-            <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/coachTable/user">
+            <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/managerTable/user">
                 <div>
                     <div class="numbers">3</div>
                     <div class="cardName">Managers</div>
@@ -71,7 +71,7 @@
                               <i class="fa-solid fa-calendar-days"></i>
                         </div>
                   </a>
-             <a class="card" href="C&A_Indoor_Project/Advertisement">
+             <a class="card" href="C&A_Indoor_Project/Pages/View_Advertisement/manager">
                         <div>
                               <!-- <div class="numbers"><?php echo $data1["advertCount"]?></div> -->
                               <div class="cardName">Advertisement</div>
