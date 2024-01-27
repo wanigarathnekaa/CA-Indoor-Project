@@ -90,6 +90,23 @@ class Pages extends Controller
         }
         $this->view('Pages/Tables/coaches_Table', $data, $res);
     }
+    //manager table
+    public function managerTable($name)
+    {
+        $managers = $this->pagesModel->getManagers();
+        $manager = $this->pagesModel->getManagerCount();
+        // $users = $this->pagesModel->getUserCount();
+        $data = [
+            'ManagerCount' => $manager,
+            'users' => $managers,
+            // 'UserCount' => $users,
+        ];
+        $res = [];
+        foreach ($data['users'] as $user) {
+            $res[] = $this->pagesModel->findUser($user->email);
+        }
+        $this->view('Pages/Tables/managers_Table', $data, $res);
+    }
 
     // Player table
     public function playerTable($name)
