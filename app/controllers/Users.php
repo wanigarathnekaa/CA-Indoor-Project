@@ -132,7 +132,7 @@ class Users extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //submitting form
-            $role = 0;
+            $role = "User";
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
 
@@ -151,18 +151,18 @@ class Users extends Controller
             } else {
                 //check email already registered or not
                 if ($this->userManagerModel->findUserByEmail($data['email'])) {
-                    // 1
                     $role = 'Manager'; 
-                    echo "user is found";
+                    //echo "user is found";
                 } elseif ($this->userModel->findUserByEmail($data['email'])) {
-                    // 2
                     $role = 'User';
-                    echo "user is found";
+                    //echo "user is found";
                 } else {
                     //user not found
+                    $role = 'User Not Found';
                     $data['email_err'] = "User Not Found";
                 }
             }
+
 
             //validate password
             if (empty($data['pwd'])) {
@@ -171,25 +171,26 @@ class Users extends Controller
 
             //If no error found then login user
             if (empty($data['email_err']) && empty($data['pwd_err'])) {
-
-                $loginUser = $this->userModel->login($data['email'], $data['pwd']);
-                $loginmanager = $this->userModel->loginManager($data['email'], $data['pwd']);
-
-                if ($loginUser) {
+                if ($role == 'User') {
                     //Authenticate User
-                    if ($this->userCoachModel->findUserByEmail($data['email'])) {
+                    $loginUser = $this->userModel->login($data['email'], $data['pwd']);
+                    if($loginUser == false){
+                        $data['pwd_err'] = "Invalid Password";
+                        $this->view('Pages/LoginPage/login', $data);
+                    }else if ($this->userCoachModel->findUserByEmail($data['email'])) {
                         $role = 'Coach';
                         $this->createUserSession($loginUser, $role);
                     }else{
                         $this->createUserSession($loginUser, $role);
                     }
-                } else {
-                    if ($this->userManagerModel->findUserByEmail($data['email'])) {
-                        $this->createUserSession($loginmanager , $role);
-                    }else{
+                } else if ($role == 'Manager') {
+                    $loginManager = $this->userModel->loginManager($data['email'], $data['pwd']);
+                    if($loginManager == false){
                         $data['pwd_err'] = "Invalid Password";
                         $this->view('Pages/LoginPage/login', $data);
-                    }                    
+                    }else{
+                        $this->createUserSession($loginManager , $role);
+                    }                   
                 }
             } else {
                 //Load View
