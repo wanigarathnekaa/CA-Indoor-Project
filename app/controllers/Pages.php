@@ -470,6 +470,11 @@ class Pages extends Controller
         $this->view('Components/termsConditions');
     }
 
+    // Contact Us Page
+    public function contactUs()
+    {
+        $this->view('Components/contactUs');
+    }
 
 }
 

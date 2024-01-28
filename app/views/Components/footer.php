@@ -9,7 +9,7 @@
                         <a href="#">About Us</a>
                     </li>
                     <li>
-                        <a href="#">Contact Us</a>
+                        <a href="C&A_Indoor_Project/Pages/contactUs">Contact Us</a>
                     </li>
                     <li>
                         <a href="#">FAQ</a>
