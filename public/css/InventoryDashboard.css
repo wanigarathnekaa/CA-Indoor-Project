@@ -1,0 +1,440 @@
+:root {
+  --color01: #2e8a99;
+  --color02: #4f9da9;
+  --color03: #a7d8d7;
+  --color04: #eaf3f4;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #000000;
+}
+
+.working-panel {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.fluid-panel {
+  text-align: left;
+  flex: 1; /* Take up remaining space */
+}
+
+.display-4 {
+  font-size: 44px;
+  font-weight: 175;
+  color: var(--color01);
+  margin-bottom: 10px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+  width: 100%; /* Make the horizontal line span the full width */
+}
+
+.working-panel .image-text {
+  display: flex;
+  align-items: center;
+}
+
+.working-panel .image-text .image {
+  margin-left: auto; /* Move the image to the right */
+}
+
+.working-panel .image-text img {
+  width: 100px; /* Adjust the width as needed */
+  height: auto;
+}
+
+/* ======================= Cards ====================== */
+.cardBox {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Adjust the number of columns to 5 */
+  grid-gap: 30px;
+}
+
+.cardBox .card {
+  position: relative;
+  background: var(--white);
+  padding: 20px; /* Adjust the padding for smaller cards */
+  height: 120px; /* Adjust the height for smaller cards */
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+}
+
+.cardBox .card .infor {
+  align-self: center;
+}
+
+.cardBox .card .numbers {
+  position: relative;
+  font-weight: 500;
+  font-size: 2rem; /* Adjust the font size for smaller cards */
+  color: var(--black1);
+}
+
+.cardBox .card .cardName {
+  color: var(--black1);
+  font-size: 1.1rem; /* Adjust the font size for smaller cards */
+  font-weight: 400;
+  margin-top: 5px;
+  text-decoration: none;
+}
+
+.cardBox .card .iconBx {
+  font-size: 3.5rem; /* Adjust the font size for smaller cards */
+  color: var(--color01);
+  align-self: center;
+}
+
+.cardBox .card:hover {
+  background: var(--color01);
+}
+
+.cardBox .card:hover .numbers,
+.cardBox .card:hover .cardName,
+.cardBox .card:hover .iconBx {
+  color: var(--white);
+}
+
+
+:root {
+    --color01: #2e8a99;
+    --color02: #4F9DA9;
+    --color03: #A7D8D7;
+    --color04: #EAF3F4;
+    --white: #fff;
+    --gray: #f5f5f5;
+    --black1: #222;
+    --black2: #000000;
+}
+
+/*  table  ..................................................................... */
+.table-container {
+    /* width: 100%; */
+    position: relative;
+    display: block;
+    /* overflow-y: scroll; */
+    /* height: 100%;   */
+    /* border-radius: 12px; */
+    /* background-color: #A7D8D7; */
+    align-items: center;
+    justify-content: center;
+    /* background-color: #A7D8D7; */
+    /* width: 94%; */
+    margin: 30px;
+}
+
+.table-container h2{
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: var(--black1);   
+}
+
+table {
+    width: 100%;
+    display: table;
+    border-collapse: collapse;
+    /* margin-top: 10px; */
+    margin-bottom: 10px;
+    /* padding-bottom: 20px; */
+    overflow-y: scroll;
+    min-width: 80%;
+}
+
+table thead {
+    display: table-header-group;
+    /* vertical-align: middle; */
+    border-color: inherit;
+    background-color: var(--color02);
+}
+
+table thead th {
+    font-weight: 600;
+    font-size: 14px;
+    text-align: left
+
+}
+
+table tr {
+    color: var(--black1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+table tbody td{
+    font-size: 14px;
+    padding-top: 5px;
+    padding-bottom: 15px;
+    text-align: left;
+}
+
+table tbody tr:hover {
+    background: var(--color03);
+    color: var(--black1); 
+}
+table tr td,
+table tr th {
+    padding: 10px;
+}
+
+
+tbody a{
+    text-decoration: none;
+    /* color: var(--black1); */
+
+}
+
+tbody td .icon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding-left: 10px;      */
+}
+
+tbody td .icon:hover{
+    cursor: pointer;
+    
+}
+
+#coachTable {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#coachTable th, #coachTable td {
+    border: 1px solid #ddd; /* Set border for each cell */
+    padding: 8px; /* Add some padding for better appearance */
+    text-align: left; /* Align text to the left within cells */
+}
+
+.pagination-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: left;
+}
+
+.pagination {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+}
+
+.page-link {
+    padding: 8px 12px;
+    text-decoration: none;
+    color: var(--color01);
+    background-color: var(--color04);
+    border: 1px solid var(--color01);
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.page-link:hover {
+    background-color: var(--color01);
+    color: var(--white);
+}
+
+
+
+
+/* responsive__________________________________________________________________________________________ */
+
+@media (max-width: 768px) {
+
+    /* margin: 10px; */
+    .table-topic{
+          margin: 10px;
+          /* width: 100%; */
+    }
+
+    .table-topic .topic-name h1{
+          font-size: 20px;
+    }
+
+    .table-topic .search {
+          width: 300px;
+    }
+
+    .tableSort{
+          margin: 10px;
+          align-items: stretch;
+          gap: 10px;
+    }
+
+    .sort label{
+          font-size: 12px;
+          width: 50px;
+          margin-right: 5px;
+
+    }
+
+
+    .table-container{
+          margin: 10px;
+          /* background-color: #000000; */
+    }
+
+    table {
+          width: 100%;
+          /* display: block; */
+
+    }
+    table thead th {
+          font-size: 12px;
+    }
+
+    table tbody td{
+          font-size: 12px;
+    }
+
+}
+
+
+
+@media (max-width:480px){
+
+    /* margin: 10px; */
+    .table-topic{
+          margin: 5px;
+          justify-content: space-around
+          /* width: 100%; */
+    }
+    .table-topic .topic-name h1{
+          font-size: 18px;
+    }
+    .tableSort{
+          margin: 5px;
+          align-items: stretch;
+          padding:10px;
+          margin-bottom: 20px;
+    }
+
+    .tableSort .search{
+          width: 150px;
+
+    }
+    .sort label{
+          font-size: 8px;
+          width: 35px;
+          margin-right: 5px;
+
+    }
+
+
+    .tableSort .search label input{
+          font-size: 8px;
+          padding-left: 25px;
+    }
+
+    .sort select,
+    .sort input{
+          width: 100px;
+          font-size: 8px;
+          padding: 5px 10px;
+    }
+
+    .table-topic .add-btn .icon{
+    font-size: small;
+    }
+
+    .table-container{
+          margin: 5px;
+    }
+
+    table thead th {
+          font-size: 10px;
+    }
+
+    table tbody td{
+          font-size: 10px;
+    }
+
+   table tr th:nth-child(4),
+   table tr th:nth-child(5),
+   table tr th:nth-child(6),
+   table tr td:nth-child(4),
+   table tr td:nth-child(5),
+   table tr td:nth-child(6)
+   {
+         text-align: center;
+         background-color: red;
+         display: none;
+   }
+
+}
+
+/* ====================== Responsive Design ========================== */
+@media (max-width: 1200px) {
+  .cardBox {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .cardBox {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .cardBox {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .cardBox {
+    grid-template-columns: repeat(1, 1fr);
+    justify-content: center; /* Center the cards on smaller screens */
+  }
+
+  .cardBox .card {
+    padding: 10px;
+    height: auto; /* Allow cards to adjust their height based on content */
+    border-radius: 10px;
+    justify-content: space-around;
+    flex-direction: column; /* Stack content vertically */
+  }
+
+  .cardBox .card .numbers {
+    font-size: 1rem;
+  }
+
+  .cardBox .card .cardName {
+    font-size: 0.8rem;
+    margin-top: 3px;
+  }
+
+  .cardBox .card .iconBx {
+    margin-top: 10px;
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .display-4 {
+    font-size: 28px; /* Reduce font size for smaller screens */
+  }
+
+  .working-panel .image-text {
+    width: 100%; /* Make the image take up the full width on smaller screens */
+    justify-content: flex-end; /* Align the image to the right */
+    margin-top: 10px; /* Add some space between text and image */
+  }
+
+  .working-panel .image-text img {
+    width: 100%; /* Make the image take up the full width */
+  }
+}
