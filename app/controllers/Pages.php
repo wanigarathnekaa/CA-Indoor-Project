@@ -464,6 +464,13 @@ class Pages extends Controller
     }
 
 
+    //terms and conditions page
+    public function termsConditions()
+    {
+        $this->view('Components/termsConditions');
+    }
+
+
 }
 
 ?>
