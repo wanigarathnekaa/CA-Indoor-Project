@@ -463,6 +463,11 @@ class Pages extends Controller
         $this->view('Pages/Manager/managerDeleteProfile', $user);
     }
 
+    public function Inventory_Management($name)
+    {
+        $this->view('Pages/InventoryManagement/dashboard');
+    }
+
 
 }
 
