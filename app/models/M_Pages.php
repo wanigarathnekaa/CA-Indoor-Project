@@ -82,6 +82,12 @@ class M_Pages
         return $result;
     }
 
+    public function getCategories(){
+        $this->db->query('SELECT * FROM category');
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
 
 }
 ?>

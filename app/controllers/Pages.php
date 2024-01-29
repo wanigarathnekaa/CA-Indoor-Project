@@ -468,6 +468,15 @@ class Pages extends Controller
         $this->view('Pages/InventoryManagement/dashboard');
     }
 
+    public function Category($name)
+    {
+        $categories = $this->pagesModel->getCategories();
+        $data = [
+            'categories' => $categories,
+        ];
+        $this->view('Pages/InventoryManagement/category',$data);
+    }
+
 
     //terms and conditions page
     public function termsConditions()

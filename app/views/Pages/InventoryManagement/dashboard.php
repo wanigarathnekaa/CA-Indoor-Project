@@ -144,6 +144,13 @@
                         <td>Unpaid</td>
                         <td>complete</td>
                     </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Order_06</td>
+                        <td>2024-01-28</td>
+                        <td>Unpaid</td>
+                        <td>complete</td>
+                    </tr>
                 </tbody>
             </table>
 
