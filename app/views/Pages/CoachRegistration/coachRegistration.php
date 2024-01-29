@@ -22,15 +22,16 @@
     <section class="home registerformhome">
       <div class="container">
         <div class="title">Registration Form</div>
-        <div class="upload">
-          <button class=" btn">
-            <i class="fa fa-upload"></i>Upload File
-            <input type="file">
-          </button>
-        </div>
+        
         
         <div class="content">
-          <form action="<?php echo URLROOT;?>/Coach/register" method="POST">
+          <form action="<?php echo URLROOT;?>/Coach/register" method="POST" enctype="multipart/form-data">
+          <div class="upload">
+          <!-- <button class=" btn"> -->
+            <!-- <i class="fa fa-upload"></i>Upload File -->
+            <input type="file" name="file">
+          <!-- </button> -->
+        </div>
             <div class="user-details">
               <div class="input-box">
                 <span class="details">Full Name</span>

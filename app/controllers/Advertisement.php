@@ -60,7 +60,7 @@ class Advertisement extends Controller
                 $data['content_err'] = "Please enter the Description";
             }
 
-            //validate email
+            //validate file
             if (empty($data['filename'])) {
                 $data['filename_err'] = "Please upload the image";
             }

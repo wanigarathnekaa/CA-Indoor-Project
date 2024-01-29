@@ -113,6 +113,9 @@ img{
 }
 .event-info{
     margin: 1.5rem 0;
+    /* background: #000; */
+    display: flex;
+    justify-content: space-between;
 }
 .event-info input,
 .event-info .btn{

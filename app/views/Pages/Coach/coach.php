@@ -24,15 +24,17 @@
         </div>
         <div class="coaches">
             <div class="profiles">
-                <?php foreach($data as $coach):?>
+                <?php $i=0;?>
+                <?php foreach($data['coaches'] as $coach):?>
                     <div class="coachcard">
-                        <a href="<?php echo URLROOT?>/Pages/CoachCard/user?email=<?php echo $coach->email; ?>">
+                        <a href="<?php echo URLROOT?>/Pages/CoachCard/user?email=<?php echo $coach->email;?>">
                             <div class="coach-img">
-                                <img class="image" src="<?php echo URLROOT; ?>/images/image1.jpg" />
+                                <img class="image" src="<?php echo URLROOT; ?>/public/coaches/<?php echo $coach->img;?>">
                             </div>
-                            <div class="Name"><?php echo "{$coach->name}"?></div>
+                            <div class="Name"><?php echo "{$data['userCoach'][$i]->name}" ?></div>
                         </a>
                     </div>
+                    <?php $i++;?>
                 <?php endforeach;?>
             </div>
         </div>

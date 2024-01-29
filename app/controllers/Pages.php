@@ -378,9 +378,17 @@ class Pages extends Controller
         $res = [];
         foreach ($data['users'] as $user) {
             $res[] = $this->pagesModel->findUser($user->email);
+            
         }
 
-        $this->view('Pages/Coach/coach', $res);
+        $data1 = [
+            'coaches' => $coaches,
+            'userCoach' => $res,
+        ];
+
+
+
+        $this->view('Pages/Coach/coach', $data1);
     }
 
     public function CoachCard($name)

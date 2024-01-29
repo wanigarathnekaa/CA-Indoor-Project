@@ -76,9 +76,6 @@ foreach ($data['adverts'] as $advert) {
               <a href="<?php echo URLROOT?>/Advertisement/editAdvertisement/<?php echo $advertisement[0]->advertisement_id?>">
               <button type="button" class="btn">Edit</button>
               </a>
-              <!-- <a href="<?php echo URLROOT?>/Advertisement/deleteAdvertisement/<?php echo $advertisement[0]->advertisement_id?>">
-              <button type="button" class="btn">Delete</button>
-              </a> -->
               <button type="button" class="btn" onclick="openDeletePopup()">Delete</button>
             </div>
           <?php } ?>
