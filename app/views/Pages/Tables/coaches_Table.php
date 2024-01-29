@@ -90,7 +90,7 @@
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $coach->specialty ?></td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $coach->certificate?></td>
                                           <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
-                                          <td onclick="openDeletePopup()"><i class="fa-solid fa-user-slash delete icon"></i></td>
+                                          <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><i class="fa-solid fa-user-slash delete icon"></i></td>
                                     </tr>
                                     <?php $i = $i + 1;
                               endforeach; ?>
@@ -138,10 +138,14 @@
                         <span class="close" onclick="closeDeletePopup()"><i class="fa-solid fa-xmark"></i></span>
                         <h2>confirm delete</h2>
 
-                        <div class="btns">
-                              <button type="button">Delete</button>
-                              <button type="button" onclick="closeDeletePopup()">Cancel</button>
-                        </div>
+                        <form action="<?php echo URLROOT; ?>/Coach/delete" method="POST">
+                              <div class="btns">
+                                    <button type="submit" class="button">Delete</button>
+                                    <button type="button" onclick="closeDeletePopup()">Cancel</button>
+                              </div>
+                              <!-- <div hidden name="submit"><span class="pd_email"></span></div> -->
+                              <input hidden name='submit' id="hid_input">
+                        </form>
                   </div>
             </div>
 

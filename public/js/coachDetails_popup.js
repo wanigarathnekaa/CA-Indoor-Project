@@ -34,9 +34,12 @@ function closePopup() {
 
 
 // delete popup
-function openDeletePopup(){
+function openDeletePopup(coach){
       deletePopup.classList.add("open-deletepopup");
       popupcontainer.classList.add("open-popupcontainer");
+
+      var input = document.getElementById("hid_input");
+      input.value = coach.email;
 }
 
 function closeDeletePopup(){
