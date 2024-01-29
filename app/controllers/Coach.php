@@ -34,6 +34,9 @@ class Coach extends Controller
                 'specialty' => trim($_POST['specialty']),
                 'certificate' => trim($_POST['certificate']),
 
+                'filename' => trim($_FILES['file']['name']),
+                'filetmp' => trim($_FILES['file']['tmp_name']),
+
                 'name_err' => "",
                 'user_name_err' => "",
                 'email_err' => "",
@@ -44,8 +47,16 @@ class Coach extends Controller
                 'achivements_err' => "",
                 'experience_err' => "",
                 'specialty_err' => "",
-                'certificate_err' => ""
+                'certificate_err' => "",
+                'filename_err' => "",
+                'filetmp_err' => ""
             ];
+
+
+            $newfilename = uniqid() . "-" . $data['filename'];
+            move_uploaded_file($data['filetmp'], "../public/coaches/" . $newfilename);
+            $data['filename'] = $newfilename;
+            print_r($data);
 
             //validate name
             if (empty($data['name'])) {
@@ -77,30 +88,44 @@ class Coach extends Controller
                 $data['pwd_err'] = "Please enter a password";
             }
 
+            // validate nic
             if (empty($data['nic'])) {
                 $data['nic_err'] = "Please enter the NIC number";
             }
 
+            // validate address
             if (empty($data['srtAddress'])) {
                 $data['address_err'] = "Please enter the Street Address";
             }
+
+            // validate city
             if (empty($data['city'])) {
                 $data['address_err'] = "Please enter the City";
             }
+
+            // validate achivements
             if (empty($data['achivements'])) {
                 $data['address_err'] = "Please enter the Achievements of the ";
             }
 
+            // validate experience
             if (empty($data['experience'])) {
                 $data['experiences_err'] = "Please enter the Experience";
             }
 
+            // validate specialty
             if (empty($data['specialty'])) {
                 $data['specialty_err'] = "Please enter the Specialty";
             }
 
+            // validate certificate
             if (empty($data['certificate'])) {
                 $data['certificate_err'] = "Please enter certifications";
+            }
+
+            // validate fie
+            if (empty($data['filename'])) {
+                $data['filename_err'] = "Please upload profile picture";
             }
 
 
@@ -135,6 +160,8 @@ class Coach extends Controller
                 'experience' => "",
                 'specialty' => "",
                 'certificate' => "",
+                'filename' => "",
+                'filetmp' => "",
 
                 'name_err' => "",
                 'user_name_err' => "",
@@ -146,7 +173,9 @@ class Coach extends Controller
                 'achivements_err' => "",
                 'experience_err' => "",
                 'specialty_err' => "",
-                'certificate_err' => ""
+                'certificate_err' => "",
+                'filename_err' => "",
+                'filetmp_err' => ""
             ];
         }
 
@@ -180,6 +209,8 @@ class Coach extends Controller
                 'experience' => trim($_POST['experience']),
                 'specialty' => trim($_POST['specialty']),
                 'certificate' => trim($_POST['certificate']),
+                'filename' => trim($_FILES['file']['name']),
+                'filetmp' => trim($_FILES['file']['tmp_name']),
 
                 'name_err' => "",
                 'user_name_err' => "",
@@ -191,8 +222,15 @@ class Coach extends Controller
                 'achivements_err' => "",
                 'experience_err' => "",
                 'specialty_err' => "",
-                'certificate_err' => ""
+                'certificate_err' => "",
+                'filename_err' => "",
+                'filetmp_err' => "",
             ];
+
+            $newfilename = uniqid() . "-" . $data['filename'];
+            move_uploaded_file($data['filetmp'], "../public/coaches/" . $newfilename);
+            $data['filename'] = $newfilename;
+
 
             //validate name
             if (empty($data['name'])) {
@@ -219,28 +257,37 @@ class Coach extends Controller
                 $data['pwd_err'] = "Please enter a password";
             }
 
+            // validate nic
             if (empty($data['nic'])) {
                 $data['nic_err'] = "Please enter the NIC number";
             }
 
+            // validate address
             if (empty($data['srtAddress'])) {
                 $data['address_err'] = "Please enter the Street Address";
             }
+
+            // validate city
             if (empty($data['city'])) {
                 $data['address_err'] = "Please enter the City";
             }
+
+            // validate achivements
             if (empty($data['achivements'])) {
                 $data['address_err'] = "Please enter the Achievements of the ";
             }
 
+            // validate experience
             if (empty($data['experience'])) {
                 $data['experiences_err'] = "Please enter the Experience";
             }
 
+            // validate specialty
             if (empty($data['specialty'])) {
                 $data['specialty_err'] = "Please enter the Specialty";
             }
 
+            // validate certificate
             if (empty($data['certificate'])) {
                 $data['certificate_err'] = "Please enter certifications";
             }
