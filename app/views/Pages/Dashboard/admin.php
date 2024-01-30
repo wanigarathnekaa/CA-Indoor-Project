@@ -100,7 +100,7 @@
                 </div>
 
                 <div class="iconBx">
-                    <i class="fa-solid fa-user-question-fill"></i>
+                    <i class="fa-solid fa-comments"></i>
                 </div>
             </a>
         </div>

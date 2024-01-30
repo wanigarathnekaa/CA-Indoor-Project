@@ -4,3 +4,7 @@
 
 # folders
 /public/uploads
+
+
+# config file
+/app/config

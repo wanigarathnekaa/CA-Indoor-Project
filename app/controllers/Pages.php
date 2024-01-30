@@ -487,10 +487,10 @@ class Pages extends Controller
     }
 
     // Contact Us Page
-    public function contactUs()
-    {
-        $this->view('Components/contactUs');
-    }
+    // public function contactUs()
+    // {
+    //     $this->view('Components/contactUs');
+    // }
 
 }
 

@@ -36,19 +36,18 @@
           <p>If you have any help or any types of issues related our company, you can send me message from here. It's my pleasure to help you.</p>
           <form action="<?php echo URLROOT; ?>/Complaint/create" method="POST">
             <div class="input-box">
-                  <input type="text" id="name" name="name" placeholder="Enter your name" value="" required>
-
+                  <input type="text" id="name" name="name" placeholder="Enter your name" value="<?php echo $_SESSION['user_name']; ?>">
             </div>
             <div class="input-box">
-                  <input type="text" id="email" name="email" placeholder="Enter your email" value="" required>
+                  <input type="text" id="email" name="email" placeholder="Enter your email" value="<?php echo $_SESSION['user_email']; ?>">
             </div>
-           
             <div class="input-box">
-                  <input type="text" id="message" name="message" placeholder="Enter your message" value="" required>
-                  <span class="form-invalid"></span>
+                  <textarea id="message" name="message" placeholder="Enter your message" value=""></textarea>
+                  <!-- <input type="text" id="message" name="message" placeholder="Enter your message" value="" required> -->
+                  <span class="form-invalid"><?php echo $data['message_err']; ?></span>
             </div>
             <div class="button">
-            <input type="submit" value="Send Now" >
+              <input type="submit" value="Send Now" >
             </div>
           </form>
         </div>
