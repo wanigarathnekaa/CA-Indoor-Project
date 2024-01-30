@@ -113,7 +113,7 @@
                 <?php foreach($data["userCoach"] as $coach): ?>
                 <div class="coach-card">
                     <div class="coach-img">
-                        <img src="<?php echo URLROOT; ?>/images/image1.jpg" class="coach-thum" alt="">
+                        <img src="<?php echo URLROOT; ?>/public/profilepic/<?php echo $coach->img; ?>" class="coach-thum" alt="">
                     </div>
                     <div class="coach-details">
                         <h3 class="coach-name"><?php echo $coach->name;?></h3>

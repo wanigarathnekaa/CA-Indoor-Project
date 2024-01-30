@@ -58,6 +58,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .name {
@@ -65,8 +66,9 @@
   text-align: center;
   position: relative;
   width: 200px;
-  height: 10px;
+  /* height: 10px; */
   font-size: 20px;
+  /* margin-bottom: 0px; */
 }
 
 .role{
@@ -74,7 +76,7 @@
   text-align: center;
   position: relative;
   width: 200px;
-  height: 10px;
+  /* height: 10px; */
   font-size: 15px;
 }
 

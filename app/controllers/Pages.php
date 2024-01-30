@@ -381,14 +381,7 @@ class Pages extends Controller
             
         }
 
-        $data1 = [
-            'coaches' => $coaches,
-            'userCoach' => $res,
-        ];
-
-
-
-        $this->view('Pages/Coach/coach', $data1);
+        $this->view('Pages/Coach/coach', $res);
     }
 
     public function CoachCard($name)

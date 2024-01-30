@@ -28,7 +28,8 @@
 
         //Register User
         public function coachRegister($data){
-            $this->db->query('INSERT INTO coaches (email, nic, srtAddress, city , achivements, experience, specialty, certificate,img) VALUES (:email, :nic, :srtAddress, :city , :achivements, :experience, :specialty, :certificate,:img)');
+            $this->db->query('INSERT INTO coaches (email, nic, srtAddress, city , achivements, experience, specialty, certificate) VALUES (:email, :nic, :srtAddress, :city , :achivements, :experience, :specialty, :certificate)');
+            
             $this->db->bind(':email', $data['email']);
             $this->db->bind(':nic', $data['nic']);
             $this->db->bind(':srtAddress', $data['srtAddress']);
@@ -37,7 +38,6 @@
             $this->db->bind(':experience', $data['experience']);
             $this->db->bind(':specialty', $data['specialty']);
             $this->db->bind(':certificate', $data['certificate']);
-            $this->db->bind(':img', $data['filename']);
 
 
             if($this->db->execute()){
@@ -50,7 +50,7 @@
         }
 
         public function updateCoach($data){
-            $this->db->query('UPDATE coaches SET email=:email ,nic= :nic, srtAddress= :srtAddress, city=:city, achivements=:achivements, experience=:experience, specialty=:specialty, certificate=:certificate ,img = :img WHERE email = :email');
+            $this->db->query('UPDATE coaches SET email=:email ,nic= :nic, srtAddress= :srtAddress, city=:city, achivements=:achivements, experience=:experience, specialty=:specialty, certificate=:certificate  WHERE email = :email');
             $this->db->bind(':email', $data['email']);
             $this->db->bind(':nic', $data['nic']);
             $this->db->bind(':srtAddress', $data['srtAddress']);
@@ -59,7 +59,7 @@
             $this->db->bind(':experience', $data['experience']);
             $this->db->bind(':specialty', $data['specialty']);
             $this->db->bind(':certificate', $data['certificate']);
-            $this->db->bind(':img', $data['filename']);
+    
 
 
             if($this->db->execute()){

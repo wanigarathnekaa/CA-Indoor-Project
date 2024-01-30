@@ -44,8 +44,8 @@
             <!-- Table Sort -->
             <div class="tableSort">
                   <div class="sort">
-                        <label>Status :</label>
-                        <select name="filter" id="filter">
+                        <label for="payfilter">Status :</label>
+                        <select name="filter" id="payfilter">
                               <option value="all">All</option>
                               <option value="paid">Paid</option>
                               <option value="unpaid">Unpaid</option>
@@ -53,12 +53,12 @@
                         </select>
                   </div>
                   <div class="sort">
-                        <label>Net :</label>
-                        <select name="filter" id="filter">
+                        <label for="netfilter">Net :</label>
+                        <select name="filter" id="netfilter">
                               <option value="all">All</option>
-                              <option value="netA">Net A</option>
-                              <option value="netB">Net B</option>
-                              <option value="netC">Net C</option>
+                              <option value="netA">Normal Net A</option>
+                              <option value="netB">Normal Net B</option>
+                              <option value="netC">Machine Net</option>
                         </select>
                   </div>
                   <div class="sort">
@@ -120,10 +120,11 @@
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
                                                 <?php echo "paid"; ?>
                                           </td>
-                                          <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
+                                          <td><a href="#"><i class="fa-solid fa-pen-to-square edit icon"></i></a></td>
                                           <td
                                                 onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
-                                                <i class="fa-solid fa-user-slash delete icon"></i>
+                                                <!-- <i class="fa-solid fa-user-slash delete icon"></i> -->
+                                                <i class="fa-solid fa-trash-can delete icon"></i>
                                           </td>
                                     </tr>
                                     <?php
