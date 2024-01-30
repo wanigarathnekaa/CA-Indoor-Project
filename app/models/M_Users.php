@@ -10,12 +10,13 @@ class M_Users
     //Register User
     public function register($data)
     {
-        $this->db->query('INSERT INTO user (name, user_name, email, phoneNumber, password) VALUES (:name, :user_name, :email, :phoneNumber, :password)');
+        $this->db->query('INSERT INTO user (name, user_name, email, phoneNumber, password,img) VALUES (:name, :user_name, :email, :phoneNumber, :password,:img)');
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':user_name', $data['user_name']);
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':phoneNumber', $data['phoneNumber']);
         $this->db->bind(':password', $data['pwd']);
+        $this->db->bind(':img', $data['filename']);
 
         if ($this->db->execute()) {
             return true;
@@ -86,12 +87,13 @@ class M_Users
 
     public function updateUser($data)
     {
-        $this->db->query('UPDATE user SET name = :name, user_name= :user_name, email= :email, phoneNumber= :phoneNumber, password= :password WHERE email = :email');
+        $this->db->query('UPDATE user SET name = :name, user_name= :user_name, email= :email, phoneNumber= :phoneNumber, password= :password ,img = :img WHERE email = :email');
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':user_name', $data['user_name']);
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':phoneNumber', $data['phoneNumber']);
         $this->db->bind(':password', $data['pwd']);
+        $this->db->bind(':img', $data['filename']);
 
 
         if ($this->db->execute()) {

@@ -54,7 +54,7 @@ class Coach extends Controller
 
 
             $newfilename = uniqid() . "-" . $data['filename'];
-            move_uploaded_file($data['filetmp'], "../public/coaches/" . $newfilename);
+            move_uploaded_file($data['filetmp'], "../public/profilepic/" . $newfilename);
             $data['filename'] = $newfilename;
             print_r($data);
 
@@ -228,7 +228,7 @@ class Coach extends Controller
             ];
 
             $newfilename = uniqid() . "-" . $data['filename'];
-            move_uploaded_file($data['filetmp'], "../public/coaches/" . $newfilename);
+            move_uploaded_file($data['filetmp'], "../public/profilepic/" . $newfilename);
             $data['filename'] = $newfilename;
 
 

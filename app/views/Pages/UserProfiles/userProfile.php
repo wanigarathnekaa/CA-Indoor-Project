@@ -24,10 +24,17 @@
                   <div class="profile-pic">
 
                         <div class="imgBox">
-                              <img class="profile-image" src="<?php echo URLROOT;?>/images/user.png">
+                              <?php
+                                    if($data->img == null){
+                                          echo '<img class="profile-image" src="'.URLROOT.'/public/profilepic/avatar.jpg">';
+                                    }
+                                    else{
+                                          echo '<img class="profile-image" src="'.URLROOT.'/public/profilepic/'.$data->img.'">';
+                                    }
+                              ?>
                         </div>
                         <div class="name"><?php echo $data->name ?></div>
-                        <!-- <div class="role"><?php echo $role ?></div> -->
+                        <div class="role"><?php echo $role ?></div>
                   </div>
                   <div class="details-block">
                         <div class="details">
