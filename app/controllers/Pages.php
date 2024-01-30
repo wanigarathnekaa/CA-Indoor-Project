@@ -472,6 +472,7 @@ class Pages extends Controller
     {
         $categories = $this->pagesModel->getCategories();
         $data = [
+            'categoryName_err' => "",
             'categories' => $categories,
         ];
         $this->view('Pages/InventoryManagement/category',$data);

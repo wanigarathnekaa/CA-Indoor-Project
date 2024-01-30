@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/managerDashboard.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/category.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
@@ -43,9 +44,10 @@
                 <div class="modal-content">
                     <h2>Add New Category</h2>
                     <!-- action="<?php echo URLROOT; ?>/Category/saveCategory ?>" -->
-                    <form action="<?php echo URLROOT; ?>/Category/saveCategory" method="POST" id="categoryForm">
+                    <form method="POST" id="categoryForm">
                         <label for="categoryName">Category Name</label>
                         <input type="text" id="categoryName" name="categoryName" placeholder="Enter category name">
+                        <span class="form-invalid"></span>
                         <div class="btn">
                             <button type="submit">Save</button>
                             <button type="button" onclick="closeModal()">Cancel</button>
@@ -66,37 +68,78 @@
                 </thead>
                 <tbody id="categoryTable">
                     <?php foreach ($data['categories'] as $category): ?>
-                            <tr>
-                                <td><?php echo $category->category_id; ?></td>
-                                <td><?php echo $category->category_name; ?></td>
-                                <td>
-                                    <a href="<?php echo URLROOT; ?>/Category/editCategory/<?php echo $category->category_id; ?>"><i class="fas fa-edit"></i></a>
-                                    <a href="<?php echo URLROOT; ?>/Category/deleteCategory/<?php echo $category->category_id; ?>"><i class="fas fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
+                        <tr>
+                            <td>
+                                <?php echo $category->category_id; ?>
+                            </td>
+                            <td>
+                                <?php echo $category->category_name; ?>
+                            </td>
+                            <td>
+                                <a
+                                    href="<?php echo URLROOT; ?>/Category/editCategory/<?php echo $category->category_id; ?>"><i
+                                        class="fas fa-edit"></i></a>
+                                <a
+                                    href="<?php echo URLROOT; ?>/Category/deleteCategory/<?php echo $category->category_id; ?>"><i
+                                        class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
 
         <!-- Pagination -->
         <div class="pagination-container">
-                <ul class="pagination">
-                    <li><a href="#" class="page-link">&laquo; Prev</a></li>
-                    <li><a href="#" class="page-link">1</a></li>
-                    <li><a href="#" class="page-link">2</a></li>
-                    <li><a href="#" class="page-link">3</a></li>
-                    <li><a href="#" class="page-link">4</a></li>
-                    <li><a href="#" class="page-link">5</a></li>
-                    <li><a href="#" class="page-link">Next &raquo;</a></li>
-                </ul>
-            </div>
+            <ul class="pagination">
+                <li><a href="#" class="page-link">&laquo; Prev</a></li>
+                <li><a href="#" class="page-link">1</a></li>
+                <li><a href="#" class="page-link">2</a></li>
+                <li><a href="#" class="page-link">3</a></li>
+                <li><a href="#" class="page-link">4</a></li>
+                <li><a href="#" class="page-link">5</a></li>
+                <li><a href="#" class="page-link">Next &raquo;</a></li>
+            </ul>
+        </div>
     </section>
 
     <!-- javascripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
     <script src="<?php echo URLROOT; ?>/js/category.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#categoryForm').submit(function (e) {
+                e.preventDefault();
+                var categoryName = $('#categoryName').val();
+
+                if (categoryName == '') {
+                    $('.form-invalid').html("Please enter category name");
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: "<?php echo URLROOT; ?>/Category/saveCategory",
+                        data: {
+                            categoryName: categoryName
+                        },
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.status === 'success') {
+                                $('#categoryForm')[0].reset();
+                                closeModal();
+                                location.reload();
+                            } else {
+                                $('.form-invalid').html(response.message);
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("AJAX request failed:", error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 
 </body>
 

@@ -217,6 +217,8 @@ tbody a {
   /* color: var(--black1); */
 }
 #coachTable td a {
+    text-decoration: none;
+    color: var(--black1);
     font-size: 1.4em; /* Adjust the font size */
     margin-right: 20px; /* Add space to the right */
   }
@@ -271,6 +273,11 @@ tbody td .icon:hover {
     background-color: var(--color01);
     color: var(--white);
 }
+
+.form-invalid{
+    color: rgb(172,5,5);
+    font-size: 0.85em;
+  }
 
 
 @media screen and (max-width: 768px) {
