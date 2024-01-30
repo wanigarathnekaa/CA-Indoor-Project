@@ -37,12 +37,81 @@ class Category extends Controller
     public function saveCategory()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($_POST['form_type'] == 'edit') {
+                $this->editCategory();
+            } else{
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+                $data = [
+                    'categoryName' => trim($_POST['categoryName']),
+                    'categorySlug' => $this->slugify($_POST['categoryName']),
+                    'categoryName_err' => "",
+                ];
+
+                // Validate category
+                if (empty($data['categoryName'])) {
+                    $data['categoryName_err'] = "Please enter a category";
+                } else {
+                    if ($this->categoryModel->findCategory($data['categoryName'])) {
+                        $data['categoryName_err'] = "This category is already exist";
+                    }
+                }
+
+                // If validation is completed and no error, then register the user
+                if (empty($data['categoryName_err'])) {
+                    // Create user
+                    if ($this->categoryModel->insertCategory($data)) {
+                        $response = [
+                            'status' => 'success',
+                        ];
+                    } else {
+                        $response = [
+                            'status' => 'error',
+                            'message' => 'Something went wrong',
+                        ];
+                    }
+                } else {
+                    // Load the view
+                    $response = [
+                        'status' => 'error',
+                        'message' => $data['categoryName_err'],
+                    ];
+                }
+
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                exit();
+            }
+        }
+    }
+
+    public function getCategoryById()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $id = trim($_POST['id']);
+
+            $category = $this->categoryModel->getCategoryById($id);
+
+            header('Content-Type: application/json');
+            echo json_encode($category);
+            exit();
+        }
+    }
+
+
+    public function editCategory()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
                 'categoryName' => trim($_POST['categoryName']),
                 'categorySlug' => $this->slugify($_POST['categoryName']),
+                'categoryId' => trim($_POST['categoryId']),
                 'categoryName_err' => "",
             ];
 
@@ -58,7 +127,7 @@ class Category extends Controller
             // If validation is completed and no error, then register the user
             if (empty($data['categoryName_err'])) {
                 // Create user
-                if ($this->categoryModel->insertCategory($data)) {
+                if ($this->categoryModel->updateCategory($data)) {
                     $response = [
                         'status' => 'success',
                     ];
@@ -78,26 +147,19 @@ class Category extends Controller
 
             header('Content-Type: application/json');
             echo json_encode($response);
-            exit(); 
+            exit();
         }
-    }
 
-
-
-    public function editCategory($id)
-    {
-        echo $id;
     }
 
     public function deleteCategory($id)
     {
-        if($this->categoryModel->deleteCategory($id)){
+        if ($this->categoryModel->deleteCategory($id)) {
             redirect('Pages/Category/manager');
-        }else{
+        } else {
             die('Something went wrong');
         }
     }
-
 
 }
 

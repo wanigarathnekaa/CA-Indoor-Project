@@ -2,40 +2,13 @@
 var modal = document.getElementById("myModal");
 
 function openModal() {
-  modal.style.display = "block";
+    modal.style.display = "block";
+    document.getElementById("form_type").value = "save";
 }
 
 function closeModal() {
   modal.style.display = "none";
   location.reload();
-}
-
-function saveCategory() {
-    // Get form data
-    var formData = new FormData(document.getElementById("categoryForm"));
-
-    // AJAX request
-    $.ajax({
-        url: "/C&A_Indoor_Project/Category/saveCategory",
-        type: "POST",
-        data: formData,
-        dataType: "json",
-        processData: false,
-        contentType: false,
-        success: function (response) {
-            // Handle server response
-            if (response.success) {
-                // If successful, close the modal or perform other actions
-                closeModal();
-            } else {
-                // If validation fails, display the error message
-                $("#categoryNameError").html(response.categoryName_err);
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error("AJAX request failed:", error);
-        }
-    });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
