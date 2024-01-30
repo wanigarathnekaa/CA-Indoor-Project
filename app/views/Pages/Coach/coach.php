@@ -28,7 +28,7 @@
                     <div class="coachcard">
                         <a href="<?php echo URLROOT?>/Pages/CoachCard/user?email=<?php echo $coach->email;?>">
                             <div class="coach-img">
-                                <img class="image" src="<?php echo URLROOT; ?>/public/coaches/<?php echo $coach->img;?>">
+                                <img class="image" src="<?php echo URLROOT; ?>/public/profilepic/<?php echo $coach->img;?>">
                             </div>
                             <div class="Name"><?php echo "{$coach->name}" ?></div>
                         </a>
