@@ -7,7 +7,7 @@
 </head>
     <body>
     <?php
-        $role = $_SESSION['user_role'];
+        $role = "Admin";
         require APPROOT . '/views/Pages/Dashboard/header.php';
         require APPROOT . '/views/Components/Side Bars/sideBar.php';
       ?>
