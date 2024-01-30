@@ -119,12 +119,13 @@ a:hover{
 }
 .right-side .input-box textarea {
   padding-top: 6px;
+
 }
 .right-side .button {
-  display: inline-block;
-  margin-top: 12px;
+  margin-top: 50px;
+  display: flex;
 }
-.right-side .button input[type="button"] {
+.right-side .button input[type="submit"] {
   color: #fff;
   font-size: 15px;
   outline: none;
@@ -135,10 +136,16 @@ a:hover{
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.button input[type="button"]:hover {
+.button input[type="submit"]:hover {
   background: var(--color02)
 }
 
+
+.input-box .form-invalid{
+  color: rgb(172,5,5);
+  font-size: 14px;
+}
+  
 
 
 @media (max-width: 950px) {

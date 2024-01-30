@@ -68,9 +68,13 @@ class Complaint extends Controller{
                          $this->view('Components/contactUs',$data);
                        
                      }}
+
+
+                    //  view complaints
                      public function viewComplaints()
                      {
                          $complaints = $this->complaintModel->getComplaints();
+                         
                          $data = [
                              'complaints' => $complaints
                          ];
