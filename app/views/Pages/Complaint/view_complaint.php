@@ -41,11 +41,13 @@
                 </div>
             </div>
 
-            <div class="swiper-button-next swiper-navBtn"></div>
-            <div class="swiper-button-prev swiper-navBtn"></div>
+            <button class="adspre-btn"><img src="<?php echo URLROOT; ?>/images/arrow.png" alt=""></button>
+            <button class="adsnxt-btn"><img src="<?php echo URLROOT; ?>/images/arrow.png" alt=""></button>
             <div class="swiper-pagination"></div>
         </div>
-      </section>  
+      </section> 
+      <script src="<?php echo URLROOT; ?>/js/ViewComplaints.js"></script>
+ 
     </body>
 
     <!-- Swiper JS -->
