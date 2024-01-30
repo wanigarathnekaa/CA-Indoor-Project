@@ -39,17 +39,18 @@
         </section>
         <div class="header">
             <h2>Category</h2>
-            <button type="button" onclick="openModal()">Add New Category</button>
+            <button type="button" id="addCategory" onclick="openModal()">Add New Category</button>
             <div id="myModal" class="modal">
                 <div class="modal-content">
-                    <h2>Add New Category</h2>
+                    <h2 class="modal-title">Add New Category</h2>
                     <!-- action="<?php echo URLROOT; ?>/Category/saveCategory ?>" -->
                     <form method="POST" id="categoryForm">
                         <label for="categoryName">Category Name</label>
                         <input type="text" id="categoryName" name="categoryName" placeholder="Enter category name">
                         <span class="form-invalid"></span>
                         <div class="btn">
-                            <button type="submit">Save</button>
+                            <input type="hidden" id="form_type" name="form_type">
+                            <button type="submit" id="submit">Save</button>
                             <button type="button" onclick="closeModal()">Cancel</button>
                         </div>
                     </form>
@@ -76,9 +77,8 @@
                                 <?php echo $category->category_name; ?>
                             </td>
                             <td>
-                                <a
-                                    href="<?php echo URLROOT; ?>/Category/editCategory/<?php echo $category->category_id; ?>"><i
-                                        class="fas fa-edit"></i></a>
+                                <button type="button" class="edit" id="<?php echo $category->category_id; ?>"><i
+                                        class="fas fa-edit"></i></button>
                                 <a
                                     href="<?php echo URLROOT; ?>/Category/deleteCategory/<?php echo $category->category_id; ?>"><i
                                         class="fas fa-trash-alt"></i></a>
@@ -112,7 +112,13 @@
             $('#categoryForm').submit(function (e) {
                 e.preventDefault();
                 var categoryName = $('#categoryName').val();
-
+                if($('#form_type').val() === "edit"){
+                    var id = $('.edit').attr('id');
+                }
+                else{
+                    var id = "";
+                }
+                
                 if (categoryName == '') {
                     $('.form-invalid').html("Please enter category name");
                 } else {
@@ -120,7 +126,9 @@
                         type: "POST",
                         url: "<?php echo URLROOT; ?>/Category/saveCategory",
                         data: {
-                            categoryName: categoryName
+                            form_type: $('#form_type').val(),
+                            categoryName: categoryName,
+                            categoryId: id
                         },
                         dataType: 'json',
                         success: function (response) {
@@ -137,6 +145,32 @@
                         }
                     });
                 }
+            });
+
+            $(".edit").click(function (e) {
+                e.preventDefault();
+                var id = $(this).attr('id');
+
+                var btn = "edit";
+                $('#myModal').css("display", "block");
+                $('#form_type').val(btn);
+                $('.modal-title').html("Edit Category");
+                $('#submit').html("Update").css("background-color", "goldenrod");
+
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo URLROOT; ?>/Category/getCategoryById",
+                    data: {
+                        id: id
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        $('#categoryName').val(response.category_name)
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX request failed:", error);
+                    }
+                });
             });
         });
     </script>

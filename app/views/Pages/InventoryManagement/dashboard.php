@@ -49,7 +49,7 @@
                 </div>
             </a>
 
-            <a class="card" href="#">
+            <a class="card" href="C&A_Indoor_Project/Pages/Category/manager">
                 <div>
                     <div class="numbers">11</div>
                     <div class="cardName">Categories</div>

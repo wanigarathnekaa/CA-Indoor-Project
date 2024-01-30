@@ -129,10 +129,19 @@ hr {
 }
 
 #categoryForm .btn {
-  position: relative;
-  right: -225px;
-  margin-top: 15px;
-}
+    position: relative;
+    /* bottom: 0; */
+    right: 0;
+    float: right;
+    margin-top: -18px;
+    margin-left: 210px;
+  }
+  
+  #categoryForm .btn button {
+    width: 35%;
+    margin-right: 0px; 
+    margin-top: 30px;
+  }
 
 #categoryForm label {
   display: block;
@@ -221,6 +230,15 @@ tbody a {
     color: var(--black1);
     font-size: 1.4em; /* Adjust the font size */
     margin-right: 20px; /* Add space to the right */
+  }
+
+#coachTable td button {
+    background-color: transparent;
+    border: none;
+    color: var(--black1);
+    font-size: 1.4em; /* Adjust the font size */
+    margin-right: 20px; /* Add space to the right */
+    cursor: pointer;
   }
 
 tbody td .icon {
