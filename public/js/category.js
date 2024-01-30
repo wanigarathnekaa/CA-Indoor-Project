@@ -7,37 +7,36 @@ function openModal() {
 
 function closeModal() {
   modal.style.display = "none";
+  location.reload();
 }
 
-// ... Existing JavaScript ...
+function saveCategory() {
+    // Get form data
+    var formData = new FormData(document.getElementById("categoryForm"));
 
-function saveCategory(event) {
-    event.preventDefault();
-    console.log("Inside Save Category!");
-  
-    $("#categoryForm").submit(function (e) {
-      e.preventDefault();
-  
-      var fd = new FormData(this);
-  
-      $.ajax({
+    // AJAX request
+    $.ajax({
         url: "/C&A_Indoor_Project/Category/saveCategory",
         type: "POST",
-        data: fd,
+        data: formData,
         dataType: "json",
         processData: false,
         contentType: false,
         success: function (response) {
-          console.log(response);
+            // Handle server response
+            if (response.success) {
+                // If successful, close the modal or perform other actions
+                closeModal();
+            } else {
+                // If validation fails, display the error message
+                $("#categoryNameError").html(response.categoryName_err);
+            }
         },
-      });
-  
-      closeModal();
+        error: function (xhr, status, error) {
+            console.error("AJAX request failed:", error);
+        }
     });
-  }
-  
-  // ... Existing JavaScript ...
-  
+}
 
 document.addEventListener("DOMContentLoaded", function () {
   const table = document.getElementById("coachTable");
