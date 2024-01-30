@@ -93,7 +93,7 @@
             </a>
 
           
-            <a class="card" href="">
+            <a class="card" href="C&A_Indoor_Project/Complaint/viewComplaints">
                 <div>
                     <div class="numbers"></div>
                     <div class="cardName">Complaints</div>

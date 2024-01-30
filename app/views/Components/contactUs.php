@@ -34,18 +34,21 @@
         <div class="right-side">
           <div class="topic-text">Send us a message</div>
           <p>If you have any help or any types of issues related our company, you can send me message from here. It's my pleasure to help you.</p>
-          <form action="#">
+          <form action="<?php echo URLROOT; ?>/Complaint/create" method="POST">
             <div class="input-box">
-              <input type="text" placeholder="Enter your name" />
+                  <input type="text" id="name" name="name" placeholder="Enter your name" value="" required>
+
             </div>
             <div class="input-box">
-              <input type="text" placeholder="Enter your email" />
+                  <input type="text" id="email" name="email" placeholder="Enter your email" value="" required>
             </div>
-            <div class="input-box message-box">
-              <textarea placeholder="Enter your message"></textarea>
+           
+            <div class="input-box">
+                  <input type="text" id="message" name="message" placeholder="Enter your message" value="" required>
+                  <span class="form-invalid"></span>
             </div>
             <div class="button">
-              <input type="button" value="Send Now" />
+            <input type="submit" value="Send Now" >
             </div>
           </form>
         </div>
