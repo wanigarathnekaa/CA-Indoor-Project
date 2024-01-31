@@ -56,9 +56,9 @@
       overflow: hidden;
       cursor: pointer;
       margin: 0 auto;
-      object-fit: cover;
+      /* object-fit: cover;
       object-position: center;
-      align-self: center;
+      align-self: center; */
   }
 
   .profile-pic:hover {
@@ -82,9 +82,12 @@
   
   .profile-image {
       max-width: 100%;
-      height: auto;
+      height: 100%;
       display: block;
       margin: 0 auto;
+      object-fit: cover;
+      object-position: center;
+
   }
   
   .propiclabel {

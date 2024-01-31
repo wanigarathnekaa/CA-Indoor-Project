@@ -35,10 +35,10 @@
                                                 <span class="camicon"><i class="fa-solid fa-camera"></i></span>
                                                 <?php
                                                       if($data["img"] == null){
-                                                            echo '<img class="profile-image" id="output" src="'.URLROOT.'/public/profilepic/avatar.jpg" width="150">' ;
+                                                            echo '<img class="profile-image" id="output" src="'.URLROOT.'/public/profilepic/avatar.jpg">' ;
                                                       }
                                                       else{
-                                                            echo '<img class="profile-image" id="output" src="'.URLROOT.'/public/profilepic/'.$data["img"].'" width="150">'; 
+                                                            echo '<img class="profile-image" id="output" src="'.URLROOT.'/public/profilepic/'.$data["img"].'">'; 
                                                       }
                                                 ?>
                                           </div>
