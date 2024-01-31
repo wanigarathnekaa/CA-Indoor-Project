@@ -48,7 +48,7 @@
                         <div class="form-group">
                             <label for="category_name">Category Name</label>
                             <select name="category_name" id="category_name" class="form-control">
-                            <option value="0">Select Category</option>
+                                <option value="0">Select Category</option>
                                 <?php foreach ($data['categories'] as $category): ?>
                                     <option value="<?php echo $category->category_id; ?>">
                                         <?php echo $category->category_name; ?>
@@ -75,19 +75,20 @@
                 <thead>
                     <tr>
                         <th>Brand ID</th>
-                        <th>Category Id</th>
+                        <th>Category Name</th>
                         <th>Brand Name</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="categoryTable">
+                    <?php $i = 0; ?>
                     <?php foreach ($data['brands'] as $brand): ?>
                         <tr>
                             <td>
                                 <?php echo $brand->brand_id; ?>
                             </td>
                             <td>
-                                <?php echo $brand->brand_category_name; ?>
+                                <?php echo $data['categories'][$i]->category_name ?>
                             </td>
                             <td>
                                 <?php echo $brand->brand_name; ?>
@@ -95,12 +96,13 @@
                             <td>
                                 <button type="button" class="edit" id="<?php echo $brand->brand_id; ?>"><i
                                         class="fas fa-edit"></i></button>
-                                <a
-                                    href="<?php echo URLROOT; ?>/Brand/deleteBrand/<?php echo $brand->brand_id; ?>"><i
+                                <a href="<?php echo URLROOT; ?>/Brand/deleteBrand/<?php echo $brand->brand_id; ?>"><i
                                         class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
-                    <?php endforeach; ?>
+                        <?php
+                        $i++;
+                    endforeach; ?>
                 </tbody>
             </table>
         </div>
