@@ -15,6 +15,13 @@
         $role = $_SESSION['user_role'];
         require APPROOT . '/views/Pages/Dashboard/header.php';
         require APPROOT . '/views/Components/Side Bars/sideBar.php';
+        $linkRole = "";
+            if($role == "User"){
+                  $linkRole = "Users";
+            }
+            else if($role == "Coach"){
+                  $linkRole = "Coach";
+            }
     ?>
 
 
@@ -27,7 +34,7 @@
 
                   <!-- form details -->
                   <div class="formbox">
-                        <form action="<?php echo URLROOT . "/" . $role; ?>/edit" method="POST" enctype="multipart/form-data">
+                        <form action="<?php echo URLROOT . "/" . $linkRole; ?>/edit" method="POST" enctype="multipart/form-data">
                               <!-- profile picture -->
                               <div class="profilepic">
                                     <label for="file" class="propiclabel">
