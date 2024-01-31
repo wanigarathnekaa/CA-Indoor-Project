@@ -39,7 +39,7 @@
         <!-- Cards -->
         <div class="cardBox">
 
-            <a class="card" href="#">
+            <a class="card" href="C&A_Indoor_Project/Pages/Brand/manager">
                 <div>
                     <div class="numbers">10</div>
                     <div class="cardName">Brands</div>
