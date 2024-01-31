@@ -104,6 +104,7 @@ class M_Users
 
     }
 
+    
     public function deleteUser($email){
         $this->db->query('DELETE FROM user WHERE email=:email');
         $this->db->bind(':email', $email);
@@ -113,6 +114,22 @@ class M_Users
         }
         else{
             return false;
+        }
+    }
+
+
+
+    // get user progile pic
+    public function getExistingImageFilename($email){
+        $this->db->query('SELECT img FROM user WHERE email = :email');
+        $this->db->bind(':email', $email);
+
+        $row = $this->db->single();
+
+        if ($row) {
+            return $row->img; 
+        } else {
+            return null; 
         }
     }
 
