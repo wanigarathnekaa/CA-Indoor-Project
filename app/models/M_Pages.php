@@ -88,6 +88,11 @@ class M_Pages
         return $result;
     }
 
+    public function getBrands(){
+        $this->db->query('SELECT * FROM brand');
+        $result = $this->db->resultSet();
+        return $result;
+    }
 
 }
 ?>
