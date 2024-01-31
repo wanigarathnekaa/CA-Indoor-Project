@@ -217,23 +217,25 @@ class Pages extends Controller
     {
         // $user = $this->pagesModel->findUser($_SESSION['user_email']);
         // print_r($user);
-        $coachAsCoach = $this->pagesModel->findCoach($_SESSION['user_email']);
-        $coachAsUser = $this->pagesModel->findUser($_SESSION['user_email']);
+        $userAsCoach = $this->pagesModel->findCoach($_SESSION['user_email']);
+        $userAsUser = $this->pagesModel->findUser($_SESSION['user_email']);
         $role = "Users";
-        if ($coachAsCoach) {
+        if ($userAsCoach) {
             $role = "Coach";
             $data = [
-                'name' => $coachAsUser->name,
-                'user_name' => $coachAsUser->user_name,
+                'name' => $userAsUser->name,
+                'user_name' => $userAsUser->user_name,
                 'email' => $_SESSION['user_email'],
-                'phoneNumber' => $coachAsUser->phoneNumber,
-                'pwd' => $coachAsUser->password,
-                'nic' => $coachAsCoach->nic,
-                // 'address' => $coachAsCoach->address,
-                'experience' => $coachAsCoach->experience,
-                'specialty' => $coachAsCoach->specialty,
-                'certificate' => $coachAsCoach->certificate,
+                'phoneNumber' => $userAsUser->phoneNumber,
+                'pwd' => $userAsUser->password,
+                'srtAddress' => $userAsCoach->srtAddress,
+                'city' => $userAsCoach->city,
+                'nic' => $userAsCoach->nic,
+                'experience' => $userAsCoach->experience,
+                'specialty' => $userAsCoach->specialty,
+                'certificate' => $userAsCoach->certificate,
                 'role' => $role,
+                'img'=>$userAsUser->img,
 
                 'name_err' => "",
                 'user_name_err' => "",
@@ -243,21 +245,24 @@ class Pages extends Controller
                 'address_err' => "",
                 'experience_err' => "",
                 'specialty_err' => "",
-                'certificate_err' => ""
+                'certificate_err' => "",
+                'img_err'=> ""
             ];
         } else {
             $data = [
-                'name' => $coachAsUser->name,
-                'user_name' => $coachAsUser->user_name,
+                'name' => $userAsUser->name,
+                'user_name' => $userAsUser->user_name,
                 'email' => $_SESSION['user_email'],
-                'phoneNumber' => $coachAsUser->phoneNumber,
-                'pwd' => $coachAsUser->password,
+                'phoneNumber' => $userAsUser->phoneNumber,
+                'pwd' => $userAsUser->password,
                 'role' => $role,
+                'img'=>$userAsUser->img,
 
                 'name_err' => "",
                 'user_name_err' => "",
                 'email_err' => "",
                 'phoneNumber_err' => "",
+                'img_err'=> ""
             ];
         }
         // print_r($data);

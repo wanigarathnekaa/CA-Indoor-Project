@@ -5,6 +5,8 @@
 # folders
 /public/uploads
 
+/public/profilepic
 
-# config file
-/app/config
+
+# config files
+/app/config/config.php

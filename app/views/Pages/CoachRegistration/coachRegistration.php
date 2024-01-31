@@ -12,7 +12,7 @@
 <body>
 
   <!-- Sidebar -->
-  <<?php
+  <?php
       $role = "Manager";
       require APPROOT . '/views/Pages/Dashboard/header.php';
       require APPROOT . '/views/Components/Side Bars/sideBar.php';
