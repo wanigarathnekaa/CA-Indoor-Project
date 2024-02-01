@@ -1,149 +1,178 @@
-/* Google Fonts - Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,600;0,700;1,300;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap");
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
-body{
+body {
   min-height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
-  background-color: #EFEFEF;
-}
-.slide-container{
-  max-width: 1120px;
-  width: 100%;
-  padding: 40px 0;
-}
-.slide-content{
-  margin: 0 40px;
-  overflow: hidden;
-  border-radius: 25px;
+  align-items: center;
+  background-color: #dbd8d8;
+  padding: 3px;
 }
 .card-wrapper {
-    display: flex;
-    flex-wrap: nowrap; /* Ensures the cards stay in a single row */
-    overflow-x: auto; /* Allows horizontal scrolling if the cards exceed the container width */
-    width: 200%; /* Make the container wider */
-    
-}
-.slide-content{
-    margin: 40px 40px 0; /* Adjusted top margin to push the cards down */
-    overflow: hidden;
-    border-radius: 25px;
-    padding-top: 50px; /* Added padding-top to create space between cards and top */
-    padding-left: 100px;
-}
-  
-.card {
-    flex: 0 0 auto; /* Ensures the cards don't grow or shrink */
-    margin-right: 10px; /* Adjust margin between cards as needed */
+  padding-top: 80px;
+  display: flex; /* Display children in a row */
+  overflow-x: auto; /* Allow horizontal scrolling */
+  scroll-snap-type: x mandatory; /* Enable snapping for horizontal scrolling */
 }
 
-/* Optional: Adjust width of cards if needed */
 .card {
-    width: 700px; /* Adjust as needed */
+  flex: 0 0 auto; /* Don't grow or shrink, maintain initial size */
+  width: 300px; /* Adjust width as needed */
+  margin-right: 20px; /* Add some space between cards */
+  scroll-snap-align: start; /* Snap card to the start of the container */
+}
+.slider-container .card {
+  width: 400px; /* Adjust width as needed */
 }
 
-.card{
-    width: 500px;
-    height: 400px;
+
+.slider-container{
+  max-width: 2020px;
+  width: 100%;
+  padding: 100px 0;
+}
+.slider-content {
+  overflow: hidden;
   border-radius: 25px;
-  background-color: #FFF;
+  margin: 0 40px;
+}
+.card {
+  width: 700px;
+  border-radius: 25px;
+  background-color: #fff;
 }
 .image-content,
-.card-content{
+.card-content {
+  padding: 10px 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 14px;
 }
-.image-content{
+.card-content{
+  height: 200px;
+}
+.image-content {
   position: relative;
   row-gap: 5px;
   padding: 25px 0;
 }
-.overlay{
+.overlay {
   position: absolute;
   left: 0;
   top: 0;
-  height: 100%;
   width: 100%;
+  height: 100%;
   background-color: #4F9DA9;
-  border-radius: 25px 25px 0 25px;
+  border-radius: 25px 25px 0px 25px;
 }
 .overlay::before,
 .overlay::after{
-  content: '';
-  position: absolute;
-  right: 0;
-  bottom: -40px;
-  height: 40px;
-  width: 40px;
-  background-color: #4F9DA9;
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -40px;
+    width: 40px;
+    height: 40px;
+    background-color:#4F9DA9;
 }
 .overlay::after{
-  border-radius: 0 25px 0 0;
-  background-color: #FFF;
+    border-radius: 0 25px 0 0 ;
+    background-color: #fff;
 }
-.card-wrapper {
-    display: flex;
-    flex-wrap: nowrap; /* Ensures the cards stay in a single row */
-    overflow-x: auto; /* Allows horizontal scrolling if the cards exceed the container width */
-    width: 1200px; /* Adjust the width of the container */
-}
-
-.card {
-    flex: 0 0 auto; /* Ensures the cards don't grow or shrink */
-    margin-right: 20px; /* Adjust margin between cards as needed */
-    width: 300px; /* Adjust the width of the cards */
-}
-.card-image{
+.card-image {
   position: relative;
   height: 150px;
   width: 150px;
+  background-color: #fff;
   border-radius: 50%;
-  background: #FFF;
-  padding: 3px;
 }
-.card-image .card-img{
+.card-image .card-img {
   height: 100%;
   width: 100%;
   object-fit: cover;
   border-radius: 50%;
   border: 4px solid #4F9DA9;
 }
-.name{
+.name {
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
   color: #333;
 }
-.description{
+.description-wrapper {
+  max-width: 200px; /* Adjust as needed */
+  overflow-wrap: break-word;
+}
+
+.description {
+  width: 200px;
   font-size: 14px;
   color: #707070;
   text-align: center;
+  
+    word-wrap: break-word; /* Allow wrapping of long words */
+    max-height: 300px; /* Adjust the maximum height as needed */
+    overflow-y: auto; /* Add vertical scrollbar if content overflows */
+    margin-bottom: 50px;
+    .description {
+      width: 200px;
+      font-size: 14px;
+      color: #707070;
+      text-align: center;
+      word-wrap: break-word; /* Allow wrapping of long words */
+      margin-bottom: 50px;
+    }
+    
 }
-.button{
+/* .button {
   border: none;
+  outline: none;
   font-size: 16px;
-  color: #FFF;
-  padding: 8px 16px;
   background-color: #4F9DA9;
-  border-radius: 6px;
+  color: white;
   margin: 14px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 400;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all ease 0.3s;
+} */
+.description {
+  word-wrap: break-word; /* Allow wrapping of long words */
 }
-.button:hover{
-  background: #2e8a99;
+.description {
+  max-width: 200px; /* Adjust as needed */
+  max-height: 100px; /* Adjust as needed */
+  overflow: auto;
+  overflow-wrap: break-word;
 }
 
+
+.button1 {
+  padding-top: 20px;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4F9DA9;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  margin: 14px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 400;
+}
+
+.button:hover {
+  background-color: #2e8a99;
+}
 .swiper-navBtn{
-  color: #4F9DA9;
+  color: #6e93f7;
   transition: color 0.3s ease;
 }
 .swiper-navBtn:hover{
@@ -151,7 +180,7 @@ body{
 }
 .swiper-navBtn::before,
 .swiper-navBtn::after{
-  font-size: 35px;
+  font-size: 40px;
 }
 .swiper-button-next{
   right: 0;
@@ -159,16 +188,15 @@ body{
 .swiper-button-prev{
   left: 0;
 }
-.swiper-pagination-bullet{
-  background-color: #4F9DA9;
-  opacity: 1;
+.swiper-pagination.bullet{
+ background-color: #6e93f7;
+ opacity: 1;
 }
-.swiper-pagination-bullet-active{
-  background-color: #4F9DA9;
+.swiper-pagination.bullet-active{
+ background-color: #4F9DA9;
 }
-
-@media screen and (max-width: 768px) {
-  .slide-content{
+@media screen and (max-width:768px) {
+  .slider-content{
     margin: 0 10px;
   }
   .swiper-navBtn{
