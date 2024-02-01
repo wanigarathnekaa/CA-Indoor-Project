@@ -33,7 +33,7 @@
 
             <!-- <div><a href="C&A_Indoor_Project/Pages/Coach/user" class="btn">View All</a></div>   -->
 
-            <div><a href="<?php echo URLROOT; ?>/Complaint/ComplaintDetails/<?php echo $complaints->id ;?>" class="button1" >View More</a></div>
+            <div><a href="<?php echo URLROOT; ?>/Complaint/ComplaintDetails/<?php echo $complaints->id ;?>" class="button1" >View</a></div>
             
             </div>
           </div>
