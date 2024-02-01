@@ -20,7 +20,7 @@
 <body>
       <!-- Sidebar -->
       <?php
-      $role = "Manager";
+      $role = $_SESSION['user_role'];
       require APPROOT . '/views/Pages/Dashboard/header.php';
       require APPROOT . '/views/Components/Side Bars/sideBar.php';
       ?>
