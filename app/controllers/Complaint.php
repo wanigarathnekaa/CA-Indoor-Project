@@ -80,7 +80,60 @@ class Complaint extends Controller{
                          ];
                          $this->view('Pages/Complaint/view_complaint', $data);
                      }
-                     
+                     public function ComplaintDetails($complaintId)
+                     {
+                         $complaint = $this->complaintModel->getComplaintById($complaintId);
                          
-}
+                         $data = [
+                            'complaint' => $complaint,
+                         ];
+                         $this->view('Pages/Complaint/complaintDetails', $data);
+                     }
+                     
+                     
+                         // Function to send email with password
+                         public static function sendEmail($email) {
+                           
+ 
+//required files
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
+
+
+                            
+                     
+                             //Import PHPMailer classes into the global namespace
+                             //These must be at the top of your script, not inside a function
+                     
+                             $mail = new PHPMailer(true);
+                     
+                             try {
+                                 //Server settings
+                                 $mail->isSMTP();
+                                 $mail->Host = 'smtp.gmail.com';
+                                 $mail->SMTPAuth = true;
+                                 $mail->Username = 'nivodya2001@gmail.com';
+                                 $mail->Password = 'ndvpqhmangzegxhn';
+                                 $mail->SMTPSecure = 'tls';
+                                 $mail->Port = 587;
+                     
+                                 //Recipients
+                                 $mail->setFrom('nivodya2001@gmail.com', 'Hasini Hewa');
+                                 $mail->addAddress($email);
+                     
+                                 //Content
+                                 $mail->isHTML(true);
+                                 $mail->Subject = 'About your complaint';
+                                 $mail->Body = 'I cleared that.';
+                     
+                                 $mail->send();
+                                 return true;
+                             } catch (Exception $e) {
+                                 return false;
+                             }
+                         }
+                     }
+                     ?>
+                     
 ?>
