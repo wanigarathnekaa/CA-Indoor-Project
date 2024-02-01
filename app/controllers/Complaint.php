@@ -1,4 +1,7 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+ 
 class Complaint extends Controller{
     private $complaintModel;
     public function __construct(){
@@ -25,7 +28,7 @@ class Complaint extends Controller{
                 'message_err'=>''
 
             ];
-            
+               
             if(empty($data['name'])) {
                 $data['name_err']='Please enter the name';
             }
@@ -89,51 +92,60 @@ class Complaint extends Controller{
                          ];
                          $this->view('Pages/Complaint/complaintDetails', $data);
                      }
-                     
-                     
-                         // Function to send email with password
-                         public static function sendEmail($email) {
-                           
+// Function to send email with password
+    public function sendEmail($complaintId)
+    {
+        require_once APPROOT . '/libraries/phpmailer/src/PHPMailer.php';
+        require_once APPROOT . '/libraries/phpmailer/src/SMTP.php';
+        require_once APPROOT . '/libraries/phpmailer/src/Exception.php';
+        if (isset($_POST["send"])) {
+
+        $mail = new PHPMailer(true);
+
+        $email=$this->complaintModel->getComplaintEmailById($complaintId);
+
  
-                            require_once APPROOT . '/libraries/phpmailer/Exception.php';
-                            require_once APPROOT . '/libraries/phpmailer/PHPMailer.php';
-                            require_once APPROOT . '/libraries/phpmailer/SMTP.php';
-                            
+            //Server settings
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'nivodya2001@gmail.com';
+            $mail->Password = 'ndvpqhmangzegxhn';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;
+            
+            //Recipients
+            $mail->setFrom('nivodya2001@gmail.com', 'Hasini Hewa');
+            $mail->addAddress($email);
+
+            //Content
+            $mail->isHTML(true);
+            $mail->Subject = 'About your complaint';
+            $mail->Body    = $_POST["message"];
+            $mail->send();
+
+            redirect('Pages/Dashboard/admin');
 
 
-                            
-                     
-                             //Import PHPMailer classes into the global namespace
-                             //These must be at the top of your script, not inside a function
-                     
-                             $mail = new PHPMailer(true);
-                     
-                             try {
-                                 //Server settings
-                                 $mail->isSMTP();
-                                 $mail->Host = 'smtp.gmail.com';
-                                 $mail->SMTPAuth = true;
-                                 $mail->Username = 'nivodya2001@gmail.com';
-                                 $mail->Password = 'ndvpqhmangzegxhn';
-                                 $mail->SMTPSecure = 'tls';
-                                 $mail->Port = 587;
-                     
-                                 //Recipients
-                                 $mail->setFrom('nivodya2001@gmail.com', 'Hasini Hewa');
-                                 $mail->addAddress($email);
-                     
-                                 //Content
-                                 $mail->isHTML(true);
-                                 $mail->Subject = 'About your complaint';
-                                 $mail->Body = 'I cleared that.';
-                     
-                                 $mail->send();
-                                 return true;
-                             } catch (Exception $e) {
-                                 return false;
-                             }
-                         }
-                     }
-                     ?>
-                     
+            if ($mail->send()) {
+                if($this->complaintModel->delete($complaintId)){
+                    redirect('Pages/Dashboard/admin');
+
+                }
+                else{
+                    die('somthing wrong');
+                }                
+
+
+
+                
+            } else {
+                // Handle email sending failure
+                echo 'Email could not be sent.';
+            }
+        } 
+
+    }}
+                         
+
 ?>
