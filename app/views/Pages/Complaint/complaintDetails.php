@@ -26,7 +26,7 @@
                         <div class="hasini">
                            <div class="right-side">
           <div class="topic-text">Reply to the Complaint</div>
-          <form id="contact" action="<?php echo URLROOT; ?>/Complaint/sendEmail/<?php echo $data['complaint']->email; ?>" method="post">
+          <form id="contact" for="<?php echo URLROOT; ?>/Complaint/sendEmail/<?php echo $data['complaint']->email; ?>" method="post">
             <div class="input-box">
                   <input type="text" id="name" name="name" placeholder="Enter your name" value="<?php echo $data['complaint']->name; ?>">
             </div>
@@ -34,11 +34,14 @@
                   <input type="text" id="email" name="email" placeholder="Enter your email" value="<?php echo $data['complaint']->email; ?>">
             </div>
             <div class="input-box">
+            <label for="name">Complaint:</label>
+
                  <textarea id="message" name="message1" placeholder="Enter your message"><?php echo $data['complaint']->message; ?></textarea>
             </div>
            
-            <div class="input-box">
-                  <textarea id="message" name="message" placeholder="Enter your Reply" value=""></textarea>
+            <div class="input-box" id="abc">
+
+                  <textarea id="message" name="message" placeholder="Enter your Reply" value="" rows="6"></textarea>
             </div>
             <div class="button">
               <input type="submit" value="Send Now" >

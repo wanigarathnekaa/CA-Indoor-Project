@@ -137,6 +137,12 @@ a:hover{
   padding-top: 6px;
 
 }
+#abc{
+  margin-top: 50px;
+} 
+.input-box textarea {
+  height: 200px;
+}
 .right-side .button {
   margin-top: 50px;
   display: flex;

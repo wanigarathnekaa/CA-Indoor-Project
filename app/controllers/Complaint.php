@@ -95,10 +95,10 @@ class Complaint extends Controller{
                          public static function sendEmail($email) {
                            
  
-//required files
-require 'phpmailer/src/Exception.php';
-require 'phpmailer/src/PHPMailer.php';
-require 'phpmailer/src/SMTP.php';
+                            require_once APPROOT . '/libraries/phpmailer/Exception.php';
+                            require_once APPROOT . '/libraries/phpmailer/PHPMailer.php';
+                            require_once APPROOT . '/libraries/phpmailer/SMTP.php';
+                            
 
 
                             
