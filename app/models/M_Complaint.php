@@ -35,6 +35,33 @@ public function create($data){
         $this->db->bind(':id',$complaintId);
         return $this->db->single();
     }
+    public function getComplaintEmailById($complaintId){
+        $this->db->query('SELECT email FROM complaint WHERE id=:id');
+        $this->db->bind(':id',$complaintId);
+        $result= $this->db->single();
+        if ($result) {
+            return $result->email; // Access the 'email' property directly
+        } else {
+            return null; // Handle case when no result is found
+        }
+    
+    }
+    public function delete($complaintId){
+        $this->db->query('DELETE FROM complaint WHERE id=:id');
+        $this->db->bind(':id',$complaintId);
+       
+
+        if($this->db->execute()){
+            return true;
+        }
+        else{
+            return false;
+        }
+        
+
+
+
+    }
 }
   
 ?>
