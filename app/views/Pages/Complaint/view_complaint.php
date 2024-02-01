@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
       <meta charset="UTF-8">
@@ -12,50 +13,41 @@
         require APPROOT . '/views/Components/Side Bars/sideBar.php';
       ?>
       <section class="home">
-        <div class="slide-container swiper">
-            <div class="slide-content">
-                <div class="card-wrapper swiper-wrapper">
-                <?php foreach ($data["complaints"] as $complaints): ?>
+  
+    <div class="slider-container swiper">
+      <div class="slider-content">
+        <div class="card-wrapper swiper-wrapper">
+        <?php foreach ($data["complaints"] as $complaints): ?>
 
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-                            <span class="overlay"></span>
+          <div class="card swiper-slide">
+            <div class="image-content">
+              <span class="overlay"></span>
+              <div class="card-image">
 
-                            <div class="card-image">
-                               <img src="" alt="" class="card-img">
-                            </div>
-                        </div>
-
-                        <div class="card-content">
-                            <h2 class="name"><?php echo $complaints->name ?></h2>
-                            <p class="description"><?php echo $complaints->message ?></p>
-
-                            <button class="button">View More</button>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
-
-                   
-                  
-                   
-                </div>
+                <img src="" class="card-img" alt="" />
+              </div>
             </div>
+            <div class="card-content">
+            <h2 class="name"><?php echo $complaints->name ?></h2>
+            <p class="description"><?php echo $complaints->message ?></p>
 
-            <button class="adspre-btn"><img src="<?php echo URLROOT; ?>/images/arrow.png" alt=""></button>
-            <button class="adsnxt-btn"><img src="<?php echo URLROOT; ?>/images/arrow.png" alt=""></button>
-            <div class="swiper-pagination"></div>
+            <!-- <div><a href="C&A_Indoor_Project/Pages/Coach/user" class="btn">View All</a></div>   -->
+
+            <div><a href="<?php echo URLROOT; ?>/Complaint/ComplaintDetails/<?php echo $complaints->id ;?>" class="button1" >View More</a></div>
+            
+            </div>
+          </div>
+          <?php endforeach; ?>
+
+         
         </div>
-      </section> 
+      </div>
+      <div class="swiper-button-next swiper-navBtn"></div>
+      <div class="swiper-button-prev swiper-navBtn"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+      </section>
       <script src="<?php echo URLROOT; ?>/js/ViewComplaints.js"></script>
- 
-    </body>
 
-    <!-- Swiper JS -->
-   <!-- <script src="//cdn.jsdelivr.net/gh/freeps2/a7rarpress@main/swiper-bundle.min.js"></script> -->
-
-    <!-- JavaScript -->
-      <!--Uncomment this line-->
-    <!-- <script src="//cdn.jsdelivr.net/gh/freeps2/a7rarpress@main/script.js"></script> -->
+  </body>
 </html>
-
-

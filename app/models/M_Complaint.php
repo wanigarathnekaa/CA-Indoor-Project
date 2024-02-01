@@ -30,6 +30,11 @@ public function create($data){
 
         return $this->db->resultset();
     }
+    public function getComplaintById($complaintId){
+        $this->db->query('SELECT * FROM complaint WHERE id=:id');
+        $this->db->bind(':id',$complaintId);
+        return $this->db->single();
+    }
 }
   
 ?>
