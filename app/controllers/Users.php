@@ -153,7 +153,12 @@ class Users extends Controller
                 if ($this->userManagerModel->findUserByEmail($data['email'])) {
                     $role = 'Manager'; 
                     //echo "user is found";
-                } elseif ($this->userModel->findUserByEmail($data['email'])) {
+                }
+                 elseif ($this->userModel->findUserByEmail($data['email'])) {
+                    $role = 'User';
+                    //echo "user is found";
+                }
+                elseif ($this->userCoachModel->findUserByEmail($data['email'])) {
                     $role = 'User';
                     //echo "user is found";
                 } else {
@@ -174,7 +179,9 @@ class Users extends Controller
                 if ($role == 'User') {
                     //Authenticate User
                     $loginUser = $this->userModel->login($data['email'], $data['pwd']);
-                    if($loginUser == false){
+                    $loginCoach = $this->userCoachModel->login($data['email'], $data['pwd']);
+
+                    if($loginUser == false || $loginCoach==false){
                         $data['pwd_err'] = "Invalid Password";
                         $this->view('Pages/LoginPage/login', $data);
                     }else if ($this->userCoachModel->findUserByEmail($data['email'])) {
