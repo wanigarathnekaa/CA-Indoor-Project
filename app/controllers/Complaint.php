@@ -92,6 +92,23 @@ class Complaint extends Controller{
                          ];
                          $this->view('Pages/Complaint/complaintDetails', $data);
                      }
+                       
+        // //Get  user image
+        
+            // Other methods and properties...
+        
+            public function getUserImg($user_id) {
+                // Logic to fetch and return image URL
+                $image = $this->complaintModel->getUserImgById($user_id);
+                // Construct the URL with URLROOT and image path
+                return  $image;
+            }
+        
+        
+        
+
+                     
+
 // Function to send email with password
     public function sendEmail($complaintId)
     {

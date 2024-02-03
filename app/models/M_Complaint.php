@@ -40,11 +40,20 @@ public function create($data){
         $this->db->bind(':id',$complaintId);
         $result= $this->db->single();
         if ($result) {
-            return $result->email; // Access the 'email' property directly
+            return $result->email; 
         } else {
-            return null; // Handle case when no result is found
+            return null; 
         }
     
+    }
+   
+    public function getUserImg($user_id)    {
+        $image=$this->db->query('SELECT img FROM user WHERE uid = :uid');
+        if ($image) {
+            return $image; 
+        } else {
+            return null; 
+        }
     }
     public function delete($complaintId){
         $this->db->query('DELETE FROM complaint WHERE id=:id');
