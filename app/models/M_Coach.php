@@ -19,7 +19,7 @@ use PHPMailer\PHPMailer\Exception;
 
         //Register User
         public function coachRegister($data){
-            $this->db->query('INSERT INTO coaches (email, nic, srtAddress, city , achivements, experience, specialty, certificate,password) VALUES (:email, :nic, :srtAddress, :city , :achivements, :experience, :specialty, :certificate,:password)');
+            $this->db->query('INSERT INTO coaches (email, nic, srtAddress, city , achivements, experience, specialty, certificate) VALUES (:email, :nic, :srtAddress, :city , :achivements, :experience, :specialty, :certificate)');
             
             $this->db->bind(':email', $data['email']);
             $this->db->bind(':nic', $data['nic']);
@@ -29,7 +29,7 @@ use PHPMailer\PHPMailer\Exception;
             $this->db->bind(':experience', $data['experience']);
             $this->db->bind(':specialty', $data['specialty']);
             $this->db->bind(':certificate', $data['certificate']);
-            $this->db->bind(':password', $data['pwd']);
+            
 
 
 
@@ -87,7 +87,7 @@ use PHPMailer\PHPMailer\Exception;
                 //Content
                 $mail->isHTML(true);
                 $mail->Subject = 'Your Coach Account Deatails';
-                $mail->Body    = 'Your login credentials:<br>Email:  '.$emai.'<br>Password:'.$password;
+                $mail->Body    = 'Your login credentials:<br>Email:  '.$email.'<br>Password:'.$password;
                 $mail->send();
     
                 return true;
