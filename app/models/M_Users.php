@@ -10,7 +10,7 @@ class M_Users
     //Register User
     public function register($data)
     {
-        $this->db->query('INSERT INTO user (name, user_name, email, phoneNumber, password,img) VALUES (:name, :user_name, :email, :phoneNumber, :password,:img)');
+        $this->db->query('INSERT INTO user (name, user_name, email, phoneNumber,password,img) VALUES (:name, :user_name, :email, :phoneNumber,:password,:img)');
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':user_name', $data['user_name']);
         $this->db->bind(':email', $data['email']);
