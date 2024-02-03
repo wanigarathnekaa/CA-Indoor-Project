@@ -1,4 +1,6 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 class Coach extends Controller
 {
     private $coachModel;
@@ -25,7 +27,7 @@ class Coach extends Controller
                 'user_name' => trim($_POST['name']),
                 'email' => trim($_POST['email']),
                 'phoneNumber' => trim($_POST['phoneNumber']),
-                'pwd' => "12345678",
+                // 'pwd' => "12345678",
                 'nic' => trim($_POST['nic']),
                 'srtAddress' => trim($_POST['srtAddress']),
                 'city' => trim($_POST['city']),
@@ -127,11 +129,20 @@ class Coach extends Controller
             if (empty($data['filename'])) {
                 $data['filename_err'] = "Please upload profile picture";
             }
+            $password=$this->coachModel->generateRandomPassword();
 
+            if($this->coachModel->SendPasswordViaEmail($_POST['email'],$password)){
+                $data['pwd'] = $password;
+
+            }
+            else {
+                    
+                die('Something Went wrong');
+            }
 
             //If validation is completed and no error, then register the user
             if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err']) && empty($data['nic_err'])) {
-                //Hash the password
+                // //Hash the password
                 $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
                 //create user
                 if ($this->coachModel->coachRegister($data) && $this->coachUserModel->register($data)) { 
