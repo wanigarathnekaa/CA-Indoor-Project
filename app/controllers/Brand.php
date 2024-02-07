@@ -119,7 +119,7 @@ class Brand extends Controller
 
             $output ='<option selected disabled>--Select Your Brand Name--</option>';
             foreach ($category as $cat) {
-                $output .= '<option value="' . $cat->brand_category_name . '">' . $cat->brand_name . '</option>';
+                $output .= '<option value="' . $cat->brand_id . '">' . $cat->brand_name . '</option>';
             }
 
             $response = [

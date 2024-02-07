@@ -91,6 +91,7 @@ hr {
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 6px;
   z-index: 999;
+  overflow-y: auto;
 }
 
 .modal-content {
@@ -104,6 +105,7 @@ hr {
   border: 1px solid #888;
   box-sizing: border-box;
   z-index: 1000;
+  overflow: hidden;
 }
 
 .modal .modal-content .modal-title {
@@ -343,7 +345,8 @@ tbody td .icon:hover {
 }
 
 .form-invalid-1,
-.form-invalid-2 {
+.form-invalid-2,.form-invalid-3,
+.form-invalid-4,.form-invalid-5, .form-invalid-6{
   color: rgb(172, 5, 5);
   font-size: 0.85em;
 }

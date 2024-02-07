@@ -7,65 +7,70 @@ class Product extends Controller
         $this->productModel = $this->model('M_Product');
     }
 
-    public function slugify($text, string $divider = '_')
-    {
-        // replace non letter or digits by divider
-        $text = preg_replace('~[^\pL\d]+~u', $divider, $text);
-
-        // transliterate
-        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-
-        // remove unwanted characters
-        $text = preg_replace('~[^-\w]+~', '', $text);
-
-        // trim
-        $text = trim($text, $divider);
-
-        // remove duplicate divider
-        $text = preg_replace('~-+~', $divider, $text);
-
-        // lowercase
-        $text = strtolower($text);
-
-        if (empty($text)) {
-            return 'n-a';
-        }
-
-        return $text;
-    }
-
-    public function saveBrand()
+    public function saveProduct()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if ($_POST['form_type'] == 'edit') {
-                $this->editBrand();
-            } else{
+            if ($_POST['formType'] == 'edit') {
+                //$this->editProduct();
+            } else {
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
                 $data = [
-                    'brandName' => trim($_POST['brandName']),
-                    'brandSlug' => $this->slugify($_POST['brandName']),
-                    'brandCategoryName' => trim($_POST['category_name']),
-                    'brandName_err' => "",
-                    'brandCategoryName_err' => "",
+                    'productName' => trim($_POST['productName']),
+                    'category_name' => intval(trim($_POST['category_name'])),
+                    'brand_name' => intval(trim($_POST['brand_name'])),
+                    'regular_price' => trim($_POST['regular_price']),
+                    'selling_price' => trim($_POST['selling_price']),
+                    'short_description' => trim($_POST['short_description']),
+
+                    'productName_err' => "",
+                    'category_name_err' => "",
+                    'brand_name_err' => "",
+                    'regular_price_err' => "",
+                    'selling_price_err' => "",
+                    'short_description_err' => "",
                 ];
 
-                // Validate category
-                if (empty($data['brandName'])) {
-                    $data['brandName_err'] = "Please enter a brand";
+                // Validate product
+                if (empty($data['productName'])) {
+                    $data['productName_err'] = "Please enter a Product Name";
                 } else {
-                    if ($this->brandModel->findBrand($data['brandName'])) {
-                        $data['brandName_err'] = "This brand is already exist";
+                    if ($this->productModel->findProduct($data['productName'])) {
+                        $data['productName_err'] = "This Product is already exist";
                     }
                 }
 
-                if($data['brandCategoryName'] == "0"){
-                    $data['brandCategoryName_err'] = "Please select a category";
+                if ($data['category_name'] == 0) {
+                    $data['category_name_err'] = "Please select a category";
+                }
+                if ($data['brand_name'] == 0) {
+                    $data['brand_name_err'] = "Please select a brand";
+                }
+                if (empty($data['regular_price'])) {
+                    $data['regular_price_err'] = "Please select a Regular Price";
+                }
+                if (empty($data['selling_price'])) {
+                    $data['selling_price_err'] = "Please select a Selling Price";
                 }
 
+                if (empty($data['short_description'])) {
+                    $data['short_description_err'] = "Enter Description";
+                }
+
+                if ($_FILES['product_thumbnail']['error'] == 0) {
+                    $data['product_thumbnail'] = trim($_FILES['product_thumbnail']['name']);
+                    $data['product_thumbnail_tmp'] = trim($_FILES['product_thumbnail']['tmp_name']);
+                } else {
+                    $data['product_thumbnail'] = ""; // Set to an empty string or handle error as needed
+                }
+
+                $newfilename = uniqid() . "-" . $data['product_thumbnail'];
+                move_uploaded_file($data['product_thumbnail_tmp'], "../public/CricketShop/" . $newfilename);
+                $data['product_thumbnail'] = $newfilename;
+
                 // If validation is completed and no error, then register the user
-                if (empty($data['brandName_err']) && empty($data['brandCategoryName_err'])) {
-                    if ($this->brandModel->insertBrand($data)) {
+                if (empty($data['productName_err']) && empty($data['category_name_err']) && empty($data['brand_name_err']) && empty($data['regular_price_err']) && empty($data['selling_price_err']) && empty($data['short_description_err'])) {
+                    if ($this->productModel->insertProduct($data)) {
                         $response = [
                             'status' => 'success',
                         ];
@@ -79,8 +84,12 @@ class Product extends Controller
                     // Load the view
                     $response = [
                         'status' => 'error',
-                        'messageBrandName' => $data['brandName_err'],
-                        'messageBrandCategoryName' => $data['brandCategoryName_err'],
+                        'messageProductName' => $data['productName_err'],
+                        'messageCategoryName' => $data['category_name_err'],
+                        'messageBrandName' => $data['brand_name_err'],
+                        'messageRegularPrice' => $data['regular_price_err'],
+                        'messageSellingPrice' => $data['selling_price_err'],
+                        'messageShortDescription' => $data['short_description_err'],
                     ];
                 }
 
@@ -91,113 +100,113 @@ class Product extends Controller
         }
     }
 
-    public function getBrandById()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // public function getBrandById()
+    // {
+    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            $id = trim($_POST['id']);
+    //         $id = trim($_POST['id']);
 
-            $category = $this->brandModel->getBrandById($id);
+    //         $category = $this->brandModel->getBrandById($id);
 
-            header('Content-Type: application/json');
-            echo json_encode($category);
-            exit();
-        }
-    }
+    //         header('Content-Type: application/json');
+    //         echo json_encode($category);
+    //         exit();
+    //     }
+    // }
 
-    public function getBrandCategoryById()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // public function getBrandCategoryById()
+    // {
+    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            $id = trim($_POST['id']);
+    //         $id = trim($_POST['id']);
 
-            $category = $this->brandModel->getBrandCategoryById($id);
+    //         $category = $this->brandModel->getBrandCategoryById($id);
 
-            $output ='<option selected disabled>--Select Your Brand Name--</option>';
-            foreach ($category as $cat) {
-                $output .= '<option value="' . $cat->brand_category_name . '">' . $cat->brand_name . '</option>';
-            }
+    //         $output ='<option selected disabled>--Select Your Brand Name--</option>';
+    //         foreach ($category as $cat) {
+    //             $output .= '<option value="' . $cat->brand_category_name . '">' . $cat->brand_name . '</option>';
+    //         }
 
-            $response = [
-                'output' => $output,
-            ];
+    //         $response = [
+    //             'output' => $output,
+    //         ];
 
-            header('Content-Type: application/json');
-            echo json_encode($response);
-            exit();
-        }
-    }
+    //         header('Content-Type: application/json');
+    //         echo json_encode($response);
+    //         exit();
+    //     }
+    // }
 
 
-    public function editBrand()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // public function editBrand()
+    // {
+    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            $data = [
-                'brandName' => trim($_POST['brandName']),
-                'brandSlug' => $this->slugify($_POST['brandName']),
-                'brandCategoryName' => trim($_POST['category_name']),
-                'brandId' => trim($_POST['brandId']),
-                'brandName_err' => "",
-                'brandCategoryName_err' => "",
-            ];
+    //         $data = [
+    //             'brandName' => trim($_POST['brandName']),
+    //             'brandSlug' => $this->slugify($_POST['brandName']),
+    //             'brandCategoryName' => trim($_POST['category_name']),
+    //             'brandId' => trim($_POST['brandId']),
+    //             'brandName_err' => "",
+    //             'brandCategoryName_err' => "",
+    //         ];
 
-            // Validate category
-            if (empty($data['brandName'])) {
-                $data['brandName_err'] = "Please enter a brand";
-            } else {
-                if ($this->brandModel->findBrand($data['brandName'])) {
-                    $data['brandName_err'] = "This category is already exist";
-                }
-            }
+    //         // Validate category
+    //         if (empty($data['brandName'])) {
+    //             $data['brandName_err'] = "Please enter a brand";
+    //         } else {
+    //             if ($this->brandModel->findBrand($data['brandName'])) {
+    //                 $data['brandName_err'] = "This category is already exist";
+    //             }
+    //         }
 
-            if($data['brandCategoryName'] == "0"){
-                $data['brandCategoryName_err'] = "Please select a category";
-            }
+    //         if($data['brandCategoryName'] == "0"){
+    //             $data['brandCategoryName_err'] = "Please select a category";
+    //         }
 
-            // If validation is completed and no error, then register the user
-            if (empty($data['brandName_err']) && empty($data['brandCategoryName_err'])) {
-                // Create user
-                if ($this->brandModel->updateBrand($data)) {
-                    $response = [
-                        'status' => 'success',
-                    ];
-                } else {
-                    $response = [
-                        'status' => 'error',
-                        'message' => 'Something went wrong',
-                    ];
-                }
-            } else {
-                // Load the view
-                $response = [
-                    'status' => 'error',
-                    'messageBrandName' => $data['brandName_err'],
-                    'messageBrandCategoryName' => $data['brandCategoryName_err'],
-                ];
-            }
+    //         // If validation is completed and no error, then register the user
+    //         if (empty($data['brandName_err']) && empty($data['brandCategoryName_err'])) {
+    //             // Create user
+    //             if ($this->brandModel->updateBrand($data)) {
+    //                 $response = [
+    //                     'status' => 'success',
+    //                 ];
+    //             } else {
+    //                 $response = [
+    //                     'status' => 'error',
+    //                     'message' => 'Something went wrong',
+    //                 ];
+    //             }
+    //         } else {
+    //             // Load the view
+    //             $response = [
+    //                 'status' => 'error',
+    //                 'messageBrandName' => $data['brandName_err'],
+    //                 'messageBrandCategoryName' => $data['brandCategoryName_err'],
+    //             ];
+    //         }
 
-            header('Content-Type: application/json');
-            echo json_encode($response);
-            exit();
-        }
+    //         header('Content-Type: application/json');
+    //         echo json_encode($response);
+    //         exit();
+    //     }
 
-    }
+    // }
 
-    public function deleteBrand($id)
-    {
-        if ($this->brandModel->deleteBrand($id)) {
-            redirect('Pages/Brand/manager');
-        } else {
-            die('Something went wrong');
-        }
-    }
+    // public function deleteBrand($id)
+    // {
+    //     if ($this->brandModel->deleteBrand($id)) {
+    //         redirect('Pages/Brand/manager');
+    //     } else {
+    //         die('Something went wrong');
+    //     }
+    // }
 
 }
 
