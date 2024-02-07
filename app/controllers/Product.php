@@ -1,10 +1,10 @@
 <?php
-class Brand extends Controller
+class Product extends Controller
 {
-    private $brandModel;
+    private $productModel;
     public function __construct()
     {
-        $this->brandModel = $this->model('M_Brand');
+        $this->productModel = $this->model('M_Product');
     }
 
     public function slugify($text, string $divider = '_')
