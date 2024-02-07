@@ -64,10 +64,12 @@ class Product extends Controller
                     $data['product_thumbnail'] = ""; // Set to an empty string or handle error as needed
                 }
 
-                $newfilename = uniqid() . "-" . $data['product_thumbnail'];
-                move_uploaded_file($data['product_thumbnail_tmp'], "../public/CricketShop/" . $newfilename);
-                $data['product_thumbnail'] = $newfilename;
-
+                $file_extension = pathinfo($data['product_thumbnail'], PATHINFO_EXTENSION);
+                $file_extension = strtolower($file_extension);
+                $newFileName = date('YmdHis') . '.' . $file_extension;
+                move_uploaded_file($data['product_thumbnail_tmp'], "../public/CricketShop/" . $newFileName);
+                $data['product_thumbnail'] = $newFileName;
+                
                 // If validation is completed and no error, then register the user
                 if (empty($data['productName_err']) && empty($data['category_name_err']) && empty($data['brand_name_err']) && empty($data['regular_price_err']) && empty($data['selling_price_err']) && empty($data['short_description_err'])) {
                     if ($this->productModel->insertProduct($data)) {
