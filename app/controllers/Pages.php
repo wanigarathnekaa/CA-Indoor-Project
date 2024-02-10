@@ -500,10 +500,12 @@ class Pages extends Controller
     {
         $categories = $this->pagesModel->getCategories();
         $brand = $this->pagesModel->getBrands();
+        $products = $this->pagesModel->getProducts();
         $data = [
             'categoryName_err' => "",
             'categories' => $categories,
             'brands' => $brand,
+            'products' => $products,
         ];
         $this->view('Pages/InventoryManagement/product',$data);
     }

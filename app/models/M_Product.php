@@ -53,28 +53,33 @@
         //     return $this->db->resultSet();
         // }
 
-        // public function deleteBrand($id){
-        //     $this->db->query('DELETE FROM brand WHERE brand_id = :brand_id');
-        //     $this->db->bind(':brand_id', $id);
-        //     if($this->db->execute()){
-        //         return true;
-        //     }else{
-        //         return false;
-        //     }
-        // }
+        public function deleteProduct($id){
+            $this->db->query('DELETE FROM product WHERE product_id = :product_id');
+            $this->db->bind(':product_id', $id);
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
 
-        // public function updateBrand($data){
-        //     $this->db->query('UPDATE brand SET brand_name = :brand_name, brand_slug_url = :brand_slug_url, brand_category_name = :brand_category_name WHERE brand_id = :brand_id');
-        //     $this->db->bind(':brand_name', $data['brandName']);
-        //     $this->db->bind(':brand_slug_url', $data['brandSlug']);
-        //     $this->db->bind(':brand_category_name', $data['brandCategoryName']);
-        //     $this->db->bind(':brand_id', $data['brandId']);
-        //     if($this->db->execute()){
-        //         return true;
-        //     }else{
-        //         return false;
-        //     }
-        // }
+        public function updateProduct($data){
+            $this->db->query('UPDATE product SET product_title = :product_title, category_id = :category_id, brand_id = :brand_id, regular_price = :regular_price, selling_price = :selling_price, product_thumbnail=:product_thumbnail, status=:status, created_at=:created_at   WHERE product_id = :product_id');
+            $this->db->bind(':product_title', $data['productName']);
+            $this->db->bind(':category_id', $data['category_name']);
+            $this->db->bind(':brand_id', $data['brand_name']);
+            $this->db->bind(':regular_price', $data['regular_price']);
+            $this->db->bind(':selling_price', $data['selling_price']);
+            $this->db->bind(':product_thumbnail', $data['product_thumbnail']);
+            $this->db->bind(':status', $data['status']);
+            $this->db->bind(':created_at', $data['created_at']);
+            $this->db->bind(':product_id', $data['product_id']);
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
         
     }
 ?>

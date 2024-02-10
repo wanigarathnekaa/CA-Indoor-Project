@@ -94,5 +94,11 @@ class M_Pages
         return $result;
     }
 
+    public function getProducts(){
+        $this->db->query('SELECT * FROM product');
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
 }
 ?>

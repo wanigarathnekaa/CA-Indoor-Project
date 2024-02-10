@@ -125,26 +125,34 @@
 
         <div class="table-container">
             <table id="coachTable">
-                <!-- <thead>
+                <thead>
                     <tr>
-                        <th>Brand ID</th>
+                        <th>Product ID</th>
+                        <th>Thumbnail</th>
+                        <th>Product Name</th>
                         <th>Category Name</th>
-                        <th>Brand Name</th>
+                        <th>Date</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="categoryTable">
-                    <?php $i = 0; ?>
-                    <?php foreach ($data['brands'] as $brand): ?>
+                    <?php foreach ($data['products'] as $product): ?>
                         <tr>
                             <td>
-                                <?php echo $brand->brand_id; ?>
+                                <?php echo $product->product_id; ?>
+                            </td>
+                            <td>
+                                <img src="<?php echo URLROOT; ?>/CricketShop/<?php echo $product->product_thumbnail; ?>"
+                                    alt="product thumbnail" height="100px">
+                            </td>
+                            <td>
+                                <?php echo $product->product_title; ?>
                             </td>
                             <td>
                                 <?php
                                 $matchedCategoryName = '';
                                 foreach ($data['categories'] as $category) {
-                                    if ($category->category_id == $brand->brand_category_name) {
+                                    if ($category->category_id == $product->category_id) {
                                         $matchedCategoryName = $category->category_name;
                                         break;
                                     }
@@ -153,19 +161,18 @@
                                 ?>
                             </td>
                             <td>
-                                <?php echo $brand->brand_name; ?>
+                                <?php echo $product->created_at; ?>
                             </td>
                             <td>
-                                <button type="button" class="edit" id="<?php echo $brand->brand_id; ?>"><i
+                                <button type="button" class="edit" id="<?php echo $product->product_id; ?>"><i
                                         class="fas fa-edit"></i></button>
-                                <a href="<?php echo URLROOT; ?>/Brand/deleteBrand/<?php echo $brand->brand_id; ?>"><i
+                                <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>"><i
                                         class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                         <?php
-                        $i++;
                     endforeach; ?>
-                </tbody> -->
+                </tbody>
             </table>
         </div>
 
@@ -262,19 +269,21 @@
                 var btn = "edit";
                 $('#myModal').css("display", "block");
                 $('#form_type').val(btn);
-                $('.modal-title').html("Edit Category");
+                $('.modal-title').html("Edit Product");
                 $('#submit').html("Update").css("background-color", "goldenrod");
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo URLROOT; ?>/Brand/getBrandById",
+                    url: "<?php echo URLROOT; ?>/Product/getProductById",
                     data: {
                         id: id
                     },
                     dataType: 'json',
                     success: function (response) {
-                        $('#productName').val(response.brand_name)
-                        $('#category_name').val(response.brand_category_name)
+                        $('#productName').val(response.product_title);
+                        $('#regular_price').val(response.regular_price);
+                        $('#selling_price').val(response.selling_price);
+                        $('#short_description').val(response.short_description);
                     },
                     error: function (xhr, status, error) {
                         console.error("AJAX request failed:", error);
