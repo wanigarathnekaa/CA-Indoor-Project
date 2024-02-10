@@ -22,6 +22,8 @@ class Product extends Controller
                     'regular_price' => trim($_POST['regular_price']),
                     'selling_price' => trim($_POST['selling_price']),
                     'short_description' => trim($_POST['short_description']),
+                    'status' => 1,
+                    'created_at' => date('Y-m-d H:i:s'),
 
                     'productName_err' => "",
                     'category_name_err' => "",

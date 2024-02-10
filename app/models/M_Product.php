@@ -6,7 +6,7 @@
         }
 
         public function insertProduct($data){
-            $this->db->query('INSERT INTO product (product_title, category_id, brand_id, regular_price, selling_price, product_thumbnail, short_description) VALUES (:product_title, :category_id, :brand_id, :regular_price, :selling_price, :product_thumbnail, :short_description)');
+            $this->db->query('INSERT INTO product (product_title, category_id, brand_id, regular_price, selling_price, product_thumbnail, short_description, status, created_at) VALUES (:product_title, :category_id, :brand_id, :regular_price, :selling_price, :product_thumbnail, :short_description, :status, :created_at)');
             $this->db->bind(':product_title', $data['productName']);
             $this->db->bind(':category_id', $data['category_name']);
             $this->db->bind(':brand_id', $data['brand_name']);
@@ -14,6 +14,8 @@
             $this->db->bind(':selling_price', $data['selling_price']);
             $this->db->bind(':product_thumbnail', $data['product_thumbnail']);
             $this->db->bind(':short_description', $data['short_description']);
+            $this->db->bind(':status', $data['status']);
+            $this->db->bind(':created_at', $data['created_at']);
             
             if($this->db->execute()){
                 return true;
