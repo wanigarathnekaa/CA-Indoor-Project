@@ -49,7 +49,7 @@
         //     $this->db->bind(':brand_category_name', $id);
 
         //     return $this->db->resultSet();
-        // } 
+        // }
 
         // public function deleteBrand($id){
         //     $this->db->query('DELETE FROM brand WHERE brand_id = :brand_id');

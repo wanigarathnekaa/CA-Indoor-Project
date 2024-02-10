@@ -98,6 +98,7 @@
                             <div class="form-group">
                                 <label for="product_thumbnail">Product Thumbnail</label>
                                 <input type="file" id="product_thumbnail" name="product_thumbnail">
+                                <span class="form-invalid-7"></span>
                             </div>
                         </div>
 
@@ -245,6 +246,7 @@
                             $('.form-invalid-4').html(response.messageRegularPrice);
                             $('.form-invalid-5').html(response.messageSellingPrice);
                             $('.form-invalid-6').html(response.messageShortDescription);
+                            $('.form-invalid-7').html(response.messageProductThumbnail);
                         }
                     },
                     error: function (xhr, status, error) {
