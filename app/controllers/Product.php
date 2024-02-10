@@ -28,6 +28,7 @@ class Product extends Controller
                     'brand_name_err' => "",
                     'regular_price_err' => "",
                     'selling_price_err' => "",
+                    'product_thumbnail_err' => "",
                     'short_description_err' => "",
                 ];
 
@@ -57,21 +58,30 @@ class Product extends Controller
                     $data['short_description_err'] = "Enter Description";
                 }
 
-                if ($_FILES['product_thumbnail']['error'] == 0) {
+                $allowed_types = array('jpg', 'jpeg', 'png');
+                $max_size = 5 * 1024 * 1024; // 5MB
+
+                if ($_FILES["product_thumbnail"]["error"] == UPLOAD_ERR_OK) {
                     $data['product_thumbnail'] = trim($_FILES['product_thumbnail']['name']);
                     $data['product_thumbnail_tmp'] = trim($_FILES['product_thumbnail']['tmp_name']);
-                } else {
-                    $data['product_thumbnail'] = ""; // Set to an empty string or handle error as needed
+                    $file_size = $_FILES['product_thumbnail']['size'];
+                    $file_extension = strtolower(pathinfo($data['product_thumbnail'], PATHINFO_EXTENSION));
+
+                    if (!in_array($file_extension, $allowed_types)) {
+                        $data['product_thumbnail_err'] = "Only jpg, jpeg, png files are allowed";
+                    } elseif ($file_size > $max_size) {
+                        $data['product_thumbnail_err'] = "File size is too large. Maximum file size is 5MB";
+                    } else {
+                        $newFileName = date('YmdHis') . '.' . $file_extension;
+                        move_uploaded_file($data['product_thumbnail_tmp'], "../public/CricketShop/" . $newFileName);
+                        $data['product_thumbnail'] = $newFileName;
+                    }
+                }else{
+                    $data['product_thumbnail_err'] = "Please select a thumbnail";
                 }
 
-                $file_extension = pathinfo($data['product_thumbnail'], PATHINFO_EXTENSION);
-                $file_extension = strtolower($file_extension);
-                $newFileName = date('YmdHis') . '.' . $file_extension;
-                move_uploaded_file($data['product_thumbnail_tmp'], "../public/CricketShop/" . $newFileName);
-                $data['product_thumbnail'] = $newFileName;
-                
                 // If validation is completed and no error, then register the user
-                if (empty($data['productName_err']) && empty($data['category_name_err']) && empty($data['brand_name_err']) && empty($data['regular_price_err']) && empty($data['selling_price_err']) && empty($data['short_description_err'])) {
+                if (empty($data['productName_err']) && empty($data['category_name_err']) && empty($data['brand_name_err']) && empty($data['regular_price_err']) && empty($data['selling_price_err']) && empty($data['short_description_err']) && empty($data['product_thumbnail_err'])) {
                     if ($this->productModel->insertProduct($data)) {
                         $response = [
                             'status' => 'success',
@@ -92,6 +102,7 @@ class Product extends Controller
                         'messageRegularPrice' => $data['regular_price_err'],
                         'messageSellingPrice' => $data['selling_price_err'],
                         'messageShortDescription' => $data['short_description_err'],
+                        'messageProductThumbnail' => $data['product_thumbnail_err'],
                     ];
                 }
 

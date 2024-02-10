@@ -59,7 +59,7 @@
                 </div>
             </a>
 
-            <a class="card" href="#">
+            <a class="card" href="C&A_Indoor_Project/Pages/Product/manager">
                 <div>
                     <div class="numbers">12</div>
                     <div class="cardName">Items</div>

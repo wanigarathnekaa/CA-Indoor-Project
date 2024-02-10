@@ -2,17 +2,17 @@
 $amount = "1000.00";
 $merchant_id = "1225484";
 $order_id = uniqid();
-$merchant_secret = "MjM4MTQzNTk5MzA1MjYzODE4MTMyNzg5NDM2Nzk0Mjg4MjY5OQ==";
+$merchant_secret = "MTI0NjM0MDI4NjM5MDE0NzA0NzIxMTU4ODM1OTEwMTE3MDk0NDk4Mw==";
 $currency = "LKR";
 //Calculate the hash using MD5 and concatenate various pieces of data
 $hash = strtoupper(
     md5(
-        $merchant_id .
-        $order_id .
-        number_format($amount, 2, '.', '') .
-        $currency .
-        strtoupper(md5($merchant_secret))
-    )
+        $merchant_id . 
+        $order_id . 
+        number_format($amount, 2, '.', '') . 
+        $currency .  
+        strtoupper(md5($merchant_secret)) 
+    ) 
 );
 // Create an associative array with payment-related data
 $array = [];
