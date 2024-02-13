@@ -496,6 +496,20 @@ class Pages extends Controller
         $this->view('Pages/InventoryManagement/brand',$data);
     }
 
+    public function Product($name)
+    {
+        $categories = $this->pagesModel->getCategories();
+        $brand = $this->pagesModel->getBrands();
+        $products = $this->pagesModel->getProducts();
+        $data = [
+            'categoryName_err' => "",
+            'categories' => $categories,
+            'brands' => $brand,
+            'products' => $products,
+        ];
+        $this->view('Pages/InventoryManagement/product',$data);
+    }
+
 
     //terms and conditions page
     public function termsConditions()

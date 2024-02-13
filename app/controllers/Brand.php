@@ -107,6 +107,31 @@ class Brand extends Controller
         }
     }
 
+    public function getBrandCategoryById()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $id = trim($_POST['id']);
+
+            $category = $this->brandModel->getBrandCategoryById($id);
+
+            $output ='<option selected disabled>--Select Your Brand Name--</option>';
+            foreach ($category as $cat) {
+                $output .= '<option value="' . $cat->brand_id . '">' . $cat->brand_name . '</option>';
+            }
+
+            $response = [
+                'output' => $output,
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+    }
+
 
     public function editBrand()
     {

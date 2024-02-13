@@ -88,7 +88,16 @@
                                 <?php echo $brand->brand_id; ?>
                             </td>
                             <td>
-                                <?php echo $data['categories'][$i]->category_name ?>
+                                <?php
+                                $matchedCategoryName = '';
+                                foreach ($data['categories'] as $category) {
+                                    if ($category->category_id == $brand->brand_category_name) {
+                                        $matchedCategoryName = $category->category_name;
+                                        break; 
+                                    }
+                                }
+                                echo $matchedCategoryName;
+                                ?>
                             </td>
                             <td>
                                 <?php echo $brand->brand_name; ?>
