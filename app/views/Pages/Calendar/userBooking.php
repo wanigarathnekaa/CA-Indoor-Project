@@ -213,7 +213,7 @@ function time_slot($duration, $cleanup, $start, $end)
 
                 <div class="btns">
                     <button id="makePaymentBtn" type="button">Full Payment</button>
-                    <button id="makePaymentBtn" type="button">Confirmation Payment</button>
+                    <button id="makePaymentBtnCon" type="button">Confirmation Payment</button>
                     <button id="cancelBtn" type="button">Cancel</button>
                 </div>
             </div>
