@@ -6,7 +6,7 @@
         }
 
         public function insertProduct($data){
-            $this->db->query('INSERT INTO product (product_title, category_id, brand_id, regular_price, selling_price, product_thumbnail, short_description, status, created_at) VALUES (:product_title, :category_id, :brand_id, :regular_price, :selling_price, :product_thumbnail, :short_description, :status, :created_at)');
+            $this->db->query('INSERT INTO product (product_title, category_id, brand_id, regular_price, selling_price, product_thumbnail, short_description, status, created_at, qty) VALUES (:product_title, :category_id, :brand_id, :regular_price, :selling_price, :product_thumbnail, :short_description, :status, :created_at, :qty)');
             $this->db->bind(':product_title', $data['productName']);
             $this->db->bind(':category_id', $data['category_name']);
             $this->db->bind(':brand_id', $data['brand_name']);
@@ -16,6 +16,7 @@
             $this->db->bind(':short_description', $data['short_description']);
             $this->db->bind(':status', $data['status']);
             $this->db->bind(':created_at', $data['created_at']);
+            $this->db->bind(':qty', $data['quantity']);
             
             if($this->db->execute()){
                 return true;
@@ -64,7 +65,7 @@
         }
 
         public function updateProduct($data){
-            $this->db->query('UPDATE product SET product_title = :product_title, category_id = :category_id, brand_id = :brand_id, regular_price = :regular_price, selling_price = :selling_price, product_thumbnail=:product_thumbnail, status=:status, created_at=:created_at   WHERE product_id = :product_id');
+            $this->db->query('UPDATE product SET product_title = :product_title, category_id = :category_id, brand_id = :brand_id, regular_price = :regular_price, selling_price = :selling_price, product_thumbnail=:product_thumbnail, status=:status, created_at=:created_at, qty=:qty   WHERE product_id = :product_id');
             $this->db->bind(':product_title', $data['productName']);
             $this->db->bind(':category_id', $data['category_name']);
             $this->db->bind(':brand_id', $data['brand_name']);
@@ -74,6 +75,7 @@
             $this->db->bind(':status', $data['status']);
             $this->db->bind(':created_at', $data['created_at']);
             $this->db->bind(':product_id', $data['product_id']);
+            $this->db->bind(':qty', $data['quantity']);
             if($this->db->execute()){
                 return true;
             }else{
