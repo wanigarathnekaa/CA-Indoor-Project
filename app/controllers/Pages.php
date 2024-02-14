@@ -510,6 +510,11 @@ class Pages extends Controller
         $this->view('Pages/InventoryManagement/product',$data);
     }
 
+    public function Cricket_Shop($name)
+    {
+        $this->view('Pages/CricketShop/crickShop');
+    }
+
 
     //terms and conditions page
     public function termsConditions()
