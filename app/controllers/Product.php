@@ -22,6 +22,7 @@ class Product extends Controller
                     'regular_price' => trim($_POST['regular_price']),
                     'selling_price' => trim($_POST['selling_price']),
                     'short_description' => trim($_POST['short_description']),
+                    'quantity' => trim($_POST['quantity']),
                     'status' => 1,
                     'created_at' => date('Y-m-d H:i:s'),
 
@@ -32,6 +33,7 @@ class Product extends Controller
                     'selling_price_err' => "",
                     'product_thumbnail_err' => "",
                     'short_description_err' => "",
+                    'quantity_err' => "",
                 ];
 
                 // Validate product
@@ -55,7 +57,9 @@ class Product extends Controller
                 if (empty($data['selling_price'])) {
                     $data['selling_price_err'] = "Please select a Selling Price";
                 }
-
+                if (empty($data['quantity'])) {
+                    $data['quantity_err'] = "Please select a Quantity";
+                }
                 if (empty($data['short_description'])) {
                     $data['short_description_err'] = "Enter Description";
                 }
@@ -83,7 +87,9 @@ class Product extends Controller
                 }
 
                 // If validation is completed and no error, then register the user
-                if (empty($data['productName_err']) && empty($data['category_name_err']) && empty($data['brand_name_err']) && empty($data['regular_price_err']) && empty($data['selling_price_err']) && empty($data['short_description_err']) && empty($data['product_thumbnail_err'])) {
+                if (empty($data['productName_err']) && empty($data['category_name_err']) && empty($data['brand_name_err']) 
+                && empty($data['regular_price_err']) && empty($data['selling_price_err']) && empty($data['short_description_err']) 
+                && empty($data['product_thumbnail_err']) && empty($data['quantity_err'])) {
                     if ($this->productModel->insertProduct($data)) {
                         $response = [
                             'status' => 'success',
@@ -105,6 +111,7 @@ class Product extends Controller
                         'messageSellingPrice' => $data['selling_price_err'],
                         'messageShortDescription' => $data['short_description_err'],
                         'messageProductThumbnail' => $data['product_thumbnail_err'],
+                        'messageQuantity' => $data['quantity_err'],
                     ];
                 }
 
@@ -144,6 +151,7 @@ class Product extends Controller
                 'regular_price' => trim($_POST['regular_price']),
                 'selling_price' => trim($_POST['selling_price']),
                 'short_description' => trim($_POST['short_description']),
+                'quantity' => trim($_POST['quantity']),
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
                 'product_id' => trim($_POST['id']),
@@ -155,6 +163,7 @@ class Product extends Controller
                 'selling_price_err' => "",
                 'product_thumbnail_err' => "",
                 'short_description_err' => "",
+                'quantity_err' => "",
             ];
 
             // Validate product
@@ -177,6 +186,9 @@ class Product extends Controller
             }
             if (empty($data['selling_price'])) {
                 $data['selling_price_err'] = "Please select a Selling Price";
+            }
+            if (empty($data['quantity'])) {
+                $data['quantity_err'] = "Please select a Quantity";
             }
 
             if (empty($data['short_description'])) {
@@ -206,7 +218,9 @@ class Product extends Controller
             }
 
             // If validation is completed and no error, then register the user
-            if (empty($data['productName_err']) && empty($data['category_name_err']) && empty($data['brand_name_err']) && empty($data['regular_price_err']) && empty($data['selling_price_err']) && empty($data['short_description_err']) && empty($data['product_thumbnail_err'])) {
+            if (empty($data['productName_err']) && empty($data['category_name_err']) && empty($data['brand_name_err']) 
+            && empty($data['regular_price_err']) && empty($data['selling_price_err']) && empty($data['short_description_err']) 
+            && empty($data['product_thumbnail_err']) && empty($data['quantity_err'])) {
                 if ($this->productModel->updateProduct($data)) {
                     $response = [
                         'status' => 'success',
@@ -228,6 +242,7 @@ class Product extends Controller
                     'messageSellingPrice' => $data['selling_price_err'],
                     'messageShortDescription' => $data['short_description_err'],
                     'messageProductThumbnail' => $data['product_thumbnail_err'],
+                    'messageQuantity' => $data['quantity_err'],
                 ];
             }
 
