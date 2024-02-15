@@ -35,13 +35,30 @@
                   <!-- form details -->
                   <div class="formbox">
                         <form action="<?php echo URLROOT . "/" . $linkRole; ?>/changePassword" method="POST" enctype="multipart/form-data">
+                              <!-- profile picture
+                              <div class="profilepic">
+                                    <label for="file" class="propiclabel">
+                                          <div class="profile-pic">
+                                                <span class="camicon"><i class="fa-solid fa-camera"></i></span>
+                                                <?php
+                                                      if($data["img"] == null){
+                                                            echo '<img class="profile-image" id="output" src="'.URLROOT.'/public/profilepic/avatar.jpg" width="150">' ;
+                                                      }
+                                                      else{
+                                                            echo '<img class="profile-image" id="output" src="'.URLROOT.'/public/profilepic/'.$data["img"].'" width="150">'; 
+                                                      }
+                                                ?>
+                                          </div>
+                                    </label>
+                                    <input type="file" hidden name="file" id="file" onchange="loadFile(event)" value="<?= URLROOT ?>/public/profilepic/<?= $data["img"] ?>" />     
+                              </div> -->
 
                               <!-- profile details -->
                               <div class="profileDetails">
                                     <?php if ($role == "User" || $role == "Coach"): ?>
                                           <div class="box">
                                                 <label for="name">Current Password</label>
-                                                <input type="text" id="old_password" name="old_password"  value=""/>
+                                                <input type="password" id="old_password" name="old_password"  value=""/>
                                           </div>
                                           <div class="box">
                                                 <!-- <label for="user_name">New Password</label>
@@ -49,7 +66,7 @@
                                           </div>
                                           <div class="box">
                                                 <label for="user_name">New Password</label>
-                                                <input type="text" name='new_password' id="new_password" value=""/>
+                                                <input type="password" name='new_password' id="new_password" value=""/>
                                           </div>
                                           <div class="box">
                                                 <!-- <label for="user_name">New Password</label>
@@ -57,20 +74,23 @@
                                           </div>
                                           <div class="box">
                                                 <label for="email">Confirm Password</label>
-                                                <input type="text" id="confirm_password" name="confirm_password" value=""/>
+                                                <input type="password" id="confirm_password" name="confirm_password" value=""/>
                                                 <?php if (isset($errorMessage)): ?>
                                                 <div class="text-danger"><?php echo $errorMessage; ?></div>
                                                 <?php endif; ?>
                                           </div>
-                                          <div class="buttons">
-                                          <input type="submit" name="submit" class="button" value="Update" href="<?php echo URLROOT;?>/Pages/Profile/user">
-                                          <a href="<?php echo URLROOT;?>/Pages/Profile/user" type="button" class="button">Cancel</a>
-                                          </div>
+                                          
 
                                     <?php endif ?>
                   
+
                               </div>
-                                   
+                              <?php if ($role == "User" || $role == "Coach"): ?>
+                              <div class="buttons">
+                                    <input type="submit" name="submit" class="button" value="Update" href="<?php echo URLROOT;?>/Pages/Profile/user">
+                                    <a href="<?php echo URLROOT;?>/Pages/Profile/user" type="button" class="button">Cancel</a>
+                              </div>
+                              <?php endif ?>     
                         </form>
                   </div>    
             </div>
