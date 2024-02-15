@@ -117,6 +117,25 @@ class M_Users
         }
 
     }
+    public function findUser($email)
+    {
+        $this->db->query('SELECT * FROM user WHERE email = :email');
+        $this->db->bind(':email', $email);
+
+        return $this->db->single();
+    }
+    public function updatePassword($email, $hashedPassword) {
+    
+        $this->db->query('UPDATE user SET password = :password WHERE email = :email');
+        $this->db->bind(':email', $email);
+        $this->db->bind(':password', $hashedPassword);
+
+        if ($this->db->execute()) {
+            return true; 
+        } else {
+            return false;
+        }
+    }
 
     
     public function deleteUser($email){

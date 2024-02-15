@@ -45,7 +45,11 @@
                         </div>
                         <div class="btnrow">
                             <a href="<?php echo URLROOT;?>/Pages/editProfile/user" type="button" class="button">Edit Profile</a>
-                              <button type="button" class="button">Change Password</button>
+                            <div class="Change Password">
+                                <a class="button"
+                                    href="<?php echo URLROOT; ?>/Pages/changePassword/user">Change Password</a>
+                            </div>
+                              <!-- <button type="button" class="button">Change Password</button> -->
                               <button type="button" class="button">Delete Profile</button>
                         </div>
                         

@@ -344,6 +344,43 @@ class Users extends Controller
         //Load the view
         $this->view('Pages/UserProfiles/editProfile', $data);
     }
+    public function changePassword(){
+        $user = $this->userModel->findUser($_SESSION['user_email']);
+    
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+           
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    
+            $oldPassword = trim($_POST['old_password']);
+            $newPassword = trim($_POST['new_password']);
+            $confirmPassword = trim($_POST['confirm_password']);
+    
+            if (empty($oldPassword) || empty($newPassword) || empty($confirmPassword)) {
+                
+                $this->view('Pages/UserProfiles/changePassword');
+            } else {
+                $hashedPassword = $user->password; 
+                if (password_verify($oldPassword, $hashedPassword)) {
+                    
+                    if ($newPassword != $confirmPassword) {
+                        
+                        $errorMessage = "Passwords do not match. Please try again.";
+                        $this->view('Pages/UserProfiles/changePassword', ['errorMessage' => $errorMessage]);
+                    } else {
+                      
+                        $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                        $this->userModel->updatePassword($user->email, $hashedNewPassword);
+                        $this->view('Pages/UserProfiles/changePassword');
+                    }
+                } else {
+                    $this->view('Pages/UserProfiles/changePassword');
+                }
+            }
+        } else {
+            $this->view('Pages/UserProfiles/changePassword');
+        }
+    }
+    
 
     public function delete()
     {
