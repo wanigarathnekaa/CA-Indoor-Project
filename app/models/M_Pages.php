@@ -56,6 +56,24 @@ class M_Pages
 
         return $this->db->resultSet();
     }
+    public function updatePassword($email, $hashedPassword) {
+        // Assuming you have a database connection and a users table
+
+        // Prepare update query
+        $query = "UPDATE users SET password = :password WHERE email = :email";
+
+        // Bind parameters
+        $this->db->query($query);
+        $this->db->bind(':email', $email);
+        $this->db->bind(':password', $hashedPassword);
+
+        // Execute query
+        if ($this->db->execute()) {
+            return true; // Password updated successfully
+        } else {
+            return false; // Password update failed
+        }
+    }
 
     public function getCoachCount()
     {
