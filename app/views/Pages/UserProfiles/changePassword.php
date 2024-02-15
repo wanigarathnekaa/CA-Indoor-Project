@@ -35,23 +35,6 @@
                   <!-- form details -->
                   <div class="formbox">
                         <form action="<?php echo URLROOT . "/" . $linkRole; ?>/changePassword" method="POST" enctype="multipart/form-data">
-                              <!-- profile picture
-                              <div class="profilepic">
-                                    <label for="file" class="propiclabel">
-                                          <div class="profile-pic">
-                                                <span class="camicon"><i class="fa-solid fa-camera"></i></span>
-                                                <?php
-                                                      if($data["img"] == null){
-                                                            echo '<img class="profile-image" id="output" src="'.URLROOT.'/public/profilepic/avatar.jpg" width="150">' ;
-                                                      }
-                                                      else{
-                                                            echo '<img class="profile-image" id="output" src="'.URLROOT.'/public/profilepic/'.$data["img"].'" width="150">'; 
-                                                      }
-                                                ?>
-                                          </div>
-                                    </label>
-                                    <input type="file" hidden name="file" id="file" onchange="loadFile(event)" value="<?= URLROOT ?>/public/profilepic/<?= $data["img"] ?>" />     
-                              </div> -->
 
                               <!-- profile details -->
                               <div class="profileDetails">
