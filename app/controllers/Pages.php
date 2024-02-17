@@ -551,7 +551,15 @@ class Pages extends Controller
 
     public function Cricket_Shop($name)
     {
-        $this->view('Pages/CricketShop/crickShop');
+        $categories = $this->pagesModel->getCategories();
+        $brand = $this->pagesModel->getBrands();
+        $products = $this->pagesModel->getProducts();
+        $data = [
+            'categories' => $categories,
+            'brands' => $brand,
+            'products' => $products,
+        ];
+        $this->view('Pages/CricketShop/crickShop',$data);
     }
 
 

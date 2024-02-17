@@ -2,8 +2,8 @@
 var modal = document.getElementById("myModal");
 
 function openModal() {
-    modal.style.display = "block";
-    document.getElementById("form_type").value = "save";
+  modal.style.display = "block";
+  document.getElementById("form_type").value = "save";
 }
 
 function closeModal() {
@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const totalPages = Math.ceil(rows.length / rowsPerPage);
   let currentPage = 1;
 
+
   showPage(currentPage);
 
   // Handle pagination click events
@@ -27,9 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (e.target.classList.contains("page-link")) {
       const pageClicked = e.target.textContent;
 
-      if (pageClicked === "Prev" && currentPage > 1) {
+      if (pageClicked === "« Prev" && currentPage > 1) {
         currentPage--;
-      } else if (pageClicked === "Next" && currentPage < totalPages) {
+      } else if (pageClicked === "Next »" && currentPage < totalPages) {
         currentPage++;
       } else if (!isNaN(pageClicked)) {
         currentPage = parseInt(pageClicked);
