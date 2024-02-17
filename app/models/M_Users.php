@@ -165,6 +165,18 @@ class M_Users
             return null; 
         }
     }
+    public function generateRandomPassword($length = 12) {
+        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+';
+        $charLength = strlen($chars);
+        $password = '';
+    
+        for ($i = 0; $i < $length; $i++) {
+            $randomIndex = mt_rand(0, $charLength - 1);
+            $password .= $chars[$randomIndex];
+        }
+    
+        return $password;
+    }
 
 
 
