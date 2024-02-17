@@ -16,18 +16,18 @@
 
   <!--MODAL-->
 
-  
-<!-- <div class="modal" data-modal>
+
+  <!-- <div class="modal" data-modal>
     <div class="modal-close-overlay" data-modal-overlay></div>
     <div class="modal-content">
       <button class="modal-close-btn" data-modal-close> -->
-        <!-- <ion-icon name="close-outline"></ion-icon> -->
-      <!-- </button> -->
-      <!-- <div class="newsletter-img">
+  <!-- <ion-icon name="close-outline"></ion-icon> -->
+  <!-- </button> -->
+  <!-- <div class="newsletter-img">
         <img src="./assets/images/newsletter.png" alt="subscribe newsletter" width="400" height="400">
       </div> -->
 
-      <!-- <div class="newsletter">
+  <!-- <div class="newsletter">
 
         <form action="#">
 
@@ -49,7 +49,7 @@
 
       </div> -->
 
-    <!-- </div>
+  <!-- </div>
 
   </div> -->
 
@@ -57,12 +57,12 @@
   <!--NOTIFICATION TOAST-->
   <!-- <div class="notification-toast" data-toast>
     <button class="toast-close-btn" data-toast-close> -->
-      <!-- <ion-icon name="close-outline"></ion-icon> -->
-    <!-- </button> -->
-    <!-- <div class="toast-banner">
+  <!-- <ion-icon name="close-outline"></ion-icon> -->
+  <!-- </button> -->
+  <!-- <div class="toast-banner">
       <img src="./assets/images/products/jewellery-1.jpg" alt="Rose Gold Earrings" width="80" height="70">
     </div> -->
-    <!-- <div class="toast-detail">
+  <!-- <div class="toast-detail">
       <p class="toast-message">
         Someone in new just bought
       </p>
@@ -124,148 +124,53 @@
           <li class="menu-category">
             <a href="#" class="menu-title">Categories</a>
             <div class="dropdown-panel">
-              <ul class="dropdown-panel-list">
-                <li class="menu-title">
-                  <a href="./bats.html">Bats</a>
-                </li>
-                <li class="panel-list-item">
-                  <a href="./EnglishWillowBats.html">English Willow Bats</a>
-                </li>
-                <li class="panel-list-item">
-                  <a href="./KashmirWillowBats.html">Kashmir Willow Bats</a>
-                </li>
-                <li class="panel-list-item">
-                  <a href="./JuniorBats.html">Junior Bats</a>
-                </li>
-              </ul>
-
-              <ul class="dropdown-panel-list">
-                <li class="menu-title">
-                  <a href="./balls.html">Balls</a>
-                </li>
-                <li class="panel-list-item">
-                  <a href="./Redballs.html">Red Cricket Balls</a>
-                </li>
-                <li class="panel-list-item">
-                  <a href="./whiteballs.html">White Cricket Balls</a>
-                </li>
-                <li class="panel-list-item">
-                  <a href="./practiceballs.html">Practice Balls</a>
-                </li>
-              </ul>
-
-              <ul class="dropdown-panel-list">
-                <li class="menu-title">
-                  <a href="./ProtectiveGear.html">Protective Gear</a>
-                </li>
-                <li class="panel-list-item">
-                  <a href="./helmets.html">Helmets</a>
-                </li>
-                <li class="panel-list-item">
-                  <a href="./battingpads.html">Batting Pads</a>
-                </li>
-                <li class="panel-list-item">
-                  <a href="./BattingGloves.html">Batting Gloves</a>
-                </li>
-                <li class="panel-list-item">
-                  <a href="./ThighGuards.html">Thigh Guards</a>
-                </li>
-                <li class="panel-list-item">
-                  <a href="./ChestGuards.html">Chest Guards</a>
-                </li>
-              </ul>
-
-              <ul class="dropdown-panel-list">
-                <li class="menu-title">
-                  <a href="./Accessories.html">Accessories</a>
-                </li>
-                <li class="panel-list-item">
-                  <a href="./Bags.html">Bags</a>
-                </li>
-                <li class="panel-list-item">
-                  <a href="./Footwear.html">Footwear</a>
-                </li>
-                <li class="panel-list-item">
-                  <a href="./Clothing.html">Clothing</a>
-                </li>
-                <li class="panel-list-item">
-                  <a href="./Caps.html">Caps</a>
-                </li>
+              <?php foreach ($data['categories'] as $category): ?>
+                <ul class="dropdown-panel-list">
+                  <li class="menu-title">
+                    <a href="./bats.html">
+                      <?php echo $category->category_name; ?>
+                    </a>
+                  </li>
+                  <?php
+                  foreach ($data['brands'] as $brand) {
+                    if ($brand->brand_category_name == $category->category_id) {
+                      ?>
+                      <li class="panel-list-item">
+                        <a href="./#">
+                          <?php echo $brand->brand_name; ?>
+                        </a>
+                      </li>
+                      <?php
+                    }
+                  }
+                  ?>
+                </ul>
+              <?php endforeach ?>
             </div>
           </li>
 
-          <li class="menu-category">
-            <a href="./bats.html" class="menu-title">Bats</a>
-            <ul class="dropdown-list">
-              <li class="dropdown-item">
-                <a href="./EnglishWillowBats.html">English Willow Bats</a>
-              </li>
-              <li class="dropdown-item">
-                <a href="./KashmirWillowBats.html">Kashmir Willow Bats</a>
-              </li>
-              <li class="dropdown-item">
-                <a href="./JuniorBats.html">Junior Bats</a>
-              </li>
-            </ul>
-          </li>
-
-
-          <li class="menu-category">
-            <a href="./balls.html" class="menu-title">Balls</a>
-            <ul class="dropdown-list">
-              <li class="dropdown-item">               
-                <a href="./Redballs.html">Red Cricket Balls</a>
-              </li>
-              <li class="dropdown-item">
-                <a href="./whiteballs.html">White Cricket Balls</a>
-              </li>
-              <li class="dropdown-item">
-                <a href="./practiceballs.html">Practice Balls</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="menu-category">
-            <a href="./ProtectiveGear.html" class="menu-title">Protective Gear</a>
-            <ul class="dropdown-list">
-              <li class="dropdown-item">
-                <a href="./helmets.html">Helmets</a>
-              </li>
-              <li class="dropdown-item">
-                <a href="./battingpads.html"> Batting Pads</a>
-              </li>
-              <li class="dropdown-item">
-                <a href="./BattingGloves.html">Batting Gloves</a>
-              </li>
-              <li class="dropdown-item">
-                <a href="./ThighGuards.html">Thigh Guards</a>
-              </li>
-              <li class="dropdown-item">
-                <a href="./ChestGuards.html">Chest Guards</a>
-              </li>
-              <li class="dropdown-item">
-                <a href="#">Abdominal Guards</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="menu-category">
-            <a href="./Accessories.html" class="menu-title">Accessories</a>
-            <ul class="dropdown-list">
-              <li class="dropdown-item">
-                <a href="./Bags.html">Bags</a>
-              </li>
-              <li class="dropdown-item">
-                <a href="./Footwear.html">Footwear</a>
-              </li>
-              <li class="dropdown-item">
-                <a href="./Clothing.html">Clothing</a>
-              </li>
-              <li class="dropdown-item">
-                <a href="./Caps.html">Cap</a>
-              </li>
-            </ul>
-          </li>
+          <?php foreach ($data['categories'] as $category): ?>
+            <li class="menu-category">
+              <a href="#" class="menu-title">
+                <?php echo $category->category_name; ?>
+              </a>
+              <ul class="dropdown-list">
+                <?php
+                foreach ($data['brands'] as $brand) {
+                  if ($brand->brand_category_name == $category->category_id) {
+                    ?>
+                    <li class="dropdown-item">
+                      <a href="#">
+                        <?php echo $brand->brand_name; ?>
+                      </a>
+                    </li>
+                    <?php
+                  }
+                }
+                ?>
+              </ul>
+            </li>
+          <?php endforeach ?>
         </ul>
       </div>
     </nav>
@@ -307,104 +212,37 @@
           <a href="#" class="menu-title">Home</a>
         </li>
 
-        <li class="menu-category">
+        <?php foreach ($data['categories'] as $category): ?>
+          <li class="menu-category">
 
-          <button class="accordion-menu" data-accordion-btn>
-            <p class="menu-title">Bats</p>
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">
+                <?php echo $category->category_name; ?>
+              </p>
 
-            <div>
-              <ion-icon name="add-outline" class="add-icon"></ion-icon>
-              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-            </div>
-          </button>
+              <div>
+                <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+              </div>
+            </button>
 
-          <ul class="submenu-category-list" data-accordion>
-
-            <li class="submenu-category">
-              <a href="./EnglishWillowBats.html" class="submenu-title">English Willow Bats</a>
-            </li>
-             <li class="submenu-category">
-              <a href="./KashmirWillowBats.html" class="submenu-title">Kashmir Willow Bats</a>
-            </li>
-            <li class="submenu-category">
-              <a href="./JuniorBats.html" class="submenu-title">Junior Bats</a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="menu-category">
-          <button class="accordion-menu" data-accordion-btn>
-            <p class="menu-title">Balls</p>
-            <div>
-              <ion-icon name="add-outline" class="add-icon"></ion-icon>
-              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-            </div>
-          </button>
-          <ul class="submenu-category-list" data-accordion>
-            <li class="submenu-category">
-              <a href="./Redballs.html" class="submenu-title">Red Cricket Balls</a>
-            </li>
-            <li class="submenu-category">
-              <a href="./whiteballs.html" class="submenu-title">White Cricket Balls</a>
-            </li>
-            <li class="submenu-category">
-              <a href="./practiceballs.html" class="submenu-title">Practice Balls</a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="menu-category">
-          <button class="accordion-menu" data-accordion-btn>
-            <p class="menu-title">Protective gear</p>
-            <div>
-              <ion-icon name="add-outline" class="add-icon"></ion-icon>
-              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-            </div>
-          </button>
-          <ul class="submenu-category-list" data-accordion>
-            <li class="submenu-category">
-              <a href="./helmets.html" class="submenu-title">Helmets</a>
-            </li>
-            <li class="submenu-category">
-              <a href="./battingpads.html" class="submenu-title">Batting Pads</a>
-            </li>
-            <li class="submenu-category">
-              <a href="./ThighGuards.html" class="submenu-title">Thigh Guards</a>
-            </li>
-            <li class="submenu-category">
-              <a href="./ChestGuards.html" class="submenu-title">Chest Guards</a>
-            </li>
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Abdominal Guards</a>
-            </li>
-
-          </ul>
-
-        </li>
-
-        <li class="menu-category">
-          <button class="accordion-menu" data-accordion-btn>
-            <p class="menu-title">Accessories</p>
-            <div>
-              <ion-icon name="add-outline" class="add-icon"></ion-icon>
-              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-            </div>
-          </button>
-          <ul class="submenu-category-list" data-accordion>
-            <li class="submenu-category">
-              <a href="./Bags.html" class="submenu-title">Bag</a>
-            </li>
-            <li class="submenu-category">
-              <a href="./Footwear.html" class="submenu-title">Footwear</a>
-            </li>
-            <li class="submenu-category">
-              <a href="./Clothing.html" class="submenu-title">Clothing</a>
-            </li>
-            <li class="submenu-category">
-              <a href="./Caps.html" class="submenu-title">Cap</a>
-            </li>
-          </ul>
-        </li>
+            <ul class="submenu-category-list" data-accordion>
+              <?php
+              foreach ($data['brands'] as $brand) {
+                if ($brand->brand_category_name == $category->category_id) {
+                  ?>
+                  <li class="submenu-category">
+                    <a href="#" class="submenu-title">
+                      <?php echo $brand->brand_name; ?>
+                    </a>
+                  </li>
+                  <?php
+                }
+              }
+              ?>
+            </ul>
+          </li>
+        <?php endforeach ?>
       </ul>
       </div>
     </nav>
@@ -425,7 +263,8 @@
               <!-- <p class="banner-subtitle">Trending item</p> -->
               <!-- <h2 class="banner-title">Women's latest fashion sale</h2> -->
               <p class="banner-text">
-                Nobody goes undefeated all the time. If you can pickup after a crushing defeat, and go on to win again, you are going to be a champion someday!!!
+                Nobody goes undefeated all the time. If you can pickup after a crushing defeat, and go on to win again,
+                you are going to be a champion someday!!!
               </p>
               <!-- <a href="#" class="banner-btn">Shop now</a> -->
             </div>
@@ -442,7 +281,8 @@
             </div>
           </div>
           <div class="slider-item">
-            <img src="<?php echo URLROOT; ?>/Crick_Images/banner-3.jpg" alt="new fashion summer sale" class="banner-img">
+            <img src="<?php echo URLROOT; ?>/Crick_Images/banner-3.jpg" alt="new fashion summer sale"
+              class="banner-img">
             <div class="banner-content">
               <!-- <p class="banner-subtitle">Sale Offer</p> -->
               <!-- <h2 class="banner-title">New fashion summer sale</h2> -->
@@ -470,659 +310,175 @@
               </button>
             </div>
             <ul class="sidebar-menu-category-list">
-              <li class="sidebar-menu-category">
-                <button class="sidebar-accordion-menu" data-accordion-btn>
-                  <div class="menu-title-flex">
-                    <img src="<?php echo URLROOT; ?>/Crick_Images/icons/bat.jpg" alt="clothes" width="20" height="20" class="menu-title-img">
-                    <p class="menu-title">Bats</p>
-                  </div>
-                  <div>
-                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                    <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-                  </div>
-                </button>
-                <ul class="sidebar-submenu-category-list" data-accordion>
-                  <li class="sidebar-submenu-category">
-                    <a href="./EnglishWillowBats.html" class="sidebar-submenu-title">
-                      <p class="product-name">English Willow Bats</p>
-                      <data value="300" class="stock" title="Available Stock">300</data>
-                    </a>
-                  </li>
-                  <li class="sidebar-submenu-category">
-                    <a href="./KashmirWillowBats.html" class="sidebar-submenu-title">
-                      <p class="product-name">Kashmir Willow Bats</p>
-                      <data value="60" class="stock" title="Available Stock">60</data>
-                    </a>
-                  </li>
-                  <li class="sidebar-submenu-category">
-                    <a href="./JuniorBats.html" class="sidebar-submenu-title">
-                      <p class="product-name">Junior Bats</p>
-                      <data value="50" class="stock" title="Available Stock">50</data>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="sidebar-menu-category">
-                <button class="sidebar-accordion-menu" data-accordion-btn>
-                  <div class="menu-title-flex">
-                    <img src="<?php echo URLROOT; ?>/Crick_Images/icons/ball.png" alt="footwear" class="menu-title-img" width="20"
-                      height="20">
-                    <p class="menu-title">Balls</p>
-                  </div>
-                  <div>
-                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                    <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-                  </div>
-                </button>
-
-                <ul class="sidebar-submenu-category-list" data-accordion>
-                  <li class="sidebar-submenu-category">
-                    <a href="./Redballs.html" class="sidebar-submenu-title">
-                      <p class="product-name">Red Cricket Balls</p>
-                      <data value="45" class="stock" title="Available Stock">45</data>
-                    </a>
-                  </li>
-                  <li class="sidebar-submenu-category">
-                    <a href="./whiteballs.html" class="sidebar-submenu-title">
-                      <p class="product-name">White Cricket Balls</p>
-                      <data value="75" class="stock" title="Available Stock">75</data>
-                    </a>
-                  </li>
-                  <li class="sidebar-submenu-category">
-                    <a href="./practiceballs.html" class="sidebar-submenu-title">
-                      <p class="product-name">Practice Balls</p>
-                      <data value="35" class="stock" title="Available Stock">35</data>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="sidebar-menu-category">
-                <button class="sidebar-accordion-menu" data-accordion-btn>
-                  <div class="menu-title-flex">
-                    <img src="<?php echo URLROOT; ?>/Crick_Images/icons/ProtectiveGear.png" alt="clothes" class="menu-title-img" width="20"
-                      height="20">
-                    <p class="menu-title">Protective Gear</p>
-                  </div>
-                  <div>
-                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                    <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-                  </div>
-                </button>
-                <ul class="sidebar-submenu-category-list" data-accordion>
-                  <li class="sidebar-submenu-category">
-                    <a href="./helmets.html" class="sidebar-submenu-title">
-                      <p class="product-name">Helmets</p>
-                      <data value="46" class="stock" title="Available Stock">46</data>
-                    </a>
-                  </li>
-                  <li class="sidebar-submenu-category">
-                    <a href="./battingpads.html" class="sidebar-submenu-title">
-                      <p class="product-name">Batting Pads</p>
-                      <data value="73" class="stock" title="Available Stock">73</data>
-                    </a>
-                  </li>
-                  <li class="sidebar-submenu-category">
-                    <a href="./BattingGloves.html" class="sidebar-submenu-title">
-                      <p class="product-name">Batting Gloves</p>
-                      <data value="61" class="stock" title="Available Stock">61</data>
-                    </a>
-                  </li>
-                  <li class="sidebar-submenu-category">
-                    <a href="./ThighGuards.html" class="sidebar-submenu-title">
-                      <p class="product-name">Thigh Guards</p>
-                      <data value="49" class="stock" title="Available Stock">49</data>
-                    </a>
-                  </li>
-                  <li class="sidebar-submenu-category">
-                    <a href="./ChestGuards.html" class="sidebar-submenu-title">
-                      <p class="product-name">Chest Guards</p>
-                      <data value="70" class="stock" title="Available Stock">70</data>
-                    </a>
-                  </li>
-                  <li class="sidebar-submenu-category">
-                    <a href="#" class="sidebar-submenu-title">
-                      <p class="product-name">Abdominal Guards</p>
-                      <data value="55" class="stock" title="Available Stock">55</data>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="sidebar-menu-category">
-                <button class="sidebar-accordion-menu" data-accordion-btn>
-                  <div class="menu-title-flex">
-                    <img src="<?php echo URLROOT; ?>/Crick_Images/icons/Accessories.jpg" alt="perfume" class="menu-title-img" width="20" height="20">
-                    <p class="menu-title">Accessories</p>
-                  </div>
-                  <div>
-                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                    <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-                  </div>
-                </button>
-                <ul class="sidebar-submenu-category-list" data-accordion>
-                  <li class="sidebar-submenu-category">
-                    <a href="./Bags.html" class="sidebar-submenu-title">
-                      <p class="product-name">Bag</p>
-                      <data value="12" class="stock" title="Available Stock">12 pcs</data>
-                    </a>
-                  </li>
-                  <li class="sidebar-submenu-category">
-                    <a href="./Footwear.html" class="sidebar-submenu-title">
-                      <p class="product-name">Footwear</p>
-                      <data value="60" class="stock" title="Available Stock">60 pcs</data>
-                    </a>
-                  </li>
-                  <li class="sidebar-submenu-category">
-                    <a href="./Clothing.html" class="sidebar-submenu-title">
-                      <p class="product-name">Clothing</p>
-                      <data value="50" class="stock" title="Available Stock">50 pcs</data>
-                    </a>
-                  </li>
-                  <li class="sidebar-submenu-category">
-                    <a href="./Caps.html" class="sidebar-submenu-title">
-                      <p class="product-name">Cap</p>
-                      <data value="87" class="stock" title="Available Stock">87 pcs</data>
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              <?php foreach ($data['categories'] as $category): ?>
+                <li class="sidebar-menu-category">
+                  <button class="sidebar-accordion-menu" data-accordion-btn>
+                    <div class="menu-title-flex">
+                      <img src="<?php echo URLROOT; ?>/Crick_Images/icons/bat.jpg" alt="clothes" width="20" height="20"
+                        class="menu-title-img">
+                      <p class="menu-title">
+                        <?php echo $category->category_name; ?>
+                      </p>
+                    </div>
+                    <div>
+                      <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                      <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                    </div>
+                  </button>
+                  <ul class="sidebar-submenu-category-list" data-accordion>
+                    <?php
+                    foreach ($data['brands'] as $brand) {
+                      if ($brand->brand_category_name == $category->category_id) {
+                        ?>
+                        <li class="sidebar-submenu-category">
+                          <a href="./EnglishWillowBats.html" class="sidebar-submenu-title">
+                            <p class="product-name">
+                              <?php echo $brand->brand_name; ?>
+                            </p>
+                            <data value="300" class="stock" title="Available Stock">300</data>
+                          </a>
+                        </li>
+                        <?php
+                      }
+                    }
+                    ?>
+                  </ul>
+                </li>
+              <?php endforeach ?>
             </ul>
           </div>
         </div>
-        
+
         <div class="product-box">
           <!--PRODUCT GRID -->
           <div class="product-main">
             <h2 class="title">New Products</h2>
             <div class="product-grid">
 
-              <div class="showcase">
-                <div class="showcase-banner">
-                  <img src="<?php echo URLROOT; ?>/Crick_Images/products/Bats/bat01.jpg" alt="bat01" width="300" class="product-img">
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-                    <button class="btn-action">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </button>
-                    <button class="btn-action">
-                      <ion-icon name="bag-add-outline"></ion-icon>
-                    </button>
+              <?php foreach ($data['products'] as $product): ?>
+                <div class="showcase">
+                  <div class="showcase-banner">
+                    <img src="<?php echo URLROOT; ?>/CricketShop/<?php echo $product->product_thumbnail ?>" alt="bat01"
+                      width="300" class="product-img">
+                    <div class="showcase-actions">
+                      <button class="btn-action">
+                        <ion-icon name="heart-outline"></ion-icon>
+                      </button>
+                      <button class="btn-action">
+                        <ion-icon name="eye-outline"></ion-icon>
+                      </button>
+                      <button class="btn-action">
+                        <ion-icon name="bag-add-outline"></ion-icon>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="showcase-content">
+                    <a href="#" class="showcase-category">
+                      <?php echo $product->product_title; ?>
+                    </a>
+                    <a href="#">
+                      <h3 class="showcase-title">
+                        <?php echo $product->product_title; ?>
+                      </h3>
+                    </a>
+                    <div class="showcase-rating">
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star"></ion-icon>
+                      <ion-icon name="star-outline"></ion-icon>
+                      <ion-icon name="star-outline"></ion-icon>
+                    </div>
+                    <div class="price-box">
+                      <p class="price">
+                        <?php echo $product->selling_price; ?>
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <div class="showcase-content">
-                  <a href="./EnglishWillowBats.html" class="showcase-category">English Willow Bat</a>
-                  <a href="#">
-                    <h3 class="showcase-title">SS English Willow Bat</h3>
-                  </a>
-                  <div class="showcase-rating">
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star-outline"></ion-icon>
-                    <ion-icon name="star-outline"></ion-icon>
-                  </div>
-                  <div class="price-box">
-                    <p class="price">23000 LKR</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="showcase">             
-                <div class="showcase-banner">
-                  <img src="<?php echo URLROOT; ?>/Crick_Images/products/Balls/rball01.jpg" alt="rball01" class="product-img" width="300">
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>              
-                    <button class="btn-action">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </button>             
-                    <button class="btn-action">
-                      <ion-icon name="bag-add-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>             
-                <div class="showcase-content">
-                  <a href="./Redballs.html" class="showcase-category">Red Cricket Balls</a>
-                  <h3>
-                    <a href="#" class="showcase-title">Red  Leather Cricket Ball - 4 3/4 Oz</a>
-                  </h3>
-                  <div class="showcase-rating">
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star-outline"></ion-icon>
-                    <ion-icon name="star-outline"></ion-icon>
-                  </div>
-                  <div class="price-box">
-                    <p class="price">2250 LKR</p>
-                  </div>
-                </div>             
-              </div>
-
-              <div class="showcase">
-                <div class="showcase-banner">
-                  <img src="<?php echo URLROOT; ?>/Crick_Images/products/Balls/wball2.jpg" alt="wball2" class="product-img" width="300">
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-                    <button class="btn-action">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </button>
-                    <button class="btn-action">
-                      <ion-icon name="bag-add-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-                <div class="showcase-content">
-                  <a href="./whiteballs.html" class="showcase-category">White Cricket Balls</a>             
-                  <h3>
-                    <a href="#" class="showcase-title">White Leather Cricket Ball - 156g(5 1/2 Oz)</a>
-                  </h3>              
-                  <div class="showcase-rating">
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star-outline"></ion-icon>
-                    <ion-icon name="star-outline"></ion-icon>
-                  </div>
-                  <div class="price-box">
-                    <p class="price">2350 LKR</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="showcase">
-                <div class="showcase-banner">
-                  <img src="<?php echo URLROOT; ?>/Crick_Images/products/Bats/kbat04.jpg" alt="kbat04" class="product-img" width="300">
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>             
-                    <button class="btn-action">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </button>           
-                    <button class="btn-action">
-                      <ion-icon name="bag-add-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>             
-                <div class="showcase-content">
-                  <a href="./KashmirWillowBats.html" class="showcase-category">Kashmir Willow Bat</a>             
-                  <h3>
-                    <a href="#" class="showcase-title">IBIS 77 Kashmir Willow Bat</a>
-                  </h3>             
-                  <div class="showcase-rating">
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                  </div>              
-                  <div class="price-box">
-                    <p class="price">18000 LKR</p>
-                  </div>             
-                </div>             
-              </div>
-
-              <div class="showcase">
-                <div class="showcase-banner">
-                  <img src="<?php echo URLROOT; ?>/Crick_Images/products/protectiveGear/helmet1.jpg" alt="helmet1" class="product-img" width="300">
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-                    <button class="btn-action">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </button>            
-                    <button class="btn-action">
-                      <ion-icon name="bag-add-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>            
-                <div class="showcase-content">
-                  <a href="./helmets.html" class="showcase-category">Helmets </a>            
-                  <h3>
-                    <a href="#" class="showcase-title">Masuri C-line Plus Senior Helmet (Size-M)</a>
-                  </h3>            
-                  <div class="showcase-rating">
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                  </div>           
-                  <div class="price-box">
-                    <p class="price">44500 LKR</p>
-                  </div>     
-                </div>             
-              </div>
-
-              <div class="showcase">
-                <div class="showcase-banner">
-                  <img src="<?php echo URLROOT; ?>/Crick_Images/products/protectiveGear/battingpad1.jpeg" alt="battingpad1" class="product-img" width="300">
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-                    <button class="btn-action">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </button>            
-                    <button class="btn-action">
-                      <ion-icon name="bag-add-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>             
-                <div class="showcase-content">
-                  <a href="./battingpads.html" class="showcase-category">Batting Pads</a>             
-                  <h3>
-                    <a href="#" class="showcase-title">Speed Blade Batting Pads</a>
-                  </h3>              
-                  <div class="showcase-rating">
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star-outline"></ion-icon>
-                    <ion-icon name="star-outline"></ion-icon>
-                  </div>             
-                  <div class="price-box">
-                    <p class="price">14960 LKR</p>
-                  </div> 
-                </div>       
-              </div>
-
-              <div class="showcase"> 
-                <div class="showcase-banner">
-                  <img src="<?php echo URLROOT; ?>/Crick_Images/products/Balls/pball1.jpg" alt="pball1" class="product-img" width="300">
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>             
-                    <button class="btn-action">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </button>             
-                    <button class="btn-action">
-                      <ion-icon name="bag-add-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>             
-                <div class="showcase-content">
-                  <a href="./practiceballs.html" class="showcase-category">Practice Balls</a>             
-                  <h3>
-                    <a href="#" class="showcase-title">Atlas Ptactice Ball</a>
-                  </h3>             
-                  <div class="showcase-rating">
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star-outline"></ion-icon>
-                  </div>
-                  <div class="price-box">
-                    <p class="price">100 LKR</p>
-                  </div>             
-                </div>             
-              </div>
-
-              <div class="showcase">
-                <div class="showcase-banner">
-                  <img src="<?php echo URLROOT; ?>/Crick_Images/products/protectiveGear/battinggloves2.jpg" alt="battinggloves2" class="product-img" width="300">
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-                    <button class="btn-action">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </button>            
-                    <button class="btn-action">
-                      <ion-icon name="bag-add-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>            
-                <div class="showcase-content">
-                  <a href="./BattingGloves.html" class="showcase-category">Batting Gloves</a>             
-                  <h3>
-                    <a href="#" class="showcase-title">DSC Intense Attitude Leather Cricket Batting Gloves</a>
-                  </h3>             
-                  <div class="showcase-rating">
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star-outline"></ion-icon>
-                    <ion-icon name="star-outline"></ion-icon>
-                  </div>             
-                  <div class="price-box">
-                    <p class="price">8600 LKR</p>
-                  </div>              
-                </div>             
-              </div>
-
-              <div class="showcase">             
-                <div class="showcase-banner">
-                  <img src="<?php echo URLROOT; ?>/Crick_Images/products/Accesseries/footware2.jpg" alt="footware2" class="product-img" width="300">
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>              
-                    <button class="btn-action">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </button>           
-                    <button class="btn-action">
-                      <ion-icon name="bag-add-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>            
-                <div class="showcase-content">
-                  <a href="./Footwear.html" class="showcase-category">Footware</a>            
-                  <h3>
-                    <a href="#" class="showcase-title">Kookaburra KC Players Spike Cricket Shoe</a>
-                  </h3>          
-                  <div class="showcase-rating">
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star-outline"></ion-icon>
-                  </div>              
-                  <div class="price-box">
-                    <p class="price">17000 LKR</p>
-                  </div>              
-                </div>
-              </div>
-
-              <div class="showcase">
-                <div class="showcase-banner">
-                  <img src="<?php echo URLROOT; ?>/Crick_Images/products/Accesseries/shirt1.jpg" alt="shirt1" class="product-img" width="300">
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-                    <button class="btn-action">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </button>  
-                    <button class="btn-action">
-                      <ion-icon name="bag-add-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-                <div class="showcase-content">
-                  <a href="./Clothing.html" class="showcase-category">Clothing</a>
-                  <h3>
-                    <a href="#" class="showcase-title">TYKA Median Cricket Shirts</a>
-                  </h3>   
-                  <div class="showcase-rating">
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star-outline"></ion-icon>
-                    <ion-icon name="star-outline"></ion-icon>
-                  </div>              
-                  <div class="price-box">
-                    <p class="price">3000 LKR</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="showcase">
-                <div class="showcase-banner">
-                  <img src="<?php echo URLROOT; ?>/Crick_Images/products/Accesseries/bag1.jpg" alt="bag1" class="product-img" width="300">
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-                    <button class="btn-action">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </button>
-                    <button class="btn-action">
-                      <ion-icon name="bag-add-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-                <div class="showcase-content">
-                  <a href="./Bags.html" class="showcase-category">Bags</a>
-                  <h3>
-                    <a href="#" class="showcase-title">Wheel Bags</a>
-                  </h3>             
-                  <div class="showcase-rating">
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star-outline"></ion-icon>
-                  </div>             
-                  <div class="price-box">
-                    <p class="price">17000 LKR</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="showcase">
-                <div class="showcase-banner">
-                  <img src="<?php echo URLROOT; ?>/Crick_Images/products/protectiveGear/thighpad1.jpeg" alt="thighpad1"  class="product-img" width="300">
-                  <div class="showcase-actions">
-                    <button class="btn-action">
-                      <ion-icon name="heart-outline"></ion-icon>
-                    </button>
-                    <button class="btn-action">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </button>
-                    <button class="btn-action">
-                      <ion-icon name="bag-add-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-                <div class="showcase-content">
-                  <a href="./ThighGuards.html" class="showcase-category">Thigh Guards</a>
-                  <h3>
-                    <a href="#" class="showcase-title">ED Sports Ultimate Cricket Thigh Pads</a>
-                  </h3>
-                  <div class="showcase-rating">
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star-outline"></ion-icon>
-                    <ion-icon name="star-outline"></ion-icon>
-                  </div>
-                  <div class="price-box">
-                    <p class="price">10000 LKR</p>
-                  </div>
-                </div>
-              </div>
+              <?php endforeach ?>
 
             </div>
           </div>
         </div>
       </div>
     </div>
-    
+
     <div class="container">
-        <!--SERVICE-->
-        <div class="service">
-          <h2 class="title">Our Services</h2>
-          <div class="service-container">
+      <!--SERVICE-->
+      <div class="service">
+        <h2 class="title">Our Services</h2>
+        <div class="service-container">
 
-            <a href="#" class="service-item">
-              <div class="service-icon">
-                <ion-icon name="boat-outline"></ion-icon>
-              </div>
-              <div class="service-content">
-                <h3 class="service-title">Island wide Delivery</h3>
-                <p class="service-desc">For Order Over 10000 LKR</p>
-              </div>
-            </a>
+          <a href="#" class="service-item">
+            <div class="service-icon">
+              <ion-icon name="boat-outline"></ion-icon>
+            </div>
+            <div class="service-content">
+              <h3 class="service-title">Island wide Delivery</h3>
+              <p class="service-desc">For Order Over 10000 LKR</p>
+            </div>
+          </a>
 
-            <a href="#" class="service-item">
-              <div class="service-icon">
-                <ion-icon name="rocket-outline"></ion-icon>
-              </div>
-              <div class="service-content">   
-                <h3 class="service-title">Next Day delivery</h3>
-                <p class="service-desc">Around Colombo</p>
-              </div>
-            </a>
+          <a href="#" class="service-item">
+            <div class="service-icon">
+              <ion-icon name="rocket-outline"></ion-icon>
+            </div>
+            <div class="service-content">
+              <h3 class="service-title">Next Day delivery</h3>
+              <p class="service-desc">Around Colombo</p>
+            </div>
+          </a>
 
-            <a href="#" class="service-item">
-              <div class="service-icon">
-                <ion-icon name="call-outline"></ion-icon>
-              </div>
-              <div class="service-content">
-                <h3 class="service-title">Best Online Support</h3>
-                <p class="service-desc">Hours: 8AM - 9PM</p>
-              </div>
-            </a>
+          <a href="#" class="service-item">
+            <div class="service-icon">
+              <ion-icon name="call-outline"></ion-icon>
+            </div>
+            <div class="service-content">
+              <h3 class="service-title">Best Online Support</h3>
+              <p class="service-desc">Hours: 8AM - 9PM</p>
+            </div>
+          </a>
 
-            <a href="#" class="service-item">
-              <div class="service-icon">
-                <ion-icon name="arrow-undo-outline"></ion-icon>
-              </div>
-              <div class="service-content">
-                <h3 class="service-title">Return Policy</h3>
-                <p class="service-desc">Easy & Free Return</p>
-              </div>
-            </a>
+          <a href="#" class="service-item">
+            <div class="service-icon">
+              <ion-icon name="arrow-undo-outline"></ion-icon>
+            </div>
+            <div class="service-content">
+              <h3 class="service-title">Return Policy</h3>
+              <p class="service-desc">Easy & Free Return</p>
+            </div>
+          </a>
 
-            <a href="#" class="service-item">
-              <div class="service-icon">
-                <ion-icon name="ticket-outline"></ion-icon>
-              </div>
-              <div class="service-content">
-                <h3 class="service-title">30% money back</h3>
-                <p class="service-desc">For Order Over 10000 LKR</p>
-              </div>
-            </a>
+          <a href="#" class="service-item">
+            <div class="service-icon">
+              <ion-icon name="ticket-outline"></ion-icon>
+            </div>
+            <div class="service-content">
+              <h3 class="service-title">30% money back</h3>
+              <p class="service-desc">For Order Over 10000 LKR</p>
+            </div>
+          </a>
 
-          </div>
         </div>
       </div>
+    </div>
     </div>
   </main>
 
 
   <!--FOOTER-->
-  <footer>      
+  <footer>
     <div class="footer-nav">
       <div class="container">
         <ul class="footer-nav-list">
           <li class="footer-nav-item">
             <h2 class="nav-title">Categories</h2>
           </li>
-          <li class="footer-nav-item">
-            <a href="./bats.html" class="footer-nav-link">Bats</a>
-          </li>
-          <li class="footer-nav-item">
-            <a href="./balls.html" class="footer-nav-link">Balls</a>
-          </li>
-          <li class="footer-nav-item">
-            <a href="./ProtectiveGear.html" class="footer-nav-link">Protective Gear</a>
-          </li>
-          <li class="footer-nav-item">
-            <a href="./Accessories.html" class="footer-nav-link">Accessories</a>
-          </li>
+          <?php foreach ($data['categories'] as $category): ?>
+            <li class="footer-nav-item">
+              <a href="./bats.html" class="footer-nav-link"><?php echo $category->category_name; ?></a>
+            </li>
+          <?php endforeach ?>
         </ul>
 
         <ul class="footer-nav-list">
@@ -1137,10 +493,10 @@
           </li>
           <li class="footer-nav-item">
             <a href="#" class="footer-nav-link">Terms and conditions</a>
-          </li>       
+          </li>
           <li class="footer-nav-item">
             <a href="#" class="footer-nav-link">About us</a>
-          </li>       
+          </li>
           <li class="footer-nav-item">
             <a href="#" class="footer-nav-link">Secure payment</a>
           </li>
@@ -1183,7 +539,7 @@
             <div class="icon-box">
               <ion-icon name="call-outline"></ion-icon>
             </div>
-            <a href="tel:+607936-8058" class="footer-nav-link">077 072 2933</a>
+            <a href="tel:077-072-2933" class="footer-nav-link">077 072 2933</a>
           </li>
           <li class="footer-nav-item flex">
             <div class="icon-box">
@@ -1196,12 +552,13 @@
     </div>
   </footer>
 
-<!--custom js link-->
-<script src="./assets/js/script.js"></script>
+  <!--custom js link-->
+  <script src="<?php echo URLROOT; ?>/js/crick_shop.js"></script>
 
-<!--ionicon link-->
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <!--ionicon link-->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
+
 </html>
