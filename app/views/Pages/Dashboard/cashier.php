@@ -58,7 +58,7 @@
                         </div>
                   </a> -->
 
-                  <a class="card" href="C&A_Indoor_Project/Pages/reservationTable/manager">
+                  <a class="card" href="C&A_Indoor_Project/Pages/creservationTable/cashier">
                         <div>
                               <div class="numbers"><?php echo $data1["Reserve_Count"]?></div>
                               <div class="cardName">Reservations</div>

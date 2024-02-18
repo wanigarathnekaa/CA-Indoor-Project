@@ -157,6 +157,12 @@ class Pages extends Controller
         $bookings = $this->pagesModel->getBookings();
         $this->view('Pages/Tables/reservations_Table', $bookings);
     }
+    //reservation table for cashier
+    public function creservationTable($name)
+    {
+        $bookings = $this->pagesModel->getBookings();
+        $this->view('Pages/Tables/cashier_reservationsTable', $bookings);
+    }
 
 
     // dashboard

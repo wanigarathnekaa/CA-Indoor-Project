@@ -83,13 +83,12 @@
                                     <th></th>
                               </tr>
                         </thead>
-
                         <!-- table body -->
                         <tbody>
                               <?php foreach ($players as $player): ?>
                                     <tr>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($player)); ?>)">
-                                                <?php echo $player->uid ?>
+                                                <?php echo $player->uid ?>      
                                           </td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($player)); ?>)">
                                                 <?php echo $player->name ?>
