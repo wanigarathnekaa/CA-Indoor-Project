@@ -205,6 +205,7 @@ class Pages extends Controller
         $this->view('Pages/Booking/bookingRegistration', $res);
     }
 
+    // user profile for player, coach......................................................................................
     public function Profile($name)
     {
         $user = $this->pagesModel->findUser($_SESSION['user_email']);
@@ -271,6 +272,12 @@ class Pages extends Controller
         $this->view('Pages/UserProfiles/editProfile', $data);
     }
 
+    public function Delete_Profile($name)
+    {
+        $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        // print_r($user);
+        $this->view('Pages/UserProfiles/deleteProfile', $user);
+    }
    
     public function changePassword(){
         $user = $this->pagesModel->findUser($_SESSION['user_email']);
@@ -462,12 +469,13 @@ class Pages extends Controller
         $this->view('Pages/ManagerRegistration/managerRegistration');
     }
 
-    public function Delete_Profile($name)
+    public function Manager_Profile($name)
     {
-        $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        // echo $_SESSION['user_email'];
+        $user = $this->pagesModel->findManager($_SESSION['user_email']);
         // print_r($user);
 
-        $this->view('Pages/UserProfiles/deleteProfile', $user);
+        $this->view('Pages/Manager/managerProfile', $user);
     }
 
     public function Manager_Edit_Profile($name)
@@ -489,15 +497,6 @@ class Pages extends Controller
         ];
 
         $this->view('Pages/Manager/managerEditProfile', $data);
-    }
-
-    public function Manager_Profile($name)
-    {
-        // echo $_SESSION['user_email'];
-        $user = $this->pagesModel->findManager($_SESSION['user_email']);
-        // print_r($user);
-
-        $this->view('Pages/Manager/managerProfile', $user);
     }
 
     public function Manager_Delete_Profile($name)
