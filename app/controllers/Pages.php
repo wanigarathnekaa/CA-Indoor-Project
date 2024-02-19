@@ -562,6 +562,20 @@ class Pages extends Controller
         $this->view('Pages/CricketShop/crickShop',$data);
     }
 
+    public function Cricket_Item($name)
+    {
+        $categories = $this->pagesModel->getCategories();
+        $brand = $this->pagesModel->getBrands();
+        $products = $this->pagesModel->getProducts();
+        $data = [
+            'categories' => $categories,
+            'brands' => $brand,
+            'products' => $products,
+            'name' => $name,
+        ];
+        $this->view('Pages/CricketShop/cricketItem',$data);
+    }
+
 
     //terms and conditions page
     public function termsConditions()
