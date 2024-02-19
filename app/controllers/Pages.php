@@ -213,6 +213,7 @@ class Pages extends Controller
         $this->view('Pages/UserProfiles/userProfile', $user);
     }
 
+
     public function editProfile($name)
     {
         // $user = $this->pagesModel->findUser($_SESSION['user_email']);
@@ -268,6 +269,44 @@ class Pages extends Controller
         // print_r($data);
 
         $this->view('Pages/UserProfiles/editProfile', $data);
+    }
+
+   
+    public function changePassword(){
+        $user = $this->pagesModel->findUser($_SESSION['user_email']);
+    
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+           
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    
+            $oldPassword = trim($_POST['old_password']);
+            $newPassword = trim($_POST['new_password']);
+            $confirmPassword = trim($_POST['confirm_password']);
+    
+            if (empty($oldPassword) || empty($newPassword) || empty($confirmPassword)) {
+                
+                $this->view('Pages/UserProfiles/changePassword');
+            } else {
+                $hashedPassword = $user->password; 
+                if (password_verify($oldPassword, $hashedPassword)) {
+                    
+                    if ($newPassword != $confirmPassword) {
+                        
+                        $errorMessage = "Passwords do not match. Please try again.";
+                        $this->view('Pages/UserProfiles/changePassword', ['errorMessage' => $errorMessage]);
+                    } else {
+                      
+                        $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                        $this->pagesModel->updatePassword($user->email, $hashedNewPassword);
+                        $this->view('Pages/UserProfiles/changePassword');
+                    }
+                } else {
+                    $this->view('Pages/UserProfiles/changePassword');
+                }
+            }
+        } else {
+            $this->view('Pages/UserProfiles/changePassword');
+        }
     }
 
     // add advertisement page
@@ -508,6 +547,33 @@ class Pages extends Controller
             'products' => $products,
         ];
         $this->view('Pages/InventoryManagement/product',$data);
+    }
+
+    public function Cricket_Shop($name)
+    {
+        $categories = $this->pagesModel->getCategories();
+        $brand = $this->pagesModel->getBrands();
+        $products = $this->pagesModel->getProducts();
+        $data = [
+            'categories' => $categories,
+            'brands' => $brand,
+            'products' => $products,
+        ];
+        $this->view('Pages/CricketShop/crickShop',$data);
+    }
+
+    public function Cricket_Item($name)
+    {
+        $categories = $this->pagesModel->getCategories();
+        $brand = $this->pagesModel->getBrands();
+        $products = $this->pagesModel->getProducts();
+        $data = [
+            'categories' => $categories,
+            'brands' => $brand,
+            'products' => $products,
+            'name' => $name,
+        ];
+        $this->view('Pages/CricketShop/cricketItem',$data);
     }
 
 

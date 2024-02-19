@@ -1,4 +1,6 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 class Users extends Controller
 {
     private $userModel;
@@ -219,6 +221,98 @@ class Users extends Controller
         }
 
     }
+    public function forgotPassword(){
+        $this->view('Pages/LoginPage/forgotPassword');
+
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+           
+            //input data
+            $data=[
+                'email'=>trim($_POST['email']),
+                
+                'email_err'=>''
+
+            ];
+            $email = trim($_POST['email']);
+            if(empty($data['email'])) {
+                $data['email_err']='Please enter the email';
+            }
+            if(empty($data['email_err'])){
+                if($this->userModel->findUserByEmail($email)){
+                    // flash('complaint_created');
+                $password=$this->userModel->generateRandomPassword();
+
+                redirect('Users/sendNewPassword/' . urlencode($email) . '/' . urlencode($password));
+
+                }
+                else{
+                    $this->view('Pages/LoginPage/forgotPassword');                }
+            }
+            else{
+                //load view
+                $this->view('Pages/LoginPage/forgotPassword');
+                       
+            }
+        
+        }
+
+        
+    }
+    public function sendNewPassword($email,$password)
+    {
+        require_once APPROOT . '/libraries/phpmailer/src/PHPMailer.php';
+        require_once APPROOT . '/libraries/phpmailer/src/SMTP.php';
+        require_once APPROOT . '/libraries/phpmailer/src/Exception.php';
+        
+
+        $mail = new PHPMailer(true);
+
+
+ 
+            //Server settings
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'nivodya2001@gmail.com';
+            $mail->Password = 'ndvpqhmangzegxhn';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;
+            
+            //Recipients
+            $mail->setFrom('nivodya2001@gmail.com', 'Hasini Hewa');
+            $mail->addAddress($email);
+
+            //Content
+            $mail->isHTML(true);
+            $mail->Subject = 'New password for yor forgoteen';
+            $mail->Body    = $password;
+            $mail->send();
+            $hashedNewPassword = password_hash($password, PASSWORD_DEFAULT);
+
+
+            if ($mail->send()) {
+                if($this->userModel->updatePassword($email,$hashedNewPassword)){
+                    redirect('Users/login');
+
+                }
+                else{
+                    die('somthing wrong');
+                }                
+
+
+
+                
+            }
+
+
+        
+        
+       
+ 
+        }
+
+    
 
     public function createUserSession($user, $role)
     {
@@ -344,6 +438,50 @@ class Users extends Controller
         //Load the view
         $this->view('Pages/UserProfiles/editProfile', $data);
     }
+    public function changePassword(){
+        $user = $this->userModel->findUser($_SESSION['user_email']);
+        $data = [
+            'name' => 'user->name',
+            'user_name' => 'user->user_name',
+            'email' => 'user->email',
+            'phoneNumber' => 'user->phoneNumber',
+          
+        ];
+    
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+           
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    
+            $oldPassword = trim($_POST['old_password']);
+            $newPassword = trim($_POST['new_password']);
+            $confirmPassword = trim($_POST['confirm_password']);
+    
+            if (empty($oldPassword) || empty($newPassword) || empty($confirmPassword)) {
+                
+                $this->view('Pages/UserProfiles/changePassword');
+            } else {
+                $hashedPassword = $user->password; 
+                if (password_verify($oldPassword, $hashedPassword)) {
+                    
+                    if ($newPassword != $confirmPassword) {
+                        
+                        $errorMessage = "Passwords do not match. Please try again.";
+                        $this->view('Pages/UserProfiles/changePassword', ['errorMessage' => $errorMessage]);
+                    } else {
+                      
+                        $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                        $this->userModel->updatePassword($user->email, $hashedNewPassword);
+                        $this->view('Pages/UserProfiles/userProfile');
+                    }
+                } else {
+                    $this->view('Pages/UserProfiles/changePassword');
+                }
+            }
+        } else {
+            $this->view('Pages/UserProfiles/changePassword');
+        }
+    }
+    
 
     public function delete()
     {
