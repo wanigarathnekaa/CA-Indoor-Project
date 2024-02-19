@@ -121,7 +121,8 @@
             <div class="container">
                 <ul class="desktop-menu-category-list">
                     <li class="menu-category">
-                        <a href="http://localhost/C&A_Indoor_Project/Pages/Cricket_Shop/manager" class="menu-title">Home</a>
+                        <a href="http://localhost/C&A_Indoor_Project/Pages/Cricket_Shop/manager"
+                            class="menu-title">Home</a>
                     </li>
                     <li class="menu-category">
                         <a class="menu-title">Categories</a>
@@ -238,9 +239,10 @@
                                 if ($brand->brand_category_name == $category->category_id) {
                                     ?>
                                     <li class="submenu-category">
-                                        <a href="http://localhost/C&A_Indoor_Project/Pages/Cricket_Item/brand_id=<?php echo $brand->brand_id; ?>" class="submenu-title">
+                                        <a href="http://localhost/C&A_Indoor_Project/Pages/Cricket_Item/brand_id=<?php echo $brand->brand_id; ?>"
+                                            class="submenu-title">
                                             <?php echo $brand->brand_name; ?>
-                                        </href=>
+                                        </a>
                                     </li>
                                     <?php
                                 }
