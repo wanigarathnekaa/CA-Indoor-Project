@@ -1,7 +1,5 @@
 <?php
-$selectedTimeSlot = isset($_GET['timeslot']) ? urldecode($_GET['timeslot']) : '7.00 - 8.00';
 $selected_date = isset($_GET['timedate']) ? urldecode($_GET['timedate']) : date('Y-m-d');
-$selected_net = isset($_GET['net']) ? urldecode($_GET['net']) : "Normal Net A";
 ?>
 
 
@@ -91,6 +89,8 @@ $selected_net = isset($_GET['net']) ? urldecode($_GET['net']) : "Normal Net A";
                             <?php endforeach; ?>
                         </select>
                     </div>
+
+                    <input type="hidden" name="timeSlotsAndNetTypes" id="timeSlotsAndNetTypes">
 
                     <button type="submit" name="booking">
                         <span class="btnText">Confirm</span>
