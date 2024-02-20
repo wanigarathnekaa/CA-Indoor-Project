@@ -494,6 +494,23 @@ class Users extends Controller
         
     }
 
+    public function getUserByEmail()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $email = trim($_POST['email']);
+
+            $user = $this->userModel->getUserByEmail($email);
+
+            header('Content-Type: application/json');
+            echo json_encode($user);
+            exit();
+        }
+        
+    }
+
 
 }
 

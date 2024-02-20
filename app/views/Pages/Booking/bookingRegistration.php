@@ -16,6 +16,8 @@ $selected_net = isset($_GET['net']) ? urldecode($_GET['net']) : "Normal Net A";
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/Booking_Styles.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
@@ -26,87 +28,107 @@ $selected_net = isset($_GET['net']) ? urldecode($_GET['net']) : "Normal Net A";
 
     <!-- Sidebar -->
     <?php
-      $role = "Manager";
-      require APPROOT . '/views/Pages/Dashboard/header.php';
-      require APPROOT . '/views/Components/Side Bars/sideBar.php';
+    $role = "Manager";
+    require APPROOT . '/views/Pages/Dashboard/header.php';
+    require APPROOT . '/views/Components/Side Bars/sideBar.php';
     ?>
 
     <!-- Content -->
     <section class="home">
         <div class="container">
-            <header>Make Your Book</header>
 
-            <form action="<?php echo URLROOT;?>/Bookings/register" method="POST">
-                <div class="form first">
-                    <div class="details personal">
-                        <span class="title">Book only nets</span>
+            <form action="<?php echo URLROOT; ?>/Bookings/register" method="POST" class="form">
+                <!-- Left side - Personal Details -->
+                <div class="details personal">
+                    <header>Make Your Book</header>
 
-                        <div class="fields">
-                            <div class="input-field">
-                                <label>Full Name</label>
-                                <input type="text" name="name" placeholder="Enter your name" required >
-                                <!-- <span class="form-invalid"><?php echo $data['name_err']; ?></span> -->
-                            </div>
-
-                            <div class="input-field">
-                                <label>Email</label>
-                                <input type="email" name="email" placeholder="Enter your email" required >
-                            </div>
-
-                            <div class="input-field">
-                                <label>Mobile Number</label>
-                                <input type="text" name="phoneNumber" placeholder="Enter mobile number" required maxlength="10">
-                            </div>
-
-                            <!-- <div class="input-field">
-                                <label>NIC Number</label>
-                                <input type="number" placeholder="Enter your ocupation" required>
-                            </div> -->
-
-                            <div class="input-field">
-                                <label>Booking Date</label>
-                                <input type="date" name="date" value="<?php echo $selected_date; ?>" readonly required>
-                            </div>
-
-                            <div class="input-field">
-                                <label>Time Slot</label>
-                                <input type="text" name="timeSlot" value="<?php echo $selectedTimeSlot; ?>" readonly required>
-                            </div>
-
-                            <div class="input-field">
-                                <label>Who is the coach?</label>
-                                <select name="coach" required>
-                                    <option disabled selected>Select the coach</option>
-                                    <?php foreach($data as $coach):?>
-                                        <option><?php echo "Mr.{$coach->name}"?></option>
-                                    <?php endforeach;?>
-                                </select>
-                            </div>
-
-                            <div class="input-field">
-                                <label>Net Type?</label>
-                                <input type="text" name="net" value="<?php echo $selected_net; ?>" readonly required>
-                            </div>
-
-
-                        </div>
+                    <div class="input-field">
+                        <label>Full Name</label>
+                        <input type="text" name="name" id="name" placeholder="Enter your name" required>
                     </div>
 
-                    <div class="details ID">
-                        <button type="submit" name="booking">
-                            <span class="btnText">Confirm</span>
-                            <i class="uil uil-navigator"></i>
-                        </button>
+                    <div class="input-field">
+                        <label>Email</label>
+                        <input type="email" name="email" id="email" placeholder="Enter your email" required>
                     </div>
 
+                    <div class="input-field">
+                        <label>Phone Number</label>
+                        <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Enter your phone number"
+                            pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number" required>
+                    </div>
+
+                    <span class="user-invalid"></span>
+                </div>
+
+                <!-- Right side - Booking Details -->
+                <div class="details ID">
+                    <!-- Display other information like time slots, date, coach name, etc. here -->
+
+                    <div class="input-field">
+                        <label>Booking Date</label>
+                        <input type="date" name="date" value="<?php echo $selected_date; ?>" readonly required>
+                    </div>
+
+                    <table class="time-slots-table">
+                        <thead>
+                            <tr>
+                                <th>Time Slot</th>
+                                <th>Net Type</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                    <div class="input-field">
+                        <label>Who is the coach?</label>
+                        <select name="coach" required>
+                            <option disabled selected>Select the coach</option>
+                            <?php foreach ($data as $coach): ?>
+                                <option>
+                                    <?php echo "Mr.{$coach->name}" ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <button type="submit" name="booking">
+                        <span class="btnText">Confirm</span>
+                        <i class="uil uil-navigator"></i>
+                    </button>
                 </div>
             </form>
-        </div>   
+        </div>
     </section>
 
 
     <!-- Script -->
     <script src="<?php echo URLROOT; ?>/js/bookingScript.js"></script>
+    <script>
+        $("#email").change(function (e) {
+            e.preventDefault();
+            var email = $("#email").val();
+
+            $.ajax({
+                type: "POST",
+                url: "<?php echo URLROOT; ?>/Users/getUserByEmail",
+                data: {
+                    email: email
+                },
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response);
+                    if (response == false) {
+                        $(".user-invalid").text("User not found");
+                    } else {
+                        $(".user-invalid").text("");
+                        $("#name").val(response.name);
+                        $("#phoneNumber").val(response.phoneNumber);
+                    }
+                }
+            })
+        });
+    </script>
 </body>
 
 </html>
