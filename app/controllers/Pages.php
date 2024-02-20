@@ -46,7 +46,7 @@ class Pages extends Controller
 
     public function Manager_Booking($name)
     {
-        $bookings = $this->pagesModel->getBookings();
+        $bookings = $this->pagesModel->getReservations();
         $this->view('Pages/Calendar/managerBooking', $bookings);
     }
 
