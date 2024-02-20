@@ -1,5 +1,6 @@
 <?php
 $selected_date = isset($_GET['timedate']) ? urldecode($_GET['timedate']) : date('Y-m-d');
+$bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
 ?>
 
 
@@ -91,6 +92,8 @@ $selected_date = isset($_GET['timedate']) ? urldecode($_GET['timedate']) : date(
                     </div>
 
                     <input type="hidden" name="timeSlotsAndNetTypes" id="timeSlotsAndNetTypes">
+
+                    <input type="hidden" name="booking_delete_id" id="booking_delete_id" value=<?php echo $bookingId;?>>
 
                     <button type="submit" name="booking">
                         <span class="btnText">Confirm</span>
