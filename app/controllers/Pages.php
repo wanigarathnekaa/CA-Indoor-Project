@@ -68,7 +68,7 @@ class Pages extends Controller
     // daily reservation table for manager, owner
     public function Table($name)
     {
-        $bookings = $this->pagesModel->getBookings();
+        $bookings = $this->pagesModel->getReservations();
         $this->view('Pages/Tables/dailyReservation', $bookings);
     }
 
@@ -139,7 +139,7 @@ class Pages extends Controller
     // dashboard
     public function Dashboard($name)
     {
-        $bookings = $this->pagesModel->getBookings();
+        $bookings = $this->pagesModel->getReservations();
         $coaches = $this->pagesModel->getCoachCount();
         $users = $this->pagesModel->getUserCount();
         $coach = $this->pagesModel->getCoaches();

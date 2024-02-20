@@ -8,7 +8,7 @@ function openPopup(reservation) {
       popupcontainer.classList.add("open-popupcontainer");
 
       const r_id = document.querySelector(".r_id");
-      r_id.textContent = reservation.reservation_Id;
+      r_id.textContent = reservation.id;
 
       const r_name = document.querySelector(".r_name");
       r_name.textContent = reservation.name;
@@ -17,7 +17,7 @@ function openPopup(reservation) {
       r_date.textContent = reservation.date;
 
       const r_net = document.querySelector(".r_net");
-      r_net.textContent = reservation.net;
+      r_net.textContent = reservation.netType;
 
       const r_timeSlot = document.querySelector(".r_timeSlot");
       r_timeSlot.textContent = reservation.timeSlot;
