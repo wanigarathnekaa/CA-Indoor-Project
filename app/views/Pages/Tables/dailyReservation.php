@@ -1,8 +1,10 @@
 <?php
+// print_r($data);
 $filter_date = date('Y-m-d');
-$new_data = array_filter($data, function ($data) use ($filter_date) {
-      return $data->date === $filter_date;
-});
+$new_data = array_filter($data, function ($item) use ($filter_date) {
+      return $item->date === $filter_date;
+  });
+  
 ?>
 
 <html>
@@ -52,9 +54,9 @@ $new_data = array_filter($data, function ($data) use ($filter_date) {
                                                 <?php echo $reservation->timeSlot; ?>
                                           </td>
                                           <td>
-                                                <?php echo $reservation->net; ?>
+                                                <?php echo $reservation->netType; ?>
                                           </td>
-                                          <td><span class="status paid">Paid</span></td>
+                                          <td><span class="status paid">Pending</span></td>
                                     </tr>
                                     <?php
                               }
@@ -96,7 +98,7 @@ $new_data = array_filter($data, function ($data) use ($filter_date) {
                         </div>
 
                         <div class="popupdetail">
-                              <h2><b>Status :</b> <span class = "r_payment">Paid</span></h2>
+                              <h2><b>Status :</b> <span class = "r_payment">Pending</span></h2>
                         </div>
                   </div>
 
