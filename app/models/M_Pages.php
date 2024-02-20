@@ -56,6 +56,13 @@ class M_Pages
 
         return $this->db->resultSet();
     }
+
+    public function getReservations(){
+        $this->db->query('SELECT * FROM bookings JOIN time_slots ON bookings.id = time_slots.booking_id;');
+        $this->db->execute();
+
+        return $this->db->resultSet();
+    }
     public function updatePassword($email, $hashedPassword) {
         // Assuming you have a database connection and a users table
 
