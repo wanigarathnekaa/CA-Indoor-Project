@@ -12,6 +12,12 @@ class Bookings extends Controller
     {
         if (isset($_POST['booking']) == 'POST') {
             //form is submitting
+            
+            if(isset($_POST['booking_delete_id']) && $_POST['booking_delete_id'] != 0){
+                $bookingId = trim($_POST['booking_delete_id']);
+                echo $bookingId;
+                $this->bookingModel->deleteReservation($bookingId);
+            }
 
             $jsonString = $_POST['timeSlotsAndNetTypes'];
 

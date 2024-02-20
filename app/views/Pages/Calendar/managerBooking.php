@@ -1,5 +1,6 @@
 <?php
 $selected_date = isset($_GET['fulldate']) ? urldecode($_GET['fulldate']) : date('Y-m-d');
+$bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
 
 $filter_date = $selected_date;
 $filter_net_M = 'Machine Net';
@@ -78,7 +79,7 @@ function time_slot($duration, $cleanup, $start, $end)
 <body>
     <!-- Sidebar -->
     <?php
-    $role = "User";
+    $role = "Manager";
     require APPROOT . '/views/Pages/Dashboard/header.php';
     require APPROOT . '/views/Components/Side Bars/sideBar.php';
     ?>
@@ -181,9 +182,19 @@ function time_slot($duration, $cleanup, $start, $end)
                 </div>
             </div>
         </div>
-        <div id="confirmationForm" style="display: none;">
-            <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/manager"><button class="confBut" onclick="passValues()">Confirm Reservation</button></a>
-        </div>
+        <?php if ($bookingId == 0) { ?>
+            <div id="confirmationForm" style="display: none;">
+                <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/manager"><button class="confBut"
+                        onclick="passValues()">Confirm Reservation</button></a>
+            </div>
+        <?php } else { ?>
+            <div id="confirmationForm" style="display: none;">
+                <a href='http://localhost/C&A_Indoor_Project/Pages/Booking_Register/manager?bookingID=<?php echo $bookingId; ?>'>
+                    <button class="confBut" onclick="passValues()">Confirm Reservation</button>
+                </a>
+            </div>
+
+        <?php } ?>
 
     </section>
     <script src="<?php echo URLROOT; ?>/js/managerBooking.js"></script>
