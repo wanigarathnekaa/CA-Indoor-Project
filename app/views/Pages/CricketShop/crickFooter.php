@@ -8,7 +8,7 @@
           </li>
           <?php foreach ($data['categories'] as $category): ?>
             <li class="footer-nav-item">
-              <a href="./bats.html" class="footer-nav-link"><?php echo $category->category_name; ?></a>
+              <a href="" class="footer-nav-link"><?php echo $category->category_name; ?></a>
             </li>
           <?php endforeach ?>
         </ul>

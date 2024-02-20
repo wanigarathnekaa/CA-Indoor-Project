@@ -44,6 +44,12 @@ class Pages extends Controller
         $this->view('Pages/Calendar/booking', $bookings);
     }
 
+    public function Manager_Booking($name)
+    {
+        $bookings = $this->pagesModel->getBookings();
+        $this->view('Pages/Calendar/managerBooking', $bookings);
+    }
+
     public function Payment($name)
     {
         // echo $_SESSION['user_email'];
@@ -573,6 +579,21 @@ class Pages extends Controller
             'name' => $name,
         ];
         $this->view('Pages/CricketShop/cricketItem',$data);
+    }
+
+    // Shooping Cart
+    public function Cricket_Cart($name)
+    {
+        $categories = $this->pagesModel->getCategories();
+        $brand = $this->pagesModel->getBrands();
+        $products = $this->pagesModel->getProducts();
+        $data = [
+            'categories' => $categories,
+            'brands' => $brand,
+            'products' => $products,
+            'name' => $name,
+        ];
+        $this->view('Pages/CricketShop/cricketCart',$data);
     }
 
 
