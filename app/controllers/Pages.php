@@ -144,6 +144,7 @@ class Pages extends Controller
         $users = $this->pagesModel->getUserCount();
         $coach = $this->pagesModel->getCoaches();
         $advertisement = $this->pagesModel->getAdvertisement();
+        $managers=$this->pagesModel->getManagerCount();
 
         $data = [
             'CoachCount' => $coaches,
@@ -151,6 +152,7 @@ class Pages extends Controller
             'coach' => $coach,
             'Reserve_Count' => count($bookings),
             'advertCount' => count($advertisement),
+            'ManagerCount'=>$managers,
         ];
         $res = [];
         foreach ($data['coach'] as $user) {
@@ -166,7 +168,7 @@ class Pages extends Controller
         if ($name == "user") {
             $this->view('Pages/Dashboard/user', $data1);
         } else if ($name == "admin") {
-            $this->view('Pages/Dashboard/admin', $data1, $bookings);
+            $this->view('Pages/Dashboard/admin', $data, $bookings);
         } else if ($name == "cashier") {
             $this->view('Pages/Dashboard/cashier');
         } else if ($name == "coach") {
