@@ -197,7 +197,7 @@ function time_slot($duration, $cleanup, $start, $end)
         <?php } ?>
 
     </section>
-    <script src="<?php echo URLROOT; ?>/js/managerBooking.js"></script>
+    <script src="<?=URLROOT?>/js/managerBooking.js"></script>
 </body>
 
 </html>
