@@ -99,7 +99,7 @@ $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
                     <div class="input-field">
                         <label>Net Price</label>
                         <!-- <input type="text" name="netprice" id="netprice" > -->
-                        <span id="netprice"></span>
+                        <span id="netprice" class="netprice"></span>
                     </div>
                     
 
