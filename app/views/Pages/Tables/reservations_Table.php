@@ -25,7 +25,9 @@
             <!-- Table Topic -->
             <div class="table-topic">
                   <div class="topic-name">
-                        <h1>Reservations : <?php echo count($data);?></h1>
+                        <h1>Reservations :
+                              <?php echo count($data); ?>
+                        </h1>
                   </div>
 
                   <!-- <div class="add-btn">
@@ -89,7 +91,7 @@
                               <?php foreach ($data as $reservation): ?>
                                     <tr>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
-                                                <?php echo $reservation->reservation_Id; ?>
+                                                <?php echo $reservation->id; ?>
                                           </td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
                                                 <?php echo $reservation->name; ?>
@@ -107,7 +109,7 @@
                                                 <?php echo $reservation->timeSlot; ?>
                                           </td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
-                                                <?php echo $reservation->net; ?>
+                                                <?php echo $reservation->netType; ?>
                                           </td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
                                                 <?php echo "paid"; ?>
@@ -166,10 +168,29 @@
                                     <h2><b>Status :</b> <span class="r_payment">Paid</span></h2>
                               </div>
                         </div>
-
                         <div class="btns">
-                              <button type="button">Reshedule</button>
+                              <button type="button" onclick="openReschedulePopup()">Reschedule</button>
                               <button type="button">Cancel</button>
+                        </div>
+                  </div>
+
+                  <!-- Popup message for rescheduling -->
+                  <div class="popupcontainer" id="reschedulePopupContainer" style="display: none;">
+                        <div class="popup" id="reschedulePopup">
+                              <span class="close" onclick="closeReschedulePopup()"><i
+                                          class="fa-solid fa-xmark"></i></span>
+                              <h2>Reschedule Reservation</h2>
+                              <hr>
+                              <div class="rescheduleDetails">
+                                    <h4>Are You Sure You Want To Reschedule?</h4>
+                                    <h4 class="day">Reservation is at Today - <span class="r_timeSlot_r"
+                                                style="font-weight:bold"></span></h4>
+                              </div>
+
+                              <div class="btns">
+                                    <button type="button" onclick="confirmReschedule()">Yes</button>
+                                    <button type="button" onclick="closeReschedulePopup()">No</button>
+                              </div>
                         </div>
                   </div>
 
