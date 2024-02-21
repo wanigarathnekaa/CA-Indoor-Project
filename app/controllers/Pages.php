@@ -131,7 +131,7 @@ class Pages extends Controller
     //reservation table
     public function reservationTable($name)
     {
-        $bookings = $this->pagesModel->getBookings();
+        $bookings = $this->pagesModel->getReservations();
         $this->view('Pages/Tables/reservations_Table', $bookings);
     }
 
