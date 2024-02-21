@@ -61,7 +61,7 @@ class Pages extends Controller
     //booking time slots for users(Players, Coaches)
     public function User_Booking($name)
     {
-        $bookings = $this->pagesModel->getBookings();
+        $bookings = $this->pagesModel->getReservations();
         $this->view('Pages/Calendar/userBooking', $bookings);
     }
 
