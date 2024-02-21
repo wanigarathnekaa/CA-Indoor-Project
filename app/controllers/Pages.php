@@ -44,6 +44,12 @@ class Pages extends Controller
         $this->view('Pages/Calendar/booking', $bookings);
     }
 
+    public function Manager_Booking($name)
+    {
+        $bookings = $this->pagesModel->getReservations();
+        $this->view('Pages/Calendar/managerBooking', $bookings);
+    }
+
     public function Payment($name)
     {
         // echo $_SESSION['user_email'];
@@ -62,7 +68,7 @@ class Pages extends Controller
     // daily reservation table for manager, owner
     public function Table($name)
     {
-        $bookings = $this->pagesModel->getBookings();
+        $bookings = $this->pagesModel->getReservations();
         $this->view('Pages/Tables/dailyReservation', $bookings);
     }
 
@@ -154,7 +160,7 @@ class Pages extends Controller
     //reservation table
     public function reservationTable($name)
     {
-        $bookings = $this->pagesModel->getBookings();
+        $bookings = $this->pagesModel->getReservations();
         $this->view('Pages/Tables/reservations_Table', $bookings);
     }
     //reservation table for cashier
@@ -168,7 +174,7 @@ class Pages extends Controller
     // dashboard
     public function Dashboard($name)
     {
-        $bookings = $this->pagesModel->getBookings();
+        $bookings = $this->pagesModel->getReservations();
         $coaches = $this->pagesModel->getCoachCount();
         $users = $this->pagesModel->getUserCount();
         $coach = $this->pagesModel->getCoaches();
@@ -240,6 +246,7 @@ class Pages extends Controller
         $this->view('Pages/Booking/bookingRegistration', $res);
     }
 
+    // user profile for player, coach......................................................................................
     public function Profile($name)
     {
         $user = $this->pagesModel->findUser($_SESSION['user_email']);
@@ -247,6 +254,7 @@ class Pages extends Controller
         // print_r($user);
         $this->view('Pages/UserProfiles/userProfile', $user);
     }
+
 
     public function editProfile($name)
     {
@@ -303,6 +311,50 @@ class Pages extends Controller
         // print_r($data);
 
         $this->view('Pages/UserProfiles/editProfile', $data);
+    }
+
+    public function Delete_Profile($name)
+    {
+        $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        // print_r($user);
+        $this->view('Pages/UserProfiles/deleteProfile', $user);
+    }
+   
+    public function changePassword(){
+        $user = $this->pagesModel->findUser($_SESSION['user_email']);
+    
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+           
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    
+            $oldPassword = trim($_POST['old_password']);
+            $newPassword = trim($_POST['new_password']);
+            $confirmPassword = trim($_POST['confirm_password']);
+    
+            if (empty($oldPassword) || empty($newPassword) || empty($confirmPassword)) {
+                
+                $this->view('Pages/UserProfiles/changePassword');
+            } else {
+                $hashedPassword = $user->password; 
+                if (password_verify($oldPassword, $hashedPassword)) {
+                    
+                    if ($newPassword != $confirmPassword) {
+                        
+                        $errorMessage = "Passwords do not match. Please try again.";
+                        $this->view('Pages/UserProfiles/changePassword', ['errorMessage' => $errorMessage]);
+                    } else {
+                      
+                        $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                        $this->pagesModel->updatePassword($user->email, $hashedNewPassword);
+                        $this->view('Pages/UserProfiles/changePassword');
+                    }
+                } else {
+                    $this->view('Pages/UserProfiles/changePassword');
+                }
+            }
+        } else {
+            $this->view('Pages/UserProfiles/changePassword');
+        }
     }
 
     // add advertisement page
@@ -458,12 +510,13 @@ class Pages extends Controller
         $this->view('Pages/ManagerRegistration/managerRegistration');
     }
 
-    public function Delete_Profile($name)
+    public function Manager_Profile($name)
     {
-        $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        // echo $_SESSION['user_email'];
+        $user = $this->pagesModel->findManager($_SESSION['user_email']);
         // print_r($user);
 
-        $this->view('Pages/UserProfiles/deleteProfile', $user);
+        $this->view('Pages/Manager/managerProfile', $user);
     }
 
     public function Manager_Edit_Profile($name)
@@ -485,15 +538,6 @@ class Pages extends Controller
         ];
 
         $this->view('Pages/Manager/managerEditProfile', $data);
-    }
-
-    public function Manager_Profile($name)
-    {
-        // echo $_SESSION['user_email'];
-        $user = $this->pagesModel->findManager($_SESSION['user_email']);
-        // print_r($user);
-
-        $this->view('Pages/Manager/managerProfile', $user);
     }
 
     public function Manager_Delete_Profile($name)
@@ -543,6 +587,48 @@ class Pages extends Controller
             'products' => $products,
         ];
         $this->view('Pages/InventoryManagement/product',$data);
+    }
+
+    public function Cricket_Shop($name)
+    {
+        $categories = $this->pagesModel->getCategories();
+        $brand = $this->pagesModel->getBrands();
+        $products = $this->pagesModel->getProducts();
+        $data = [
+            'categories' => $categories,
+            'brands' => $brand,
+            'products' => $products,
+        ];
+        $this->view('Pages/CricketShop/crickShop',$data);
+    }
+
+    public function Cricket_Item($name)
+    {
+        $categories = $this->pagesModel->getCategories();
+        $brand = $this->pagesModel->getBrands();
+        $products = $this->pagesModel->getProducts();
+        $data = [
+            'categories' => $categories,
+            'brands' => $brand,
+            'products' => $products,
+            'name' => $name,
+        ];
+        $this->view('Pages/CricketShop/cricketItem',$data);
+    }
+
+    // Shooping Cart
+    public function Cricket_Cart($name)
+    {
+        $categories = $this->pagesModel->getCategories();
+        $brand = $this->pagesModel->getBrands();
+        $products = $this->pagesModel->getProducts();
+        $data = [
+            'categories' => $categories,
+            'brands' => $brand,
+            'products' => $products,
+            'name' => $name,
+        ];
+        $this->view('Pages/CricketShop/cricketCart',$data);
     }
 
 

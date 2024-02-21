@@ -92,13 +92,13 @@
         <!-- Pagination -->
         <div class="pagination-container">
             <ul class="pagination">
-                <li><a href="#" class="page-link">&laquo; Prev</a></li>
+                <li><a href="#" class="page-link" id="prevLink">&laquo; Prev</a></li>
                 <li><a href="#" class="page-link">1</a></li>
                 <li><a href="#" class="page-link">2</a></li>
                 <li><a href="#" class="page-link">3</a></li>
                 <li><a href="#" class="page-link">4</a></li>
                 <li><a href="#" class="page-link">5</a></li>
-                <li><a href="#" class="page-link">Next &raquo;</a></li>
+                <li><a href="#" class="page-link" id="nextLink">Next &raquo;</a></li>
             </ul>
         </div>
     </section>

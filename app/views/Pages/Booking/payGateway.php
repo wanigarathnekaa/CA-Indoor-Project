@@ -1,5 +1,5 @@
 <?php
-$amount = "1000.00";
+$amount = isset($_GET['amount']) ? urldecode($_GET['amount']) : 0;
 $merchant_id = "1225484";
 $order_id = uniqid();
 $merchant_secret = "MTI0NjM0MDI4NjM5MDE0NzA0NzIxMTU4ODM1OTEwMTE3MDk0NDk4Mw==";

@@ -27,9 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (e.target.classList.contains("page-link")) {
       const pageClicked = e.target.textContent;
 
-      if (pageClicked === "Prev" && currentPage > 1) {
+      if (pageClicked === "« Prev" && currentPage > 1) {
         currentPage--;
-      } else if (pageClicked === "Next" && currentPage < totalPages) {
+      } else if (pageClicked === "Next »" && currentPage < totalPages) {
         currentPage++;
       } else if (!isNaN(pageClicked)) {
         currentPage = parseInt(pageClicked);

@@ -24,7 +24,7 @@
                         </div>
                         <div class="forgot-password">
                               <label><input type="checkbox" checked="checked" name="remember"> Remember me</label>
-                              <a href="#">Forgot Password?</a>
+                              <a href="forgotPassword">Forgot Password?</a>
                         </div>
                         <button class="btn" type="submit">Login</button>
 

@@ -39,13 +39,14 @@
                               <div class="profilepic">
                                     <label for="file" class="propiclabel">
                                           <div class="profile-pic">
-                                                <span class="camicon"><i class="fa-solid fa-camera"></i></span>
+                                                <!-- <span class="camicon"><i class="fa-solid fa-camera"></i></span> -->
+                                                <span class="camicon"><i class='bx bxs-camera-plus'></i></span>
                                                 <?php
                                                       if($data["img"] == null){
-                                                            echo '<img class="profile-image" id="output" src="'.URLROOT.'/public/profilepic/avatar.jpg" width="150">' ;
+                                                            echo '<img class="profile-image" id="output" src="'.URLROOT.'/public/profilepic/avatar.jpg">' ;
                                                       }
                                                       else{
-                                                            echo '<img class="profile-image" id="output" src="'.URLROOT.'/public/profilepic/'.$data["img"].'" width="150">'; 
+                                                            echo '<img class="profile-image" id="output" src="'.URLROOT.'/public/profilepic/'.$data["img"].'">'; 
                                                       }
                                                 ?>
                                           </div>
@@ -58,15 +59,15 @@
                                     <?php if ($role == "User" || $role == "Coach"): ?>
                                           <div class="box">
                                                 <label for="name">Name</label>
-                                                <input type="text" id="name" name="name"  value="<?=$data["name"]?>"/>
+                                                <input type="text" id="name" name="name"  value="<?=$data["name"]?>" required/>
                                           </div>
                                           <div class="box">
                                                 <label for="user_name">User Name</label>
-                                                <input type="text" name='user_name' id="user_name" value="<?=$data["user_name"]?>"/>
+                                                <input type="text" name='user_name' id="user_name" value="<?=$data["user_name"]?>" required/>
                                           </div>
                                           <div class="box">
                                                 <label for="email">Email</label>
-                                                <input type="email" id="email" name="email" value="<?=$data["email"]?>"/>
+                                                <input type="email" id="email" name="email" value="<?=$data["email"]?>" />
                                           </div>
                                           <div class="box">
                                                 <label for="phoneNumber">Phone Number</label>

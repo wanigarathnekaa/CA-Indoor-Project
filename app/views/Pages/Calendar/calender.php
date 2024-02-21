@@ -1,4 +1,6 @@
 <?php
+
+$bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
 function build_calendar($month, $year)
 {
     $daysOfWeek = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
@@ -14,10 +16,11 @@ function build_calendar($month, $year)
     $next_month = date('m', mktime(0, 0, 0, $month + 1, 1, $year));
     $next_year = date('Y', mktime(0, 0, 0, $month + 1, 1, $year));
 
+    $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
     $calendar = "<center><h2 class='date'>$monthName $year</h2>";
-    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $prev_month . "&year=" . $prev_year . "' target='_self'_>Prev Month</a> ";
-    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender'>Current Month</a> ";
-    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $next_month . "&year=" . $next_year . "'>NextMonth</a></center> ";
+    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $prev_month . "&year=" . $prev_year . "&bookingID=" . $bookingId . "' target='_self'_>Prev Month</a> ";
+    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender&bookingID=" . $bookingId . "'>Current Month</a> ";
+    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $next_month . "&year=" . $next_year . "&bookingID=" . $bookingId . "'>NextMonth</a></center> ";
 
     $calendar .= "<br><table class='calander'> ";
     $calendar .= "<tr>";
@@ -52,7 +55,8 @@ function build_calendar($month, $year)
         }
         else {
             // $calendar .= "<td class='$today'><h4>$currentDay</h4><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user' class = 'btn btn-success btn-xs' target='_top'>Book</a></td>";
-            $calendar .= "<td class='$today'><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user?fulldate=$date' class = 'btn btn-success btn-xs' target='_top'><h4>$currentDay</h4></a></td>";
+            $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : '';
+            $calendar .= "<td class='$today'><a href='http://localhost/C&A_Indoor_Project/Pages/Manager_Booking/manager?fulldate=$date&bookingID=" . $bookingId . "' class = 'btn btn-success btn-xs' target='_top'><h4>$currentDay</h4></a></td>";
         }
         // echo $today;
  

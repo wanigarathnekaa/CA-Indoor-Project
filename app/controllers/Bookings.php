@@ -12,26 +12,29 @@ class Bookings extends Controller
     {
         if (isset($_POST['booking']) == 'POST') {
             //form is submitting
+            
+            if(isset($_POST['booking_delete_id']) && $_POST['booking_delete_id'] != 0){
+                $bookingId = trim($_POST['booking_delete_id']);
+                echo $bookingId;
+                $this->bookingModel->deleteReservation($bookingId);
+            }
 
-            //Valid input
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $jsonString = $_POST['timeSlotsAndNetTypes'];
+
+            // Decode the JSON string into an associative array
+            $arrayData = json_decode($jsonString, true);
 
             //Input data
             $data = [
                 'name' => trim($_POST['name']),
                 'email' => trim($_POST['email']),
-                'net' => trim($_POST['net']),
-                'timeSlot' => trim($_POST['timeSlot']),
+                'phoneNumber' => trim($_POST['phoneNumber']),
                 'date' => trim($_POST['date']),
                 'coach' => trim($_POST['coach']),
-                'phoneNumber' => trim($_POST['phoneNumber']),
 
                 'name_err' => "",
                 'email_err' => "",
-                'net_err' => "",
-                'timeSlot_err' => "",
                 'date_err' => "",
-                'coach_err' => "",
                 'phoneNumber_err' => "",
             ];
 
@@ -40,24 +43,24 @@ class Bookings extends Controller
                 $data['name_err'] = "Please enter a name";
             }
 
-            //validate user_name
-            if (empty($data['net'])) {
-                $data['net_err'] = "Please enter the net";
-            }
-            else if($this->bookingModel->findBooking($data['date'], $data['timeSlot'], $data['net'])){
-                $data['net_err'] = "Net has been booked already.";
-            }
-
             //validate email
             if (empty($data['email'])) {
                 $data['email_err'] = "Please enter an email";
             }
 
             if (empty($data['name_err']) && empty($data['net_err']) && empty($data['email_err'])) {
+                $bookingId = $this->bookingModel->last_inserted_id();
                 //create user
-                if ($this->bookingModel->Booking_Register($data)) {
+                if ($this->bookingModel->Make_Reservation($data)) {
                     $_SESSION['booking_success'] = true;
-                    redirect("Pages/Booking/user?fulldate={$data['date']}");
+                    $bookingId = $this->bookingModel->last_inserted_id();
+                    foreach ($arrayData as $timeSlotAndNetType) {
+                        $timeSlot = $timeSlotAndNetType['timeSlot'];
+                        $netType = $timeSlotAndNetType['netType'];
+                        $this->bookingModel->addTimeSlots($bookingId, $timeSlot, $netType);
+                    }
+
+                    redirect("Pages/Manager_Booking/manager?fulldate={$data['date']}");
                 } else {
                     die('Something Went wrong');
                 }
@@ -66,27 +69,20 @@ class Bookings extends Controller
                 // echo '<script>alert("Net has been booked already")</script>'; 
                 $this->view('Pages/Booking/bookingRegistration', $data);
             }
-        } 
-        else {
+        } else {
             //initial form
             $data = [
                 'name' => "",
                 'email' => "",
-                'net' => "",
-                'timeSlot' => "",
+                'phoneNumber' => "",
                 'date' => "",
                 'coach' => "",
-                'phoneNumber' => "",
-
+                'timeSlotsAndNetTypes' => "",
 
                 'name_err' => "",
                 'email_err' => "",
-                'net_err' => "",
-                'timeSlot_err' => "",
                 'date_err' => "",
-                'coach_err' => "",
                 'phoneNumber_err' => "",
-
             ];
         }
 
@@ -97,12 +93,12 @@ class Bookings extends Controller
     public function delete()
     {
         // var_dump($_POST);
-        if($this->bookingModel->deleteBooking($_POST["submit"])) {  
+        if ($this->bookingModel->deleteBooking($_POST["submit"])) {
             redirect("Pages/reservationTable/user");
-        }else{
+        } else {
             die("Something Went Wrong");
         }
-        
+
     }
 
 }

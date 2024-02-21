@@ -127,9 +127,15 @@ function openPopup() {
   popupcontainer.classList.add("open-popupcontainer");
 
   // Set event listener for Make Payment button
-  document
-    .getElementById("makePaymentBtn")
-    .addEventListener("click", makePayment);
+  document.getElementById("makePaymentBtn").addEventListener("click", function () {
+    totPrice = totPrice;
+    makePayment();
+  });
+
+  document.getElementById("makePaymentBtnCon").addEventListener("click", function () {
+    totPrice = totPrice * 0.3;
+    makePayment();
+  });
 
   // Set event listener for Cancel button
   document.getElementById("cancelBtn").addEventListener("click", closePopup);
@@ -176,6 +182,11 @@ function closePopup() {
     .getElementById("makePaymentBtn")
     .removeEventListener("click", makePayment);
   document.getElementById("cancelBtn").removeEventListener("click", closePopup);
+
+  document
+    .getElementById("makePaymentBtnCon")
+    .removeEventListener("click", makePayment);
+  document.getElementById("cancelBtn").removeEventListener("click", closePopup);
 }
 
 function makePayment() {
@@ -183,7 +194,6 @@ function makePayment() {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       // Log the response to the console
-      // alert(xhttp.responseText);
       console.log(xhttp.responseText);
       var obj = JSON.parse(xhttp.responseText);
 
@@ -232,11 +242,12 @@ function makePayment() {
         custom_1: "",
         custom_2: "",
       };
+      console.log(payment);
       payhere.startPayment(payment);
     }
   };
 
   // xhttp.setRequestHeader('Content-Type', 'application/json');
-  xhttp.open("GET", "C&A_Indoor_Project/Pages/Payment/user", true);
+  xhttp.open("GET", "C&A_Indoor_Project/Pages/Payment/user?amount="+String(totPrice), true);
   xhttp.send();
 }

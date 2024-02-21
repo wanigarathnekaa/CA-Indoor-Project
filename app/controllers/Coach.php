@@ -129,8 +129,11 @@ class Coach extends Controller
             if (empty($data['filename'])) {
                 $data['filename_err'] = "Please upload profile picture";
             }
+
+            //generate random password
             $password=$this->coachModel->generateRandomPassword();
 
+            //check whether the  password is sent to the coach via email
             if($this->coachModel->SendPasswordViaEmail($_POST['email'],$password)){
                 $data['pwd'] = $password;
 

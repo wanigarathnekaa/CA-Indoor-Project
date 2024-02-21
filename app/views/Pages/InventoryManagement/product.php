@@ -92,6 +92,14 @@
                                 <span class="form-invalid-5"></span>
                             </div>
                         </div>
+                        <!-- Quantity -->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="productName">Quantity</label>
+                                <input type="text" id="productQty" name="productQty" placeholder="Enter Product quantity">
+                                <span class="form-invalid-8"></span>
+                            </div>
+                        </div>
 
                         <!-- thumbnail -->
                         <div class="col-md-12">
@@ -131,6 +139,7 @@
                         <th>Thumbnail</th>
                         <th>Product Name</th>
                         <th>Category Name</th>
+                        <th>Quantity</th>
                         <th>Date</th>
                         <th>Actions</th>
                     </tr>
@@ -161,6 +170,9 @@
                                 ?>
                             </td>
                             <td>
+                                <?php echo $product->qty; ?>
+                            </td>
+                            <td>
                                 <?php echo $product->created_at; ?>
                             </td>
                             <td>
@@ -179,13 +191,13 @@
         <!-- Pagination -->
         <div class="pagination-container">
             <ul class="pagination">
-                <li><a href="#" class="page-link">&laquo; Prev</a></li>
+                <li><a href="#" class="page-link" id="prevLink">&laquo; Prev</a></li>
                 <li><a href="#" class="page-link">1</a></li>
                 <li><a href="#" class="page-link">2</a></li>
                 <li><a href="#" class="page-link">3</a></li>
                 <li><a href="#" class="page-link">4</a></li>
                 <li><a href="#" class="page-link">5</a></li>
-                <li><a href="#" class="page-link">Next &raquo;</a></li>
+                <li><a href="#" class="page-link" id="nextLink">Next &raquo;</a></li>
             </ul>
         </div>
     </section>
@@ -205,6 +217,7 @@
                 var regular_price = $('#regular_price').val();
                 var selling_price = $('#selling_price').val();
                 var short_description = $('#short_description').val();
+                var quantity = $('#productQty').val();
 
                 // Create FormData object
                 var formData = new FormData(this);
@@ -225,6 +238,7 @@
                 formData.append('selling_price', selling_price);
                 formData.append('short_description', short_description);
                 formData.append('id', id);
+                formData.append('quantity', quantity);
 
                 // Get the file input element
                 var fileInput = $('#product_thumbnail')[0];
@@ -233,8 +247,6 @@
                     // Append the file to FormData
                     formData.append('product_thumbnail', fileInput.files[0]);
                 }
-
-                console.log(formType, productName, category_name, brand_name, regular_price, selling_price, short_description, id);
 
                 $.ajax({
                     type: "POST",
@@ -254,6 +266,7 @@
                             $('.form-invalid-5').html(response.messageSellingPrice);
                             $('.form-invalid-6').html(response.messageShortDescription);
                             $('.form-invalid-7').html(response.messageProductThumbnail);
+                            $('.form-invalid-8').html(response.messageQuantity);
                         }
                     },
                     error: function (xhr, status, error) {
