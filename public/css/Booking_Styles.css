@@ -82,7 +82,11 @@ body {
 }
 
 .personal {
-  background-color: #f0f0f0;
+  background-color: var(--color04);
+}
+
+.ID{
+  overflow: scroll;
 }
 
 .container form .form.second {
@@ -166,13 +170,15 @@ select:focus {
     border-collapse: collapse;
     margin-top: 20px;
     margin-bottom: 20px;
+    text-align: center;
   }
   
   .time-slots-table th, .time-slots-table td {
-    padding: 10px;
+    padding: 8px 10px;
     text-align: left;
     border: 1px solid var(--color03);
-    border-radius: 6px;
+    font-size: 14px;
+    /* border-radius: 6px; */
   }
   
   .time-slots-table thead {
@@ -188,6 +194,11 @@ select:focus {
     background-color: var(--color03);
   }
   
+
+  .netprice{
+    font-size: large;
+    color: var(--color01)
+  }
   
 /* .input-field select,
 .input-field input[type="date"]{
