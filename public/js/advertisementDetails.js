@@ -5,9 +5,6 @@ let deletePopup = document.getElementById('deletepopup');
 function openDeletePopup(){
       deletePopup.classList.add("open-deletepopup");
       popupcontainer.classList.add("open-popupcontainer");
-
-      // var input = document.getElementById("hid_input");
-      // input.value = player.email;
 }
 
 function closeDeletePopup(){
