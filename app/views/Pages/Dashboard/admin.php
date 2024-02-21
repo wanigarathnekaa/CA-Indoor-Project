@@ -29,7 +29,7 @@
         <div class="cardBox">
             <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/managerTable/user">
                 <div>
-                    <div class="numbers">3</div>
+                    <div class="numbers"><?php echo $data["ManagerCount"]?></div>
                     <div class="cardName">Managers</div>
                 </div>
                 <div class="iconBx">
@@ -41,8 +41,7 @@
             <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/coachTable/user">
 
                 <div>
-                <!-- <div class="numbers"><?php echo isset($data1["CoachCount"]) ? $data1["CoachCount"] : 'N/A'; ?></div> -->
-                  <div class="numbers">14</div>
+                  <div class="numbers"><?php echo $data["CoachCount"]?></div>
 
                     <div class="cardName">Coaches</div>
                 </div>
@@ -53,7 +52,7 @@
 
             <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/playerTable/user">
                 <div>
-                    <div class="numbers">80</div>
+                    <div class="numbers"><?php echo $data["UserCount"]?></div>
                     <div class="cardName">Players</div>
                 </div>
                 <div class="iconBx">
@@ -63,7 +62,7 @@
 
             <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/reservationTable/user">
                         <div>
-                              <div class="numbers">10</div>
+                              <div class="numbers"><?php echo $data["Reserve_Count"]?></div>
                               <div class="cardName">Reservations</div>
                         </div>
 
@@ -73,8 +72,9 @@
                   </a>
              <a class="card" href="C&A_Indoor_Project/Pages/View_Advertisement/manager">
                         <div>
-                              <!-- <div class="numbers"><?php echo $data1["advertCount"]?></div> -->
-                              <div class="cardName">Advertisement</div>
+                              <div class="numbers"><?php echo $data["advertCount"]?></div>
+                              <div class="cardName">Advertisements</div>
+
                         </div>
                         <div class="iconBx">
                               <i class="fa-brands fa-adversal"></i>
