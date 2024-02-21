@@ -95,6 +95,14 @@ $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
 
                     <input type="hidden" name="booking_delete_id" id="booking_delete_id" value=<?php echo $bookingId;?>>
 
+                    <!-- net price -->
+                    <div class="input-field">
+                        <label>Net Price</label>
+                        <!-- <input type="text" name="netprice" id="netprice" > -->
+                        <span id="netprice"></span>
+                    </div>
+                    
+
                     <button type="submit" name="booking">
                         <span class="btnText">Confirm</span>
                         <i class="uil uil-navigator"></i>
