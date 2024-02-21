@@ -8,15 +8,15 @@
 }
 
 :root {
-    --color01: #2e8a99;
-    --primary-clr: #4f9da9;
-    --color03: #a7d8d7;
-    --color04: #eaf3f4;
-    --white: #fff;
-    --gray: #f5f5f5;
-    --black1: #222;
-    --black2: #000000;
-  }
+  --color01: #2e8a99;
+  --primary-clr: #4f9da9;
+  --color03: #a7d8d7;
+  --color04: #eaf3f4;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #000000;
+}
 
 body {
   min-height: 100vh;
@@ -29,6 +29,7 @@ body {
   position: relative;
   /* max-width: 900px; */
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -71,8 +72,9 @@ body {
   overflow: hidden;
 }
 .container form .form {
-  /* position: absolute; */
-  /* background-color: #fff; */
+  display: flex;
+  flex-direction: row; /* Arrange form elements in a row */
+  justify-content: space-between;
   transition: 0.3s ease;
 }
 
@@ -164,42 +166,34 @@ select:focus {
   font-size: 0.85em;
 }
 
-  
-  .time-slots-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .time-slots-table th, .time-slots-table td {
-    padding: 8px 10px;
-    text-align: left;
-    border: 1px solid var(--color03);
-    font-size: 14px;
-    /* border-radius: 6px; */
-  }
-  
-  .time-slots-table thead {
-    background-color: var(--color01);
-    color: var(--white);
-  }
-  
-  .time-slots-table tbody tr:nth-child(even) {
-    background-color: var(--color04);
-  }
-  
-  .time-slots-table tbody tr:hover {
-    background-color: var(--color03);
-  }
-  
+.time-slots-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
-  .netprice{
-    font-size: large;
-    color: var(--color01)
-  }
-  
+.time-slots-table th,
+.time-slots-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid var(--color03);
+  border-radius: 6px;
+}
+
+.time-slots-table thead {
+  background-color: var(--color01);
+  color: var(--white);
+}
+
+.time-slots-table tbody tr:nth-child(even) {
+  background-color: var(--color04);
+}
+
+.time-slots-table tbody tr:hover {
+  background-color: var(--color03);
+}
+
 /* .input-field select,
 .input-field input[type="date"]{
     color: #707070;

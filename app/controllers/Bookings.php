@@ -12,8 +12,8 @@ class Bookings extends Controller
     {
         if (isset($_POST['booking']) == 'POST') {
             //form is submitting
-            
-            if(isset($_POST['booking_delete_id']) && $_POST['booking_delete_id'] != 0){
+
+            if (isset($_POST['booking_delete_id']) && $_POST['booking_delete_id'] != 0) {
                 $bookingId = trim($_POST['booking_delete_id']);
                 echo $bookingId;
                 $this->bookingModel->deleteReservation($bookingId);
@@ -24,6 +24,9 @@ class Bookings extends Controller
             // Decode the JSON string into an associative array
             $arrayData = json_decode($jsonString, true);
 
+            $bookingPrice = $_POST['bookingPrice'];
+            $decimalBookingPrice = number_format((float) $bookingPrice, 2, '.', '');
+
             //Input data
             $data = [
                 'name' => trim($_POST['name']),
@@ -31,6 +34,8 @@ class Bookings extends Controller
                 'phoneNumber' => trim($_POST['phoneNumber']),
                 'date' => trim($_POST['date']),
                 'coach' => trim($_POST['coach']),
+                'bookingPrice' => $decimalBookingPrice,
+                'paymentStatus' => 'Pending',
 
                 'name_err' => "",
                 'email_err' => "",

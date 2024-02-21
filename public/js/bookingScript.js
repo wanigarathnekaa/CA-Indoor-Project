@@ -52,3 +52,5 @@ for (var i = 0; i < timeSlotArray.length; i++) {
 
 var netprice = document.getElementById("netprice");
 netprice.textContent = "Total Price: " + totprice + " LKR";
+
+document.getElementById("bookingPrice").value = totprice;

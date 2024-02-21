@@ -75,7 +75,7 @@ class Pages extends Controller
     // personal reservation table for player
     public function Personal_Reservation($name)
     {
-        $bookings = $this->pagesModel->getBookings();
+        $bookings = $this->pagesModel->getReservations();
         $this->view('Pages/Tables/personal_reservation', $bookings);
     }
 
@@ -160,6 +160,7 @@ class Pages extends Controller
         $data1 = [
             'adverts' => $advertisement,
             'userCoach' => $res,
+            'bookings' => $bookings,
         ];
 
         if ($name == "user") {
