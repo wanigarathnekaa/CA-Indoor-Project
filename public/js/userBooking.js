@@ -1,5 +1,7 @@
 let selectedSlots = [];
 let totPrice = 0;
+let paidPrice = 0;
+let selected_date = "";
 
 class CustomSelect {
   constructor(originalSelect) {
@@ -121,21 +123,26 @@ document.querySelectorAll(".custom-select").forEach((selectElement) => {
 let popup = document.getElementById("popup");
 let popupcontainer = document.getElementById("popupcontainer");
 
-function openPopup() {
+function openPopup(date) {
+  selected_date = date;
   console.log("Open popup");
   popup.classList.add("open-popup");
   popupcontainer.classList.add("open-popupcontainer");
 
   // Set event listener for Make Payment button
-  document.getElementById("makePaymentBtn").addEventListener("click", function () {
-    totPrice = totPrice;
-    makePayment();
-  });
+  document
+    .getElementById("makePaymentBtn")
+    .addEventListener("click", function () {
+      paidPrice = totPrice;
+      makePayment();
+    });
 
-  document.getElementById("makePaymentBtnCon").addEventListener("click", function () {
-    totPrice = totPrice * 0.3;
-    makePayment();
-  });
+  document
+    .getElementById("makePaymentBtnCon")
+    .addEventListener("click", function () {
+      paidPrice = totPrice * 0.3;
+      makePayment();
+    });
 
   // Set event listener for Cancel button
   document.getElementById("cancelBtn").addEventListener("click", closePopup);
@@ -198,10 +205,51 @@ function makePayment() {
       var obj = JSON.parse(xhttp.responseText);
 
       // Payment completed. It can be a successful failure.
+      // ... (your existing code)
+
+      // Payment completed. It can be a successful failure.
       payhere.onCompleted = function onCompleted(orderId) {
         console.log("Payment completed. OrderID:" + orderId);
-        // Note: validate the payment and show success or failure page to the customer
+
+        // Payment completed. It can be a successful failure.
+        var xhr = new XMLHttpRequest();
+
+        var postData = {
+          name: obj["first_name"],
+          email: obj["email"],
+          phone: obj["phone"],
+          date: selected_date,
+          coach: "UserBooking",
+          timeSlots: JSON.stringify(selectedSlots),
+          bookingPrice: totPrice,
+          paymentStatus: "Paid",
+          paidPrice: paidPrice,
+        };
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+              // Log the response to the console
+              console.log(xhr.responseText);
+              var responseObject = JSON.parse(xhr.responseText);
+
+              if (responseObject.status === "success") {
+                location.reload();
+              }
+            } else {
+              // Handle error, show an error message, etc.
+              console.error("Error in XMLHttpRequest. Status:", xhr.status);
+            }
+          }
+        };
+
+        xhr.open("POST", "C&A_Indoor_Project/Bookings/BookingRegister");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(postData));
+
+        // ... (rest of your existing code)
       };
+      // ... (rest of your existing code)
 
       // Payment window closed
       payhere.onDismissed = function onDismissed() {
@@ -226,7 +274,7 @@ function makePayment() {
         notify_url: "http://sample.com/notify",
         order_id: obj["order_id"],
         items: obj["items"],
-        amount: totPrice,
+        amount: paidPrice,
         currency: obj["currency"],
         hash: obj["hash"], // *Replace with generated hash retrieved from backend
         first_name: obj["first_name"],
@@ -248,6 +296,10 @@ function makePayment() {
   };
 
   // xhttp.setRequestHeader('Content-Type', 'application/json');
-  xhttp.open("GET", "C&A_Indoor_Project/Pages/Payment/user?amount="+String(totPrice), true);
+  xhttp.open(
+    "GET",
+    "C&A_Indoor_Project/Pages/Payment/user?amount=" + String(paidPrice),
+    true
+  );
   xhttp.send();
 }
