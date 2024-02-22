@@ -35,7 +35,7 @@ class Bookings extends Controller
                 'date' => trim($_POST['date']),
                 'coach' => trim($_POST['coach']),
                 'bookingPrice' => $decimalBookingPrice,
-                'paymentStatus' => 'Pending',
+                'paymentStatus' => 'Not Paid',
                 'paidPrice' => 0,
 
                 'name_err' => "",
@@ -116,6 +116,12 @@ class Bookings extends Controller
             $paymentStatus = isset($postData['paymentStatus']) ? trim($postData['paymentStatus']) : '';
             $paidPrice = isset($postData['paidPrice']) ? trim($postData['paidPrice']) : '';
             $arrayData = json_decode($postData['timeSlots'], true);
+
+            if($paidPrice == $bookingPrice){
+                $paymentStatus = "Paid";
+            } else {
+                $paymentStatus = "Pending";
+            }
             
             
             $data = [
