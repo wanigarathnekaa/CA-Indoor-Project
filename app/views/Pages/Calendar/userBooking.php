@@ -182,7 +182,7 @@ function time_slot($duration, $cleanup, $start, $end)
             </div>
         </div>
         <div id="confirmationForm" style="display: none;">
-            <button class="confBut" onclick="openPopup()">Confirm Reservation</button>
+            <button class="confBut" onclick="openPopup((<?php echo htmlspecialchars(json_encode($selected_date)); ?>))">Confirm Reservation</button>
         </div>
 
 
@@ -220,6 +220,7 @@ function time_slot($duration, $cleanup, $start, $end)
         </div>
 
     </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://www.payhere.lk/lib/payhere.js"></script>
     <script src="<?php echo URLROOT; ?>/js/userBooking.js"></script>
 </body>
