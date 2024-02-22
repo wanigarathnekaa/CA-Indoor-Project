@@ -120,13 +120,13 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
                   <hr>
                   <div class="rescheduleDetails">
                         <h4>Are You Sure You Want To Reschedule?</h4>
-                        <h4 class="day">Reservation is at Today - <span class="r_timeSlot_r"
+                        <h4 class="day">Time For Reservation - <span class="r_timeSlot_r"
                                     style="font-weight:bold"></span></h4>
                   </div>
 
                   <div class="btns">
-                        <button type="button" onclick="confirmReschedule()">Yes</button>
-                        <button type="button" onclick="closeReschedulePopup()">No</button>
+                        <button type="button" class="yesButton" onclick="confirmReschedule()">Yes</button>
+                        <button type="button" class="noButton" onclick="closeReschedulePopup()">No</button>
                   </div>
             </div>
       </div>

@@ -1,6 +1,9 @@
 let popup = document.getElementById("popup");
 let popupcontainer = document.getElementById("popupcontainer");
-// let reschedulePopupContainer = document.getElementById("reschedulePopupContainer");
+let reschedulePopupContainer = document.getElementById(
+  "reschedulePopupContainer"
+);
+let reschedulePopup = document.getElementById("reschedulePopup");
 let deletePopup = document.getElementById("deletepopup");
 let numberOfDays = 0;
 let timeSlot = "";
@@ -67,25 +70,22 @@ function closeDeletePopup() {
 function openReschedulePopup() {
   // Hide the original popup and show the reschedulePopup
   console.log("Reschedule button clicked");
-  reschedulePopup.classList.add("open-reschedulePopup");
-  popupcontainer.classList.add("open-popupcontainer");
-  popup.classList.remove("open-popup");
-  // reschedulePopupContainer.classList.add("open-popupcontainer");
+  reschedulePopup.classList.add("open-popup");
+  reschedulePopupContainer.classList.add("open-popupcontainer");
 
-  // popupcontainer.style.display = "none";
-  // reschedulePopupContainer.style.display = "block";
+  popupcontainer.style.display = "none";
+  reschedulePopupContainer.style.display = "block";
   const r_timeSlot_r = document.querySelector(".r_timeSlot_r");
   r_timeSlot_r.textContent = timeSlot;
 }
 
 function closeReschedulePopup() {
-  reschedulePopup.classList.remove("open-reschedulePopup");
-  popup.classList.add("open-popup");
-  // popupcontainer.classList.remove("open-popupcontainer");
-  // reschedulePopupContainer.classList.remove("open-popupcontainer");
+  reschedulePopup.classList.remove("open-popup");
+  reschedulePopupContainer.classList.remove("open-popupcontainer");
   popupcontainer.style.display = "block";
   reschedulePopupContainer.style.display = "none";
 }
+
 
 function confirmReschedule() {
   // Add your redirection URL
