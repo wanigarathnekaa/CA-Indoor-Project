@@ -101,7 +101,7 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
                         </div>
 
                         <div class="popupdetail">
-                              <h2><b>Status :</b> <span class="r_payment">Pending</span></h2>
+                              <h2><b>Status :</b> <span class="r_payment"></span></h2>
                         </div>
                   </div>
 
