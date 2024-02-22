@@ -297,6 +297,14 @@
                         $('#regular_price').val(response.regular_price);
                         $('#selling_price').val(response.selling_price);
                         $('#short_description').val(response.short_description);
+                        $('#productQty').val(response.qty);
+
+                        $("#category_name").val(response.category_id);
+
+                        $("#category_name").trigger("change");
+
+                        $("#brand_name").val(response.brand_id);
+
                     },
                     error: function (xhr, status, error) {
                         console.error("AJAX request failed:", error);
