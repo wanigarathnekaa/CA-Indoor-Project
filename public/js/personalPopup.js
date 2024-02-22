@@ -44,7 +44,7 @@ function openPopup(reservation) {
   }
 
   const r_payment = document.querySelector(".r_payment");
-  r_payment.textContent = "Pending";
+  r_payment.textContent = reservation.paymentStatus;
 }
 
 function closePopup() {
