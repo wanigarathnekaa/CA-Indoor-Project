@@ -32,15 +32,23 @@ function openPopup(reservation) {
   // Calculate the number of days
   const reservationDate = new Date(reservation.date);
   const currentDate = new Date();
-  const timeDifference = reservationDate.getTime() - currentDate.getTime();
-  numberOfDays = Math.ceil(timeDifference / (1000 * 3600 * 24)); // Convert milliseconds to days
-  console.log(numberOfDays);
+
+  // Calculate the difference in days, rounding up to the nearest whole number
+  numberOfDays = Math.ceil(
+    (reservationDate - currentDate) / (1000 * 3600 * 24)
+  );
+
+  // If the reservation date is the same as the current date, set numberOfDays to 0
+  if (reservationDate.toDateString() === currentDate.toDateString()) {
+    numberOfDays = 0;
+  }
 
   const r_payment = document.querySelector(".r_payment");
   r_payment.textContent = "Pending";
 }
 
 function closePopup() {
+  location.reload();
   popup.classList.remove("open-popup");
   popupcontainer.classList.remove("open-popupcontainer");
 }
@@ -54,7 +62,32 @@ function openReschedulePopup() {
   popupcontainer.style.display = "none";
   reschedulePopupContainer.style.display = "block";
   const r_timeSlot_r = document.querySelector(".r_timeSlot_r");
-  r_timeSlot_r.textContent = timeSlot;
+  r_timeSlot_r.textContent = numberOfDays + " days";
+
+  console.log(numberOfDays);
+  const yesButton = document.querySelector(".yesButton");
+  const noButton = document.querySelector(".noButton");
+
+
+  if (numberOfDays == 1 || numberOfDays == 2) {
+    const rescheduleDetails = document.querySelector(".rescheduleDetails");
+    rescheduleDetails.innerHTML =
+      "<h4>You Cannot Reschedule the Time Slot</h4><h4>" +
+      numberOfDays +
+      " Day before Your Reservation</h4>";
+    yesButton.style.display = "none";
+    noButton.textContent = "Okay";
+    document.querySelector(".noButton").classList.add("center-btns");
+  } else if (numberOfDays == 0) {
+    const rescheduleDetails = document.querySelector(".rescheduleDetails");
+    rescheduleDetails.innerHTML =
+      "<h4>You Cannot Reschedule the Time Slot</h4><h4>Today Is Your Reservation</h4>";
+    yesButton.style.display = "none";
+    noButton.textContent = "Okay";
+    document.querySelector(".noButton").classList.add("center-btns");
+  }
+
+  document.querySelector(".noButton").classList.remove("center-btns");
 }
 
 function closeReschedulePopup() {
@@ -65,7 +98,9 @@ function closeReschedulePopup() {
 }
 
 function confirmReschedule() {
-      // Add your redirection URL
-      var redirectURL = "http://localhost/C&A_Indoor_Project/Pages/Calendar/manager?bookingID="+bookingID;
-      window.location.href = redirectURL;
-  }
+  // Add your redirection URL
+  var redirectURL =
+    "http://localhost/C&A_Indoor_Project/Pages/Calendar/manager?bookingID=" +
+    bookingID;
+  window.location.href = redirectURL;
+}
