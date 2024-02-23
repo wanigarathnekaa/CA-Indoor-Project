@@ -35,18 +35,26 @@
   font-weight: 600;
   color: var(--color01);
 }
-.cardHeader .btn {
-  position: relative;
-  padding: 5px 10px;
-  background: var(--color02);
-  text-decoration: none;
-  color: var(--white);
+
+.cardHeader .serachselect{
+  background: var(--color01);
+  padding: 3px 10px;
   border-radius: 6px;
 }
-
-.cardHeader .btn:hover {
-  background-color: var(--color01);
+.cardHeader .btn {
+  position: relative;
+  padding: 5px;
+  background: var(--color01);
+  text-decoration: none;
+  color: var(--black1);
+  border: none;
 }
+
+
+
+
+
+
 
 .details .tablediv .recentOrders table {
   width: 100%;

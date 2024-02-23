@@ -23,12 +23,16 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
             <h2>
                 <?php echo date('Y-m-d'); ?>
             </h2>
-            <select id="liveSearch" class="btn">
-                <option value="All">All</option>
-                <option value="Normal Net A">Normal Net A</option>
-                <option value="Normal Net B">Normal Net B</option>
-                <option value="Machine Net">Machine Net</option>
-            </select>
+            <div class="serachselect">
+                <i class="fa-solid fa-magnifying-glass icon"></i>
+                <select id="liveSearch" class="btn">
+                    <option value="All">All</option>
+                    <option value="Normal Net A">Normal Net A</option>
+                    <option value="Normal Net B">Normal Net B</option>
+                    <option value="Machine Net">Machine Net</option>
+                </select>
+            </div>
+            
         </div>
 
         <div class="table-container">
