@@ -23,8 +23,12 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
             <h2>
                 <?php echo date('Y-m-d'); ?>
             </h2>
-            <!-- veiw all button -->
-            <a href="#" class="btn">View All</a>
+            <select id="liveSearch" class="btn">
+                <option value="All">All</option>
+                <option value="Normal Net A">Normal Net A</option>
+                <option value="Normal Net B">Normal Net B</option>
+                <option value="Machine Net">Machine Net</option>
+            </select>
         </div>
 
         <div class="table-container">
@@ -43,7 +47,7 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
                 <tbody>
                     <?php
                     foreach ($new_data as $reservation) {
-                    ?>
+                        ?>
                         <tr onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
                             <td>
                                 <?php echo $reservation->name; ?>
@@ -56,7 +60,7 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
                             </td>
                             <td><span class="status paid">Pending</span></td>
                         </tr>
-                    <?php
+                        <?php
                     }
                     ?>
 
@@ -112,7 +116,8 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
             <hr>
             <div class="rescheduleDetails">
                 <h4>Are You Sure You Want To Reschedule?</h4>
-                <h4 class="day">Reservation is at Today - <span class="r_timeSlot_r" style="font-weight:bold"></span></h4>
+                <h4 class="day">Reservation is at Today - <span class="r_timeSlot_r" style="font-weight:bold"></span>
+                </h4>
             </div>
 
             <div class="btns">
@@ -123,7 +128,24 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
     </div>
 
     <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="<?php echo URLROOT; ?>/js/popup.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#liveSearch").on("change", function () {
+                selectedValue = $(this).val();
+                // alert(selectedValue);
+                if (selectedValue != "All") {
+                    $("table tbody tr").filter(function () {
+                        $(this).toggle($(this).text().indexOf(selectedValue) > -1);
+                    });
+                } else {
+                    $("table tbody tr").show();
+                }
+
+            });
+        });
+    </script>
 </body>
 
 </html>
