@@ -189,7 +189,7 @@ function time_slot($duration, $cleanup, $start, $end)
             </div>
         <?php } else { ?>
             <div id="confirmationForm" style="display: none;">
-                <a href='http://localhost/C&A_Indoor_Project/Pages/Booking_Register/manager?bookingID=<?php echo $bookingId; ?>'>
+                <a href='http://localhost/C&A_Indoor_Project/Pages/Booking_Register/manager?bookingID=<?php echo $bookingId; ?>&timedate=<?php echo $selected_date; ?>'>
                     <button class="confBut" onclick="passValues()">Confirm Reservation</button>
                 </a>
             </div>
@@ -197,7 +197,7 @@ function time_slot($duration, $cleanup, $start, $end)
         <?php } ?>
 
     </section>
-    <script src="<?php echo URLROOT; ?>/js/managerBooking.js"></script>
+    <script src="<?=URLROOT?>/js/managerBooking.js"></script>
 </body>
 
 </html>

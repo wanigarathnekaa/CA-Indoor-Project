@@ -126,5 +126,4 @@ function passValues() {
     localStorage.setItem("selectedSlots", selectedSlotsString);
   
     return false;
-  }
-  
+  }  

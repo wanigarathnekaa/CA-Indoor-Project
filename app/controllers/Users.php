@@ -293,7 +293,7 @@ class Users extends Controller
 
             if ($mail->send()) {
                 if($this->userModel->updatePassword($email,$hashedNewPassword)){
-                    redirect('Users/login');
+                    $this->view('Pages/OTPSEND/index');
 
                 }
                 else{

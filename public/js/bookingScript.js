@@ -28,3 +28,29 @@ createTableRows(timeSlotArray, timeSlotTable);
 // Update the hidden input field with the array values
 document.getElementById("timeSlotsAndNetTypes").value = timeSlots;
 console.log(timeSlots);
+
+
+
+
+// Calculate the total price
+let totprice = 0;
+
+
+for (var i = 0; i < timeSlotArray.length; i++) {
+  console.log(timeSlotArray[i].timeSlot);
+  console.log(timeSlotArray[i].netType);
+  console.log(timeSlotArray[i].date);
+
+  if (timeSlotArray[i].netType == "Normal Net A") {
+    totprice += 1000;
+  }else if (timeSlotArray[i].netType == "Normal Net B") {
+    totprice += 1000;
+  }else if (timeSlotArray[i].netType == "Machine Net") {
+    totprice += 1500;
+  }
+}
+
+var netprice = document.getElementById("netprice");
+netprice.textContent = "Total Price: " + totprice + " LKR";
+
+document.getElementById("bookingPrice").value = totprice;

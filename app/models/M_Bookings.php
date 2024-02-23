@@ -37,12 +37,15 @@ class M_Bookings
 
     public function Make_Reservation($data)
     {
-        $this->db->query("INSERT INTO bookings (name, email, phoneNumber, date, coach) VALUES (:name, :email, :phoneNumber, :date, :coach)");
+        $this->db->query("INSERT INTO bookings (name, email, phoneNumber, date, coach, bookingPrice, paymentStatus, paidPrice) VALUES (:name, :email, :phoneNumber, :date, :coach, :bookingPrice, :paymentStatus, :paidPrice)");
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':date', $data['date']);
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':phoneNumber', $data['phoneNumber']);
         $this->db->bind(':coach', $data['coach']);
+        $this->db->bind(':bookingPrice', $data['bookingPrice']);
+        $this->db->bind(':paymentStatus', $data['paymentStatus']);
+        $this->db->bind(':paidPrice', $data['paidPrice']);
 
         if ($this->db->execute()) {
             return true;

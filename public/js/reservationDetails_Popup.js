@@ -1,6 +1,9 @@
 let popup = document.getElementById("popup");
 let popupcontainer = document.getElementById("popupcontainer");
-let reschedulePopupContainer = document.getElementById("reschedulePopupContainer");
+let reschedulePopupContainer = document.getElementById(
+  "reschedulePopupContainer"
+);
+let reschedulePopup = document.getElementById("reschedulePopup");
 let deletePopup = document.getElementById("deletepopup");
 let numberOfDays = 0;
 let timeSlot = "";
@@ -82,6 +85,7 @@ function closeReschedulePopup() {
   popupcontainer.style.display = "block";
   reschedulePopupContainer.style.display = "none";
 }
+
 
 function confirmReschedule() {
   // Add your redirection URL

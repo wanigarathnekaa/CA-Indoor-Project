@@ -137,35 +137,35 @@
                         <hr>
                         <div class="popupdetails">
                               <div class="popupdetail">
-                                    <h2><b>Reservation ID :</b><span class="r_id"></span></h2>
+                                    <h2><b>Reservation ID : </b><span class="r_id"></span></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Customer Name :</b><span class="r_name"></span></h2>
+                                    <h2><b>Customer Name : </b><span class="r_name"></span></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Customer Email :</b><span class="r_email"></span></h2>
+                                    <h2><b>Customer Email : </b><span class="r_email"></span></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Customer Contact Number :</b><span class="r_number"></span></h2>
+                                    <h2><b>Customer Contact Number : </b><span class="r_number"></span></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Reservation Date :</b><span class="r_date"></span></h2>
+                                    <h2><b>Reservation Date : </b><span class="r_date"></span></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Reservation Time :</b><span class="r_time"></span></h2>
+                                    <h2><b>Reservation Time : </b><span class="r_time"></span></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Net :</b><span class="r_net"></span></h2>
+                                    <h2><b>Net : </b><span class="r_net"></span></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Status :</b> <span class="r_payment">Paid</span></h2>
+                                    <h2><b>Status : </b> <span class="r_payment">Paid</span></h2>
                               </div>
                         </div>
                         <div class="btns">
@@ -193,8 +193,6 @@
                               </div>
                         </div>
                   </div>
-
-
 
 
                   <!-- delete message -->
