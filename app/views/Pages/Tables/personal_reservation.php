@@ -32,7 +32,12 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
                         Upcoming Reservations
                   </h2>
                   <!-- veiw all button -->
-                  <a href="#" class="btn">View All</a>
+                  <select id="liveSearch" class="btn">
+                        <option value="All">All</option>
+                        <option value="Normal Net A">Normal Net A</option>
+                        <option value="Normal Net B">Normal Net B</option>
+                        <option value="Machine Net">Machine Net</option>
+                  </select> <!-- <a href="#" class="btn">View All</a> -->
             </div>
 
             <div class="table-container">
@@ -153,7 +158,24 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
       </div>
 
       <!-- JavaScript -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
       <script src="<?php echo URLROOT; ?>/js/personalPopup.js"></script>
+      <script>
+            $(document).ready(function () {
+                  $("#liveSearch").on("change", function () {
+                        selectedValue = $(this).val();
+                        // alert(selectedValue);
+                        if (selectedValue != "All") {
+                              $("table tbody tr").filter(function () {
+                                    $(this).toggle($(this).text().indexOf(selectedValue) > -1);
+                              });
+                        }else{
+                              $("table tbody tr").show();
+                        }
+
+                  });
+            });
+      </script>
 </body>
 
 </html>

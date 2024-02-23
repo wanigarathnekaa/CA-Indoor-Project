@@ -58,7 +58,7 @@ class M_Pages
     }
 
     public function getReservations(){
-        $this->db->query('SELECT * FROM bookings JOIN time_slots ON bookings.id = time_slots.booking_id;');
+        $this->db->query('SELECT * FROM bookings JOIN time_slots ON bookings.id = time_slots.booking_id ORDER BY bookings.date ASC;');
         $this->db->execute();
 
         return $this->db->resultSet();
