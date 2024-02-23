@@ -40,19 +40,19 @@
                   <div class="sort">
                         <label for="payfilter">Status :</label>
                         <select name="filter" id="payfilter">
-                              <option value="all">All</option>
-                              <option value="paid">Paid</option>
-                              <option value="unpaid">Unpaid</option>
-                              <option value="cancelled">Cancelled</option>
+                              <option value="All">All</option>
+                              <option value="Pending">Pending</option>
+                              <option value="Paid">Paid</option>
+                              <option value="Not Paid">Not Paid</option>
                         </select>
                   </div>
                   <div class="sort">
                         <label for="netfilter">Net :</label>
                         <select name="filter" id="netfilter">
-                              <option value="all">All</option>
-                              <option value="netA">Normal Net A</option>
-                              <option value="netB">Normal Net B</option>
-                              <option value="netC">Machine Net</option>
+                              <option value="All">All</option>
+                              <option value="Normal Net A">Normal Net A</option>
+                              <option value="Normal Net B">Normal Net B</option>
+                              <option value="Machine Net">Machine Net</option>
                         </select>
                   </div>
                   <div class="sort">
@@ -61,7 +61,7 @@
                   </div>
                   <div class="search">
                         <label>
-                              <input type="text" placeholder="Search here" id="searchInput" onkeyup="search()">
+                              <input type="text" placeholder="Search here" id="searchInput">
                               <i class="fa-solid fa-magnifying-glass icon"></i>
                         </label>
                   </div>
@@ -112,7 +112,7 @@
                                                 <?php echo $reservation->netType; ?>
                                           </td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
-                                                <?php echo "paid"; ?>
+                                                <?php echo $reservation->paymentStatus; ?>
                                           </td>
                                           <td><a href="#"><i class="fa-solid fa-pen-to-square edit icon"></i></a></td>
                                           <td
@@ -209,6 +209,54 @@
       </section>
 
       <!-- javascript -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
       <script src="<?php echo URLROOT; ?>/js/reservationDetails_Popup.js"></script>
       <script src="<?php echo URLROOT; ?>/js/reservation_Table.js"></script>
+      <script>
+            $(document).ready(function () {
+                  $("#netfilter").on("change", function () {
+                        selectedValue = $(this).val();
+                        // alert(selectedValue);
+                        if (selectedValue != "All") {
+                              $("table tbody tr").filter(function () {
+                                    $(this).toggle($(this).text().indexOf(selectedValue) > -1);
+                              });
+                        } else {
+                              $("table tbody tr").show();
+                        }
+
+                  });
+
+                  $("#payfilter").on("change", function () {
+                        selectedValue = $(this).val();
+                        // alert(selectedValue);
+                        if (selectedValue != "All") {
+                              $("table tbody tr").filter(function () {
+                                    $(this).toggle($(this).text().indexOf(selectedValue) > -1);
+                              });
+                        } else {
+                              $("table tbody tr").show();
+                        }
+
+                  });
+
+                  $("#date").on("change", function () {
+                        selectedValue = $(this).val();
+                        if (selectedValue != "All") {
+                              $("table tbody tr").filter(function () {
+                                    $(this).toggle($(this).text().indexOf(selectedValue) > -1);
+                              });
+                        } else {
+                              $("table tbody tr").show();
+                        }
+
+                  });
+                  $("#searchInput").on("keyup", function () {
+                        var value = $(this).val();
+                        $("table tbody tr").filter(function () {
+                              $(this).toggle($(this).text().indexOf(value) > -1);
+                        });
+                  });
+            });
+      </script>
 </body>
