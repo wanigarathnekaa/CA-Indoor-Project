@@ -3,10 +3,10 @@ $filter_date = date('Y-m-d');
 $email = $_SESSION['user_email'];
 
 $personal_reservations = array_filter($data['bookings'], function ($item) use ($email, $filter_date) {
-    // Assuming $item->reservation_date contains the reservation date
-    $reservation_date = date('Y-m-d', strtotime($item->date));
+      // Assuming $item->reservation_date contains the reservation date
+      $reservation_date = date('Y-m-d', strtotime($item->date));
 
-    return $item->email === $email && $reservation_date >= $filter_date;
+      return $item->email === $email && $reservation_date >= $filter_date;
 });
 
 ?>
@@ -107,7 +107,7 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
 
                   <div class="btns">
                         <button type="button" onclick="openReschedulePopup()">Reschedule</button>
-                        <button type="button">Cancel</button>
+                        <button type="button" onclick="openCancelReschedulePopup()">Cancel</button>
                   </div>
             </div>
       </div>
@@ -124,10 +124,31 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
                                     style="font-weight:bold"></span></h4>
                   </div>
 
-                  <div class="btns">
+                  <div class="btns" id="rescheduleButtons">
                         <button type="button" class="yesButton" onclick="confirmReschedule()">Yes</button>
                         <button type="button" class="noButton" onclick="closeReschedulePopup()">No</button>
                   </div>
+
+            </div>
+      </div>
+
+      <!-- Popup message for rescheduling -->
+      <div class="popupcontainer" id="cancelReschedule" style="display: none;">
+            <div class="popup" id="cancelReschedulePopup">
+                  <span class="close" onclick="closeCancelReschedulePopup()"><i class="fa-solid fa-xmark"></i></span>
+                  <h2>Reschedule Reservation</h2>
+                  <hr>
+                  <div class="cancelRescheduleDetails">
+                        <h4>Are You Sure You Want To Cancel?</h4>
+                        <h4 class="day">Time For Reservation - <span class="r_timeSlot_cancel"
+                                    style="font-weight:bold"></span></h4>
+                  </div>
+
+                  <div class="btns" id="cancelRescheduleButtons">
+                        <button type="button" class="yesButtonCancel" onclick="confirmCancelReschedule()">Yes</button>
+                        <button type="button" class="noButtonCancel" onclick="closeCancelReschedulePopup()">No</button>
+                  </div>
+
             </div>
       </div>
 

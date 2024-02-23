@@ -114,6 +114,12 @@
   font-size: 16px;
 }
 
+.cancelRescheduleDetails h4 {
+  margin-top: 20px;
+  font-weight: 400;
+  font-size: 16px;
+}
+
 .rescheduleDetails .day{
   margin-top: 10px;
   font-weight: 300;
