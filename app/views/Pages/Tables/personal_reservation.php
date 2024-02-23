@@ -31,13 +31,15 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
                   <h2>
                         Upcoming Reservations
                   </h2>
-                  <!-- veiw all button -->
-                  <select id="liveSearch" class="btn">
-                        <option value="All">All</option>
-                        <option value="Normal Net A">Normal Net A</option>
-                        <option value="Normal Net B">Normal Net B</option>
-                        <option value="Machine Net">Machine Net</option>
-                  </select> <!-- <a href="#" class="btn">View All</a> -->
+                  <div class="serachselect">
+                        <i class="fa-solid fa-magnifying-glass icon"></i>
+                        <select id="liveSearch" class="btn">
+                              <option value="All">All</option>
+                              <option value="Normal Net A">Normal Net A</option>
+                              <option value="Normal Net B">Normal Net B</option>
+                              <option value="Machine Net">Machine Net</option>
+                        </select> <!-- <a href="#" class="btn">View All</a> -->
+                  </div>
             </div>
 
             <div class="table-container">
