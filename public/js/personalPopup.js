@@ -3,6 +3,9 @@ let popupcontainer = document.getElementById("popupcontainer");
 let reschedulePopupContainer = document.getElementById(
   "reschedulePopupContainer"
 );
+let cancelReschedule = document.getElementById("cancelReschedule");
+let cancelReschedulePopup = document.getElementById("cancelReschedulePopup");
+
 let numberOfDays = 0;
 let timeSlot = "";
 let bookingID = 0;
@@ -67,27 +70,25 @@ function openReschedulePopup() {
   console.log(numberOfDays);
   const yesButton = document.querySelector(".yesButton");
   const noButton = document.querySelector(".noButton");
-
+  const button = document.querySelector("#rescheduleButtons");
 
   if (numberOfDays == 1 || numberOfDays == 2) {
     const rescheduleDetails = document.querySelector(".rescheduleDetails");
+    button.classList.add("center-btns");
     rescheduleDetails.innerHTML =
-      "<h4>You Cannot Reschedule the Time Slot</h4><h4>" +
+      "<h4>You <span style='font-weight: 700; font-style: italic;'>Cannot</span> Reschedule the Time Slot</h4><h4>" +
       numberOfDays +
       " Day before Your Reservation</h4>";
     yesButton.style.display = "none";
     noButton.textContent = "Okay";
-    document.querySelector(".noButton").classList.add("center-btns");
   } else if (numberOfDays == 0) {
     const rescheduleDetails = document.querySelector(".rescheduleDetails");
+    button.classList.add("center-btns");
     rescheduleDetails.innerHTML =
-      "<h4>You Cannot Reschedule the Time Slot</h4><h4>Today Is Your Reservation</h4>";
+      "<h4>You <span style='font-weight: 700; font-style: italic;'>Cannot</span> Reschedule the Time Slot</h4><h4>Today Is Your Reservation</h4>";
     yesButton.style.display = "none";
     noButton.textContent = "Okay";
-    document.querySelector(".noButton").classList.add("center-btns");
   }
-
-  document.querySelector(".noButton").classList.remove("center-btns");
 }
 
 function closeReschedulePopup() {
@@ -95,6 +96,48 @@ function closeReschedulePopup() {
   reschedulePopupContainer.classList.remove("open-popupcontainer");
   popupcontainer.style.display = "block";
   reschedulePopupContainer.style.display = "none";
+}
+
+function openCancelReschedulePopup() {
+  // Hide the original popup and show the reschedulePopup
+  console.log("Reschedule button clicked");
+  cancelReschedulePopup.classList.add("open-popup");
+  cancelReschedule.classList.add("open-popupcontainer");
+
+  popupcontainer.style.display = "none";
+  cancelReschedule.style.display = "block";
+  const r_timeSlot_cancel = document.querySelector(".r_timeSlot_cancel");
+  r_timeSlot_cancel.textContent = numberOfDays + " days";
+
+  console.log(numberOfDays);
+  const yesButton = document.querySelector(".yesButtonCancel");
+  const noButton = document.querySelector(".noButtonCancel");
+  const button = document.querySelector("#cancelRescheduleButtons");
+
+  if (numberOfDays == 1 || numberOfDays == 2) {
+    const rescheduleDetails = document.querySelector(".cancelRescheduleDetails");
+    button.classList.add("center-btns");
+    rescheduleDetails.innerHTML =
+      "<h4>You <span style='font-weight: 700; font-style: italic;'>Cannot</span> Cancel the Time Slot</h4><h4>" +
+      numberOfDays +
+      " Day before Your Reservation</h4>";
+    yesButton.style.display = "none";
+    noButton.textContent = "Okay";
+  } else if (numberOfDays == 0) {
+    const rescheduleDetails = document.querySelector(".cancelRescheduleDetails");
+    button.classList.add("center-btns");
+    rescheduleDetails.innerHTML =
+      "<h4>You <span style='font-weight: 700; font-style: italic;'>Cannot</span> Cancel the Time Slot</h4><h4>Today Is Your Reservation</h4>";
+    yesButton.style.display = "none";
+    noButton.textContent = "Okay";
+  }
+}
+
+function closeCancelReschedulePopup() {
+  cancelReschedulePopup.classList.remove("open-popup");
+  cancelReschedule.classList.remove("open-popupcontainer");
+  popupcontainer.style.display = "block";
+  cancelReschedule.style.display = "none";
 }
 
 function confirmReschedule() {
