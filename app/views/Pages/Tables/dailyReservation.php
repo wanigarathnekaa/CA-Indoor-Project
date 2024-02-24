@@ -62,7 +62,7 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
                             <td>
                                 <?php echo $reservation->netType; ?>
                             </td>
-                            <td><span class="status paid">Pending</span></td>
+                            <td><span class="status paid"><?php echo $reservation->paymentStatus; ?></span></td>
                         </tr>
                         <?php
                     }
@@ -101,7 +101,7 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
                 </div>
 
                 <div class="popupdetail">
-                    <h2><b>Status :</b> <span class="r_payment">Pending</span></h2>
+                    <h2><b>Status :</b> <span class="r_payment"></span></h2>
                 </div>
             </div>
 
