@@ -37,7 +37,7 @@ function openPopup(reservation) {
   console.log(numberOfDays);
 
   const r_payment = document.querySelector(".r_payment");
-  r_payment.textContent = "Pending";
+  r_payment.textContent = reservation.paymentStatus;
 }
 
 function closePopup() {
