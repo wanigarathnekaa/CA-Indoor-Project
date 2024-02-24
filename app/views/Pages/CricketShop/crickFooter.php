@@ -85,7 +85,9 @@
   </footer>
 
   <!--custom js link-->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="<?php echo URLROOT; ?>/js/crick_shop.js"></script>
+  <script src="<?php echo URLROOT; ?>/js/ItemDetail.js"></script>
 
   <!--ionicon link-->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

@@ -125,14 +125,18 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                   </div>
                 </div>
                 <div class="showcase-content">
-                  <a href="#" class="showcase-category">
+                  <a href="http://localhost/C&A_Indoor_Project/Pages/Item_Detail/<?= $product->product_id;?>" class="showcase-category">
                     <?php echo $product->product_title; ?>
                   </a>
-                  <a href="#">
+                  <a href="http://localhost/C&A_Indoor_Project/Pages/Item_Detail/<?= $product->product_id;?>">
                     <h3 class="showcase-title">
-                      <?php echo $product->product_title; ?>
+                      <?php
+                      $shortDescription = $product->short_description;
+                      echo strlen($shortDescription) > 25 ? substr($shortDescription, 0, 25) . '...' : $shortDescription;
+                      ?>
                     </h3>
                   </a>
+
                   <div class="showcase-rating">
                     <ion-icon name="star"></ion-icon>
                     <ion-icon name="star"></ion-icon>
