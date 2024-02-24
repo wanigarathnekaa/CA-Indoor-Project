@@ -125,5 +125,12 @@ class M_Pages
         return $result;
     }
 
+    public function getProductByID($id){
+        $this->db->query('SELECT * FROM product WHERE product_id = :id');
+        $this->db->bind(':id', $id);
+    
+        return $this->db->single();
+    }
+
 }
 ?>

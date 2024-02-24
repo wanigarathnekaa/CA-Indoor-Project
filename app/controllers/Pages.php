@@ -583,8 +583,24 @@ class Pages extends Controller
         ];
         $this->view('Pages/CricketShop/cricketItem',$data);
     }
+   
+    public function Item_Detail($name)
+    {
+        $categories = $this->pagesModel->getCategories();
+        $brand = $this->pagesModel->getBrands();
+        $products = $this->pagesModel->getProducts();
+        $singleProduct = $this->pagesModel->getProductByID($name);
+        $data = [
+            'categories' => $categories,
+            'brands' => $brand,
+            'products' => $products,
+            'SProduct' => $singleProduct,
+            'name' => $name,
+        ];
+        $this->view('Pages/CricketShop/itemDetail',$data);
+    }
 
-    // Shooping Cart
+// Shooping Cart
     public function Cricket_Cart($name)
     {
         $categories = $this->pagesModel->getCategories();

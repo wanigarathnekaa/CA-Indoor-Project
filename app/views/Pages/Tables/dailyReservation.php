@@ -138,7 +138,6 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
         $(document).ready(function () {
             $("#liveSearch").on("change", function () {
                 selectedValue = $(this).val();
-                // alert(selectedValue);
                 if (selectedValue != "All") {
                     $("table tbody tr").filter(function () {
                         $(this).toggle($(this).text().indexOf(selectedValue) > -1);
@@ -147,7 +146,7 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
                     $("table tbody tr").show();
                 }
 
-            });
+            }); 
         });
     </script>
 </body>

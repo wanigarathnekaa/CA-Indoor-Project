@@ -9,6 +9,8 @@
     <!--custom css link-->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/style-prefix.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/cricketitem.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/ItemDetail.css">
+
 
 </head>
 
