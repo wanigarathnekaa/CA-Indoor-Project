@@ -105,10 +105,10 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                                         </div>
                                     </div>
                                     <div class="showcase-content">
-                                        <a href="#" class="showcase-category">
+                                        <a href="http://localhost/C&A_Indoor_Project/Pages/Item_Detail/<?= $product->product_id;?>" class="showcase-category">
                                             <?php echo $product->product_title; ?>
                                         </a>
-                                        <a href="#">
+                                        <a href="http://localhost/C&A_Indoor_Project/Pages/Item_Detail/<?= $product->product_id;?>">
                                             <h3 class="showcase-title">
                                                 <?php echo $product->product_title; ?>
                                             </h3>
@@ -145,10 +145,10 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                                             </div>
                                         </div>
                                         <div class="showcase-content">
-                                            <a href="#" class="showcase-category">
+                                            <a href="http://localhost/C&A_Indoor_Project/Pages/Item_Detail/<?= $product->product_id;?>" class="showcase-category">
                                             <?php echo $product->product_title; ?>
                                             </a>
-                                            <a href="#">
+                                            <a href="http://localhost/C&A_Indoor_Project/Pages/Item_Detail/<?= $product->product_id;?>">
                                                 <h3 class="showcase-title">
                                                 <?php echo $product->product_title; ?>
                                                 </h3>

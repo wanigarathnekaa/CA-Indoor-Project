@@ -126,3 +126,9 @@
   background: var(--color01);
   color: #fff;
 }
+
+#quantity {
+  color: red;
+  font-size: 0.85rem;
+  
+}
