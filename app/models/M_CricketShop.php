@@ -18,6 +18,12 @@
                 return false;
             }
         }
+
+        public function getCart($email){
+            $this->db->query('SELECT * FROM cart WHERE customer_email = :customer_email');
+            $this->db->bind(':customer_email', $email);
+            return $this->db->resultSet();
+        }
         
       
     }   

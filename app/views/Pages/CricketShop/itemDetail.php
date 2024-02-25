@@ -49,6 +49,11 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
+        var cartCount = '<?= count($data['cartItems']) ?>';
+        if (cartCount == 0) {
+            cartCount = 0;
+        }
+        $('#cartCount').html(cartCount);
         $('#add').click(function () {
             var product_id = '<?= $data['SProduct']->product_id; ?>';
             var email = '<?= $_SESSION['user_email']; ?>';
@@ -76,6 +81,8 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                         var jsonData = JSON.parse(response);
                         if (jsonData.status == 'success') {
                             $('#quantity').html("Item added to cart");
+                            var updatedCartCount = parseInt(cartCount) + 1;
+                            $('#cartCount').html(updatedCartCount);
                         } else {
                             $('#quantity').html("Item not added to cart");
                         }

@@ -121,7 +121,7 @@ class M_Pages
 
     public function getProducts(){
         $this->db->query('SELECT * FROM product');
-        $result = $this->db->resultSet();
+        $result = $this->db->resultSet();        
         return $result;
     }
 
@@ -130,6 +130,12 @@ class M_Pages
         $this->db->bind(':id', $id);
     
         return $this->db->single();
+    }
+
+    public function getCart($email){
+        $this->db->query('SELECT * FROM cart WHERE customer_email = :customer_email');
+        $this->db->bind(':customer_email', $email);
+        return $this->db->resultSet();
     }
 
 }
