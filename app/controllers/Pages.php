@@ -559,10 +559,12 @@ class Pages extends Controller
 
     public function Cricket_Shop($name)
     {
+        $cartItems = $this->pagesModel->getCart($_SESSION['user_email']);
         $categories = $this->pagesModel->getCategories();
         $brand = $this->pagesModel->getBrands();
         $products = $this->pagesModel->getProducts();
         $data = [
+            'cartItems' => $cartItems,
             'categories' => $categories,
             'brands' => $brand,
             'products' => $products,
@@ -572,10 +574,13 @@ class Pages extends Controller
 
     public function Cricket_Item($name)
     {
+
+        $cartItems = $this->pagesModel->getCart($_SESSION['user_email']);
         $categories = $this->pagesModel->getCategories();
         $brand = $this->pagesModel->getBrands();
         $products = $this->pagesModel->getProducts();
         $data = [
+            'cartItems' => $cartItems,
             'categories' => $categories,
             'brands' => $brand,
             'products' => $products,
@@ -586,11 +591,13 @@ class Pages extends Controller
    
     public function Item_Detail($name)
     {
+        $cartItems = $this->pagesModel->getCart($_SESSION['user_email']);
         $categories = $this->pagesModel->getCategories();
         $brand = $this->pagesModel->getBrands();
         $products = $this->pagesModel->getProducts();
         $singleProduct = $this->pagesModel->getProductByID($name);
         $data = [
+            'cartItems' => $cartItems,
             'categories' => $categories,
             'brands' => $brand,
             'products' => $products,
@@ -603,10 +610,12 @@ class Pages extends Controller
 // Shooping Cart
     public function Cricket_Cart($name)
     {
+        $cartItems = $this->pagesModel->getCart($_SESSION['user_email']);
         $categories = $this->pagesModel->getCategories();
         $brand = $this->pagesModel->getBrands();
         $products = $this->pagesModel->getProducts();
         $data = [
+            'cartItems' => $cartItems,
             'categories' => $categories,
             'brands' => $brand,
             'products' => $products,

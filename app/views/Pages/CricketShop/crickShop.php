@@ -224,3 +224,12 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
 <?php
 include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
 ?>
+<script>
+    $(document).ready(function () {
+        var cartCount = '<?= count($data['cartItems']) ?>';
+        if (cartCount == 0) {
+            cartCount = 0;
+        }
+        $('#cartCount').html(cartCount);
+    });
+</script>
