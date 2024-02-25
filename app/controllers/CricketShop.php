@@ -16,6 +16,7 @@ class CricketShop extends Controller
                 'email' => trim($_POST['email']),
                 'product_title' => trim($_POST['product_title']),
                 'product_price' => trim($_POST['product_price']),
+                'product_thumbnail' => trim($_POST['product_thumbnail']),
                 'qty' => trim($_POST['qty']),
                 'totalAmount' => trim($_POST['totalAmount'])
             ];

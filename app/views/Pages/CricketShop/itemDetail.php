@@ -59,6 +59,7 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
             var email = '<?= $_SESSION['user_email']; ?>';
             var product_title = '<?= $data['SProduct']->product_title; ?>';
             var product_price = '<?= $data['SProduct']->selling_price; ?>';
+            var product_thumbnail = '<?= $data['SProduct']->product_thumbnail; ?>';
             var qty = $('#qty\\[\\]').val();
             var totalAmount = product_price * qty * 0.8;
 
@@ -74,6 +75,7 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                         email: email,
                         product_title: product_title,
                         product_price: product_price,
+                        product_thumbnail: product_thumbnail,
                         qty: qty,
                         totalAmount: totalAmount,
                     },

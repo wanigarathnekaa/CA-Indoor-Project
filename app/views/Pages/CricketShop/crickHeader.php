@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/style-prefix.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/cricketitem.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/ItemDetail.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/cart.css">
+
 
 
 </head>
