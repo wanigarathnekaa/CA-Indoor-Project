@@ -119,11 +119,21 @@ document.querySelectorAll(".custom-select").forEach((selectElement) => {
 });
 
 function passValues() {
-    // Convert the array to a JSON string before storing in localStorage
-    const selectedSlotsString = JSON.stringify(selectedSlots);
-    console.log(selectedSlotsString);
-    
-    localStorage.setItem("selectedSlots", selectedSlotsString);
-  
-    return false;
-  }  
+  // Convert the array to a JSON string before storing in localStorage
+  const selectedSlotsString = JSON.stringify(selectedSlots);
+  console.log(selectedSlotsString);
+
+  localStorage.setItem("selectedSlots", selectedSlotsString);
+
+  return false;
+}
+
+let popup = document.getElementById("SuccessPopup");
+
+function openPopup() {
+  popup.classList.add("open-popup");
+}
+
+function closePopup() {
+  location.reload();
+}
