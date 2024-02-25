@@ -19,13 +19,26 @@ $new_array_3 = array_filter($data, function ($item) use ($filter_date, $filter_n
     return $item->date === $filter_date && $item->netType === $filter_net_B;
 });
 
-if (isset($_SESSION['booking_success']) && $_SESSION['booking_success'] === true) {
-    echo '<div class="alert">';
-    echo '<script>alert("You have confirmed your booking!");</script>';
-    echo '</div>';
-    unset($_SESSION['booking_success']);
-}
+// if (isset($_SESSION['booking_success']) && $_SESSION['booking_success'] === true) {
+//     echo '<div class="alert">';
+//     echo '<script>alert("You have confirmed your booking!");</script>';
+//     echo '</div>';
+//     unset($_SESSION['booking_success']);
+// }
 ?>
+
+<?php if (isset($_SESSION['booking_success']) && $_SESSION['booking_success'] === true) {
+    ?>
+    <div class="SuccessContainer">
+        <div class="SuccessPopup" id="SuccessPopup">
+            <img src="<?= URLROOT ?>/images/tick.png">
+            <h2>Reservation Is Successful!</h2>
+            <!-- <p>Your payment has been successfully submitted.</p> -->
+            <button type="button" onclick="closePopup()">OK</button>
+        </div>
+    </div>
+<?php
+} ?>
 
 
 <?php
@@ -73,131 +86,147 @@ function time_slot($duration, $cleanup, $start, $end)
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/userbooking_style.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_userbooking.css">
 
+    <style>
+        <?php if (isset($_SESSION['booking_success']) && $_SESSION['booking_success'] === true) { ?>
+            .content-container {
+                display: none;
+            }
+
+            .SuccessContainer {
+                display: block;
+            }
+
+            <?php unset($_SESSION['booking_success']);
+        } ?>
+    </style>
+
     <title>Booking</title>
 </head>
 
 <body>
     <!-- Sidebar -->
+    <div class="content-container">
     <?php
     $role = "Manager";
     require APPROOT . '/views/Pages/Dashboard/header.php';
     require APPROOT . '/views/Components/Side Bars/sideBar.php';
     ?>
-
-    <section class="home">
-        <h1 class="text-center">Book on Date:
-            <?php echo date($selected_date, strtotime(date("Y/m/d"))); ?>
-        </h1>
-        <div class="timeSlots">
-            <div class="slot">
-                <h1 class="netType">Normal Net A</h1>
-                <div class="form-group">
-                    <select name="language" class="custom-select" multiple>
-                        <?php
-                        $timeslots = time_slot($duration, $cleanup, $start, $end);
-                        foreach ($timeslots as $ts) {
-                            ?>
+        <section class="home">
+            <h1 class="text-center">Book on Date:
+                <?php echo date($selected_date, strtotime(date("Y/m/d"))); ?>
+            </h1>
+            <div class="timeSlots">
+                <div class="slot">
+                    <h1 class="netType">Normal Net A</h1>
+                    <div class="form-group">
+                        <select name="language" class="custom-select" multiple>
                             <?php
-                            $found = false;
-                            foreach ($new_array_2 as $reservation) {
-                                if ($reservation->timeSlot === $ts) {
-                                    $found = true;
-                                    break;
+                            $timeslots = time_slot($duration, $cleanup, $start, $end);
+                            foreach ($timeslots as $ts) {
+                                ?>
+                                <?php
+                                $found = false;
+                                foreach ($new_array_2 as $reservation) {
+                                    if ($reservation->timeSlot === $ts) {
+                                        $found = true;
+                                        break;
+                                    }
                                 }
-                            }
-                            if ($found) { ?>
-                                <option value="<?php echo $ts; ?>" data-booked="true">
-                                    <?php echo $ts; ?>
-                                </option>
-                            <?php } else { ?>
-                                <option value="<?php echo $ts; ?>" data-net-type="Normal Net A"
-                                    data-date="<?php echo $filter_date; ?>">
-                                    <?php echo $ts; ?>
-                                </option>
+                                if ($found) { ?>
+                                    <option value="<?php echo $ts; ?>" data-booked="true">
+                                        <?php echo $ts; ?>
+                                    </option>
+                                <?php } else { ?>
+                                    <option value="<?php echo $ts; ?>" data-net-type="Normal Net A"
+                                        data-date="<?php echo $filter_date; ?>">
+                                        <?php echo $ts; ?>
+                                    </option>
+                                <?php } ?>
                             <?php } ?>
-                        <?php } ?>
-                    </select>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="slot">
+                    <h1 class="netType">Normal Net B</h1>
+                    <div class="form-group">
+                        <select name="language" class="custom-select" multiple>
+                            <?php
+                            $timeslots = time_slot($duration, $cleanup, $start, $end);
+                            foreach ($timeslots as $ts) {
+                                ?>
+                                <?php
+                                $found = false;
+                                foreach ($new_array_3 as $reservation) {
+                                    if ($reservation->timeSlot === $ts) {
+                                        $found = true;
+                                        break;
+                                    }
+                                }
+                                if ($found) { ?>
+                                    <option value="<?php echo $ts; ?>" data-booked="true">
+                                        <?php echo $ts; ?>
+                                    </option>
+                                <?php } else { ?>
+                                    <option value="<?php echo $ts; ?>" data-net-type="Normal Net B"
+                                        data-date="<?php echo $filter_date; ?>">
+                                        <?php echo $ts; ?>
+                                    </option>
+                                <?php } ?>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="slot">
+                    <h1 class="netType">Machine Net</h1>
+                    <div class="form-group">
+                        <select name="language" class="custom-select" multiple>
+                            <?php
+                            $timeslots = time_slot($duration, $cleanup, $start, $end);
+                            foreach ($timeslots as $ts) {
+                                ?>
+                                <?php
+                                $found = false;
+                                foreach ($new_array_1 as $reservation) {
+                                    if ($reservation->timeSlot === $ts) {
+                                        $found = true;
+                                        break;
+                                    }
+                                }
+                                if ($found) { ?>
+                                    <option value="<?php echo $ts; ?>" data-booked="true">
+                                        <?php echo $ts; ?>
+                                    </option>
+                                <?php } else { ?>
+                                    <option value="<?php echo $ts; ?>" data-net-type="Machine Net"
+                                        data-date="<?php echo $filter_date; ?>">
+                                        <?php echo $ts; ?>
+                                    </option>
+                                <?php } ?>
+                            <?php } ?>
+                        </select>
+                    </div>
                 </div>
             </div>
-
-            <div class="slot">
-                <h1 class="netType">Normal Net B</h1>
-                <div class="form-group">
-                    <select name="language" class="custom-select" multiple>
-                        <?php
-                        $timeslots = time_slot($duration, $cleanup, $start, $end);
-                        foreach ($timeslots as $ts) {
-                            ?>
-                            <?php
-                            $found = false;
-                            foreach ($new_array_3 as $reservation) {
-                                if ($reservation->timeSlot === $ts) {
-                                    $found = true;
-                                    break;
-                                }
-                            }
-                            if ($found) { ?>
-                                <option value="<?php echo $ts; ?>" data-booked="true">
-                                    <?php echo $ts; ?>
-                                </option>
-                            <?php } else { ?>
-                                <option value="<?php echo $ts; ?>" data-net-type="Normal Net B"
-                                    data-date="<?php echo $filter_date; ?>">
-                                    <?php echo $ts; ?>
-                                </option>
-                            <?php } ?>
-                        <?php } ?>
-                    </select>
+            <?php if ($bookingId == 0) { ?>
+                <div id="confirmationForm" style="display: none;">
+                    <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/manager"><button class="confBut"
+                            onclick="passValues()">Confirm Reservation</button></a>
                 </div>
-            </div>
-
-            <div class="slot">
-                <h1 class="netType">Machine Net</h1>
-                <div class="form-group">
-                    <select name="language" class="custom-select" multiple>
-                        <?php
-                        $timeslots = time_slot($duration, $cleanup, $start, $end);
-                        foreach ($timeslots as $ts) {
-                            ?>
-                            <?php
-                            $found = false;
-                            foreach ($new_array_1 as $reservation) {
-                                if ($reservation->timeSlot === $ts) {
-                                    $found = true;
-                                    break;
-                                }
-                            }
-                            if ($found) { ?>
-                                <option value="<?php echo $ts; ?>" data-booked="true">
-                                    <?php echo $ts; ?>
-                                </option>
-                            <?php } else { ?>
-                                <option value="<?php echo $ts; ?>" data-net-type="Machine Net"
-                                    data-date="<?php echo $filter_date; ?>">
-                                    <?php echo $ts; ?>
-                                </option>
-                            <?php } ?>
-                        <?php } ?>
-                    </select>
+            <?php } else { ?>
+                <div id="confirmationForm" style="display: none;">
+                    <a
+                        href='http://localhost/C&A_Indoor_Project/Pages/Booking_Register/manager?bookingID=<?php echo $bookingId; ?>&timedate=<?php echo $selected_date; ?>'>
+                        <button class="confBut" onclick="passValues()">Confirm Reservation</button>
+                    </a>
                 </div>
-            </div>
-        </div>
-        <?php if ($bookingId == 0) { ?>
-            <div id="confirmationForm" style="display: none;">
-                <a href="http://localhost/C&A_Indoor_Project/Pages/Booking_Register/manager"><button class="confBut"
-                        onclick="passValues()">Confirm Reservation</button></a>
-            </div>
-        <?php } else { ?>
-            <div id="confirmationForm" style="display: none;">
-                <a href='http://localhost/C&A_Indoor_Project/Pages/Booking_Register/manager?bookingID=<?php echo $bookingId; ?>&timedate=<?php echo $selected_date; ?>'>
-                    <button class="confBut" onclick="passValues()">Confirm Reservation</button>
-                </a>
-            </div>
 
-        <?php } ?>
+            <?php } ?>
 
-    </section>
-    <script src="<?=URLROOT?>/js/managerBooking.js"></script>
+        </section>
+    </div>
+    <script src="<?= URLROOT ?>/js/managerBooking.js"></script>
 </body>
 
 </html>
