@@ -109,7 +109,7 @@
                             <a href="#">Logout</a>
                         </div>
                     </button>
-                    <button class="action-btn">
+                    <button class="action-btn" onclick="goToCart()">
                         <ion-icon name="bag-handle-outline"></ion-icon>
                         <span class="count" id="cartCount"></span>
                     </button>

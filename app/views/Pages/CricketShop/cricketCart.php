@@ -36,7 +36,9 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                         <?php echo $cartItem->total_amount; ?>
                     </div>
                     <div class="column item-action">
+
                         <button class="remove-btn" onclick="removeItem(<?php echo $cartItem->cart_id; ?>)">Remove</button>
+
                     </div>
                 </div>
                 <?php $sum += $cartItem->total_amount; ?>
@@ -67,5 +69,35 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
             cartCount = 0;
         }
         $('#cartCount').html(cartCount);
+
+        $('#removeItem').click(function () {
+            console.log('remove item');
+            var cart_id = <?= $data['cartItems']->cart_id?>;
+            alert(cart_id);
+
+            // $.ajax({
+            //     url: '<?= URLROOT ?>/CricketShop/removeItem',
+            //     type: 'POST',
+            //     data: {
+            //         product_id: product_id,
+            //         email: email,
+            //         product_title: product_title,
+            //         product_price: product_price,
+            //         product_thumbnail: product_thumbnail,
+            //         qty: qty,
+            //         totalAmount: totalAmount
+            //     },
+            //     success: function (response) {
+            //         var data = JSON.parse(response);
+            //         if (data.status == 'success') {
+            //             alert('Item removed from cart');
+            //             location.reload();
+            //         } else {
+            //             alert('Error! Item not removed from cart');
+            //         }
+            //     }
+            // });
+        });
+
     });
 </script>
