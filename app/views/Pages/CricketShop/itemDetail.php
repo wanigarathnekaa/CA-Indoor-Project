@@ -15,13 +15,15 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
         <p class="product-short-des">
             <?= $data['SProduct']->short_description; ?>
         </p>
-        <span class="product-price">LKR
-            <?= number_format($data['SProduct']->selling_price * 0.8, 2, '.', ''); ?>
-        </span>
+        
         <span class="product-actual-price">LKR
             <?= number_format($data['SProduct']->selling_price, 2, '.', ''); ?>
         </span>
         <span class="product-discount">( 20% off )</span>
+        <br>
+        <span class="product-price">LKR
+            <?= number_format($data['SProduct']->selling_price * 0.8, 2, '.', ''); ?>
+        </span>
 
         <div class="form-field form-field--increments">
             <label class="form-label form-label--alternate" for="qty[]">Quantity:</label>
