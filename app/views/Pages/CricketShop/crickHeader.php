@@ -9,6 +9,10 @@
     <!--custom css link-->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/style-prefix.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/cricketitem.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/ItemDetail.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/cart.css">
+
+
 
 </head>
 
@@ -106,12 +110,8 @@
                         </div>
                     </button>
                     <button class="action-btn">
-                        <ion-icon name="heart-outline"></ion-icon>
-                        <span class="count">0</span>
-                    </button>
-                    <button class="action-btn">
                         <ion-icon name="bag-handle-outline"></ion-icon>
-                        <span class="count">0</span>
+                        <span class="count" id="cartCount"></span>
                     </button>
                 </div>
             </div>

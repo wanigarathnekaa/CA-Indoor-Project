@@ -303,3 +303,7 @@ function makePayment() {
   );
   xhttp.send();
 }
+
+function closePopupSuccess() {
+  location.reload();
+}
