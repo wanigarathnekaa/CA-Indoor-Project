@@ -36,7 +36,9 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                         <?php echo $cartItem->total_amount; ?>
                     </div>
                     <div class="column item-action">
-                        <button class="btn remove-btn" id="removeItem">Remove</button>
+
+                        <button class="remove-btn" onclick="removeItem(<?php echo $cartItem->cart_id; ?>)">Remove</button>
+
                     </div>
                 </div>
                 <?php $sum += $cartItem->total_amount; ?>
