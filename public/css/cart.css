@@ -113,3 +113,18 @@
     background-color: var(--color02);
 }
 
+.qtyInput{
+    width: 50px;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    text-align: center;
+    margin: 0 10px;
+}
+
+.item-quantity{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
