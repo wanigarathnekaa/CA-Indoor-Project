@@ -36,18 +36,22 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                         <?php echo $cartItem->total_amount; ?>
                     </div>
                     <div class="column item-action">
-                        <button class="btn remove-btn" onclick="removeItem(<?php echo $cartItem->cart_id; ?>)">Remove</button>
+                        <button class="remove-btn" onclick="removeItem(<?php echo $cartItem->cart_id; ?>)">Remove</button>
                     </div>
                 </div>
                 <?php $sum += $cartItem->total_amount; ?>
             <?php endforeach; ?>
 
             <div class="cart-total">
-                <span>Total: $<span id="totalAmount"><?=$sum?></span></span>
+                <span>Total: LKR <span id="totalAmount"><?=$sum?></span></span>
             </div>
         </div>
 
-        <button class="btn checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        <div class="checkout">
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+
+        </div>
+
     </div>
 </section>
 
