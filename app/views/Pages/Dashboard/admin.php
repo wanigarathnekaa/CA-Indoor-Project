@@ -82,7 +82,7 @@
                         </div>
               </a>
 
-            <a class="card" href="#">
+            <a class="card" href="C&A_Indoor_Project/Reports/view1">
                 <div>
                     <div class="numbers"></div>
                     <div class="cardName">Reports</div>
@@ -107,9 +107,12 @@
          
             <div class="charts">
                   <!-- Weekly Reservations chart -->
-                  <?php
-                        require APPROOT . '/views/Pages/Charts/weeklyReservationsChart.php';
-                  ?>
+    <!-- Weekly Reservations chart -->
+    <a class="card" href="C&A_Indoor_Project/Complaint/viewComplaints">
+        <?php require APPROOT . '/views/Pages/Charts/weeklyReservationsChart.php'; ?>
+    </a>
+
+
 
                   <!-- Customers Count chart -->
                   <?php
