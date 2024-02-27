@@ -96,23 +96,7 @@ class Pages extends Controller
         }
         $this->view('Pages/Tables/coaches_Table', $data, $res);
     }
-    //coach table view for cashier
-    public function vcoachTable($name)
-    {
-        $coaches = $this->pagesModel->getCoaches();
-        $coach = $this->pagesModel->getCoachCount();
-        // $users = $this->pagesModel->getUserCount();
-        $data = [
-            'CoachCount' => $coach,
-            'users' => $coaches,
-            // 'UserCount' => $users,
-        ];
-        $res = [];
-        foreach ($data['users'] as $user) {
-            $res[] = $this->pagesModel->findUser($user->email);
-        }
-        $this->view('Pages/Tables/v_coaches', $data,$res); 
-    }
+    
     //manager table
     public function managerTable($name)
     {
@@ -143,19 +127,7 @@ class Pages extends Controller
         ];
         $this->view('Pages/Tables/players_Table', $players, $data);
     }
-    //player table for cashier
-    public function vplayerTable($name)
-    {
-        $players = $this->pagesModel->getUsers();
-        $coaches = $this->pagesModel->getCoaches();
-        $users = $this->pagesModel->getUserCount();
-        $data = [
-            'Coaches' => $coaches,
-            'UserCount' => $users,
-        ];
-        $this->view('Pages/Tables/v_players', $players, $data);
-    }
-
+  
 
     //reservation table
     public function reservationTable($name)
@@ -163,12 +135,7 @@ class Pages extends Controller
         $bookings = $this->pagesModel->getReservations();
         $this->view('Pages/Tables/reservations_Table', $bookings);
     }
-    //reservation table for cashier
-    public function creservationTable($name)
-    {
-        $bookings = $this->pagesModel->getBookings();
-        $this->view('Pages/Tables/cashier_reservationsTable', $bookings);
-    }
+   
 
 
     // dashboard

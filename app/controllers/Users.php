@@ -5,12 +5,14 @@ class Users extends Controller
 {
     private $userModel;
     private $userManagerModel;
+    private $userCashierModel;
     private $userCoachModel;
     private $userAdminModel;
     public function __construct()
     {
         $this->userModel = $this->model('M_Users');
         $this->userManagerModel = $this->model('M_Manager');
+        $this->userCashierModel = $this->model('M_Cashier');
         $this->userCoachModel = $this->model('M_Coach');
         $this->userAdminModel = $this->model('M_Admin');
 
@@ -155,7 +157,11 @@ class Users extends Controller
                 if ($this->userManagerModel->findUserByEmail($data['email'])) {
                     $role = 'Manager'; 
                     //echo "user is found";
+                }elseif ($this->userCashierModel->findUserByEmail($data['email'])) {
+                    $role = 'Cashier';
+                    //echo "user is found";
                 }
+    
                  elseif ($this->userModel->findUserByEmail($data['email'])) {
                     $role = 'User';
                     //echo "user is found";
@@ -197,6 +203,14 @@ class Users extends Controller
                         $this->view('Pages/LoginPage/login', $data);
                     }else{
                         $this->createUserSession($loginManager , $role);
+                    }                   
+                }else if ($role == 'Cashier') {
+                    $loginCashier = $this->userModel->loginCashier($data['email'], $data['pwd']);
+                    if($loginCashier == false){
+                        $data['pwd_err'] = "Invalid Password";
+                        $this->view('Pages/LoginPage/login', $data);
+                    }else{
+                        $this->createUserSession($loginCashier , $role);
                     }                   
                 }
             } else {
@@ -323,6 +337,8 @@ class Users extends Controller
 
         if($role == 'Manager'){
             redirect('Pages/Dashboard/manager');
+        }elseif($role == 'Cashier'){
+            redirect('Pages/Dashboard/cashier');
         }elseif($role == 'User'){
             redirect('Pages/Dashboard/user');
         }else{
@@ -513,6 +529,7 @@ class Users extends Controller
 
 
 }
+
 
 
 ?>

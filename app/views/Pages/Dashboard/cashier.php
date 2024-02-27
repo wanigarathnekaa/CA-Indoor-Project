@@ -17,7 +17,7 @@
 <body>
       <!-- Sidebar -->
       <?php
-      $role = "Cashier";
+      $role = $_SESSION['user_role'];
       require APPROOT . '/views/Pages/Dashboard/header.php';
       require APPROOT . '/views/Components/Side Bars/sideBar.php';
       ?>
@@ -27,7 +27,7 @@
 
             <!-- Cards -->
             <div class="cardBox">
-                  <a class="card" href="C&A_Indoor_Project/Pages/vcoachTable/user">
+                  <a class="card" href="C&A_Indoor_Project/Pages/coachTable/user">
                         <div class="infor">
                               <div class="numbers"><?php echo $data1["CoachCount"]?></div>
                               <div class="cardName">Coaches</div>
@@ -37,7 +37,7 @@
                         </div>
                   </a>
 
-                  <a class="card" href="C&A_Indoor_Project/Pages/vplayerTable/user">
+                  <a class="card" href="C&A_Indoor_Project/Pages/playerTable/user">
                         <div>
                               <div class="numbers"><?php echo $data1["UserCount"]?></div>
                               <div class="cardName">Players</div>
@@ -47,18 +47,18 @@
                         </div>
                   </a>
 
-                  <!-- <a class="card" href="C&A_Indoor_Project/Pages/View_Advertisement/manager">
+                  <a class="card" href="C&A_Indoor_Project/Pages/View_Advertisement/manager">
                         <div>
                               <div class="numbers"><?php echo $data1["advertCount"]?></div>
                               <div class="cardName">Advertisement</div>
                         </div>
                         <div class="iconBx">
                               <i class="fa-brands fa-adversal"></i>
-                              
+                              <!-- <i class="fa-solid fa-file-contract"></i> -->
                         </div>
-                  </a> -->
+                  </a>
 
-                  <a class="card" href="C&A_Indoor_Project/Pages/creservationTable/cashier">
+                  <a class="card" href="C&A_Indoor_Project/Pages/reservationTable/manager">
                         <div>
                               <div class="numbers"><?php echo $data1["Reserve_Count"]?></div>
                               <div class="cardName">Reservations</div>
@@ -68,7 +68,7 @@
                               <i class="fa-solid fa-calendar-days"></i>
                         </div>
                   </a>
-<!-- 
+
                   <a class="card" href="#">
                         <div>
                               <div class="numbers"></div>
@@ -77,7 +77,7 @@
                         <div class="iconBx">
                               <i class='bx bxs-report'></i>
                         </div>
-                  </a> -->
+                  </a>
 
                   <a class="card" href="C&A_Indoor_Project/Pages/Inventory_Management/manager">
                         <div>
@@ -89,7 +89,7 @@
                         </div>
                   </a>
 
-                  <!-- <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/Coach_Registration/coach">
+                  <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/Coach_Registration/coach">
                         <div>
                               <div class="numbers"></div>
                               <div class="cardName">Registration</div>
@@ -98,7 +98,7 @@
                         <div class="iconBx">
                               <i class="fa-solid fa-user-plus"></i>
                         </div>
-                  </a> -->
+                  </a>
             </div>
 
             
@@ -120,6 +120,23 @@
 
             
 
+            <!-- chart -->
+            <div class="charts">
+                  <!-- Weekly Reservations chart -->
+                  <?php
+                        require APPROOT . '/views/Pages/Charts/weeklyReservationsChart.php';
+                  ?>
+
+                  <!-- Customers Count chart -->
+                  <?php
+                        require APPROOT . '/views/Pages/Charts/customersCountChart.php';
+                  ?>
+
+                  <!-- Reservations Net chart -->
+                  <?php
+                        require APPROOT . '/views/Pages/Charts/reservationsNetChart.php';
+                  ?>
+            </div>
 
       </section>
 
@@ -127,7 +144,7 @@
       <!-- javascripts -->
       <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
 
-      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 
 </html>
