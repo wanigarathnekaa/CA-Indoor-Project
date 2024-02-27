@@ -67,6 +67,13 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+    $(document).ready(function () {
+        var cartCount = '<?= count($data['cartItems']) ?>';
+        if (cartCount == 0) {
+            cartCount = 0;
+        }
+        $('#cartCount').html(cartCount);
+    });
     document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.qtyInput').forEach(cartItem => {
             cartItem.addEventListener('change', function () {
