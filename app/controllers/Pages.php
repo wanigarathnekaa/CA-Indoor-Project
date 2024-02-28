@@ -47,7 +47,10 @@ class Pages extends Controller
     public function Manager_Booking($name)
     {
         $bookings = $this->pagesModel->getReservations();
-        $this->view('Pages/Calendar/managerBooking', $bookings);
+        $data = [
+            'bookings' => $bookings,
+        ];
+        $this->view('Pages/Calendar/managerBooking', $data);
     }
 
     public function Payment($name)
@@ -79,6 +82,26 @@ class Pages extends Controller
         $this->view('Pages/Tables/personal_reservation', $bookings);
     }
 
+    //schedule page for coach,player
+    public function userSchedule($name)
+    {
+        $bookings = $this->pagesModel->getReservations();
+        $coach = $this->pagesModel->getCoaches();
+
+        $data = [
+            'coach' => $coach,
+        ];
+        $res = [];
+        foreach ($data['coach'] as $user) {
+            $res[] = $this->pagesModel->findUser($user->email);
+        }
+
+        $data1 = [
+            'userCoach' => $res,
+            'bookings' => $bookings,
+        ];
+        $this->view('Pages/SchedulePages/userschedule', $data1);
+    }
     // coach table
     public function coachTable($name)
     {
