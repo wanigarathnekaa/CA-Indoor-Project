@@ -647,6 +647,23 @@ class Pages extends Controller
         $this->view('Pages/CricketShop/cricketCart',$data);
     }
 
+    //checkout page
+    public function Checkout($name)
+    {
+        $cartItems = $this->pagesModel->getCart($_SESSION['user_email']);
+        $categories = $this->pagesModel->getCategories();
+        $brand = $this->pagesModel->getBrands();
+        $products = $this->pagesModel->getProducts();
+        $data = [
+            'cartItems' => $cartItems,
+            'categories' => $categories,
+            'brands' => $brand,
+            'products' => $products,
+            'name' => $name,
+        ];
+        $this->view('Pages/CricketShop/checkout',$data);
+    }
+
 
     //terms and conditions page
     public function termsConditions()

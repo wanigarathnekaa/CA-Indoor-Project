@@ -55,7 +55,6 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
 
         <div class="checkout">
             <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
-
         </div>
 
     </div>
