@@ -128,3 +128,9 @@
     align-items: center;
 }
 
+@media (max-width: 800px) {
+ .cart-section{
+        margin: 10px;
+ }
+
+}
