@@ -1,41 +1,24 @@
 <?php
 class M_Report
-{
-    private $db;
-    public function __construct()
-    {
-        $this->db = new Database;
+{        private $db;
+    
+        public function __construct(){
+            $this->db = new Database;
+        }
+    
+        public function getBookingDetails($data) {
+            // Access invoice_date and invoice_due_date from the passed array
+            $invoice_date = $data['invoice_date'];
+            $invoice_due_date = $data['invoice_due_date'];
+    
+            // Now you can use them in your database query
+            $this->db->query('SELECT * FROM bookings WHERE date >= :invoice_date AND date <= :invoice_due_date');
+            $this->db->bind(':invoice_date',$invoice_date);
+            $this->db->bind(':invoice_due_date',$invoice_due_date);
+            return $this->db->resultSet();
+        }
     }
+    
 
-    public function getUsernames(){
-        $this->db->query('SELECT * FROM user');
 
-        return $this->db->resultset();
-    }
-    public function getReservations(){
-        $this->db->query('SELECT * FROM reservation');
-    
-        return $this->db->resultset();
-
-    }
-    public function getUserAndReservationData($data){
-        $date = $data['date'];
-        $user_name = $data['user_name'];
-    
-        $this->db->query('SELECT u.user_name, u.email, u.phoneNumber, r.net 
-                          FROM user u 
-                          INNER JOIN reservation r ON u.email = r.email 
-                          WHERE u.user_name = :user_name AND r.date = :date');
-    
-        $this->db->bind(':user_name', $user_name);
-        $this->db->bind(':date', $date);
-    
-        return $this->db->resultset();
-    }
-    
-    
-    
-    
-    
-}
 ?>

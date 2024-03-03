@@ -1,0 +1,63 @@
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    margin-top: 50px; /* Adjust margin-top as needed */
+}
+
+.text-primary {
+    color: #2e8a99 !important;
+    font-size: 28px; /* Increase font size */
+}
+
+.text-success {
+    color: #4F9DA9;
+    font-size: 24px; /* Increase font size */
+}
+
+.btn-primary {
+    background-color: #2e8a99;
+    border-color: #2e8a99;
+    font-size: 20px; /* Increase font size */
+    padding: 15px 30px; /* Increase padding */
+    border-radius: 10px; /* Increase border radius */
+}
+
+.form-control {
+    border-color: #A7D8D7;
+    font-size: 20px; /* Increase font size */
+    padding: 15px; /* Increase padding */
+    border-radius: 10px; /* Increase border radius */
+}
+
+.alert {
+    font-size: 24px; /* Increase font size */
+    padding: 20px; /* Increase padding */
+    border-radius: 10px; /* Increase border radius */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 20px; /* Increase padding */
+    text-align: left;
+    border-bottom: 2px solid #EAF3F4; /* Increase border thickness */
+}
+
+th {
+    background-color: #2e8a99;
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #EAF3F4;
+}
+
+tr:hover {
+    background-color: #A7D8D7;
+}
