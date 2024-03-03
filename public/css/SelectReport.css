@@ -1,44 +1,42 @@
 .card {
     display: inline-block;
-    width: 300px; /* Adjust width according to your design */
-    height: 200px; /* Adjust height according to your design */
-    background-color: #EAF3F4; /* Adjust background color as needed */
+    width: 300px; 
+    height: 200px; 
+    background-color: #EAF3F4; 
     border-radius: 10px;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 4); /* Increased blur radius and spread radius */
-    text-decoration: none; /* Remove underline from the link */
-    color: inherit; /* Inherit text color from parent */
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 4); 
+    text-decoration: none; 
+    color: inherit; 
 }
 
 .card:hover {
-    background-color: #A7D8D7; /* Adjust hover background color as needed */
-}
+    background-color: #A7D8D7; }
 
 .card > div {
-    padding: 20px; /* Adjust padding as needed */
+    padding: 20px; 
 }
 
 .iconBx {
-    /* Add styles for the iconBx if needed */
+   
 }
 .card {
     display: inline-block;
-    width: 300px; /* Adjust width according to your design */
-    height: 200px; /* Adjust height according to your design */
-    background-color: #EAF3F4; /* Adjust background color as needed */
+    width: 300px; 
+    height: 200px; 
+    background-color: #EAF3F4; 
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    text-decoration: none; /* Remove underline from the link */
-    color: inherit; /* Inherit text color from parent */
-}
+    text-decoration: none; 
+    color: inherit; }
 
 .card:hover {
-    background-color: #A7D8D7; /* Adjust hover background color as needed */
+    background-color: #A7D8D7; 
 }
 
 .card > div {
-    padding: 20px; /* Adjust padding as needed */
+    padding: 20px; 
 }
 
 .iconBx {
-    /* Add styles for the iconBx if needed */
+ 
 }
