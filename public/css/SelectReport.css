@@ -1,0 +1,42 @@
+.card {
+    display: inline-block;
+    width: 300px; 
+    height: 200px; 
+    background-color: #EAF3F4; 
+    border-radius: 10px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 4); 
+    text-decoration: none; 
+    color: inherit; 
+}
+
+.card:hover {
+    background-color: #A7D8D7; }
+
+.card > div {
+    padding: 20px; 
+}
+
+.iconBx {
+   
+}
+.card {
+    display: inline-block;
+    width: 300px; 
+    height: 200px; 
+    background-color: #EAF3F4; 
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-decoration: none; 
+    color: inherit; }
+
+.card:hover {
+    background-color: #A7D8D7; 
+}
+
+.card > div {
+    padding: 20px; 
+}
+
+.iconBx {
+ 
+}

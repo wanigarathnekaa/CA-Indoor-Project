@@ -7,7 +7,29 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
             <div class="detailscontainer">
                   <form action="/action_page.php">
                         <div class="col-50">
-                              <h2 class="topic">Delivery Address</h2>
+                              <h2 class="topic">Delivery Details</h2>
+
+                              <div class="col-md-6">
+                                    <!-- Pickup mode -->
+                                    <div class="form-group">
+                                          <label for="pickup">Pickup Mode</label>
+                                          <select id="pickup" name="pickup">
+                                                <option value="pickup_at_store">Pickup at the Store</option>
+                                                <option value="online_delivery">Online Delivery</option>
+                                          </select>
+                                    </div>
+
+                                    <!-- Payment method -->
+                                    <div class="form-group">
+                                          <label for="payment">Payment Method</label>
+                                          <select id="payment" name="payment">
+                                                <option value="pay_online">Online Payment</option>
+                                                <option value="pay_cash_on_delivery">Cash On Delivery</option>
+                                                <option value="pay_at_store">Pay at the Store</option>
+                                          </select>
+                                    </div>
+                              </div>
+
                               <label for="fname">Full Name</label>
                               <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
 
@@ -19,7 +41,7 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
 
                               <label for="adr">Address</label>
                               <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
-                              
+
                               <label for="city">City</label>
                               <input type="text" id="city" name="city" placeholder="New York">
                         </div>
@@ -47,3 +69,12 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
 <?php
 include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
 ?>
+<script>
+      $(document).ready(function () {
+            var cartCount = '<?= count($data['cartItems']) ?>';
+            if (cartCount == 0) {
+                  cartCount = 0;
+            }
+            $('#cartCount').html(cartCount);
+      });
+</script>
