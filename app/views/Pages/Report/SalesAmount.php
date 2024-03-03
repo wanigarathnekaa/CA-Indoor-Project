@@ -87,6 +87,9 @@ if(isset($_POST["download_pdf"])) {
 <head>
     <title>Booking Report for Selected Date Range</title>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/bookingFilter.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    
 </head>
 <body>
