@@ -7,70 +7,41 @@ class Reports extends Controller
         $this->reportmodel = $this->model('M_Report');
 
     }
-    public function view1()
+    public function SelectReport()
                      {
-                         $usernames = $this->reportmodel->getUsernames();
-                         $reservations = $this->reportmodel->getReservations();
-
                          
-                         $data = [
-                             'usernames' => $usernames,
-                             'reservations'=>$reservations
-                         ];
-                         $this->view('Pages/Report/report1',$data);
+                         $this->view('Pages/Report/reportSelect');
                         
 
                      }
-                     public function view2()
-                     {
-                         
-                         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                            //form is submitting
-                
-                            //Valid input
-                            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
-                
-                
-                            //Input data
-                            $data = [
-                                'date' => trim($_POST['date']),
-                                'user_name' => trim($_POST['user_name']),
-                                
-                
-                                'date_err' => "",
-                                'user_name_err' => "",
-                               
-                            ];
-                
-                            
-                
-                            //If validation is completed and no error, then register the user
-                            if (empty($data['date_err']) && empty($data['user_name_err'])) {
-                               
-                                //create user
-                                $userReservatoons=$this->reportmodel->getUserAndReservationData($data);
-                                $data1 = [
-                                    'userReservatoons' => $userReservatoons                                ];
-                                $this->view('Pages/Report/report1',$data1); 
-                            } else {
-                                //Load the view
-                                $this->view('Pages/Report/report1',$data); 
-                            }
-                        } else {
-                            //initial form
-                            $data = [
-                                'date' => "",
-                                'user_name' => "",
-                                
-                
-                                'date_err' => "",
-                                'user_name_err' => ""
-                              
-                            ];
-                        }
-                
-                        //Load the view
-                        $this->view('Pages/Report/report1',$data); 
+    public function SalesAmount(){
+        $this->view('Pages/Report/SalesAmount');
 
-                     }
-}
+
+    }
+
+
+    
+        public function bookingDetails(){
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                // Valid input
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    
+                // Input data
+                $data = [
+                    'invoice_date' => trim($_POST['invoice_date']),
+                    'invoice_due_date' => trim($_POST['invoice_due_date']),   
+                ];
+      
+                $bookings = $this->reportmodel->getBookingDetails($data);
+                $data1 = [
+                    'bookings' => $bookings
+                ];
+                $this->view('Pages/Report/SalesAmount', $data1);
+            }
+        }
+    }
+    
+   
+    
+                   

@@ -82,7 +82,7 @@
                         </div>
               </a>
 
-            <a class="card" href="C&A_Indoor_Project/Reports/view1">
+            <a class="card" href="C&A_Indoor_Project/Reports/SelectReport">
                 <div>
                     <div class="numbers"></div>
                     <div class="cardName">Reports</div>
@@ -101,6 +101,16 @@
 
                 <div class="iconBx">
                     <i class="fa-solid fa-comments"></i>
+                </div>
+            </a>
+            <a class="card" href="C&A_Indoor_Project/Complaint/viewComplaints">
+                <div>
+                    <div class="numbers"></div>
+                    <div class="cardName">Company Users</div>
+                </div>
+
+                <div class="iconBx">
+                        <i class="fa-solid fa-user"></i>
                 </div>
             </a>
         </div>
