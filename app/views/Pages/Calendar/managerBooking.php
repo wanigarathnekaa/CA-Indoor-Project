@@ -7,17 +7,22 @@ $filter_net_M = 'Machine Net';
 $filter_net_A = 'Normal Net A';
 $filter_net_B = 'Normal Net B';
 
-$new_array_1 = array_filter($data, function ($item) use ($filter_date, $filter_net_M) {
-    return $item->date === $filter_date && $item->netType === $filter_net_M;
-});
 
-$new_array_2 = array_filter($data, function ($item) use ($filter_date, $filter_net_A) {
-    return $item->date === $filter_date && $item->netType === $filter_net_A;
-});
+if (is_array($data) && !empty($data)) {
+    $new_array_1 = array_filter($data, function ($item) use ($filter_date, $filter_net_M) {
+        return is_object($item) && property_exists($item, 'date') && $item->date === $filter_date && $item->netType === $filter_net_M;
 
-$new_array_3 = array_filter($data, function ($item) use ($filter_date, $filter_net_B) {
-    return $item->date === $filter_date && $item->netType === $filter_net_B;
-});
+    });
+
+    $new_array_2 = array_filter($data, function ($item) use ($filter_date, $filter_net_A) {
+        return is_object($item) && property_exists($item, 'date') && $item->date === $filter_date && $item->netType === $filter_net_A;
+    });
+
+    $new_array_3 = array_filter($data, function ($item) use ($filter_date, $filter_net_B) {
+        return is_object($item) && property_exists($item, 'date') && $item->date === $filter_date && $item->netType === $filter_net_B;
+    });
+
+}
 
 // if (isset($_SESSION['booking_success']) && $_SESSION['booking_success'] === true) {
 //     echo '<div class="alert">';
