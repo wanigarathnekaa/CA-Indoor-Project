@@ -54,7 +54,7 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
         </div>
 
         <div class="checkout">
-            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            <button class="checkout-btn" onclick="window.location.href='<?php echo URLROOT; ?>/Pages/Checkout/user'">Proceed To Checkout</button>
         </div>
 
     </div>

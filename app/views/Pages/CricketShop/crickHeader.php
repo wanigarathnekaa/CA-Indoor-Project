@@ -48,8 +48,9 @@
                             <a href="#">Logout</a>
                         </div>
                     </button>
-                    <button class="action-btn" onclick="goToCart()">
-                        <ion-icon name="bag-handle-outline"></ion-icon>
+                    <button class="action-btn" onclick="window.location.href='<?php echo URLROOT; ?>/Pages/Cricket_Cart/cart'">
+                        <!-- <ion-icon name="bag-handle-outline"></ion-icon> -->
+                        <ion-icon name='cart'></ion-icon>
                         <span class="count" id="cartCount"></span>
                     </button>
                 </div>
@@ -60,7 +61,7 @@
             <div class="container">
                 <ul class="desktop-menu-category-list">
                     <li class="menu-category">
-                        <a href="http://localhost/C&A_Indoor_Project/Pages/Cricket_Shop/manager"
+                        <a href="<?php echo URLROOT; ?>/Pages/Cricket_Shop/User"
                             class="menu-title">Home</a>
                     </li>
                     <li class="menu-category">
@@ -126,19 +127,13 @@
             <button class="action-btn" data-mobile-menu-open-btn>
                 <ion-icon name="menu-outline"></ion-icon>
             </button>
-            <button class="action-btn">
-                <ion-icon name="bag-handle-outline"></ion-icon>
-                <span class="count">0</span>
+            <button class="action-btn" onclick="window.location.href='<?php echo URLROOT; ?>/Pages/Cricket_Shop/User'">
+                <ion-icon name='home'></ion-icon>
             </button>
-            <button class="action-btn">
-                <ion-icon name="home-outline"></ion-icon>
-            </button>
-            <button class="action-btn">
-                <ion-icon name="heart-outline"></ion-icon>
-                <span class="count">0</span>
-            </button>
-            <button class="action-btn" data-mobile-menu-open-btn>
-                <ion-icon name="grid-outline"></ion-icon>
+            <button class="action-btn" onclick="window.location.href='<?php echo URLROOT; ?>/Pages/Cricket_Cart/cart'">
+                <ion-icon name='cart'></ion-icon>
+                <!-- <span class="count">0</span> -->
+                <span class="count" id="cartCount"></span>
             </button>
         </div>
 
