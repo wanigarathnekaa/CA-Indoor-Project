@@ -47,10 +47,10 @@ class Pages extends Controller
     public function Manager_Booking($name)
     {
         $bookings = $this->pagesModel->getReservations();
-        $data = [
-            'bookings' => $bookings,
-        ];
-        $this->view('Pages/Calendar/managerBooking', $data);
+        // $data = [
+        //     'bookings' => $bookings,
+        // ];
+        $this->view('Pages/Calendar/managerBooking', $bookings);
     }
 
     public function Payment($name)
