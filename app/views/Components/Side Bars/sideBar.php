@@ -45,7 +45,7 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="C&A_Indoor_Project/Pages/Cricket_Shop/User">
                             <i class="bx bx-store icon"></i>
                             <span class="text nav-text">Cricket Store</span>
                         </a>
@@ -147,7 +147,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-link">
-                                    <a href="#">
+                                    <a href="C&A_Indoor_Project/Pages/Cricket_Shop/Coach">
                                         <i class="bx bx-store icon"></i>
                                         <span class="text nav-text">Cricket Store</span>
                                     </a>
