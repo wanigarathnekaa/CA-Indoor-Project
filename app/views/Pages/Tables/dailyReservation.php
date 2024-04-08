@@ -107,7 +107,7 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
 
             <div class="btns">
                 <button type="button" onclick="openReschedulePopup()">Reschedule</button>
-                <button type="button">Cancel</button>
+                <button type="button" onclick="openCancelPopup()">Cancel</button>
             </div>
         </div>
     </div>
@@ -131,6 +131,25 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
         </div>
     </div>
 
+    <!-- Popup message for Cancelling -->
+    <div class="popupcontainer" id="cancelPopupContainer" style="display: none;">
+        <div class="popup" id="cancelPopup">
+            <span class="close" onclick="closeCancelPopup()"><i class="fa-solid fa-xmark"></i></span>
+            <h2>Cancel Reservation</h2>
+            <hr>
+            <div class="cancelDetails">
+                <h4>Are You Sure You Want To Cancel The Reservation?</h4>
+                <h4 class="day" style="font-weight:450">All Time Slots Will Be Cancelled.</h4>
+            </div>
+            <span class="cancel_bookingId" style="font-weight:bold"></span>
+
+            <div class="btns">
+                <button type="button" id="cancelReservation">Yes</button>
+                <button type="button" onclick="closeCancelPopup()">No</button>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="<?php echo URLROOT; ?>/js/popup.js"></script>
@@ -147,6 +166,25 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
                 }
 
             }); 
+
+            $("#cancelReservation").on("click", function () {
+                var bookingId = $(".cancel_bookingId").text();
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo URLROOT; ?>/Bookings/cancelReservation",
+                    data: {
+                        bookingId: bookingId
+                    },
+                    success: function (response) {
+                        if (response.status == "success") {
+                            alert("Reservation Cancelled Successfully");
+                            location.reload();
+                        } else {
+                            alert("Failed to Cancel the Reservation");
+                        }
+                    }
+                });
+            });
         });
     </script>
 </body>
