@@ -1,11 +1,11 @@
 <?php
-include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
+include_once APPROOT . '/views/Pages/CricketShop/crickHeader.php';
 ?>
 
 <div class="row">
       <div class="col-75">
             <div class="detailscontainer">
-                  <form action="/action_page.php">
+                  <form action="" id="orderForm">
                         <div class="col-50">
                               <h2 class="topic">Delivery Details</h2>
 
@@ -14,6 +14,7 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                                     <div class="form-group">
                                           <label for="pickup">Pickup Mode</label>
                                           <select id="pickup" name="pickup">
+                                                <option value="">Select Pickup Mode</option>
                                                 <option value="pickup_at_store">Pickup at the Store</option>
                                                 <option value="online_delivery">Online Delivery</option>
                                           </select>
@@ -23,9 +24,7 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                                     <div class="form-group">
                                           <label for="payment">Payment Method</label>
                                           <select id="payment" name="payment">
-                                                <option value="pay_online">Online Payment</option>
-                                                <option value="pay_cash_on_delivery">Cash On Delivery</option>
-                                                <option value="pay_at_store">Pay at the Store</option>
+                                                <option value="">Select Pickup Mode First</option>
                                           </select>
                                     </div>
                               </div>
@@ -51,15 +50,15 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                   </form>
             </div>
       </div>
+      <?php print_r($data["cartItems"]); ?>
 
       <div class="col-25">
             <div class="prizecontainer">
                   <h2 class="topic">Bill</h2>
-                  <p>Items <span class="price">4</span></p>
+                  <p>Items <span class="price"><?php echo count($data["cartItems"]); ?></span></p>
                   <p>Delivery <span class="price">Free</span></p>
                   <p>Total price <span class="price">$30</span></p>
                   <p>Discount <span class="price">0</span></p>
-                  <p>Discount Code <span class="price">0</span></p>
                   <hr>
                   <p class="tot">Total Bill <span class="price"><b>$30</b></span></p>
             </div>
@@ -67,14 +66,64 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
 </div>
 
 <?php
-include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
+include_once APPROOT . '/views/Pages/CricketShop/crickFooter.php';
 ?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
       $(document).ready(function () {
-            var cartCount = '<?= count($data['cartItems']) ?>';
-            if (cartCount == 0) {
-                  cartCount = 0;
-            }
+            var cartCount = <?= count($data['cartItems']) ?>;
             $('#cartCount').html(cartCount);
+
+            $("#pickup").change(function (e) {
+                  e.preventDefault();
+                  var pickupOption = $("#pickup").val();
+                  if (pickupOption == 'pickup_at_store') {
+                        $("#payment").html('<option value="pay_at_store">Pay at the Store</option>' +
+                              '<option value="pay_online">Pay Online</option>');
+                        $("#adr, #city").prop('disabled', true);
+                  } else if (pickupOption == 'online_delivery') {
+                        $("#payment").html('<option value="pay_cash_on_delivery">Cash On Delivery</option>' +
+                              '<option value="pay_online">Pay Online</option>');
+                        $("#adr, #city").prop('disabled', false);
+                  }
+            });
+
+            $('#orderForm').submit(function (e) {
+                  e.preventDefault();
+                  var pickup = $('#pickup').val();
+                  var payment = $('#payment').val();
+                  var fname = $('#fname').val();
+                  var email = $('#email').val();
+                  var adr = $('#adr').val();
+                  var phone = $('#phone').val();
+                  var city = $('#city').val();
+
+                  $.ajax({
+                        type: "POST",
+                        url: "<?= URLROOT; ?>/Order/saveOrder",
+                        data: {
+                              pickup: pickup,
+                              payment: payment,
+                              fname: fname,
+                              email: email,
+                              adr: adr,
+                              phone: phone,
+                              city: city
+                        },
+                        dataType: 'json',
+                        success: function (response) {
+                              if (response.status === "success") {
+                                    alert("Order placed successfully");
+                                    location.reload();
+                              } else {
+                                    console.log(response);
+                              }
+                        },
+                        error: function (xhr, status, error) {
+                              console.error("AJAX request failed:", error);
+                        }
+                  });
+            });
+
       });
 </script>
