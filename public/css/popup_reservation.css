@@ -21,6 +21,7 @@
 }
 
 .popup,
+.popup2,
 .reschedulePopup,
 .deletepopup {
   width: 500px;
@@ -38,6 +39,7 @@
 }
 
 .open-popup,
+.open-popup2,
 .open-reschedulePopup,
 .open-deletepopup {
   visibility: visible;
@@ -47,6 +49,7 @@
 
 /* close icon */
 .popup .close,
+.popup2 .close,
 .deletepopup .close,
 .reschedulePopup .close {
   position: absolute;
@@ -57,7 +60,8 @@
 
 /* ........................................................ */
 
-.popup h2 {
+.popup h2,
+.popup2 h2{
   font-size: 25px;
   font-weight: 500;
   /* margin: 30px 0 10px; */
@@ -95,31 +99,37 @@
 
 /* ........................................................ */
 
-.popup .popupdetails {
+.popup .popupdetails,
+.popup2 .popupdetails{
   justify-content: center;
   margin-top: 15px;
 }
 
-.popup .popupdetails .popupdetail {
+.popup .popupdetails .popupdetail ,
+.popup2 .popupdetails .popupdetail {
   /* background-color: #b8b8b8; */
   margin-bottom: 5px;
 }
 
-.popup .popupdetails .popupdetail h2 {
+.popup .popupdetails .popupdetail h2 ,
+.popup2 .popupdetails .popupdetail h2 {
   font-size: 15px;
 }
 
 @media screen and (max-device-width: 480px) {
   .popup,
+  .popup2,
   .deletepopup,
   .reschedulePopup {
     width: 300px;
   }
-  .popup h2 {
+  .popup h2 ,
+  .popup2 h2 {
     font-size: 20px;
   }
 
-  .popup .popupdetails .popupdetail h2 {
+  .popup .popupdetails .popupdetail h2,
+  .popup2 .popupdetails .popupdetail h2{
     font-size: 13px;
   }
 }

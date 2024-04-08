@@ -58,7 +58,7 @@
                         <div class="cardName">Coaches</div>
                     </div>    
                 </a>
-                <a class="card" href="#">
+                <a class="card" href="C&A_Indoor_Project/Pages/userSchedule/user">
                     <div class="card-icon">
                         <i class="fa-solid fa-globe"></i>
                     </div>
@@ -67,7 +67,7 @@
                     </div>    
                 </a>
 
-                <a class="card" href="#">
+                <a class="card" href="C&A_Indoor_Project/Pages/Cricket_Shop/User">
                     <div class="card-icon">
                         <i class="fa-solid fa-cart-shopping"></i>
                     </div>

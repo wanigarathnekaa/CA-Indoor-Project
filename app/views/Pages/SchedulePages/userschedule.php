@@ -23,7 +23,7 @@
                   <div class="tagrow">
                         <!-- <h2>Reservations</h2> -->
                   </div>
-                  <div class="details">                  
+                  <div class="details row1">                  
                         <!-- Calander -->
                         <div class="calanderdiv">
                               <iframe src="http://localhost/C&A_Indoor_Project/Pages/userCalendar/user" frameborder="0"></iframe>                        
@@ -38,29 +38,27 @@
             </div>
 
 
-            <?php 
-            if ($_SESSION['user_role'] == 'Coach') { ?>
+            
             <div class="sec-reservation">
                   
-                  <div class="details2">
+                  <div class="details row2">
                   <!-- upcomming Reservations -->
                   <div class="tablediv">
-                        <div class="tagrow">
-                              <h2>Reservations</h2>
-                        </div>
                         <?php
-                              //     require APPROOT . '/views/Pages/Tables/personal_reservation.php';
+                                  require APPROOT . '/views/Pages/Tables/personal_previous_reservation.php';
                         ?>
                   </div>
                   
                   <!-- Calander -->
+                  <!-- <?php 
+                  if ($_SESSION['user_role'] == 'Coach') { ?> -->
                   <div class="calanderdiv">
                                                     
                   </div>
                   </div>
             </div>
 
-            <?php } ?>;
+            <?php } ?>
 
 
       </section>

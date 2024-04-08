@@ -79,7 +79,20 @@ class Pages extends Controller
     public function Personal_Reservation($name)
     {
         $bookings = $this->pagesModel->getReservations();
-        $this->view('Pages/Tables/personal_reservation', $bookings);
+        $data = [
+            'bookings' => $bookings,
+        ];
+        $this->view('Pages/Tables/personal_reservation', $data);
+    }
+
+    //personal previous reservation table for player
+    public function Personal_Previous_Reservation($name)
+    {
+        $bookings = $this->pagesModel->getReservations();
+        $data = [
+            'bookings' => $bookings,
+        ];
+        $this->view('Pages/Tables/personal_previous_reservation', $data);
     }
 
     //schedule page for coach,player
@@ -224,18 +237,18 @@ class Pages extends Controller
     }
 
     //reservation register page
-    public function Booking_Register($name)
-    {
-        $coaches = $this->pagesModel->getCoaches();
-        $data = [
-            'users' => $coaches,
-        ];
-        $res = [];
-        foreach ($data['users'] as $user) {
-            $res[] = $this->pagesModel->findUser($user->email);
-        }
-        $this->view('Pages/Booking/bookingRegistration', $res);
-    }
+    // public function Booking_Register($name)
+    // {
+    //     $coaches = $this->pagesModel->getCoaches();
+    //     $data = [
+    //         'users' => $coaches,
+    //     ];
+    //     $res = [];
+    //     foreach ($data['users'] as $user) {
+    //         $res[] = $this->pagesModel->findUser($user->email);
+    //     }
+    //     $this->view('Pages/Booking/bookingRegistration', $res);
+    // }
 
     // user profile for player, coach......................................................................................
     public function Profile($name)

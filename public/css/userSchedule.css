@@ -2,7 +2,7 @@
 .sec-reservation{
       margin-bottom: 20px;
 }
-.details {
+.row1 {
       position: relative;
       /* width: 100%; */
       /* padding: 20px; */
@@ -14,6 +14,22 @@
       margin-left: 20px;
       margin-right: 20px;
 }
+
+.row2{
+      position: relative;
+      /* width: 100%; */
+      /* padding: 20px; */
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 30px;
+      /* margin-top: 10px; */
+      /* box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08); */
+      margin-left: 20px;
+      margin-right: 20px;
+      margin-bottom: 20px;
+
+}
+
 
 .calanderdiv{
       position: relative;
@@ -31,18 +47,7 @@
       height: 100%;
       border: none;
 }
-.details2 {
-      position: relative;
-      /* width: 100%; */
-      /* padding: 20px; */
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-gap: 30px;
-      /* margin-top: 10px; */
-      /* box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08); */
-      margin-left: 20px;
-      margin-right: 20px;
-}
+
 /* topic */
 .tagrow{
       width: 100%;

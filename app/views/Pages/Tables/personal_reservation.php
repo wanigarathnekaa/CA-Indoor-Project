@@ -58,7 +58,16 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
                         <tbody>
                               <?php
                               foreach ($personal_reservations as $reservation) {
-                                    ?>
+                                    $status_color = '';
+                                    if ($reservation->paymentStatus == 'Paid') {
+                                          $status_color = '#00ff00';
+                                    } else if ($reservation->paymentStatus == 'Pending') {
+                                          $status_color = '#ffcc00';
+                                    } else {
+                                          $status_color = '#ff0000';
+                                    }
+                              ?>
+
                                     <tr onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
                                           <td>
                                                 <?php echo $reservation->date; ?>
@@ -69,9 +78,9 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
                                           <td>
                                                 <?php echo $reservation->netType; ?>
                                           </td>
-                                          <td><span class="status paid">Pending</span></td>
+                                          <td><span class="status" style="background-color: <?php echo $status_color; ?>;"><?php echo $reservation->paymentStatus ?></span></td>
                                     </tr>
-                                    <?php
+                              <?php
                               }
                               ?>
 
