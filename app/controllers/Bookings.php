@@ -229,6 +229,31 @@ class Bookings extends Controller
 
     }
 
+    public function cancelReservation()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $booking_Id = trim($_POST['bookingId']);
+
+            if($this->bookingModel->deleteReservation($booking_Id)){
+                $response = [
+                    'status' => 'success',
+                ];
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Something went wrong',
+                ];
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+    }
+
 }
 
 ?>

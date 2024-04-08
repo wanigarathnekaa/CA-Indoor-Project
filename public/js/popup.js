@@ -65,7 +65,28 @@ function closeReschedulePopup() {
 }
 
 function confirmReschedule() {
-      // Add your redirection URL
-      var redirectURL = "http://localhost/C&A_Indoor_Project/Pages/Calendar/manager?bookingID="+bookingID;
-      window.location.href = redirectURL;
-  }
+  // Add your redirection URL
+  var redirectURL =
+    "http://localhost/C&A_Indoor_Project/Pages/Calendar/manager?bookingID=" +
+    bookingID;
+  window.location.href = redirectURL;
+}
+
+function openCancelPopup() {
+  // Hide the original popup and show the reschedulePopup
+  console.log("Cancel button clicked");
+  cancelPopup.classList.add("open-popup");
+  cancelPopupContainer.classList.add("open-popupcontainer");
+
+  popupcontainer.style.display = "none";
+  cancelPopupContainer.style.display = "block";
+  const cancel_bookingId = document.querySelector(".cancel_bookingId");
+  cancel_bookingId.textContent = bookingID;
+}
+
+function closeCancelPopup() {
+  cancelPopup.classList.remove("open-popup");
+  cancelPopupContainer.classList.remove("open-popupcontainer");
+  popupcontainer.style.display = "block";
+  cancelPopupContainer.style.display = "none";
+}

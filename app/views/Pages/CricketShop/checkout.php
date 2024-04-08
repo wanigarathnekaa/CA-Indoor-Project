@@ -14,7 +14,7 @@ include_once APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                         <div class="form-group">
                             <label for="pickup">Pickup Mode</label>
                             <select id="pickup" name="pickup">
-                                <option value="">Select Pickup Mode</option>
+                                <option disabled selected>Select Pickup Mode</option>
                                 <option value="pickup_at_store">Pickup at the Store</option>
                                 <option value="online_delivery">Online Delivery</option>
                             </select>
@@ -24,7 +24,7 @@ include_once APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                         <div class="form-group">
                             <label for="payment">Payment Method</label>
                             <select id="payment" name="payment">
-                                <option value="">Select Pickup Mode First</option>
+                                <option disabled selected>Select Pickup Mode First</option>
                             </select>
                         </div>
                     </div>
