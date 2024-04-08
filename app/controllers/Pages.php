@@ -533,12 +533,14 @@ class Pages extends Controller
             'pwd' => $manager->password,
             'nic' => $manager->nic,
             'address' => $manager->address,
+            'img'=>$manager->img,
 
             'name_err' => "",
             'email_err' => "",
             'phoneNumber_err' => "",
             'nic_err' => "",
             'address_err' => "",
+            'img_err'=> ""
         ];
 
         $this->view('Pages/Manager/managerEditProfile', $data);
@@ -551,6 +553,40 @@ class Pages extends Controller
 
         $this->view('Pages/Manager/managerDeleteProfile', $user);
     }
+
+    public function CompanyUser_Profile($name)
+    {
+        $user = $this->pagesModel->findComanyUser($_SESSION['user_email']);
+        // print_r($user);
+        $this->view('Pages/CompanyUser/companyUserProfile', $user);
+    }
+
+    public function CompanyUser_Edit_Profile($name)
+    {
+        $user = $this->pagesModel->findComanyUser($_SESSION['user_email']);
+        // print_r($user);
+        $data = [
+            'name' => $user->name,
+            'email' => $_SESSION['user_email'],
+            'phoneNumber' => $user->phoneNumber,
+            'pwd' => $user->password,
+            'nic' => $user->nic,
+            'image'=>$user->image,
+
+            'name_err' => "",
+            'email_err' => "",
+            'phoneNumber_err' => "",
+            'img_err'=> ""
+        ];
+        $this->view('Pages/CompanyUser/CompanyUserEditProfile', $data);
+    }
+
+    
+
+
+
+
+
 
     public function Inventory_Management($name)
     {
@@ -566,6 +602,8 @@ class Pages extends Controller
         ];
         $this->view('Pages/InventoryManagement/category',$data);
     }
+
+    
 
     public function Brand($name)
     {

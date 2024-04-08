@@ -26,11 +26,11 @@
 
                               <div class="imgBox">
                                     <?php
-                                          if($data->img == null){
+                                          if($data->image == null){
                                                 echo '<img class="profile-image" src="'.URLROOT.'/public/profilepic/avatar.jpg">';
                                           }
                                           else{
-                                                echo '<img class="profile-image" src="'.URLROOT.'/public/profilepic/'.$data->img.'">';
+                                                echo '<img class="profile-image" src="'.URLROOT.'/public/profilepic/'.$data->image.'">';
                                           }
                                     ?>
                               </div>
@@ -45,10 +45,10 @@
                                     <div class="infor"><b>Email</b> : <?php echo $data->email?> </div>
                                     <div class="infor"><b>Mobile Number</b> : <?php echo $data->phoneNumber?></div> 
                                     <div class="infor"><b>nic</b> : <?php echo $data->nic?></div>
-                                    <div class="infor"><b>Address</b> : <?php echo $data->address?></div>                             
+                                    <!-- <div class="infor"><b>Address</b> : <?php echo $data->address?></div>                              -->
                               </div>
                               <div class="btnrow">
-                              <a href="<?php echo URLROOT;?>/Pages/Manager_Edit_Profile/manager" type="button" class="button">Edit Profile</a>
+                              <a href="<?php echo URLROOT;?>/Pages/CompanyUser_Edit_Profile/<?php echo $role ?>" type="button" class="button">Edit Profile</a>
                               <div class="Change Password">
                                     <a class="button" href="<?php echo URLROOT; ?>/Pages/changePassword/user">Change Password</a>
                               </div>
@@ -65,7 +65,7 @@
                   <div class="deletepopup" id=deletepopup>
                   <span class="close" onclick="closeDeletePopup()"><i class="fa-solid fa-xmark"></i></span>
                   <h2>Are you sure you want to delete your account ?</h2>
-                  <form action="<?php echo URLROOT;?>/Manager/delete" method="POST">
+                  <form action="<?php echo URLROOT;?>/CompanyUser/delete" method="POST">
                         <div class="btns">
                               <button type="submit" class="button">Delete</button>
                               <button type="button" onclick="closeDeletePopup()">Cancel</button>

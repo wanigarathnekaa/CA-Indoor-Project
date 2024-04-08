@@ -120,7 +120,9 @@ class Manager extends Controller
                 'phoneNumber' => trim($_POST['phoneNumber']),
                 'nic' => trim($_POST['nic']),
                 'address' => trim($_POST['address']),
-                'pwd' => "12345678",
+                // 'pwd' => "12345678",
+                'filename' => trim($_FILES['file']['name']),
+                'filetmp' => trim($_FILES['file']['tmp_name']),
 
                 'name_err' => "",
                 'user_name_err' => "",
@@ -128,7 +130,22 @@ class Manager extends Controller
                 'phoneNumber_err' => "",
                 'nic_err' => "",
                 'address_err' => "",
+                'filename_err' => "",
+                'filetmp_err' => "",
+
             ];
+
+            // Check if a new file has been uploaded
+            if (!empty($_FILES['file']['name'])) {
+                // Move the uploaded file
+                $newfilename = uniqid() . "-" . $_FILES['file']['name'];
+                move_uploaded_file($_FILES['file']['tmp_name'], "../public/profilepic/" . $newfilename);
+                $data['filename'] = $newfilename;
+            }else {
+                // No new file uploaded, retain the existing image value
+                $existingFilename = $this->managerModel->getExistingImageFilename($data['email']); // Replace $userId with the actual user ID
+                $data['filename'] = $existingFilename;
+            }
 
             //validate name
             if (empty($data['name'])) {
@@ -163,7 +180,7 @@ class Manager extends Controller
             //If validation is completed and no error, then register the user
             if (empty($data['name_err']) && empty($data['email_err']) && empty($data['nic_err']) && empty($data['address_err'])) {
                 //Hash the password
-                $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
+                // $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
                 
                 //create user
                 if($this->managerModel->updateManager($data)) {

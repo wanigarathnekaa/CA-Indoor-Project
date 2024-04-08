@@ -37,6 +37,14 @@ class M_Pages
         return $this->db->single();
     }
 
+    public function findComanyUser($email)
+    {
+        $this->db->query('SELECT * FROM company_users WHERE email = :email');
+        $this->db->bind(':email', $email);
+
+        return $this->db->single();
+    }
+
     public function getCoaches()
     {
         $this->db->query('SELECT * FROM coaches');

@@ -6,15 +6,13 @@ class Users extends Controller
     private $userModel;
     private $userManagerModel;
     private $userCoachModel;
-    private $userAdminModel;
+    private $companyUserModel;
     public function __construct()
     {
         $this->userModel = $this->model('M_Users');
         $this->userManagerModel = $this->model('M_Manager');
         $this->userCoachModel = $this->model('M_Coach');
-        $this->userAdminModel = $this->model('M_Admin');
-
-
+        $this->companyUserModel = $this->model('M_CompanyUsers');
     }
 
     //Register function.....................................................
@@ -130,6 +128,10 @@ class Users extends Controller
         $this->view('Pages/RegisterPage/register', $data);
     }
 
+
+
+
+
     public function login()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -154,11 +156,19 @@ class Users extends Controller
                 //check email already registered or not
                 if ($this->userManagerModel->findUserByEmail($data['email'])) {
                     $role = 'Manager'; 
-                    //echo "user is found";
                 }
-                 elseif ($this->userModel->findUserByEmail($data['email'])) {
+                elseif ($this->userModel->findUserByEmail($data['email'])) {
                     $role = 'User';
-                    //echo "user is found";
+                }
+                elseif ($this->companyUserModel->findUserByEmail($data['email'])) {
+                    $roleNumber = $this->companyUserModel->getUserRoleByEmail($data['email']);
+                    if($roleNumber->role == 1){
+                        $role = 'Owner';
+                    }elseif($roleNumber->role == 2){
+                        $role = 'Admin';
+                    }elseif($roleNumber->role == 3){
+                        $role = 'Cashier';
+                    }
                 }
                 
                 
@@ -198,6 +208,33 @@ class Users extends Controller
                     }else{
                         $this->createUserSession($loginManager , $role);
                     }                   
+                } else if($role == 'Owner' ){
+                    $loginOwner = $this->companyUserModel->loginCompanyUsers($data['email'], $data['pwd']);
+                    if($loginOwner == false){
+                        $data['pwd_err'] = "Invalid Password";
+                        $this->view('Pages/LoginPage/login', $data);
+                    }else{
+                        $this->createUserSession($loginOwner , $role);
+                    }
+                }else if($role == 'Admin' ){
+                    $loginAdmin = $this->companyUserModel->loginCompanyUsers($data['email'], $data['pwd']);
+                    if($loginAdmin == false){
+                        $data['pwd_err'] = "Invalid Password";
+                        $this->view('Pages/LoginPage/login', $data);
+                    }else{
+                        $this->createUserSession($loginAdmin , $role);
+                    }
+                }else if($role == 'Cashier' ){
+                    $loginCashier = $this->companyUserModel->loginCompanyUsers($data['email'], $data['pwd']);
+                    if($loginCashier == false){
+                        $data['pwd_err'] = "Invalid Password";
+                        $this->view('Pages/LoginPage/login', $data);
+                    }else{
+                        $this->createUserSession($loginCashier , $role);
+                    }  
+                }else{
+                    $data['email_err'] = "User Not Found";
+                    $this->view('Pages/LoginPage/login', $data);
                 }
             } else {
                 //Load View
@@ -219,8 +256,9 @@ class Users extends Controller
 
 
         }
-
     }
+
+
     public function forgotPassword(){
         $this->view('Pages/LoginPage/forgotPassword');
 
@@ -325,8 +363,14 @@ class Users extends Controller
             redirect('Pages/Dashboard/manager');
         }elseif($role == 'User'){
             redirect('Pages/Dashboard/user');
-        }else{
+        }elseif($role == 'Coach'){
             redirect('Pages/Dashboard/coach');
+        }elseif($role == 'Owner'){
+            redirect('Pages/Dashboard/owner');
+        }elseif($role == 'Admin'){
+            redirect('Pages/Dashboard/admin');
+        }elseif($role == 'Cashier'){
+            redirect('Pages/Dashboard/cashier');
         }
 
         
@@ -428,8 +472,6 @@ class Users extends Controller
                 }else{
                     die('Something Went wrong');
                 }
-
-
             } else {
                 //Load the view
                 $this->view('Pages/UserProfiles/editProfile', $data);
@@ -438,6 +480,8 @@ class Users extends Controller
         //Load the view
         $this->view('Pages/UserProfiles/editProfile', $data);
     }
+
+    
     public function changePassword(){
         $user = $this->userModel->findUser($_SESSION['user_email']);
         $data = [
