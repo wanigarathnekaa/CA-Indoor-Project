@@ -89,13 +89,12 @@
                             </a>
                         </li>
                         <li class="profile">
-                            <a href="C&A_Indoor_Project/Pages/Profile/user">
+                            <a href="C&A_Indoor_Project/Pages/CompanyUser_Profile/Admin">
                                 <i class="bx bx-user-circle icon"></i>
                                 <span class="text nav-text">Profile</span>
                             </a>
                         </li>
-                <?php }
-                 else if ($role == "Cashier") { ?>
+                <?php }else if ($role == "Cashier") { ?>
                             <li class="nav-link">
                                 <a href="#">
                                     <i class="bx bx-home-alt icon"></i>
@@ -121,7 +120,7 @@
                                 </a>
                             </li>
                             <li class="profile">
-                                <a href="C&A_Indoor_Project/Pages/Profile/user">
+                                <a href="C&A_Indoor_Project/Pages/CompanyUser_Profile/Admin">
                                     <i class="bx bx-user-circle icon"></i>
                                     <span class="text nav-text">Profile</span>
                                 </a>
@@ -250,7 +249,7 @@
                                             </a>
                                         </li>
                                         <li class="profile">
-                                            <a href="C&A_Indoor_Project/Pages/Profile/user">
+                                            <a href="C&A_Indoor_Project/Pages/CompanyUser_Profile/Owner">
                                                 <i class="bx bx-user-circle icon"></i>
                                                 <span class="text nav-text">Profile</span>
                                             </a>

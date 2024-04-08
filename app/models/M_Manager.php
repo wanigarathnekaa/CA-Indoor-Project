@@ -45,12 +45,13 @@ class M_Manager
 
     public function updateManager($data)
     {
-        $this->db->query('UPDATE managers SET name=:name, email=:email ,nic= :nic, address= :address, phoneNumber=:phoneNumber WHERE email = :email');
+        $this->db->query('UPDATE managers SET name=:name, email=:email ,nic= :nic, address= :address, phoneNumber=:phoneNumber ,img = :img  WHERE email = :email');
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':nic', $data['nic']);
         $this->db->bind(':address', $data['address']);
         $this->db->bind(':phoneNumber', $data['phoneNumber']);
+        $this->db->bind(':img', $data['filename']);
 
 
         if ($this->db->execute()) {
@@ -72,5 +73,19 @@ class M_Manager
         }
     }
 
+
+    // get user progile pic
+    public function getExistingImageFilename($email){
+        $this->db->query('SELECT img FROM managers WHERE email = :email');
+        $this->db->bind(':email', $email);
+
+        $row = $this->db->single();
+
+        if ($row) {
+            return $row->img; 
+        } else {
+            return null; 
+        }
+    }
 }
 ?>
