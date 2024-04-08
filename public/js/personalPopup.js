@@ -1,8 +1,7 @@
 let popup = document.getElementById("popup");
+let popup2 = document.getElementById("popup2");
 let popupcontainer = document.getElementById("popupcontainer");
-let reschedulePopupContainer = document.getElementById(
-  "reschedulePopupContainer"
-);
+let reschedulePopupContainer = document.getElementById("reschedulePopupContainer");
 let cancelReschedule = document.getElementById("cancelReschedule");
 let cancelReschedulePopup = document.getElementById("cancelReschedulePopup");
 
@@ -151,11 +150,9 @@ function confirmReschedule() {
 
 
 
-
 //Previous reservation
-
 function openPopup2(reservation) {
-  popup.classList.add("open-popup2");
+  popup2.classList.add("open-popup2");
   popupcontainer.classList.add("open-popupcontainer");
 
   const r_id = document.querySelector(".r_id");
@@ -173,29 +170,29 @@ function openPopup2(reservation) {
   const r_timeSlot = document.querySelector(".r_timeSlot");
   r_timeSlot.textContent = reservation.timeSlot;
 
-  timeSlot = reservation.timeSlot;
-  bookingID = reservation.booking_id;
+  // timeSlot = reservation.timeSlot;
+  // bookingID = reservation.booking_id;
 
   // Calculate the number of days
-  const reservationDate = new Date(reservation.date);
-  const currentDate = new Date();
+  // const reservationDate = new Date(reservation.date);
+  // const currentDate = new Date();
 
   // Calculate the difference in days, rounding up to the nearest whole number
-  numberOfDays = Math.ceil(
-    (reservationDate - currentDate) / (1000 * 3600 * 24)
-  );
+  // numberOfDays = Math.ceil(
+  //   (reservationDate - currentDate) / (1000 * 3600 * 24)
+  // );
 
   // If the reservation date is the same as the current date, set numberOfDays to 0
-  if (reservationDate.toDateString() === currentDate.toDateString()) {
-    numberOfDays = 0;
-  }
+  // if (reservationDate.toDateString() === currentDate.toDateString()) {
+  //   numberOfDays = 0;
+  // }
 
-  const r_payment = document.querySelector(".r_payment");
-  r_payment.textContent = reservation.paymentStatus;
+  // const r_payment = document.querySelector(".r_payment");
+  // r_payment.textContent = reservation.paymentStatus;
 }
 
 function closePopup2() {
   location.reload();
-  popup.classList.remove("open-popup2");
+  popup2.classList.remove("open-popup2");
   popupcontainer.classList.remove("open-popupcontainer");
 }
