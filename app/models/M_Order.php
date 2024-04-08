@@ -24,6 +24,43 @@
                 return false;
             }
         }
+
+        public function orderItems($orderId, $product_id, $qty, $price_per_unit){
+            $this->db->query('INSERT INTO orderitems (order_id, product_id, quantity, price_per_unit) VALUES(:order_id, :product_id, :qty, :price_per_unit)');
+            $this->db->bind(':order_id', $orderId);
+            $this->db->bind(':product_id', $product_id);
+            $this->db->bind(':qty', $qty);
+            $this->db->bind(':price_per_unit', $price_per_unit);
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function getOrders($customerID){
+            $this->db->query('SELECT * FROM orders WHERE customer_id = :customer_id');
+            $this->db->bind(':customer_id', $customerID);
+            return $this->db->resultSet();
+        }
+
+        public function deleteCart($email){
+            $this->db->query('DELETE FROM cart WHERE customer_email = :email');
+            $this->db->bind(':email', $email);
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function last_inserted_id()
+    {
+        $this->db->query("SELECT MAX(order_id) AS lastID FROM orders");
+        $this->db->execute();
+        $result = $this->db->single();
+        return $result->lastID;
+    }
         
     }
 ?>

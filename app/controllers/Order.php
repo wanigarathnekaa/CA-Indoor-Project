@@ -23,6 +23,7 @@ class Order extends Controller
                 "customerID" => $_SESSION['user_id'], 
                 "order_date" => date('Y-m-d H:i:s'),
                 "order_status" => "pending",
+                "items" => $_POST['items'], // This is an array of items in the cart
 
 
                 "pickup_err" => "",
@@ -33,6 +34,8 @@ class Order extends Controller
                 "phone_err" => "",
                 "city_err" => ""
             ];
+
+            $orderItems = $data["items"];
 
             // Validate Order
             if(empty($data["pickup"])){
@@ -62,7 +65,15 @@ class Order extends Controller
             // If validation is completed and no error, then insert the order
             if (empty($data['pickup_err']) && empty($data['payment_err']) && empty($data['fname_err']) && empty($data['email_err']) 
             && empty($data['adr_err']) && empty($data['phone_err']) && empty($data['city_err'])) {
-                if ($this->orderModel->insertOrder($data)) {
+                if ($this->orderModel->insertOrder($data) && $this->orderModel->deleteCart($_SESSION['user_email'])) {  
+
+                    $orderId = $this->orderModel->last_inserted_id();
+                    foreach ($orderItems as $item) {
+                        $product_id = $item['p_id'];
+                        $qty = $item['qty'];
+                        $price_per_unit = $item['product_price'];
+                        $this->orderModel->orderItems($orderId, $product_id, $qty, $price_per_unit);
+                    }
                     $response = [
                         'status' => 'success',
                         'message' => 'Order Placed Successfully'
