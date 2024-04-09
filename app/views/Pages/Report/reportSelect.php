@@ -45,6 +45,22 @@
 
             
         </div>
+
+        <div class="cardBox">
+        <a class="card" href="<?php echo URLROOT; ?>/Reports/Bookingreport">
+    <div>
+       
+        <h3></h3>
+        <p>Booking Reports</p>
+    </div>
+    <div class="iconBx"></div>
+</a>
+
+
+        
+
+            
+        </div>
          
            
 
