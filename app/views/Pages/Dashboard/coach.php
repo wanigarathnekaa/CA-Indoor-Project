@@ -128,6 +128,15 @@
         </section>
 
 
+        <!-- Cricket Shop banner -->
+        <div class="hero-image">
+            <div class="hero-text">
+                <h1>Buy High Quality Cricket Equipments</h1>
+                <a href="C&A_Indoor_Project/Pages/Cricket_Shop/Coach" class="btn">Shop Now</a>
+            </div>
+        </div>
+
+
         <!-- ABOUT US -->
         <div class="sec-about">
             <div class="tagrow">
