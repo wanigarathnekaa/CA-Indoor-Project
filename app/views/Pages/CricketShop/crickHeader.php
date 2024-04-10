@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/ItemDetail.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/cart.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/checkout.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/orders.css">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
@@ -40,13 +41,8 @@
                 </div>
 
                 <div class="header-user-actions">
-                    <button class="action-btn" id="personBtn">
-                        <ion-icon name="person-outline"></ion-icon>
-                        <div class="dropdown-content">
-                            <a href="#">Profile</a>
-                            <a href="#">Your Orders</a>
-                            <a href="#">Logout</a>
-                        </div>
+                    <button class="action-btn" id="personBtn"onclick="window.location.href='<?php echo URLROOT; ?>/Pages/Orders/<?php echo $_SESSION['user_email']; ?>'">
+                        <ion-icon name="bag-handle"></ion-icon>
                     </button>
                     <button class="action-btn" onclick="window.location.href='<?php echo URLROOT; ?>/Pages/Cricket_Cart/cart'">
                         <!-- <ion-icon name="bag-handle-outline"></ion-icon> -->

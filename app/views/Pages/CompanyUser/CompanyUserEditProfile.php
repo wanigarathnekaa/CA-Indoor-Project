@@ -25,7 +25,7 @@
                 <h1 class="form-title">Edit profile</h1> 
             </div>
 
-            <?php print_r($data); ?>
+            
             <!-- form details -->
             <div class="formbox">
                 <form action="<?php echo URLROOT; ?>/CompanyUsers/edit" method="POST" enctype="multipart/form-data">
