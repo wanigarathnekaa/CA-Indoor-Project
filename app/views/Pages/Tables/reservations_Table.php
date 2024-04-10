@@ -114,9 +114,7 @@
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
                                                 <?php echo $reservation->paymentStatus; ?>
                                           </td>
-                                          <td><a href="#"><i class="fa-solid fa-pen-to-square edit icon"></i></a></td>
-                                          <td
-                                                onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
+                                          <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
                                                 <!-- <i class="fa-solid fa-user-slash delete icon"></i> -->
                                                 <i class="fa-solid fa-trash-can delete icon"></i>
                                           </td>
@@ -165,29 +163,47 @@
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Status : </b> <span class="r_payment">Paid</span></h2>
+                                    <h2><b>Status : </b> <span class="r_payment"></span></h2>
                               </div>
                         </div>
                         <div class="btns">
                               <button type="button" onclick="openReschedulePopup()">Reschedule</button>
-                              <button type="button">Cancel</button>
+                              <button type="button" onclick="openCancelPopup()">Cancel</button>
                         </div>
                   </div>
 
                   <!-- Popup message for rescheduling -->
                   <div class="reschedulePopup" id="reschedulePopup">
-                        <span class="close" onclick="closeReschedulePopup()"><i
-                                    class="fa-solid fa-xmark"></i></span>
+                        <span class="close" onclick="closeReschedulePopup()"><i class="fa-solid fa-xmark"></i></span>
                         <h2>Reschedule Reservation</h2>
                         <hr>
                         <div class="rescheduleDetails">
                               <h4>Are You Sure You Want To Reschedule?</h4>
-                              <h4 class="day">Reservation is at Today - <span class="r_timeSlot_r" style="font-weight:bold"></span></h4>
+                              <h4 class="day">Time For Reservation - <span class="r_timeSlot_r"
+                                          style="font-weight: bold;"></span></h4>
                         </div>
 
-                        <div class="btns">
-                              <button type="button" onclick="confirmReschedule()">Yes</button>
-                              <button type="button" onclick="closeReschedulePopup()">No</button>
+                        <div class="btns" id="rescheduleButtons">
+                              <button type="button" class="yesButton" onclick="confirmReschedule()">Yes</button>
+                              <button type="button" class="noButton" onclick="closeReschedulePopup()">No</button>
+                        </div>
+                  </div>
+
+                  <!-- Popup message for Cancellation -->
+                  <div class="reschedulePopup" id="cancelPopup">
+                        <span class="close" onclick="closeCancelPopup()"><i class="fa-solid fa-xmark"></i></span>
+                        <h2>Cancel Reservation</h2>
+                        <hr>
+                        <div class="CancelDetails">
+                              <h4>Are You Sure You Want To Cancel The Reservation?</h4>
+                              <h4 class="day">Time For Your Reservation - <span class="cancel_timeSlot"
+                                          style="font-weight: bold;"></span></h4>
+                              <span class="cancel_bookingId" style="font-weight:bold"></span>
+                        </div>
+
+                        <div class="btns" id="cancelButtons">
+                              <button type="button" class="cyesButton" id="cancelReservation">Yes</button>
+                              <button type="button" class="cnoButton" onclick="closeCancelPopup()">No</button>
                         </div>
                   </div>
 
@@ -255,6 +271,24 @@
                         var value = $(this).val();
                         $("table tbody tr").filter(function () {
                               $(this).toggle($(this).text().indexOf(value) > -1);
+                        });
+                  });
+                  $("#cancelReservation").on("click", function () {
+                        var bookingId = $(".cancel_bookingId").text();
+                        $.ajax({
+                              type: "POST",
+                              url: "<?php echo URLROOT; ?>/Bookings/cancelReservation",
+                              data: {
+                                    bookingId: bookingId
+                              },
+                              success: function (response) {
+                                    if (response.status == "success") {
+                                          alert("Reservation Cancelled Successfully");
+                                          location.reload();
+                                    } else {
+                                          alert("Failed to Cancel the Reservation");
+                                    }
+                              }
                         });
                   });
             });
