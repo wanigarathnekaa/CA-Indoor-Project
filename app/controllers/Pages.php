@@ -716,6 +716,32 @@ class Pages extends Controller
     }
 
 
+
+    // orders page
+    public function Orders($name)
+    {
+        $cartItems = $this->pagesModel->getCart($_SESSION['user_email']);
+        $categories = $this->pagesModel->getCategories();
+        $brand = $this->pagesModel->getBrands();
+        $products = $this->pagesModel->getProducts();
+        $oders = $this->pagesModel->getOrders($_SESSION['user_id']);
+
+        
+
+
+        $data = [
+            'cartItems' => $cartItems,
+            'categories' => $categories,
+            'brands' => $brand,
+            'products' => $products,
+            'name' => $name,
+            'orders' => $oders,
+        ];
+
+        $this->view('Pages/CricketShop/orders',$data);
+    }
+
+
     //terms and conditions page
     public function termsConditions()
     {

@@ -146,5 +146,19 @@ class M_Pages
         return $this->db->resultSet();
     }
 
+
+    public function getOrders($customerID){
+        $this->db->query('SELECT * FROM orders WHERE customer_id = :customer_id');
+        $this->db->bind(':customer_id', $customerID);
+        return $this->db->resultSet();
+    }
+
+    public function getOrderItems($orderID){
+        $this->db->query('SELECT * FROM orderitems WHERE order_id = :order_id');
+        $this->db->bind(':order_id', $orderID);
+        return $this->db->resultSet();
+    }
+    
+
 }
 ?>
