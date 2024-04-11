@@ -20,6 +20,19 @@
 </head>
 
 <body>
+
+    <!-- side bar -->
+    <?php
+        $role = $_SESSION['user_role'];
+        $linkRole = "";
+            if($role == "User"){
+                $linkRole = "user";
+            }
+            else if($role == "Coach"){
+                $linkRole = "coach";
+            }
+    ?>
+
     <div class="overlay" data-overlay></div>
 
 
@@ -28,7 +41,7 @@
     <header>
         <div class="header-main">
             <div class="container">
-                <a href="#" class="header-logo">
+                <a href="<?php echo URLROOT; ?>/Pages/Dashboard/<?php echo $linkRole?>" class="header-logo">
                     <img src="<?php echo URLROOT; ?>/Crick_Images/logo/logo.png" alt="Anon's logo" width="120"
                         height="36">
                 </a>

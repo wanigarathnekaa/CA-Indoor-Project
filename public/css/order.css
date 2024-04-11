@@ -89,38 +89,101 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 6px;
+    /* border-radius: 6px; */
     z-index: 999;
-  }
-  
-  #categoryForm {
-    display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: left;
+    align-items: center;
+    justify-items: center;
   }
   
   .modal-content {
     background-color: #fff;
-    margin: 15% auto;
+    margin-left: 30%;
+    /* margin-top: 30%; */
     padding: 20px;
     border: 1px solid #888;
-    width: 30%;
-    padding: 20px;
+    width: 40%;
+    /* height: 60%; */
+    /* padding: 20px; */
     border-radius: 6px;
     box-sizing: border-box;
-    position: relative;
+    /* position: relative; */
     z-index: 1000;
   }
-  
+
   .modal-content .close {
-    /* color: #aaa; */
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 10px;
     cursor: pointer;
+    font-size: 20px;
+}
+
+  .modal-content .title {
+    font-size: 20px;
+    /* font-weight: 800; */
+    margin-bottom: 5px;
+    color: var(--color01);
   }
   
+.modal-content .customerDetails,
+.modal-content .orderItems,
+.modal-content .orderStatus{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    /* justify-content: center; */
+    align-items: left;
+    margin-bottom: 10px;
+  }
+
+  .modal-content .customerDetails h3,
+  .modal-content .orderItems h3,
+  .modal-content .orderStatus h3{
+    font-size: 18px;
+    font-weight: 500;
+    /* margin-bottom: 5px; */
+    color: var(--color01);
+    /* text-decoration: underline var(--color01); */
+  }
+
+  .modal-content .orderStatus button {
+    background-color: var(--color02);
+    color: var(--white);
+    border: none;
+    padding: 2px;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 25%;
+  }
+
+  .modal-content .orderStatus button:hover {
+    background-color: var(--color01);
+  }
+
+  .modal-content .btn{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .modal-content .btn button {
+    background-color: var(--color01);
+    color: var(--white);
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 25%;
+  }
+
+  .modal-content .btn button:hover {
+    background-color: var(--color02);
+  }
+
+
+
+
   .modal-content .close:hover,
   .modal-content .close:focus {
     color: black;
@@ -128,6 +191,15 @@
     cursor: pointer;
   }
   
+
+
+  #categoryForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+  }
+
   #categoryForm .btn {
       position: relative;
       /* bottom: 0; */
@@ -304,7 +376,7 @@
     }
   
     .working-panel .image-text {
-      width: 100%; /* Make the image take up the full width on smaller screens */
+      width: 10%; /* Make the image take up the full width on smaller screens */
       justify-content: flex-end; /* Align the image to the right */
       margin-top: 10px; /* Add some space between text and image */
     }

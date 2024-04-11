@@ -83,10 +83,10 @@
                                 <?php echo $order->order_date; ?>
                             </td>
                             <td>
-                                <?php echo $order->payment_method; ?>
+                                <?php echo str_replace('_',' ',$order->payment_method); ?>
                             </td>
                             <td>
-                                <?php echo $order->pickup_mode; ?>
+                                <?php echo str_replace('_',' ',$order->pickup_mode); ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -97,14 +97,20 @@
         <!-- OrderDetails -->
         <div id="orderDetailsModal" class="modal">
             <div class="modal-content">
-                <h2 class="modal-title">Order Details</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div class="title">
+                    <h2 class="modal-title">Order Details</h2>
+                </div>
+                <hr>
 
                 <div class="customerDetails">
                     <h3>Customer Details</h3>
-                    <span id="name" class="name"></span><br>
-                    <span id="email" class="email"></span><br>
-                    <span id="phone" class="phone"></span><br>
-                    <span id="addr" class="addr"></span><br>
+                    <div>
+                        <span id="name" class="name"></span><br>
+                        <span id="email" class="email"></span><br>
+                        <span id="phone" class="phone"></span><br>
+                        <span id="addr" class="addr"></span><br>
+                    </div>
                 </div>
 
                 <div class="orderItems">
@@ -117,6 +123,8 @@
                     <span id="status" class="status"></span>
                     <button id="Change_Status">Change Status</button>
                 </div>
+
+                <hr>
 
                 <div class="btn">
                     <input type="hidden" id="form_type" name="form_type">
@@ -169,7 +177,7 @@
                         // Loop through orderItems and append them to the items element
                         var itemsText = "";
                         for (var i = 0; i < orderItems.length; i++) {
-                            itemsText += "Product ID: " + orderItems[i].product_id + ", Quantity: " + orderItems[i].quantity + ", Price per Unit: " + orderItems[i].price_per_unit + "<br>";
+                            itemsText += "Product ID: " + orderItems[i].product_id + "<br>Quantity: " + orderItems[i].quantity + "<br>Price per Unit: " + orderItems[i].price_per_unit + "<br>";
                         }
                         $("#items").html(itemsText);
                         $("#status").text("Status: " + order.order_status);
