@@ -97,7 +97,6 @@
         <!-- OrderDetails -->
         <div id="orderDetailsModal" class="modal">
             <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
                 <div class="title">
                     <h2 class="modal-title">Order Details</h2>
                 </div>
