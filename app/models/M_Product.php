@@ -82,6 +82,17 @@
                 return false;
             }
         }
+
+        public function updateQuantity($data){
+            $this->db->query('UPDATE product SET qty = :qty WHERE product_id = :product_id');
+            $this->db->bind(':qty', $data['quantity']);
+            $this->db->bind(':product_id', $data['product_id']);
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
         
     }
 ?>

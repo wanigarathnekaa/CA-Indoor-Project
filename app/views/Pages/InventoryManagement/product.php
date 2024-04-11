@@ -96,7 +96,8 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="productName">Quantity</label>
-                                <input type="text" id="productQty" name="productQty" placeholder="Enter Product quantity">
+                                <input type="text" id="productQty" name="productQty"
+                                    placeholder="Enter Product quantity">
                                 <span class="form-invalid-8"></span>
                             </div>
                         </div>
@@ -171,6 +172,17 @@
                             </td>
                             <td>
                                 <?php echo $product->qty; ?>
+                                <button type="button" id="Change_Quantity" class="Change_Quantity" style="background-color: #4CAF50; /* Green */
+                                    border: none;
+                                    color: white;
+                                    padding: 5px 10px;
+                                    text-align: center;
+                                    text-decoration: none;
+                                    display: inline-block;
+                                    font-size: 12px;
+                                    margin: 2px 1px;
+                                    cursor: pointer;
+                                    border-radius: 4px;"  p_id="<?php echo $product->product_id; ?>">Change Quantity</button>
                             </td>
                             <td>
                                 <?php echo $product->created_at; ?>
@@ -186,6 +198,22 @@
                     endforeach; ?>
                 </tbody>
             </table>
+        </div>
+
+        <div id="quantityChange" class="modal">
+            <div class="modal-content">
+                <h2 class="modal-title">Update Product Quantity</h2>
+                <div class="form-group">
+                    <label for="productName">New Quantity</label>
+                    <input type="number" id="productQuantity" class="productQuantity" name="productQuantity"
+                        placeholder="Enter New Product quantity"><br>
+                    <span class="form-invalid-8"></span>
+                </div>
+                <div class="btn">
+                    <button type="button" id="updateQuantity">Update</button>
+                    <button type="button" onclick="closeModal()">Cancel</button>
+                </div>
+            </div>
         </div>
 
         <!-- Pagination -->
@@ -328,6 +356,43 @@
                     }
                 })
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.Change_Quantity').forEach(item => {
+                item.addEventListener('click', event => {
+                    $('#quantityChange').css("display", "block");
+                    // Get the product id
+                    var id = $(event.target).attr('p_id');
+                    $('#updateQuantity').click(function (e) {
+                        e.preventDefault();
+                        var quantity = parseInt($('#productQuantity').val());
+                        if (isNaN(quantity)) { // Check if quantity is NaN
+                            quantity = 0; // Set quantity to 0 if NaN
+                        }
+                        console.log(quantity);
+                        $.ajax({
+                            type: "POST",
+                            url: "<?php echo URLROOT; ?>/Product/updateQuantity",
+                            data: {
+                                id: id,
+                                quantity: quantity
+                            },
+                            dataType: 'json',
+                            success: function (response) {
+                                if (response.status == "success") {
+                                    location.reload();
+                                } else {
+                                    $('.form-invalid-8').html(response.message);
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                console.error("AJAX request failed:", error);
+                            }
+                        });
+                    });
+                })
+            })
         });
     </script>
 
