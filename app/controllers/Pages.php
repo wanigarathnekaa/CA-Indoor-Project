@@ -136,6 +136,22 @@ class Pages extends Controller
         }
         $this->view('Pages/Tables/managers_Table', $data, $res);
     }
+    public function CompanyUserTable($name)
+    {
+        $CompanyUsers = $this->pagesModel->getCompanyUsers();
+        $CompanyUser = $this->pagesModel->getCompanyUserCount();
+        // $users = $this->pagesModel->getUserCount();
+        $data = [
+            'CompanyUserCount' => $CompanyUser,
+            'CompanyUsers' => $CompanyUsers,
+            // 'UserCount' => $users,
+        ];
+        $res = [];
+        foreach ($data['CompanyUsers'] as $CompanyUsers) {
+            $res[] = $this->pagesModel->findUser($CompanyUsers->email);
+        }
+        $this->view('Pages/Tables/CompanyUser_Table', $data, $res);
+    }
 
     // Player table
     public function playerTable($name)
@@ -168,6 +184,8 @@ class Pages extends Controller
         $coach = $this->pagesModel->getCoaches();
         $advertisement = $this->pagesModel->getAdvertisement();
         $managers=$this->pagesModel->getManagerCount();
+        $companyUsers=$this->pagesModel->getCompanyUserCount();
+
 
         $data = [
             'CoachCount' => $coaches,
@@ -176,6 +194,8 @@ class Pages extends Controller
             'Reserve_Count' => count($bookings),
             'advertCount' => count($advertisement),
             'ManagerCount'=>$managers,
+            'CompanyUserCount'=>$companyUsers,
+
         ];
         $res = [];
         foreach ($data['coach'] as $user) {

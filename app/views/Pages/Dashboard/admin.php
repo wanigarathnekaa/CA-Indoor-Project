@@ -27,6 +27,16 @@
 
         <!-- Cards -->
         <div class="cardBox">
+
+           <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/CompanyUserTable/user">
+                <div>
+                    <div class="numbers"><?php echo $data["CompanyUserCount"]?></div>
+                    <div class="cardName">Company Users</div>
+                </div>
+                <div class="iconBx">
+                <i class="fa-solid fa-user-tie"></i>
+                </div>
+            </a>
             <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/managerTable/user">
                 <div>
                     <div class="numbers"><?php echo $data["ManagerCount"]?></div>
@@ -59,6 +69,8 @@
                         <i class="fa-solid fa-users"></i>
                 </div>
             </a>
+
+            
 
             <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/reservationTable/user">
                         <div>
@@ -103,36 +115,20 @@
                     <i class="fa-solid fa-comments"></i>
                 </div>
             </a>
-            <a class="card" href="C&A_Indoor_Project/Complaint/viewComplaints">
-                <div>
-                    <div class="numbers"></div>
-                    <div class="cardName">Company Users</div>
-                </div>
-
-                <div class="iconBx">
-                        <i class="fa-solid fa-user"></i>
-                </div>
-            </a>
+            
         </div>
-         
+        
+
             <div class="charts">
-                  <!-- Weekly Reservations chart -->
-    <!-- Weekly Reservations chart -->
-    <a class="card" href="C&A_Indoor_Project/Complaint/viewComplaints">
-        <?php require APPROOT . '/views/Pages/Charts/weeklyReservationsChart.php'; ?>
-    </a>
-
-
-
-                  <!-- Customers Count chart -->
-                  <?php
-                        require APPROOT . '/views/Pages/Charts/customersCountChart.php';
-                  ?>
-
-                  <!-- Reservations Net chart -->
-                  <?php
-                        require APPROOT . '/views/Pages/Charts/reservationsNetChart.php';
-                  ?>
+                 <!-- Weekly Reservations chart -->
+                 <?php require APPROOT . '/views/Pages/Charts/weeklyReservationsChart.php'; ?>
+                  
+                 <!-- Customers Count chart -->
+                 <?php require APPROOT . '/views/Pages/Charts/customersCountChart.php'; ?>
+                 
+                 <!-- Reservations Net chart -->
+                 <?php require APPROOT . '/views/Pages/Charts/reservationsNetChart.php'; ?>
+                 
             </div>
 
 
