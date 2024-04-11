@@ -57,6 +57,12 @@ class M_Pages
 
         return $this->db->resultSet();
     }
+    public function getCompanyusers()
+    {
+        $this->db->query('SELECT * FROM company_users');
+
+        return $this->db->resultSet();
+    }
 
     public function getBookings()
     {
@@ -99,6 +105,12 @@ class M_Pages
     public function getManagerCount()
     {
         $this->db->query('SELECT * FROM managers');
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+    public function getCompanyUserCount()
+    {
+        $this->db->query('SELECT * FROM company_users');
         $this->db->execute();
         return $this->db->rowCount();
     }

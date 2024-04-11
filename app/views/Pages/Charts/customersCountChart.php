@@ -4,17 +4,17 @@ if ($link === false) {
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
 
-// Query to get the count of coaches
+//coach count
 $res_coaches = mysqli_query($link, "SELECT COUNT(*) AS coach_count FROM coaches");
 $row_coaches = mysqli_fetch_assoc($res_coaches);
 $coach_count = $row_coaches['coach_count'];
 
-// Query to get the total count of users (players + coaches)
+//players + coaches count
 $res_total_users = mysqli_query($link, "SELECT COUNT(*) AS total_user_count FROM user");
 $row_total_users = mysqli_fetch_assoc($res_total_users);
 $total_user_count = $row_total_users['total_user_count'];
 
-// Calculate the count of players
+//players count
 $player_count = $total_user_count - $coach_count;
 
 mysqli_close($link);
@@ -44,3 +44,70 @@ new Chart("customerCountChart", {
   }
 });
 </script>
+
+
+<!-- 
+class Model {
+    public function getPlayersAndCoachesCount() {
+        $link = mysqli_connect("localhost", "root", "", "c&a_indoor_net");
+        if ($link === false) {
+            die("ERROR: Could not connect. " . mysqli_connect_error());
+        }
+
+        $result = array();
+
+        $res_coaches = mysqli_query($link, "SELECT COUNT(*) AS coach_count FROM coaches");
+        $row_coaches = mysqli_fetch_assoc($res_coaches);
+        $coach_count = $row_coaches['coach_count'];
+
+        $res_total_users = mysqli_query($link, "SELECT COUNT(*) AS total_user_count FROM user");
+        $row_total_users = mysqli_fetch_assoc($res_total_users);
+        $total_user_count = $row_total_users['total_user_count'];
+
+        $player_count = $total_user_count - $coach_count;
+
+        $result['players'] = $player_count;
+        $result['coaches'] = $coach_count;
+
+        mysqli_close($link);
+
+        return $result;
+    }
+}
+
+ -->
+
+
+
+
+
+<!-- 
+class Model {
+    public function getPlayersAndCoachesCount() {
+        $link = mysqli_connect("localhost", "root", "", "c&a_indoor_net");
+        if ($link === false) {
+            die("ERROR: Could not connect. " . mysqli_connect_error());
+        }
+
+        $result = array();
+
+        $res_coaches = mysqli_query($link, "SELECT COUNT(*) AS coach_count FROM coaches");
+        $row_coaches = mysqli_fetch_assoc($res_coaches);
+        $coach_count = $row_coaches['coach_count'];
+
+        $res_total_users = mysqli_query($link, "SELECT COUNT(*) AS total_user_count FROM user");
+        $row_total_users = mysqli_fetch_assoc($res_total_users);
+        $total_user_count = $row_total_users['total_user_count'];
+
+        $player_count = $total_user_count - $coach_count;
+
+        $result['players'] = $player_count;
+        $result['coaches'] = $coach_count;
+
+        mysqli_close($link);
+
+        return $result;
+    }
+} -->
+
+
