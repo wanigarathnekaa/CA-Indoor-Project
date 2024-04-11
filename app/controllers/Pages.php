@@ -623,7 +623,14 @@ class Pages extends Controller
         $this->view('Pages/InventoryManagement/category',$data);
     }
 
-    
+    public function Order($name)
+    {
+        $orders = $this->pagesModel->getOrder();
+        $data = [
+            'orders' => $orders,
+        ];
+        $this->view('Pages/InventoryManagement/order',$data);
+    }
 
     public function Brand($name)
     {
