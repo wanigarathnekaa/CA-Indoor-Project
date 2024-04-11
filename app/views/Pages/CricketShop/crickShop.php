@@ -112,7 +112,7 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                 <div class="showcase-banner">
                   <img src="<?php echo URLROOT; ?>/CricketShop/<?php echo $product->product_thumbnail ?>" alt="bat01"
                     width="300" class="product-img">
-                  <div class="showcase-actions">
+                  <!-- <div class="showcase-actions">
                     <button class="btn-action">
                       <ion-icon name="heart-outline"></ion-icon>
                     </button>
@@ -122,7 +122,7 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                     <button class="btn-action">
                       <ion-icon name="bag-add-outline"></ion-icon>
                     </button>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="showcase-content">
                   <a href="http://localhost/C&A_Indoor_Project/Pages/Item_Detail/<?= $product->product_id;?>" class="showcase-category">
