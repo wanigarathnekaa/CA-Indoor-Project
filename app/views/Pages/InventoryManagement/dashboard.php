@@ -70,7 +70,7 @@
                 </div>
             </a>
 
-            <a class="card" href="#">
+            <a class="card" href="C&A_Indoor_Project/Pages/Order/manager">
                 <div>
                     <div class="numbers">13</div>
                     <div class="cardName">Orders</div>

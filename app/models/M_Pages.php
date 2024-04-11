@@ -158,6 +158,12 @@ class M_Pages
         return $this->db->resultSet();
     }
 
+    public function getOrder(){
+        $this->db->query('SELECT * FROM orders');
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
 
     public function getOrders($customerID){
         $this->db->query('SELECT * FROM orders WHERE customer_id = :customer_id');

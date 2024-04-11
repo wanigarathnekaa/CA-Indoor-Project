@@ -22,7 +22,8 @@ class Order extends Controller
                 "city" => trim($_POST['city']),
                 "customerID" => $_SESSION['user_id'], 
                 "order_date" => date('Y-m-d H:i:s'),
-                "order_status" => "pending",
+                "order_status" => "Not Complete",
+                "payment_status" => "Not Paid",
                 "items" => $_POST['items'], // This is an array of items in the cart
 
 
@@ -36,6 +37,11 @@ class Order extends Controller
             ];
 
             $orderItems = $data["items"];
+
+            if($data["pickup"] == "pickup_at_store"){
+                $data["adr"] = "Store_Address";
+                $data["city"] = "Store_City";
+            }
 
             // Validate Order
             if(empty($data["pickup"])){
@@ -61,6 +67,33 @@ class Order extends Controller
             }
 
             $response = [];
+
+            //Checking product quantity before placing order
+            foreach ($orderItems as $item) {
+                $product_id = $item['p_id'];
+                $qty = $item['qty'];
+                if($qty > $this->orderModel->getProductQuantity($product_id)){
+                    $response = [
+                        'status' => 'error',
+                        'message' => 'Product quantity is not available'
+                    ];
+                    header('Content-Type: application/json');
+                    echo json_encode($response);
+                    exit();
+                }
+
+                if($this->orderModel->updateQuantity($product_id, $qty)){
+                    continue;
+                } else {
+                    $response = [
+                        'status' => 'error',
+                        'message' => 'Something went wrong. Please try again'
+                    ];
+                    header('Content-Type: application/json');
+                    echo json_encode($response);
+                    exit();
+                }
+            }
     
             // If validation is completed and no error, then insert the order
             if (empty($data['pickup_err']) && empty($data['payment_err']) && empty($data['fname_err']) && empty($data['email_err']) 
@@ -95,6 +128,52 @@ class Order extends Controller
                     'adr_err' => $data['adr_err'],
                     'phone_err' => $data['phone_err'],
                     'city_err' => $data['city_err']
+                ];
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+    }
+
+    public function getOrderDetails()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $order_id = $_POST['order_id'];
+            $order = $this->orderModel->getOrder($order_id);
+            $orderItems = $this->orderModel->getOrderItems($order_id);
+
+            $response = [
+                'order' => $order,
+                'orderItems' => $orderItems
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+    }
+
+    public function changeOrderStatus()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $order_id = $_POST['order_id'];
+            $new_status = $_POST['new_status'];
+
+            if ($this->orderModel->updateOrderStatus($order_id, $new_status)) {
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Order Status Updated Successfully'
+                ];
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Something went wrong. Please try again'
                 ];
             }
 
