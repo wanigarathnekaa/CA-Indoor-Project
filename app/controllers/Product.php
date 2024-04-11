@@ -261,6 +261,47 @@ class Product extends Controller
         }
     }
 
+    public function updateQuantity()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'product_id' => trim($_POST['id']),
+                'quantity' => trim($_POST['quantity']),
+
+                'quantity_err' => '',
+            ];  
+            
+            if(empty($data['quantity']) || $data['quantity'] < 1){
+                $data['quantity_err'] = 'Please enter a valid quantity';
+            }
+
+            if(empty($data['quantity_err'])){
+                if($this->productModel->updateQuantity($data)){
+                    $response = [
+                        'status' => 'success',
+                        'message' => 'Quantity updated successfully',
+                    ];
+                }else{
+                    $response = [
+                        'status' => 'error',
+                        'message' => 'Something went wrong',
+                    ];
+                }
+            }else{
+                $response = [
+                    'status' => 'error',
+                    'message' => $data['quantity_err'],
+                ];
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+    }
+
 }
 
 
