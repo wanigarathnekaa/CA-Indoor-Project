@@ -172,26 +172,16 @@
                             </td>
                             <td>
                                 <?php echo $product->qty; ?>
-                                <button type="button" id="Change_Quantity" class="Change_Quantity" style="background-color: #4CAF50; /* Green */
-                                    border: none;
-                                    color: white;
-                                    padding: 5px 10px;
-                                    text-align: center;
-                                    text-decoration: none;
-                                    display: inline-block;
-                                    font-size: 12px;
-                                    margin: 2px 1px;
-                                    cursor: pointer;
-                                    border-radius: 4px;"  p_id="<?php echo $product->product_id; ?>">Change Quantity</button>
+                                <button type="button" id="Change_Quantity" class="Change_Quantity" p_id="<?php echo $product->product_id; ?>"><i class="fa-solid fa-pen"></i></button>
                             </td>
                             <td>
                                 <?php echo $product->created_at; ?>
                             </td>
                             <td>
-                                <button type="button" class="edit" id="<?php echo $product->product_id; ?>"><i
-                                        class="fas fa-edit"></i></button>
-                                <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>"><i
-                                        class="fas fa-trash-alt"></i></a>
+                                <button type="button" class="edit" id="<?php echo $product->product_id; ?>">
+                                    <i class="fas fa-edit icon"></i></button>
+                                <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>" >
+                                    <i class="fas fa-trash-alt icon"></i></a>
                             </td>
                         </tr>
                         <?php
@@ -200,15 +190,24 @@
             </table>
         </div>
 
+
+        <!-- popup -->
         <div id="quantityChange" class="modal">
             <div class="modal-content">
-                <h2 class="modal-title">Update Product Quantity</h2>
+                <div class="title">
+                    <h2 class="modal-title">Update Product Quantity</h2>
+                </div>
+                <hr>
+
                 <div class="form-group">
-                    <label for="productName">New Quantity</label>
+                    <label for="productName">New Quantity :</label>
                     <input type="number" id="productQuantity" class="productQuantity" name="productQuantity"
                         placeholder="Enter New Product quantity"><br>
                     <span class="form-invalid-8"></span>
                 </div>
+
+                <hr>
+
                 <div class="btn">
                     <button type="button" id="updateQuantity">Update</button>
                     <button type="button" onclick="closeModal()">Cancel</button>
