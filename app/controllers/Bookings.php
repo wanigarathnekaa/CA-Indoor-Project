@@ -53,6 +53,16 @@ class Bookings extends Controller
             if (empty($data['email'])) {
                 $data['email_err'] = "Please enter an email";
             }
+            $role = $_SESSION['user_role'];
+            if ($role == 'Manager') {
+                $role = 'manager';
+            } else if ($role == 'Coach') {
+                $role = 'coach';
+            } else if ($role == 'Owner') {
+                $role = 'owner';
+            }else if ($role == 'User') {
+                $role = 'user';
+            }
 
             if (empty($data['name_err']) && empty($data['net_err']) && empty($data['email_err'])) {
                 $bookingId = $this->bookingModel->last_inserted_id();
@@ -66,7 +76,7 @@ class Bookings extends Controller
                         $this->bookingModel->addTimeSlots($bookingId, $timeSlot, $netType);
                     }
 
-                    redirect("Pages/Manager_Booking/manager?fulldate={$data['date']}");
+                    redirect("Pages/Manager_Booking/{$role}?fulldate={$data['date']}");
                 } else {
                     die('Something Went wrong');
                 }
@@ -102,10 +112,10 @@ class Bookings extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $jsonString = file_get_contents("php://input");
             $postData = json_decode($jsonString, true);
-    
+
             // Log the received data for debugging
             error_log(print_r($postData, true));
-    
+
             // Access the data as needed
             $name = isset($postData['name']) ? trim($postData['name']) : '';
             $email = isset($postData['email']) ? trim($postData['email']) : '';
@@ -117,13 +127,13 @@ class Bookings extends Controller
             $paidPrice = isset($postData['paidPrice']) ? trim($postData['paidPrice']) : '';
             $arrayData = json_decode($postData['timeSlots'], true);
 
-            if($paidPrice == $bookingPrice){
+            if ($paidPrice == $bookingPrice) {
                 $paymentStatus = "Paid";
             } else {
                 $paymentStatus = "Pending";
             }
-            
-            
+
+
             $data = [
                 'name' => $name,
                 'email' => $email,
@@ -150,32 +160,34 @@ class Bookings extends Controller
 
             //validate email
             if (empty($data['email'])) {
-                $data['email_err'] =  "Payment is Unsuccessful - Email is required";
+                $data['email_err'] = "Payment is Unsuccessful - Email is required";
             }
 
             if (empty($data['phoneNumber'])) {
-                $data['phoneNumber_err'] =  "Payment is Unsuccessful - Phone Number is required";
+                $data['phoneNumber_err'] = "Payment is Unsuccessful - Phone Number is required";
             }
 
             if (empty($data['date'])) {
-                $data['date_err'] =  "Payment is Unsuccessful - Date is required";
+                $data['date_err'] = "Payment is Unsuccessful - Date is required";
             }
 
             if (empty($data['coach'])) {
-                $data['coach_err'] =  "Payment is Unsuccessful - Coach is required";
+                $data['coach_err'] = "Payment is Unsuccessful - Coach is required";
             }
 
             if (empty($data['bookingPrice'])) {
-                $data['bookingPrice_err'] =  "Payment is Unsuccessful - Booking Price is required";
+                $data['bookingPrice_err'] = "Payment is Unsuccessful - Booking Price is required";
             }
 
             if (empty($data['paymentStatus'])) {
-                $data['paymentStatus_err'] =  "Payment is Unsuccessful - Payment Status is required";
+                $data['paymentStatus_err'] = "Payment is Unsuccessful - Payment Status is required";
             }
 
-            if (empty($data['name_err']) && empty($data['email_err']) && empty($data['date_err']) 
-            && empty($data['coach_err']) && empty($data['phoneNumber_err']) 
-            && empty($data['bookingPrice_err']) && empty($data['paymentStatus_err'])){
+            if (
+                empty($data['name_err']) && empty($data['email_err']) && empty($data['date_err'])
+                && empty($data['coach_err']) && empty($data['phoneNumber_err'])
+                && empty($data['bookingPrice_err']) && empty($data['paymentStatus_err'])
+            ) {
                 //create user
                 if ($this->bookingModel->Make_Reservation($data)) {
                     $_SESSION['booking_success'] = true;
@@ -208,14 +220,14 @@ class Bookings extends Controller
                 ];
             }
 
-    
+
             $jsObj = json_encode($response);
             echo $jsObj;
         } else {
             echo "Invalid request method";
         }
     }
-    
+
 
 
     public function delete()
@@ -237,7 +249,7 @@ class Bookings extends Controller
 
             $booking_Id = trim($_POST['bookingId']);
 
-            if($this->bookingModel->deleteReservation($booking_Id)){
+            if ($this->bookingModel->deleteReservation($booking_Id)) {
                 $response = [
                     'status' => 'success',
                 ];

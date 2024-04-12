@@ -227,7 +227,7 @@ class Manager extends Controller
     {
         // var_dump($_POST);
         if ($this->managerModel->deleteManager($_POST["submit"])) {
-            redirect("Users/register");
+            redirect("Pages/managerTable/owner");
         } else {
             die("Something Went Wrong");
         }

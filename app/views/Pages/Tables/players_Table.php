@@ -100,7 +100,6 @@
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($player)); ?>)">
                                                 <?php echo $player->phoneNumber ?>
                                           </td>
-                                          <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
                                           <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($player)); ?>)"><i class="fa-solid fa-user-slash delete icon"></i>
                                           </td>
                                     </tr>

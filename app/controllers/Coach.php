@@ -341,9 +341,17 @@ class Coach extends Controller
     // delete function.....................................................
     public function delete()
     {
-        // var_dump($_POST);
+        // var_dump($_POST);        
+        $role = $_SESSION['user_role'];
+        if($role == 'Manager'){
+            $role = 'manager';
+        }else if($role == 'Coach'){
+            $role = 'coach';
+        }else if($role == 'Owner'){
+            $role = 'owner';
+        }
         if ($this->coachModel->deleteCoach($_POST["submit"]) && $this->coachUserModel->deleteUser($_POST["submit"])) {
-            redirect("Users/register");
+            redirect("Pages/Dashboard/{$role}");
         } else {
             die("Something Went Wrong");
         }
