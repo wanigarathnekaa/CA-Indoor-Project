@@ -21,17 +21,26 @@ class Manager extends Controller
                 'name' => trim($_POST['name']),
                 'email' => trim($_POST['email']),
                 'phoneNumber' => trim($_POST['phoneNumber']),
-                'password' => "12345678",
+                // 'password' => "12345678",
                 'nic' => trim($_POST['nic']),
-                'address' => trim($_POST['address']),
+                'strAddress' => trim($_POST['strAddress']),
+                'city' => trim($_POST['city']),
+
+                'filename' => $_FILES['file']['name'],
+                'filetmp' => $_FILES['file']['tmp_name'],
 
                 'name_err' => "",
                 'email_err' => "",
                 'phoneNumber_err' => "",
                 'password_err' => "",
                 'nic_err' => "",
-                'address_err' => ""
+                'strAddress_err' => "",
+                'city_err' => "",
+                'filename_err' => "",
+                'filetmp_err' => "",
             ];
+
+        
 
             //validate name
             if (empty($data['name'])) {
@@ -53,26 +62,31 @@ class Manager extends Controller
             }
 
             //validate password
-            if (empty($data['password'])) {
-                $data['password_err'] = "Please enter a password";
-            }
+            // if (empty($data['password'])) {
+            //     $data['password_err'] = "Please enter a password";
+            // }
 
             if (empty($data['nic'])) {
                 $data['nic_err'] = "Please enter the NIC number";
             }
 
-            if (empty($data['address'])) {
-                $data['address_err'] = "Please enter the Address";
+            //validate address
+            if (empty($data['strAddress'])) {
+                $data['strAddress_err'] = "Please enter the Street Address";
+            }
+
+            if (empty($data['city'])) {
+                $data['city_err'] = "Please enter the City";
             }
 
             //If validation is completed and no error, then register the user
-            if (empty($data['name_err']) && empty($data['email_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['phoneNumber_err']) && empty($data['password_err'])) {
+            if (empty($data['name_err']) && empty($data['email_err']) && empty($data['nic_err']) && empty($data['phoneNumber_err']) && empty($data['strAddress_err']) && empty($data['city_err'])) {
                 //Hash the password
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
                 //create user
                 if ($this->managerModel->managerRegister($data)) {
-                    redirect('Users/login');
+                    redirect('Pages/Dashboard/owner');
                 } else {
                     die('Something Went wrong');
                 }
@@ -119,17 +133,19 @@ class Manager extends Controller
                 'email' => trim($_POST['email']),
                 'phoneNumber' => trim($_POST['phoneNumber']),
                 'nic' => trim($_POST['nic']),
-                'address' => trim($_POST['address']),
+                'strAddress' => trim($_POST['strAddress']),
+                'city' => trim($_POST['city']),
                 // 'pwd' => "12345678",
-                'filename' => trim($_FILES['file']['name']),
-                'filetmp' => trim($_FILES['file']['tmp_name']),
+                'filename' => $_FILES['file']['name'],
+                'filetmp' => $_FILES['file']['tmp_name'],
 
                 'name_err' => "",
                 'user_name_err' => "",
                 'email_err' => "",
                 'phoneNumber_err' => "",
                 'nic_err' => "",
-                'address_err' => "",
+                'strAddress_err' => "",
+                'city_err' => "",
                 'filename_err' => "",
                 'filetmp_err' => "",
 
@@ -162,23 +178,24 @@ class Manager extends Controller
                 $data['phoneNumber_err'] = "Please enter a phone number";
             }
 
-            //validate password
-            if (empty($data['pwd'])) {
-                $data['pwd_err'] = "Please enter a password";
-            }
-
             if (empty($data['nic'])) {
                 $data['nic_err'] = "Please enter a valid NIC number";
             }
 
-            //validate user_name
-            if (empty($data['address'])) {
-                $data['address_err'] = "Please enter an user_name";
+            //validate address
+            if (empty($data['strAddress'])) {
+                $data['strAddress_err'] = "Please enter the Street Address";
+            }
+
+            if (empty($data['city'])) {
+                $data['city_err'] = "Please enter the City";
             }
 
 
+
+
             //If validation is completed and no error, then register the user
-            if (empty($data['name_err']) && empty($data['email_err']) && empty($data['nic_err']) && empty($data['address_err'])) {
+            if (empty($data['name_err']) && empty($data['email_err']) && empty($data['nic_err'])  && empty($data['phoneNumber_err']) && empty($data['strAddress_err']) && empty($data['city_err'])) {
                 //Hash the password
                 // $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
                 

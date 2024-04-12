@@ -66,18 +66,16 @@
                             <input type="text" id="nic" name="nic" placeholder="Enter NIC" value="<?=$data["nic"]?>"/>
                         </div>
                         
-                        <!-- <div class="box">
+                        <div class="box">
                             <label for="srtAddress">Street Address</label>
-                            <input type="text" id="srtAddress" name="srtAddress" value="<?=$data["srtAddress"]?>"/>
+                            <input type="text" id="strAddress" name="strAddress" value="<?=$data["strAddress"]?>"/>
                         </div>
+
                         <div class="box">
                             <label for="city">City</label>
                             <input type="text" id="city" name="city" value="<?=$data["city"]?>"/>
-                        </div> -->
-                        <div class="box">
-                            <label for="Address">Address:</label>
-                            <input type="text" id="address" name="address" placeholder="Enter Address" value="<?=$data["address"]?>"/>
                         </div>
+                        
                                 
                     </div>
                     <div class="buttons">

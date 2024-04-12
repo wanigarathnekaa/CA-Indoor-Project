@@ -19,7 +19,7 @@
                 
                 <?php if ($role == "User") { ?>
                     <li class="nav-link">
-                        <a href="C&A_Indoor_Project/Pages/Dashboard/user">
+                        <a href="<?php echo URLROOT; ?>/Pages/Dashboard/user">
                             <i class="bx bx-home-alt icon"></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
@@ -31,27 +31,27 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="C&A_Indoor_Project/Pages/View_Advertisement/user">
+                        <a href="<?php echo URLROOT; ?>/Pages/View_Advertisement/user">
                             <i class="fa-brands fa-adversal icon"></i>
                             <span class="text nav-text">Advertisement</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="C&A_Indoor_Project/Pages/Coach/user">
+                        <a href="<?php echo URLROOT; ?>/Pages/Coach/user">
                             <i class="fa-solid fa-user-group icon"></i>
                             <span class="text nav-text">Coach</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="C&A_Indoor_Project/Pages/Cricket_Shop/User">
+                        <a href="<?php echo URLROOT; ?>/Pages/Cricket_Shop/User">
                             <i class="bx bx-store icon"></i>
                             <span class="text nav-text">Cricket Store</span>
                         </a>
                     </li>
                     <li class="profile">
-                        <a href="C&A_Indoor_Project/Pages/Profile/user">
+                        <a href="<?php echo URLROOT; ?>/Pages/Profile/user">
                             <i class="bx bx-user-circle icon"></i>
                             <span class="text nav-text">Profile</span>
                         </a>
@@ -138,7 +138,7 @@
                             </li>
                 <?php } else if ($role == "Coach") { ?>
                                 <li class="nav-link">
-                                    <a href="C&A_Indoor_Project/Pages/Dashboard/coach">
+                                    <a href="<?php echo URLROOT; ?>/Pages/Dashboard/coach">
                                         <i class="bx bx-home-alt icon"></i>
                                         <span class="text nav-text">Dashboard</span>
                                     </a>
@@ -150,27 +150,27 @@
                                     </a>
                                 </li>
                                 <li class="nav-link">
-                                    <a href="C&A_Indoor_Project/Pages/View_Advertisement/coach">
+                                    <a href="<?php echo URLROOT; ?>/Pages/View_Advertisement/coach">
 
                                         <i class="fa-brands fa-adversal icon"></i>
                                         <span class="text nav-text">Advertisement</span>
                                     </a>
                                 </li>
                                 <li class="nav-link">
-                                    <a href="C&A_Indoor_Project/Pages/Cricket_Shop/Coach">
+                                    <a href="<?php echo URLROOT; ?>/Pages/Cricket_Shop/Coach">
                                         <i class="bx bx-store icon"></i>
                                         <span class="text nav-text">Cricket Store</span>
                                     </a>
                                 </li>
                                 <li class="profile">
-                                    <a href="C&A_Indoor_Project/Pages/Profile/user">
+                                    <a href="<?php echo URLROOT; ?>/Pages/Profile/user">
                                         <i class="bx bx-user-circle icon"></i>
                                         <span class="text nav-text">Profile</span>
                                     </a>
                                 </li>
                 <?php } else if ($role == "Manager") { ?>
                                     <li class="nav-link">
-                                        <a href="C&A_Indoor_Project/Pages/Dashboard/manager">
+                                        <a href="<?php echo URLROOT; ?>/Pages/Dashboard/manager">
                                             <i class="bx bx-home-alt icon"></i>
                                             <span class="text nav-text">Dashboard</span>
                                         </a>
@@ -182,13 +182,13 @@
                                         </a>
                                     </li>
                                     <li class="nav-link">
-                                        <a href="C&A_Indoor_Project/Pages/View_Advertisement/manager">
+                                        <a href="<?php echo URLROOT; ?>/Pages/View_Advertisement/manager">
                                             <i class="fa-brands fa-adversal icon"></i>
                                             <span class="text nav-text">Advertisement</span>
                                         </a>
                                     </li>
                                     <li class="nav-link">
-                                        <a href="C&A_Indoor_Project/Pages/Coach_Registration/coach">
+                                        <a href="<?php echo URLROOT; ?>/Pages/Coach_Registration/coach">
                                             <i class="bx bxs-user-plus icon"></i>
                                             <span class="text nav-text">Registration</span>
                                         </a>
@@ -215,7 +215,7 @@
                                     </li>
                 <?php } else if ($role == "Owner") { ?>
                                         <li class="nav-link">
-                                            <a href="#">
+                                            <a href="<?php echo URLROOT; ?>/Pages/Dashboard/owner">
                                                 <i class="bx bx-home-alt icon"></i>
                                                 <span class="text nav-text">Dashboard</span>
                                             </a>
@@ -227,7 +227,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-link">
-                                            <a href="#">
+                                            <a href="<?php echo URLROOT; ?>/Pages/View_Advertisement/owner">
                                                 <i class="fa-brands fa-adversal icon"></i>
                                                 <span class="text nav-text">Advertisement</span>
                                             </a>
@@ -260,7 +260,7 @@
                                             </a>
                                         </li>
                                         <li class="profile">
-                                            <a href="C&A_Indoor_Project/Pages/CompanyUser_Profile/Owner">
+                                            <a href="<?php echo URLROOT; ?>/Pages/CompanyUser_Profile/Owner">
                                                 <i class="bx bx-user-circle icon"></i>
                                                 <span class="text nav-text">Profile</span>
                                             </a>
@@ -281,7 +281,7 @@
         </div>
         <div class="bottom-content">
             <li class="logout">
-                <a href="http://localhost/C&A_Indoor_Project/Users/login">
+                <a href="<?php echo URLROOT; ?>/Users/login">
                     <i class='bx bx-log-out icon'></i>
                     <span class="text nav-text">logout</span>
                 </a>

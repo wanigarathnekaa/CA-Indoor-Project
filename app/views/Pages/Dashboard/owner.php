@@ -23,9 +23,9 @@
 
         <!-- Cards -->
         <div class="cardBox">
-            <a class="card" href="#">
+            <a class="card" href="C&A_Indoor_Project/Pages/managerTable/owner">
                 <div>
-                    <div class="numbers">3</div>
+                    <div class="numbers"><?php echo $data1["ManagerCount"]?></div>
                     <div class="cardName">Managers</div>
                 </div>
                 <div class="iconBx">
@@ -35,7 +35,7 @@
 
             <a class="card" href="C&A_Indoor_Project/Pages/coachTable/owner">
                 <div>
-                    <div class="numbers">15</div>
+                    <div class="numbers"><?php echo $data1["CoachCount"]?></div>
                     <div class="cardName">Coaches</div>
                 </div>
                 <div class="iconBx">
@@ -45,7 +45,7 @@
 
             <a class="card" href="C&A_Indoor_Project/Pages/playerTable/owner">
                 <div>
-                    <div class="numbers">80</div>
+                    <div class="numbers"><?php echo $data1["UserCount"]?></div>
                     <div class="cardName">Players</div>
                 </div>
                 <div class="iconBx">
@@ -55,7 +55,7 @@
 
             <a class="card" href="C&A_Indoor_Project/Pages/View_Advertisement/owner">
                 <div>
-                    <div class="numbers">284</div>
+                    <div class="numbers"><?php echo $data1["advertCount"]?></div>
                     <div class="cardName">Advertisement</div>
                 </div>
                 <div class="iconBx">
@@ -73,7 +73,7 @@
                 </div>
             </a>
 
-            <a class="card" href="#">
+            <a class="card" href="<?php echo URLROOT;?>/Pages/Manager_Registration/manager">
                 <div>
                     <div class="numbers"></div>
                     <div class="cardName">Registration</div>

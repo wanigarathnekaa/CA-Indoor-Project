@@ -36,9 +36,9 @@
                         </h1>
                   </div>
             
-                  <!-- <div class="add-btn">
-                        <a href="<?php echo URLROOT; ?>/Coach/register"><i class="fa-solid fa-user-plus  icon"></i></a>
-                  </div> -->
+                  <div class="add-btn">
+                        <a href="#"><i class="fa-solid fa-user-plus  icon"></i></a>
+                  </div>
             </div>
 
             <!-- Table Sort -->

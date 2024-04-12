@@ -10,10 +10,11 @@ class M_Manager
     //Register User
     public function managerRegister($data)
     {
-        $this->db->query('INSERT INTO managers (name, email, nic, address, phoneNumber, password) VALUES (:name, :email, :nic, :address, :phoneNumber, :password)');
+        $this->db->query('INSERT INTO managers (name, email, nic, strAddress,city, phoneNumber, password) VALUES (:name, :email, :nic, :strAddress,:city, :phoneNumber, :password)');
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':nic', $data['nic']);
-        $this->db->bind(':address', $data['address']);
+        $this->db->bind(':strAddress', $data['strAddress']);
+        $this->db->bind(':city', $data['city']);
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':phoneNumber', $data['phoneNumber']);
         $this->db->bind(':password', $data['password']);
@@ -45,11 +46,12 @@ class M_Manager
 
     public function updateManager($data)
     {
-        $this->db->query('UPDATE managers SET name=:name, email=:email ,nic= :nic, address= :address, phoneNumber=:phoneNumber ,img = :img  WHERE email = :email');
+        $this->db->query('UPDATE managers SET name=:name, email=:email ,nic= :nic, strAddress=:strAddress, city=:city, phoneNumber=:phoneNumber ,img = :img  WHERE email = :email');
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':nic', $data['nic']);
-        $this->db->bind(':address', $data['address']);
+        $this->db->bind(':strAddress', $data['strAddress']);
+        $this->db->bind(':city', $data['city']);
         $this->db->bind(':phoneNumber', $data['phoneNumber']);
         $this->db->bind(':img', $data['filename']);
 
