@@ -530,8 +530,20 @@ class Users extends Controller
     public function delete()
     {
         // var_dump($_POST);
+        $role = $_SESSION['user_role'];
+        if($role == 'Manager'){
+            $role = 'manager';
+        }else if($role == 'Coach'){
+            $role = 'coach';
+        }else if($role == 'Owner'){
+            $role = 'owner';
+        }else if($role == 'Admin'){
+            $role = 'admin';
+        }else if($role == 'User'){
+            $role = 'user';
+        }
         if($this->userModel->deleteUser($_POST["submit"])) {  
-            redirect("Users/register");
+            redirect("Pages/Dashboard/{$role}");
         }else{
             die("Something Went Wrong");
         }

@@ -5,15 +5,22 @@ function build_calendar($month, $year)
 {
     $daysOfWeek = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
     $firstDayOfMonth = mktime(0, 0, 0, $month, 1, $year);
-    $lastDayOfMonth = mktime(0, 0, 0, $month, date('t', $firstDayOfMonth), $year);
+    $numberDays = date('t', $firstDayOfMonth);
+    $dateComponents = getdate($firstDayOfMonth);
+    $monthName = $dateComponents['month'];
+    $dayOfWeek = $dateComponents['wday'];
     $dateToday = date('Y-m-d');
-    $lastReservationDay = strtotime('+14 days');
+
+    $prev_month = date('m', mktime(0, 0, 0, $month - 1, 1, $year));
+    $prev_year = date('Y', mktime(0, 0, 0, $month - 1, 1, $year));
+    $next_month = date('m', mktime(0, 0, 0, $month + 1, 1, $year));
+    $next_year = date('Y', mktime(0, 0, 0, $month + 1, 1, $year));
 
     $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
-    $calendar = "<center><h2 class='date'>" . date('F', $firstDayOfMonth) . " $year</h2>";
-    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . date('m', strtotime('-1 month', $firstDayOfMonth)) . "&year=" . date('Y', strtotime('-1 month', $firstDayOfMonth)) . "&bookingID=" . $bookingId . "' target='_self'_>Prev Month</a> ";
-    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . date('m') . "&year=" . date('Y') . "&bookingID=" . $bookingId . "'>Current Month</a> ";
-    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . date('m', strtotime('+1 month', $firstDayOfMonth)) . "&year=" . date('Y', strtotime('+1 month', $firstDayOfMonth)) . "&bookingID=" . $bookingId . "'>Next Month</a></center> ";
+    $calendar = "<center><h2 class='date'>$monthName $year</h2>";
+    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $prev_month . "&year=" . $prev_year . "&bookingID=" . $bookingId . "' target='_self'_>Prev Month</a> ";
+    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender&bookingID=" . $bookingId . "'>Current Month</a> ";
+    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $next_month . "&year=" . $next_year . "&bookingID=" . $bookingId . "'>NextMonth</a></center> ";
 
     $calendar .= "<br><table class='calander'> ";
     $calendar .= "<tr>";
@@ -23,28 +30,43 @@ function build_calendar($month, $year)
 
     $calendar .= "</tr><tr>";
     $currentDay = 1;
+    if ($dayOfWeek > 0) {
+        for ($k = 0; $k < $dayOfWeek; $k++) {
+            $calendar .= "<td class='empty'></td>";
+        }
+    }
 
-    while ($currentDay <= date('t', $firstDayOfMonth) && $firstDayOfMonth <= $lastReservationDay) {
-        $dayOfWeek = date('w', $firstDayOfMonth);
-        if ($dayOfWeek == 0) {
+    $month = str_pad($month, 2, "0", STR_PAD_LEFT);
+
+    // echo "Today's date: $dateToday";
+    while ($currentDay <= $numberDays) {
+        if ($dayOfWeek == 7) {
+            $dayOfWeek = 0;
             $calendar .= "</tr><tr>";
         }
 
-        $date = date('Y-m-d', $firstDayOfMonth);
+        $currentDayRel = str_pad($currentDay, 2, "0", STR_PAD_LEFT);
+        $date = "$year-$month-$currentDayRel";
+        $dayName = strtolower(date('l', strtotime($date)));
         $today = ($date == $dateToday) ? 'today' : '';
 
-        if ($date < $dateToday) {
-            $calendar .= "<td class='empty'></td>";
-        } else {
-            $calendar .= "<td class='$today'><a href='http://localhost/C&A_Indoor_Project/Pages/Manager_Booking/manager?fulldate=$date&bookingID=" . $bookingId . "' class = 'btn btn-success btn-xs' target='_top'><h4>" . date('j', $firstDayOfMonth) . "</h4></a></td>";
+        if ($date < date('Y-m-d')) {
+            $calendar .= "<a class = 'btn btn-danger btn-xs'><td class='$today'><h4>$currentDay</h4></td></a>";
         }
+        else {
+            // $calendar .= "<td class='$today'><h4>$currentDay</h4><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user' class = 'btn btn-success btn-xs' target='_top'>Book</a></td>";
+            $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : '';
+            $calendar .= "<td class='$today'><a href='http://localhost/C&A_Indoor_Project/Pages/Manager_Booking/manager?fulldate=$date&bookingID=" . $bookingId . "' class = 'btn btn-success btn-xs' target='_top'><h4>$currentDay</h4></a></td>";
+        }
+        // echo $today;
+ 
 
-        $firstDayOfMonth = strtotime('+1 day', $firstDayOfMonth);
         $currentDay++;
+        $dayOfWeek++;
     }
 
-    if ($dayOfWeek < 6) {
-        $remainingDays = 6 - $dayOfWeek;
+    if ($dayOfWeek < 7) {
+        $remainingDays = 7 - $dayOfWeek;
         for ($i = 0; $i < $remainingDays; $i++) {
             $calendar .= "<td class='empty'></td>";
         }
