@@ -232,7 +232,7 @@ class Pages extends Controller
         } else if ($name == "manager") {
             $this->view('Pages/Dashboard/manager', $bookings, $data);
         } else if ($name == "owner") {
-            $this->view('Pages/Dashboard/owner');
+            $this->view('Pages/Dashboard/owner', $bookings, $data);
         }
     }
 
@@ -552,7 +552,8 @@ class Pages extends Controller
             'phoneNumber' => $manager->phoneNumber,
             'pwd' => $manager->password,
             'nic' => $manager->nic,
-            'address' => $manager->address,
+            'strAddress' => $manager->strAddress,
+            'city' => $manager->city,
             'img'=>$manager->img,
 
             'name_err' => "",

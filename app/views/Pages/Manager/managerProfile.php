@@ -45,7 +45,7 @@
                                     <div class="infor"><b>Email</b> : <?php echo $data->email?> </div>
                                     <div class="infor"><b>Mobile Number</b> : <?php echo $data->phoneNumber?></div> 
                                     <div class="infor"><b>nic</b> : <?php echo $data->nic?></div>
-                                    <div class="infor"><b>Address</b> : <?php echo $data->address?></div>                             
+                                    <div class="infor"><b>Address</b> : <?php echo $data->strAddress?>,<?php echo $data->city ?></div>                            
                               </div>
                               <div class="btnrow">
                               <a href="<?php echo URLROOT;?>/Pages/Manager_Edit_Profile/manager" type="button" class="button">Edit Profile</a>

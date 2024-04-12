@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Registration Form</title>
+     <title>Coach Registration</title>
    </head>
 <body>
 
   <!-- Sidebar -->
   <?php
-      $role = "Manager";
+      $role = $_SESSION['user_role'];
       require APPROOT . '/views/Pages/Dashboard/header.php';
       require APPROOT . '/views/Components/Side Bars/sideBar.php';
   ?>
@@ -21,7 +21,7 @@
     <!-- Content -->
     <section class="home registerformhome">
       <div class="container">
-        <div class="title">Registration Form</div>
+        <div class="title">Coach Registration Form</div>
         
         
         <div class="content">
@@ -31,7 +31,7 @@
             <!-- <i class="fa fa-upload"></i>Upload File -->
             <input type="file" name="file">
           <!-- </button> -->
-        </div>
+          </div>
             <div class="user-details">
               <div class="input-box">
                 <span class="details">Full Name</span>
@@ -55,7 +55,7 @@
             
               <div class="input-box">
                 <span class="details">Expeience</span>
-                <input type="text" placeholder="Confirm your Expeience" name="experience" required>
+                <input type="text" placeholder="Enter your Expeience" name="experience" required>
               </div>
               <div class="input-box">
                 <span class="details">Speciality</span>
@@ -69,20 +69,20 @@
               
               <div class="input-box">
                   <span class="details">Achivements</span>
-                  <input type="text" name="achivements" id="address" placeholder="Enter your Achivements" required>              
+                  <input type="text" name="achivements" placeholder="Enter your Achivements" required>              
               </div>
 
               <!-- <label>Address</label> -->
               <div class="input-box">
                 <label for="address">Street Address</label>
                 <div>
-                  <input type="text" name="srtAddress" id="address" placeholder="Enter your Address" required>
+                  <input type="text" name="srtAddress"  placeholder="Enter Your Street Address" required>
                 </div>
               </div>
               <div class="input-box">
                 <label for="address">City</label>
                 <div>
-                  <input type="text" name="city" id="address" placeholder="Enter your Address" required>
+                  <input type="text" name="city"  placeholder="Enter Your City" required>
                 </div>
               </div>
             </div>
