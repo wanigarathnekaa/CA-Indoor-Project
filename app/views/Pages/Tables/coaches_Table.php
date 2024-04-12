@@ -75,7 +75,7 @@
                                     <th>Speciality</th>
                                     <th>Certificate</th>
                                     <th></th>
-                                    <th></th>
+                                    <!-- <th></th> -->
                               </tr>
                         </thead>
 

@@ -73,7 +73,7 @@
                                     <th>NIC</th>
                                     <th>Address</th>
                                     <th></th>
-                                    <th></th>
+                                    <!-- <th></th> -->
 
                                     
                                    
