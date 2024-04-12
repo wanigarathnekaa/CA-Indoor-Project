@@ -113,17 +113,28 @@ class Coach extends Controller
             if (empty($data['filename'])) {
                 $data['filename_err'] = "Please upload profile picture";
             }
-
-
+            
 
             //If validation is completed and no error, then register the user
-            if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err']) && empty($data['nic_err']) && empty($data['srtAddress_err']) && empty($data['city_err']) && empty($data['achivements_err']) && empty($data['experience_err']) && empty($data['specialty_err']) && empty($data['certificate_err'])) {
+            if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err']) && empty($data['nic_err']) && empty($data['srtAddress_err']) && empty($data['city_err']) && empty($data['achivements_err']) && empty($data['experience_err']) && empty($data['specialty_err']) && empty($data['certificate_err']) ) {
                 //generate random password
-                $password = $this->coachModel->generateRandomPassword();
+                $password=$this->coachModel->generateRandomPassword();
 
                 //check whether the  password is sent to the coach via email
-                if ($this->coachModel->SendPasswordViaEmail($_POST['email'], $password)) {
+                if($this->coachModel->SendPasswordViaEmail($_POST['email'],$password)){
                     $data['pwd'] = $password;
+
+                }
+                else {
+                        
+                    die('Something Went wrong');
+                }
+                // //Hash the password
+                $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
+                //create user
+                if ($this->coachModel->coachRegister($data) && $this->coachUserModel->register($data)) { 
+                    echo "User Registered";
+                    redirect('Pages/Dashboard/manager');
                 } else {
                     die('Something Went wrong');
                 }
