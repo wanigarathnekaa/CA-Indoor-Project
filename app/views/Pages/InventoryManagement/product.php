@@ -172,7 +172,8 @@
                             </td>
                             <td>
                                 <?php echo $product->qty; ?>
-                                <button type="button" id="Change_Quantity" class="Change_Quantity" p_id="<?php echo $product->product_id; ?>"><i class="fa-solid fa-pen"></i></button>
+                                <button type="button" id="Change_Quantity" class="Change_Quantity"
+                                    p_id="<?php echo $product->product_id; ?>"><i class="fa-solid fa-pen"></i></button>
                             </td>
                             <td>
                                 <?php echo $product->created_at; ?>
@@ -180,7 +181,7 @@
                             <td>
                                 <button type="button" class="edit" id="<?php echo $product->product_id; ?>">
                                     <i class="fas fa-edit icon"></i></button>
-                                <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>" >
+                                <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>">
                                     <i class="fas fa-trash-alt icon"></i></a>
                             </td>
                         </tr>
@@ -360,10 +361,9 @@
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.Change_Quantity').forEach(item => {
                 item.addEventListener('click', event => {
-                    $('#quantityChange').css("display", "block");
-                    // Get the product id
-                    var id = $(event.target).attr('p_id');
+                    $('#quantityChange').css("display", "block");                   
                     $('#updateQuantity').click(function (e) {
+                        var id = $(item).attr('p_id');
                         e.preventDefault();
                         var quantity = parseInt($('#productQuantity').val());
                         if (isNaN(quantity)) { // Check if quantity is NaN
