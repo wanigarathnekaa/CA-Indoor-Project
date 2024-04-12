@@ -9,10 +9,10 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="<?php echo URLROOT;?>/css/SelectReport.css">
 
-    <link rel="stylesheet" href="<?php echo URLROOT;?>/css/adminDashboard.css">
+    <!-- <link rel="stylesheet" href="<?php echo URLROOT;?>/css/adminDashboard.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/components/charts.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/managerDashboard.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/components/charts.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/components/charts.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 </head>
 
@@ -47,11 +47,27 @@
         </div>
 
         <div class="cardBox">
-        <a class="card" href="<?php echo URLROOT; ?>/Reports/Bookingreport">
+        <a class="card" href="<?php echo URLROOT; ?>/Reports/SalesMonthly">
     <div>
        
         <h3></h3>
-        <p>Booking Reports</p>
+        <p>Monthly Booking</p>
+    </div>
+    <div class="iconBx"></div>
+</a>
+
+
+        
+
+            
+        </div>
+
+        <div class="cardBox">
+        <a class="card" href="<?php echo URLROOT; ?>/Reports/SalesMonthly">
+    <div>
+       
+        <h3></h3>
+        <p>Filter Orders</p>
     </div>
     <div class="iconBx"></div>
 </a>
