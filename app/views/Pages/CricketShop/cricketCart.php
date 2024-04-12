@@ -31,7 +31,7 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                     </div>
                     <div class="column item-quantity">
                         <input id="qty<?php echo $cartItem->cart_id; ?>" class="qtyInput" name="qty" type="number" value="<?php echo $cartItem->qty; ?>" 
-                        cart_id = "<?php echo $cartItem->cart_id; ?>" price = "<?php echo $cartItem->product_price*0.8 ?>" p_id="<?php echo $cartItem->p_id; ?>"  aria-live="polite">
+                        cart_id = "<?php echo $cartItem->cart_id; ?>" price = "<?php echo $cartItem->product_price ?>" p_id="<?php echo $cartItem->p_id; ?>"  aria-live="polite">
                     </div>
                     <div class="column item-total">
                         LKR
@@ -91,7 +91,7 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                     data: {
                         qty: qty,
                         cart_id: cart_id,
-                        product_price: product_price,
+                        product_price: product_price*0.8,
                         p_id: p_id
                     },
                     success: function (response) {
