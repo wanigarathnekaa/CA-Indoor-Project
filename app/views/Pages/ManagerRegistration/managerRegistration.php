@@ -21,13 +21,10 @@
     <!-- Content -->
     <section class="home registerformhome">
         <div class="container">
-            <div class="title">Manage Registration Form</div>
+            <div class="title">Manager Registration Form</div>
 
             <div class="content">
                 <form action="<?php echo URLROOT;?>/Manager/register" method="POST">
-                    <!-- <div class="upload">
-                        <input type="file" name="file">
-                    </div> -->
                     
                     <div class="user-details">
                         <div class="input-box">

@@ -5,6 +5,7 @@ let deletePopup = document.getElementById('deletepopup');
 
 // details popup
 function openPopup(manager) {
+      console.log(manager);
       popup.classList.add("open-popup");
       popupcontainer.classList.add("open-popupcontainer");
 

@@ -101,8 +101,6 @@
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($manager)); ?>)">
                                                 <?php echo $manager->strAddress; ?>, <?php echo $manager->city; ?>
                                           </td>
-                                          
-                                          <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
                                           <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($manager)); ?>)"><i class="fa-solid fa-user-slash delete icon"></i></td>
                                     </tr>
                                     <?php $i = $i + 1;
@@ -121,9 +119,6 @@
 
                         <hr>
                         <div class="popupdetails">
-           
-                             
-
                               <div class="popupdetail">
                                     <h2><b>Email : </b><span class="m_email"></span></h2>
                               </div>
@@ -138,9 +133,6 @@
                               <div class="popupdetail">
                                     <h2><b>Address : </b><span class="m_address"></span></h2>
                               </div>
-
-
-                             
                         </div>
 
                         
@@ -153,12 +145,10 @@
                         <span class="close" onclick="closeDeletePopup()"><i class="fa-solid fa-xmark"></i></span>
                         <h2>confirm delete</h2>
 
-                        <form action="<?php echo URLROOT; ?>/Manager/delete" method="POST">
-                              <div class="btns">
-                                    <button type="button">Delete</button>
+                        <form action="<?php echo URLROOT; ?>/Manager/delete" method="POST">                             
+                                    <button type="submit" class="button">Delete</button>
                                     <button type="button" onclick="closeDeletePopup()">Cancel</button>
-                              </div>
-                              
+                              </div>                 
                               <input hidden name='submit' id="hid_input">
                         </form>
                   </div>

@@ -527,7 +527,7 @@ class Pages extends Controller
             'name' => "",
             'email' => "",
             'phoneNumber' => "",
-            'pwd' => "",
+            'password' => "",
             'nic' => "",
             'srtAddress' => "",
             'city' => "",
@@ -546,7 +546,7 @@ class Pages extends Controller
             'experience_err' => "",
             'specialty_err' => "",
             'certificate_err' => "",
-            'achivements_err' => "",
+            'achivements_err' => "",    
         ];
         $this->view('Pages/CoachRegistration/coachRegistration', $data);
     }
@@ -557,7 +557,7 @@ class Pages extends Controller
             'name' => "",
             'email' => "",
             'phoneNumber' => "",
-            'pwd' => "",
+            'password' => "",
             'nic' => "",
             'strAddress' => "",
             'city' => "",
@@ -640,13 +640,6 @@ class Pages extends Controller
         ];
         $this->view('Pages/CompanyUser/CompanyUserEditProfile', $data);
     }
-
-
-
-
-
-
-
 
     public function Inventory_Management($name)
     {

@@ -91,7 +91,6 @@
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $coach->experience ?></td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $coach->specialty ?></td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $coach->certificate?></td>
-                                          <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
                                           <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><i class="fa-solid fa-user-slash delete icon"></i></td>
                                     </tr>
                                     <?php $i = $i + 1;
@@ -115,9 +114,6 @@
                               <div class="popupdetail">
                                     <h2><b>Mobile : </b><span class="c_mobile"></span> </h2>
                               </div>
-                              <!-- <div class="popupdetail">
-                                    <h2><b>Address : </b><span class="c_address"></span> </h2>
-                              </div> -->
                               <div class="popupdetail">
                                     <h2><b>Experience : </b><span class="c_exp"></span> </h2>
                               </div>
@@ -128,14 +124,7 @@
                                     <h2><b>Certificate : </b><span class="c_cert"></span> </h2>
                               </div>
                         </div>
-
-                        <!-- <div class="btns">
-                              <button type="button">Reshedule</button>
-                              <button type="button">Cancel</button>
-                        </div> -->
                   </div>
-
-
 
                   
                   <!-- delete message -->
