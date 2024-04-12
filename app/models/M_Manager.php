@@ -140,7 +140,7 @@ class M_Manager
 
             //Content
             $mail->isHTML(true);
-            $mail->Subject = 'Your MAnager Account Details';
+            $mail->Subject = 'Your Manager Account Details';
             $mail->Body    = 'Your login credentials : <br>Email :  '.$email.'<br>Password : '.$password;
             $mail->send();
 
