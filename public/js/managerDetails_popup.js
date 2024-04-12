@@ -21,7 +21,7 @@ function openPopup(manager) {
       m_nic.textContent = manager.nic;
 
       const m_address = document.querySelector(".m_address");
-      m_address.textContent = manager.address;
+      m_address.textContent = manager.strAddress + "," + manager.city;
 
    
 }

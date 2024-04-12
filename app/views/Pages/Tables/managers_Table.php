@@ -99,7 +99,7 @@
                                                 <?php echo $manager->nic; ?>
                                           </td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($manager)); ?>)">
-                                                <?php echo $manager->address; ?>
+                                                <?php echo $manager->strAddress; ?>, <?php echo $manager->city; ?>
                                           </td>
                                           
                                           <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
@@ -125,18 +125,18 @@
                              
 
                               <div class="popupdetail">
-                                    <h2><b>Email :</b><span class="m_email"></span></h2>
+                                    <h2><b>Email : </b><span class="m_email"></span></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Contact Number :</b><span class="m_number"></span></h2>
+                                    <h2><b>Contact Number : </b><span class="m_number"></span></h2>
                               </div>
                               <div class="popupdetail">
-                                    <h2><b>NIC :</b><span class="m_nic"></span></h2>
+                                    <h2><b>NIC : </b><span class="m_nic"></span></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Address :</b><span class="m_address"></span></h2>
+                                    <h2><b>Address : </b><span class="m_address"></span></h2>
                               </div>
 
 
