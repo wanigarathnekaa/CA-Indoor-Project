@@ -233,7 +233,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-link">
-                                            <a href="C&A_Indoor_Project/Pages/Manager_Registration/manager">
+                                            <a href="<?php echo URLROOT; ?>/Pages/Manager_Registration/manager">
                                                 <i class="bx bxs-user-plus icon"></i>
                                                 <span class="text nav-text">Registration</span>
                                             </a>

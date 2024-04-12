@@ -222,7 +222,7 @@
                         <div class="aboutDetails">
                             <div class="detail">
                                 <i class="fa-solid fa-circle-check tick"></i>
-                                <p>Rs. 1000 per hour for noemal net</p>
+                                <p>Rs. 1000 per hour for normal net</p>
                             </div>
     
                             <div class="detail">

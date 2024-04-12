@@ -123,8 +123,6 @@ class M_Manager
 
         $mail = new PHPMailer(true);
 
-
-        
             //Server settings
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
@@ -135,7 +133,7 @@ class M_Manager
             $mail->Port = 465;
             
             //Recipients
-            $mail->setFrom('nivodya2001@gmail.com', 'Hasini Hewa');
+            $mail->setFrom('nivodya2001@gmail.com', 'C&A Indoor Cricket Net');
             $mail->addAddress($email);
 
             //Content
@@ -144,11 +142,7 @@ class M_Manager
             $mail->Body    = 'Your login credentials : <br>Email :  '.$email.'<br>Password : '.$password;
             $mail->send();
 
-            return true;
-
-
-                
-            
+            return true;   
         } 
 }
 ?>
