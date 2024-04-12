@@ -70,6 +70,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Mobile</th>
+                                    <th>Address</th>
                                     <th>Experience</th>
                                     <th>Speciality</th>
                                     <th>Certificate</th>
@@ -86,6 +87,7 @@
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $data1[$i]->name ?></td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $data1[$i]->email ?></td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $data1[$i]->phoneNumber ?></td>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $coach->srtAddress . ', ' . $coach->city ?></td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $coach->experience ?></td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $coach->specialty ?></td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $coach->certificate?></td>
@@ -113,6 +115,9 @@
                               <div class="popupdetail">
                                     <h2><b>Mobile : </b><span class="c_mobile"></span> </h2>
                               </div>
+                              <!-- <div class="popupdetail">
+                                    <h2><b>Address : </b><span class="c_address"></span> </h2>
+                              </div> -->
                               <div class="popupdetail">
                                     <h2><b>Experience : </b><span class="c_exp"></span> </h2>
                               </div>

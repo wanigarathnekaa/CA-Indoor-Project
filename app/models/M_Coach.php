@@ -1,6 +1,7 @@
 <?php 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
     class M_Coach{
         private $db;
         public function __construct(){
@@ -62,6 +63,7 @@ use PHPMailer\PHPMailer\Exception;
         
             return $password;
         }
+        
         public function SendPasswordViaEmail($email,$password) {
             require_once APPROOT . '/libraries/phpmailer/src/PHPMailer.php';
             require_once APPROOT . '/libraries/phpmailer/src/SMTP.php';

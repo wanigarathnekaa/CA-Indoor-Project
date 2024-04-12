@@ -1,4 +1,8 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class Manager extends Controller
 {
     private $managerModel;
@@ -71,6 +75,17 @@ class Manager extends Controller
 
             //If validation is completed and no error, then register the user
             if (empty($data['name_err']) && empty($data['email_err']) && empty($data['nic_err']) && empty($data['phoneNumber_err']) && empty($data['strAddress_err']) && empty($data['city_err'])) {
+                //generate random password
+                $password=$this->managerModel->generateRandomPassword();
+
+                //check whether the  password is sent to the coach via email
+                if($this->managerModel->SendPasswordViaEmail($_POST['email'],$password)){
+                    $data['pwd'] = $password;
+                }
+                else {        
+                    die('Something Went wrong');
+                }
+
                 //Hash the password
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
