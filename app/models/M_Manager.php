@@ -1,4 +1,7 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class M_Manager
 {
     private $db;
@@ -89,5 +92,63 @@ class M_Manager
             return null; 
         }
     }
+
+
+    public function generateRandomPassword($length = 12) {
+        // Define characters to use in the password
+        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+';
+    
+        // Get the total number of characters available
+        $charLength = strlen($chars);
+    
+        // Initialize the password variable
+        $password = '';
+    
+        // Loop to generate random characters
+        for ($i = 0; $i < $length; $i++) {
+            // Generate a random index to pick a character from $chars
+            $randomIndex = mt_rand(0, $charLength - 1);
+    
+            // Append the randomly selected character to the password
+            $password .= $chars[$randomIndex];
+        }
+    
+        return $password;
+    }
+    
+    public function SendPasswordViaEmail($email,$password) {
+        require_once APPROOT . '/libraries/phpmailer/src/PHPMailer.php';
+        require_once APPROOT . '/libraries/phpmailer/src/SMTP.php';
+        require_once APPROOT . '/libraries/phpmailer/src/Exception.php';
+
+        $mail = new PHPMailer(true);
+
+
+        
+            //Server settings
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'nivodya2001@gmail.com';
+            $mail->Password = 'ndvpqhmangzegxhn';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;
+            
+            //Recipients
+            $mail->setFrom('nivodya2001@gmail.com', 'Hasini Hewa');
+            $mail->addAddress($email);
+
+            //Content
+            $mail->isHTML(true);
+            $mail->Subject = 'Your MAnager Account Details';
+            $mail->Body    = 'Your login credentials : <br>Email :  '.$email.'<br>Password : '.$password;
+            $mail->send();
+
+            return true;
+
+
+                
+            
+        } 
 }
 ?>

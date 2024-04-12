@@ -25,44 +25,44 @@
 
             <div class="content">
                 <form action="<?php echo URLROOT;?>/Manager/register" method="POST">
-                    <div class="upload">
+                    <!-- <div class="upload">
                         <input type="file" name="file">
-                    </div>
+                    </div> -->
                     
                     <div class="user-details">
                         <div class="input-box">
                             <span class="details">Full Name</span>
-                            <input type="text" placeholder="Enter Your Name"  name="name" required >
+                            <input type="text" placeholder="Enter Your Name"  name="name" value="<?php echo $data['name']; ?>">
                             <span class="form-invalid"><?php echo $data['name_err']; ?></span>
                         </div>
 
                         <div class="input-box">
                             <span class="details">Email</span>
-                            <input type="email" placeholder="Enter Your Email" name="email" required>
+                            <input type="email" placeholder="Enter Your Email" name="email" value="<?php echo $data['email']; ?>">
                             <span class="form-invalid"><?php echo $data['email_err']; ?></span>
                         </div>
 
                         <div class="input-box">
                             <span class="details">Phone Number</span>
-                            <input type="tel" placeholder="Enter Your Phone Number" name="phoneNumber" required>
+                            <input type="tel" placeholder="Enter Your Phone Number" name="phoneNumber" value="<?php echo $data['phoneNumber']; ?>">
                             <span class="form-invalid"><?php echo $data['phoneNumber_err']; ?></span>
                         </div>
 
                         <div class="input-box">
                             <span class="details">NIC</span>
-                            <input type="text" placeholder="Enter Your NIC Number" name="nic" required>
+                            <input type="text" placeholder="Enter Your NIC Number" name="nic" value="<?php echo $data['nic']; ?>">
                             <span class="form-invalid"><?php echo $data['nic_err']; ?></span>
                         </div>
 
                         <div class="input-box">
                             <span class="details">Street Address</span>
-                            <input type="text" placeholder="Enter Your Street Address" name="strAddress" required>
+                            <input type="text" placeholder="Enter Your Street Address" name="strAddress" value="<?php echo $data['strAddress']; ?>">
                             <span class="form-invalid"><?php echo $data['strAddress_err']; ?></span>
                         </div>
 
                         <div class="input-box">
                             <span class="details">City</span>
-                            <input type="text" placeholder="Enter Your City" name="city" required>
+                            <input type="text" placeholder="Enter Your City" name="city" value="<?php echo $data['city']; ?>">
                             <span class="form-invalid"><?php echo $data['city_err']; ?></span>
                         </div>
                     </div>
