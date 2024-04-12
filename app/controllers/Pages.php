@@ -196,18 +196,18 @@ class Pages extends Controller
         $users = $this->pagesModel->getUserCount();
         $coach = $this->pagesModel->getCoaches();
         $advertisement = $this->pagesModel->getAdvertisement();
-        $managers=$this->pagesModel->getManagerCount();
-        $companyUsers=$this->pagesModel->getCompanyUserCount();
+        $managers = $this->pagesModel->getManagerCount();
+        $companyUsers = $this->pagesModel->getCompanyUserCount();
 
 
         $data = [
             'CoachCount' => $coaches,
-            'UserCount' => $users-$coaches,
+            'UserCount' => $users - $coaches,
             'coach' => $coach,
             'Reserve_Count' => count($bookings),
             'advertCount' => count($advertisement),
-            'ManagerCount'=>$managers,
-            'CompanyUserCount'=>$companyUsers,
+            'ManagerCount' => $managers,
+            'CompanyUserCount' => $companyUsers,
 
         ];
         $res = [];
@@ -302,7 +302,7 @@ class Pages extends Controller
                 'specialty' => $userAsCoach->specialty,
                 'certificate' => $userAsCoach->certificate,
                 'role' => $role,
-                'img'=>$userAsUser->img,
+                'img' => $userAsUser->img,
 
                 'name_err' => "",
                 'user_name_err' => "",
@@ -313,7 +313,7 @@ class Pages extends Controller
                 'experience_err' => "",
                 'specialty_err' => "",
                 'certificate_err' => "",
-                'img_err'=> ""
+                'img_err' => ""
             ];
         } else {
             $data = [
@@ -323,13 +323,13 @@ class Pages extends Controller
                 'phoneNumber' => $userAsUser->phoneNumber,
                 'pwd' => $userAsUser->password,
                 'role' => $role,
-                'img'=>$userAsUser->img,
+                'img' => $userAsUser->img,
 
                 'name_err' => "",
                 'user_name_err' => "",
                 'email_err' => "",
                 'phoneNumber_err' => "",
-                'img_err'=> ""
+                'img_err' => ""
             ];
         }
         // print_r($data);
@@ -343,31 +343,32 @@ class Pages extends Controller
         // print_r($user);
         $this->view('Pages/UserProfiles/deleteProfile', $user);
     }
-   
-    public function changePassword(){
+
+    public function changePassword()
+    {
         $user = $this->pagesModel->findUser($_SESSION['user_email']);
-    
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-           
+
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-    
+
             $oldPassword = trim($_POST['old_password']);
             $newPassword = trim($_POST['new_password']);
             $confirmPassword = trim($_POST['confirm_password']);
-    
+
             if (empty($oldPassword) || empty($newPassword) || empty($confirmPassword)) {
-                
+
                 $this->view('Pages/UserProfiles/changePassword');
             } else {
-                $hashedPassword = $user->password; 
+                $hashedPassword = $user->password;
                 if (password_verify($oldPassword, $hashedPassword)) {
-                    
+
                     if ($newPassword != $confirmPassword) {
-                        
+
                         $errorMessage = "Passwords do not match. Please try again.";
                         $this->view('Pages/UserProfiles/changePassword', ['errorMessage' => $errorMessage]);
                     } else {
-                      
+
                         $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
                         $this->pagesModel->updatePassword($user->email, $hashedNewPassword);
                         $this->view('Pages/UserProfiles/changePassword');
@@ -387,40 +388,38 @@ class Pages extends Controller
         $role = "User";
         $user = $this->pagesModel->findUser($_SESSION['user_email']);
         $coach = $this->pagesModel->findCoach($_SESSION['user_email']);
-        $manager = $this->pagesModel->findManager($_SESSION['user_email']); 
-        if($user){
+        $manager = $this->pagesModel->findManager($_SESSION['user_email']);
+        if ($user) {
             $role = "User";
-        } 
-        else if($coach){
+        } else if ($coach) {
             $role = "Coach";
-        }
-        else if($manager){
+        } else if ($manager) {
             $role = "Manager";
         }
         $data = [
-                'role' => $role,
-                'email' => $_SESSION['user_email'],
-                'title' => "",
-                'name' => "",
-                'date' => "",
-                'content' => "",
-                'filename' => "",
-                'filetmp' => "",
+            'role' => $role,
+            'email' => $_SESSION['user_email'],
+            'title' => "",
+            'name' => "",
+            'date' => "",
+            'content' => "",
+            'filename' => "",
+            'filetmp' => "",
 
 
-                'title_err' => "",
-                'name_err' => "",
-                'date_err' => "",
-                'content_err' => "",
-                'filename_err' => "",
-                'filetmp_err' => "",
-            ];
+            'title_err' => "",
+            'name_err' => "",
+            'date_err' => "",
+            'content_err' => "",
+            'filename_err' => "",
+            'filetmp_err' => "",
+        ];
 
         $this->view('Pages/Advertisement/addAdvertisement', $data);
     }
 
 
-   
+
 
     // view advertisement
     public function View_Advertisement($name)
@@ -428,14 +427,12 @@ class Pages extends Controller
         $role = "User";
         $user = $this->pagesModel->findUser($_SESSION['user_email']);
         $coach = $this->pagesModel->findCoach($_SESSION['user_email']);
-        $manager = $this->pagesModel->findManager($_SESSION['user_email']); 
-        if(!empty($user)){
+        $manager = $this->pagesModel->findManager($_SESSION['user_email']);
+        if (!empty($user)) {
             $role = "User";
-        } 
-        else if(!empty($coach)){
+        } else if (!empty($coach)) {
             $role = "Coach";
-        }
-        else if(!empty($manager)){
+        } else if (!empty($manager)) {
             $role = "Manager";
         }
         $advertisement = $this->pagesModel->getAdvertisement();
@@ -475,9 +472,9 @@ class Pages extends Controller
         $flag = 0;
         $advertisement = $this->pagesModel->getAdvertisement();
         $user = $this->pagesModel->findUser($_SESSION['user_email']);
-        if(empty($user)){
+        if (empty($user)) {
             $flag = 1;
-        } 
+        }
         $data = [
             'adverts' => $advertisement,
             'flag' => $flag,
@@ -494,7 +491,7 @@ class Pages extends Controller
         $res = [];
         foreach ($data['users'] as $user) {
             $res[] = $this->pagesModel->findUser($user->email);
-            
+
         }
 
         $this->view('Pages/Coach/coach', $res);
@@ -522,7 +519,7 @@ class Pages extends Controller
     }
 
 
-   
+
 
     public function Coach_Registration($name)
     {
@@ -531,7 +528,16 @@ class Pages extends Controller
 
     public function Manager_Registration($name)
     {
-        $this->view('Pages/ManagerRegistration/managerRegistration');
+        $data = [
+            'name_err' => "",
+            'email_err' => "",
+            'phoneNumber_err' => "",
+            'password_err' => "",
+            'nic_err' => "",
+            'strAddress_err' => "",
+            'city_err' => "",
+        ];
+        $this->view('Pages/ManagerRegistration/managerRegistration', $data);
     }
 
     public function Manager_Profile($name)
@@ -554,14 +560,14 @@ class Pages extends Controller
             'nic' => $manager->nic,
             'strAddress' => $manager->strAddress,
             'city' => $manager->city,
-            'img'=>$manager->img,
+            'img' => $manager->img,
 
             'name_err' => "",
             'email_err' => "",
             'phoneNumber_err' => "",
             'nic_err' => "",
             'address_err' => "",
-            'img_err'=> ""
+            'img_err' => ""
         ];
 
         $this->view('Pages/Manager/managerEditProfile', $data);
@@ -592,17 +598,17 @@ class Pages extends Controller
             'phoneNumber' => $user->phoneNumber,
             'pwd' => $user->password,
             'nic' => $user->nic,
-            'image'=>$user->image,
+            'image' => $user->image,
 
             'name_err' => "",
             'email_err' => "",
             'phoneNumber_err' => "",
-            'img_err'=> ""
+            'img_err' => ""
         ];
         $this->view('Pages/CompanyUser/CompanyUserEditProfile', $data);
     }
 
-    
+
 
 
 
@@ -621,7 +627,7 @@ class Pages extends Controller
             'categoryName_err' => "",
             'categories' => $categories,
         ];
-        $this->view('Pages/InventoryManagement/category',$data);
+        $this->view('Pages/InventoryManagement/category', $data);
     }
 
     public function Order($name)
@@ -630,7 +636,7 @@ class Pages extends Controller
         $data = [
             'orders' => $orders,
         ];
-        $this->view('Pages/InventoryManagement/order',$data);
+        $this->view('Pages/InventoryManagement/order', $data);
     }
 
     public function Brand($name)
@@ -642,7 +648,7 @@ class Pages extends Controller
             'categories' => $categories,
             'brands' => $brand,
         ];
-        $this->view('Pages/InventoryManagement/brand',$data);
+        $this->view('Pages/InventoryManagement/brand', $data);
     }
 
     public function Product($name)
@@ -656,7 +662,7 @@ class Pages extends Controller
             'brands' => $brand,
             'products' => $products,
         ];
-        $this->view('Pages/InventoryManagement/product',$data);
+        $this->view('Pages/InventoryManagement/product', $data);
     }
 
     public function Cricket_Shop($name)
@@ -671,7 +677,7 @@ class Pages extends Controller
             'brands' => $brand,
             'products' => $products,
         ];
-        $this->view('Pages/CricketShop/crickShop',$data);
+        $this->view('Pages/CricketShop/crickShop', $data);
     }
 
     public function Cricket_Item($name)
@@ -688,9 +694,9 @@ class Pages extends Controller
             'products' => $products,
             'name' => $name,
         ];
-        $this->view('Pages/CricketShop/cricketItem',$data);
+        $this->view('Pages/CricketShop/cricketItem', $data);
     }
-   
+
     public function Item_Detail($name)
     {
         $cartItems = $this->pagesModel->getCart($_SESSION['user_email']);
@@ -706,10 +712,10 @@ class Pages extends Controller
             'SProduct' => $singleProduct,
             'name' => $name,
         ];
-        $this->view('Pages/CricketShop/itemDetail',$data);
+        $this->view('Pages/CricketShop/itemDetail', $data);
     }
 
-// Shooping Cart
+    // Shooping Cart
     public function Cricket_Cart($name)
     {
         $cartItems = $this->pagesModel->getCart($_SESSION['user_email']);
@@ -723,7 +729,7 @@ class Pages extends Controller
             'products' => $products,
             'name' => $name,
         ];
-        $this->view('Pages/CricketShop/cricketCart',$data);
+        $this->view('Pages/CricketShop/cricketCart', $data);
     }
 
     //checkout page
@@ -740,7 +746,7 @@ class Pages extends Controller
             'products' => $products,
             'name' => $name,
         ];
-        $this->view('Pages/CricketShop/checkout',$data);
+        $this->view('Pages/CricketShop/checkout', $data);
     }
 
 
@@ -754,7 +760,7 @@ class Pages extends Controller
         $products = $this->pagesModel->getProducts();
         $oders = $this->pagesModel->getOrders($_SESSION['user_id']);
 
-        
+
 
 
         $data = [
@@ -766,7 +772,7 @@ class Pages extends Controller
             'orders' => $oders,
         ];
 
-        $this->view('Pages/CricketShop/orders',$data);
+        $this->view('Pages/CricketShop/orders', $data);
     }
 
 

@@ -21,13 +21,10 @@ class Manager extends Controller
                 'name' => trim($_POST['name']),
                 'email' => trim($_POST['email']),
                 'phoneNumber' => trim($_POST['phoneNumber']),
-                // 'password' => "12345678",
+                'password' => "12345678",
                 'nic' => trim($_POST['nic']),
                 'strAddress' => trim($_POST['strAddress']),
                 'city' => trim($_POST['city']),
-
-                'filename' => $_FILES['file']['name'],
-                'filetmp' => $_FILES['file']['tmp_name'],
 
                 'name_err' => "",
                 'email_err' => "",
@@ -36,11 +33,9 @@ class Manager extends Controller
                 'nic_err' => "",
                 'strAddress_err' => "",
                 'city_err' => "",
-                'filename_err' => "",
-                'filetmp_err' => "",
             ];
 
-        
+
 
             //validate name
             if (empty($data['name'])) {
@@ -51,20 +46,15 @@ class Manager extends Controller
             if (empty($data['email'])) {
                 $data['email_err'] = "Please enter an email";
             } else {
-                // if($this->coachUserModel->findUserByEmail($data['email'])){
-                //     $data['email_err'] = "This email is already in use";
-                // }
+                if ($this->managerModel->findUserByEmail($data['email'])) {
+                    $data['email_err'] = "This email is already in use";
+                }
             }
 
             //validate phone number
             if (empty($data['phoneNumber'])) {
                 $data['phoneNumber_err'] = "Please enter a phone number";
             }
-
-            //validate password
-            // if (empty($data['password'])) {
-            //     $data['password_err'] = "Please enter a password";
-            // }
 
             if (empty($data['nic'])) {
                 $data['nic_err'] = "Please enter the NIC number";
@@ -86,10 +76,12 @@ class Manager extends Controller
 
                 //create user
                 if ($this->managerModel->managerRegister($data)) {
+                    echo "<script>alert('Manager Registered Successfully');</script>";
                     redirect('Pages/Dashboard/owner');
                 } else {
                     die('Something Went wrong');
                 }
+
             } else {
                 //Load the view
                 echo "Place";
@@ -157,7 +149,7 @@ class Manager extends Controller
                 $newfilename = uniqid() . "-" . $_FILES['file']['name'];
                 move_uploaded_file($_FILES['file']['tmp_name'], "../public/profilepic/" . $newfilename);
                 $data['filename'] = $newfilename;
-            }else {
+            } else {
                 // No new file uploaded, retain the existing image value
                 $existingFilename = $this->managerModel->getExistingImageFilename($data['email']); // Replace $userId with the actual user ID
                 $data['filename'] = $existingFilename;
@@ -195,14 +187,14 @@ class Manager extends Controller
 
 
             //If validation is completed and no error, then register the user
-            if (empty($data['name_err']) && empty($data['email_err']) && empty($data['nic_err'])  && empty($data['phoneNumber_err']) && empty($data['strAddress_err']) && empty($data['city_err'])) {
+            if (empty($data['name_err']) && empty($data['email_err']) && empty($data['nic_err']) && empty($data['phoneNumber_err']) && empty($data['strAddress_err']) && empty($data['city_err'])) {
                 //Hash the password
                 // $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
-                
+
                 //create user
-                if($this->managerModel->updateManager($data)) {
+                if ($this->managerModel->updateManager($data)) {
                     redirect('Pages/Manager_Profile/manager');
-                }else{
+                } else {
                     die('Something Went wrong');
                 }
 
@@ -219,12 +211,12 @@ class Manager extends Controller
     public function delete()
     {
         // var_dump($_POST);
-        if($this->managerModel->deleteManager($_POST["submit"])) {  
+        if ($this->managerModel->deleteManager($_POST["submit"])) {
             redirect("Users/register");
-        }else{
+        } else {
             die("Something Went Wrong");
         }
-        
+
     }
 }
 
