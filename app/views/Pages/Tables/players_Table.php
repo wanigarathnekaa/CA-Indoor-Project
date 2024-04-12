@@ -80,7 +80,7 @@
                                     <th>Email</th>
                                     <th>Mobile Number</th>
                                     <th></th>
-                                    <th></th>
+                                    <!-- <th></th> -->
                               </tr>
                         </thead>
 
