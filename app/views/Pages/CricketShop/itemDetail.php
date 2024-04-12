@@ -15,7 +15,7 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
         <p class="product-short-des">
             <?= $data['SProduct']->short_description; ?>
         </p>
-        
+
         <span class="product-actual-price">LKR
             <?= number_format($data['SProduct']->selling_price, 2, '.', ''); ?>
         </span>
@@ -51,49 +51,88 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
-        var cartCount = '<?= count($data['cartItems']) ?>';
-        if (cartCount == 0) {
+        var cartCount = <?= count($data['cartItems']) ?>;
+        if (cartCount === 0) {
             cartCount = 0;
         }
         $('#cartCount').html(cartCount);
+
         $('#add').click(function () {
             var product_id = '<?= $data['SProduct']->product_id; ?>';
             var email = '<?= $_SESSION['user_email']; ?>';
             var product_title = '<?= $data['SProduct']->product_title; ?>';
             var product_price = '<?= $data['SProduct']->selling_price; ?>';
             var product_thumbnail = '<?= $data['SProduct']->product_thumbnail; ?>';
-            var qty = $('#qty\\[\\]').val();
+            var qty = parseInt($('#qty\\[\\]').val());
+            var flag = 0;
+            var cartId = 0;
+
+            console.log('<?= $data['SProduct']->qty; ?>');
+            console.log(qty);
+
+            <?php foreach ($data['cartItems'] as $element): ?>
+                // Check if the product is already in the cart
+                if (product_id == <?= $element->p_id; ?>) {
+                    // Increment the quantity
+                    qty += parseInt(<?= $element->qty; ?>);
+                    cartId = <?= $element->cart_id; ?>;
+                    flag = 1;
+                }
+            <?php endforeach; ?>
+
             var totalAmount = product_price * qty * 0.8;
 
             if (qty > '<?= $data['SProduct']->qty; ?>') {
                 $('#quantity').html("We don't have enough " + product_title + " stock on hand for the quantity you selected. Please try again.");
             } else {
                 $('#quantity').html("");
-                $.ajax({
-                    type: 'POST',
-                    url: '<?= URLROOT; ?>/CricketShop/addToCart',
-                    data: {
-                        product_id: product_id,
-                        email: email,
-                        product_title: product_title,
-                        product_price: product_price,
-                        product_thumbnail: product_thumbnail,
-                        qty: qty,
-                        totalAmount: totalAmount,
-                    },
-                    success: function (response) {
-                        var jsonData = JSON.parse(response);
-                        if (jsonData.status == 'success') {
-                            $('#quantity').html("Item added to cart");
-                            var updatedCartCount = parseInt(cartCount) + 1;
-                            $('#cartCount').html(updatedCartCount);
-                        } else {
-                            $('#quantity').html("Item not added to cart");
+                if (flag == 0) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?= URLROOT; ?>/CricketShop/addToCart',
+                        data: {
+                            product_id: product_id,
+                            email: email,
+                            product_title: product_title,
+                            product_price: product_price,
+                            product_thumbnail: product_thumbnail,
+                            qty: qty,
+                            totalAmount: totalAmount,
+                        },
+                        success: function (response) {
+                            var jsonData = JSON.parse(response);
+                            if (jsonData.status == 'success') {
+                                $('#quantity').html("Item added to cart");
+                                var updatedCartCount = parseInt(cartCount) + 1;
+                                $('#cartCount').html(updatedCartCount);
+                            } else {
+                                $('#quantity').html("Item not added to cart");
+                            }
                         }
-                    }
-                });
+                    });
+                }else{
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?= URLROOT; ?>/CricketShop/updateCart',
+                        data: {
+                            qty: qty,
+                            cart_id: cartId,
+                            product_price: product_price*0.8,
+                            p_id: product_id,
+                        },
+                        success: function (response) {
+                            var jsonData = JSON.parse(response);
+                            if (jsonData.status == 'success') {
+                                $('#quantity').html("Item added to cart");
+                                var updatedCartCount = parseInt(cartCount) + 1;
+                                $('#cartCount').html(updatedCartCount);
+                            } else {
+                                $('#quantity').html("Item not added to cart");
+                            }
+                        }
+                    });
+                }
             }
         });
     });
-
 </script>

@@ -137,7 +137,7 @@ include_once APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                 success: function(response) {
                     if (response.status === "success") {
                         alert("Order placed successfully");
-                        location.reload();
+                        window.location.href = "http://localhost/C&A_Indoor_Project/Pages/Cricket_Shop/User";
                     } else {
                         console.log(response);
                     }
