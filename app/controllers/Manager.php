@@ -25,7 +25,7 @@ class Manager extends Controller
                 'name' => trim($_POST['name']),
                 'email' => trim($_POST['email']),
                 'phoneNumber' => trim($_POST['phoneNumber']),
-                'password' => "12345678",
+                // 'password' => "12345678",
                 'nic' => trim($_POST['nic']),
                 'strAddress' => trim($_POST['strAddress']),
                 'city' => trim($_POST['city']),
@@ -80,7 +80,7 @@ class Manager extends Controller
 
                 //check whether the  password is sent to the coach via email
                 if($this->managerModel->SendPasswordViaEmail($_POST['email'],$password)){
-                    $data['pwd'] = $password;
+                    $data['password'] = $password;
                 }
                 else {        
                     die('Something Went wrong');

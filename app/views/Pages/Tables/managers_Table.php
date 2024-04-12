@@ -37,7 +37,7 @@
                   </div>
             
                   <div class="add-btn">
-                        <a href="#"><i class="fa-solid fa-user-plus  icon"></i></a>
+                        <a href="<?php echo URLROOT; ?>/Pages/Manager_Registration/manager"><i class="fa-solid fa-user-plus  icon"></i></a>
                   </div>
             </div>
 
@@ -103,7 +103,7 @@
                                           </td>
                                           
                                           <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
-                                          <td onclick="openDeletePopup()"><i class="fa-solid fa-user-slash delete icon"></i></td>
+                                          <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($manager)); ?>)"><i class="fa-solid fa-user-slash delete icon"></i></td>
                                     </tr>
                                     <?php $i = $i + 1;
                               endforeach; ?>
@@ -153,10 +153,14 @@
                         <span class="close" onclick="closeDeletePopup()"><i class="fa-solid fa-xmark"></i></span>
                         <h2>confirm delete</h2>
 
-                        <div class="btns">
-                              <button type="button">Delete</button>
-                              <button type="button" onclick="closeDeletePopup()">Cancel</button>
-                        </div>
+                        <form action="<?php echo URLROOT; ?>/Manager/delete" method="POST">
+                              <div class="btns">
+                                    <button type="button">Delete</button>
+                                    <button type="button" onclick="closeDeletePopup()">Cancel</button>
+                              </div>
+                              
+                              <input hidden name='submit' id="hid_input">
+                        </form>
                   </div>
             </div>
 

@@ -38,7 +38,7 @@ function openDeletePopup(manager){
       popupcontainer.classList.add("open-popupcontainer");
 
       var input = document.getElementById("hid_input");
-      input.value = manager.manager_Id;
+      input.value = manager.email;
 }
 
 function closeDeletePopup(){
