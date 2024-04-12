@@ -1,6 +1,7 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
 class Coach extends Controller
 {
     private $coachModel;
@@ -27,7 +28,7 @@ class Coach extends Controller
                 'user_name' => trim($_POST['name']),
                 'email' => trim($_POST['email']),
                 'phoneNumber' => trim($_POST['phoneNumber']),
-                // 'pwd' => "12345678",
+                'pwd' => "12345678",
                 'nic' => trim($_POST['nic']),
                 'srtAddress' => trim($_POST['srtAddress']),
                 'city' => trim($_POST['city']),
@@ -36,11 +37,7 @@ class Coach extends Controller
                 'specialty' => trim($_POST['specialty']),
                 'certificate' => trim($_POST['certificate']),
 
-                'filename' => trim($_FILES['file']['name']),
-                'filetmp' => trim($_FILES['file']['tmp_name']),
-
                 'name_err' => "",
-                'user_name_err' => "",
                 'email_err' => "",
                 'phoneNumber_err' => "",
                 'nic_err' => "",
@@ -50,24 +47,11 @@ class Coach extends Controller
                 'experience_err' => "",
                 'specialty_err' => "",
                 'certificate_err' => "",
-                'filename_err' => "",
-                'filetmp_err' => ""
             ];
-
-
-            $newfilename = uniqid() . "-" . $data['filename'];
-            move_uploaded_file($data['filetmp'], "../public/profilepic/" . $newfilename);
-            $data['filename'] = $newfilename;
-            print_r($data);
 
             //validate name
             if (empty($data['name'])) {
                 $data['name_err'] = "Please enter a name";
-            }
-
-            //validate user_name
-            if (empty($data['user_name'])) {
-                $data['user_name_err'] = "Please enter an user_name";
             }
 
             //validate email
@@ -129,7 +113,6 @@ class Coach extends Controller
             if (empty($data['filename'])) {
                 $data['filename_err'] = "Please upload profile picture";
             }
-
             
 
             //If validation is completed and no error, then register the user
@@ -153,49 +136,63 @@ class Coach extends Controller
                     echo "User Registered";
                     redirect('Pages/Dashboard/manager');
                 } else {
-                    
                     die('Something Went wrong');
                 }
+
+                //If validation is completed and no error, then register the user
+                if (
+                    empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err'])
+                    && empty($data['nic_err']) && empty($data['phoneNumber_err']) && empty($data['srtAddress_err'])
+                    && empty($data['city_err']) && empty($data['achivements_err']) && empty($data['experience_err'])
+                    && empty($data['specialty_err']) && empty($data['certificate_err']) && empty($data['filename_err'])
+                ) {
+                    // //Hash the password
+                    $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
+                    //create user
+                    if ($this->coachModel->coachRegister($data) && $this->coachUserModel->register($data)) {
+                        echo "User Registered";
+                        redirect('Pages/Dashboard/manager');
+                    } else {
+
+                        die('Something Went wrong');
+                    }
+                } else {
+                    //Load the view
+                    $this->view('Pages/CoachRegistration/coachRegistration', $data);
+                }
             } else {
-                //Load the view
-                $this->view('Pages/CoachRegistration/coachRegistration', $data);
+                //initial form
+                $data = [
+                    'name' => "",
+                    'user_name' => "",
+                    'email' => "",
+                    'phoneNumber' => "",
+                    'pwd' => "",
+                    'nic' => "",
+                    'srtAddress' => "",
+                    'city' => "",
+                    'achivements' => "",
+                    'experience' => "",
+                    'specialty' => "",
+                    'certificate' => "",
+
+                    'name_err' => "",
+                    'user_name_err' => "",
+                    'email_err' => "",
+                    'phoneNumber_err' => "",
+                    'nic_err' => "",
+                    'srtAddress_err' => "",
+                    'city_err' => "",
+                    'achivements_err' => "",
+                    'experience_err' => "",
+                    'specialty_err' => "",
+                    'certificate_err' => "",
+                ];
             }
-        } else {
-            //initial form
-            $data = [
-                'name' =>"",
-                'user_name' => "",
-                'email' => "",
-                'phoneNumber' => "",
-                'pwd' => "",
-                'nic' => "",
-                'srtAddress' => "",
-                'city' => "",
-                'achivements' => "",
-                'experience' => "",
-                'specialty' => "",
-                'certificate' => "",
-                'filename' => "",
-                'filetmp' => "",
 
-                'name_err' => "",
-                'user_name_err' => "",
-                'email_err' => "",
-                'phoneNumber_err' => "",
-                'nic_err' => "",
-                'srtAddress_err' => "",
-                'city_err' => "",
-                'achivements_err' => "",
-                'experience_err' => "",
-                'specialty_err' => "",
-                'certificate_err' => "",
-                'filename_err' => "",
-                'filetmp_err' => ""
-            ];
+            //Load the view
+            $this->view('Pages/CoachRegistration/coachRegistration', $data);
         }
-
-        //Load the view
-        $this->view('Pages/CoachRegistration/coachRegistration', $data);
     }
 
 
@@ -248,7 +245,7 @@ class Coach extends Controller
                 $newfilename = uniqid() . "-" . $_FILES['file']['name'];
                 move_uploaded_file($_FILES['file']['tmp_name'], "../public/profilepic/" . $newfilename);
                 $data['filename'] = $newfilename;
-            }else {
+            } else {
                 // No new file uploaded, retain the existing image value
                 $existingFilename = $this->coachUserModel->getExistingImageFilename($data['email']); // Replace $userId with the actual user ID
                 $data['filename'] = $existingFilename;
@@ -339,17 +336,17 @@ class Coach extends Controller
 
 
 
-    
+
     // delete function.....................................................
     public function delete()
     {
         // var_dump($_POST);
-        if($this->coachModel->deleteCoach($_POST["submit"]) && $this->coachUserModel->deleteUser($_POST["submit"])) {  
+        if ($this->coachModel->deleteCoach($_POST["submit"]) && $this->coachUserModel->deleteUser($_POST["submit"])) {
             redirect("Users/register");
-        }else{
+        } else {
             die("Something Went Wrong");
         }
-        
+
     }
 
 
