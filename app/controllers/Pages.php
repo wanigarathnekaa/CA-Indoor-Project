@@ -524,29 +524,16 @@ class Pages extends Controller
     public function Coach_Registration($name)
     {
         $data = [
-            'name' => "",
-            'email' => "",
-            'phoneNumber' => "",
-            'pwd' => "",
-            'nic' => "",
-            'srtAddress' => "",
-            'city' => "",
-            'experience' => "",
-            'specialty' => "",
-            'certificate' => "",
-            'achivements' => "",
-
             'name_err' => "",
             'email_err' => "",
             'phoneNumber_err' => "",
             'password_err' => "",
             'nic_err' => "",
-            'srtAddress_err' => "",
+            'strAddress_err' => "",
             'city_err' => "",
             'experience_err' => "",
             'specialty_err' => "",
             'certificate_err' => "",
-            'achivements_err' => "",
         ];
         $this->view('Pages/CoachRegistration/coachRegistration', $data);
     }
@@ -554,14 +541,6 @@ class Pages extends Controller
     public function Manager_Registration($name)
     {
         $data = [
-            'name' => "",
-            'email' => "",
-            'phoneNumber' => "",
-            'pwd' => "",
-            'nic' => "",
-            'strAddress' => "",
-            'city' => "",
-
             'name_err' => "",
             'email_err' => "",
             'phoneNumber_err' => "",
