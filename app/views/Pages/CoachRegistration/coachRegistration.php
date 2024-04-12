@@ -36,40 +36,46 @@
               <div class="input-box">
                 <span class="details">Full Name</span>
                 <input type="text" placeholder="Enter your name"  name="name" required >
+                <span class="form-invalid"><?php echo $data['name_err']; ?></span>
               </div>
             
               <div class="input-box">
                 <span class="details">Email</span>
                 <input type="email" placeholder="Enter your email" name="email" required>
-                <!-- validation -->
-                <!-- <span class="form-invalid"><?php echo $data['email_err']; ?></span> -->
+                <span class="form-invalid"><?php echo $data['email_err']; ?></span>
               </div>
               <div class="input-box">
                 <span class="details">Phone Number</span>
                 <input type="tel" placeholder="Enter your number" name="phoneNumber" required>
+                <span class="form-invalid"><?php echo $data['phoneNumber_err']; ?></span>
               </div>
               <div class="input-box">
                 <span class="details">NIC</span>
                 <input type="text" placeholder="Enter your NIC number" name="nic" required>
+                <span class="form-invalid"><?php echo $data['nic_err']; ?></span>
               </div>
             
               <div class="input-box">
                 <span class="details">Expeience</span>
                 <input type="text" placeholder="Enter your Expeience" name="experience" required>
+                <span class="form-invalid"><?php echo $data['experience_err']; ?></span>
               </div>
               <div class="input-box">
                 <span class="details">Speciality</span>
                 <input type="text" placeholder="Enter your Speciality" name="specialty" required>
+                <span class="form-invalid"><?php echo $data['specialty_err']; ?></span>
               </div>
               <div class="input-box">
                 <span class="details">Certificates</span>
                 <input type="text" placeholder="Enter your Certificates" name="certificate" required>
+                <span class="form-invalid"><?php echo $data['certificate_err']; ?></span>
               </div>
             
               
               <div class="input-box">
                   <span class="details">Achivements</span>
-                  <input type="text" name="achivements" placeholder="Enter your Achivements" required>              
+                  <input type="text" name="achivements" placeholder="Enter your Achivements" required> 
+                  <span class="form-invalid"><?php echo $data['achivements_err']; ?></span>             
               </div>
 
               <!-- <label>Address</label> -->
@@ -77,12 +83,14 @@
                 <label for="address">Street Address</label>
                 <div>
                   <input type="text" name="srtAddress"  placeholder="Enter Your Street Address" required>
+                  <span class="form-invalid"><?php echo $data['srtAddress_err']; ?></span>
                 </div>
               </div>
               <div class="input-box">
                 <label for="address">City</label>
                 <div>
                   <input type="text" name="city"  placeholder="Enter Your City" required>
+                  <span class="form-invalid"><?php echo $data['city_err']; ?></span>
                 </div>
               </div>
             </div>

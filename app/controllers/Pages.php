@@ -523,7 +523,19 @@ class Pages extends Controller
 
     public function Coach_Registration($name)
     {
-        $this->view('Pages/CoachRegistration/coachRegistration');
+        $data = [
+            'name_err' => "",
+            'email_err' => "",
+            'phoneNumber_err' => "",
+            'password_err' => "",
+            'nic_err' => "",
+            'strAddress_err' => "",
+            'city_err' => "",
+            'experience_err' => "",
+            'specialty_err' => "",
+            'certificate_err' => "",
+        ];
+        $this->view('Pages/CoachRegistration/coachRegistration', $data);
     }
 
     public function Manager_Registration($name)
