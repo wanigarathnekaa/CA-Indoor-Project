@@ -643,7 +643,8 @@ class Pages extends Controller
 
     public function Inventory_Management($name)
     {
-        $this->view('Pages/InventoryManagement/dashboard');
+        $orders = $this->pagesModel->getOrder();
+        $this->view('Pages/InventoryManagement/dashboard', $orders);
     }
 
     public function Category($name)
