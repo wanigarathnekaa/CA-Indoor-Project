@@ -22,14 +22,17 @@ $new_array_3 = array_filter($data, function ($item) use ($filter_date, $filter_n
 
 <?php if (isset($_SESSION['booking_success']) && $_SESSION['booking_success'] === true) {
     ?>
+<form id="successForm" action="<?php echo URLROOT; ?>/Bookings/SendInvoice/30" method="post">
     <div class="SuccessContainer">
         <div class="SuccessPopup" id="SuccessPopup">
             <img src="<?= URLROOT ?>/images/tick.png">
             <h2>Payment Successfully!</h2>
             <p>Your payment has been successfully submitted.</p>
-            <button type="button" onclick="closePopupSuccess()">OK</button>
+            <button type="submit" name="OKAY" onclick="closePopupSuccess()">OK</button>
         </div>
     </div>
+</form>
+
     <?php
 } ?>
 

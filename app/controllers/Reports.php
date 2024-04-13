@@ -17,7 +17,7 @@ class Reports extends Controller
 
                      }
 
-                     public function Bookingreport()
+    public function Bookingreport()
                      {
                          
                         $this->view('Pages/Report/bookingreport');
@@ -44,14 +44,17 @@ class Reports extends Controller
             $this->view('Pages/Report/SalesAmount', $data1);
         }
         
-if(isset($_POST["filter"])){
-    $this->reportmodel->displayFilteredBookings($data);
-}
+        if(isset($_POST["filter"])){
+            $this->reportmodel->displayFilteredBookings($data);
+        }
 
-if(isset($_POST["download_pdf"])) {
-    $this->reportmodel->filterBookingsAndGeneratePDF($data);
+        if(isset($_POST["download_pdf"])) {
+            $this->reportmodel->filterBookingsAndGeneratePDF($data);
+            // $invoice_name=$this->reportmodel->sendemail($data);
+            // $this->reportmodel->sendingemail($invoice_name);
+            
 
-}
+        }
 
 
     }
@@ -87,8 +90,8 @@ if(isset($_POST["download_pdf"])) {
 
     }
 
-    public function SalesAmounter(){
-        $this->view('Pages/Report/SalesAmount');
+    public function genandsendemail(){
+        $this->view('Pages/Report/orderReport');
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Valid input
@@ -96,25 +99,24 @@ if(isset($_POST["download_pdf"])) {
 
             // Input data
             $data = [
-                'invoice_date' => trim($_POST['invoice_date']),
-                'invoice_due_date' => trim($_POST['invoice_due_date']),   
+                'category' => trim($_POST['category']),
             ];
-  
-            $bookings = $this->reportmodel->getBookingDetails($data);
-            $data1 = [
-                'bookings' => $bookings
+            
+            $orders = $this->reportmodel->getOrderDetails($data);
+            $data2 = [
+                'orders' => $orders
             ];
-            $this->view('Pages/Report/SalesAmount', $data1);
+            $this->view('Pages/Report/bookingreport', $data2);
         }
         
-if(isset($_POST["filter"])){
-    $this->reportmodel->displayFilteredBookings($data);
+if(isset($_POST["Filter"])){
+    $this->reportmodel->displayMonthlyFilteredBookings($data);
 }
 
 if(isset($_POST["download_pdf"])) {
-    $this->reportmodel->filterBookingsAndGenerateANDsendPDF($data);
+    $this->reportmodel->MonthlyfilterBookingsAndGeneratePDF($data);
 
-}
+}   
 
 
     }
