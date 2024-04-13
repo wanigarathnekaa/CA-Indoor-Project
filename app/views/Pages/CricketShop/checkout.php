@@ -67,19 +67,19 @@ include_once APPROOT . '/views/Pages/CricketShop/crickHeader.php';
         <div class="prizecontainer">
             <h2 class="topic">Bill</h2>
             <p>Items <span class="price">
-                        <?php echo $qty; ?>
-                    </span></p>
+                    <?php echo $qty; ?>
+                </span></p>
             <p>Delivery <span class="price">Free</span></p>
             <p>Total price <span class="price">LKR
-                        <?php echo number_format($product_total); ?>
-                    </span></p>
+                    <?php echo number_format($product_total); ?>
+                </span></p>
             <p>Discount <span class="price">
-                        <?php echo (($product_total - $total_price) / $product_total) * 100; ?>%
-                    </span></p>
+                    <?php echo (($product_total - $total_price) / $product_total) * 100; ?>%
+                </span></p>
             <hr>
             <p class="tot">Total Bill <span class="price"><b>LKR
-                                <?php echo number_format($total_price); ?>
-                            </b></span></p>
+                        <?php echo number_format($total_price); ?>
+                    </b></span></p>
         </div>
     </div>
 </div>
@@ -87,16 +87,17 @@ include_once APPROOT . '/views/Pages/CricketShop/crickHeader.php';
 <?php
 include_once APPROOT . '/views/Pages/CricketShop/crickFooter.php';
 ?>
+<script src="https://www.payhere.lk/lib/payhere.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         var cartCount = '<?= count($data['cartItems']) ?>';
         if (cartCount == 0) {
             cartCount = 0;
         }
         $('#cartCount').html(cartCount);
 
-        $("#pickup").change(function(e) {
+        $("#pickup").change(function (e) {
             e.preventDefault();
             var pickupOption = $("#pickup").val();
             if (pickupOption == 'pickup_at_store') {
@@ -110,7 +111,7 @@ include_once APPROOT . '/views/Pages/CricketShop/crickFooter.php';
             }
         });
 
-        $('#orderForm').submit(function(e) {
+        $('#orderForm').submit(function (e) {
             e.preventDefault();
             var pickup = $('#pickup').val();
             var payment = $('#payment').val();
@@ -119,6 +120,7 @@ include_once APPROOT . '/views/Pages/CricketShop/crickFooter.php';
             var adr = $('#adr').val();
             var phone = $('#phone').val();
             var city = $('#city').val();
+            var price = '<?= $total_price; ?>';
 
             $.ajax({
                 type: "POST",
@@ -131,18 +133,86 @@ include_once APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                     adr: adr,
                     phone: phone,
                     city: city,
+                    price: price,
                     items: <?= json_encode($data["cartItems"]); ?>
                 },
                 dataType: 'json',
-                success: function(response) {
+                success: function (response) {
                     if (response.status === "success") {
                         alert("Order placed successfully");
                         window.location.href = "http://localhost/C&A_Indoor_Project/Pages/Cricket_Shop/User";
                     } else {
                         console.log(response);
+                        obj = response;
+                        // Put the payment variables here
+                        var payment = {
+                            sandbox: true,
+                            merchant_id: obj["merchant_id"],
+                            return_url:
+                                "http://localhost/C&A_Indoor_Project/Pages/Cricket_Shop/User", // Important
+                            cancel_url:
+                                "http://localhost/C&A_Indoor_Project/Pages/Cricket_Shop/User", // Important
+                            notify_url: "http://sample.com/notify",
+                            order_id: obj["order_id"],
+                            items: obj["items"],
+                            amount: obj["amount"],
+                            currency: obj["currency"],
+                            hash: obj["hash"], // *Replace with generated hash retrieved from backend
+                            first_name: obj["first_name"],
+                            last_name: obj["last_name"],
+                            email: obj["email"],
+                            phone: obj["phone"],
+                            address: "No 37, Rohina Mawatha, Palawatta",
+                            city: "Battaramulla",
+                            country: "Sri Lanka",
+                            delivery_address: obj["address"],
+                            delivery_city: obj["city"],
+                            delivery_country: "Sri Lanka",
+                            custom_1: "",
+                            custom_2: "",
+                        };
+                        console.log(payment);
+                        payhere.startPayment(payment);
+
+                        payhere.onCompleted = function onCompleted(orderId) {
+                            console.log("Payment completed. OrderID:" + orderId);
+
+                            var data = {
+                                pickup: obj["pickup"],
+                                payment: obj["payment"],
+                                fname: obj["first_name"],
+                                email: obj["email"],
+                                adr: obj["address"],
+                                phone: obj["phone"],
+                                city: obj["city"],
+                                price: obj["amount"],
+                                items: <?= json_encode($data["cartItems"]); ?>
+                            };
+
+                            console.log(data); 
+
+                            $.ajax({
+                                type: "POST",
+                                url: "<?= URLROOT; ?>/Order/onlinePaidOrder",
+                                data: data,
+                                dataType: 'json',
+                                success: function (response) {
+                                    if (response.status === "success") {
+                                        alert("Order placed successfully");
+                                        window.location.href = "http://localhost/C&A_Indoor_Project/Pages/Cricket_Shop/User";
+                                    } else {
+                                        console.log(response);
+                                    }
+                                },
+                                error: function (xhr, status, error) {
+                                    console.error("AJAX request failed:", error);
+                                }
+                            });
+                        };
+
                     }
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.error("AJAX request failed:", error);
                 }
             });
