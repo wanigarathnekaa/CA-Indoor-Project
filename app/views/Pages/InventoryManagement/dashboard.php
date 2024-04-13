@@ -109,48 +109,15 @@
 
                 <!-- table body -->
                 <tbody>
+                    <?php foreach ($data as $order):?>
                     <tr>
-                        <td>1</td>
-                        <td>Order_01</td>
-                        <td>2024-01-28</td>
-                        <td>paid</td>
-                        <td>complete</td>
+                        <td><?php echo $order->order_id;?></td>
+                        <td><?php echo $order->full_name;?></td>
+                        <td><?php echo $order->order_date;?></td>
+                        <td><?php echo $order->payment_status;?></td>
+                        <td><?php echo $order->order_status;?></td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Order_02</td>
-                        <td>2024-01-28</td>
-                        <td>Unpaid</td>
-                        <td>Incomplete</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Order_03</td>
-                        <td>2024-01-28</td>
-                        <td>paid</td>
-                        <td>complete</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Order_04</td>
-                        <td>2024-01-28</td>
-                        <td>paid</td>
-                        <td>Incomplete</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Order_05</td>
-                        <td>2024-01-28</td>
-                        <td>Unpaid</td>
-                        <td>complete</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Order_06</td>
-                        <td>2024-01-28</td>
-                        <td>Unpaid</td>
-                        <td>complete</td>
-                    </tr>
+                    <?php endforeach;?>
                 </tbody>
             </table>
 
