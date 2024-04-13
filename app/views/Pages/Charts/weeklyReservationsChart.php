@@ -1,49 +1,47 @@
 <?php
 
 // Assuming $data contains your reservations array
-$reservations = $data;
+$reservations = $data; // Make sure $data is initialized with your reservations data
 
-// Function to get the start and end date of a week given any date
-function get_week_boundaries($date) {
-    $start_of_week = strtotime('last Sunday', strtotime($date));
-    $end_of_week = strtotime('next Saturday', $start_of_week);
-    return [$start_of_week, $end_of_week];
+// Get today's date
+$today = date('Y-m-d');
+$today_name = date('l');
+
+// Get the starting date (Sunday) of the current week
+if ($today_name == 'Sunday') {
+    $startOfWeek = strtotime('today');
+} else {
+    $startOfWeek = strtotime('last sunday');
 }
 
-// Initialize a chart to store the number of reservations for each day
-$chart = [];
+$startOfWeekFormatted = date('Y-m-d', $startOfWeek);
 
-// Iterate through the reservations
-foreach ($reservations as $reservation) {
-    $reservation_date = strtotime($reservation->date);
-    list($start_of_week, $end_of_week) = get_week_boundaries(date("Y-m-d", $reservation_date));
-
-    // If the start_of_week key doesn't exist in the chart, initialize it
-    if (!isset($chart[$start_of_week])) {
-        $chart[$start_of_week] = [];
-    }
-
-    // If the reservation date key doesn't exist in the chart, initialize it
-    if (!isset($chart[$start_of_week][$reservation_date])) {
-        $chart[$start_of_week][$reservation_date] = 0;
-    }
-
-    // Increment the count for the reservation date
-    $chart[$start_of_week][$reservation_date]++;
+// Get the ending date (Saturday) of the current week
+if ($today_name == 'Saturday') {
+    $endOfWeek = strtotime('today');
+} else {
+    $endOfWeek = strtotime('next saturday');
 }
 
-// Prepare data for Chart.js
-$weekly_counts = [];
-$day_labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+$endOfWeekFormatted = date('Y-m-d', $endOfWeek);
 
-foreach ($chart as $week) {
-    $weekly_count = [];
-    foreach ($day_labels as $day) {
-        // If the day doesn't exist in the current week, set count to 0
-        $weekly_count[] = isset($week[strtotime($day)]) ? $week[strtotime($day)] : 0;
+
+$countList = [];
+for ($i = $startOfWeek; $i <= $endOfWeek; $i += 86400) { // 86400 seconds in a day
+    $date_of_week = date('Y-m-d', $i);
+    $count = 0;
+    foreach ($reservations as $reservation) {
+        $reservationDate = strtotime($reservation->date); // Convert reservation date to timestamp
+        if ($reservationDate == $i) {
+            $count++;
+        }
     }
-    $weekly_counts[] = $weekly_count;
-}
+    // Store the count in the list
+    $countList[] = $count;
+}  
+
+// Convert countList to JSON for JavaScript
+$countListJSON = json_encode($countList);
 
 ?>
 
@@ -60,14 +58,12 @@ foreach ($chart as $week) {
         data: {
             labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
             datasets: [
-                <?php foreach ($weekly_counts as $week_count): ?>
-                    {
-                        label: 'Number of Reservations',
-                        data: <?php echo json_encode($week_count); ?>,
-                        borderWidth: -3,
-                        backgroundColor: "#4F9DA9",
-                    },
-                <?php endforeach; ?>
+                {
+                    label: 'Number of Reservations',
+                    data: <?= $countListJSON ?>,
+                    borderWidth: 1,
+                    backgroundColor: "#4F9DA9",
+                },
             ]
         },
         options: {
