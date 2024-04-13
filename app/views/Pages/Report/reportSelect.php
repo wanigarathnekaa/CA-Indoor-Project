@@ -24,54 +24,36 @@
     <!-- Content -->
     <section class="home">
 
-        <!-- Cards -->
-        <div class="cardBox">
+    <!-- Cards -->
+    <div class="cardBox">
         <a class="card" href="<?php echo URLROOT; ?>/Reports/SalesAmount">
-    <div>
-       
+        <div>
         <h1>Filter Bookings</h1>
         <p></p>
-    </div>
-    <div class="iconBx"></div>
-</a>
-
-
-        
-
-            
         </div>
+        <div class="iconBx"></div>
+        </a>
+    </div>
 
-        <div class="cardBox">
+    <div class="cardBox">
         <a class="card" href="<?php echo URLROOT; ?>/Reports/SalesMonthly">
-    <div>
-       
+        <div>
         <h1>Monthly Booking</h1>
         <p></p>
-    </div>
-    <div class="iconBx"></div>
-</a>
-
-
-        
-
-            
         </div>
+        <div class="iconBx"></div>
+        </a>
+    </div>
 
-        <div class="cardBox">
-        <a class="card" href="<?php echo URLROOT; ?>/Reports/SalesMonthly">
-    <div>
-       
+    <div class="cardBox">
+        <a class="card" href="<?php echo URLROOT; ?>/Reports/genandsendemail">
+        <div>
         <h1>Filter Orders</h1>
         <p></p>
-    </div>
-    <div class="iconBx"></div>
-</a>
-
-
-        
-
-            
         </div>
+        <div class="iconBx"></div>
+        </a>
+    </div>
          
            
 

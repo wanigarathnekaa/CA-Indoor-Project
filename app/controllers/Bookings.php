@@ -228,7 +228,21 @@ class Bookings extends Controller
         }
     }
 
+    public function SendInvoice($reservationID){
+        $this->view('Pages/Report/SalesAmount');
 
+        
+        if(isset($_POST["OKAY"])) {
+            // $this->reportmodel->filterBookingsAndGeneratePDF($data);
+            $reservation = $this->bookingModel->GetReservInfo($reservationID);
+            $invoice_name=$this->bookingModel->sendEmail($reservation);
+            $this->bookingModel->sendingemail($invoice_name,$reservation);
+                    
+
+        }
+
+
+    }
 
     public function delete()
     {
