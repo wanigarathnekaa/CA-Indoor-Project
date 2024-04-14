@@ -185,6 +185,7 @@
                         $("#email").text("Email: " + order.email);
                         $("#phone").text("Phone: " + order.mobile_number);
                         $("#addr").text("Address: " + order.address);
+                        $("#status").text("Status: " + order.order_status);
                         // Loop through orderItems and append them to the items element
                         var itemsTable = $("#orderItemsTable tbody");
                         itemsTable.empty(); // Clear previous entries
@@ -198,7 +199,6 @@
                             itemsTable.append(row);
                         }
                         $("#items").html(itemsText);
-                        $("#status").text("Status: " + order.order_status);
                     }
                 });
             });
