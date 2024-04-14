@@ -1,54 +1,77 @@
 <?php
-$link = mysqli_connect("localhost", "root", "", "c&a_indoor_net");
-if ($link === false) {
-    die("ERROR: Could not connect. " . mysqli_connect_error());
+
+// Assuming $data contains your reservations array
+$reservations = $data; // Make sure $data is initialized with your reservations data
+
+// Get today's date
+$today = date('Y-m-d');
+$today_name = date('l');
+
+// Get the starting date (Sunday) of the current week
+if ($today_name == 'Sunday') {
+    $startOfWeek = strtotime('today');
+} else {
+    $startOfWeek = strtotime('last sunday');
 }
 
-$counts = array(
-    'Sunday' => 0,
-    'Monday' => 0,
-    'Tuesday' => 0,
-    'Wednesday' => 0,
-    'Thursday' => 0,
-    'Friday' => 0,
-    'Saturday' => 0
-);
+$startOfWeekFormatted = date('Y-m-d', $startOfWeek);
 
-$res = mysqli_query($link, "SELECT DAYNAME(date) AS day_name, COUNT(*) AS reservation_count FROM reservation GROUP BY DAYOFWEEK(date)");
-
-while ($row = mysqli_fetch_assoc($res)) {
-    $day_name = $row['day_name'];
-    $counts[$day_name] = $row['reservation_count'];
+// Get the ending date (Saturday) of the current week
+if ($today_name == 'Saturday') {
+    $endOfWeek = strtotime('today');
+} else {
+    $endOfWeek = strtotime('next saturday');
 }
 
-mysqli_close($link);
+$endOfWeekFormatted = date('Y-m-d', $endOfWeek);
+
+
+$countList = [];
+for ($i = $startOfWeek; $i <= $endOfWeek; $i += 86400) { // 86400 seconds in a day
+    $date_of_week = date('Y-m-d', $i);
+    $count = 0;
+    foreach ($reservations as $reservation) {
+        $reservationDate = strtotime($reservation->date); // Convert reservation date to timestamp
+        if ($reservationDate == $i) {
+            $count++;
+        }
+    }
+    // Store the count in the list
+    $countList[] = $count;
+}  
+
+// Convert countList to JSON for JavaScript
+$countListJSON = json_encode($countList);
+
 ?>
 
 <div class="chart1">
-      <h1>Weekly Reservations</h1>
-      <canvas id="weeklyReservations"></canvas>
+    <h1>Weekly Reservations</h1>
+    <canvas id="weeklyReservations"></canvas>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-      const ctx = document.getElementById('weeklyReservations');
-      new Chart(ctx, {
-            type: 'bar',
-            data: {
-                  labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-                  datasets: [{
-                        label: 'Number of Reservations',
-                        data: [<?php echo implode(',', $counts); ?>],
-                        borderWidth: 1,
-                        backgroundColor: "#4F9DA9",
-                  }]
-            },
-            options: {
-                  scales: {
-                        y: {
-                              beginAtZero: true
-                        }
-                  }
+    const ctx = document.getElementById('weeklyReservations');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            datasets: [
+                {
+                    label: 'Number of Reservations',
+                    data: <?= $countListJSON ?>,
+                    borderWidth: 1,
+                    backgroundColor: "#4F9DA9",
+                },
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
             }
-      });
+        }
+    });
 </script>

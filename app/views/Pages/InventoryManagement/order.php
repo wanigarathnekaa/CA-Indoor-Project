@@ -37,9 +37,9 @@
         </section>
         <div class="header">
             <h2>Orders</h2>
-            <button type="button" id="addCategory" onclick="openModal()">Add New Order</button>
+            <!-- <button type="button" id="addCategory" onclick="openModal()">Add New Order</button>
             <div id="myModal" class="modal">
-                <!-- <div class="modal-content">
+                <div class="modal-content">
                     <h2 class="modal-title">Add New Category</h2>
                     <form method="POST" id="categoryForm">
                         <label for="categoryName">Category Name</label>
@@ -51,8 +51,8 @@
                             <button type="button" onclick="closeModal()">Cancel</button>
                         </div>
                     </form>
-                </div> -->
-            </div>
+                </div>
+            </div> -->
         </div>
 
         <div class="table-container">
@@ -83,10 +83,10 @@
                                 <?php echo $order->order_date; ?>
                             </td>
                             <td>
-                                <?php echo str_replace('_',' ',$order->payment_method); ?>
+                                <?php echo str_replace('_', ' ', $order->payment_method); ?>
                             </td>
                             <td>
-                                <?php echo str_replace('_',' ',$order->pickup_mode); ?>
+                                <?php echo str_replace('_', ' ', $order->pickup_mode); ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -114,8 +114,20 @@
 
                 <div class="orderItems">
                     <h3>Order Items</h3>
-                    <span id="items" class="items"></span>
+                    <table id="orderItemsTable">
+                        <thead>
+                            <tr>
+                                <th>Product ID</th>
+                                <th>Quantity</th>
+                                <th>Price per Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody id="items">
+                            <!-- Order items will be appended here -->
+                        </tbody>
+                    </table>
                 </div>
+
 
                 <div class="orderStatus">
                     <h3>Order Status</h3>
@@ -151,7 +163,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
-    <script src="<?php echo URLROOT; ?>/js/category.js"></script>
+    <script src="<?php echo URLROOT; ?>/js/order.js"></script>
     <script>
         //Select the table row when clicked
         $(document).ready(function () {
@@ -173,13 +185,20 @@
                         $("#email").text("Email: " + order.email);
                         $("#phone").text("Phone: " + order.mobile_number);
                         $("#addr").text("Address: " + order.address);
+                        $("#status").text("Status: " + order.order_status);
                         // Loop through orderItems and append them to the items element
-                        var itemsText = "";
+                        var itemsTable = $("#orderItemsTable tbody");
+                        itemsTable.empty(); // Clear previous entries
+
                         for (var i = 0; i < orderItems.length; i++) {
-                            itemsText += "Product ID: " + orderItems[i].product_id + "<br>Quantity: " + orderItems[i].quantity + "<br>Price per Unit: " + orderItems[i].price_per_unit + "<br>";
+                            var row = "<tr>" +
+                                "<td>" + orderItems[i].product_id + "</td>" +
+                                "<td>" + orderItems[i].quantity + "</td>" +
+                                "<td>" + orderItems[i].price_per_unit + "</td>" +
+                                "</tr>";
+                            itemsTable.append(row);
                         }
                         $("#items").html(itemsText);
-                        $("#status").text("Status: " + order.order_status);
                     }
                 });
             });

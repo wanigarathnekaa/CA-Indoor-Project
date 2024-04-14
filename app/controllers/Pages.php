@@ -224,7 +224,7 @@ class Pages extends Controller
         if ($name == "user") {
             $this->view('Pages/Dashboard/user', $data1);
         } else if ($name == "admin") {
-            $this->view('Pages/Dashboard/admin', $data, $bookings);
+            $this->view('Pages/Dashboard/admin', $bookings, $data);
         } else if ($name == "cashier") {
             $this->view('Pages/Dashboard/cashier');
         } else if ($name == "coach") {
@@ -643,7 +643,8 @@ class Pages extends Controller
 
     public function Inventory_Management($name)
     {
-        $this->view('Pages/InventoryManagement/dashboard');
+        $orders = $this->pagesModel->getOrder();
+        $this->view('Pages/InventoryManagement/dashboard', $orders);
     }
 
     public function Category($name)

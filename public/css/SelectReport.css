@@ -1,42 +1,83 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.home {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.cardBox {
+    margin: 20px;
+}
 .card {
-    display: inline-block;
-    width: 300px; 
-    height: 200px; 
-    background-color: #779ea2; 
-    border-radius: 10px;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 4); 
-    text-decoration: none; 
-    color: inherit; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: #fff; /* text color */
+    background-color: #2f8691 ; /* darker background color */
+    border-radius: 8px;
+    padding: 50px; /* increased padding */
+    width: 350px; /* increased width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
 .card:hover {
-    background-color: #A7D8D7; }
-
-.card > div {
-    padding: 20px; 
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    background-color: #4F9DA9;
 }
+
+.card div {
+    margin-bottom: 20px; /* increased margin */
+}
+
+.card h2 {
+    font-size: 28px; /* increased font size */
+    margin: 0;
+}
+
+.card p {
+    font-size: 20px; /* increased font size */
+    margin: 0;
+}
+
+
+
 
 .iconBx {
-   
-}
-.card {
-    display: inline-block;
-    width: 300px; 
-    height: 200px; 
-    background-color: #EAF3F4; 
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    text-decoration: none; 
-    color: inherit; }
-
-.card:hover {
-    background-color: #A7D8D7; 
+    font-size: 48px;
 }
 
-.card > div {
-    padding: 20px; 
+/* Sidebar styles (adjust as needed) */
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #33333374;
+    padding-top: 20px;
 }
 
-.iconBx {
- 
+/* Sidebar links */
+.sidebar a {
+    padding: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    display: block;
+}
+
+/* Active link */
+.sidebar a.active {
+    background-color: #555;
 }

@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-md-6">
 
-            <form action="<?php echo URLROOT;?>/Reports/SalesMonthly" method="post">
+            <form action="<?php echo URLROOT;?>/Reports/genandsendemail" method="post">
             <div class="form-group">
     <label>Select the Month</label>
     <select name="Selected_month" id="Selected_month" class="form-control" required>
