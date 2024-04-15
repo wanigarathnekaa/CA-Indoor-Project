@@ -17,7 +17,7 @@ $coachUser = array_values($coachUser);
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <!-- <title>Document</title> -->
+      <title>CoachCard</title>
       <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/Coachcard.css">
 </head>
 
