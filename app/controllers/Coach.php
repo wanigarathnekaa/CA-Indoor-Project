@@ -190,7 +190,7 @@ class Coach extends Controller
             //Input data
             $data = [
                 'name' => trim($_POST['name']),
-                'user_name' => trim($_POST['name']),
+                'user_name' => trim($_POST['user_name']),
                 'email' => trim($_POST['email']),
                 'phoneNumber' => trim($_POST['phoneNumber']),
                 'pwd' => "12345678",

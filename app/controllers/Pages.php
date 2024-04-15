@@ -301,6 +301,7 @@ class Pages extends Controller
                 'experience' => $userAsCoach->experience,
                 'specialty' => $userAsCoach->specialty,
                 'certificate' => $userAsCoach->certificate,
+                'achivements' => $userAsCoach->achivements,
                 'role' => $role,
                 'img' => $userAsUser->img,
 
@@ -313,6 +314,7 @@ class Pages extends Controller
                 'experience_err' => "",
                 'specialty_err' => "",
                 'certificate_err' => "",
+                'achivements_err' => "",
                 'img_err' => ""
             ];
         } else {
