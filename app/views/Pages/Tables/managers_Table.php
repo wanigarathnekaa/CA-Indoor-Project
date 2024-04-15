@@ -145,7 +145,8 @@
                         <span class="close" onclick="closeDeletePopup()"><i class="fa-solid fa-xmark"></i></span>
                         <h2>confirm delete</h2>
 
-                        <form action="<?php echo URLROOT; ?>/Manager/delete" method="POST">                             
+                        <form action="<?php echo URLROOT; ?>/Manager/delete" method="POST">     
+                              <div class="btns">                        
                                     <button type="submit" class="button">Delete</button>
                                     <button type="button" onclick="closeDeletePopup()">Cancel</button>
                               </div>                 
