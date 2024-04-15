@@ -60,6 +60,7 @@ class Manager extends Controller
                 $data['phoneNumber_err'] = "Please enter a phone number";
             }
 
+            //validate nic
             if (empty($data['nic'])) {
                 $data['nic_err'] = "Please enter the NIC number";
             }
@@ -69,6 +70,7 @@ class Manager extends Controller
                 $data['strAddress_err'] = "Please enter the Street Address";
             }
 
+            //validate city
             if (empty($data['city'])) {
                 $data['city_err'] = "Please enter the City";
             }
@@ -110,14 +112,16 @@ class Manager extends Controller
                 'phoneNumber' => "",
                 'password' => "",
                 'nic' => "",
-                'address' => "",
+                'strAddress' => "",
+                'city' => "",
 
                 'name_err' => "",
                 'email_err' => "",
                 'phoneNumber_err' => "",
                 'password_err' => "",
                 'nic_err' => "",
-                'address_err' => ""
+                'strAddress_err' => "",
+                'city_err' => "",
             ];
         }
 

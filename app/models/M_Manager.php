@@ -128,7 +128,7 @@ class M_Manager
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
             $mail->Username = 'nivodya2001@gmail.com';
-            $mail->Password = 'ndvpqhmangzegxhn';
+            $mail->Password = 'wupbxphjicpfidgj';
             $mail->SMTPSecure = 'ssl';
             $mail->Port = 465;
             
