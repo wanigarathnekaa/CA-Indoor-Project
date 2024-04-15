@@ -101,6 +101,10 @@
                                                 <label for="certificate">Certification</label>
                                                 <input type="text" id="certificate" name="certificate"  value="<?=$data["certificate"]?>"/>
                                           </div>
+                                          <div class="box">
+                                                <label for="achivements">Achivements</label>
+                                                <input type="text" id="achivements" name="achivements" value="<?=$data["achivements"]?>"/>
+                                          </div>
                                     <?php endif ?>
                               </div>
                               <?php if ($role == "User" || $role == "Coach"): ?>
