@@ -231,7 +231,7 @@ class Bookings extends Controller
 
     public function SendInvoice($reservationID)
     {
-        $this->view('Pages/Report/SalesAmount');
+        
 
         
         if(isset($_POST["OKAY"])) {
@@ -242,6 +242,7 @@ class Bookings extends Controller
                     
 
         }
+
 
 
     }
