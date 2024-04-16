@@ -342,11 +342,12 @@ class M_Report
             $pdf->SetFont('helvetica', '', 12);
             
             $pdf->SetFont('', 'B'); //bold
-            $pdf->Write(0, 'Booking Report', '', 0, 'C', true, 0, false, false, 0);
-            $pdf->Cell(0, 10, 'Between selected dates', 0, 1, 'C');
-            $pdf->Cell(0, 10, 'From ' . $invoice_date . ' to ' . $invoice_due_date, 0, 1, 'C');
- 
-          
+            $pdf->Write(0, 'Booking Snapshot', '', 0, 'C', true, 0, false, false, 0);
+            $pdf->Cell(0, 10, 'Insights from ' . $invoice_date . '  to' . $invoice_due_date,  0, 1, 'C');
+            $pdf->Cell(0, 10, 'A detailed overview of bookings during the specified period' ,  0, 1, 'C');
+
+         
+            $pdf->Ln(10); 
             
             // prepare data
             $tableHeader = array('Date', 'Name', 'Booking Price');
@@ -393,7 +394,9 @@ class M_Report
            $pdf->SetFont('', '', 12); 
            $pdf->Write(0, 'Total Not Paid :' . number_format($totalNotPaid, 2));
            $pdf->Ln(); 
+            
            
+
            $pdf->Cell(130); 
            $pdf->SetFont('', '', 12);
            $pdf->SetFont('', 'B'); 

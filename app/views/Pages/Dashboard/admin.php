@@ -118,17 +118,7 @@
             
         </div>
         
-            <!--Reservation Details -->
-            <div class="details">
-                  <!-- Recent Reservations -->
-                  <div class="tablediv">
-                        
-                          <a href="<?php echo URLROOT; ?>/Pages/AccountLogTable">View Account Log Table</a>
-    
-                  </div>
-                  
-                 
-            </div>
+            
 
             <div class="charts">
                  <!-- Weekly Reservations chart -->
