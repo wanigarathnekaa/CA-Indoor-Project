@@ -114,6 +114,13 @@ class M_Pages
         $this->db->execute();
         return $this->db->rowCount();
     }
+    
+    public function getAccLog()
+    {
+        $this->db->query('SELECT * FROM userlog');
+        $result = $this->db->resultSet();
+        return $result;
+    }
 
     public function getUserCount()
     {

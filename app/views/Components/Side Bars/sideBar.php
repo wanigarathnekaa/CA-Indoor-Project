@@ -281,7 +281,7 @@
         </div>
         <div class="bottom-content">
             <li class="logout">
-                <a href="<?php echo URLROOT; ?>/Users/login">
+                <a href="<?php echo URLROOT; ?>/Users/logout">
                     <i class='bx bx-log-out icon'></i>
                     <span class="text nav-text">logout</span>
                 </a>

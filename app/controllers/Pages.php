@@ -186,6 +186,13 @@ class Pages extends Controller
         $bookings = $this->pagesModel->getReservations();
         $this->view('Pages/Tables/reservations_Table', $bookings);
     }
+    public function AccountLogTable()
+    {
+        $logs = $this->pagesModel->getAccLog();
+        // $users = $this->pagesModel->getUserCount();
+                
+        $this->view('Pages/Tables/accountlog_Table', $logs);
+    }
 
 
     // dashboard

@@ -25,6 +25,21 @@ class M_Users
         }
 
     }
+
+    public function createlog($data)
+    {
+        $this->db->query('INSERT INTO userlog (user_name, email, create_date) VALUES (:user_name, :email, NOW())');
+        $this->db->bind(':user_name', $data['user_name']);
+        $this->db->bind(':email', $data['email']);
+       
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
     public function findUserByEmail($email)
     {
         $this->db->query('SELECT * FROM user WHERE email = :email');
@@ -68,6 +83,35 @@ class M_Users
         }
 
     }
+
+    public function updateLastLogin($user_email)
+        {
+            $sql = "UPDATE userlog SET last_login = CURRENT_TIMESTAMP() WHERE email = :user_email";
+            $this->db->query($sql);
+            $this->db->bind(':user_email', $user_email);
+
+            // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    
+        public function updateLastLogout($user_email)
+        {
+            $sql = "UPDATE userlog SET last_logout = CURRENT_TIMESTAMP() WHERE email = :user_email";
+            $this->db->query($sql);
+            $this->db->bind(':user_email', $user_email);
+
+            // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+    }
+
     public function loginCoach($email, $password)
     {
         $this->db->query('SELECT * FROM coaches WHERE email = :email');

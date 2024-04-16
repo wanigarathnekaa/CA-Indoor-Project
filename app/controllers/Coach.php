@@ -130,7 +130,7 @@ class Coach extends Controller
                 $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
                 
                 //create user
-                if ($this->coachModel->coachRegister($data) && $this->coachUserModel->register($data)) { 
+                if ($this->coachModel->coachRegister($data) && $this->coachUserModel->register($data) && $this->coachUserModel->createlog($data)) { 
                     echo "User Registered";
                     redirect('Pages/Dashboard/manager');
                 } else {
@@ -190,7 +190,7 @@ class Coach extends Controller
             //Input data
             $data = [
                 'name' => trim($_POST['name']),
-                'user_name' => trim($_POST['user_name']),
+                'user_name' => trim($_POST['name']),
                 'email' => trim($_POST['email']),
                 'phoneNumber' => trim($_POST['phoneNumber']),
                 'pwd' => "12345678",

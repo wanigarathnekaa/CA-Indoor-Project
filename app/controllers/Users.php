@@ -97,6 +97,7 @@ class Users extends Controller
 
                 //create user
                 if ($this->userModel->register($data)) {
+                    $this->userModel->createlog($data);
                     redirect('Users/login');
                 } else {
                     die('Something Went wrong');
@@ -196,8 +197,12 @@ class Users extends Controller
                         $this->view('Pages/LoginPage/login', $data);
                     }else if ($this->userCoachModel->findUserByEmail($data['email'])) {
                         $role = 'Coach';
+                        //updating_last_login_time
+                        $this->userModel->updateLastLogin($loginUser->email);
                         $this->createUserSession($loginUser, $role);
                     }else{
+                        //updating_last_login_time
+                        $this->userModel->updateLastLogin($loginUser->email);
                         $this->createUserSession($loginUser, $role);
                     }
                 } else if ($role == 'Manager') {
@@ -377,6 +382,9 @@ class Users extends Controller
     }
     public function logout()
     {
+         // Update last logout time in the database
+        $this->userModel->updateLastLogout($_SESSION['user_email']);
+
         session_destroy();
 
         redirect('Users/login');
