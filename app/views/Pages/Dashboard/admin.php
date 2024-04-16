@@ -34,7 +34,7 @@
                     <div class="cardName">Company Users</div>
                 </div>
                 <div class="iconBx">
-                <i class="fa-solid fa-user-tie"></i>
+                <i class="fa-solid fa-chalkboard-user"></i>
                 </div>
             </a>
             <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/managerTable/user">
@@ -115,20 +115,20 @@
                     <i class="fa-solid fa-comments"></i>
                 </div>
             </a>
+
+            <a class="card" href="<?php echo URLROOT; ?>/Pages/AccountLogTable">
+                <div>
+                    <div class="numbers"></div>
+                    <div class="cardName">View Account Log Table</div>
+                </div>
+
+                <div class="iconBx">
+                    <i class="fa-solid fa-user-gear"></i>
+                </div>
+            </a>
             
         </div>
-        
-            <!--Reservation Details -->
-            <div class="details">
-                  <!-- Recent Reservations -->
-                  <div class="tablediv">
-                        
-                          <a href="<?php echo URLROOT; ?>/Pages/AccountLogTable">View Account Log Table</a>
-    
-                  </div>
-                  
-                 
-            </div>
+
 
             <div class="charts">
                  <!-- Weekly Reservations chart -->
