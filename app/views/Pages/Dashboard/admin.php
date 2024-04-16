@@ -117,8 +117,8 @@
             </a>
             
         </div>
-        
-            
+
+
 
             <div class="charts">
                  <!-- Weekly Reservations chart -->
