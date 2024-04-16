@@ -69,16 +69,6 @@
                         </div>
                   </a>
 
-                  <a class="card" href="#">
-                        <div>
-                              <div class="numbers"></div>
-                              <div class="cardName">Reports</div>
-                        </div>
-                        <div class="iconBx">
-                              <i class='bx bxs-report'></i>
-                        </div>
-                  </a>
-
                   <a class="card" href="C&A_Indoor_Project/Pages/Inventory_Management/manager">
                         <div>
                               <div class="numbers"></div>
@@ -93,6 +83,17 @@
                         <div>
                               <div class="numbers"></div>
                               <div class="cardName">Registration</div>
+                        </div>
+
+                        <div class="iconBx">
+                              <i class="fa-solid fa-user-plus"></i>
+                        </div>
+                  </a>
+
+                  <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/Permanent_Booking/manager">
+                        <div>
+                              <div class="numbers"></div>
+                              <div class="cardName">Permanent Booking</div>
                         </div>
 
                         <div class="iconBx">
