@@ -8,6 +8,7 @@
 }
 
 :root {
+  
   --color01: #2e8a99;
   --primary-clr: #4f9da9;
   --color03: #a7d8d7;
@@ -46,6 +47,7 @@ body {
   color: #333;
   display: block;
   margin: 6px 0;
+  margin-bottom: 20px;
 }
 .container header::before {
   content: "";
@@ -122,7 +124,7 @@ form.secActive .form.first {
 }
 form .input-field {
   display: flex;
-  width: 80%;
+  width: 100%;
   flex-direction: column;
   /* margin: 4px 0; */
   margin-bottom: 15px;
@@ -130,7 +132,7 @@ form .input-field {
 
 .input-field label {
   font-size: 16px;
-  font-weight: 400;
+  /* font-weight: 400; */
   color: #2e2e2e;
 }
 .input-field input,
@@ -145,7 +147,7 @@ select {
   border-bottom-width: 2px;
   padding: 0 15px;
   height: 42px;
-  margin: 8px 0;
+  /* margin: 8px 0; */
 }
 
 .input-field input:user-invalid {
@@ -157,7 +159,8 @@ select {
   border-color: #2d8491;
 }
 
-select:focus {
+select:focus,
+select:valid{
   border-color: #2e8a99;
 }
 
@@ -367,6 +370,34 @@ input[type="checkbox"]:checked + label.btn {
   background-color: #007bff;
   color: #fff;
 }
+
+
+.netbtnbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.netbtnbar .net{
+  background-color: var(--white);
+  color: var(--black2);
+  border: solid 1px var(--color01);
+  padding: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  width: 25%;
+}
+
+.netbtnbar .net:hover{
+  background-color: var(--color01);
+  color: var(--white);
+}
+
+
+
+
+
 
 /* Media query to make the layout responsive */
 @media (max-width: 768px) {

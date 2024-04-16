@@ -125,17 +125,19 @@ function time_slot($duration, $cleanup, $start, $end)
                         </select>
                     </div>
 
-                    <button id="timeSlotA" name="booking">
-                        <span class="btnText">Normal Net A</span>
-                    </button>
+                    <div class="netbtnbar">
+                        <button id="timeSlotA" name="booking" class="net">
+                            <span class="btnText">Normal Net A</span>
+                        </button>
 
-                    <button id="timeSlotB" name="booking">
-                        <span class="btnText">Normal Net B</span>
-                    </button>
+                        <button id="timeSlotB" name="booking" class="net">
+                            <span class="btnText">Normal Net B</span>
+                        </button>
 
-                    <button id="timeSlotM" name="booking">
-                        <span class="btnText">Machine Net</span>
-                    </button>
+                        <button id="timeSlotM" name="booking" class="net">
+                            <span class="btnText">Machine Net</span>
+                        </button>
+                    </div>
 
                     <button type="submit" name="booking">
                         <span class="btnText">Confirm</span>
