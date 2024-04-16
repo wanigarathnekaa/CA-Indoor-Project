@@ -42,6 +42,9 @@ use PHPMailer\PHPMailer\Exception;
             }
             
         }
+
+        
+
         public function generateRandomPassword($length = 12) {
             // Define characters to use in the password
             $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+';
