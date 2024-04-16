@@ -192,6 +192,7 @@ class Bookings extends Controller
                 if ($this->bookingModel->Make_Reservation($data)) {
                     $_SESSION['booking_success'] = true;
                     $bookingId = $this->bookingModel->last_inserted_id();
+                    $_SESSION['booking_id'] = $bookingId;
                     foreach ($arrayData as $timeSlotAndNetType) {
                         $timeSlot = $timeSlotAndNetType['timeSlot'];
                         $netType = $timeSlotAndNetType['netType'];
@@ -228,7 +229,8 @@ class Bookings extends Controller
         }
     }
 
-    public function SendInvoice($reservationID){
+    public function SendInvoice($reservationID)
+    {
         $this->view('Pages/Report/SalesAmount');
 
         

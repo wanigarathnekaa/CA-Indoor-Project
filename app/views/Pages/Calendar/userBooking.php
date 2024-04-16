@@ -22,7 +22,7 @@ $new_array_3 = array_filter($data, function ($item) use ($filter_date, $filter_n
 
 <?php if (isset($_SESSION['booking_success']) && $_SESSION['booking_success'] === true) {
     ?>
-<form id="successForm" action="<?php echo URLROOT; ?>/Bookings/SendInvoice/30" method="post">
+<form id="successForm" action="<?php echo URLROOT; ?>/Bookings/SendInvoice/<?= $_SESSION['booking_id']?>" method="post">
     <div class="SuccessContainer">
         <div class="SuccessPopup" id="SuccessPopup">
             <img src="<?= URLROOT ?>/images/tick.png">
