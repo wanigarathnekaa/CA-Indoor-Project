@@ -60,7 +60,7 @@ class Bookings extends Controller
                 $role = 'coach';
             } else if ($role == 'Owner') {
                 $role = 'owner';
-            }else if ($role == 'User') {
+            } else if ($role == 'User') {
                 $role = 'user';
             }
 
@@ -233,13 +233,13 @@ class Bookings extends Controller
     {
         $this->view('Pages/Report/SalesAmount');
 
-        
-        if(isset($_POST["OKAY"])) {
+
+        if (isset($_POST["OKAY"])) {
             // $this->reportmodel->filterBookingsAndGeneratePDF($data);
             $reservation = $this->bookingModel->GetReservInfo($reservationID);
-            $invoice_name=$this->bookingModel->sendEmail($reservation);
-            $this->bookingModel->sendingemail($invoice_name,$reservation);
-                    
+            $invoice_name = $this->bookingModel->sendEmail($reservation);
+            $this->bookingModel->sendingemail($invoice_name, $reservation);
+
 
         }
 
@@ -256,6 +256,51 @@ class Bookings extends Controller
         }
 
     }
+
+    public function permanentBooking()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            // Decode JSON strings to arrays
+            $timeSlotsA = json_decode($_POST['timeSlotsA'], true);
+            $timeSlotsB = json_decode($_POST['timeSlotsB'], true);
+            $timeSlotsM = json_decode($_POST['timeSlotsM'], true);
+
+            // Encode arrays to JSON strings
+            $timeSlotsAJson = json_encode($timeSlotsA);
+            $timeSlotsBJson = json_encode($timeSlotsB);
+            $timeSlotsMJson = json_encode($timeSlotsM);
+
+            $data = [
+                'name' => trim($_POST['name']),
+                'email' => trim($_POST['email']),
+                'phoneNumber' => trim($_POST['phoneNumber']),
+                'date' => trim($_POST['date']),
+                'coach' => trim($_POST['coach']),
+                'timeDuration' => trim($_POST['timeDuration']),
+                'day' => trim($_POST['day']),
+                'timeSlotA' => $timeSlotsAJson, // Use JSON string
+                'timeSlotB' => $timeSlotsBJson, // Use JSON string
+                'timeSlotM' => $timeSlotsMJson, // Use JSON string
+            ];
+
+            if ($this->bookingModel->permanentBooking($data)) {
+                $response = [
+                    'status' => 'success',
+                ];
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Something went wrong',
+                ];
+            }
+
+            $jsObj = json_encode($response);
+            echo $jsObj;
+
+        }
+    }
+
 
     public function cancelReservation()
     {
