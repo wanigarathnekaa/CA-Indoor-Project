@@ -1,91 +1,66 @@
+h1 {
+  font-size: 36px;
+  color: #333; /* Darker color for better readability */
+  text-transform: uppercase;
+  font-weight: 500; /* Slightly bolder font weight */
+  text-align: center;
+  margin-bottom: 20px; /* Increased margin for better spacing */
+}
 
-h1{
-    font-size: 30px;
-    color: #000;
-    text-transform: uppercase;
-    font-weight: 300;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-  table{
-    width:100%;
-    table-layout: fixed;
-  }
-  .tbl-header{
-    background-color: rgba(255,255,255,0.3);
-   }
-  .tbl-content{
-    height:300px;
-    overflow-x:auto;
-    margin-top: 0px;
-    border: 1px solid rgba(255,255,255,0.3);
-  }
-  th{
-    padding: 20px 15px;
-    text-align: left;
-    font-weight: 500;
-    font-size: 12px;
-    color: #000;
-    text-transform: uppercase;
-  }
-  td{
-    padding: 15px;
-    text-align: left;
-    vertical-align:middle;
-    font-weight: 300;
-    font-size: 12px;
-    color: #000;
-    border-bottom: solid 1px rgba(255,255,255,0.1);
-  }
-  
-  
-  /* demo styles */
-  
-  @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
-   
-  .taable{
-    background: -webkit-linear-gradient(left, #4F9DA9, #fff);
-    border-radius: 20px;
-    width: 1000px;
-    margin:50px 0 0 180px; /* This centers the table horizontally */
+table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse; /* Ensure borders collapse properly */
+}
 
-  } 
-  
-  
-  /* follow me template */
-  .made-with-love {
-    margin-top: 40px;
-    padding: 10px;
-    clear: left;
-    text-align: center;
-    font-size: 10px;
-    font-family: arial;
-    color: #000;
-  }
-  .made-with-love i {
-    font-style: normal;
-    color: #F50057;
-    font-size: 14px;
-    position: relative;
-    top: 2px;
-  }
-  .made-with-love a {
-    color: #000;
-    text-decoration: none;
-  }
-  .made-with-love a:hover {
-    text-decoration: underline;
-  }
-  
-  
-  /* for custom scrollbar for webkit browser*/
-  
-  ::-webkit-scrollbar {
-      width: 6px;
-  } 
-  ::-webkit-scrollbar-track {
-      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-  } 
-  ::-webkit-scrollbar-thumb {
-      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-  }
+.tbl-header {
+  background-color: rgba(255, 255, 255, 0.7); /* Increased opacity for better visibility */
+}
+
+.tbl-content {
+  height: 350px; /* Increased height for better scrolling experience */
+  overflow-x: auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Adjusted border color for better contrast */
+}
+
+th {
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 600; /* Increased font weight for headers */
+  font-size: 14px; /* Larger font size for headers */
+  color: #444; /* Slightly darker color for better contrast */
+  text-transform: uppercase;
+}
+
+td {
+  padding: 15px;
+  text-align: left;
+  vertical-align: middle;
+  font-weight: 400; /* Normal font weight for data cells */
+  font-size: 15px; /* Slightly larger font size for data cells */
+  color: #000; /* Darker color for better contrast */
+  border-bottom: solid 1px rgba(255, 255, 255, 0.2); /* Adjusted border color for better contrast */
+}
+
+.taable {
+  background: linear-gradient(to right, #4F9DA9, #fff); /* Simplified gradient syntax */
+  border-radius: 20px;
+  width: 1000px;
+  margin: 50px auto; /* Center the table horizontally */
+}
+
+/* Remove follow me template styles for simplicity */
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px; /* Increased width for better visibility */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1); /* Adjusted background color for better visibility */
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3); /* Adjusted thumb color for better visibility */
+}
