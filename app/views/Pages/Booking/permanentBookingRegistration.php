@@ -114,6 +114,11 @@ function time_slot($duration, $cleanup, $start, $end)
                     <!-- Display other information like time slots, date, coach name, etc. here -->
 
                     <div class="input-field">
+                        <label>From:</label>
+                        <input type="date" name="date" id="date">
+                    </div>
+
+                    <div class="input-field">
                         <label>Who is the coach?</label>
                         <select name="coach" required>
                             <option disabled selected>Select the coach</option>
@@ -158,8 +163,8 @@ function time_slot($duration, $cleanup, $start, $end)
                         ?>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <input type="checkbox" id="<?php echo str_replace(':', '', $ts); ?>"
-                                    name="timeSlotA" value="<?php echo $ts; ?>">
+                                <input type="checkbox" id="<?php echo str_replace(':', '', $ts); ?>" name="timeSlotA"
+                                    value="<?php echo $ts; ?>">
                                 <label for="<?php echo str_replace(':', '', $ts); ?>" class="btn btn-danger">
                                     <?php echo $ts; ?>
                                 </label>
@@ -187,8 +192,8 @@ function time_slot($duration, $cleanup, $start, $end)
                         ?>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <input type="checkbox" id="<?php echo str_replace(':', '', $ts); ?>"
-                                    name="timeSlotB" value="<?php echo $ts; ?>">
+                                <input type="checkbox" id="<?php echo str_replace(':', '', $ts); ?>" name="timeSlotB"
+                                    value="<?php echo $ts; ?>">
                                 <label for="<?php echo str_replace(':', '', $ts); ?>" class="btn btn-danger">
                                     <?php echo $ts; ?>
                                 </label>
@@ -216,8 +221,8 @@ function time_slot($duration, $cleanup, $start, $end)
                         ?>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <input type="checkbox" id="<?php echo str_replace(':', '', $ts); ?>"
-                                    name="timeSlotM" value="<?php echo $ts; ?>">
+                                <input type="checkbox" id="<?php echo str_replace(':', '', $ts); ?>" name="timeSlotM"
+                                    value="<?php echo $ts; ?>">
                                 <label for="<?php echo str_replace(':', '', $ts); ?>" class="btn btn-danger">
                                     <?php echo $ts; ?>
                                 </label>
@@ -318,23 +323,69 @@ function time_slot($duration, $cleanup, $start, $end)
             $("#timeSlotA").on("click", function (e) {
                 //Show Time slots
                 e.preventDefault();
-                alert("Time slots for Normal Net A");
                 $("#timeSlotsSectionA").css("display", "block");
             });
 
             $("#timeSlotB").on("click", function (e) {
                 //Show Time slots
                 e.preventDefault();
-                alert("Time slots for Normal Net B");
                 $("#timeSlotsSectionB").css("display", "block");
             });
 
             $("#timeSlotM").on("click", function (e) {
                 //Show Time slots
                 e.preventDefault();
-                alert("Time slots for Machine Net");
                 $("#timeSlotsSectionM").css("display", "block");
             });
+
+            //Submit the form
+            $("form").on("submit", function (e) {
+                e.preventDefault();
+                var name = $("#name").val();
+                var email = $("#email").val();
+                var phoneNumber = $("#phoneNumber").val();
+                var timeDuration = $("select[name='timeDuration']").val();
+                var day = $("select[name='day']").val();
+                var date = $("#date").val();
+                var coach = $("select[name='coach']").val();
+
+                // Convert arrays to JSON strings
+                var timeSlotsA = JSON.stringify(selectedTimeSlotsA);
+                var timeSlotsB = JSON.stringify(selectedTimeSlotsB);
+                var timeSlotsM = JSON.stringify(selectedTimeSlotsM);
+
+                // Check if the user has selected any time slots
+                if (selectedTimeSlotsA.length === 0 && selectedTimeSlotsB.length === 0 && selectedTimeSlotsM.length === 0) {
+                    alert("Please select a time slot");
+                    return;
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo URLROOT; ?>/Bookings/permanentBooking",
+                    data: {
+                        name: name,
+                        email: email,
+                        phoneNumber: phoneNumber,
+                        timeDuration: timeDuration,
+                        day: day,
+                        date: date,
+                        coach: coach,
+                        timeSlotsA: timeSlotsA,
+                        timeSlotsB: timeSlotsB,
+                        timeSlotsM: timeSlotsM
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        if (response.status == "success") {
+                            alert("Booking successful");
+                        } else {
+                            alert("Booking failed");
+                        }
+                    }
+                });
+            });
+
         });
     </script>
 </body>

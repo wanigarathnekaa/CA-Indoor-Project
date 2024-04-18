@@ -1,6 +1,6 @@
 <?php
 
-require_once('C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/TCPDF-main/tcpdf.php');
+require_once ('C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/TCPDF-main/tcpdf.php');
 require 'C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/phpmailer/src/PHPMailer.php';
 require 'C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/phpmailer/src/Exception.php';
 require 'C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/phpmailer/src/SMTP.php';
@@ -11,7 +11,8 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
 
-class MYPDF extends TCPDF {
+class MYPDF extends TCPDF
+{
 
     public function Invoice($id,$customerName, $email, $payment, $date, $paymentstatus,$phoneNumber) {
         // Set PDF properties
@@ -22,182 +23,52 @@ class MYPDF extends TCPDF {
         $this->SetKeywords('Invoice, Payment');
         $this->AddPage();
 
-       
-
-  
-        $this->SetFont('helvetica', 'B', 15);
-        $this->Cell(0, 10, 'C & A Cricket Net', 0, 1, 'L');
-        
-        // RECEIVER & SENDER DETAILS 
-        $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
-        $this->SetXY($receiverDetailsX, $this->GetY() - 10); // Set position to the same line
-        $this->SetFont('helvetica', 'B', 12);
-        $this->Cell(0, 10, 'INVOICE', 0, 1, 'R');
-
-        $this->Ln(5); // Adjust the spacing as needed
-
-
-        $this->SetFont('helvetica', 'B', 12);
-        $this->Cell(0, 10, 'ORDER PLACED SUCCESSFULLY', 0, 1, 'L');
-        
-        // RECEIVER DETAILS on the right
-        $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
-        $this->SetXY($receiverDetailsX, $this->GetY() - 10); // Set position to the same line
-        $this->SetFont('helvetica', 'B', 12);
-        $this->Cell(0, 10, 'INV_NO : #' . $id, 0, 1, 'R');
-
-        $this->Ln(5); // Adjust the spacing as needed
-
-        $this->SetFont('helvetica', 'B', 12);
-        $this->Cell(0, 10, 'SENDER DETAILS', 0, 1, 'L');
-        
-        // RECEIVER DETAILS on the right
-        $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
-        $this->SetXY($receiverDetailsX, $this->GetY() - 10); // Set position to the same line
-        $this->SetFont('helvetica', 'B', 12);
-        $this->Cell(0, 10, 'RECEIVER DETAILS', 0, 1, 'R');
-
-        $this->Ln(5); // Adjust the spacing as needed
-
-
-
-        // SENDER DETAILS on the left
+        // Set font
         $this->SetFont('helvetica', '', 12);
-        $this->Cell(0, 6,'Kaveesha Wanigarathne', 0, 1, 'L');
 
-// RECEIVER DETAILS on the right
-$receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
-$this->SetXY($receiverDetailsX, $this->GetY() - 6); // Set position to the same line
-$this->SetFont('helvetica', '', 12);
-$this->Cell(0, 6, $customerName, 0, 1, 'R');
-
-// Adjust the Y position
-$this->Ln(1);
-
-// SENDER DETAILS on the left
-$this->SetFont('helvetica', '', 12);
-$this->Cell(0, 6, '0770722933/0701184455', 0, 1, 'L');
-
-// RECEIVER DETAILS on the right
-$receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
-$this->SetXY($receiverDetailsX, $this->GetY() - 6); // Set position to the same line
-$this->SetFont('helvetica', '', 12);
-$this->Cell(0, 6,$phoneNumber, 0, 1, 'R');
-
-
-// Adjust the Y position
-$this->Ln(1);
-
-// SENDER DETAILS on the left
-$this->SetFont('helvetica', '', 12);
-$this->Cell(0, 6, 'caindoor44@gmail.com', 0, 1, 'L');
-
-// RECEIVER DETAILS on the right
-$receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
-$this->SetXY($receiverDetailsX, $this->GetY() - 6); // Set position to the same line
-$this->SetFont('helvetica', '', 12);
-$this->Cell(0, 6, $email, 0, 1, 'R');
-
-
-// Adjust the Y position
-$this->Ln(3);
-
-
-    
-
-        // Special notes
-        $this->SetFont('helvetica', 'B', 12);
-        $this->Cell(0, 10, 'SPECIAL NOTES', 0, 1, 'L');
-        $this->SetFont('helvetica', '', 12);
-        $this->Cell(0, 10, 'No special note found', 0, 1, 'L');
-        $this->Ln(10);
+        // Company name
+        $this->SetFont('helvetica', 'B', 16);
+        $this->Cell(0, 10, 'C&A Indoor Cricket', 0, 1, 'C');
+        $this->Ln(5);
 
         // Payment description
         $this->SetFont('helvetica', 'B', 12);
+        $this->Ln(10);
         $this->Cell(0, 10, 'Payment Description', 0, 1, 'L');
         $this->SetFont('helvetica', '', 12);
         $this->MultiCell(0, 10, 'This invoice is for the time slot booking payment made on ' . $date . '.', 0, 'L');
 
+        // Customer details
+        $this->SetFont('helvetica', '', 12);
+        $this->Cell(80, 10, 'Customer Name:', 0, 0, 'L');
+        $this->Cell(0, 10, $customerName, 0, 1, 'R');
+        $this->Cell(80, 10, 'Email:', 0, 0, 'L');
+        $this->Cell(0, 10, $email, 0, 1, 'R');
 
+        
 
-// SENDER DETAILS on the left
-$this->SetFont('helvetica', 'B', 12);
-$this->Cell(0, 10, 'Total Amount: ', 0, 1, 'L');
+        // Payment details
+        $this->SetFont('helvetica', 'B', 12);
+        $this->Ln(5);
+        $this->Cell(0, 10, 'Payment:', 0, 1, 'L');
+        $this->SetFont('helvetica', '', 12);
+        $this->Cell(80, 10, 'Amount:', 0, 0, 'L');
+        $this->Cell(0, 10, $payment, 0, 1, 'R');
 
-// RECEIVER DETAILS on the right
-$receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
-$this->SetXY($receiverDetailsX, $this->GetY() - 6); // Set position to the same line
-$this->SetFont('helvetica', '', 12);
-$this->Cell(0, 10,  number_format($payment, 2), 0, 1, 'R');
-
-
-
-// SENDER DETAILS on the left
-$this->SetFont('helvetica', 'B', 12);
-$this->Cell(0, 10, 'Paid Amount: ', 0, 1, 'L');
-
-// RECEIVER DETAILS on the right
-$receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
-$this->SetXY($receiverDetailsX, $this->GetY() - 6); // Set position to the same line
-$this->SetFont('helvetica', '', 12);
-$this->Cell(0, 10,  number_format($payment, 2), 0, 1, 'R');
-
-
-// Define the width of the line
-$lineWidth = 50; // Adjust the width as needed
-
-// Calculate the X coordinates
-$startX = $this->GetPageWidth() - 10 - $lineWidth; // Starting X coordinate
-$endX = $this->GetPageWidth() - 10; // Ending X coordinate
-
-// Draw the line
-$this->Line($startX, $this->GetY(), $endX, $this->GetY());
-
-// Move to the next line
-$this->Ln(10); // You can adjust the spacing after the line as needed
-
-// SENDER DETAILS on the left
-$this->SetFont('helvetica', 'B', 12);
-$this->Cell(0, 10, 'Remaining Payment:', 0, 1, 'L');
-
-
-
-// RECEIVER DETAILS on the right
-$receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
-$this->SetXY($receiverDetailsX, $this->GetY() - 6); // Set position to the same line
-$this->SetFont('helvetica', '', 12);
-$remainingPayment = $paymentstatus == 'Not Paid' ? $payment : ($paymentstatus == 'Pending' ? ($payment - 300) : 0);
-$this->Cell(0, 10,  number_format($remainingPayment, 2), 0, 1, 'R');
-
-// Define the width of the line
-$lineWidth = 50; // Adjust the width as needed
-
-// Calculate the X coordinates
-$startX = $this->GetPageWidth() - 10 - $lineWidth; // Starting X coordinate
-$endX = $this->GetPageWidth() - 10; // Ending X coordinate
-
-// Draw the line
-$this->Line($startX, $this->GetY(), $endX, $this->GetY());
-$this->Ln(1); // You can adjust the spacing after the line as needed
-
-$this->Line($startX, $this->GetY(), $endX, $this->GetY());
-
-
-
-$this->Ln(100); // Adjust the spacing as needed
-
-
-// Add a straight line after the previous content
-$this->Line(10, $this->GetY(), $this->GetPageWidth() - 10, $this->GetY());
-
-
-$this->Ln(10); // You can adjust the spacing after the line as needed
-
-
+        // Calculate remaining payment
+        $this->SetFont('helvetica', 'B', 12);
+        $this->Ln(5);
+        $this->Cell(0, 10, 'Remaining Payment:', 0, 1, 'L');
+        $this->SetFont('helvetica', '', 12);
+        $remainingPayment = 0;
+        if ($paymentstatus == 'Not Paid') {
+            $remainingPayment = $payment;
+        } elseif ($paymentstatus == 'Pending') {
+            $remainingPayment = $payment - 300;
+        }
+        $this->Cell(0, 10, $remainingPayment, 0, 1, 'R');
     }
 }
-
-
 
 
 
@@ -314,49 +185,52 @@ class M_Bookings
             return false;
         }
     }
-    public function GetReservInfo($reservationId) {
+    public function GetReservInfo($reservationId)
+    {
         $this->db->query('SELECT * FROM bookings WHERE id = :reservationId');
-        
+
         $this->db->bind(':reservationId', $reservationId);
         $this->db->execute();
         $resultSet = $this->db->single();
-    
-            return $resultSet ;
-       
+
+        return $resultSet;
+
     }
-    
-    
-    public function sendEmail($reservation) {
-       
+
+
+    public function sendEmail($reservation)
+    {
+
         $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf->Invoice($reservation->id,$reservation->name,$reservation->email, $reservation->bookingPrice, $reservation->date, $reservation->paymentStatus,$reservation->phoneNumber);
+        $pdf->Invoice($reservation->name,$reservation->email, $reservation->bookingPrice, $reservation->date, $reservation->paymentStatus);
 
 
-       
-$file_location = "C:\\xampp\\htdocs\\C&A_Indoor_Project\\app\\views\\Pages\\Report\\Invoice\\";  
 
-$file_name = "INV_" . $reservation->id . ".pdf"; // Concatenate booking ID with file name
-$pdf->Output($file_location.$file_name, 'F'); // F means upload PDF file on some folder
-echo "Upload successfully!!";
-return $file_name;
+        $file_location = "C:\\xampp\\htdocs\\C&A_Indoor_Project\\app\\views\\Pages\\Report\\Invoice\\";
 
-              }
+        $file_name = "INV_" . $reservation->id . ".pdf"; // Concatenate booking ID with file name
+        $pdf->Output($file_location . $file_name, 'F'); // F means upload PDF file on some folder
+        echo "Upload successfully!!";
+        return $file_name;
 
-            public function sendingemail($invoice_name,$reservation) {
+    }
 
-                $mail = new PHPMailer(true);
-        
-                $email=$reservation->email;
-        
-                $file_location = "C:\\xampp\\htdocs\\C&A_Indoor_Project\\app\\views\\Pages\\Report\\Invoice\\";
-        
-            
-                // Server settings
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com';
-                $mail->SMTPAuth = true;
-                $mail->Username = 'nivodya2001@gmail.com';
-                $mail->Password = 'wupbxphjicpfidgj
+    public function sendingemail($invoice_name, $reservation)
+    {
+
+        $mail = new PHPMailer(true);
+
+        $email = $reservation->email;
+
+        $file_location = "C:\\xampp\\htdocs\\C&A_Indoor_Project\\app\\views\\Pages\\Report\\Invoice\\";
+
+
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'nivodya2001@gmail.com';
+        $mail->Password = 'wupbxphjicpfidgj
                 ';
                 $mail->SMTPSecure = 'ssl';
                 $mail->Port = 465;
@@ -382,12 +256,7 @@ return $file_name;
                 }
             
                 }  
-                public function getReservations(){
-                    $this->db->query('SELECT * FROM bookings JOIN time_slots ON bookings.id = time_slots.booking_id ORDER BY bookings.date ASC;');
-                    $this->db->execute();
-            
-                    return $this->db->resultSet();
-                }
+
 
 }
 ?>
