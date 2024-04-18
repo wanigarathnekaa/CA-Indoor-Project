@@ -44,7 +44,7 @@
             </div>
 
             <div class="service-cards">
-                <a class="card" href="#">
+                <a class="card" href="<?php echo URLROOT; ?>/Pages/userSchedule/coach">
                     <div class="card-icon">
                         <i class="fa-solid fa-users"></i>
                     </div>
@@ -53,7 +53,7 @@
                     </div>    
                 </a>
 
-                <a class="card" href="C&A_Indoor_Project/Pages/userSchedule/coach">
+                <a class="card" href="<?php echo URLROOT; ?>/Pages/userSchedule/coach">
                     <div class="card-icon">
                         <i class="fa-solid fa-globe"></i>
                     </div>
@@ -62,7 +62,7 @@
                     </div>    
                 </a>
 
-                <a class="card" href="C&A_Indoor_Project/Pages/Cricket_Shop/Coach">
+                <a class="card" href="<?php echo URLROOT; ?>/Pages/Cricket_Shop/Coach">
                     <div class="card-icon">
                         <i class="fa-solid fa-cart-shopping"></i>
                     </div>
@@ -71,7 +71,7 @@
                     </div>    
                 </a>
 
-                <a class="card" href="C&A_Indoor_Project/Pages/Add_Advertisements/coach">
+                <a class="card" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/coach">
                     <div class="card-icon">
                         <i class="fa-solid fa-address-card"></i>
                     </div>

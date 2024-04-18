@@ -310,8 +310,6 @@ class Users extends Controller
         
 
         $mail = new PHPMailer(true);
-
-
  
             //Server settings
             $mail->isSMTP();
@@ -337,22 +335,11 @@ class Users extends Controller
             if ($mail->send()) {
                 if($this->userModel->updatePassword($email,$hashedNewPassword)){
                     $this->view('Pages/OTPSEND/index');
-
                 }
                 else{
                     die('somthing wrong');
-                }                
-
-
-
-                
+                }                   
             }
-
-
-        
-        
-       
- 
         }
 
     
@@ -376,9 +363,7 @@ class Users extends Controller
             redirect('Pages/Dashboard/admin');
         }elseif($role == 'Cashier'){
             redirect('Pages/Dashboard/cashier');
-        }
-
-        
+        }        
     }
     public function logout()
     {
