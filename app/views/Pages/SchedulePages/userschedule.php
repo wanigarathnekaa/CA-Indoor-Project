@@ -42,19 +42,21 @@
             <div class="sec-reservation">
                   
                   <div class="details row2">
-                  <!-- upcomming Reservations -->
-                  <div class="tablediv">
-                        <?php
-                                  require APPROOT . '/views/Pages/Tables/personal_previous_reservation.php';
-                        ?>
-                  </div>
-                  
-                  <!-- Calander -->
-                  <!-- <?php 
-                  if ($_SESSION['user_role'] == 'Coach') { ?> -->
-                  <div class="calanderdiv">
-                                                    
-                  </div>
+                        <!-- upcomming Reservations -->
+                        <div class="tablediv">
+                              <?php
+                                    require APPROOT . '/views/Pages/Tables/personal_previous_reservation.php';
+                              ?>
+                        </div>
+                        
+                        <!-- Calander -->
+                        <!-- <?php 
+                        if ($_SESSION['user_role'] == 'Coach') { ?> -->
+                        
+                              <?php
+                                    require APPROOT . '/views/Pages/Tables/coachSession.php';
+                              ?>                           
+                        
                   </div>
             </div>
 

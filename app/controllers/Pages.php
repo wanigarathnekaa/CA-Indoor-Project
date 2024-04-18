@@ -95,6 +95,17 @@ class Pages extends Controller
         $this->view('Pages/Tables/personal_previous_reservation', $data);
     }
 
+
+    //Coaching reservation table for coach
+    public function Coaching_Reservation($name)
+    {
+        $bookings = $this->pagesModel->getReservations();
+        $data = [
+            'bookings' => $bookings,
+        ];
+        $this->view('Pages/Tables/coachSession', $data);
+    }
+
     //schedule page for coach,player
     public function userSchedule($name)
     {
