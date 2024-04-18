@@ -11,7 +11,7 @@
   <!--for demo wrap-->
   <h1>User Activity Log</h1>
   <div class="tbl-header">
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table cellpadding="0" cellspacing="0" >
       <thead>
         <tr>
           <th>Name</th>
@@ -24,18 +24,23 @@
     </table>
   </div>
   <div class="tbl-content">
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table cellpadding="0" cellspacing="0">
       <tbody>
-      <?php foreach ($logs as $log): ?>
-      <tr>
+      <?php foreach ($data['logs'] as $log): ?>
+    <tr>
         <td><?php echo $log->user_name; ?></td>
         <td><?php echo $log->email; ?></td>
         <td><?php echo $log->create_date; ?></td>
         <td><?php echo $log->last_login; ?></td>
         <td><?php echo $log->last_logout; ?></td>
         <!-- Add other table columns as needed -->
-      </tr>
+    </tr>
 <?php endforeach; ?>
+
+
+
+
+
 
 
 

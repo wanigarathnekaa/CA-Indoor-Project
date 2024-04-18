@@ -189,10 +189,10 @@ class Pages extends Controller
     public function AccountLogTable()
     {
         $logs = $this->pagesModel->getAccLog();
-        // $users = $this->pagesModel->getUserCount();
-                
-        $this->view('Pages/Tables/accountlog_Table', $logs);
+        $data = ['logs' => $logs]; // Pass $logs as an associative array
+        $this->view('Pages/Tables/accountlog_Table', $data);
     }
+    
 
 
     // dashboard
