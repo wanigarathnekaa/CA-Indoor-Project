@@ -379,6 +379,7 @@ function time_slot($duration, $cleanup, $start, $end)
                         console.log(response);
                         if (response.status == "success") {
                             alert("Booking successful");
+                            window.location.href = "http://localhost/C&A_Indoor_Project/Pages/Dashboard/manager";
                         } else {
                             alert("Booking failed");
                         }
