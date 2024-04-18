@@ -14,7 +14,8 @@ use PHPMailer\PHPMailer\SMTP;
 class MYPDF extends TCPDF
 {
 
-    public function Invoice($id,$customerName, $email, $payment, $date, $paymentstatus,$phoneNumber) {
+    public function Invoice($id, $customerName, $email, $payment, $date, $paymentstatus, $phoneNumber)
+    {
         // Set PDF properties
         $this->SetCreator(PDF_CREATOR);
         $this->SetAuthor('Admin');
@@ -45,7 +46,7 @@ class MYPDF extends TCPDF
         $this->Cell(80, 10, 'Email:', 0, 0, 'L');
         $this->Cell(0, 10, $email, 0, 1, 'R');
 
-        
+
 
         // Payment details
         $this->SetFont('helvetica', 'B', 12);
@@ -202,7 +203,7 @@ class M_Bookings
     {
 
         $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf->Invoice($reservation->name,$reservation->email, $reservation->bookingPrice, $reservation->date, $reservation->paymentStatus);
+        $pdf->Invoice($reservation->name, $reservation->email, $reservation->bookingPrice, $reservation->date, $reservation->paymentStatus);
 
 
 
@@ -232,30 +233,51 @@ class M_Bookings
         $mail->Username = 'nivodya2001@gmail.com';
         $mail->Password = 'wupbxphjicpfidgj
                 ';
-                $mail->SMTPSecure = 'ssl';
-                $mail->Port = 465;
-        
-                // Recipients
-                $mail->setFrom('nivodya2001@gmail.com', 'Hasini Hewa');
-                $mail->addAddress($email);
-        
-                // Content
-                $mail->isHTML(true);
-                $mail->Subject = 'About your complaint';
-                $mail->Body = 'Please find the attached PDF file.';
-                
-                // Load PDF file
-                $file_path = $file_location . $invoice_name; // Assuming $invoice_name contains the file name
-                $mail->addAttachment($file_path); // Attach the PDF file
-        
-                // Send email
-                if ($mail->send()) {
-                    echo 'Email sent.';
-                } else {
-                    echo 'Email could not be sent.';
-                }
-            
-                }  
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+
+        // Recipients
+        $mail->setFrom('nivodya2001@gmail.com', 'Hasini Hewa');
+        $mail->addAddress($email);
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = 'About your complaint';
+        $mail->Body = 'Please find the attached PDF file.';
+
+        // Load PDF file
+        $file_path = $file_location . $invoice_name; // Assuming $invoice_name contains the file name
+        $mail->addAttachment($file_path); // Attach the PDF file
+
+        // Send email
+        if ($mail->send()) {
+            echo 'Email sent.';
+        } else {
+            echo 'Email could not be sent.';
+        }
+
+    }
+
+    public function permanentBooking($data)
+    {
+        $this->db->query("INSERT INTO permanent_booking (name, email, phoneNumber, date, coach, timeDuration, day, timeSlotA, timeSlotB, timeSlotM) VALUES (:name, :email, :phoneNumber, :date, :coach, :timeDuration, :day, :timeSlotA, :timeSlotB, :timeSlotM)");
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':date', $data['date']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':phoneNumber', $data['phoneNumber']);
+        $this->db->bind(':coach', $data['coach']);
+        $this->db->bind(':timeDuration', $data['timeDuration']);
+        $this->db->bind(':day', $data['day']);
+        $this->db->bind(':timeSlotA', $data['timeSlotA']);
+        $this->db->bind(':timeSlotB', $data['timeSlotB']);
+        $this->db->bind(':timeSlotM', $data['timeSlotM']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 }
