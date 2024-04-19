@@ -33,7 +33,11 @@ $coachUser = array_values($coachUser);
       <section class="home">
             <div class="carddiv">
                   <div class="card">
-                        <img src="<?php echo URLROOT; ?>/public/profilepic/<?php echo $coachUser[0]->img;?>" >
+                        <?php if($coachUser[0]->img== NULL):?>
+                                    <img class="image" src="<?php echo URLROOT; ?>/public/profilepic/avatar.jpg">
+                        <?php else:?>
+                                    <img class="image" src="<?php echo URLROOT; ?>/public/profilepic/<?php echo $coachUser[0]->img;?>">
+                        <?php endif;?>
                         <div>
                               <h2><?php echo $coachUser[0]->name;?></h2>
                               <div class="details">

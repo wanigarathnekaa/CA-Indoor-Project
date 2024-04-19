@@ -147,9 +147,15 @@ class Advertisement extends Controller
                 'filetmp_err' => "",
             ];
 
-            $newfilename = uniqid() . "-" . $data['filename'];
-            move_uploaded_file($data['filetmp'], "../public/uploads/" . $newfilename);
-            $data['filename'] = $newfilename;
+            if (!empty($_FILES['file']['name'])) {
+                $newfilename = uniqid() . "-" . $data['filename'];
+                move_uploaded_file($data['filetmp'], "../public/uploads/" . $newfilename);
+                $data['filename'] = $newfilename;
+            } else {
+                $existingFilename = $this->advertiseModel->getExistingImageFilename($advertisement_id);
+                $data['filename'] = $existingFilename;
+                $data['img'] = $existingFilename;
+            }
 
             //validate name
             if (empty($data['name'])) {
@@ -171,13 +177,10 @@ class Advertisement extends Controller
                 $data['content_err'] = "Please enter the Description";
             }
 
-            //validate email
-            if (empty($data['filename'])) {
-                $data['filename_err'] = "Please upload the image";
-            }
+           
 
 
-            if (empty($data['title_err']) && empty($data['content_err'])) {
+            if (empty($data['title_err']) && empty($data['content_err']) && empty($data['date_err']) && empty($data['name_err'])) {
                 if ($this->advertiseModel->editAdvertisement($data)) {
                     redirect('Pages/View_Advertisement/advertisement');
                 } else {
