@@ -68,9 +68,7 @@
                         <thead>
                               <tr>
                                     <th>Name</th>
-                                    <th>Role</th>
-
-                                    <th>Email</th>
+                                    <th>Role</th>                                   <th>Email</th>
                                     <th>phoneNumber</th>
                                     <th>NIC</th>
                                     <th></th>
@@ -104,9 +102,7 @@
 
                                           ?>
                                            </td>
-                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($CompanyUser)); ?>)">
-                                                <?php echo $CompanyUser->role; ?>
-                                          </td>
+                                          
                                            <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($CompanyUser)); ?>)">
                                                 <?php echo $CompanyUser->email; ?>
                                           </td>
