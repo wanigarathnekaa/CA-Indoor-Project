@@ -416,6 +416,7 @@ function time_slot($duration, $cleanup, $start, $end)
                         },
                         success: function (response) {
                             response = JSON.parse(response);
+                            console.log(response);
                             if (response.status === "success") {
                                 var bookings = response.data;
                                 bookings.forEach(element => {
@@ -465,7 +466,7 @@ function time_slot($duration, $cleanup, $start, $end)
                                     }
                                 });
                             } else {
-                                alert("Booking not available");
+                                console.log("No Permanent Bookings Available");
                             }
                         }
                     });

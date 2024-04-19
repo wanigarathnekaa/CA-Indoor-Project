@@ -188,7 +188,7 @@ class Bookings extends Controller
                 && empty($data['coach_err']) && empty($data['phoneNumber_err'])
                 && empty($data['bookingPrice_err']) && empty($data['paymentStatus_err'])
             ) {
-                //create user
+                //create reservation
                 if ($this->bookingModel->Make_Reservation($data)) {
                     $_SESSION['booking_success'] = true;
                     $bookingId = $this->bookingModel->last_inserted_id();
@@ -231,7 +231,7 @@ class Bookings extends Controller
 
     public function SendInvoice($reservationID)
     {
-        
+
 
 
         if (isset($_POST["OKAY"])) {
@@ -266,6 +266,7 @@ class Bookings extends Controller
             $timeSlotsA = json_decode($_POST['timeSlotsA'], true);
             $timeSlotsB = json_decode($_POST['timeSlotsB'], true);
             $timeSlotsM = json_decode($_POST['timeSlotsM'], true);
+            $bookingPrice = count($timeSlotsA) * 1000 + count($timeSlotsB) * 1000 + count($timeSlotsM) * 1500;
 
             // Encode arrays to JSON strings
             $timeSlotsAJson = json_encode($timeSlotsA);
@@ -290,6 +291,17 @@ class Bookings extends Controller
                 'phoneNumber_err' => "",
                 'timeDuration_err' => "",
                 'day_err' => "",
+            ];
+
+            $data1 = [
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'phoneNumber' => $data['phoneNumber'],
+                'date' => $data['date'],
+                'coach' => $data['coach'],
+                'bookingPrice' => $bookingPrice,
+                'paymentStatus' => 'Not Paid',
+                'paidPrice' => 0,
             ];
 
             //validate name
@@ -322,6 +334,34 @@ class Bookings extends Controller
                 $data['day_err'] = "Please enter a day";
             }
 
+            // Calculate the end date based on the start date and time duration
+            $startDate = strtotime($data['date']);
+            $timeDuration = $data['timeDuration'];
+
+            // Calculate end date based on time duration
+            if (strpos($timeDuration, 'Months') !== false) {
+                $months = (int) filter_var($timeDuration, FILTER_SANITIZE_NUMBER_INT);
+                $endDate = date('Y-m-d', strtotime("+$months months", $startDate));
+            }
+            $data['endDate'] = $endDate;
+
+            $desiredDay = $data["day"];
+
+            // Get all specified days between start and end date
+            $specifiedDays = [];
+            $currentDate = $startDate;
+
+            // Find the first occurrence of the desired day
+            while (date('l', $currentDate) != $desiredDay && $currentDate <= strtotime($endDate)) {
+                $currentDate = strtotime('+1 day', $currentDate);
+            }
+
+            // Collect all the specified days
+            while ($currentDate <= strtotime($endDate)) {
+                $specifiedDays[] = date('Y-m-d', $currentDate);
+                $currentDate = strtotime('+7 days', $currentDate);
+            }
+
             // Check if there are no errors
             if (
                 empty($data['name_err']) && empty($data['email_err']) && empty($data['date_err'])
@@ -329,9 +369,31 @@ class Bookings extends Controller
             ) {
                 // Check if the booking is successful
                 if ($this->bookingModel->permanentBooking($data)) {
-                    $response = [
-                        'status' => 'success',
-                    ];
+                    foreach ($specifiedDays as $date) {
+                        $data1['date'] = $date;
+                        if ($this->bookingModel->Make_Reservation($data1)) {
+                            $_SESSION['booking_success'] = true;
+                            $bookingId = $this->bookingModel->last_inserted_id();
+                            foreach ($timeSlotsA as $timeSlot) {
+                                $this->bookingModel->addTimeSlots($bookingId, $timeSlot, 'Normal Net A');
+                            }
+                            foreach ($timeSlotsB as $timeSlot) {
+                                $this->bookingModel->addTimeSlots($bookingId, $timeSlot, 'Normal Net B');
+                            }
+                            foreach ($timeSlotsM as $timeSlot) {
+                                $this->bookingModel->addTimeSlots($bookingId, $timeSlot, 'Machine Net');
+                            }
+
+                            $response = [
+                                'status' => 'success',
+                            ];
+                        } else {
+                            $response = [
+                                'status' => 'error',
+                                'message' => 'Something went wrong when making reservation',
+                            ];
+                        }
+                    }
                 } else {
                     $response = [
                         'status' => 'error',
