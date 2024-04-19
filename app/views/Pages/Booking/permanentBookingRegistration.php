@@ -408,15 +408,18 @@ function time_slot($duration, $cleanup, $start, $end)
                                 var bookings = response.data;
                                 bookings.forEach(element => {
                                     var selectedDate = new Date(date);
+                                    var endDateForSelectedDate = new Date(date);
+                                    var bookingEndDate = new Date(element.date);
                                     var endDate = new Date(element.date);
                                     endDate.setMonth(endDate.getMonth() + parseInt(element.timeDuration.split(" ")[0])); // Add time duration in months
+                                    endDateForSelectedDate.setMonth(endDateForSelectedDate.getMonth() + parseInt(timeDuration.split(" ")[0])); // Add time duration in months
+                                    timeSlotsA = JSON.parse(element.timeSlotA);
+                                    timeSlotsB = JSON.parse(element.timeSlotB);
+                                    timeSlotsM = JSON.parse(element.timeSlotM);
+                                    console.log(bookingEndDate <= endDateForSelectedDate);
 
-                                    if (selectedDate >= new Date(element.date) && selectedDate <= endDate && day === element.day) {
-                                        console.log("Date and day are within the booking time duration.");
-                                        timeSlotsA = JSON.parse(element.timeSlotA);
-                                        timeSlotsB = JSON.parse(element.timeSlotB);
-                                        timeSlotsM = JSON.parse(element.timeSlotM);
-                                        console.log(timeSlotsA, timeSlotsB, timeSlotsM);
+                                    if ((selectedDate >= new Date(element.date) && selectedDate <= endDate && day === element.day) ||
+                                        (selectedDate <= new Date(element.date) && bookingEndDate <= endDateForSelectedDate && day === element.day)) {
 
                                         // Disable time slots for net A
                                         timeSlotsA.forEach(slot => {
@@ -434,8 +437,19 @@ function time_slot($duration, $cleanup, $start, $end)
                                         });
 
                                     } else {
-                                        console.log("Selected date and day are not within the booking time duration.");
-                                    }
+                                        timeSlotsA.forEach(slot => {
+                                            $("input[name='timeSlotA'][value='" + slot + "']").prop("disabled", false);
+                                        });
+
+                                        // Disable time slots for net B
+                                        timeSlotsB.forEach(slot => {
+                                            $("input[name='timeSlotB'][value='" + slot + "']").prop("disabled", false);
+                                        });
+
+                                        // Disable time slots for machine net
+                                        timeSlotsM.forEach(slot => {
+                                            $("input[name='timeSlotM'][value='" + slot + "']").prop("disabled", false);
+                                        });                                    }
                                 });
                             } else {
                                 alert("Booking not available");
