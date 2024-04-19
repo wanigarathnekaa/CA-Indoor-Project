@@ -280,14 +280,16 @@ class Pages extends Controller
     public function Permanent_Booking($name)
     {
         $coaches = $this->pagesModel->getCoaches();
+        $permanentBookings = $this->pagesModel->getPermanentBookings();
         $data = [
             'users' => $coaches,
+            'permanentBookings' => $permanentBookings,
         ];
         $res = [];
         foreach ($data['users'] as $user) {
             $res[] = $this->pagesModel->findUser($user->email);
         }
-        $this->view('Pages/Booking/permanentBookingRegistration', $res);
+        $this->view('Pages/Booking/permanentBookingRegistration', $res, $data);
     }
 
     // user profile for player, coach......................................................................................
