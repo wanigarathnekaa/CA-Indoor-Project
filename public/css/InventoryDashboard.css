@@ -109,270 +109,359 @@ hr {
   color: var(--white);
 }
 
-
 :root {
-    --color01: #2e8a99;
-    --color02: #4F9DA9;
-    --color03: #A7D8D7;
-    --color04: #EAF3F4;
-    --white: #fff;
-    --gray: #f5f5f5;
-    --black1: #222;
-    --black2: #000000;
+  --color01: #2e8a99;
+  --color02: #4f9da9;
+  --color03: #a7d8d7;
+  --color04: #eaf3f4;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #000000;
 }
 
 /*  table  ..................................................................... */
 .table-container {
-    /* width: 100%; */
-    position: relative;
-    display: block;
-    /* overflow-y: scroll; */
-    /* height: 100%;   */
-    /* border-radius: 12px; */
-    /* background-color: #A7D8D7; */
-    align-items: center;
-    justify-content: center;
-    /* background-color: #A7D8D7; */
-    /* width: 94%; */
-    margin: 30px;
+  /* width: 100%; */
+  position: relative;
+  display: block;
+  /* overflow-y: scroll; */
+  /* height: 100%;   */
+  /* border-radius: 12px; */
+  /* background-color: #A7D8D7; */
+  align-items: center;
+  justify-content: center;
+  /* background-color: #A7D8D7; */
+  /* width: 94%; */
+  margin: 30px;
 }
 
-.table-container h2{
-    font-size: 30px;
-    font-weight: 500;
-    margin-bottom: 15px;
-    color: var(--black1);   
+.table-container h2 {
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  color: var(--black1);
 }
 
 table {
-    width: 100%;
-    display: table;
-    border-collapse: collapse;
-    /* margin-top: 10px; */
-    margin-bottom: 10px;
-    /* padding-bottom: 20px; */
-    overflow-y: scroll;
-    min-width: 80%;
+  width: 100%;
+  display: table;
+  border-collapse: collapse;
+  /* margin-top: 10px; */
+  margin-bottom: 10px;
+  /* padding-bottom: 20px; */
+  overflow-y: scroll;
+  min-width: 80%;
 }
 
 table thead {
-    display: table-header-group;
-    /* vertical-align: middle; */
-    border-color: inherit;
-    background-color: var(--color02);
+  display: table-header-group;
+  /* vertical-align: middle; */
+  border-color: inherit;
+  background-color: var(--color02);
 }
 
 table thead th {
-    font-weight: 600;
-    font-size: 14px;
-    text-align: left
-
+  font-weight: 600;
+  font-size: 14px;
+  text-align: left;
 }
 
 table tr {
-    color: var(--black1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  color: var(--black1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
-table tbody td{
-    font-size: 14px;
-    padding-top: 5px;
-    padding-bottom: 15px;
-    text-align: left;
+table tbody td {
+  font-size: 14px;
+  padding-top: 5px;
+  padding-bottom: 15px;
+  text-align: left;
 }
 
 table tbody tr:hover {
-    background: var(--color03);
-    color: var(--black1); 
+  background: var(--color03);
+  color: var(--black1);
 }
 table tr td,
 table tr th {
-    padding: 10px;
+  padding: 10px;
 }
 
-
-tbody a{
-    text-decoration: none;
-    /* color: var(--black1); */
-
+tbody a {
+  text-decoration: none;
+  /* color: var(--black1); */
 }
 
 tbody td .icon {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* padding-left: 10px;      */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding-left: 10px;      */
 }
 
-tbody td .icon:hover{
-    cursor: pointer;
-    
+tbody td .icon:hover {
+  cursor: pointer;
 }
 
 #coachTable {
-    border-collapse: collapse;
-    width: 100%;
+  border-collapse: collapse;
+  width: 100%;
 }
 
-#coachTable th, #coachTable td {
-    border: 1px solid #ddd; /* Set border for each cell */
-    padding: 8px; /* Add some padding for better appearance */
-    text-align: left; /* Align text to the left within cells */
+#coachTable th,
+#coachTable td {
+  border: 1px solid #ddd; /* Set border for each cell */
+  padding: 8px; /* Add some padding for better appearance */
+  text-align: left; /* Align text to the left within cells */
 }
 
 .pagination-container {
-    margin-top: 20px;
-    display: flex;
-    justify-content: left;
+  margin-top: 20px;
+  display: flex;
+  justify-content: left;
 }
 
 .pagination {
-    list-style: none;
-    display: flex;
-    gap: 10px;
+  list-style: none;
+  display: flex;
+  gap: 10px;
 }
 
 .page-link {
-    padding: 8px 12px;
-    text-decoration: none;
-    color: var(--color01);
-    background-color: var(--color04);
-    border: 1px solid var(--color01);
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: var(--color01);
+  background-color: var(--color04);
+  border: 1px solid var(--color01);
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .page-link:hover {
-    background-color: var(--color01);
-    color: var(--white);
+  background-color: var(--color01);
+  color: var(--white);
 }
 
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  overflow-y: auto;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
 
+.modal-content {
+  max-width: 700px;
+  width: 500px;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 15px;
+  margin: 5% auto;
+  border: 1px solid #888;
+  box-sizing: border-box;
+  z-index: 1000;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
 
+.modal-content .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.modal-content .title {
+  font-size: 20px;
+  /* font-weight: 800; */
+  margin-bottom: 5px;
+  color: var(--color01);
+}
+
+.modal-content .customerDetails,
+.modal-content .orderItems,
+.modal-content .orderStatus {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  /* justify-content: center; */
+  align-items: left;
+  margin-bottom: 10px;
+}
+
+.modal-content .customerDetails h3,
+.modal-content .orderItems h3,
+.modal-content .orderStatus h3 {
+  font-size: 18px;
+  font-weight: 500;
+  /* margin-bottom: 5px; */
+  color: var(--color01);
+  /* text-decoration: underline var(--color01); */
+}
+
+.modal-content .orderStatus button {
+  background-color: var(--color02);
+  color: var(--white);
+  border: none;
+  padding: 2px;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 25%;
+}
+
+.modal-content .orderStatus button:hover {
+  background-color: var(--color01);
+}
+
+.modal-content .btn {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.modal-content .btn button {
+  background-color: var(--color01);
+  color: var(--white);
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 25%;
+}
+
+.modal-content .btn button:hover {
+  background-color: var(--color02);
+}
+
+.modal-content .close:hover,
+.modal-content .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 /* responsive__________________________________________________________________________________________ */
 
 @media (max-width: 768px) {
+  /* margin: 10px; */
+  .table-topic {
+    margin: 10px;
+    /* width: 100%; */
+  }
 
-    /* margin: 10px; */
-    .table-topic{
-          margin: 10px;
-          /* width: 100%; */
-    }
+  .table-topic .topic-name h1 {
+    font-size: 20px;
+  }
 
-    .table-topic .topic-name h1{
-          font-size: 20px;
-    }
+  .table-topic .search {
+    width: 300px;
+  }
 
-    .table-topic .search {
-          width: 300px;
-    }
+  .tableSort {
+    margin: 10px;
+    align-items: stretch;
+    gap: 10px;
+  }
 
-    .tableSort{
-          margin: 10px;
-          align-items: stretch;
-          gap: 10px;
-    }
+  .sort label {
+    font-size: 12px;
+    width: 50px;
+    margin-right: 5px;
+  }
 
-    .sort label{
-          font-size: 12px;
-          width: 50px;
-          margin-right: 5px;
+  .table-container {
+    margin: 10px;
+    /* background-color: #000000; */
+  }
 
-    }
+  table {
+    width: 100%;
+    /* display: block; */
+  }
+  table thead th {
+    font-size: 12px;
+  }
 
-
-    .table-container{
-          margin: 10px;
-          /* background-color: #000000; */
-    }
-
-    table {
-          width: 100%;
-          /* display: block; */
-
-    }
-    table thead th {
-          font-size: 12px;
-    }
-
-    table tbody td{
-          font-size: 12px;
-    }
-
+  table tbody td {
+    font-size: 12px;
+  }
 }
 
+@media (max-width: 480px) {
+  /* margin: 10px; */
+  .table-topic {
+    margin: 5px;
+    justify-content: space-around;
+    /* width: 100%; */
+  }
+  .table-topic .topic-name h1 {
+    font-size: 18px;
+  }
+  .tableSort {
+    margin: 5px;
+    align-items: stretch;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
 
+  .tableSort .search {
+    width: 150px;
+  }
+  .sort label {
+    font-size: 8px;
+    width: 35px;
+    margin-right: 5px;
+  }
 
-@media (max-width:480px){
+  .tableSort .search label input {
+    font-size: 8px;
+    padding-left: 25px;
+  }
 
-    /* margin: 10px; */
-    .table-topic{
-          margin: 5px;
-          justify-content: space-around
-          /* width: 100%; */
-    }
-    .table-topic .topic-name h1{
-          font-size: 18px;
-    }
-    .tableSort{
-          margin: 5px;
-          align-items: stretch;
-          padding:10px;
-          margin-bottom: 20px;
-    }
+  .sort select,
+  .sort input {
+    width: 100px;
+    font-size: 8px;
+    padding: 5px 10px;
+  }
 
-    .tableSort .search{
-          width: 150px;
-
-    }
-    .sort label{
-          font-size: 8px;
-          width: 35px;
-          margin-right: 5px;
-
-    }
-
-
-    .tableSort .search label input{
-          font-size: 8px;
-          padding-left: 25px;
-    }
-
-    .sort select,
-    .sort input{
-          width: 100px;
-          font-size: 8px;
-          padding: 5px 10px;
-    }
-
-    .table-topic .add-btn .icon{
+  .table-topic .add-btn .icon {
     font-size: small;
-    }
+  }
 
-    .table-container{
-          margin: 5px;
-    }
+  .table-container {
+    margin: 5px;
+  }
 
-    table thead th {
-          font-size: 10px;
-    }
+  table thead th {
+    font-size: 10px;
+  }
 
-    table tbody td{
-          font-size: 10px;
-    }
+  table tbody td {
+    font-size: 10px;
+  }
 
-   table tr th:nth-child(4),
-   table tr th:nth-child(5),
-   table tr th:nth-child(6),
-   table tr td:nth-child(4),
-   table tr td:nth-child(5),
-   table tr td:nth-child(6)
-   {
-         text-align: center;
-         background-color: red;
-         display: none;
-   }
-
+  table tr th:nth-child(4),
+  table tr th:nth-child(5),
+  table tr th:nth-child(6),
+  table tr td:nth-child(4),
+  table tr td:nth-child(5),
+  table tr td:nth-child(6) {
+    text-align: center;
+    background-color: red;
+    display: none;
+  }
 }
 
 /* ====================== Responsive Design ========================== */
