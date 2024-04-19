@@ -59,19 +59,23 @@
                                     <?php if ($role == "User" || $role == "Coach"): ?>
                                           <div class="box">
                                                 <label for="name">Name</label>
-                                                <input type="text" id="name" name="name"  value="<?=$data["name"]?>" required/>
+                                                <input type="text" id="name" name="name"  value="<?=$data["name"]?>"/>
+                                                <span class="form-invalid"><?php echo $data['name_err']; ?></span>
                                           </div>
                                           <div class="box">
                                                 <label for="user_name">User Name</label>
-                                                <input type="text" name='user_name' id="user_name" value="<?=$data["user_name"]?>" required/>
+                                                <input type="text" name='user_name' id="user_name" value="<?=$data["user_name"]?>"/>
+                                                <span class="form-invalid"><?php echo $data['user_name_err']; ?></span>
                                           </div>
                                           <div class="box">
                                                 <label for="email">Email</label>
                                                 <input type="email" id="email" name="email" value="<?=$data["email"]?>" />
+                                                <span class="form-invalid"><?php echo $data['email_err']; ?></span>
                                           </div>
                                           <div class="box">
                                                 <label for="phoneNumber">Phone Number</label>
                                                 <input type="text" id="phoneNumber" name="phoneNumber"  value="<?=$data["phoneNumber"]?>"/>
+                                                <span class="form-invalid"><?php echo $data['phoneNumber_err']; ?></span>
                                           </div>
 
                                     <?php endif ?>
@@ -80,30 +84,37 @@
                                           <div class="box">
                                                 <label for="nic">NIC</label>
                                                 <input type="text" id="nic" name="nic" placeholder="Enter NIC" value="<?=$data["nic"]?>"/>
+                                                <span class="form-invalid"><?php echo $data['nic_err']; ?></span>
                                           </div>
                                           <div class="box">
                                                 <label for="experience">Experience</label>
                                                 <input type="text" id="experience" name="experience" value="<?=$data["experience"]?>"/>
+                                                <span class="form-invalid"><?php echo $data['experience_err']; ?></span>
                                           </div>
                                           <div class="box">
                                                 <label for="srtAddress">Street Address</label>
                                                 <input type="text" id="srtAddress" name="srtAddress" value="<?=$data["srtAddress"]?>"/>
+                                                <span class="form-invalid"><?php echo $data['srtAddress_err']; ?></span>
                                           </div>
                                           <div class="box">
                                                 <label for="city">City</label>
                                                 <input type="text" id="city" name="city" value="<?=$data["city"]?>"/>
+                                                <span class="form-invalid"><?php echo $data['city_err']; ?></span>
                                           </div>
                                           <div class="box">
                                                 <label for="pecialty">Specialization</label>
                                                 <input type="text" id="specialty" name="specialty" placeholder="Specialization" value="<?=$data["specialty"]?>" />
+                                                <span class="form-invalid"><?php echo $data['specialty_err']; ?></span>
                                           </div>
                                           <div class="box">
                                                 <label for="certificate">Certification</label>
                                                 <input type="text" id="certificate" name="certificate"  value="<?=$data["certificate"]?>"/>
+                                                <span class="form-invalid"><?php echo $data['certificate_err']; ?></span>
                                           </div>
                                           <div class="box">
                                                 <label for="achivements">Achivements</label>
                                                 <input type="text" id="achivements" name="achivements" value="<?=$data["achivements"]?>"/>
+                                                <span class="form-invalid"><?php echo $data['achivements_err']; ?></span>
                                           </div>
                                     <?php endif ?>
                               </div>

@@ -52,19 +52,23 @@
                     <div class="profileDetails">
                         <div class="box">
                             <label for="name">Name</label>
-                            <input type="text" id="name" name="name"  value="<?=$data["name"]?>" required/>
+                            <input type="text" id="name" name="name"  value="<?=$data["name"]?>" />
+                            <span class="form-invalid"><?php echo $data['name_err']; ?></span>
                         </div>
                         <div class="box">
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" value="<?=$data["email"]?>" />
+                            <span class="form-invalid"><?php echo $data['email_err']; ?></span>
                         </div>
                         <div class="box">
                             <label for="phoneNumber">Phone Number</label>
                             <input type="text" id="phoneNumber" name="phoneNumber"  value="<?=$data["phoneNumber"]?>"/>
+                            <span class="form-invalid"><?php echo $data['phoneNumber_err']; ?></span>
                         </div>
                         <div class="box">
                             <label for="nic">NIC</label>
                             <input type="text" id="nic" name="nic" placeholder="Enter NIC" value="<?=$data["nic"]?>"/>
+                            <span class="form-invalid"><?php echo $data['nic_err']; ?></span>
                         </div>        
                     </div>
                     <div class="buttons">

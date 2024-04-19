@@ -151,7 +151,12 @@
   }
 
 
-
+.form-invalid {
+      color: red;
+      font-size: 12px;
+      /* margin-top: 5px; */
+      /* margin-bottom: 5px; */
+  }
   
   /* Responsive Styles */
 

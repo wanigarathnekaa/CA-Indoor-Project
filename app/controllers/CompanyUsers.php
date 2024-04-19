@@ -32,7 +32,7 @@ class CompanyUsers extends Controller
                         'phoneNumber_err' => "",
                         'nic_err' => "",
                         'filename_err' => "",
-                '       filetmp_err' => "",      
+                        'filetmp_err' => "",      
                   ];
 
                   // Check if a new file has been uploaded
@@ -45,6 +45,7 @@ class CompanyUsers extends Controller
                         // No new file uploaded, retain the existing image value
                         $existingFilename = $this->companyUserModel->getExistingImageFilename($data['email']); // Replace $userId with the actual user ID
                         $data['filename'] = $existingFilename;
+                        $data['image'] = $existingFilename;
                   }
 
                   //validate name
@@ -77,9 +78,11 @@ class CompanyUsers extends Controller
                         if($this->companyUserModel->editProfile($data)){
                               redirect('Pages/CompanyUser_Profile/<?php echo $role ?>');
                         } else {
-                              die('Something went wrong');
+                              $this->view('Pages/CompanyUser/CompanyUserEditProfile', $data);
                         }
                   } else {
+
+                        //Load view with errors
                         $this->view('Pages/CompanyUser/CompanyUserEditProfile', $data);
                   }
             }
