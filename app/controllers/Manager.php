@@ -172,6 +172,7 @@ class Manager extends Controller
                 // No new file uploaded, retain the existing image value
                 $existingFilename = $this->managerModel->getExistingImageFilename($data['email']); // Replace $userId with the actual user ID
                 $data['filename'] = $existingFilename;
+                $data['img'] = $existingFilename;
             }
 
             //validate name

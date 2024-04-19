@@ -343,7 +343,8 @@ class Pages extends Controller
                 'email_err' => "",
                 'phoneNumber_err' => "",
                 'nic_err' => "",
-                'address_err' => "",
+                'srtAddress_err' => "",
+                'city_err' => "",
                 'experience_err' => "",
                 'specialty_err' => "",
                 'certificate_err' => "",
@@ -624,7 +625,7 @@ class Pages extends Controller
             'name' => $manager->name,
             'email' => $_SESSION['user_email'],
             'phoneNumber' => $manager->phoneNumber,
-            'pwd' => $manager->password,
+            // 'pwd' => $manager->password,
             'nic' => $manager->nic,
             'strAddress' => $manager->strAddress,
             'city' => $manager->city,
@@ -634,7 +635,8 @@ class Pages extends Controller
             'email_err' => "",
             'phoneNumber_err' => "",
             'nic_err' => "",
-            'address_err' => "",
+            'strAddress_err' => "",
+            'city_err' => "",
             'img_err' => ""
         ];
 
@@ -664,13 +666,14 @@ class Pages extends Controller
             'name' => $user->name,
             'email' => $_SESSION['user_email'],
             'phoneNumber' => $user->phoneNumber,
-            'pwd' => $user->password,
+            // 'pwd' => $user->password,
             'nic' => $user->nic,
             'image' => $user->image,
 
             'name_err' => "",
             'email_err' => "",
             'phoneNumber_err' => "",
+            'nic_err' => "",
             'img_err' => ""
         ];
         $this->view('Pages/CompanyUser/CompanyUserEditProfile', $data);

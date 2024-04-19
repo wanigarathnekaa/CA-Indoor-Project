@@ -401,7 +401,7 @@ class Users extends Controller
                 'user_name' => trim($_POST['user_name']),
                 'email' => trim($_POST['email']),
                 'phoneNumber' => trim($_POST['phoneNumber']),
-                'pwd' => "12345678",
+                // 'pwd' => "12345678",
                 'filename' => trim($_FILES['file']['name']),
                 'filetmp' => trim($_FILES['file']['tmp_name']),
 
@@ -423,10 +423,8 @@ class Users extends Controller
                 // No new file uploaded, retain the existing image value
                 $existingFilename = $this->userModel->getExistingImageFilename($data['email']); // Replace $userId with the actual user ID
                 $data['filename'] = $existingFilename;
+                $data['img'] = $existingFilename;
             }
-
-
-
 
             //validate name
             if (empty($data['name'])) {
@@ -449,15 +447,15 @@ class Users extends Controller
             }
 
             //validate password
-            if (empty($data['pwd'])) {
-                $data['pwd_err'] = "Please enter a password";
-            }
+            // if (empty($data['pwd'])) {
+            //     $data['pwd_err'] = "Please enter a password";
+            // }
 
 
             //If validation is completed and no error, then register the user
-            if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err'])) {
+            if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err']) && empty($data['phoneNumber_err'])) {
                 //Hash the password
-                $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
+                // $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
                 
                 //create user
                 if($this->userModel->updateUser($data)) {
