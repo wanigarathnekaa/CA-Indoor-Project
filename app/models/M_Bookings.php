@@ -10,12 +10,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
+class MYPDF extends TCPDF {
 
-class MYPDF extends TCPDF
-{
-
-    public function Invoice($id, $customerName, $email, $payment, $payment1, $date, $paymentstatus, $phoneNumber)
-    {
+    public function Invoice($id,$customerName, $email, $payment,$payment1, $date, $paymentstatus,$phoneNumber) {
         // Set PDF properties
         $this->SetCreator(PDF_CREATOR);
         $this->SetAuthor('Admin');
@@ -24,51 +21,171 @@ class MYPDF extends TCPDF
         $this->SetKeywords('Invoice, Payment');
         $this->AddPage();
 
-        // Set font
-        $this->SetFont('helvetica', '', 12);
+       
 
-        // Company name
-        $this->SetFont('helvetica', 'B', 16);
-        $this->Cell(0, 10, 'C&A Indoor Cricket', 0, 1, 'C');
+  
+        $this->SetFont('helvetica', 'B', 15);
+        $this->Cell(0, 10, 'C & A Cricket Net', 0, 1, 'L');
+        
+        // RECEIVER & SENDER DETAILS 
+        $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
+        $this->SetXY($receiverDetailsX, $this->GetY() - 10); // Set position to the same line
+        $this->SetFont('helvetica', 'B', 12);
+        $this->Cell(0, 10, 'INVOICE', 0, 1, 'R');
+
         $this->Ln(5);
+
+
+        $this->SetFont('helvetica', 'B', 12);
+        $this->Cell(0, 10, 'ORDER PLACED SUCCESSFULLY', 0, 1, 'L');
+        
+
+        $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
+        $this->SetXY($receiverDetailsX, $this->GetY() - 10); 
+        $this->SetFont('helvetica', 'B', 12);
+        $this->Cell(0, 10, 'INV_NO : #' . $id, 0, 1, 'R');
+
+        $this->Ln(5); 
+
+        $this->SetFont('helvetica', 'B', 12);
+        $this->Cell(0, 10, 'SENDER DETAILS', 0, 1, 'L');
+        
+        
+        $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
+        $this->SetXY($receiverDetailsX, $this->GetY() - 10);
+        $this->SetFont('helvetica', 'B', 12);
+        $this->Cell(0, 10, 'RECEIVER DETAILS' . $id, 0, 1, 'R');
+
+        
+
+        $this->Ln(5); 
+
+
+
+
+        $this->SetFont('helvetica', '', 12);
+        $this->Cell(0, 6,'Kaveesha Wanigarathne', 0, 1, 'L');
+        
+        
+        $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
+        $this->SetXY($receiverDetailsX, $this->GetY() - 6); 
+        $this->SetFont('helvetica', '', 12);
+        $this->Cell(0, 6, $customerName, 0, 1, 'R');
+
+
+        $this->Ln(1);
+
+        $this->SetFont('helvetica', '', 12);
+        $this->Cell(0, 6, '0770722933/0701184455', 0, 1, 'L');
+
+        $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
+        $this->SetXY($receiverDetailsX, $this->GetY() - 6); // Set position to the same line
+        $this->SetFont('helvetica', '', 12);
+        $this->Cell(0, 6,$phoneNumber, 0, 1, 'R');
+
+
+        $this->Ln(1);
+
+        $this->SetFont('helvetica', '', 12);
+        $this->Cell(0, 6, 'caindoor44@gmail.com', 0, 1, 'L');
+
+        $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
+        $this->SetXY($receiverDetailsX, $this->GetY() - 6); // Set position to the same line
+        $this->SetFont('helvetica', '', 12);
+        $this->Cell(0, 6, $email, 0, 1, 'R');
+
+
+        $this->Ln(3);
+
+
+    
+
+        // Special notes
+        $this->SetFont('helvetica', 'B', 12);
+        $this->Cell(0, 10, 'SPECIAL NOTES', 0, 1, 'L');
+        $this->SetFont('helvetica', '', 12);
+        $this->Cell(0, 10, 'No special note found', 0, 1, 'L');
+        $this->Ln(10);
 
         // Payment description
         $this->SetFont('helvetica', 'B', 12);
-        $this->Ln(10);
         $this->Cell(0, 10, 'Payment Description', 0, 1, 'L');
         $this->SetFont('helvetica', '', 12);
         $this->MultiCell(0, 10, 'This invoice is for the time slot booking payment made on ' . $date . '.', 0, 'L');
 
-        // Customer details
-        $this->SetFont('helvetica', '', 12);
-        $this->Cell(80, 10, 'Customer Name:', 0, 0, 'L');
-        $this->Cell(0, 10, $customerName, 0, 1, 'R');
-        $this->Cell(80, 10, 'Email:', 0, 0, 'L');
-        $this->Cell(0, 10, $email, 0, 1, 'R');
+// Amounts
+$this->SetFont('helvetica', 'B', 12);
+$this->Cell(0, 10, 'Total Amount: ', 0, 1, 'L');
+
+$receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
+$this->SetXY($receiverDetailsX, $this->GetY() - 6); 
+$this->SetFont('helvetica', '', 12);
+$this->Cell(0, 10,  number_format($payment, 2), 0, 1, 'R');
 
 
 
-        // Payment details
-        $this->SetFont('helvetica', 'B', 12);
-        $this->Ln(5);
-        $this->Cell(0, 10, 'Payment:', 0, 1, 'L');
-        $this->SetFont('helvetica', '', 12);
-        $this->Cell(80, 10, 'Amount:', 0, 0, 'L');
-        $this->Cell(0, 10, $payment, 0, 1, 'R');
+$this->SetFont('helvetica', 'B', 12);
+$this->Cell(0, 10, 'Paid Amount: ', 0, 1, 'L');
 
-        // Calculate remaining payment
-        $this->SetFont('helvetica', 'B', 12);
-        $this->Ln(5);
-        $this->Cell(0, 10, 'Remaining Payment:', 0, 1, 'L');
-        $this->SetFont('helvetica', '', 12);
-        $remainingPayment = 0;
-        if ($paymentstatus == 'Not Paid') {
-            $remainingPayment = $payment;
-        } elseif ($paymentstatus == 'Pending') {
-            $remainingPayment = $payment - 300;
-        }
-        $this->Cell(0, 10, $remainingPayment, 0, 1, 'R');
+$receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
+$this->SetXY($receiverDetailsX, $this->GetY() - 6); 
+$this->SetFont('helvetica', '', 12);
+$this->Cell(0, 10,  number_format($payment, 2), 0, 1, 'R');
+
+
+
+$lineWidth = 50; // Adjust the width as needed
+
+// Calculate the X coordinates
+$startX = $this->GetPageWidth() - 10 - $lineWidth; // Starting X coordinate
+$endX = $this->GetPageWidth() - 10; // Ending X coordinate
+
+// Draw the line
+$this->Line($startX, $this->GetY(), $endX, $this->GetY());
+
+// Move to the next line
+$this->Ln(10); // You can adjust the spacing after the line as needed
+
+// SENDER DETAILS on the left
+$this->SetFont('helvetica', 'B', 12);
+$this->Cell(0, 10, 'Remaining Payment:', 0, 1, 'L');
+
+
+
+// RECEIVER DETAILS on the right
+$receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
+$this->SetXY($receiverDetailsX, $this->GetY() - 6); // Set position to the same line
+$this->SetFont('helvetica', '', 12);
+$remainingPayment = $paymentstatus == 'Not Paid' ? $payment : ($paymentstatus == 'Pending' ? ($payment - 300) : 0);
+$this->Cell(0, 10,  number_format($remainingPayment, 2), 0, 1, 'R');
+
+// Define the width of the line
+$lineWidth = 50; // Adjust the width as needed
+
+// Calculate the X coordinates
+$startX = $this->GetPageWidth() - 10 - $lineWidth; // Starting X coordinate
+$endX = $this->GetPageWidth() - 10; // Ending X coordinate
+
+// Draw the line
+$this->Line($startX, $this->GetY(), $endX, $this->GetY());
+$this->Ln(1); // You can adjust the spacing after the line as needed
+
+$this->Line($startX, $this->GetY(), $endX, $this->GetY());
+
+
+
+$this->Ln(100); // Adjust the spacing as needed
+
+
+// Add a straight line after the previous content
+$this->Line(10, $this->GetY(), $this->GetPageWidth() - 10, $this->GetY());
+
+
+$this->Ln(10); // You can adjust the spacing after the line as needed
+
+
     }
+
 }
 
 
