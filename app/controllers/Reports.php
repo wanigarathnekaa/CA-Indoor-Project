@@ -113,7 +113,7 @@ if(isset($_POST["download_pdf"])) {
         }
 
         if(isset($_POST["download_pdf"])) {
-            $this->reportmodel->filterBookingsAndGeneratePDF($data);
+            $this->reportmodel->OrderGeneratePDF($data);
             
             
 

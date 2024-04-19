@@ -11,7 +11,7 @@
 <body>
 <section class="home">
 <div class='container pt-5'>
-    <h1 class='text-center text-primary'>Booking Report for Selected Date Range</h1><hr>
+    <h1 class='text-center text-primary'>Order Report</h1><hr>
     <div class="row">
         <div class="col-md-6">
             <!-- <h2 class="text-success">Filter Bookings</h2> -->
