@@ -14,7 +14,7 @@ use PHPMailer\PHPMailer\SMTP;
 class MYPDF extends TCPDF
 {
 
-    public function Invoice($id, $customerName, $email, $payment, $date, $paymentstatus, $phoneNumber)
+    public function Invoice($id, $customerName, $email, $payment, $payment1, $date, $paymentstatus, $phoneNumber)
     {
         // Set PDF properties
         $this->SetCreator(PDF_CREATOR);
@@ -203,7 +203,7 @@ class M_Bookings
     {
 
         $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf->Invoice($reservation->name, $reservation->email, $reservation->bookingPrice, $reservation->date, $reservation->paymentStatus);
+        $pdf->Invoice($reservation->id,$reservation->name, $reservation->email, $reservation->bookingPrice, $reservation->paidPrice, $reservation->date, $reservation->paymentStatus,$reservation->phoneNumber);
 
 
 

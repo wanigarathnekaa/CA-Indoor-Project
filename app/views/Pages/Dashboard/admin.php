@@ -119,7 +119,7 @@
             <a class="card" href="<?php echo URLROOT; ?>/Pages/AccountLogTable">
                 <div>
                     <div class="numbers"></div>
-                    <div class="cardName">View Account Log Table</div>
+                    <div class="cardName">Account Logs</div>
                 </div>
 
                 <div class="iconBx">
