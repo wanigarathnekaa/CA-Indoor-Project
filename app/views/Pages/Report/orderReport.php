@@ -11,32 +11,19 @@
 <body>
 <section class="home">
 <div class='container pt-5'>
-    <h1 class='text-center text-primary'>Monthly Booking Report</h1><hr>
+    <h1 class='text-center text-primary'>Booking Report for Selected Date Range</h1><hr>
     <div class="row">
         <div class="col-md-6">
+            <!-- <h2 class="text-success">Filter Bookings</h2> -->
 
-            <form action="<?php echo URLROOT;?>/Reports/genandsendemail" method="post">
-            <div class="form-group">
-    <label>Select the Month</label>
-    <select name="Selected_month" id="Selected_month" class="form-control" required>
-        <option value="">Select Month</option>
-        <option value="01">January</option>
-        <option value="02">February</option>
-        <option value="03">March</option>
-        <option value="04">April</option>
-        <option value="05">May</option>
-        <option value="06">June</option>
-        <option value="07">July</option>
-        <option value="08">August</option>
-        <option value="09">September</option>
-        <option value="10">October</option>
-        <option value="11">November</option>
-        <option value="12">December</option>
-    </select>
-</div>
-
-                <input type="submit" name="Filter" value="Filterbtn" class="btn btn-primary">
-                <input type="submit" name="download_pdf" value="download_pdf" class="btn btn-primary">
+            <form action="<?php echo URLROOT;?>/Reports/OrderReport" method="post">
+                <div class="form-group">
+                    <label>Product</label>
+                    <input type="text" name="Product" id="Product" class="form-control" required>
+                </div>
+               
+                <input type="submit" name="filter" value="Filter" class="btn btn-primary">
+                <input type="submit" name="download_pdf" value="Download_PDF" class="btn btn-primary">
 
             </form>
         </div>

@@ -46,7 +46,7 @@
     </div>
 
     <div class="cardBox">
-        <a class="card" href="<?php echo URLROOT; ?>/Reports/genandsendemail">
+        <a class="card" href="<?php echo URLROOT; ?>/Reports/OrderReport">
         <div>
         <h1>Filter Orders</h1>
         <p></p>
