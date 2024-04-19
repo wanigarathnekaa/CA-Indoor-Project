@@ -185,6 +185,12 @@ class M_Pages
         $this->db->bind(':order_id', $orderID);
         return $this->db->resultSet();
     }
+
+    public function getPermanentBookings()
+    {
+        $this->db->query('SELECT * FROM permanent_booking');
+        return $this->db->resultSet();
+    }
     
 
 }

@@ -377,13 +377,14 @@ function time_slot($duration, $cleanup, $start, $end)
                     },
                     success: function (response) {
                         console.log(response);
-                        if (response.status == "success") {
+                        if (response.status.trim() === "success") {
                             alert("Booking successful");
                             window.location.href = "http://localhost/C&A_Indoor_Project/Pages/Dashboard/manager";
                         } else {
                             alert("Booking failed");
                         }
                     }
+
                 });
             });
 
