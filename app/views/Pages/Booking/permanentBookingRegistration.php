@@ -388,6 +388,64 @@ function time_slot($duration, $cleanup, $start, $end)
                 });
             });
 
+            $("#date, select[name='timeDuration'], select[name='day']").on("change", function () {
+                var date = $("#date").val();
+                var timeDuration = $("select[name='timeDuration']").val();
+                var day = $("select[name='day']").val();
+                if (date && timeDuration && day) {
+                    console.log(date, timeDuration, day);
+                    $.ajax({
+                        type: "POST",
+                        url: "<?php echo URLROOT; ?>/Bookings/checkBooking",
+                        data: {
+                            date: date,
+                            timeDuration: timeDuration,
+                            day: day,
+                        },
+                        success: function (response) {
+                            response = JSON.parse(response);
+                            if (response.status === "success") {
+                                var bookings = response.data;
+                                bookings.forEach(element => {
+                                    var selectedDate = new Date(date);
+                                    var endDate = new Date(element.date);
+                                    endDate.setMonth(endDate.getMonth() + parseInt(element.timeDuration.split(" ")[0])); // Add time duration in months
+
+                                    if (selectedDate >= new Date(element.date) && selectedDate <= endDate && day === element.day) {
+                                        console.log("Date and day are within the booking time duration.");
+                                        timeSlotsA = JSON.parse(element.timeSlotA);
+                                        timeSlotsB = JSON.parse(element.timeSlotB);
+                                        timeSlotsM = JSON.parse(element.timeSlotM);
+                                        console.log(timeSlotsA, timeSlotsB, timeSlotsM);
+
+                                        // Disable time slots for net A
+                                        timeSlotsA.forEach(slot => {
+                                            $("input[name='timeSlotA'][value='" + slot + "']").prop("disabled", true);
+                                        });
+
+                                        // Disable time slots for net B
+                                        timeSlotsB.forEach(slot => {
+                                            $("input[name='timeSlotB'][value='" + slot + "']").prop("disabled", true);
+                                        });
+
+                                        // Disable time slots for machine net
+                                        timeSlotsM.forEach(slot => {
+                                            $("input[name='timeSlotM'][value='" + slot + "']").prop("disabled", true);
+                                        });
+
+                                    } else {
+                                        console.log("Selected date and day are not within the booking time duration.");
+                                    }
+                                });
+                            } else {
+                                alert("Booking not available");
+                            }
+                        }
+                    });
+                }
+            });
+
+
         });
     </script>
 </body>

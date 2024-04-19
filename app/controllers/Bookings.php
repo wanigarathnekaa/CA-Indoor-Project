@@ -302,6 +302,38 @@ class Bookings extends Controller
         }
     }
 
+    public function checkBooking()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'date' => trim($_POST['date']),
+                'day' => trim($_POST['day']),
+                'timeDuration' => trim($_POST['timeDuration']),
+            ];
+
+            $result = $this->bookingModel->getPermanentBookings();
+
+            if ($result) {
+                $response = [
+                    'status' => 'success',
+                    'data' => $result,
+                ];
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'No booking found',
+                ];
+            }
+
+            // header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+    }
+
 
     public function cancelReservation()
     {
