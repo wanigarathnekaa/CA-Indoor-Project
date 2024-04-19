@@ -81,6 +81,67 @@ class MYPDF extends TCPDF {
 
 }
 
+class MYPDFSixColumns extends TCPDF {
+
+    public function ColoredTableSixColumns($header, $data) {
+
+        // Colors, line width, and bold font
+        $this->SetFillColor(211, 211, 211);
+        $this->SetTextColor(255);
+        $this->SetDrawColor(128, 128, 128);
+        $this->SetLineWidth(0.3);
+        $this->SetFont('');
+
+        // Header
+        $w = array(30, 30, 30, 30, 30, 30); // Column widths
+        $this->SetTextColor(0); // Column names
+        $num_headers = count($header);
+        for ($i = 0; $i < $num_headers; ++$i) {
+            $this->Cell($w[$i], 7, $header[$i], 1, 0, 'C', 1);
+        }
+        $this->Ln();
+
+        // Color and font restoration
+        $this->SetFillColor(224, 235, 255);
+        $this->SetTextColor(0);
+
+        // Data
+        $fill = 0;
+        foreach ($data as $row) {
+            // Convert $row[3] to float before passing it to number_format()
+            $price = floatval(str_replace(',', '', $row[3]));
+
+            $this->SetFillColor(255, 255, 255); // White
+
+            // Output the data
+            $this->Cell($w[0], 6, $row[0], 'LR', 0, 'L', $fill);
+            $this->Cell($w[1], 6, $row[1], 'LR', 0, 'L', $fill);
+            $this->Cell($w[2], 6, $row[2], 'LR', 0, 'L', $fill);
+            $this->Cell($w[3], 6, number_format($price, 2), 'LR', 0, 'L', $fill);
+            $this->Cell($w[4], 6, $row[4], 'LR', 0, 'L', $fill);
+            $this->Cell($w[5], 6, $row[5], 'LR', 0, 'L', $fill);
+            $this->Ln();
+            $fill = !$fill;
+        }
+
+        // Last line
+        $this->Cell(array_sum($w), 0, '', 'T');
+        $this->Ln(10); // Add space before total amounts
+    }
+
+    // Your custom function for generating a report
+    public function GenerateReportSixColumns($header, $data, $totalPrice, $totalPaid, $totalPending, $totalNotPaid) {
+        $this->AddPage();
+        $this->SetFont('helvetica', '', 12);
+        $this->Write(0, 'Booking Report', '', 0, 'C', true, 0, false, false, 0);
+        $this->ColoredTableSixColumns($header, $data);
+
+        
+    }
+
+}
+
+
 
 class M_Report
 {        private $db;
@@ -104,10 +165,15 @@ class M_Report
     
            
             
-            $this->db->query('SELECT orderitems.* FROM orderitems 
-                              INNER JOIN product ON orderitems.product_id = product.product_id WHERE product.product_title = :product');
-            $this->db->bind(':product',$Product);
+            $this->db->query('SELECT orders.*, orderitems.*
+                  FROM orders
+                  INNER JOIN orderitems ON orders.order_id = orderitems.order_id
+                  INNER JOIN product ON orderitems.product_id = product.product_id
+                  WHERE product.product_title = :product');
+
+            $this->db->bind(':product', $Product);
             return $this->db->resultSet();
+
         }
         
         public function getMonthlyBookingDetails($data) {
@@ -297,7 +363,71 @@ class M_Report
            // download pdf
            $pdf->Output('booking_report1.pdf', 'D');
         }
-                 
+
+        public function OrderGeneratePDF($data) {
+            $Product = $data['Product'];
+        
+            // Fetch data from the database
+            $this->db->query('SELECT orders.*, orderitems.*
+                              FROM orders
+                              INNER JOIN orderitems ON orders.order_id = orderitems.order_id
+                              INNER JOIN product ON orderitems.product_id = product.product_id
+                              WHERE product.product_title = :product');
+        
+            $this->db->bind(':product', $Product);
+            $result = $this->db->resultSet();
+            
+            // Debugging: print the result to check the retrieved data
+            print_r($result);
+        
+            // Create PDF object
+            $pdf = new MYPDFSixColumns(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        
+            // Set PDF information
+            $pdf->SetCreator(PDF_CREATOR);
+            $pdf->SetAuthor('admin');
+            $pdf->SetTitle('Booking Report');
+            $pdf->SetSubject('Booking Report');
+            $pdf->SetKeywords('Booking, Report');
+            
+            // Add a page to the PDF
+            $pdf->AddPage();
+            $pdf->SetFont('helvetica', '', 16);
+            
+            // Add title to the PDF
+            $pdf->SetFont('', 'B'); //bold
+            $pdf->Write(0, 'Product Sales Analysis Report', '', 0, 'L', true, 0, false, false, 0);
+            $pdf->SetFont('helvetica', '', 12);
+            $pdf->Cell(0, 10, 'Product: ' . $Product, 0, 1, 'L');
+            $pdf->Ln(15); 
+        
+            // Prepare table data
+            $tableHeader = array('Order_ID', 'Name', 'Quantity', 'Total Price', 'Order_date', 'Order_Status');
+            $tableData = array();
+            
+            // Populate table data
+            foreach ($result as $order) {
+                // Assuming the properties exist in $order, adjust the property names if needed
+                $tableData[] = array(
+                    $order->order_id,
+                    $order->full_name, // Adjust property name if needed
+                    $order->quantity,
+                    number_format($order->price_per_unit, 2),
+                    $order->order_date,
+                    $order->order_status
+                );
+            }
+        
+            // Debugging: print the table data to check if it's populated correctly
+            print_r($tableData);
+        
+            // Add colored table to the PDF
+            $pdf->ColoredTableSixColumns($tableHeader, $tableData);
+        
+            // Output PDF
+            $pdf->Output('booking_report1.pdf', 'D');
+        }
+            
         
         public function displayFilteredBookings($data) {
             $invoice_date = $data['invoice_date'];
@@ -368,17 +498,19 @@ class M_Report
     
            
             
-            $this->db->query('SELECT orderitems.product_id, orderitems.quantity, orderitems.price_per_unit
-                  FROM orderitems 
-                  INNER JOIN product ON orderitems.product_id = product.product_id 
-                  WHERE product.product_title = :product');
+            $this->db->query('SELECT orders.*, orderitems.*
+            FROM orders
+            INNER JOIN orderitems ON orders.order_id = orderitems.order_id
+            INNER JOIN product ON orderitems.product_id = product.product_id
+            WHERE product.product_title = :product');
 
-            $this->db->bind(':product',$Product);
+            $this->db->bind(':product', $Product);
             $result=$this->db->resultSet();
+
             if ($result && count($result) > 0) {
                 echo "<div class='alert alert-success'>Filtered Orders:</div>";
                 echo "<table class='table table-bordered'>";
-                echo "<thead><tr><th>Product Name</th><th>Quantity</th><th>Total Price</th></tr></thead>";
+                echo "<thead><tr><th>Order ID</th><th>Customer Name</th><th>Quantity</th><th>Total Price</th>><th>Order Date</th><th>Order Status</th></tr></thead>";
                 echo "<tbody>";
                 // $totalPrice = 0;
                 // $totalPaid = 0;
@@ -387,10 +519,13 @@ class M_Report
         // Fetching results as objects of stdClass
 foreach ($result as $order) {
     echo "<tr>";
-    echo "<td>" . $order->product_id . "</td>";
-    echo "<td>" . $order->quantity . "</td>";
-    echo "<td>" . $order->price_per_unit . "</td>";
-    echo "</tr>";
+        echo "<td>" . $order->order_id . "</td>";
+        echo "<td>" . $order->full_name . "</td>";
+        echo "<td>" . $order->quantity . "</td>";
+        echo "<td>" . $order->price_per_unit . "</td>";
+        echo "<td>" . $order->order_date . "</td>";
+        echo "<td>" . $order->order_status . "</td>";
+        echo "</tr>";
 }
 
                 
