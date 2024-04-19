@@ -8,7 +8,6 @@
 }
 
 :root {
-  
   --color01: #2e8a99;
   --primary-clr: #4f9da9;
   --color03: #a7d8d7;
@@ -160,7 +159,7 @@ select {
 }
 
 select:focus,
-select:valid{
+select:valid {
   border-color: #2e8a99;
 }
 
@@ -333,6 +332,15 @@ label {
   cursor: pointer;
 }
 
+#invalid1,
+#invalid2,
+#invalid3,
+#invalid4,
+#invalid5,
+#invalid6 {
+  color: red;
+  font-size: 13px;
+}
 
 .modal-content .btn {
   display: flex;
@@ -371,7 +379,6 @@ input[type="checkbox"]:checked + label.btn {
   color: #fff;
 }
 
-
 .netbtnbar {
   display: flex;
   justify-content: space-between;
@@ -379,7 +386,7 @@ input[type="checkbox"]:checked + label.btn {
   gap: 10px;
 }
 
-.netbtnbar .net{
+.netbtnbar .net {
   background-color: var(--white);
   color: var(--black2);
   border: solid 1px var(--color01);
@@ -389,15 +396,10 @@ input[type="checkbox"]:checked + label.btn {
   width: 25%;
 }
 
-.netbtnbar .net:hover{
+.netbtnbar .net:hover {
   background-color: var(--color01);
   color: var(--white);
 }
-
-
-
-
-
 
 /* Media query to make the layout responsive */
 @media (max-width: 768px) {

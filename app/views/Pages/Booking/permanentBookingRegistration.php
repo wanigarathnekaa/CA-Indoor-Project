@@ -69,17 +69,20 @@ function time_slot($duration, $cleanup, $start, $end)
                     <div class="input-field">
                         <label>Full Name</label>
                         <input type="text" name="name" id="name" placeholder="Enter your name">
+                        <span id="invalid1"></span>
                     </div>
 
                     <div class="input-field">
                         <label>Email</label>
                         <input type="email" name="email" id="email" placeholder="Enter your email">
+                        <span id="invalid2"></span>
                     </div>
 
                     <div class="input-field">
                         <label>Phone Number</label>
                         <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Enter your phone number"
                             pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number">
+                        <span id="invalid3"></span>
                     </div>
 
                     <div class="input-field">
@@ -90,6 +93,7 @@ function time_slot($duration, $cleanup, $start, $end)
                             <option><?php echo "6 Months" ?></option>
                             <option><?php echo "1 Year" ?></option>
                         </select>
+                        <span id="invalid4"></span>
                     </div>
 
                     <div class="input-field">
@@ -104,6 +108,7 @@ function time_slot($duration, $cleanup, $start, $end)
                             <option><?php echo "Friday" ?></option>
                             <option><?php echo "Saturday" ?></option>
                         </select>
+                        <span id="invalid5"></span>
                     </div>
 
                     <span class="user-invalid"></span>
@@ -116,6 +121,7 @@ function time_slot($duration, $cleanup, $start, $end)
                     <div class="input-field">
                         <label>From:</label>
                         <input type="date" name="date" id="date">
+                        <span id="invalid6"></span>
                     </div>
 
                     <div class="input-field">
@@ -377,11 +383,17 @@ function time_slot($duration, $cleanup, $start, $end)
                     },
                     success: function (response) {
                         console.log(response);
+                        response = JSON.parse(response);
                         if (response.status.trim() === "success") {
                             alert("Booking successful");
                             window.location.href = "http://localhost/C&A_Indoor_Project/Pages/Dashboard/manager";
                         } else {
-                            alert("Booking failed");
+                            $("#invalid1").html(response.messageNameError);
+                            $("#invalid2").html(response.messageEmailError);
+                            $("#invalid3").html(response.messagePhoneNumberError);
+                            $("#invalid4").html(response.messageTimeDurationError);
+                            $("#invalid5").html(response.messageDayError);
+                            $("#invalid6").html(response.messageDateError);
                         }
                     }
 
@@ -449,7 +461,8 @@ function time_slot($duration, $cleanup, $start, $end)
                                         // Disable time slots for machine net
                                         timeSlotsM.forEach(slot => {
                                             $("input[name='timeSlotM'][value='" + slot + "']").prop("disabled", false);
-                                        });                                    }
+                                        });
+                                    }
                                 });
                             } else {
                                 alert("Booking not available");

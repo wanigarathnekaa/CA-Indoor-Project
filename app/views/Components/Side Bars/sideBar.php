@@ -12,11 +12,11 @@
 
         <i class='bx bx-chevron-right toggle'></i>
     </header>
- 
-       <div class="menu-bar">
+
+    <div class="menu-bar">
         <div class="menu">
             <ul class="menu-links">
-                
+
                 <?php if ($role == "User") { ?>
                     <li class="nav-link">
                         <a href="<?php echo URLROOT; ?>/Pages/Dashboard/user">
@@ -56,6 +56,12 @@
                             <span class="text nav-text">Profile</span>
                         </a>
                     </li>
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class="bx bxs-alarm-exclamation icon"></i>
+                            <span class="text nav-text">Feedback</span>
+                        </a>
+                    </li>
                 <?php } else if ($role == "Admin") { ?>
                         <li class="nav-link">
                             <a href="C&A_Indoor_Project/Pages/Dashboard/admin">
@@ -69,16 +75,17 @@
                                 <span class="text nav-text">Schedule</span>
                             </a>
                         </li> -->
-<li class="nav-link">
-<a href="#">
-<i class="fa-brands fa-adversal icon"></i>
-<span class="text nav-text">Customers</span>
-</a>
-<ul class="dropdown-menu" role="menu">
-<li><a href="C&A_Indoor_Project/Pages/CompanyUsers/add-user.php"><span class="text nav-text">Add Customer</span></a></li>
-<li><a href="customer-list.php"><span class="text nav-text">Manage Customers</span></a></li>
-</ul>
-</li>
+                        <li class="nav-link">
+                            <a href="#">
+                                <i class="fa-brands fa-adversal icon"></i>
+                                <span class="text nav-text">Customers</span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="C&A_Indoor_Project/Pages/CompanyUsers/add-user.php"><span class="text nav-text">Add
+                                            Customer</span></a></li>
+                                <li><a href="customer-list.php"><span class="text nav-text">Manage Customers</span></a></li>
+                            </ul>
+                        </li>
 
                         <li class="nav-link">
                             <a href="#">
@@ -105,7 +112,7 @@
                                 <span class="text nav-text">Profile</span>
                             </a>
                         </li>
-                <?php }else if ($role == "Cashier") { ?>
+                <?php } else if ($role == "Cashier") { ?>
                             <li class="nav-link">
                                 <a href="#">
                                     <i class="bx bx-home-alt icon"></i>
@@ -168,6 +175,12 @@
                                         <span class="text nav-text">Profile</span>
                                     </a>
                                 </li>
+                                <li class="nav-link">
+                                    <a href="#">
+                                        <i class="bx bxs-alarm-exclamation icon"></i>
+                                        <span class="text nav-text">Feedback</span>
+                                    </a>
+                                </li>
                 <?php } else if ($role == "Manager") { ?>
                                     <li class="nav-link">
                                         <a href="<?php echo URLROOT; ?>/Pages/Dashboard/manager">
@@ -193,14 +206,6 @@
                                             <span class="text nav-text">Registration</span>
                                         </a>
                                     </li>
-
-                                    <li class="nav-link">
-                                        <a href="#">
-                                            <i class="bx bx-store icon"></i>
-                                            <span class="text nav-text">Cricket Store</span>
-                                        </a>
-                                    </li>
-
                                     <li class="nav-link">
                                         <a href="#">
                                             <i class="bx bxs-report icon"></i>
@@ -238,25 +243,10 @@
                                                 <span class="text nav-text">Registration</span>
                                             </a>
                                         </li>
-
-                                        <li class="nav-link">
-                                            <a href="#">
-                                                <i class="bx bx-store icon"></i>
-                                                <span class="text nav-text">Cricket Store</span>
-                                            </a>
-                                        </li>
-
                                         <li class="nav-link">
                                             <a href="#">
                                                 <i class="bx bxs-report icon"></i>
                                                 <span class="text nav-text">Report</span>
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-link">
-                                            <a href="#">
-                                                <i class="fa-solid fa-comments-dollar icon"></i>
-                                                <span class="text nav-text">Confirmation Fee</span>
                                             </a>
                                         </li>
                                         <li class="profile">
@@ -266,17 +256,6 @@
                                             </a>
                                         </li>
                 <?php } ?>
-
-                <? if ($role != "Cashier") { ?>
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class="bx bxs-alarm-exclamation icon"></i>
-                            <span class="text nav-text">Feedback</span>
-                        </a>
-                    </li>
-                <? } ?>
-
-
             </ul>
         </div>
         <div class="bottom-content">
@@ -312,5 +291,5 @@
       </label>
       </header>
             </div></section> -->
- <!-- javascripts -->
- <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
+<!-- javascripts -->
+<script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>

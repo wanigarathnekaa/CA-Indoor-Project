@@ -283,16 +283,70 @@ class Bookings extends Controller
                 'timeSlotA' => $timeSlotsAJson, // Use JSON string
                 'timeSlotB' => $timeSlotsBJson, // Use JSON string
                 'timeSlotM' => $timeSlotsMJson, // Use JSON string
+
+                'name_err' => "",
+                'email_err' => "",
+                'date_err' => "",
+                'phoneNumber_err' => "",
+                'timeDuration_err' => "",
+                'day_err' => "",
             ];
 
-            if ($this->bookingModel->permanentBooking($data)) {
-                $response = [
-                    'status' => 'success',
-                ];
+            //validate name
+            if (empty($data['name'])) {
+                $data['name_err'] = "Please enter a name";
+            }
+
+            //validate email
+            if (empty($data['email'])) {
+                $data['email_err'] = "Please enter an email";
+            }
+
+            //validate date
+            if (empty($data['date'])) {
+                $data['date_err'] = "Please enter a date";
+            }
+
+            //validate phone number
+            if (empty($data['phoneNumber'])) {
+                $data['phoneNumber_err'] = "Please enter a phone number";
+            }
+
+            //validate time duration
+            if (empty($data['timeDuration'])) {
+                $data['timeDuration_err'] = "Please enter a time duration";
+            }
+
+            //validate day
+            if (empty($data['day'])) {
+                $data['day_err'] = "Please enter a day";
+            }
+
+            // Check if there are no errors
+            if (
+                empty($data['name_err']) && empty($data['email_err']) && empty($data['date_err'])
+                && empty($data['phoneNumber_err']) && empty($data['timeDuration_err']) && empty($data['day_err'])
+            ) {
+                // Check if the booking is successful
+                if ($this->bookingModel->permanentBooking($data)) {
+                    $response = [
+                        'status' => 'success',
+                    ];
+                } else {
+                    $response = [
+                        'status' => 'error',
+                        'message' => 'Something went wrong',
+                    ];
+                }
             } else {
                 $response = [
                     'status' => 'error',
-                    'message' => 'Something went wrong',
+                    'messageNameError' => $data['name_err'],
+                    'messageEmailError' => $data['email_err'],
+                    'messageDateError' => $data['date_err'],
+                    'messagePhoneNumberError' => $data['phoneNumber_err'],
+                    'messageTimeDurationError' => $data['timeDuration_err'],
+                    'messageDayError' => $data['day_err'],
                 ];
             }
 
