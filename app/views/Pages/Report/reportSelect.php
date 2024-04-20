@@ -42,7 +42,7 @@
 
         </div>
         <div class="iconBx">
-                    <i class='bx bxs-report'></i>
+            <i class='bx bxs-report'></i>
         </div>  
         </a>
      
@@ -52,7 +52,7 @@
 
         </div>
         <div class="iconBx">
-                    <i class='bx bxs-report'></i>
+            <i class='bx bxs-report'></i>
         </div> 
         </a>
 
@@ -62,7 +62,7 @@
 
         </div>
         <div class="iconBx">
-                    <i class='bx bxs-report'></i>
+            <i class='bx bxs-report'></i>
         </div> 
         </a>
     </div>
