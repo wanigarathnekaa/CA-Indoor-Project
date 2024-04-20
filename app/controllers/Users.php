@@ -1,6 +1,7 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
 class Users extends Controller
 {
     private $userModel;
@@ -33,6 +34,7 @@ class Users extends Controller
                 'phoneNumber' => trim($_POST['phoneNumber']),
                 'pwd' => trim($_POST['pwd']),
                 'confirmPwd' => trim($_POST['confirmPwd']),
+                'is_blacklist' => 0,
 
                 'name_err' => "",
                 'user_name_err' => "",
@@ -41,6 +43,8 @@ class Users extends Controller
                 'pwd_err' => "",
                 'confirmPwd_err' => "",
             ];
+
+            print_r($data);
 
             //validate name
             if (empty($data['name'])) {
@@ -55,8 +59,7 @@ class Users extends Controller
             //validate email
             if (empty($data['email'])) {
                 $data['email_err'] = "Please enter an email";
-            } 
-            else {
+            } else {
                 //check email already registered or not
                 if ($this->userModel->findUserByEmail($data['email'])) {
                     $data['email_err'] = "This email is already in use";
@@ -66,11 +69,9 @@ class Users extends Controller
             //validate phone number
             if (empty($data['phoneNumber'])) {
                 $data['phoneNumber_err'] = "Please enter a phone number";
-            }
-            elseif(strlen($data['phoneNumber']) != 10){
-                    $data['phoneNumber_err'] = "Please enter a valid phone number";
-            }
-            else{
+            } elseif (strlen($data['phoneNumber']) != 10) {
+                $data['phoneNumber_err'] = "Please enter a valid phone number";
+            } else {
                 // if ($this->userModel->findUserByPhoneNumber($data['phoneNumber'])) {
                 //     $data['phoneNumber_err'] = "This phone number is already in use";
                 // }
@@ -79,12 +80,10 @@ class Users extends Controller
             //validate password
             if (empty($data['pwd'])) {
                 $data['pwd_err'] = "Please enter a password";
-            }
-            elseif(empty($data['confirmPwd'])){
+            } elseif (empty($data['confirmPwd'])) {
                 $data['confirmPwd_err'] = "Please confirm your password";
-            }
-            else{
-                if($data['pwd'] != $data['confirmPwd']){
+            } else {
+                if ($data['pwd'] != $data['confirmPwd']) {
                     $data['confirmPwd_err'] = "Not Matching Passwords";
                 }
             }
@@ -156,24 +155,19 @@ class Users extends Controller
             } else {
                 //check email already registered or not
                 if ($this->userManagerModel->findUserByEmail($data['email'])) {
-                    $role = 'Manager'; 
-                }
-                elseif ($this->userModel->findUserByEmail($data['email'])) {
+                    $role = 'Manager';
+                } elseif ($this->userModel->findUserByEmail($data['email'])) {
                     $role = 'User';
-                }
-                elseif ($this->companyUserModel->findUserByEmail($data['email'])) {
+                } elseif ($this->companyUserModel->findUserByEmail($data['email'])) {
                     $roleNumber = $this->companyUserModel->getUserRoleByEmail($data['email']);
-                    if($roleNumber->role == 1){
+                    if ($roleNumber->role == 1) {
                         $role = 'Owner';
-                    }elseif($roleNumber->role == 2){
+                    } elseif ($roleNumber->role == 2) {
                         $role = 'Admin';
-                    }elseif($roleNumber->role == 3){
+                    } elseif ($roleNumber->role == 3) {
                         $role = 'Cashier';
                     }
-                }
-                
-                
-                else {
+                } else {
                     //user not found
                     $role = 'User Not Found';
                     $data['email_err'] = "User Not Found";
@@ -191,53 +185,53 @@ class Users extends Controller
                 if ($role == 'User') {
                     //Authenticate User
                     $loginUser = $this->userModel->login($data['email'], $data['pwd']);
-                    
-                    if($loginUser == false){
+
+                    if ($loginUser == false) {
                         $data['pwd_err'] = "Invalid Password";
                         $this->view('Pages/LoginPage/login', $data);
-                    }else if ($this->userCoachModel->findUserByEmail($data['email'])) {
+                    } else if ($this->userCoachModel->findUserByEmail($data['email'])) {
                         $role = 'Coach';
                         //updating_last_login_time
                         $this->userModel->updateLastLogin($loginUser->email);
                         $this->createUserSession($loginUser, $role);
-                    }else{
+                    } else {
                         //updating_last_login_time
                         $this->userModel->updateLastLogin($loginUser->email);
                         $this->createUserSession($loginUser, $role);
                     }
                 } else if ($role == 'Manager') {
                     $loginManager = $this->userModel->loginManager($data['email'], $data['pwd']);
-                    if($loginManager == false){
+                    if ($loginManager == false) {
                         $data['pwd_err'] = "Invalid Password";
                         $this->view('Pages/LoginPage/login', $data);
-                    }else{
-                        $this->createUserSession($loginManager , $role);
-                    }                   
-                } else if($role == 'Owner' ){
+                    } else {
+                        $this->createUserSession($loginManager, $role);
+                    }
+                } else if ($role == 'Owner') {
                     $loginOwner = $this->companyUserModel->loginCompanyUsers($data['email'], $data['pwd']);
-                    if($loginOwner == false){
+                    if ($loginOwner == false) {
                         $data['pwd_err'] = "Invalid Password";
                         $this->view('Pages/LoginPage/login', $data);
-                    }else{
-                        $this->createUserSession($loginOwner , $role);
+                    } else {
+                        $this->createUserSession($loginOwner, $role);
                     }
-                }else if($role == 'Admin' ){
+                } else if ($role == 'Admin') {
                     $loginAdmin = $this->companyUserModel->loginCompanyUsers($data['email'], $data['pwd']);
-                    if($loginAdmin == false){
+                    if ($loginAdmin == false) {
                         $data['pwd_err'] = "Invalid Password";
                         $this->view('Pages/LoginPage/login', $data);
-                    }else{
-                        $this->createUserSession($loginAdmin , $role);
+                    } else {
+                        $this->createUserSession($loginAdmin, $role);
                     }
-                }else if($role == 'Cashier' ){
+                } else if ($role == 'Cashier') {
                     $loginCashier = $this->companyUserModel->loginCompanyUsers($data['email'], $data['pwd']);
-                    if($loginCashier == false){
+                    if ($loginCashier == false) {
                         $data['pwd_err'] = "Invalid Password";
                         $this->view('Pages/LoginPage/login', $data);
-                    }else{
-                        $this->createUserSession($loginCashier , $role);
-                    }  
-                }else{
+                    } else {
+                        $this->createUserSession($loginCashier, $role);
+                    }
+                } else {
                     $data['email_err'] = "User Not Found";
                     $this->view('Pages/LoginPage/login', $data);
                 }
@@ -264,85 +258,84 @@ class Users extends Controller
     }
 
 
-    public function forgotPassword(){
+    public function forgotPassword()
+    {
         $this->view('Pages/LoginPage/forgotPassword');
 
-        if($_SERVER['REQUEST_METHOD']=='POST'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-           
+
             //input data
-            $data=[
-                'email'=>trim($_POST['email']),
-                
-                'email_err'=>''
+            $data = [
+                'email' => trim($_POST['email']),
+
+                'email_err' => ''
 
             ];
             $email = trim($_POST['email']);
-            if(empty($data['email'])) {
-                $data['email_err']='Please enter the email';
+            if (empty($data['email'])) {
+                $data['email_err'] = 'Please enter the email';
             }
-            if(empty($data['email_err'])){
-                if($this->userModel->findUserByEmail($email)){
+            if (empty($data['email_err'])) {
+                if ($this->userModel->findUserByEmail($email)) {
                     // flash('complaint_created');
-                $password=$this->userModel->generateRandomPassword();
+                    $password = $this->userModel->generateRandomPassword();
 
-                redirect('Users/sendNewPassword/' . urlencode($email) . '/' . urlencode($password));
+                    redirect('Users/sendNewPassword/' . urlencode($email) . '/' . urlencode($password));
 
+                } else {
+                    $this->view('Pages/LoginPage/forgotPassword');
                 }
-                else{
-                    $this->view('Pages/LoginPage/forgotPassword');                }
-            }
-            else{
+            } else {
                 //load view
                 $this->view('Pages/LoginPage/forgotPassword');
-                       
+
             }
-        
+
         }
 
-        
+
     }
-    public function sendNewPassword($email,$password)
+    public function sendNewPassword($email, $password)
     {
         require_once APPROOT . '/libraries/phpmailer/src/PHPMailer.php';
         require_once APPROOT . '/libraries/phpmailer/src/SMTP.php';
         require_once APPROOT . '/libraries/phpmailer/src/Exception.php';
-        
+
 
         $mail = new PHPMailer(true);
- 
-            //Server settings
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'nivodya2001@gmail.com';
-            $mail->Password = 'ndvpqhmangzegxhn';
-            $mail->SMTPSecure = 'ssl';
-            $mail->Port = 465;
-            
-            //Recipients
-            $mail->setFrom('nivodya2001@gmail.com', 'Hasini Hewa');
-            $mail->addAddress($email);
 
-            //Content
-            $mail->isHTML(true);
-            $mail->Subject = 'New password for yor forgoteen';
-            $mail->Body    = $password;
-            $mail->send();
-            $hashedNewPassword = password_hash($password, PASSWORD_DEFAULT);
+        //Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'nivodya2001@gmail.com';
+        $mail->Password = 'ndvpqhmangzegxhn';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+
+        //Recipients
+        $mail->setFrom('nivodya2001@gmail.com', 'Hasini Hewa');
+        $mail->addAddress($email);
+
+        //Content
+        $mail->isHTML(true);
+        $mail->Subject = 'New password for yor forgoteen';
+        $mail->Body = $password;
+        $mail->send();
+        $hashedNewPassword = password_hash($password, PASSWORD_DEFAULT);
 
 
-            if ($mail->send()) {
-                if($this->userModel->updatePassword($email,$hashedNewPassword)){
-                    $this->view('Pages/OTPSEND/index');
-                }
-                else{
-                    die('somthing wrong');
-                }                   
+        if ($mail->send()) {
+            if ($this->userModel->updatePassword($email, $hashedNewPassword)) {
+                $this->view('Pages/OTPSEND/index');
+            } else {
+                die('somthing wrong');
             }
         }
+    }
 
-    
+
 
     public function createUserSession($user, $role)
     {
@@ -351,23 +344,23 @@ class Users extends Controller
         $_SESSION['user_email'] = $user->email;
         $_SESSION['user_role'] = $role;
 
-        if($role == 'Manager'){
+        if ($role == 'Manager') {
             redirect('Pages/Dashboard/manager');
-        }elseif($role == 'User'){
+        } elseif ($role == 'User') {
             redirect('Pages/Dashboard/user');
-        }elseif($role == 'Coach'){
+        } elseif ($role == 'Coach') {
             redirect('Pages/Dashboard/coach');
-        }elseif($role == 'Owner'){
+        } elseif ($role == 'Owner') {
             redirect('Pages/Dashboard/owner');
-        }elseif($role == 'Admin'){
+        } elseif ($role == 'Admin') {
             redirect('Pages/Dashboard/admin');
-        }elseif($role == 'Cashier'){
+        } elseif ($role == 'Cashier') {
             redirect('Pages/Dashboard/cashier');
-        }        
+        }
     }
     public function logout()
     {
-         // Update last logout time in the database
+        // Update last logout time in the database
         $this->userModel->updateLastLogout($_SESSION['user_email']);
 
         session_destroy();
@@ -419,7 +412,7 @@ class Users extends Controller
                 $newfilename = uniqid() . "-" . $_FILES['file']['name'];
                 move_uploaded_file($_FILES['file']['tmp_name'], "../public/profilepic/" . $newfilename);
                 $data['filename'] = $newfilename;
-            }else {
+            } else {
                 // No new file uploaded, retain the existing image value
                 $existingFilename = $this->userModel->getExistingImageFilename($data['email']); // Replace $userId with the actual user ID
                 $data['filename'] = $existingFilename;
@@ -456,11 +449,11 @@ class Users extends Controller
             if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err']) && empty($data['phoneNumber_err'])) {
                 //Hash the password
                 // $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
-                
+
                 //create user
-                if($this->userModel->updateUser($data)) {
+                if ($this->userModel->updateUser($data)) {
                     redirect('Pages/Profile/user');
-                }else{
+                } else {
                     die('Something Went wrong');
                 }
             } else {
@@ -472,22 +465,14 @@ class Users extends Controller
         $this->view('Pages/UserProfiles/editProfile', $data);
     }
 
-    
-    public function changePassword(){
-        // $data1 = [
-        //     'old_password_err' => "",
-        //     'new_password_err' => "",
-        //     'confirm_password_err' => ""
 
-        // ];
-        // $this->view('Pages/UserProfiles/changePassword',$data1);
-
-
+    public function changePassword()
+    {
         $user = $this->userModel->findUser($_SESSION['user_email']);
-        
-    
+
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-           
+
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
@@ -501,23 +486,22 @@ class Users extends Controller
 
             ];
 
-           
-            
+
+
 
             if (empty($data['oldPassword']) || empty($data['newPassword']) || empty($data['confirmPassword'])) {
                 $this->view('Pages/UserProfiles/changePassword');
             } else {
-                $hashedPassword = $user->password; 
+                $hashedPassword = $user->password;
                 if (password_verify($data['oldPassword'], $hashedPassword)) {
-                    if ($data['oldPassword'] == $data['newPassword']){
+                    if ($data['oldPassword'] == $data['newPassword']) {
                         $data['new_password_err'] = "Please enter a password different from the old one.";
                         $this->view('Pages/UserProfiles/changePassword', $data);
 
-                    }
-                    else if ($data['newPassword'] != $data['confirmPassword']) {
+                    } else if ($data['newPassword'] != $data['confirmPassword']) {
                         $data['confirm_password_err'] = "Passwords do not match. Please try again.";
                         $this->view('Pages/UserProfiles/changePassword', $data);
-                        
+
                     } else {
                         $hashedNewPassword = password_hash($data['newPassword'], PASSWORD_DEFAULT);
                         $this->userModel->updatePassword($user->email, $hashedNewPassword);
@@ -528,29 +512,31 @@ class Users extends Controller
                     $this->view('Pages/UserProfiles/changePassword', $data);
                     $this->view('Pages/UserProfiles/changePassword');
                 }
-            }}}
+            }
+        }
+    }
 
     public function delete()
     {
         // var_dump($_POST);
         $role = $_SESSION['user_role'];
-        if($role == 'Manager'){
+        if ($role == 'Manager') {
             $role = 'manager';
-        }else if($role == 'Coach'){
+        } else if ($role == 'Coach') {
             $role = 'coach';
-        }else if($role == 'Owner'){
+        } else if ($role == 'Owner') {
             $role = 'owner';
-        }else if($role == 'Admin'){
+        } else if ($role == 'Admin') {
             $role = 'admin';
-        }else if($role == 'User'){
+        } else if ($role == 'User') {
             $role = 'user';
         }
-        if($this->userModel->deleteUser($_POST["submit"])) {  
+        if ($this->userModel->deleteUser($_POST["submit"])) {
             redirect("Pages/Dashboard/{$role}");
-        }else{
+        } else {
             die("Something Went Wrong");
         }
-        
+
     }
 
     public function getUserByEmail()
@@ -567,7 +553,7 @@ class Users extends Controller
             echo json_encode($user);
             exit();
         }
-        
+
     }
 
 

@@ -21,6 +21,13 @@ class M_Pages
         return $this->db->single();
     }
 
+    public function getActivatedCoaches()
+    {
+        $this->db->query('SELECT u.*, c.* FROM coaches c LEFT JOIN user u ON u.email = c.email WHERE u.is_blacklist = 0');
+
+        return $this->db->resultSet();
+    }
+
     public function findCoach($email)
     {
         $this->db->query('SELECT * FROM coaches WHERE email = :email');
