@@ -17,10 +17,24 @@
             <!-- <h2 class="text-success">Filter Bookings</h2> -->
 
             <form action="<?php echo URLROOT;?>/Reports/OrderReport" method="post">
-                <div class="form-group">
-                    <label>Product</label>
-                    <input type="text" name="Product" id="Product" class="form-control" required>
-                </div>
+            <div class="form-group">
+            <label for="product">Product</label>
+            <select name="Product" id="product" class="form-control" required>
+                <option value="">Select a product...</option>
+                <option value="SS Ton Power Plus English Willow Cricket Bat Size ...">SS Ton Power Plus English Willow Cricket Bat Size ...</option>
+                <option value="SS Blast English Willow Cricket Bat Size SH">SS Blast English Willow Cricket Bat Size SH</option>
+                <option value="SS Vintage Green 4.0 English Willow Cricket Bat Si...">SS Vintage Green 4.0 English Willow Cricket Bat Si...</option>
+                <option value="SG Savage Plus Kashmir Willow Cricket">SG Savage Plus Kashmir Willow Cricket</option>
+                <option value="Kookaburra Jos Buttler Classic Kashmir Willow Cric...">Kookaburra Jos Buttler Classic Kashmir Willow Cric...</option>
+                <option value="SS Super Test Cricket Batting Gloves">SS Super Test Cricket Batting Gloves</option>
+                <option value="DSC Intense Passion Cricket Batting Gloves">DSC Intense Passion Cricket Batting Gloves</option>
+                <option value="EM GT 1.0 Cricket Batting Leg Guard Pads">EM GT 1.0 Cricket Batting Leg Guard Pads</option>
+                <option value="SS Test Opener Cricket Batting Leg Guard Pads">SS Test Opener Cricket Batting Leg Guard Pads</option>
+                <option value="Masuri Pro Premium Cricket Helmet">Masuri Pro Premium Cricket Helmet</option>
+                <option value="Kookaburra Pace Cricket Ball">Kookaburra Pace Cricket Ball</option>
+            </select>
+            </div>
+
                
                 <input type="submit" name="filter" value="Filter" class="btn btn-primary">
                 <input type="submit" name="download_pdf" value="Download_PDF" class="btn btn-primary">
