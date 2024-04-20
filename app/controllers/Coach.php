@@ -317,7 +317,7 @@ class Coach extends Controller
     public function delete()
     {
         // var_dump($_POST);
-        if ($this->coachModel->deleteCoach($_POST["submit"]) && $this->coachUserModel->deleteUser($_POST["submit"])) {
+        if ($this->coachUserModel->deleteUser($_POST["submit"])) {
             redirect("Pages/Dashboard/manager");
         } else {
             die("Something Went Wrong");

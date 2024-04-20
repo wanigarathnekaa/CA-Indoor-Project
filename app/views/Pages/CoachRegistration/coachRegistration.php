@@ -80,7 +80,7 @@
 
               <!-- <label>Address</label> -->
               <div class="input-box">
-                 <span class="details">Address</span>
+                 <span class="details">Str. Address</span>
                   <input type="text" name="srtAddress"  placeholder="Enter Your Street Address" value="<?php echo $data['srtAddress']; ?>">
                   <span class="form-invalid"><?php echo $data['srtAddress_err']; ?></span>
               </div>

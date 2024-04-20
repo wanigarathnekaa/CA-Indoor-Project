@@ -74,6 +74,7 @@
                                     <th>Experience</th>
                                     <th>Speciality</th>
                                     <th>Certificate</th>
+                                    <th>Status</th>
                                     <th></th>
                                     <!-- <th></th> -->
                               </tr>
@@ -91,6 +92,11 @@
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $coach->experience ?></td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $coach->specialty ?></td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $coach->certificate?></td>
+                                          <?php if($data1[$i]->is_blacklist == 0){?>
+                                                <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)">Activated</td>
+                                          <?php }else{?>
+                                                <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)">Deactivated</td>
+                                          <?php }?>
                                           <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><i class="fa-solid fa-user-slash delete icon"></i></td>
                                     </tr>
                                     <?php $i = $i + 1;
@@ -130,11 +136,11 @@
                   <!-- delete message -->
                   <div class="deletepopup" id=deletepopup>
                         <span class="close" onclick="closeDeletePopup()"><i class="fa-solid fa-xmark"></i></span>
-                        <h2>confirm delete</h2>
+                        <h2>Change the Status</h2>
 
                         <form action="<?php echo URLROOT; ?>/Coach/delete" method="POST">
                               <div class="btns">
-                                    <button type="submit" class="button">Delete</button>
+                                    <button type="submit" class="button">Change Status</button>
                                     <button type="button" onclick="closeDeletePopup()">Cancel</button>
                               </div>
                               <!-- <div hidden name="submit"><span class="pd_email"></span></div> -->

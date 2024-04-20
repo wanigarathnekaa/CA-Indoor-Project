@@ -277,30 +277,22 @@ class Pages extends Controller
     //reservation register page
     public function Booking_Register($name)
     {
-        $coaches = $this->pagesModel->getCoaches();
+        $coaches = $this->pagesModel->getActivatedCoaches();
         $data = [
             'users' => $coaches,
         ];
-        $res = [];
-        foreach ($data['users'] as $user) {
-            $res[] = $this->pagesModel->findUser($user->email);
-        }
-        $this->view('Pages/Booking/bookingRegistration', $res);
+        $this->view('Pages/Booking/bookingRegistration', $coaches);
     }
 
     public function Permanent_Booking($name)
     {
-        $coaches = $this->pagesModel->getCoaches();
+        $coaches = $this->pagesModel->getActivatedCoaches();
         $permanentBookings = $this->pagesModel->getPermanentBookings();
         $data = [
             'users' => $coaches,
             'permanentBookings' => $permanentBookings,
         ];
-        $res = [];
-        foreach ($data['users'] as $user) {
-            $res[] = $this->pagesModel->findUser($user->email);
-        }
-        $this->view('Pages/Booking/permanentBookingRegistration', $res, $data);
+        $this->view('Pages/Booking/permanentBookingRegistration', $coaches, $data);
     }
 
     // user profile for player, coach......................................................................................
