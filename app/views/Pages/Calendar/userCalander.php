@@ -55,7 +55,7 @@ function build_calendar($month, $year)
         if ($date < date('Y-m-d')) {
             $calendar .= "<a class = 'btn btn-danger btn-xs'><td class='$today'><h4>$currentDay</h4></td></a>";
         }
-        else if($date <= $dateAfterTwoWeeks){
+        else if($date <= $dateAfterTwoWeeks) {
             // $calendar .= "<td class='$today'><h4>$currentDay</h4><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user' class = 'btn btn-success btn-xs' target='_top'>Book</a></td>";
             $calendar .= "<td class='$today'><a href='http://localhost/C&A_Indoor_Project/Pages/User_Booking/user?fulldate=$date' class = 'btn btn-success btn-xs' target='_top'><h4>$currentDay</h4></a></td>";
         }else{
