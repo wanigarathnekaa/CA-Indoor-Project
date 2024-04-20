@@ -88,7 +88,16 @@
 
                         <!-- table body -->
                         <tbody>
-                              <?php foreach ($data as $reservation): ?>
+                              <?php foreach ($data as $reservation): 
+                                    $status_color = '';
+                                    if ($reservation->paymentStatus == 'Paid') {
+                                          $status_color = '#00ff00';
+                                    } else if ($reservation->paymentStatus == 'Pending') {
+                                          $status_color = '#ffcc00';
+                                    } else {
+                                          $status_color = '#ff0000';
+                                    }
+                                    ?>
                                     <tr>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
                                                 <?php echo $reservation->id; ?>
@@ -112,7 +121,7 @@
                                                 <?php echo $reservation->netType; ?>
                                           </td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
-                                                <?php echo $reservation->paymentStatus; ?>
+                                                <span class="status" style="background-color: <?php echo $status_color; ?>;"><?php echo $reservation->paymentStatus ?></span>
                                           </td>
                                           <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
                                                 <!-- <i class="fa-solid fa-user-slash delete icon"></i> -->

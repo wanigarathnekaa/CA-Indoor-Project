@@ -43,15 +43,7 @@
 
             <!-- Table Sort -->
             <div class="tableSort">
-                  <!-- <div class="sort">
-                        <label>Status :</label>
-                        <select name="filter" id="filter">
-                              <option value="all">All</option>
-                              <option value="paid">Paid</option>
-                              <option value="unpaid">Unpaid</option>
-                              <option value="cancelled">Cancelled</option>
-                        </select>
-                  </div> -->
+                  
                   
                   <div class="search">
                         <label>
@@ -83,7 +75,14 @@
                         <!-- table body -->
                         <tbody>
                               <?php $i = 0; ?>
-                              <?php foreach ($data['users'] as $coach): ?>
+                              <?php foreach ($data['users'] as $coach): 
+                                    $status_color = '';
+                                    if ($data1[$i]->is_blacklist == 0) {
+                                          $status_color = '#30c030';
+                                    } else {
+                                          $status_color = '#e03333';
+                                    }
+                                    ?>
                                     <tr>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $data1[$i]->name ?></td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $data1[$i]->email ?></td>
@@ -93,11 +92,11 @@
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $coach->specialty ?></td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><?php echo $coach->certificate?></td>
                                           <?php if($data1[$i]->is_blacklist == 0){?>
-                                                <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)">Activated</td>
+                                                <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><span class="status" style="background-color: <?php echo $status_color; ?>;">Activated</span></td>
                                           <?php }else{?>
-                                                <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)">Deactivated</td>
+                                                <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($coach)); ?>, <?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"> <span class="status" style="background-color: <?php echo $status_color; ?>;">Deactivated</span></td>
                                           <?php }?>
-                                          <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><i class="fa-solid fa-user-slash delete icon"></i></td>
+                                          <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($data1[$i])); ?>)"><i class="fa-solid fa-rotate edit icon"></i></td>
                                     </tr>
                                     <?php $i = $i + 1;
                               endforeach; ?>
