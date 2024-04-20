@@ -63,7 +63,7 @@
                 </div>
             </a>
 
-            <a class="card" href="#">
+            <a class="card"  href="C&A_Indoor_Project/Reports/SelectReport">
                 <div>
                     <div class="numbers"></div>
                     <div class="cardName">Reports</div>
@@ -110,6 +110,7 @@
                 <iframe src="http://localhost/C&A_Indoor_Project/Pages/Calendar/User" frameborder="0"></iframe>                        
             </div>
         </div>
+        
 
         <!-- chart -->
         <div class="charts">
