@@ -16,7 +16,7 @@ body {
   --black1: #222;
   --black2: #000000;
 }
-.details .tablediv .recentOrders {
+.details .tablediv .permaner {
   position: relative;
   display: grid;
   max-height: 550px;
@@ -27,8 +27,8 @@ body {
   height: 500px;
 }
 
-.details .tablediv .recentOrders .table-container,
-.details .tablediv .recentOrders .table-container2{
+.details .tablediv .permaner .table-container,
+.details .tablediv .permaner .table-container2{
   position: relative;
   /* display: block; */
   overflow-y: scroll;
@@ -65,7 +65,7 @@ body {
 
 
 
-.details .tablediv .recentOrders table {
+.details .tablediv .permaner table {
   width: 100%;
   display: table;
   border-collapse: collapse;
@@ -74,56 +74,26 @@ body {
   padding-bottom: 20px;
   overflow-y: scroll;
 }
-.details .tablediv .recentOrders table thead td {
+.details .tablediv .permaner table thead td {
   font-weight: 600;
 }
-.details .tablediv .recentOrders table tr {
+.details .tablediv .permaner table tr {
   color: var(--black1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-.details .recentOrders table tr:last-child {
+.details .permaner table tr:last-child {
   border-bottom: none;
 }
-.details .recentOrders table tbody tr:hover {
+.details .permaner table tbody tr:hover {
   background: var(--color01);
   color: var(--white);
 }
-.details .recentOrders table tr td {
+.details .permaner table tr td {
   padding: 10px;
-}
-.details .recentOrders table tr td:last-child {
-  text-align: end;
-}
-.details .recentOrders table tr td:nth-child(2) {
-  text-align: end;
-}
-.details .recentOrders table tr td:nth-child(3) {
   text-align: center;
 }
-.status{
-  padding: 4px 8px;
-  /* background: #32e02c; */
-  color: var(--black2);
-  border-radius:12px;
-  font-size: 12px;
-  font-weight: 500;
-}
-/* .status.canceled {
-  padding: 2px 4px;
-  background: #f00;
-  color: var(--white);
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
-}
-.status.confirmation {
-  padding: 2px 4px;
-  background: #1795ce;
-  color: var(--white);
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
-} */
+
+
 
 .rescheduleDetails h4 {
   margin-top: 20px;
@@ -148,7 +118,7 @@ body {
 
 /* ====================== Responsive Design ========================== */
 @media (max-width: 480px) {
-  .details .tablediv .recentOrders {
+  .details .tablediv .permaner {
     padding: 0px;
     padding-bottom: 10px;
   }
@@ -171,10 +141,10 @@ body {
     border-radius: 6px;
     font-size: 10px;
   }
-  .details .tablediv .recentOrders table thead td {
+  .details .tablediv .permaner table thead td {
     font-size: 12px;
   }
-  .details .tablediv .recentOrders table tbody td {
+  .details .tablediv .permaner table tbody td {
     font-size: 10px;
   }
   .status.paid,

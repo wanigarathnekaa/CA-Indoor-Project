@@ -122,8 +122,8 @@
 }
 
 .container .content .button input[type="submit"]{
-      padding: 15px 25px;
-      border-radius: 5px;
+      padding: 10px 20px;
+      border-radius: 20px;
       border: none;
       background-color: var(--color02);
       color: var(--white);

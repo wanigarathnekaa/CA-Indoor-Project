@@ -189,7 +189,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-link">
-                                        <a href="#">
+                                        <a href="<?php echo URLROOT; ?>/Pages/Schedule/manager">
                                             <i class="bx bxs-calendar icon"></i>
                                             <span class="text nav-text">Schedule</span>
                                         </a>
@@ -226,7 +226,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-link">
-                                            <a href="#">
+                                            <a href="<?php echo URLROOT; ?>/Pages/Schedule/owner">
                                                 <i class="bx bxs-calendar icon"></i>
                                                 <span class="text nav-text">Schedule</span>
                                             </a>

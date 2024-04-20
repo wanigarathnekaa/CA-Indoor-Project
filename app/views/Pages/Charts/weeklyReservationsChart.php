@@ -1,7 +1,7 @@
 <?php
 
 // Assuming $data contains your reservations array
-$reservations = $data; // Make sure $data is initialized with your reservations data
+$reservations = $data['bookings']; // Make sure $data is initialized with your reservations data
 
 // Get today's date
 $today = date('Y-m-d');

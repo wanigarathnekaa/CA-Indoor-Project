@@ -1,7 +1,7 @@
 <?php
 //print_r($data);
 $filter_date = date('Y-m-d');
-$new_data = array_filter($data, function ($item) use ($filter_date) {
+$new_data = array_filter($data['bookings'], function ($item) use ($filter_date) {
     return $item->date === $filter_date;
 });
 
