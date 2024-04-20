@@ -16,9 +16,9 @@
         <tr>
           <th>Name</th>
           <th>Email</th>
+          <th><b>Creation Date</th>
           <th>Last-login</th>
           <th>Last-logout</th>
-          <th><b>Creation Date</th>
         </tr>
       </thead>
     </table>

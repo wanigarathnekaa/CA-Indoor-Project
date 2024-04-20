@@ -56,7 +56,7 @@
         </div> 
         </a>
 
-        <a class="card" href="<?php echo URLROOT; ?>/Reports/OrderReport">
+        <a class="card" href="<?php echo URLROOT; ?>/Reports/Userlogs">
         <div>
         <div class="cardName">User Account Activity Report</div>
 

@@ -427,6 +427,64 @@ class M_Report
             // Output PDF
             $pdf->Output('booking_report1.pdf', 'D');
         }
+        public function LogsGeneratePDF($data) {
+            $invoice_date = $data['invoice_date'];
+            $invoice_due_date = $data['invoice_due_date'];
+        
+            $this->db->query("SELECT * FROM userlog WHERE create_date >= :start_date AND create_date <= :end_date");
+
+            $this->db->bind(':start_date', $invoice_date);
+            $this->db->bind(':end_date', $invoice_due_date);
+            $result = $this->db->resultSet();
+            
+                    
+            // Create PDF object
+            $pdf = new MYPDFSixColumns(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        
+            // Set PDF information
+            $pdf->SetCreator(PDF_CREATOR);
+            $pdf->SetAuthor('admin');
+            $pdf->SetTitle('Booking Report');
+            $pdf->SetSubject('Booking Report');
+            $pdf->SetKeywords('Booking, Report');
+            
+            // Add a page to the PDF
+            $pdf->AddPage();
+            $pdf->SetFont('helvetica', '', 16);
+            
+            // Add title to the PDF
+            $pdf->SetFont('', 'B'); //bold
+            $pdf->Write(0, 'Product Sales Analysis Report', '', 0, 'L', true, 0, false, false, 0);
+            $pdf->SetFont('helvetica', '', 12);
+            $pdf->Cell(0, 10, 'Product: ', 0, 1, 'L');
+            $pdf->Ln(15); 
+        
+            // Prepare table data
+            $tableHeader = array('User ID', 'User Name', 'Email', 'Creation Date', 'Last Login', 'Last Logout', 'Order_ID', 'Name', 'Quantity', 'Total Price', 'Order_date', 'Order_Status');
+            $tableData = array();
+            
+            // Populate table data
+            foreach ($result as $log) {
+                // Assuming the properties exist in $order, adjust the property names if needed
+                $tableData[] = array(
+                    $log->uid,
+                    $log->user_name,
+                    $log->email,
+                    $log->create_date,
+                    $log->last_login,
+                    $log->last_logout,
+                );
+            }
+        
+            // Debugging: print the table data to check if it's populated correctly
+            print_r($tableData);
+        
+            // Add colored table to the PDF
+            $pdf->ColoredTableSixColumns($tableHeader, $tableData);
+        
+            // Output PDF
+            $pdf->Output('booking_report1.pdf', 'D');
+        }
             
         
         public function displayFilteredBookings($data) {
@@ -607,6 +665,46 @@ foreach ($result as $order) {
                 echo "<div class='alert alert-warning'>No bookings found between the selected dates.</div>";
             }
         }
+        public function displayLogs($data) {
+            $invoice_date = $data['invoice_date'];
+            $invoice_due_date = $data['invoice_due_date'];
+        
+            $this->db->query("SELECT * FROM userlog WHERE create_date >= :start_date AND create_date <= :end_date");
+
+            $this->db->bind(':start_date', $invoice_date);
+            $this->db->bind(':end_date', $invoice_due_date);
+            $result = $this->db->resultSet();
+        
+            if ($result && count($result) > 0) {
+                echo "<div class='alert alert-success'>Filtered User Logs:</div>";
+                echo "<table class='table table-bordered'>";
+                echo "<thead><tr><th>User ID</th><th>User Name</th><th>Email</th><th>Creation Date</th><th>Last Login</th><th>Last Logout</th></tr></thead>";
+                echo "<tbody>";
+           
+        
+                // Fetching results as associative array
+                foreach ($result as $row) {
+                    echo "<tr>";
+                    echo "<td>" . $row->uid . "</td>"; // User ID
+                    echo "<td>" . $row->user_name . "</td>"; // User Name
+                    echo "<td>" . $row->email . "</td>"; // Email
+                    echo "<td>" . $row->create_date . "</td>"; // Creation Date
+                    echo "<td>" . $row->last_login . "</td>"; // Last Login
+                    echo "<td>" . $row->last_logout . "</td>"; // Last Logout
+                    echo "</tr>";}
+        
+                    
+                echo "</tbody>";
+                echo "</table>";
+        
+                
+                echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download</button>";
+                echo "</form>";
+            } else {
+                echo "<div class='alert alert-warning'>No bookings123 found between the selected dates.</div>";
+            }
+        }
+        
         
         
     }
