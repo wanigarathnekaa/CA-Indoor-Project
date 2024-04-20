@@ -99,13 +99,28 @@
 
                 <!-- table body -->
                 <tbody>
-                    <?php foreach (array_reverse($data) as $order): ?>
+                    <?php foreach (array_reverse($data) as $order):
+                        $payment_status_color = '';
+                        if ($order->payment_status == 'Paid') {
+                            $payment_status_color = '#00ff00';
+                        } else if ($order->payment_status == 'Not Paid') {
+                            $payment_status_color = '#ff0000';
+                        }
+
+
+                        $order_status_color = '';
+                        if ($order->order_status == 'Complete') {
+                            $order_status_color = '#00ff00';
+                        } else if ($order->order_status == 'Not Complete') {
+                            $order_status_color = '#ff0000';
+                        }
+                        ?>
                         <tr>
                             <td><?php echo $order->order_id; ?></td>
                             <td><?php echo $order->full_name; ?></td>
                             <td><?php echo $order->order_date; ?></td>
-                            <td><?php echo $order->payment_status; ?></td>
-                            <td><?php echo $order->order_status; ?></td>
+                            <td><span class="status" style="background-color: <?php echo $payment_status_color; ?>;"><?php echo $order->payment_status; ?></span></td>
+                            <td><span class="status" style="background-color: <?php echo $order_status_color; ?>;"><?php echo $order->order_status; ?></span></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

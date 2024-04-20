@@ -351,6 +351,15 @@ tbody td .icon:hover {
   cursor: pointer;
 }
 
+.status{
+  padding: 2px 8px;
+  color: var(--black2);
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+
+}
+
 /* responsive__________________________________________________________________________________________ */
 
 @media (max-width: 768px) {

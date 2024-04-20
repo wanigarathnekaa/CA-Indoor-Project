@@ -65,7 +65,7 @@
                                             <?php echo $category->category_name; ?>
                                         </option>
                                     <?php endforeach; ?>
-                                </select><br>
+                                </select>
                                 <span class="form-invalid-2"></span>
                             </div>
                             <!-- Product Brand Name -->
@@ -73,7 +73,7 @@
                                 <label for="brand_name">Brand Name</label>
                                 <select name="brand_name" id="brand_name" class="form-control">
                                     <option value="0">Select a Category first</option>
-                                </select><br>
+                                </select>
                                 <span class="form-invalid-3"></span>
                             </div>
                         </div>
