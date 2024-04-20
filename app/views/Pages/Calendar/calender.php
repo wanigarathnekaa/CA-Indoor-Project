@@ -16,6 +16,11 @@ function build_calendar($month, $year)
     $next_month = date('m', mktime(0, 0, 0, $month + 1, 1, $year));
     $next_year = date('Y', mktime(0, 0, 0, $month + 1, 1, $year));
 
+    $today_date = new DateTime(); // Current date and time
+    $today_date->modify('+2 weeks'); // Add two weeks
+
+    $dateAfterTwoWeeks = $today_date->format('Y-m-d'); // Format date as 'Y-m-d'
+
     $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
     $calendar = "<center><h2 class='date'>$monthName $year</h2>";
     $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $prev_month . "&year=" . $prev_year . "&bookingID=" . $bookingId . "' target='_self'_>Prev Month</a> ";
@@ -52,14 +57,15 @@ function build_calendar($month, $year)
 
         if ($date < date('Y-m-d')) {
             $calendar .= "<a class = 'btn btn-danger btn-xs'><td class='$today'><h4>$currentDay</h4></td></a>";
-        }
-        else {
+        } else if($date <= $dateAfterTwoWeeks) {
             // $calendar .= "<td class='$today'><h4>$currentDay</h4><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user' class = 'btn btn-success btn-xs' target='_top'>Book</a></td>";
             $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : '';
             $calendar .= "<td class='$today'><a href='http://localhost/C&A_Indoor_Project/Pages/Manager_Booking/manager?fulldate=$date&bookingID=" . $bookingId . "' class = 'btn btn-success btn-xs' target='_top'><h4>$currentDay</h4></a></td>";
+        }else{
+            $calendar .= "<a class = 'btn btn-danger btn-xs'><td class='$today'><h4>$currentDay</h4></td></a>";
         }
         // echo $today;
- 
+
 
         $currentDay++;
         $dayOfWeek++;
@@ -83,23 +89,23 @@ function build_calendar($month, $year)
 
 <head>
     <meta name="viewport" content="width = device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo URLROOT;?>/css/calander_style.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/calander_style.css">
 </head>
 
 <body>
     <div class="calander-container">
-                <?php
-                $dateComponent = getdate();
-                if (isset($_GET['month']) && isset($_GET['year'])) {
-                    $month = $_GET['month'];
-                    $year = $_GET['year'];
-                } else {
-                    $month = $dateComponent['mon'];
-                    $year = $dateComponent['year'];
-                }
+        <?php
+        $dateComponent = getdate();
+        if (isset($_GET['month']) && isset($_GET['year'])) {
+            $month = $_GET['month'];
+            $year = $_GET['year'];
+        } else {
+            $month = $dateComponent['mon'];
+            $year = $dateComponent['year'];
+        }
 
-                echo build_calendar($month, $year);
-                ?>
+        echo build_calendar($month, $year);
+        ?>
     </div>
 </body>
 
