@@ -72,7 +72,10 @@ class Pages extends Controller
     public function Table($name)
     {
         $bookings = $this->pagesModel->getReservations();
-        $this->view('Pages/Tables/dailyReservation', $bookings);
+        $data = [
+            'bookings' => $bookings,
+        ];
+        $this->view('Pages/Tables/dailyReservation', $data);
     }
 
     // personal reservation table for player
@@ -93,6 +96,17 @@ class Pages extends Controller
             'bookings' => $bookings,
         ];
         $this->view('Pages/Tables/personal_previous_reservation', $data);
+    }
+
+
+    //permanent reservations
+    public function Permanent_Reservation($name)
+    {
+        $permanentBookings = $this->pagesModel->getPermanentBookings();
+        $data = [
+            'permanentBookings' => $permanentBookings,
+        ];
+        $this->view('Pages/Tables/permanentReservations', $data);
     }
 
 
@@ -126,6 +140,20 @@ class Pages extends Controller
         ];
         $this->view('Pages/SchedulePages/userschedule', $data1);
     }
+
+    //schedule page for company
+    public function Schedule($name)
+    {
+        $bookings = $this->pagesModel->getReservations();
+        $permanentBookings = $this->pagesModel->getPermanentBookings();
+        $data = [
+            'bookings' => $bookings,
+            'permanentBookings' => $permanentBookings,
+        ];
+        $this->view('Pages/SchedulePages/companyschedule', $data);
+    }
+
+
     // coach table
     public function coachTable($name)
     {
@@ -216,6 +244,7 @@ class Pages extends Controller
         $advertisement = $this->pagesModel->getAdvertisement();
         $managers = $this->pagesModel->getManagerCount();
         $companyUsers = $this->pagesModel->getCompanyUserCount();
+        $bookings = $this->pagesModel->getReservations();
 
 
         $data = [
@@ -226,6 +255,7 @@ class Pages extends Controller
             'advertCount' => count($advertisement),
             'ManagerCount' => $managers,
             'CompanyUserCount' => $companyUsers,
+            'bookings' => $bookings,
 
         ];
         $res = [];
@@ -248,7 +278,7 @@ class Pages extends Controller
         } else if ($name == "coach") {
             $this->view('Pages/Dashboard/coach', $data1);
         } else if ($name == "manager") {
-            $this->view('Pages/Dashboard/manager', $bookings, $data);
+            $this->view('Pages/Dashboard/manager',$data);
         } else if ($name == "owner") {
             $this->view('Pages/Dashboard/owner', $bookings, $data);
         }

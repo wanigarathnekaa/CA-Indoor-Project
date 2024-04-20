@@ -1,5 +1,6 @@
 /* ........................................................ */
-.popupcontainer {
+.popupcontainer,
+.popupcontainer2 {
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -14,7 +15,8 @@
   transition: all 0.3s ease;
 }
 
-.open-popupcontainer {
+.open-popupcontainer,
+.open-popupcontainer2 {
   opacity: 1;
   pointer-events: auto;
   z-index: 100;
