@@ -83,17 +83,6 @@
                     <i class="fa-solid fa-user-plus"></i>
                 </div>
             </a>
-
-            <a class="card" href="#">
-                <div>
-                    <div class="numbers"></div>
-                    <div class="cardName">Confirmation Fee</div>
-                </div>
-
-                <div class="iconBx">
-                    <i class="fa-solid fa-comments-dollar"></i>
-                </div>
-            </a>
         </div>
 
         <!--Reservation Details -->
