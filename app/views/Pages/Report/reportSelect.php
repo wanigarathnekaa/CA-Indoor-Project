@@ -28,30 +28,42 @@
     <div class="cardBox">
         <a class="card" href="<?php echo URLROOT; ?>/Reports/SalesAmount">
         <div>
-        <h1>Filter Bookings</h1>
-        <p></p>
-        </div>
-        <div class="iconBx"></div>
-        </a>
-    </div>
+        <div class="cardName">Filtered Booking Report</div>
 
-    <div class="cardBox">
+        </div>
+        <div class="iconBx">
+                    <i class='bx bxs-report'></i>
+        </div>  
+        </a>
+
         <a class="card" href="<?php echo URLROOT; ?>/Reports/SalesMonthly">
         <div>
-        <h1>Monthly Booking</h1>
-        <p></p>
-        </div>
-        <div class="iconBx"></div>
-        </a>
-    </div>
+        <div class="cardName">Monthly Booking Report</div>
 
-    <div class="cardBox">
+        </div>
+        <div class="iconBx">
+                    <i class='bx bxs-report'></i>
+        </div>  
+        </a>
+     
         <a class="card" href="<?php echo URLROOT; ?>/Reports/OrderReport">
         <div>
-        <h1>Filter Orders</h1>
-        <p></p>
+        <div class="cardName">Order Filtering Report</div>
+
         </div>
-        <div class="iconBx"></div>
+        <div class="iconBx">
+                    <i class='bx bxs-report'></i>
+        </div> 
+        </a>
+
+        <a class="card" href="<?php echo URLROOT; ?>/Reports/OrderReport">
+        <div>
+        <div class="cardName">User Account Activity Report</div>
+
+        </div>
+        <div class="iconBx">
+                    <i class='bx bxs-report'></i>
+        </div> 
         </a>
     </div>
          

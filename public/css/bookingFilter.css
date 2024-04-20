@@ -73,8 +73,15 @@ form {
     margin-bottom: 20px;
 }
 
-.btn-primary,
-input[type="submit"] {
-    width: 100%;
+
+.btn-container .btn-primary,
+.btn-container input[type="submit"] {
+    width: 200px;
     max-width: 200px; /* Adjust maximum width as needed */
+    border-radius: 30px;
+    margin-right: 10px; /* Add margin between buttons */
+}
+
+.btn-primary:last-child {
+    margin-right: 0; /* Remove margin from last button */
 }
