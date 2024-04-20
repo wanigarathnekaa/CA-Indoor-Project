@@ -35,9 +35,11 @@
     </select>
 </div>
 
-                <input type="submit" name="Filter" value="Filterbtn" class="btn btn-primary">
-                <input type="submit" name="download_pdf" value="download_pdf" class="btn btn-primary">
+                 <div class="btn-container">
+                 <input type="submit" name="Filter" value="View" class="btn btn-primary">
+                <input type="submit" name="download_pdf" value="Download" class="btn btn-primary">
 
+                </div>
             </form>
         </div>
     </div>

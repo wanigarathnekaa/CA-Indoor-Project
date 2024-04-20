@@ -36,9 +36,10 @@
             </div>
 
                
-                <input type="submit" name="filter" value="Filter" class="btn btn-primary">
-                <input type="submit" name="download_pdf" value="Download_PDF" class="btn btn-primary">
-
+            <div class="btn-container">
+                    <input type="submit" name="filter" value="View" class="btn btn-primary">
+                    <input type="submit" name="download_pdf" value="Download" class="btn btn-primary">
+                </div>
             </form>
         </div>
     </div>
