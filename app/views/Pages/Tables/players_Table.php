@@ -49,16 +49,6 @@
 
             <!-- Table Sort -->
             <div class="tableSort">
-                  <!-- <div class="sort">
-                        <label>Status :</label>
-                        <select name="filter" id="filter">
-                              <option value="all">All</option>
-                              <option value="paid">Paid</option>
-                              <option value="unpaid">Unpaid</option>
-                              <option value="cancelled">Cancelled</option>
-                        </select>
-                  </div> -->
-
                   <div class="search">
                         <label>
                               <input type="text" placeholder="Search here" id="searchInput" onkeyup="search()">
@@ -87,7 +77,14 @@
 
                         <!-- table body -->
                         <tbody>
-                              <?php foreach ($players as $player): ?>
+                              <?php foreach ($players as $player):
+                                    $status_color = '';
+                                    if ($player->is_blacklist == 0) {
+                                          $status_color = '#30c030';
+                                    } else {
+                                          $status_color = '#e03333';
+                                    }
+                                    ?>
                                     <tr>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($player)); ?>)">
                                                 <?php echo $player->uid ?>
@@ -102,11 +99,11 @@
                                                 <?php echo $player->phoneNumber ?>
                                           </td>
                                           <?php if($player->is_blacklist == 0){?>
-                                                <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($player)); ?>)">Activated</td>
+                                                <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($player)); ?>)"><span class="status" style="background-color: <?php echo $status_color; ?>;">Activated</span></td>
                                           <?php }else{?>
-                                                <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($player)); ?>)">Deactivated</td>
+                                                <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($player)); ?>)"> <span class="status" style="background-color: <?php echo $status_color; ?>;">Deactivated</span></td>
                                           <?php }?>
-                                          <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($player)); ?>)"><i class="fa-solid fa-user-slash delete icon"></i>
+                                          <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($player)); ?>)"><i class="fa-solid fa-rotate edit icon"></i></td>
                                           </td>
                                     </tr>
                                     <?php
