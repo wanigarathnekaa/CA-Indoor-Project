@@ -38,12 +38,44 @@ include_once APPROOT . '/views/Pages/CricketShop/crickHeader.php';
 </div>
 
 
+
+<!-- OrderDetails popup -->
+<div id="orderDetailsModal" class="modal">
+      <div class="modal-content">
+            <div class="title">
+                  <h2 class="modal-title">Order Details</h2>
+                  <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <hr>
+
+            <div class="orderItems">
+                  <table id="orderItemsTable">
+                        <thead>
+                              <tr>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                              </tr>
+                        </thead>
+                        <tbody id="items">
+                              <!-- Order Items will be displayed here -->
+                        </tbody>
+                  </table>
+            </div>
+            <hr>
+            
+      </div>
+</div>
+
+
 <?php
 include_once APPROOT . '/views/Pages/CricketShop/crickFooter.php';
 ?>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="<?php echo URLROOT; ?>/js/orders.js"></script>
 <script>
     $(document).ready(function () {
         var cartCount = '<?= count($data['cartItems']) ?>';
@@ -52,4 +84,38 @@ include_once APPROOT . '/views/Pages/CricketShop/crickFooter.php';
         }
         $('#cartCount').html(cartCount);
     });
+
+
+      $(document).ready(function () {
+            $('#orders #orderItems .order-item').click(function () {
+                  $(this).addClass('selected').siblings().removeClass('selected');
+                  console.log($(this).find('.order-id').text());
+                  $('#orderDetailsModal').css('display', 'block');
+                  $.ajax({
+                        url : "<?php echo URLROOT; ?>/Order/getOrderDetails",
+                        type : 'POST',
+                        data : {
+                              order_id : $(this).find('.order-id').text()
+                        },
+                        success : function (response) {
+                              console.log(response);
+                              var orderItems = response.orderItems;
+
+                              var itemsTable = $('#orderItemsTable tbody');
+                              itemsTable.empty();
+
+                              for (var i = 0; i < orderItems.length; i++) {
+                                    var item = orderItems[i];
+                                    var row = '<tr>';
+                                    row += '<td>' + item.product_id + '</td>';
+                                    row += '<td>' + item.quantity + '</td>';
+                                    row += '<td>' + item.price_per_unit + '</td>';
+                                    row += '</tr>';
+                                    $('#items').append(row);
+                              }
+                              $("#items").html(itemsText);
+                        }
+                  });
+            });
+      });
 </script>
