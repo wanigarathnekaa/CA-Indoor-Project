@@ -3,11 +3,18 @@ class Pages extends Controller
 {
     private $pagesModel;
     private $advertiseModel;
+    private $userModel;
+
     public function __construct()
     {
         $this->pagesModel = $this->model('M_Pages');
+        $this->userModel = $this->model('M_Users');
+
         $this->advertiseModel = $this->model('M_Advertisement');
     }
+
+
+   
 
     public function about()
     {
@@ -229,8 +236,7 @@ class Pages extends Controller
     {
         $logs = $this->pagesModel->getAccLog();
         $data = [
-            'logs' => $logs
-        ]; // Pass $logs as an associative array
+            'logs' => $logs]; // Pass $logs as an associative array
         $this->view('Pages/Tables/accountlog_Table', $data);
     }
     
@@ -411,32 +417,41 @@ class Pages extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                'oldPassword' => trim($_POST['old_password']),
+                'newPassword' => trim($_POST['new_password']),
+                'confirmPassword' => trim($_POST['confirm_password']),
 
-            $oldPassword = trim($_POST['old_password']);
-            $newPassword = trim($_POST['new_password']);
-            $confirmPassword = trim($_POST['confirm_password']);
+                'old_password_err' => "",
+                'new_password_err' => "",
+                'confirm_password_err' => ""
 
-            if (empty($oldPassword) || empty($newPassword) || empty($confirmPassword)) {
+            ];
 
+            
+            if (empty($data['oldPassword']) || empty($data['newPassword']) || empty($data['confirmPassword'])) {
                 $this->view('Pages/UserProfiles/changePassword');
             } else {
                 $hashedPassword = $user->password;
-                if (password_verify($oldPassword, $hashedPassword)) {
+                if (password_verify($data['oldPassword'], $hashedPassword)) {
+                    if ($data['oldPassword'] == $data['newPassword']) {
+                        $data['new_password_err'] = "Please enter a password different from the old one.";
+                        $this->view('Pages/UserProfiles/changePassword', $data);
 
-                    if ($newPassword != $confirmPassword) {
+                    } else if ($data['newPassword'] != $data['confirmPassword']) {
+                        $data['confirm_password_err'] = "Passwords do not match. Please try again.";
+                        $this->view('Pages/UserProfiles/changePassword', $data);
 
-                        $errorMessage = "Passwords do not match. Please try again.";
-                        $this->view('Pages/UserProfiles/changePassword', ['errorMessage' => $errorMessage]);
                     } else {
-
-                        $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-                        $this->pagesModel->updatePassword($user->email, $hashedNewPassword);
-                        $this->view('Pages/UserProfiles/changePassword');
+                        $hashedNewPassword = password_hash($data['newPassword'], PASSWORD_DEFAULT);
+                        $this->userModel->updatePassword($user->email, $hashedNewPassword);
+                        $this->view('Pages/UserProfiles/userProfile', $user);
                     }
                 } else {
+                    $data['old_password_err'] = "Current Password is incorrect.";
+                    $this->view('Pages/UserProfiles/changePassword', $data);
                     $this->view('Pages/UserProfiles/changePassword');
-                }
-            }
+                }}
         } else {
             $this->view('Pages/UserProfiles/changePassword');
         }
