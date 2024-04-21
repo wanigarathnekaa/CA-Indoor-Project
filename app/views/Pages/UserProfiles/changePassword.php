@@ -34,7 +34,7 @@
 
                   <!-- form details -->
                   <div class="formbox">
-                        <form action="<?php echo URLROOT . "/" . $linkRole; ?>/changePassword" method="POST" enctype="multipart/form-data">
+                        <form action="<?php echo URLROOT;?>/Users/changePassword" method="POST" enctype="multipart/form-data">
                               <!-- profile picture
                               <div class="profilepic">
                                     <label for="file" class="propiclabel">
@@ -92,7 +92,8 @@
                   
 
                               </div>
-                              <?php if ($role == "User" || $role == "Coach"): ?>
+                              <?php if ($role == "User" || $role == "Coach"): 
+                                    ?>
                               <div class="buttons">
                                     <input type="submit" name="submit" class="button" value="Update" href="<?php echo URLROOT;?>/Pages/Profile/user">
                                     <a href="<?php echo URLROOT;?>/Pages/Profile/user" type="button" class="button">Cancel</a>
