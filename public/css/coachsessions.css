@@ -1,15 +1,17 @@
 .maindiv{
-    
       /* background-color: var(--color04); */
       border-radius: 20px;
       padding: 20px;
       box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+      height: 500px;
 }
 
 .maindiv h2{
       text-align: left;
       color: var(--color01);
 }
+
+
 
 .recentSessions{
       /* margin-top: 20px; */
@@ -36,6 +38,7 @@
 .session-items {
       margin-bottom: 20px;
       overflow: scroll;
+      height: 400px;
 }
 
 .session-item {

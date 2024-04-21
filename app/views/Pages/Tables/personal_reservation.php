@@ -119,6 +119,14 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
                         <div class="popupdetail">
                               <h2><b>Status :</b> <span class="r_payment"></span></h2>
                         </div>
+
+                        <div class="popupdetail">
+                              <h2><b>Booking Price :</b> <span class="r_price"></span></h2>
+                        </div>
+
+                        <div class="popupdetail">
+                              <h2><b>Paid Amount :</b> <span class="r_paid"></span></h2>
+                        </div>
                   </div>
 
                   <div class="btns">

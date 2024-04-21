@@ -89,34 +89,42 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
       </div>
 
       <!-- Popup message -->
-      <div class="popupcontainer" id="popupcontainer">
+      <div class="popupcontainer2" id="popupcontainer2">
             <div class="popup2" id="popup2">
                   <span class="close" onclick="closePopup2()"><i class="fa-solid fa-xmark"></i></span>
                   <h2>Reservation</h2>
                   <hr>
                   <div class="popupdetails">
                         <div class="popupdetail">
-                              <h2><b>Reservation ID :</b> <span class="r_id"></span></h2>
+                              <h2><b>Reservation ID :</b> <span class="p_id"></span></h2>
                         </div>
 
                         <div class="popupdetail">
-                              <h2><b>Customer Name :</b> <span class="r_name"></span></h2>
+                              <h2><b>Customer Name :</b> <span class="p_name"></span></h2>
                         </div>
 
                         <div class="popupdetail">
-                              <h2><b>Reservation Date :</b> <span class="r_date"></span></h2>
+                              <h2><b>Reservation Date :</b> <span class="p_date"></span></h2>
                         </div>
 
                         <div class="popupdetail">
-                              <h2><b>Reservation Time :</b> <span class="r_timeSlot"></span></h2>
+                              <h2><b>Reservation Time :</b> <span class="p_timeSlot"></span></h2>
                         </div>
 
                         <div class="popupdetail">
-                              <h2><b>Net :</b> <span class="r_net"></span></h2>
+                              <h2><b>Net :</b> <span class="p_net"></span></h2>
                         </div>
 
                         <div class="popupdetail">
-                              <h2><b>Status :</b> <span class="r_payment"></span></h2>
+                              <h2><b>Status :</b> <span class="p_payment"></span></h2>
+                        </div>
+
+                        <div class="popupdetail">
+                              <h2><b>Booking Price :</b> <span class="p_price"></span></h2>
+                        </div>
+
+                        <div class="popupdetail">
+                              <h2><b>Paid Amount :</b> <span class="p_paid"></span></h2>
                         </div>
                   </div>
             </div>
@@ -124,7 +132,7 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
 
       <!-- JavaScript -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-      <script src="<?php echo URLROOT; ?>/js/personalPopup.js"></script>
+      <script src="<?php echo URLROOT; ?>/js/pastpersonalPopup.js"></script>
       <script>
             $(document).ready(function () {
                   $("#liveSearch").on("change", function () {
