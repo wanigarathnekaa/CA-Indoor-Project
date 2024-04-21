@@ -75,35 +75,40 @@
                                 <span class="text nav-text">Schedule</span>
                             </a>
                         </li> -->
-                        <li class="nav-link">
-                            <a href="#">
-                                <i class="fa-brands fa-adversal icon"></i>
-                                <span class="text nav-text">Customers</span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="C&A_Indoor_Project/Pages/CompanyUsers/add-user.php"><span class="text nav-text">Add
-                                            Customer</span></a></li>
-                                <li><a href="customer-list.php"><span class="text nav-text">Manage Customers</span></a></li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-link">
-                            <a href="#">
-                                <i class="fa-brands fa-adversal icon"></i>
-                                <span class="text nav-text">Advertisement</span>
-                            </a>
-                        </li>
-                        <li class="nav-link">
+                        <!-- <li class="nav-link">
                             <a href="#">
                                 <i class="bx bxs-user-detail icon"></i>
                                 <span class="text nav-text">User Management</span>
                             </a>
+                        </li> -->
+
+                        <li class="nav-link">
+                            <a href="C&A_Indoor_Project/Pages/View_Advertisement/admin">
+                                <i class="fa-brands fa-adversal icon"></i>
+                                <span class="text nav-text">Advertisement</span>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-link">
+                            <a href="C&A_Indoor_Project/Reports/SelectReport">
+                                <i class="bx bxs-report icon"></i>                    
+
+                                <span class="text nav-text">Reports</span>
+                            </a>
+                        
                         </li>
 
                         <li class="nav-link">
-                            <a href="#">
+                            <a href="C&A_Indoor_Project/Pages/AccountLogTable">
                                 <i class="bx bxs-detail icon"></i>
                                 <span class="text nav-text">System Logs</span>
+                            </a>
+                        </li>
+                        <li class="nav-link">
+                            <a href="C&A_Indoor_Project/Complaint/viewComplaints">
+                                <i class="fa-solid fa-comments icon"></i>                   
+
+                                <span class="text nav-text">Complaints</span>
                             </a>
                         </li>
                         <li class="profile">

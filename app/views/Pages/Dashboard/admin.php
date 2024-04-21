@@ -27,7 +27,7 @@
 
         <!-- Cards -->
         <div class="cardBox">
-
+    
            <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/CompanyUserTable/user">
                 <div>
                     <div class="numbers"><?php echo $data1["CompanyUserCount"]?></div>
@@ -82,7 +82,7 @@
                               <i class="fa-solid fa-calendar-days"></i>
                         </div>
                   </a>
-             <a class="card" href="C&A_Indoor_Project/Pages/View_Advertisement/manager">
+             <a class="card" href="C&A_Indoor_Project/Pages/View_Advertisement/admin">
                         <div>
                               <div class="numbers"><?php echo $data1["advertCount"]?></div>
                               <div class="cardName">Advertisements</div>
@@ -129,8 +129,8 @@
             
         </div>
 
-        <!--Reservation Details -->
-        <div class="details">
+            <!--Reservation Details -->
+             <div class="details">
                   <!-- Recent Reservations -->
                   <div class="tablediv">
                         <?php
@@ -146,14 +146,20 @@
 
 
             <div class="charts">
-                 <!-- Weekly Reservations chart -->
-                 <?php require APPROOT . '/views/Pages/Charts/weeklyReservationsChart.php'; ?>
-                  
-                 <!-- Customers Count chart -->
-                 <?php require APPROOT . '/views/Pages/Charts/customersCountChart.php'; ?>
-                 
-                 <!-- Reservations Net chart -->
-                 <?php require APPROOT . '/views/Pages/Charts/reservationsNetChart.php'; ?>
+                <!-- Weekly Reservations chart -->
+                <?php
+                        require APPROOT . '/views/Pages/Charts/weeklyReservationsChart.php';
+                  ?>
+
+                  <!-- Customers Count chart -->
+                  <?php
+                        require APPROOT . '/views/Pages/Charts/customersCountChart.php';
+                  ?>
+
+                  <!-- Reservations Net chart -->
+                  <?php
+                        require APPROOT . '/views/Pages/Charts/reservationsNetChart.php';
+                  ?>
                  
             </div>
 
