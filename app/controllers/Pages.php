@@ -228,7 +228,9 @@ class Pages extends Controller
     public function AccountLogTable()
     {
         $logs = $this->pagesModel->getAccLog();
-        $data = ['logs' => $logs]; // Pass $logs as an associative array
+        $data = [
+            'logs' => $logs
+        ]; // Pass $logs as an associative array
         $this->view('Pages/Tables/accountlog_Table', $data);
     }
     
@@ -272,7 +274,7 @@ class Pages extends Controller
         if ($name == "user") {
             $this->view('Pages/Dashboard/user', $data1);
         } else if ($name == "admin") {
-            $this->view('Pages/Dashboard/admin', $bookings, $data);
+            $this->view('Pages/Dashboard/admin', $data1, $data);
         } else if ($name == "cashier") {
             $this->view('Pages/Dashboard/cashier');
         } else if ($name == "coach") {
