@@ -125,7 +125,7 @@ class M_Pages
     public function getAccLog()
     {
         $this->db->query('SELECT * FROM userlog');
-
+        $this->db->execute();
         return $this->db->resultSet();
     }
 

@@ -524,7 +524,7 @@ class M_Report
                 echo "<form method='post'>";
                 echo "<input type='hidden' name='invoice_date' value='$invoice_date'>";
                 echo "<input type='hidden' name='invoice_due_date' value='$invoice_due_date'>";
-                echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download PDF</button>";
+                echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download</button>";
                 echo "</form>";
             } else {
                 echo "<div class='alert alert-warning'>No bookings found between the selected dates.</div>";
@@ -548,7 +548,7 @@ class M_Report
             if ($result && count($result) > 0) {
                 echo "<div class='alert alert-success'>Filtered Orders:</div>";
                 echo "<table class='table table-bordered'>";
-                echo "<thead><tr><th>Order ID</th><th>Customer Name</th><th>Quantity</th><th>Total Price</th>><th>Order Date</th><th>Order Status</th></tr></thead>";
+                echo "<thead><tr><th>Order ID</th><th>Customer Name</th><th>Quantity</th><th>Total Price</th><th>Order Date</th><th>Order Status</th></tr></thead>";
                 echo "<tbody>";
                 // $totalPrice = 0;
                 // $totalPaid = 0;
@@ -575,7 +575,7 @@ foreach ($result as $order) {
               
                 echo "<form method='post'>";
                 echo "    <input type='hidden' name='Product' value='" . $Product . "'>";
-                echo "    <button type='submit' name='download_pdf' class='btn btn-primary'>Download PDF</button>";
+                echo "    <button type='submit' name='download_pdf' class='btn btn-primary'>Download</button>";
                 echo "</form>";
                          
               } else {
@@ -638,7 +638,7 @@ foreach ($result as $order) {
         
                 echo "<form method='post'>";
                 echo "<input type='hidden' name='Selected_month' value='$input_month'>";
-                echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download PDF</button>";
+                echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download</button>";
                 
                 echo "</form>";
             } else {
@@ -680,7 +680,7 @@ foreach ($result as $order) {
                 echo "<form method='post'>";
                 echo "<input type='hidden' name='invoice_date' value='$invoice_date'>";
                 echo "<input type='hidden' name='invoice_due_date' value='$invoice_due_date'>";
-                echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download PDF</button>";
+                echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download</button>";
                 echo "</form>";
             } else {
                 echo "<div class='alert alert-warning'>No bookings123 found between the selected dates.</div>";
