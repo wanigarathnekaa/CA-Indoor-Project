@@ -602,12 +602,12 @@ foreach ($result as $order) {
                 echo "</tbody>";
                 echo "</table>";
         
+              
                 // echo "<form method='post'>";
-                // echo "<input type='hidden' name='invoice_date' value='$invoice_date'>";
-                // echo "<input type='hidden' name='invoice_due_date' value='$invoice_due_date'>";
+  
                 // echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download PDF</button>";
-                // echo "</form>";
-            } else {
+                // echo "</form>";          
+              } else {
                 echo "<div class='alert alert-warning'>No Orses Found.</div>";
             }
         }
@@ -665,12 +665,11 @@ foreach ($result as $order) {
                 echo "</tbody>";
                 echo "</table>";
         
-                echo "<form method='post' action='" . URLROOT . "/Reports/SalesMonthly'>";
-                echo "<input type='hidden' name='invoice_date' value='$input_month'>";
-                // echo "<input type='hidden' name='invoice_due_date' value='$invoice_due_date'>";
-                echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download PDF</button>";
+                // echo "<form method='post'>";
+                // echo "<input type='hidden' name='invoice_date' value='$input_month'>";
+                // echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download PDF</button>";
                 
-                echo "</form>";
+                // echo "</form>";
             } else {
                 echo "<div class='alert alert-warning'>No bookings found between the selected dates.</div>";
             }
@@ -707,9 +706,11 @@ foreach ($result as $order) {
                 echo "</tbody>";
                 echo "</table>";
         
-                
-                echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download</button>";
-                echo "</form>";
+                // echo "<form method='post'>";
+                // echo "<input type='hidden' name='invoice_date' value='$invoice_date'>";
+                // echo "<input type='hidden' name='invoice_due_date' value='$invoice_due_date'>";
+                // echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download PDF</button>";
+                // echo "</form>";
             } else {
                 echo "<div class='alert alert-warning'>No bookings123 found between the selected dates.</div>";
             }
