@@ -93,7 +93,7 @@ class MYPDFSixColumns extends TCPDF {
         $this->SetFont('');
 
         // Header
-        $w = array(30, 30, 30, 30, 30, 30); // Column widths
+        $w = array(20, 50, 30, 30, 30, 30); // Column widths
         $this->SetTextColor(0); // Column names
         $num_headers = count($header);
         for ($i = 0; $i < $num_headers; ++$i) {
@@ -117,8 +117,18 @@ class MYPDFSixColumns extends TCPDF {
             $this->Cell($w[0], 6, $row[0], 'LR', 0, 'L', $fill);
             $this->Cell($w[1], 6, $row[1], 'LR', 0, 'L', $fill);
             $this->Cell($w[2], 6, $row[2], 'LR', 0, 'L', $fill);
-            $this->Cell($w[3], 6, number_format($price, 2), 'LR', 0, 'L', $fill);
-            $this->Cell($w[4], 6, $row[4], 'LR', 0, 'L', $fill);
+            $date = $row[3];
+            if (DateTime::createFromFormat('Y-m-d H:i:s', $date) !== false) {
+                // If it's in 'Y-m-d H:i:s' format, display only the date part
+                $formattedDate = date('Y-m-d', strtotime($date));
+            } else {
+                // If it's not in 'Y-m-d H:i:s' format, display as is
+                $formattedDate = $date;
+            }
+            
+            $this->Cell($w[3], 6, $formattedDate, 'LR', 0, 'L', $fill);
+            
+                        $this->Cell($w[4], 6, $row[4], 'LR', 0, 'L', $fill);
             $this->Cell($w[5], 6, $row[5], 'LR', 0, 'L', $fill);
             $this->Ln();
             $fill = !$fill;
@@ -130,7 +140,7 @@ class MYPDFSixColumns extends TCPDF {
     }
 
     // Your custom function for generating a report
-    public function GenerateReportSixColumns($header, $data, $totalPrice, $totalPaid, $totalPending, $totalNotPaid) {
+    public function GenerateReportSixColumns($header, $data) {
         $this->AddPage();
         $this->SetFont('helvetica', '', 12);
         $this->Write(0, 'Booking Report', '', 0, 'C', true, 0, false, false, 0);
@@ -397,8 +407,8 @@ class M_Report
             // Add title to the PDF
             $pdf->SetFont('', 'B'); //bold
             $pdf->Write(0, 'Product Sales Analysis Report', '', 0, 'L', true, 0, false, false, 0);
-            $pdf->SetFont('helvetica', '', 12);
-            $pdf->Cell(0, 10, 'Product: ' . $Product, 0, 1, 'L');
+            $pdf->SetFont('helvetica', '', 10);
+            $pdf->Cell(0, 10, 'Selected Product: ' . $Product, 0, 1, 'L');
             $pdf->Ln(15); 
         
             // Prepare table data
@@ -454,25 +464,25 @@ class M_Report
             
             // Add title to the PDF
             $pdf->SetFont('', 'B'); //bold
-            $pdf->Write(0, 'Product Sales Analysis Report', '', 0, 'L', true, 0, false, false, 0);
-            $pdf->SetFont('helvetica', '', 12);
-            $pdf->Cell(0, 10, 'Product: ', 0, 1, 'L');
+            $pdf->Write(0, 'User Logs Report', '', 0, 'L', true, 0, false, false, 0);
+            $pdf->SetFont('helvetica', '',8);
+            $pdf->Cell(0, 10, 'Account Details for Accounts Created Between ' . $invoice_date . ' and ' . $invoice_due_date, 0, 1, 'L'); // Add the description
             $pdf->Ln(15); 
         
             // Prepare table data
-            $tableHeader = array('User ID', 'User Name', 'Email', 'Creation Date', 'Last Login', 'Last Logout', 'Order_ID', 'Name', 'Quantity', 'Total Price', 'Order_date', 'Order_Status');
+            $tableHeader = array('User ID', 'Email ', 'User Name', 'Creation Date', 'Last Login', 'Last Logout');
             $tableData = array();
             
             // Populate table data
             foreach ($result as $log) {
                 // Assuming the properties exist in $order, adjust the property names if needed
                 $tableData[] = array(
-                    $log->uid,
-                    $log->user_name,
-                    $log->email,
-                    $log->create_date,
-                    $log->last_login,
-                    $log->last_logout,
+                     $log->uid,
+                     $log->email,
+                     $log->user_name,
+                     $log->create_date,
+                     $log->last_login,
+                     $log->last_logout,
                 );
             }
         
