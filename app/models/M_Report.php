@@ -58,26 +58,6 @@ class MYPDF extends TCPDF {
 
     }
 
-    // Your custom function for generating a report
-    public function GenerateReport($header, $data, $totalPrice, $totalPaid, $totalPending, $totalNotPaid) {
-        $this->AddPage();
-        $this->SetFont('helvetica', '', 12);
-        $this->Write(0, 'Booking Report', '', 0, 'C', true, 0, false, false, 0);
-        $this->ColoredTable($header, $data);
-
-        //space
-        $this->Ln(10); 
-
-        // Print total amounts
-        $this->Write(0, 'Total Price: $' . number_format($totalPrice, 2));
-        $this->Ln();
-        $this->Write(0, 'Total Paid: $' . number_format($totalPaid, 2));
-        $this->Ln(); 
-        $this->Write(0, 'Total Pending: $' . number_format($totalPending, 2));
-        $this->Ln(); 
-        $this->Write(0, 'Total Not Paid: $' . number_format($totalNotPaid, 2));
-        $this->Ln(); 
-    }
 
 }
 
@@ -127,8 +107,7 @@ class MYPDFSixColumns extends TCPDF {
             }
             
             $this->Cell($w[3], 6, $formattedDate, 'LR', 0, 'L', $fill);
-            
-                        $this->Cell($w[4], 6, $row[4], 'LR', 0, 'L', $fill);
+            $this->Cell($w[4], 6, $row[4], 'LR', 0, 'L', $fill);
             $this->Cell($w[5], 6, $row[5], 'LR', 0, 'L', $fill);
             $this->Ln();
             $fill = !$fill;
@@ -139,15 +118,6 @@ class MYPDFSixColumns extends TCPDF {
         $this->Ln(10); // Add space before total amounts
     }
 
-    // Your custom function for generating a report
-    public function GenerateReportSixColumns($header, $data) {
-        $this->AddPage();
-        $this->SetFont('helvetica', '', 12);
-        $this->Write(0, 'Booking Report', '', 0, 'C', true, 0, false, false, 0);
-        $this->ColoredTableSixColumns($header, $data);
-
-        
-    }
 
 }
 
@@ -371,7 +341,7 @@ class M_Report
            $pdf->Ln(); 
 
            // download pdf
-           $pdf->Output('booking_report1.pdf', 'D');
+           $pdf->Output('Monthly_booking_report.pdf', 'D');
         }
 
         public function OrderGeneratePDF($data) {
@@ -435,7 +405,7 @@ class M_Report
             $pdf->ColoredTableSixColumns($tableHeader, $tableData);
         
             // Output PDF
-            $pdf->Output('booking_report1.pdf', 'D');
+            $pdf->Output('Order_report.pdf', 'D');
         }
         public function LogsGeneratePDF($data) {
             $invoice_date = $data['invoice_date'];
@@ -493,7 +463,7 @@ class M_Report
             $pdf->ColoredTableSixColumns($tableHeader, $tableData);
         
             // Output PDF
-            $pdf->Output('booking_report1.pdf', 'D');
+            $pdf->Output('User_log_report.pdf', 'D');
         }
             
         
@@ -603,10 +573,11 @@ foreach ($result as $order) {
                 echo "</table>";
         
               
-                // echo "<form method='post'>";
-  
-                // echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download PDF</button>";
-                // echo "</form>";          
+                echo "<form method='post'>";
+                echo "    <input type='hidden' name='Product' value='" . $Product . "'>";
+                echo "    <button type='submit' name='download_pdf' class='btn btn-primary'>Download PDF</button>";
+                echo "</form>";
+                         
               } else {
                 echo "<div class='alert alert-warning'>No Orses Found.</div>";
             }
@@ -665,11 +636,11 @@ foreach ($result as $order) {
                 echo "</tbody>";
                 echo "</table>";
         
-                // echo "<form method='post'>";
-                // echo "<input type='hidden' name='invoice_date' value='$input_month'>";
-                // echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download PDF</button>";
+                echo "<form method='post'>";
+                echo "<input type='hidden' name='Selected_month' value='$input_month'>";
+                echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download PDF</button>";
                 
-                // echo "</form>";
+                echo "</form>";
             } else {
                 echo "<div class='alert alert-warning'>No bookings found between the selected dates.</div>";
             }
@@ -706,11 +677,11 @@ foreach ($result as $order) {
                 echo "</tbody>";
                 echo "</table>";
         
-                // echo "<form method='post'>";
-                // echo "<input type='hidden' name='invoice_date' value='$invoice_date'>";
-                // echo "<input type='hidden' name='invoice_due_date' value='$invoice_due_date'>";
-                // echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download PDF</button>";
-                // echo "</form>";
+                echo "<form method='post'>";
+                echo "<input type='hidden' name='invoice_date' value='$invoice_date'>";
+                echo "<input type='hidden' name='invoice_due_date' value='$invoice_due_date'>";
+                echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download PDF</button>";
+                echo "</form>";
             } else {
                 echo "<div class='alert alert-warning'>No bookings123 found between the selected dates.</div>";
             }
