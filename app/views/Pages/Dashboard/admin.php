@@ -130,16 +130,13 @@
         </div>
 
             <!--Reservation Details -->
-             <div class="details">
-                  <!-- Recent Reservations -->
-                  <div class="tablediv">
-                        <?php
-                              require APPROOT . '/views/Pages/Tables/accountlog_Table.php';
-                        ?>
-                  </div>
-                  
-                  
-            </div>
+            <div class="details">
+    <!-- Recent Reservations -->
+    <div class="tablediv">
+        <?php require APPROOT . '/views/Pages/Tables/accountlog_Table.php'; ?>
+    </div>
+</div>
+
 
 
         
