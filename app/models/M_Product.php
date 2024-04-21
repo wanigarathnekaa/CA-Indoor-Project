@@ -6,7 +6,7 @@
         }
 
         public function insertProduct($data){
-            $this->db->query('INSERT INTO product (product_title, category_id, brand_id, regular_price, selling_price, product_thumbnail, short_description, status, created_at, qty) VALUES (:product_title, :category_id, :brand_id, :regular_price, :selling_price, :product_thumbnail, :short_description, :status, :created_at, :qty)');
+            $this->db->query('INSERT INTO product (product_title, category_id, brand_id, regular_price, selling_price, product_thumbnail, short_description, status, created_at, qty, discount) VALUES (:product_title, :category_id, :brand_id, :regular_price, :selling_price, :product_thumbnail, :short_description, :status, :created_at, :qty, :discount)');
             $this->db->bind(':product_title', $data['productName']);
             $this->db->bind(':category_id', $data['category_name']);
             $this->db->bind(':brand_id', $data['brand_name']);
@@ -17,6 +17,7 @@
             $this->db->bind(':status', $data['status']);
             $this->db->bind(':created_at', $data['created_at']);
             $this->db->bind(':qty', $data['quantity']);
+            $this->db->bind(':discount', $data['discount']);
             
             if($this->db->execute()){
                 return true;
@@ -86,6 +87,17 @@
         public function updateQuantity($data){
             $this->db->query('UPDATE product SET qty = :qty WHERE product_id = :product_id');
             $this->db->bind(':qty', $data['quantity']);
+            $this->db->bind(':product_id', $data['product_id']);
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function updateDiscount($data){
+            $this->db->query('UPDATE product SET discount = :discount WHERE product_id = :product_id');
+            $this->db->bind(':discount', $data['discount']);
             $this->db->bind(':product_id', $data['product_id']);
             if($this->db->execute()){
                 return true;

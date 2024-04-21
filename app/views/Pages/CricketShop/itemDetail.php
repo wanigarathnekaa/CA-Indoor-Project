@@ -2,6 +2,10 @@
 include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
 ?>
 
+<?php
+$discount = 1 - ($data['SProduct']->discount / 100);
+?>
+
 <section class="product-details">
     <div class="image-slider">
         <div class="product-images">
@@ -19,10 +23,10 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
         <span class="product-actual-price">LKR
             <?= number_format($data['SProduct']->selling_price, 2, '.', ''); ?>
         </span>
-        <span class="product-discount">( 20% off )</span>
+        <span class="product-discount">( <?php echo $data['SProduct']->discount; ?>% off )</span>
         <br>
         <span class="product-price">LKR
-            <?= number_format($data['SProduct']->selling_price * 0.8, 2, '.', ''); ?>
+            <?= number_format($data['SProduct']->selling_price * $discount, 2, '.', ''); ?>
         </span>
 
         <div class="form-field form-field--increments">
@@ -57,6 +61,8 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
         }
         $('#cartCount').html(cartCount);
 
+        var discount = <?= $discount ?>; // Assigning PHP discount value to JavaScript variable
+
         $('#add').click(function () {
             var product_id = '<?= $data['SProduct']->product_id; ?>';
             var email = '<?= $_SESSION['user_email']; ?>';
@@ -80,7 +86,7 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                 }
             <?php endforeach; ?>
 
-            var totalAmount = product_price * qty * 0.8;
+            var totalAmount = product_price * qty * discount; 
 
             if (qty > '<?= $data['SProduct']->qty; ?>') {
                 $('#quantity').html("We don't have enough " + product_title + " stock on hand for the quantity you selected. Please try again.");
@@ -110,14 +116,14 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                             }
                         }
                     });
-                }else{
+                } else {
                     $.ajax({
                         type: 'POST',
                         url: '<?= URLROOT; ?>/CricketShop/updateCart',
                         data: {
                             qty: qty,
                             cart_id: cartId,
-                            product_price: product_price*0.8,
+                            product_price: product_price * discount,
                             p_id: product_id,
                         },
                         success: function (response) {

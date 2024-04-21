@@ -74,7 +74,7 @@ include_once APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                     <?php echo number_format($product_total); ?>
                 </span></p>
             <p>Discount <span class="price">
-                    <?php echo (($product_total - $total_price) / $product_total) * 100; ?>%
+                    <?php echo number_format((($product_total - $total_price) / $product_total) * 100, 2, '.', '') ?>%
                 </span></p>
             <hr>
             <p class="tot">Total Bill <span class="price"><b>LKR
