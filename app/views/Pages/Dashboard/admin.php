@@ -116,7 +116,7 @@
                 </div>
             </a>
 
-            <a class="card" href="<?php echo URLROOT; ?>/Pages/AccountLogTable">
+            <!-- <a class="card" href="<?php echo URLROOT; ?>/Pages/AccountLogTable">
                 <div>
                     <div class="numbers"></div>
                     <div class="cardName">Account Logs</div>
@@ -125,9 +125,24 @@
                 <div class="iconBx">
                     <i class="fa-solid fa-user-gear"></i>
                 </div>
-            </a>
+            </a> -->
             
         </div>
+
+        <!--Reservation Details -->
+        <div class="details">
+                  <!-- Recent Reservations -->
+                  <div class="tablediv">
+                        <?php
+                              require APPROOT . '/views/Pages/Tables/accountlog_Table.php';
+                        ?>
+                  </div>
+                  
+                  
+            </div>
+
+
+        
 
 
             <div class="charts">
