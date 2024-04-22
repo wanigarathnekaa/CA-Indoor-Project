@@ -12,7 +12,7 @@ use PHPMailer\PHPMailer\SMTP;
 
 class MYPDF extends TCPDF {
 
-    public function Invoice($id,$customerName, $email, $payment,$payment1, $date, $paymentstatus,$phoneNumber) {
+    public function Invoice($id,$customerName, $email, $payment,$paidprice, $date, $paymentstatus,$phoneNumber) {
         // Set PDF properties
         $this->SetCreator(PDF_CREATOR);
         $this->SetAuthor('Admin');
@@ -54,7 +54,7 @@ class MYPDF extends TCPDF {
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
         $this->SetXY($receiverDetailsX, $this->GetY() - 10);
         $this->SetFont('helvetica', 'B', 12);
-        $this->Cell(0, 10, 'RECEIVER DETAILS' . $id, 0, 1, 'R');
+        $this->Cell(0, 10, 'RECEIVER DETAILS', 0, 1, 'R');
 
         
 
@@ -130,7 +130,7 @@ $this->Cell(0, 10, 'Paid Amount: ', 0, 1, 'L');
 $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
 $this->SetXY($receiverDetailsX, $this->GetY() - 6); 
 $this->SetFont('helvetica', '', 12);
-$this->Cell(0, 10,  number_format($payment, 2), 0, 1, 'R');
+$this->Cell(0, 10,  number_format($paidprice, 2), 0, 1, 'R');
 
 
 
@@ -156,7 +156,7 @@ $this->Cell(0, 10, 'Remaining Payment:', 0, 1, 'L');
 $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
 $this->SetXY($receiverDetailsX, $this->GetY() - 6); // Set position to the same line
 $this->SetFont('helvetica', '', 12);
-$remainingPayment = $paymentstatus == 'Not Paid' ? $payment : ($paymentstatus == 'Pending' ? ($payment - 300) : 0);
+$remainingPayment = $paymentstatus == 'Not Paid' ? $payment : ($paymentstatus == 'Pending' ? ($payment - $paidprice) : 0);
 $this->Cell(0, 10,  number_format($remainingPayment, 2), 0, 1, 'R');
 
 // Define the width of the line
