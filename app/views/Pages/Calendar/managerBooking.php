@@ -110,7 +110,7 @@ function time_slot($duration, $cleanup, $start, $end)
     <!-- Sidebar -->
     <div class="content-container">
     <?php
-    $role = "Manager";
+    $role = $_SESSION['user_role'];
     require APPROOT . '/views/Pages/Dashboard/header.php';
     require APPROOT . '/views/Components/Side Bars/sideBar.php';
     ?>
