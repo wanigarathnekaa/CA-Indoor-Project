@@ -121,19 +121,19 @@
                         </li>
                 <?php } else if ($role == "Cashier") { ?>
                             <li class="nav-link">
-                                <a href="#">
+                                <a href="<?php echo URLROOT; ?>/Pages/Dashboard/cashier">
                                     <i class="bx bx-home-alt icon"></i>
                                     <span class="text nav-text">Dashboard</span>
                                 </a>
                             </li>
                             <li class="nav-link">
-                                <a href="#">
+                                <a href="<?php echo URLROOT; ?>/Pages/Schedule/cashier">
                                     <i class="bx bxs-calendar icon"></i>
                                     <span class="text nav-text">Schedule</span>
                                 </a>
                             </li>
                             <li class="nav-link">
-                                <a href="#">
+                                <a href="<?php echo URLROOT; ?>/Pages/View_Advertisement/cashier">
                                     <i class="fa-brands fa-adversal icon"></i>
                                     <span class="text nav-text">Advertisement</span>
                                 </a>
