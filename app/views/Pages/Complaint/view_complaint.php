@@ -23,7 +23,7 @@
             <div class="image-content">
               <span class="overlay"></span>
               <div class="card-image">
-                    <img src="<?php echo '<img class="profile-image" src="'.URLROOT.'/public/profilepic/avatar.jpg">';?>" class="card-img" alt="" />
+              <img class="profile-image card-img" src="<?= URLROOT ?>/public/profilepic/avatar.jpg" style="max-width: 100%; max-height: 100%;" alt="" />
               </div>
             </div>
             <div class="card-content">
