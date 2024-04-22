@@ -246,6 +246,34 @@ class Bookings extends Controller
 
 
     }
+    public function sendingInvoice()
+    {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $reservationID = trim($_POST['id']);
+            
+            $reservation = $this->bookingModel->GetReservInfo($reservationID);
+            $invoice_name = $this->bookingModel->sendEmail($reservation);
+            if ($this->bookingModel->sendingemail($invoice_name, $reservation)) {
+                $response = [
+                    'status' => 'success',
+                ];
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Something went wrong',
+                ];
+            }
+    
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+
+
+
+
+
+    }
 
     public function delete()
     {
