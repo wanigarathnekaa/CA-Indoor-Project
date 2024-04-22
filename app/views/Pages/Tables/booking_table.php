@@ -2,304 +2,333 @@
 <html lang="en">
 
 <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/Reservation_Table.css">
-      <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_reservation.css">
-      <title>Reservation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/Reservation_Table.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_reservation.css">
+    <title>Reservation</title>
 </head>
 
 <body>
-      <!-- Sidebar -->
-      <?php
-      $role = $_SESSION['user_role'];
-      require APPROOT . '/views/Pages/Dashboard/header.php';
-      require APPROOT . '/views/Components/Side Bars/sideBar.php';
-      ?>
+    <!-- Sidebar -->
+    <?php
+    $role = $_SESSION['user_role'];
+    require APPROOT . '/views/Pages/Dashboard/header.php';
+    require APPROOT . '/views/Components/Side Bars/sideBar.php';
+    ?>
 
-      <!-- <?php print_r($data); ?> -->
+    <!-- <?php print_r($data); ?> -->
 
-      <!-- Content -->
-      <section class="home">
+    <!-- Content -->
+    <section class="home">
 
-            <!-- Table Topic -->
-            <div class="table-topic">
-                  <div class="topic-name">
-                        <h1>Reservations :
-                              <?php echo count($data); ?>
-                        </h1>
-                  </div>
+        <!-- Table Topic -->
+        <div class="table-topic">
+            <div class="topic-name">
+                <h1>Reservations :
+                    <?php echo count($data); ?>
+                </h1>
+            </div>
 
-                  <!-- <div class="add-btn">
+            <!-- <div class="add-btn">
                         <a href="#"><i class="fa-solid fa-calendar-plus icon"></i></i></a>
                   </div> -->
-            </div>
+        </div>
 
-            <!-- Table Sort -->
-            <div class="tableSort">
-                  <div class="sort">
-                        <label for="payfilter">Status :</label>
-                        <select name="filter" id="payfilter">
-                              <option value="All">All</option>
-                              <option value="Pending">Pending</option>
-                              <option value="Paid">Paid</option>
-                              <option value="Not Paid">Not Paid</option>
-                        </select>
-                  </div>
-                  <div class="sort">
-                        <label for="netfilter">Net :</label>
-                        <select name="filter" id="netfilter">
-                              <option value="All">All</option>
-                              <option value="Normal Net A">Normal Net A</option>
-                              <option value="Normal Net B">Normal Net B</option>
-                              <option value="Machine Net">Machine Net</option>
-                        </select>
-                  </div>
-                  <div class="sort">
-                        <label>Date :</label>
-                        <input type="date" id="date" name="date">
-                  </div>
-                  <div class="search">
-                        <label>
-                              <input type="text" placeholder="Search here" id="searchInput">
-                              <i class="fa-solid fa-magnifying-glass icon"></i>
-                        </label>
-                  </div>
+        <!-- Table Sort -->
+        <div class="tableSort">
+            <div class="sort">
+                <label for="payfilter">Status :</label>
+                <select name="filter" id="payfilter">
+                    <option value="All">All</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Paid">Paid</option>
+                    <option value="Not Paid">Not Paid</option>
+                </select>
             </div>
+            <div class="sort">
+                <label>Date :</label>
+                <input type="date" id="date" name="date">
+            </div>
+            <div class="search">
+                <label>
+                    <input type="text" placeholder="Search here" id="searchInput">
+                    <i class="fa-solid fa-magnifying-glass icon"></i>
+                </label>
+            </div>
+        </div>
 
-            <!-- Table -->
-            <div class="table-container">
-                  <table id=reservationTable>
-                        <!-- table header -->
+        <!-- Table -->
+        <div class="table-container">
+            <table id=reservationTable>
+                <!-- table header -->
+                <thead>
+                    <tr>
+                        <td>Reservation ID</td>
+                        <td>Customer</td>
+                        <td>Customer Email</td>
+                        <td>Phone Number</td>
+                        <td>Date</td>
+                        <td>Booking Price</td>
+                        <td>Paid Price</td>
+                        <td>Status</td>
+                    </tr>
+                </thead>
+
+                <!-- table body -->
+                <tbody>
+                    <?php
+                    foreach ($data as $reservation) {
+                        $status_color = '';
+                        if ($reservation->paymentStatus == 'Paid') {
+                            $status_color = '#00ff00';
+                        } elseif ($reservation->paymentStatus == 'Pending') {
+                            $status_color = '#ffcc00';
+                        } else {
+                            $status_color = '#ff0000';
+                        }
+                        ?>
+                        <tr>
+                            <td>
+                                <?php echo $reservation->id; ?>
+                            </td>
+                            <td>
+                                <?php echo $reservation->name; ?>
+                            </td>
+                            <td>
+                                <?php echo $reservation->email; ?>
+                            </td>
+                            <td>
+                                <?php echo $reservation->phoneNumber; ?>
+                            </td>
+                            <td>
+                                <?php echo $reservation->date; ?>
+                            </td>
+                            <td>
+                                <?php echo $reservation->bookingPrice; ?>
+                            </td>
+                            <td>
+                                <?php echo $reservation->paidPrice; ?>
+                            </td>
+                            <td><span class="status"
+                                    style="background-color: <?php echo $status_color; ?>;"><?php echo $reservation->paymentStatus ?></span>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Popup message -->
+        <div id="reservationModal" class="modal">
+            <div class="modal-content">
+                <div class="title">
+                    <h2 class="modal-title">Reservation Details</h2>
+                </div>
+                <hr>
+
+                <div class="customerDetails">
+                    <h3>Customer Details</h3>
+                    <div>
+                        <span id="name" class="name"></span><br>
+                        <span id="email" class="email"></span><br>
+                        <span id="phone" class="phone"></span><br>
+                    </div>
+                </div>
+
+                <div class="orderItems">
+                    <h3>Reserved Time Slots</h3>
+                    <table id="timeSlotTable">
                         <thead>
-                              <tr>
-                                    <th>Reservation ID</th>
-                                    <th>Customer Name</th>
-                                    <th>email</th>
-                                    <th>Contact Number</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Net</th>
-                                    <th>Status</th>
-                                    <th></th>
-                                    <th></th>
-                              </tr>
+                            <tr>
+                                <th>Normal Net A</th>
+                                <th>Normal Net B</th>
+                                <th>Machine Net</th>
+                            </tr>
                         </thead>
-
-                        <!-- table body -->
-                        <tbody>
-                              <?php foreach ($data as $reservation): 
-                                    $status_color = '';
-                                    if ($reservation->paymentStatus == 'Paid') {
-                                          $status_color = '#00ff00';
-                                    } else if ($reservation->paymentStatus == 'Pending') {
-                                          $status_color = '#ffcc00';
-                                    } else {
-                                          $status_color = '#ff0000';
-                                    }
-                                    ?>
-                                    <tr>
-                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
-                                                <?php echo $reservation->id; ?>
-                                          </td>
-                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
-                                                <?php echo $reservation->name; ?>
-                                          </td>
-                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
-                                                <?php echo $reservation->email; ?>
-                                          </td>
-                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
-                                                <?php echo $reservation->phoneNumber; ?>
-                                          </td>
-                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
-                                                <?php echo $reservation->date; ?>
-                                          </td>
-                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
-                                                <?php echo $reservation->timeSlot; ?>
-                                          </td>
-                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
-                                                <?php echo $reservation->netType; ?>
-                                          </td>
-                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
-                                                <span class="status" style="background-color: <?php echo $status_color; ?>;"><?php echo $reservation->paymentStatus ?></span>
-                                          </td>
-                                          <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
-                                                <!-- <i class="fa-solid fa-user-slash delete icon"></i> -->
-                                                <i class="fa-solid fa-trash-can delete icon"></i>
-                                          </td>
-                                    </tr>
-                                    <?php
-                              endforeach; ?>
+                        <tbody id="timeSlots">
+                            <!-- Order items will be appended here -->
                         </tbody>
-                  </table>
+                    </table>
+                </div>
+
+                <div class="paymentDetails">
+                    <h3>Payment Details</h3>
+                    <span id="PaymentStatus" class="PaymentStatus"></span>
+                    <span id="PaidAmount" class="PaidAmount"></span>
+                    <span id="BookingPrice" class="BookingPrice"></span>
+                    <span id="PaymentToBeMade" class="PaymentToBeMade"></span>
+                    <span id="paidMsj" class="paidMsj" style="color: red;"></span>
+                </div>
+
+                <hr>
+
+                <div class="btn">
+                    <input type="hidden" id="form_type" name="form_type">
+                    <button type="button" id="paid">Pay</button>
+                    <button type="button" onclick="closeModal()">close</button>
+                </div>
             </div>
+        </div>
 
+        </div>
 
-            <!-- popup -->
-            <div class="popupcontainer" id="popupcontainer">
-                  <!-- details popup -->
-                  <div class="popup" id="popup">
-                        <span class="close" onclick="closePopup()"><i class="fa-solid fa-xmark"></i></span>
-                        <h2>Reservation</h2>
-                        <hr>
-                        <div class="popupdetails">
-                              <div class="popupdetail">
-                                    <h2><b>Reservation ID : </b><span class="r_id"></span></h2>
-                              </div>
+    </section>
 
-                              <div class="popupdetail">
-                                    <h2><b>Customer Name : </b><span class="r_name"></span></h2>
-                              </div>
+    <!-- javascript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        var modal = document.getElementById("reservationModal");
+        function closeModal() {
+            modal.style.display = "none";
+            location.reload();
+        }
 
-                              <div class="popupdetail">
-                                    <h2><b>Customer Email : </b><span class="r_email"></span></h2>
-                              </div>
+        $(document).ready(function () {
 
-                              <div class="popupdetail">
-                                    <h2><b>Customer Contact Number : </b><span class="r_number"></span></h2>
-                              </div>
+            $("#payfilter").on("change", function () {
+                selectedValue = $(this).val();
+                // alert(selectedValue);
+                if (selectedValue != "All") {
+                    $("table tbody tr").filter(function () {
+                        $(this).toggle($(this).text().indexOf(selectedValue) > -1);
+                    });
+                } else {
+                    $("table tbody tr").show();
+                }
 
-                              <div class="popupdetail">
-                                    <h2><b>Reservation Date : </b><span class="r_date"></span></h2>
-                              </div>
-
-                              <div class="popupdetail">
-                                    <h2><b>Reservation Time : </b><span class="r_time"></span></h2>
-                              </div>
-
-                              <div class="popupdetail">
-                                    <h2><b>Net : </b><span class="r_net"></span></h2>
-                              </div>
-
-                              <div class="popupdetail">
-                                    <h2><b>Status : </b> <span class="r_payment"></span></h2>
-                              </div>
-                        </div>
-                        <div class="btns">
-                              <button type="button" onclick="openReschedulePopup()">Reschedule</button>
-                              <button type="button" onclick="openCancelPopup()">Cancel</button>
-                        </div>
-                  </div>
-
-                  <!-- Popup message for rescheduling -->
-                  <div class="reschedulePopup" id="reschedulePopup">
-                        <span class="close" onclick="closeReschedulePopup()"><i class="fa-solid fa-xmark"></i></span>
-                        <h2>Reschedule Reservation</h2>
-                        <hr>
-                        <div class="rescheduleDetails">
-                              <h4>Are You Sure You Want To Reschedule?</h4>
-                              <h4 class="day">Time For Reservation - <span class="r_timeSlot_r"
-                                          style="font-weight: bold;"></span></h4>
-                        </div>
-
-                        <div class="btns" id="rescheduleButtons">
-                              <button type="button" class="yesButton" onclick="confirmReschedule()">Yes</button>
-                              <button type="button" class="noButton" onclick="closeReschedulePopup()">No</button>
-                        </div>
-                  </div>
-
-                  <!-- Popup message for Cancellation -->
-                  <div class="reschedulePopup" id="cancelPopup">
-                        <span class="close" onclick="closeCancelPopup()"><i class="fa-solid fa-xmark"></i></span>
-                        <h2>Cancel Reservation</h2>
-                        <hr>
-                        <div class="CancelDetails">
-                              <h4>Are You Sure You Want To Cancel The Reservation?</h4>
-                              <h4 class="day">Time For Your Reservation - <span class="cancel_timeSlot"
-                                          style="font-weight: bold;"></span></h4>
-                              <span class="cancel_bookingId" style="font-weight:bold"></span>
-                        </div>
-
-                        <div class="btns" id="cancelButtons">
-                              <button type="button" class="cyesButton" id="cancelReservation">Yes</button>
-                              <button type="button" class="cnoButton" onclick="closeCancelPopup()">No</button>
-                        </div>
-                  </div>
-
-
-                  <!-- delete message -->
-                  <div class="deletepopup" id=deletepopup>
-                        <span class="close" onclick="closeDeletePopup()"><i class="fa-solid fa-xmark"></i></span>
-                        <h2>confirm delete</h2>
-                        <form action="<?php echo URLROOT; ?>/Bookings/delete" method="POST">
-                              <div class="btns">
-                                    <button type="submit">Delete</button>
-                                    <button type="button" onclick="closeDeletePopup()">Cancel</button>
-                              </div>
-                              <input hidden name='submit' id="hid_input">
-                        </form>
-                  </div>
-            </div>
-
-      </section>
-
-      <!-- javascript -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-      <script src="<?php echo URLROOT; ?>/js/reservationDetails_Popup.js"></script>
-      <script src="<?php echo URLROOT; ?>/js/reservation_Table.js"></script>
-      <script>
-            $(document).ready(function () {
-                  $("#netfilter").on("change", function () {
-                        selectedValue = $(this).val();
-                        // alert(selectedValue);
-                        if (selectedValue != "All") {
-                              $("table tbody tr").filter(function () {
-                                    $(this).toggle($(this).text().indexOf(selectedValue) > -1);
-                              });
-                        } else {
-                              $("table tbody tr").show();
-                        }
-
-                  });
-
-                  $("#payfilter").on("change", function () {
-                        selectedValue = $(this).val();
-                        // alert(selectedValue);
-                        if (selectedValue != "All") {
-                              $("table tbody tr").filter(function () {
-                                    $(this).toggle($(this).text().indexOf(selectedValue) > -1);
-                              });
-                        } else {
-                              $("table tbody tr").show();
-                        }
-
-                  });
-
-                  $("#date").on("change", function () {
-                        selectedValue = $(this).val();
-                        if (selectedValue != "All") {
-                              $("table tbody tr").filter(function () {
-                                    $(this).toggle($(this).text().indexOf(selectedValue) > -1);
-                              });
-                        } else {
-                              $("table tbody tr").show();
-                        }
-
-                  });
-                  $("#searchInput").on("keyup", function () {
-                        var value = $(this).val();
-                        $("table tbody tr").filter(function () {
-                              $(this).toggle($(this).text().indexOf(value) > -1);
-                        });
-                  });
-                  $("#cancelReservation").on("click", function () {
-                        var bookingId = $(".cancel_bookingId").text();
-                        $.ajax({
-                              type: "POST",
-                              url: "<?php echo URLROOT; ?>/Bookings/cancelReservation",
-                              data: {
-                                    bookingId: bookingId
-                              },
-                              success: function (response) {
-                                    if (response.status == "success") {
-                                          alert("Reservation Cancelled Successfully");
-                                          location.reload();
-                                    } else {
-                                          alert("Failed to Cancel the Reservation");
-                                    }
-                              }
-                        });
-                  });
             });
-      </script>
+
+            $("#date").on("change", function () {
+                selectedValue = $(this).val();
+                if (selectedValue != "All") {
+                    $("table tbody tr").filter(function () {
+                        $(this).toggle($(this).text().indexOf(selectedValue) > -1);
+                    });
+                } else {
+                    $("table tbody tr").show();
+                }
+
+            });
+            $("#searchInput").on("keyup", function () {
+                var value = $(this).val();
+                $("table tbody tr").filter(function () {
+                    $(this).toggle($(this).text().indexOf(value) > -1);
+                });
+            });
+
+            var payment_status = "";
+            var id_reserve = "";
+
+            $('#reservationTable tbody tr').click(function () {
+                console.log("clicked");
+                var id = $(this).find('td').eq(0).text();
+                id_reserve = id;
+                $("#reservationModal").css("display", "block");
+                console.log(id);
+                $.ajax({
+                    url: "<?php echo URLROOT; ?>/Bookings/getReservationDetails",
+                    type: "POST",
+                    data: {
+                        id: id
+                    },
+                    success: function (response) {
+                        console.log(response);
+
+                        // Assuming the response is an array and you want to use the first item
+                        var data = response[0];
+
+                        $(".name").text("Name: " + data.name);
+                        $(".email").text("Email: " + data.email);
+                        $(".phone").text("Phone: " + data.phoneNumber);
+                        $(".PaymentStatus").text("Payment Status: " + data.paymentStatus);
+                        $(".PaidAmount").text("Paid Amount: " + data.paidPrice);
+                        $(".BookingPrice").text("Booking Price: " + data.bookingPrice);
+                        $(".PaymentToBeMade").text("Payment To Be Made: " + (data.bookingPrice - data.paidPrice));
+                        payment_status = data.paymentStatus;
+                        console.log(data.date);
+
+                        if (new Date(data.date) < new Date().setHours(0, 0, 0, 0)) {
+                            $("#paid").css("color", "black");
+                            $(".paidMsj").text("Panelty for late payment should be collected.");
+                        } else {
+                            $("#paid").css("color", "white");
+                            $("#paid").prop("disabled", false);
+                        }
+
+
+                        var timeSlots = data.timeSlots;
+                        var timeSlotTable = $("#timeSlotTable tbody");
+                        timeSlotTable.empty();
+
+                        var netATimeSlots = [];
+                        var netBTimeSlots = [];
+                        var machineTimeSlots = [];
+
+                        // Separate time slots based on netType
+                        for (var i = 0; i < response.length; i++) {
+                            var netType = response[i].netType;
+                            var timeSlot = response[i].timeSlot;
+
+                            if (netType === 'Normal Net A') {
+                                netATimeSlots.push(timeSlot);
+                            } else if (netType === 'Normal Net B') {
+                                netBTimeSlots.push(timeSlot);
+                            } else if (netType === 'Machine Net') {
+                                machineTimeSlots.push(timeSlot);
+                            }
+                        }
+
+                        // Determine the maximum length among the time slot arrays
+                        var maxLength = Math.max(netATimeSlots.length, netBTimeSlots.length, machineTimeSlots.length);
+
+                        // Build the table rows column-wise
+                        for (var i = 0; i < maxLength; i++) {
+                            var netATime = i < netATimeSlots.length ? netATimeSlots[i] : '';
+                            var netBTime = i < netBTimeSlots.length ? netBTimeSlots[i] : '';
+                            var machineTime = i < machineTimeSlots.length ? machineTimeSlots[i] : '';
+
+                            var row = "<tr>" +
+                                "<td>" + netATime + "</td>" +
+                                "<td>" + netBTime + "</td>" +
+                                "<td>" + machineTime + "</td>" +
+                                "</tr>";
+
+                            timeSlotTable.append(row);
+                        }
+                    }
+
+                });
+            });
+
+            $("#paid").click(function () {
+                var id = id_reserve;
+                console.log(id);
+                console.log(payment_status);
+                if (payment_status == "Paid") {
+                    $(".paidMsj").text("Payment has already been made");
+                    return;
+                }
+
+                $.ajax({
+                    url: "<?php echo URLROOT; ?>/Bookings/updateReservation",
+                    type: "POST",
+                    data: {
+                        id: id
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        if (response.status == "success") {
+                            alert("Payment successful");
+                            closeModal();
+                        } else {
+                            alert("Payment failed");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
