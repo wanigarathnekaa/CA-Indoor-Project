@@ -251,6 +251,12 @@ class Pages extends Controller
         $bookings = $this->pagesModel->getBookings();
         $this->view('Pages/Tables/booking_table', $bookings);
     }
+
+    public function orderTable($name)
+    {
+        $order = $this->pagesModel->getOrder();
+        $this->view('Pages/Tables/orders_table', $order);
+    }
     public function AccountLogTable()
     {
         $logs = $this->pagesModel->getAccLog();
@@ -266,6 +272,8 @@ class Pages extends Controller
     {
         $bookings = $this->pagesModel->getReservations();
         $coaches = $this->pagesModel->getCoachCount();
+        $bookingCount = count($this->pagesModel->getBookings());
+        $orderCount = count($this->pagesModel->getOrder());
         $users = $this->pagesModel->getUserCount();
         $coach = $this->pagesModel->getCoaches();
         $advertisement = $this->pagesModel->getAdvertisement();
@@ -278,6 +286,8 @@ class Pages extends Controller
         $data = [
             'CoachCount' => $coaches,
             'UserCount' => $users - $coaches,
+            'bookingCount' => $bookingCount,
+            'orderCount' => $orderCount,
             'coach' => $coach,
             'Reserve_Count' => count($bookings),
             'advertCount' => count($advertisement),

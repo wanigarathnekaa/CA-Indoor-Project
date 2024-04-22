@@ -192,14 +192,18 @@
                 selectedValue = $(this).val();
                 // alert(selectedValue);
                 if (selectedValue != "All") {
-                    $("table tbody tr").filter(function () {
-                        $(this).toggle($(this).text().indexOf(selectedValue) > -1);
-                    });
+                    $("table tbody tr").hide().filter(function () {
+                        if (selectedValue === "Not Paid") {
+                            return $(this).text().indexOf(selectedValue) > -1 && $(this).text().indexOf("NOT Paid") === -1;
+                        } else {
+                            return $(this).text().indexOf(selectedValue) > -1;
+                        }
+                    }).show();
                 } else {
                     $("table tbody tr").show();
                 }
-
             });
+
 
             $("#date").on("change", function () {
                 selectedValue = $(this).val();
