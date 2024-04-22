@@ -324,9 +324,16 @@ class Order extends Controller
             $order = $this->orderModel->getOrder($order_id);
             $orderItems = $this->orderModel->getOrderItems($order_id);
 
+            $products = [];
+            foreach ($orderItems as $item) {
+                $product = $this->orderModel->getProduct($item->product_id);
+                $products[] = $product;
+            }
+
             $response = [
                 'order' => $order,
-                'orderItems' => $orderItems
+                'orderItems' => $orderItems,
+                'products' => $products
             ];
 
             header('Content-Type: application/json');

@@ -52,6 +52,7 @@ include_once APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                   <table id="orderItemsTable">
                         <thead>
                               <tr>
+                                    <th>Product</th>
                                     <th>Product Name</th>
                                     <th>Quantity</th>
                                     <th>Price</th>
@@ -74,7 +75,7 @@ include_once APPROOT . '/views/Pages/CricketShop/crickFooter.php';
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <script src="<?php echo URLROOT; ?>/js/orders.js"></script>
 <script>
     $(document).ready(function () {
@@ -100,20 +101,24 @@ include_once APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                         success : function (response) {
                               console.log(response);
                               var orderItems = response.orderItems;
+                              var products =response.products;
+                              
 
                               var itemsTable = $('#orderItemsTable tbody');
                               itemsTable.empty();
 
                               for (var i = 0; i < orderItems.length; i++) {
                                     var item = orderItems[i];
+                                    var product = products[i];
                                     var row = '<tr>';
-                                    row += '<td>' + item.product_id + '</td>';
+                                    row += '<td><img width="120px" height="100px" src="<?= URLROOT ?>/CricketShop/'+ product.product_thumbnail +'">'+'</td>';                                 
+                                    row += '<td>' + product.product_title + '</td>';
                                     row += '<td>' + item.quantity + '</td>';
                                     row += '<td>' + item.price_per_unit + '</td>';
                                     row += '</tr>';
                                     $('#items').append(row);
                               }
-                              $("#items").html(itemsText);
+                              // $("#items").html(itemsText);
                         }
                   });
             });
