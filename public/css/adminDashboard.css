@@ -1,2 +1,7 @@
 @import url(./dashboardCard.css);
 @import url(./sideBar.css);
+
+
+.spacer {
+    height: 40px; /* Adjust the height as needed */
+}
