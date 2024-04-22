@@ -123,6 +123,7 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
                 <span id="PaidAmount" class="PaidAmount"></span>
                 <span id="BookingPrice" class="BookingPrice"></span>
                 <span id="PaymentToBeMade" class="PaymentToBeMade"></span>
+                <span id="paidMsj" class="paidMsj" style="color: red;"></span>
             </div>
 
             <hr>
@@ -143,6 +144,8 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
             modal.style.display = "none";
             location.reload();
         }
+        var payment_status = "";
+        var id_reserve = "";
 
         $(document).ready(function () {
             $("#liveSearch").on("change", function () {
@@ -159,6 +162,7 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
             $('tbody tr').click(function () {
                 console.log("clicked");
                 var id = $(this).find('td').eq(0).text();
+                id_reserve = id;
                 $("#reservationModal").css("display", "block");
                 console.log(id);
                 $.ajax({
@@ -180,6 +184,7 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
                         $(".PaidAmount").text("Paid Amount: " + data.paidPrice);
                         $(".BookingPrice").text("Booking Price: " + data.bookingPrice);
                         $(".PaymentToBeMade").text("Payment To Be Made: " + (data.bookingPrice - data.paidPrice));
+                        payment_status = data.paymentStatus;
 
                         var timeSlots = data.timeSlots;
                         var timeSlotTable = $("#timeSlotTable tbody");
@@ -226,9 +231,13 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
             });
 
             $("#paid").click(function () {
-                console.log("Paid");
-                var id = $("table tbody tr").find('td').eq(0).text();
+                var id = id_reserve;
                 console.log(id);
+                console.log(payment_status);
+                if (payment_status == "Paid") {
+                    $(".paidMsj").text("Payment has already been made");
+                    return;
+                }
 
                 $.ajax({
                     url: "<?php echo URLROOT; ?>/Bookings/updateReservation",
