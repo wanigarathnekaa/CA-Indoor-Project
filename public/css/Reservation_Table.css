@@ -1,384 +1,461 @@
-
 :root {
-      --color01: #2e8a99;
-      --color02: #4F9DA9;
-      --color03: #A7D8D7;
-      --color04: #EAF3F4;
-      --white: #fff;
-      --gray: #f5f5f5;
-      --black1: #222;
-      --black2: #000000;
+  --color01: #2e8a99;
+  --color02: #4f9da9;
+  --color03: #a7d8d7;
+  --color04: #eaf3f4;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #000000;
 }
 
 /* margin 30px */
 
 /* ........................................................................................................... */
-.table-topic{
-      margin: 30px;
-      display: flex;
-      justify-content: space-between;
-      /* background-color: #373ae0; */
+.table-topic {
+  margin: 30px;
+  display: flex;
+  justify-content: space-between;
+  /* background-color: #373ae0; */
 }
 
-.table-topic .topic-name h1{
-      font-size: 25px;
+.table-topic .topic-name h1 {
+  font-size: 25px;
 }
 
-.table-topic .add-btn{
-      display: flex;
-      align-items: center;
-      background: #2e8a99;
-      padding: 5px 10px;
-      border-radius: 40px;
+.table-topic .add-btn {
+  display: flex;
+  align-items: center;
+  background: #2e8a99;
+  padding: 5px 10px;
+  border-radius: 40px;
 }
 
-.table-topic .add-btn:hover{
-      background: #4F9DA9;
-      cursor: pointer;
+.table-topic .add-btn:hover {
+  background: #4f9da9;
+  cursor: pointer;
 }
 
-.table-topic .add-btn .icon{
-      color: #000000;
-      font-size: large;
+.table-topic .add-btn .icon {
+  color: #000000;
+  font-size: large;
 }
 
-.table-topic .add-btn .icon:hover{
-      color: #ffffff;
+.table-topic .add-btn .icon:hover {
+  color: #ffffff;
 }
 
-.table-topic .add-btn a{
-      text-decoration: none;
-      /* color: var(--black1); */
+.table-topic .add-btn a {
+  text-decoration: none;
+  /* color: var(--black1); */
+}
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  overflow-y: auto;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
+.modal-content {
+  max-width: 700px;
+  width: 500px;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 15px;
+  margin: 5% auto;
+  border: 1px solid #888;
+  box-sizing: border-box;
+  z-index: 1000;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
 
+.modal-content .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
 
+.modal-content .title {
+  font-size: 20px;
+  /* font-weight: 800; */
+  margin-bottom: 5px;
+  color: var(--color01);
+}
+
+.modal-content .customerDetails,
+.modal-content .orderItems,
+.modal-content .paymentDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  /* justify-content: center; */
+  align-items: left;
+  margin-bottom: 10px;
+}
+
+.modal-content .customerDetails h3,
+.modal-content .orderItems h3,
+.modal-content .paymentDetails h3 {
+  font-size: 18px;
+  font-weight: 500;
+  /* margin-bottom: 5px; */
+  color: var(--color01);
+  /* text-decoration: underline var(--color01); */
+}
+
+.modal-content .orderStatus button {
+  background-color: var(--color02);
+  color: var(--white);
+  border: none;
+  padding: 2px;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 25%;
+}
+
+.modal-content .orderStatus button:hover {
+  background-color: var(--color01);
+}
+
+.modal-content .btn {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.modal-content .btn button {
+  background-color: var(--color01);
+  color: var(--white);
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 25%;
+  margin-top: 10px;
+}
+
+.modal-content .btn button:hover {
+  background-color: var(--color02);
+}
+
+.modal-content .close:hover,
+.modal-content .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 /* Table Sort..................................................................... */
 .tableSort {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      margin: 30px; /* Adjust margin as needed */
-      box-shadow: 0 7px 25px rgba(0, 0, 0, 0.112);
-      border-radius: 15px;
-      background-color: #2e8b9948;
-      padding: 10px 20px 10px 20px;
-      gap: 10px;
-    }
-    
-    .sort {
-      display: flex;
-      align-items: center;
-      /* margin-bottom: 10px; */
-    }
-    
-    .sort label {
-      margin-right: 10px;
-      font-weight: bold;
-      font-size: 12px;
-      width: 45px;
-
-    }
-    
-    .sort select,
-    .sort input {
-      /* padding: 8px; */
-      border: 1px solid #ccc;
-      border-radius: 40px;
-      font-size: 12px; 
-      padding: 5px 20px;
-      border: 1px solid var(--black2);
-    }
-    
-    .sort input {
-      width: 200px; 
-    }
-    
-    .sort select {
-      width: 200px;
-    }
-    
-    .sort select:hover,
-    .sort input:hover,
-    .sort select:focus,
-    .sort input:focus {
-      border-color: #333;
-    }
-    
-    .tableSort .search {
-      display: flex;
-      align-items: center;
-      position: relative;
-      width: 300px;
-      /* margin: 0 10px; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px; /* Adjust margin as needed */
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.112);
+  border-radius: 15px;
+  background-color: #2e8b9948;
+  padding: 10px 20px 10px 20px;
+  gap: 10px;
 }
-    
+
+.sort {
+  display: flex;
+  align-items: center;
+  /* margin-bottom: 10px; */
+}
+
+.sort label {
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 12px;
+  width: 45px;
+}
+
+.sort select,
+.sort input {
+  /* padding: 8px; */
+  border: 1px solid #ccc;
+  border-radius: 40px;
+  font-size: 12px;
+  padding: 5px 20px;
+  border: 1px solid var(--black2);
+}
+
+.sort input {
+  width: 200px;
+}
+
+.sort select {
+  width: 200px;
+}
+
+.sort select:hover,
+.sort input:hover,
+.sort select:focus,
+.sort input:focus {
+  border-color: #333;
+}
+
+.tableSort .search {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 300px;
+  /* margin: 0 10px; */
+}
+
 .tableSort .search label {
-      display: flex;
-      align-items: center;
-      position: relative;
-      width: 100%;
-
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
 }
-    
+
 .tableSort .search label input {
-      width: 100%;
-      /* height: 30px; */
-      border-radius: 40px;
-      padding: 5px 20px;
-      padding-left: 35px;
-      font-size: 12px;
-      outline: none;
-      border: 1px solid var(--black2);
+  width: 100%;
+  /* height: 30px; */
+  border-radius: 40px;
+  padding: 5px 20px;
+  padding-left: 35px;
+  font-size: 12px;
+  outline: none;
+  border: 1px solid var(--black2);
 }
 
-.tableSort .search label input:focus{
-      border: 2px solid #000000;
+.tableSort .search label input:focus {
+  border: 2px solid #000000;
 }
-    
+
 .tableSort .search label .icon {
-      position: absolute;
-      /* top: 5px; */
-      left: 10px;
-      font-size: 0.8rem;
+  position: absolute;
+  /* top: 5px; */
+  left: 10px;
+  font-size: 0.8rem;
 }
-
-
-
-
-
-
 
 /*  table  ..................................................................... */
 .table-container {
-      /* width: 100%; */
-      position: relative;
-      display: block;
-      /* overflow-y: scroll; */
-      /* height: 100%;   */
-      /* border-radius: 12px; */
-      /* background-color: #A7D8D7; */
-      align-items: center;
-      justify-content: center;
-      /* background-color: #A7D8D7; */
-      /* width: 94%; */
-      margin: 30px;
+  /* width: 100%; */
+  position: relative;
+  display: block;
+  /* overflow-y: scroll; */
+  /* height: 100%;   */
+  /* border-radius: 12px; */
+  /* background-color: #A7D8D7; */
+  align-items: center;
+  justify-content: center;
+  /* background-color: #A7D8D7; */
+  /* width: 94%; */
+  margin: 30px;
 }
 
 table {
-      width: 100%;
-      display: table;
-      border-collapse: collapse;
-      /* margin-top: 10px; */
-      margin-bottom: 10px;
-      /* padding-bottom: 20px; */
-      overflow-y: scroll;
-      min-width: 80%;
+  width: 100%;
+  display: table;
+  border-collapse: collapse;
+  /* margin-top: 10px; */
+  margin-bottom: 10px;
+  /* padding-bottom: 20px; */
+  overflow-y: scroll;
+  min-width: 80%;
 }
 
 table thead {
-      display: table-header-group;
-      vertical-align: middle;
-      border-color: inherit;
-      background-color: var(--color02);
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: inherit;
+  background-color: var(--color02);
 }
 
 table thead th {
-      font-weight: 600;
-      font-size: 14px;
-      text-align: left;
-
+  font-weight: 600;
+  font-size: 14px;
+  text-align: left;
 }
 
 table tr {
-      color: var(--black1);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  color: var(--black1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
-table tbody td{
-      font-size: 14px;
-      padding-top: 5px;
-      padding-bottom: 15px;
-      text-align: left;
+table tbody td {
+  font-size: 14px;
+  padding-top: 5px;
+  padding-bottom: 15px;
+  text-align: left;
 }
 
 table tbody tr:hover {
-      background: var(--color03);
-      color: var(--black1); 
+  background: var(--color03);
+  color: var(--black1);
 }
 table tr td,
 table tr th {
-      padding: 10px;
+  padding: 10px;
 }
 
-
-tbody a{
-      text-decoration: none;
-      /* color: var(--black1); */
-
+tbody a {
+  text-decoration: none;
+  /* color: var(--black1); */
 }
 
 tbody td .icon {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      /* padding-left: 10px;      */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding-left: 10px;      */
 }
 
-tbody .edit{
-      color:#373ae0;;
+tbody .edit {
+  color: #373ae0;
 }
 
-tbody .delete{
-      color:#e03737;
+tbody .delete {
+  color: #e03737;
 }
 
-
-.status{
-      padding: 5px 10px;
-      border-radius: 40px;
-      font-size: 12px;
-      font-weight: bold;
-      text-align: center;
+.status {
+  padding: 5px 10px;
+  border-radius: 40px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
 }
-      
-
-
 
 /* responsive__________________________________________________________________________________________ */
 
 @media (max-width: 768px) {
+  /* margin: 10px; */
+  .table-topic {
+    margin: 10px;
+    /* width: 100%; */
+  }
 
-      /* margin: 10px; */
-      .table-topic{
-            margin: 10px;
-            /* width: 100%; */
-      }
+  .table-topic .topic-name h1 {
+    font-size: 20px;
+  }
 
-      .table-topic .topic-name h1{
-            font-size: 20px;
-      }
+  .tableSort .search {
+    width: 300px;
+  }
 
-      .tableSort .search {
-            width: 300px;
-      }
+  .tableSort {
+    margin: 10px;
+    align-items: stretch;
+    gap: 10px;
+  }
 
-      .tableSort{
-            margin: 10px;
-            align-items: stretch;
-            gap: 10px;
-      }
+  .sort label {
+    font-size: 12px;
+    width: 50px;
+    margin-right: 5px;
+  }
 
-      .sort label{
-            font-size: 12px;
-            width: 50px;
-            margin-right: 5px;
+  .table-container {
+    margin: 10px;
+    /* background-color: #000000; */
+  }
 
-      }
+  table {
+    width: 100%;
+    /* display: block; */
+  }
 
+  table thead th {
+    font-size: 12px;
+  }
 
-      .table-container{
-            margin: 10px;
-            /* background-color: #000000; */
-      }
-
-      table {
-            width: 100%;
-            /* display: block; */
-
-      }
-
-      table thead th {
-            font-size: 12px;
-      }
-
-      table tbody td{
-            font-size: 12px;
-      }
-
+  table tbody td {
+    font-size: 12px;
+  }
 }
 
+@media (max-width: 480px) {
+  /* margin: 10px; */
+  .table-topic {
+    margin: 5px;
+    justify-content: space-around;
+    /* width: 100%; */
+  }
+  .table-topic .topic-name h1 {
+    font-size: 18px;
+  }
 
+  .tableSort {
+    margin: 5px;
+    align-items: stretch;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
 
-@media (max-width:480px){
+  .tableSort .search {
+    width: 150px;
+  }
+  .sort label {
+    font-size: 8px;
+    width: 35px;
+    margin-right: 5px;
+  }
 
-      /* margin: 10px; */
-      .table-topic{
-            margin: 5px;
-            justify-content: space-around
-            /* width: 100%; */
-      }
-      .table-topic .topic-name h1{
-            font-size: 18px;
-      }
+  .tableSort .search label input {
+    font-size: 8px;
+    padding-left: 25px;
+  }
 
-      .tableSort{
-            margin: 5px;
-            align-items: stretch;
-            padding:10px;
-            margin-bottom: 20px;
-      }
+  .sort select,
+  .sort input {
+    width: 100px;
+    font-size: 8px;
+    padding: 5px 10px;
+  }
 
-      .tableSort .search{
-            width: 150px;
+  .table-topic .add-btn .icon {
+    font-size: small;
+  }
 
-      }
-      .sort label{
-            font-size: 8px;
-            width: 35px;
-            margin-right: 5px;
+  .table-container {
+    margin: 5px;
+  }
 
-      }
+  table thead th {
+    font-size: 10px;
+  }
 
+  table tbody td {
+    font-size: 10px;
+  }
 
-      .tableSort .search label input{
-            font-size: 8px;
-            padding-left: 25px;
-      }
-
-      .sort select,
-      .sort input{
-            width: 100px;
-            font-size: 8px;
-            padding: 5px 10px;
-      }
-
-      
-      .table-topic .add-btn .icon{
-      font-size: small;
-      }
-
-      .table-container{
-            margin: 5px;
-      }
-
-      table thead th {
-            font-size: 10px;
-      }
-
-      table tbody td{
-            font-size: 10px;
-      }
-
-      /* table tr th:nth-child(4), */
-      table tr th:nth-child(5),
+  /* table tr th:nth-child(4), */
+  table tr th:nth-child(5),
       table tr th:nth-child(6),
       /* table tr td:nth-child(4), */
       table tr td:nth-child(5),
-      table tr td:nth-child(6)
-      {
-            text-align: center;
-            background-color: red;
-            display: none;
-      }
-      .status.paid {
-            font-size: 10px;
-      }
-      .status.canceled {
-            font-size: 10px;
-      }
-      .status.confirmation {
-            font-size: 10px;
-      }
+      table tr td:nth-child(6) {
+    text-align: center;
+    background-color: red;
+    display: none;
+  }
+  .status.paid {
+    font-size: 10px;
+  }
+  .status.canceled {
+    font-size: 10px;
+  }
+  .status.confirmation {
+    font-size: 10px;
+  }
 }
