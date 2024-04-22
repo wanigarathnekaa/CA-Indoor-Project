@@ -1,3 +1,13 @@
+<?php
+
+$filter_date = date('Y-m-d'); 
+$new_data = array_filter($data['logs'], function ($item) use ($filter_date) {
+    $last_login_date = substr($item->last_login, 0, 10);     // get only the date 
+    return $last_login_date === $filter_date; 
+});
+
+?>
+
 <html>
 
 <head>
@@ -12,6 +22,10 @@
 
     <div class="recentOrders">
     <div class="cardHeader">
+        <!-- date -->
+        <h2>
+                <?php echo date('Y-m-d'); ?>
+            </h2>
     <h2>User Account Logs</h2>
     </div>
 
@@ -33,15 +47,24 @@
 
                 <!-- table body -->
                 <tbody>
-        <?php foreach ($data['logs'] as $log): ?>
-            <tr onclick="openPopupCoachSession(<?php echo htmlspecialchars(json_encode($log)); ?>)">
-                <td><?php echo $log->user_name; ?></td>
-                <td class="left-align"><?php echo $log->email; ?></td>
-                <td><?php echo date('Y-m-d', strtotime($log->create_date)); ?></td>
-                <td><?php echo $log->last_login; ?></td>
-                <td><?php echo $log->last_logout; ?></td>
-            </tr>
-        <?php endforeach; ?>
+            <?php if (empty($new_data)): ?>
+                <tr>
+                    <td colspan="5" style="text-align: center; color: red;" >No users logged in today.</td>
+                </tr>
+           <?php else: ?>
+           <?php foreach ($new_data as $log): ?>
+           <tr onclick="openPopupCoachSession(<?php echo htmlspecialchars(json_encode($log)); ?>)">
+            <td><?php echo $log->user_name; ?></td>
+            <td class="left-align"><?php echo $log->email; ?></td>
+            <td><?php echo date('Y-m-d', strtotime($log->create_date)); ?></td>
+            <td><?php echo date('H:i:s', strtotime($log->last_login)); ?></td>
+            <td><?php echo date('H:i:s', strtotime($log->last_logout)); ?></td>
+
+          </tr>
+          <?php endforeach; ?>
+          <?php endif; ?>
+          
+
     </tbody>
             </table>
         </div>

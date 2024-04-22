@@ -32,7 +32,7 @@
         
            <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/CompanyUserTable/user">
                 <div>
-                    <div class="numbers"><?php echo $data1["CompanyUserCount"]?></div>
+                    <div class="numbers"><?php echo $data["CompanyUserCount"]?></div>
                     <div class="cardName">Company Users</div>
                 </div>
                 <div class="iconBx">
@@ -41,7 +41,7 @@
             </a>
             <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/managerTable/user">
                 <div>
-                    <div class="numbers"><?php echo $data1["ManagerCount"]?></div>
+                    <div class="numbers"><?php echo $data["ManagerCount"]?></div>
                     <div class="cardName">Managers</div>
                 </div>
                 <div class="iconBx">
@@ -53,7 +53,7 @@
             <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/coachTable/user">
 
                 <div>
-                  <div class="numbers"><?php echo $data1["CoachCount"]?></div>
+                  <div class="numbers"><?php echo $data["CoachCount"]?></div>
 
                     <div class="cardName">Coaches</div>
                 </div>
@@ -64,7 +64,7 @@
 
             <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/playerTable/user">
                 <div>
-                    <div class="numbers"><?php echo $data1["UserCount"]?></div>
+                    <div class="numbers"><?php echo $data["UserCount"]?></div>
                     <div class="cardName">Players</div>
                 </div>
                 <div class="iconBx">
@@ -76,7 +76,7 @@
 
             <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/reservationTable/user">
                         <div>
-                              <div class="numbers"><?php echo $data1["Reserve_Count"]?></div>
+                              <div class="numbers"><?php echo $data["Reserve_Count"]?></div>
                               <div class="cardName">Reservations</div>
                         </div>
 
@@ -86,7 +86,7 @@
                   </a>
              <a class="card" href="C&A_Indoor_Project/Pages/View_Advertisement/admin">
                         <div>
-                              <div class="numbers"><?php echo $data1["advertCount"]?></div>
+                              <div class="numbers"><?php echo $data["advertCount"]?></div>
                               <div class="cardName">Advertisements</div>
 
                         </div>
