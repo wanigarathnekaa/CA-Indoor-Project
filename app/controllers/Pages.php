@@ -244,6 +244,12 @@ class Pages extends Controller
         $bookings = $this->pagesModel->getReservations();
         $this->view('Pages/Tables/reservations_Table', $bookings);
     }
+
+    public function bookingTable($name)
+    {
+        $bookings = $this->pagesModel->getBookings();
+        $this->view('Pages/Tables/booking_table', $bookings);
+    }
     public function AccountLogTable()
     {
         $logs = $this->pagesModel->getAccLog();

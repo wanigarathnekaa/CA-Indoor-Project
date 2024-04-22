@@ -49,7 +49,18 @@
                   <a class="card" href="C&A_Indoor_Project/Pages/reservationTable/cashier">
                         <div>
                               <div class="numbers"><?php echo $data1["Reserve_Count"]?></div>
-                              <div class="cardName">Reservations</div>
+                              <div class="cardName">Time Slot<br>Reservations</div>
+                        </div>
+
+                        <div class="iconBx">
+                              <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                  </a>
+
+                  <a class="card" href="C&A_Indoor_Project/Pages/bookingTable/cashier">
+                        <div>
+                              <div class="numbers"><?php echo $data1["Reserve_Count"]?></div>
+                              <div class="cardName">All Bookings</div>
                         </div>
 
                         <div class="iconBx">
