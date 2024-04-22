@@ -66,8 +66,8 @@
 }
 
 .modal-content {
-  max-width: 700px;
-  width: 500px;
+  /* max-width: 700px; */
+  width: 800px;
   background-color: #fff;
   padding: 25px 30px;
   border-radius: 15px;
@@ -75,10 +75,11 @@
   border: 1px solid #888;
   box-sizing: border-box;
   z-index: 1000;
-  overflow: hidden;
+  overflow: scroll;
   justify-content: center;
   align-items: center;
   justify-items: center;
+  /* font-size: 13px; */
 }
 
 .modal-content .close {
@@ -116,6 +117,45 @@
   color: var(--color01);
   /* text-decoration: underline var(--color01); */
 }
+
+.modal-content .orderItems table {
+  width: 100%;
+  display: table;
+  border-collapse: collapse;
+  /* margin-top: 10px; */
+  margin-bottom: 10px;
+  /* padding-bottom: 20px; */
+  overflow-y: scroll;
+  min-width: 80%;
+  max-height: 500px;
+}
+
+.modal-content .orderItems table thead {
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: inherit;
+  background-color: var(--color02);
+}
+
+.modal-content .orderItems table thead th {
+  font-weight: 600;
+  font-size: 12px;
+  text-align: left;
+}
+
+.modal-content .orderItems table tr {
+  color: var(--black1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.modal-content .orderItems table tbody td {
+  font-size: 12px;
+  padding-top: 5px;
+  /* padding-bottom: 15px; */
+  text-align: left;
+}
+
+
 
 .modal-content .orderStatus button {
   background-color: var(--color02);
@@ -175,6 +215,31 @@
   color: var(--color01);
   /* text-decoration: underline var(--color01); */
 }
+
+.statusrow {
+  display: flex;
+  gap: 10px;
+}
+
+.statusrow span{
+  margin-right: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Table Sort..................................................................... */
 .tableSort {
