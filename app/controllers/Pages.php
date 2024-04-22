@@ -299,7 +299,7 @@ class Pages extends Controller
         if ($name == "user") {
             $this->view('Pages/Dashboard/user', $data1);
         } else if ($name == "admin") {
-            $this->view('Pages/Dashboard/admin', $data1, $data); // Pass all data in a single array
+            $this->view('Pages/Dashboard/admin', $data); // Pass all data in a single array
         } else if ($name == "cashier") {
             $this->view('Pages/Dashboard/cashier', $data1, $data);
         } else if ($name == "coach") {

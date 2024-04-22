@@ -52,13 +52,14 @@ $new_data = array_filter($data['logs'], function ($item) use ($filter_date) {
                     <td colspan="5" style="text-align: center; color: red;" >No users logged in today.</td>
                 </tr>
            <?php else: ?>
+            
            <?php foreach ($new_data as $log): ?>
-           <tr onclick="openPopupCoachSession(<?php echo htmlspecialchars(json_encode($log)); ?>)">
+            <tr onclick="openPopupCoachSession(<?php echo htmlspecialchars(json_encode($log)); ?>)" style="text-align: center;">
             <td><?php echo $log->user_name; ?></td>
             <td class="left-align"><?php echo $log->email; ?></td>
             <td><?php echo date('Y-m-d', strtotime($log->create_date)); ?></td>
-            <td><?php echo date('H:i:s', strtotime($log->last_login)); ?></td>
-            <td><?php echo date('H:i:s', strtotime($log->last_logout)); ?></td>
+            <td style="padding: 1px 3px; border-radius: 100px; background: linear-gradient(to right, rgba(255, 255, 0, 0.5) 0%, rgba(255, 255, 0, 0.5) 100%);"><?php echo date('H:i:s', strtotime($log->last_login)); ?></td>
+            <td style="padding: 1px 3px; text-align: center; border-radius: 100px; background: linear-gradient(to right, rgba(255, 0, 0, 0.5) 0%, rgba(255, 0, 0, 0.5) 100%);"><?php echo date('H:i:s', strtotime($log->last_logout)); ?></td>
 
           </tr>
           <?php endforeach; ?>
