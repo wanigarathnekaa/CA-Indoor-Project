@@ -313,7 +313,7 @@ class Pages extends Controller
         } else if ($name == "manager") {
             $this->view('Pages/Dashboard/manager',$data);
         } else if ($name == "owner") {
-            $this->view('Pages/Dashboard/owner', $bookings, $data);
+            $this->view('Pages/Dashboard/owner', $data);
         }
     }
 

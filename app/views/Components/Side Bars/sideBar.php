@@ -50,18 +50,20 @@
                             <span class="text nav-text">Cricket Store</span>
                         </a>
                     </li>
+                    <li class="nav-link">
+                        <a href="<?php echo URLROOT; ?>/Complaint/create">
+                            <!-- <i class="bx bxs-alarm-exclamation icon"></i> -->
+                            <i class="fa-regular fa-comments icon"></i>
+                            <span class="text nav-text">Feedback</span>
+                        </a>
+                    </li>
                     <li class="profile">
                         <a href="<?php echo URLROOT; ?>/Pages/Profile/user">
                             <i class="bx bx-user-circle icon"></i>
                             <span class="text nav-text">Profile</span>
                         </a>
                     </li>
-                    <li class="nav-link">
-                        <a href="<?php echo URLROOT; ?>/Complaint/create">
-                            <i class="bx bxs-alarm-exclamation icon"></i>
-                            <span class="text nav-text">Feedback</span>
-                        </a>
-                    </li>
+                    
                 <?php } else if ($role == "Admin") { ?>
                         <li class="nav-link">
                             <a href="C&A_Indoor_Project/Pages/Dashboard/admin">
@@ -174,18 +176,19 @@
                                         <span class="text nav-text">Cricket Store</span>
                                     </a>
                                 </li>
+                                <li class="nav-link">
+                                    <a href="<?php echo URLROOT; ?>/Complaint/create">
+                                    <i class="fa-regular fa-comments icon"></i>
+                                        <span class="text nav-text">Feedback</span>
+                                    </a>
+                                </li>
                                 <li class="profile">
                                     <a href="<?php echo URLROOT; ?>/Pages/Profile/user">
                                         <i class="bx bx-user-circle icon"></i>
                                         <span class="text nav-text">Profile</span>
                                     </a>
                                 </li>
-                                <li class="nav-link">
-                                    <a href="<?php echo URLROOT; ?>/Complaint/create">
-                                        <i class="bx bxs-alarm-exclamation icon"></i>
-                                        <span class="text nav-text">Feedback</span>
-                                    </a>
-                                </li>
+                                
                 <?php } else if ($role == "Manager") { ?>
                                     <li class="nav-link">
                                         <a href="<?php echo URLROOT; ?>/Pages/Dashboard/manager">
