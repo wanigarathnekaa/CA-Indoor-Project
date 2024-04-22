@@ -22,16 +22,54 @@ $new_array_3 = array_filter($data, function ($item) use ($filter_date, $filter_n
 
 <?php if (isset($_SESSION['booking_success']) && $_SESSION['booking_success'] === true) {
     ?>
-<form id="successForm" action="<?php echo URLROOT; ?>/Bookings/SendInvoice/<?= $_SESSION['booking_id']?>" method="post">
+<form id="successForm">
     <div class="SuccessContainer">
         <div class="SuccessPopup" id="SuccessPopup">
             <img src="<?= URLROOT ?>/images/tick.png">
             <h2>Payment Successfully!</h2>
             <p>Your payment has been successfully submitted.</p>
-            <button type="submit" name="OKAY" onclick="closePopupSuccess()">OK</button>
+            <button type="submit" id="paid" name="OKAY">OK</button>
         </div>
     </div>
 </form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var modal = document.getElementById("SuccessPopup");
+
+        function closeModal() {
+            modal.style.display = "none";
+            location.reload();
+        }
+
+        var payment_status = "";
+        var id_reserve = <?= json_encode($_SESSION['booking_id'] ?? null) ?>;
+
+        function sendInvoice(reservationId) {
+            $.ajax({
+                url: "<?php echo URLROOT; ?>/Bookings/sendingInvoice",
+                type: "POST",
+                data: { id: reservationId },
+                success: function(response) {
+                    alert("Failed to send invoice");
+                    console.log("Invoice sent successfully:", response);
+                    closeModal(); // Close the popup after successful invoice sending
+                },
+                error: function(xhr, status, error) {
+                    alert("Invoice sent successfully");
+
+                    console.error("Failed to send invoice:", error);
+                }
+            });
+        }
+
+        $("#paid").click(function() {
+            var id = id_reserve;
+            sendInvoice(id);
+        });
+    });
+</script>
 
     <?php
 } ?>
