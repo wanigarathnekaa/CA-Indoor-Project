@@ -9,7 +9,7 @@ class M_Order
 
     public function insertOrder($data)
     {
-        $this->db->query('INSERT INTO orders (full_name, mobile_number, email, address, city, customer_id, order_date, order_status, payment_method, pickup_mode, payment_status) VALUES(:fname, :phone, :email, :adr, :city, :customerID, :order_date, :order_status, :payment, :pickup, :payment_status)');
+        $this->db->query('INSERT INTO orders (full_name, mobile_number, email, address, city, customer_id, order_date, order_status, payment_method, pickup_mode, payment_status, price) VALUES(:fname, :phone, :email, :adr, :city, :customerID, :order_date, :order_status, :payment, :pickup, :payment_status, :price)');
         $this->db->bind(':fname', $data['fname']);
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':adr', $data['adr']);
@@ -21,6 +21,7 @@ class M_Order
         $this->db->bind(':payment', $data['payment']);
         $this->db->bind(':pickup', $data['pickup']);
         $this->db->bind(':payment_status', $data['payment_status']);
+        $this->db->bind(':price', $data['price']);
 
         if ($this->db->execute()) {
             return true;
@@ -87,6 +88,18 @@ class M_Order
     {
         $this->db->query('UPDATE orders SET order_status = :new_status WHERE order_id = :order_id');
         $this->db->bind(':new_status', $newStatus);
+        $this->db->bind(':order_id', $orderID);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updatePaymentStatus($orderID)
+    {
+        $this->db->query('UPDATE orders SET payment_status = :new_status WHERE order_id = :order_id');
+        $this->db->bind(':new_status', "Paid");
         $this->db->bind(':order_id', $orderID);
         if ($this->db->execute()) {
             return true;

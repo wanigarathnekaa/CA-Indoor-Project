@@ -367,6 +367,31 @@ class Order extends Controller
             exit();
         }
     }
+
+    public function changePaymentStatus()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $order_id = $_POST['order_id'];
+
+            if ($this->orderModel->updatePaymentStatus($order_id)) {
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Order Status Updated Successfully'
+                ];
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Something went wrong. Please try again'
+                ];
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+    }
 }
 
 

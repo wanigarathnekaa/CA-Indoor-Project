@@ -159,6 +159,23 @@
   cursor: pointer;
 }
 
+.modal-content .orderStatus {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  /* justify-content: center; */
+  align-items: left;
+  margin-bottom: 10px;
+}
+
+.modal-content .orderStatus h3 {
+  font-size: 18px;
+  font-weight: 500;
+  /* margin-bottom: 5px; */
+  color: var(--color01);
+  /* text-decoration: underline var(--color01); */
+}
+
 /* Table Sort..................................................................... */
 .tableSort {
   display: flex;
