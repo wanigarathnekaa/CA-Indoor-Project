@@ -24,10 +24,12 @@
 
     <!-- Content -->
     <section class="home">
-
+    
+    
         <!-- Cards -->
         <div class="cardBox">
-    
+        
+        
            <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/CompanyUserTable/user">
                 <div>
                     <div class="numbers"><?php echo $data1["CompanyUserCount"]?></div>
