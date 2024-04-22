@@ -278,14 +278,14 @@ class Pages extends Controller
             'adverts' => $advertisement,
             'userCoach' => $res,
             'bookings' => $bookings,
-            'logs' => $logs,
+
 
         ];
 
         if ($name == "user") {
             $this->view('Pages/Dashboard/user', $data1);
         } else if ($name == "admin") {
-            $this->view('Pages/Dashboard/admin', $data1,$data); // Pass all data in a single array
+            $this->view('Pages/Dashboard/admin', $data); // Pass all data in a single array
         } else if ($name == "cashier") {
             $this->view('Pages/Dashboard/cashier');
         } else if ($name == "coach") {
