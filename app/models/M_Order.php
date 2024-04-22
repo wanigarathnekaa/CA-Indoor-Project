@@ -115,5 +115,13 @@ class M_Order
         }
     }
 
+
+    public function getProduct($product_id)
+    {
+        $this->db->query('SELECT * FROM product WHERE product_id = :product_id');
+        $this->db->bind(':product_id', $product_id);
+        return $this->db->single();
+    }
+
 }
 ?>

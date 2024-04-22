@@ -1,3 +1,4 @@
+
 <?php
 class Pages extends Controller
 {
@@ -83,6 +84,18 @@ class Pages extends Controller
             'bookings' => $bookings,
         ];
         $this->view('Pages/Tables/dailyReservation', $data);
+    }
+
+    // daily reservation table for cashier
+    public function Cashier_Table($name)
+    {
+        $bookings = $this->pagesModel->getReservations();
+        $reservations = $this->pagesModel->getBookings();
+        $data = [
+            'bookings' => $bookings,
+            'reservation' => $reservations
+        ];
+        $this->view('Pages/Tables/cashierReservation', $data);
     }
 
     // personal reservation table for player
@@ -254,6 +267,7 @@ class Pages extends Controller
         $companyUsers = $this->pagesModel->getCompanyUserCount();
         $bookings = $this->pagesModel->getReservations();
         $logs = $this->pagesModel->getAccLog();
+        $reservation = $this->pagesModel->getBookings();
       
         $data = [
             'CoachCount' => $coaches,
@@ -265,7 +279,7 @@ class Pages extends Controller
             'CompanyUserCount' => $companyUsers,
             'bookings' => $bookings,
             'logs' => $logs,
-
+            'reservation' => $reservation
 
 
         ];
@@ -278,16 +292,16 @@ class Pages extends Controller
             'adverts' => $advertisement,
             'userCoach' => $res,
             'bookings' => $bookings,
-
+            'logs' => $logs,
 
         ];
 
         if ($name == "user") {
             $this->view('Pages/Dashboard/user', $data1);
         } else if ($name == "admin") {
-            $this->view('Pages/Dashboard/admin', $data); // Pass all data in a single array
+            $this->view('Pages/Dashboard/admin', $data1, $data); // Pass all data in a single array
         } else if ($name == "cashier") {
-            $this->view('Pages/Dashboard/cashier');
+            $this->view('Pages/Dashboard/cashier', $data1, $data);
         } else if ($name == "coach") {
             $this->view('Pages/Dashboard/coach', $data1);
         } else if ($name == "manager") {

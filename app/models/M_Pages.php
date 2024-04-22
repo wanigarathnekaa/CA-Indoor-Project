@@ -73,7 +73,7 @@ class M_Pages
 
     public function getBookings()
     {
-        $this->db->query('SELECT * FROM reservation');
+        $this->db->query('SELECT * FROM bookings');
 
         return $this->db->resultSet();
     }

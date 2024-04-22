@@ -476,6 +476,54 @@ class Bookings extends Controller
         }
     }
 
+    public function getReservationDetails()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $booking_Id = trim($_POST['id']);
+
+            $result = $this->bookingModel->getReservationDetailsByID($booking_Id);
+
+            if ($result) {
+                $response = $result;
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Something went wrong',
+                ];
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+    }
+
+    public function updateReservation()
+    {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $booking_Id = trim($_POST['id']);
+
+        if ($this->bookingModel->updateReservation($booking_Id)) {
+            $response = [
+                'status' => 'success',
+            ];
+        } else {
+            $response = [
+                'status' => 'error',
+                'message' => 'Something went wrong',
+            ];
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit();
+
+    }
+
 }
 
 ?>
