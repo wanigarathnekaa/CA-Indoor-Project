@@ -48,37 +48,25 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
 
                 <!-- table body -->
                 <tbody>
-                    <?php
-                    foreach ($new_data as $reservation) {
-                        $status_color = '';
-                        if ($reservation->paymentStatus == 'Paid') {
-                            $status_color = '#00ff00';
-                        } elseif ($reservation->paymentStatus == 'Pending') {
-                            $status_color = '#ffcc00';
-                        } else {
-                            $status_color = '#ff0000';
-                        }
-                        ?>
+                    <?php foreach ($new_data as $reservation): ?>
                         <tr>
+                            <td><?php echo $reservation->id; ?></td>
+                            <td><?php echo $reservation->name; ?></td>
+                            <td><?php echo $reservation->bookingPrice; ?></td>
+                            <td><?php echo $reservation->paidPrice; ?></td>
                             <td>
-                                <?php echo $reservation->id; ?>
-                            </td>
-                            <td>
-                                <?php echo $reservation->name; ?>
-                            </td>
-                            <td>
-                                <?php echo $reservation->bookingPrice; ?>
-                            </td>
-                            <td>
-                                <?php echo $reservation->paidPrice; ?>
-                            </td>
-                            <td><span class="status"
-                                    style="background-color: <?php echo $status_color; ?>;"><?php echo $reservation->paymentStatus ?></span>
+                                <span class="status" style="background-color: <?php
+                                    if ($reservation->paymentStatus == 'Paid') {
+                                        echo '#00ff00';
+                                    } elseif ($reservation->paymentStatus == 'Pending') {
+                                        echo '#ffcc00';
+                                    } else {
+                                        echo '#ff0000';
+                                    }
+                                ?>"><?php echo $reservation->paymentStatus ?></span>
                             </td>
                         </tr>
-                        <?php
-                    }
-                    ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
@@ -119,10 +107,10 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
 
             <div class="paymentDetails">
                 <h3>Payment Details</h3>
-                <span id="PaymentStatus" class="PaymentStatus"></span>
-                <span id="PaidAmount" class="PaidAmount"></span>
-                <span id="BookingPrice" class="BookingPrice"></span>
-                <span id="PaymentToBeMade" class="PaymentToBeMade"></span>
+                <span id="PaymentStatus" class="PaymentStatus"></span><br>
+                <span id="PaidAmount" class="PaidAmount"></span><br>
+                <span id="BookingPrice" class="BookingPrice"></span><br>
+                <span id="PaymentToBeMade" class="PaymentToBeMade"></span><br>
                 <span id="paidMsj" class="paidMsj" style="color: red;"></span>
             </div>
 
@@ -131,7 +119,7 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
             <div class="btn">
                 <input type="hidden" id="form_type" name="form_type">
                 <button type="button" id="paid">Pay</button>
-                <button type="button" onclick="closeModal()">close</button>
+                <button type="button" onclick="closeModal()">Close</button>
             </div>
         </div>
     </div>
@@ -140,12 +128,30 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         var modal = document.getElementById("reservationModal");
+        
         function closeModal() {
             modal.style.display = "none";
             location.reload();
         }
+        
         var payment_status = "";
         var id_reserve = "";
+        
+        function sendInvoice(reservationId) {
+            $.ajax({
+                url: "<?php echo URLROOT; ?>/Bookings/sendingInvoice",
+                type: "POST",
+                data: { id: reservationId },
+                success: function (response) {
+                    alert(" Failed to send invoice"); 
+                    console.error("Invoice sent successfully:");
+                },
+                error: function (xhr, status, error) {
+                    alert("Invoice sent successfully"); 
+                    console.error("Failed to send invoice:", error);
+                }
+            });
+        } 
 
         $(document).ready(function () {
             $("#liveSearch").on("change", function () {
@@ -160,23 +166,16 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
             });
 
             $('tbody tr').click(function () {
-                console.log("clicked");
                 var id = $(this).find('td').eq(0).text();
                 id_reserve = id;
                 $("#reservationModal").css("display", "block");
-                console.log(id);
+
                 $.ajax({
                     url: "<?php echo URLROOT; ?>/Bookings/getReservationDetails",
                     type: "POST",
-                    data: {
-                        id: id
-                    },
+                    data: { id: id },
                     success: function (response) {
-                        console.log(response);
-
-                        // Assuming the response is an array and you want to use the first item
                         var data = response[0];
-
                         $(".name").text("Name: " + data.name);
                         $(".email").text("Email: " + data.email);
                         $(".phone").text("Phone: " + data.phoneNumber);
@@ -194,7 +193,6 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
                         var netBTimeSlots = [];
                         var machineTimeSlots = [];
 
-                        // Separate time slots based on netType
                         for (var i = 0; i < response.length; i++) {
                             var netType = response[i].netType;
                             var timeSlot = response[i].timeSlot;
@@ -208,10 +206,8 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
                             }
                         }
 
-                        // Determine the maximum length among the time slot arrays
                         var maxLength = Math.max(netATimeSlots.length, netBTimeSlots.length, machineTimeSlots.length);
 
-                        // Build the table rows column-wise
                         for (var i = 0; i < maxLength; i++) {
                             var netATime = i < netATimeSlots.length ? netATimeSlots[i] : '';
                             var netBTime = i < netBTimeSlots.length ? netBTimeSlots[i] : '';
@@ -226,14 +222,11 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
                             timeSlotTable.append(row);
                         }
                     }
-
                 });
             });
 
             $("#paid").click(function () {
                 var id = id_reserve;
-                console.log(id);
-                console.log(payment_status);
                 if (payment_status == "Paid") {
                     $(".paidMsj").text("Payment has already been made");
                     return;
@@ -242,16 +235,14 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
                 $.ajax({
                     url: "<?php echo URLROOT; ?>/Bookings/updateReservation",
                     type: "POST",
-                    data: {
-                        id: id
-                    },
+                    data: { id: id },
                     success: function (response) {
-                        console.log(response);
                         if (response.status == "success") {
-                            alert("Payment successful");
-                            closeModal();
+                            alert("Payment successful"); 
+                            closeModal(); 
+                            sendInvoice(id); 
                         } else {
-                            alert("Payment failed");
+                            alert("Payment failed"); 
                         }
                     }
                 });
@@ -259,5 +250,4 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
         });
     </script>
 </body>
-
 </html>
