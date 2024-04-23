@@ -167,6 +167,20 @@ body {
   border-radius: 6px;
   font-weight: 400;
 }
+.button2 {
+  padding-top: 20px;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4F9DA9;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  margin: 14px;
+  border-radius: 6px;
+  font-weight: 400;
+  padding: 15px 30px; /* Adjust padding as needed */
+}
 
 .button:hover {
   background-color: #2e8a99;

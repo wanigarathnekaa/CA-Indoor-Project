@@ -256,7 +256,7 @@ class Pages extends Controller
         $logs = $this->pagesModel->getAccLog();
         $data = [
             'logs' => $logs]; // Pass $logs as an associative array
-        $this->view('Pages/Tables/accountlog_Table', $data);
+        $this->view('Pages/Tables/AccountLOG', $data);
     }
     
 
