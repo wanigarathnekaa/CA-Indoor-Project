@@ -489,8 +489,10 @@
                         if (response.status == "success") {
                             alert("Order placed successfully");
                             location.reload();
-                        } else {
-                            $("#invalid2").text("response.pickup_err");
+                        } else if(response.status == "error"){
+                            alert(response.message)
+                        }else {
+                            $("#invalid2").text(response.pickup_err);
                             $("#invalid3").text(response.payment_err);
                             $("#invalid4").text(response.fname_err);
                             $("#invalid5").text(response.phone_err);
