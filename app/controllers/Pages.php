@@ -44,7 +44,7 @@ class Pages extends Controller
     {
         $this->view('Pages/Calendar/userCalander');
     }
-
+    
     //booking time slots for company
     public function Booking($name)
     {
@@ -499,6 +499,55 @@ class Pages extends Controller
             $this->view('Pages/UserProfiles/changePassword');
         }
     }
+    public function CompanyUserchangePassword()
+    {         
+        $this->view('Pages/CompanyUser/changepassword');
+
+        // $user = $this->pagesModel->findUser($_SESSION['user_email']);
+
+        // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        //     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        //     $data = [
+        //         'oldPassword' => trim($_POST['old_password']),
+        //         'newPassword' => trim($_POST['new_password']),
+        //         'confirmPassword' => trim($_POST['confirm_password']),
+
+        //         'old_password_err' => "",
+        //         'new_password_err' => "",
+        //         'confirm_password_err' => ""
+
+        //     ];
+
+            
+        //     if (empty($data['oldPassword']) || empty($data['newPassword']) || empty($data['confirmPassword'])) {
+        //         $this->view('Pages/UserProfiles/changePassword');
+        //     } else {
+        //         $hashedPassword = $user->password;
+        //         if (password_verify($data['oldPassword'], $hashedPassword)) {
+        //             if ($data['oldPassword'] == $data['newPassword']) {
+        //                 $data['new_password_err'] = "Please enter a password different from the old one.";
+        //                 $this->view('Pages/UserProfiles/changePassword', $data);
+
+        //             } else if ($data['newPassword'] != $data['confirmPassword']) {
+        //                 $data['confirm_password_err'] = "Passwords do not match. Please try again.";
+        //                 $this->view('Pages/UserProfiles/changePassword', $data);
+
+        //             } else {
+        //                 $hashedNewPassword = password_hash($data['newPassword'], PASSWORD_DEFAULT);
+        //                 $this->userModel->updatePassword($user->email, $hashedNewPassword);
+        //                 $this->view('Pages/UserProfiles/userProfile', $user);
+        //             }
+        //         } else {
+        //             $data['old_password_err'] = "Current Password is incorrect.";
+        //             $this->view('Pages/UserProfiles/changePassword', $data);
+        //             $this->view('Pages/UserProfiles/changePassword');
+        //         }}
+        // } else {
+        //     $this->view('Pages/UserProfiles/changePassword');
+        // }
+    }
+
 
     // add advertisement page
     public function Add_Advertisements($name)
