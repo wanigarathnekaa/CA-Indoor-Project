@@ -30,6 +30,26 @@ class M_Manager
         }
 
     }
+    public function findManager($email)
+    {
+        $this->db->query('SELECT * FROM managers WHERE email = :email ');
+        $this->db->bind(':email', $email);
+
+        return $this->db->single();
+    }
+    public function updateManagerPassword($email, $hashedPassword)
+    {
+
+        $this->db->query('UPDATE managers SET password = :password WHERE email = :email');
+        $this->db->bind(':email', $email);
+        $this->db->bind(':password', $hashedPassword);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function findUserByEmail($email)
     {
