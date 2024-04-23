@@ -91,7 +91,6 @@ function time_slot($duration, $cleanup, $start, $end)
                             <option disabled selected>Select Time</option>
                             <option><?php echo "3 Months" ?></option>
                             <option><?php echo "6 Months" ?></option>
-                            <option><?php echo "1 Year" ?></option>
                         </select>
                         <span id="invalid4"></span>
                     </div>
