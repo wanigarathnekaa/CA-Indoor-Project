@@ -78,6 +78,17 @@
                               <i class="fa-solid fa-calendar-days"></i>
                         </div>
                   </a>
+
+                  <a class="card" href="C&A_Indoor_Project/Pages/Cancel_Order_Table/cashier">
+                        <div>
+                              <div class="numbers"><?php echo $data1["cancelOrderCount"]?></div>
+                              <div class="cardName">Cancelled Orders</div>
+                        </div>
+
+                        <div class="iconBx">
+                              <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                  </a>
             </div>
 
             

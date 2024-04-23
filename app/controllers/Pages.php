@@ -257,6 +257,12 @@ class Pages extends Controller
         $order = $this->pagesModel->getOrder();
         $this->view('Pages/Tables/orders_table', $order);
     }
+
+    public function Cancel_Order_Table($name)
+    {
+        $order = $this->pagesModel->getCancelOrder();
+        $this->view('Pages/Tables/cancelOrderTable', $order);
+    }
     public function AccountLogTable()
     {
         $logs = $this->pagesModel->getAccLog();
@@ -274,6 +280,7 @@ class Pages extends Controller
         $coaches = $this->pagesModel->getCoachCount();
         $bookingCount = count($this->pagesModel->getBookings());
         $orderCount = count($this->pagesModel->getOrder());
+        $cancelOrderCount = count($this->pagesModel->getCancelOrder());
         $users = $this->pagesModel->getUserCount();
         $coach = $this->pagesModel->getCoaches();
         $advertisement = $this->pagesModel->getAdvertisement();
@@ -288,6 +295,7 @@ class Pages extends Controller
             'UserCount' => $users - $coaches,
             'bookingCount' => $bookingCount,
             'orderCount' => $orderCount,
+            'cancelOrderCount' => $cancelOrderCount,
             'coach' => $coach,
             'Reserve_Count' => count($bookings),
             'advertCount' => count($advertisement),

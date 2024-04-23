@@ -1,15 +1,25 @@
 // JavaScript for Modal
 var modal = document.getElementById("orderDetailsModal");
 var modal1 = document.getElementById("myModal");
+var modal2 = document.getElementById("cancelModal");
+
 
 function openModal() {
     modal1.style.display = "block";
     document.getElementById("form_type").value = "save";
 }
 
+function openCancelModal() {
+  modal2.style.display = "block";
+}
+
 function closeModal() {
   modal.style.display = "none";
   location.reload();
+}
+
+function closeCancelModal() {
+  modal2.style.display = "none";
 }
 
 document.addEventListener("DOMContentLoaded", function () {

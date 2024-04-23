@@ -76,7 +76,7 @@ class M_Order
         $this->db->bind(':order_id', $orderID);
         return $this->db->resultSet();
     }
-    
+
     public function getOrder($orderID)
     {
         $this->db->query('SELECT * FROM orders WHERE order_id = :order_id');
@@ -135,6 +135,43 @@ class M_Order
         $this->db->bind(':product_id', $product_id);
         return $this->db->single();
     }
+
+    public function deleteOrder($order_id)
+    {
+        $this->db->query('DELETE FROM orders WHERE order_id = :order_id');
+        $this->db->bind(':order_id', $order_id);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function insertCancelOrder($data)
+    {
+        $this->db->query('INSERT INTO cancel_orders (order_id, full_name, mobile_number, email, address, city, customer_id, order_date, order_status, payment_method, pickup_mode, payment_status, price) VALUES(:order_id, :fname, :phone, :email, :adr, :city, :customerID, :order_date, :order_status, :payment, :pickup, :payment_status, :price)');
+        $this->db->bind(':order_id', $data['order_id']);
+        $this->db->bind(':fname', $data['full_name']);
+        $this->db->bind(':phone', $data['mobile_number']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':adr', $data['address']);
+        $this->db->bind(':city', $data['city']);
+        $this->db->bind(':customerID', $data['customer_id']);
+        $this->db->bind(':order_date', $data['order_date']);
+        $this->db->bind(':order_status', $data['order_status']);
+        $this->db->bind(':payment', $data['payment_method']);
+        $this->db->bind(':pickup', $data['pickup_mode']);
+        $this->db->bind(':payment_status', $data['payment_status']);
+        $this->db->bind(':price', $data['price']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 
 }
 ?>

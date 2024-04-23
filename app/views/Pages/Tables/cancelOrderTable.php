@@ -49,6 +49,7 @@
                     <option value="Not Paid">Not Paid</option>
                 </select>
             </div>
+
             <div class="sort">
                 <label for="pickupModeFilter">Mode :</label>
                 <select name="filter" id="pickupModeFilter"> <!-- Changed id to pickupModeFilter -->
@@ -65,18 +66,17 @@
                     <option value="Not Complete">Not Complete</option>
                 </select>
             </div>
+
             <div class="sort">
                 <label>Date :</label>
                 <input type="date" id="date" name="date">
             </div>
-
             <div class="search">
                 <label>
                     <input type="text" placeholder="Search here" id="searchInput">
                     <i class="fa-solid fa-magnifying-glass icon"></i>
                 </label>
             </div>
-
         </div>
 
         <!-- Table -->
