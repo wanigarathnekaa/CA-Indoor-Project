@@ -25,24 +25,16 @@
 
         <div class="topicdiv">
             <h1>Advertisement</h1>
-            <!-- <?php if ($role == "User") { ?>
-                <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/user"><i
-                        class="fa-solid fa-file-circle-plus icon"></i></a>
-            <?php } else if ($role == "Coach") { ?>
-                    <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/coach"><i
-                            class="fa-solid fa-file-circle-plus icon"></i></a>
-            <?php } else if ($role == "Manager") { ?>
-                        <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/manager"><i
-                                class="fa-solid fa-file-circle-plus icon"></i></a>
-            <?php } ?> -->
-
+            
 
             <?php if ($role != "User") { ?>
                 <?php if ($role == "Coach") { ?>
                     <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/coach"><i class="fa-solid fa-file-circle-plus icon"></i></a>
                 <?php } else if ($role == "Manager") { ?>
                     <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/manager"><i class="fa-solid fa-file-circle-plus icon"></i></a>
-                <?php } ?>    
+                <?php } else if ($role == "Cashier") { ?>
+                    <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/cashier"><i class="fa-solid fa-file-circle-plus icon"></i></a>   
+            <?php } ?>
             <?php } ?>
 
         </div>

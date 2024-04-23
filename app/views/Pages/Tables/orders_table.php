@@ -75,7 +75,24 @@
                     </tr>
                 </thead>
                 <tbody id="orderTable">
-                    <?php foreach ($data as $order): ?>
+                        <?php foreach ($data as $order): 
+                        $payment_status_color = '';
+                        if ($order->payment_status == 'Paid') {
+                            $payment_status_color = '#00ff00';
+                        } else if ($order->payment_status == 'Not Paid') {
+                            $payment_status_color = '#ff0000';
+                        }else if ($order->payment_status == 'Pending') {
+                            $payment_status_color = '#ffe100';
+                        }
+
+
+                        $order_status_color = '';
+                        if ($order->order_status == 'Complete') {
+                            $order_status_color = '#00ff00';
+                        } else if ($order->order_status == 'Not Complete') {
+                            $order_status_color = '#ff0000';
+                        }
+                        ?>
                         <tr>
                             <td>
                                 <?php echo $order->order_id; ?>
@@ -99,10 +116,14 @@
                                 <?php echo str_replace('_', ' ', $order->payment_method); ?>
                             </td>
                             <td>
+                                <span class="status" style="background-color: <?php echo $order_status_color; ?>">
                                 <?php echo str_replace('_', ' ', $order->order_status); ?>
+                                </span>
                             </td>
                             <td>
+                                <span class="status" style="background-color: <?php echo $payment_status_color; ?>">
                                 <?php echo str_replace('_', ' ', $order->payment_status); ?>
+                                </span>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -133,9 +154,10 @@
                     <table id="orderItemsTable">
                         <thead>
                             <tr>
-                                <th>Product ID</th>
+                                <th>Product</th>
+                                <th>Product Name</th>
                                 <th>Quantity</th>
-                                <th>Price per Unit</th>
+                                <th>Unit Price</th>
                             </tr>
                         </thead>
                         <tbody id="items">
@@ -148,10 +170,15 @@
                 <div class="orderStatus">
                     <h3>Order Status</h3>
                     <span id="TotalAmount" class="TotalAmount"></span>
-                    <span id="OrderStatus" class="OrderStatus"></span>
-                    <button id="Change_Status">Change Order Status</button>
-                    <span id="PaymentStatus" class="PaymentStatus"></span>
-                    <button id="Change_Payment">Paid</button>
+                    <div class="statusrow">
+                        <span id="OrderStatus" class="OrderStatus"></span>
+                        <button id="Change_Status">Change Status</button>
+                    </div>
+                    <div class="statusrow">
+                        <span id="PaymentStatus" class="PaymentStatus"></span>
+                        <button id="Change_Payment">Paid</button>
+                    </div>
+                    
                 </div>
 
                 <hr>
@@ -226,6 +253,8 @@
                         console.log(response);
                         var order = response.order; // Access the order object from the response
                         var orderItems = response.orderItems; // Access the orderItems array from the response
+                        var products = response.products; // Access the products array from the response
+
                         $("#name").text("Name: " + order.full_name);
                         $("#email").text("Email: " + order.email);
                         $("#phone").text("Phone: " + order.mobile_number);
@@ -243,11 +272,14 @@
                         itemsTable.empty(); // Clear previous entries
 
                         for (var i = 0; i < orderItems.length; i++) {
-                            var row = "<tr>" +
-                                "<td>" + orderItems[i].product_id + "</td>" +
-                                "<td>" + orderItems[i].quantity + "</td>" +
-                                "<td>" + orderItems[i].price_per_unit + "</td>" +
-                                "</tr>";
+                            var item = orderItems[i];
+                            var product = products[i];
+                            var row = '<tr>';
+                            row += '<td><img width="60px" height="50px" src="<?= URLROOT ?>/CricketShop/'+ product.product_thumbnail +'">'+'</td>';                                 
+                            row += '<td>' + product.product_title + '</td>';
+                            row += '<td>' + item.quantity + '</td>';
+                            row += '<td>' + item.price_per_unit + '</td>';
+                            row += '</tr>';
                             itemsTable.append(row);
                         }
                         $("#items").html(itemsText);

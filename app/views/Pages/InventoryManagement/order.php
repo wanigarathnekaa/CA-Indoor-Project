@@ -147,9 +147,10 @@
                     <table id="orderItemsTable">
                         <thead>
                             <tr>
-                                <th>Product ID</th>
+                                <th>Product</th>
+                                <th>Product Name</th>
                                 <th>Quantity</th>
-                                <th>Price per Unit</th>
+                                <th>Unit Price</th>
                             </tr>
                         </thead>
                         <tbody id="items">
@@ -211,6 +212,8 @@
                         console.log(response);
                         var order = response.order; // Access the order object from the response
                         var orderItems = response.orderItems; // Access the orderItems array from the response
+                        var products =response.products;
+
                         $("#name").text("Name: " + order.full_name);
                         $("#email").text("Email: " + order.email);
                         $("#phone").text("Phone: " + order.mobile_number);
@@ -221,11 +224,14 @@
                         itemsTable.empty(); // Clear previous entries
 
                         for (var i = 0; i < orderItems.length; i++) {
-                            var row = "<tr>" +
-                                "<td>" + orderItems[i].product_id + "</td>" +
-                                "<td>" + orderItems[i].quantity + "</td>" +
-                                "<td>" + orderItems[i].price_per_unit + "</td>" +
-                                "</tr>";
+                            var item = orderItems[i];
+                            var product = products[i];
+                            var row = '<tr>';
+                            row += '<td><img width="60px" height="50px" src="<?= URLROOT ?>/CricketShop/'+ product.product_thumbnail +'">'+'</td>';                                 
+                            row += '<td>' + product.product_title + '</td>';
+                            row += '<td>' + item.quantity + '</td>';
+                            row += '<td>' + item.price_per_unit + '</td>';
+                            row += '</tr>';
                             itemsTable.append(row);
                         }
                         $("#items").html(itemsText);
