@@ -394,7 +394,7 @@
                         newRow += '<td><span style="color:red"><i class="fa-solid fa-trash-can delete icon"></i></span></td>';
                         newRow += '</tr>';
 
-                        total_price += response.selling_price * (1-(response.discount/100));
+                        total_price += response.selling_price * (1 - (response.discount / 100));
                         $("#totPrice").html('<p>Total Price: <b>Rs. ' + total_price + '</b></p>');
                         console.log(total_price);
 
@@ -437,7 +437,7 @@
                 $("#customer_details").css("display", "block");
                 $("#placeOrder").css("display", "none");
                 $("#saveOrder").css("display", "block");
-                if(selectedItems.length == 0){
+                if (selectedItems.length == 0) {
                     $("#invalid1").text("Please add items to the order");
                     return;
                 }
@@ -495,6 +495,27 @@
             selectedItems.splice(index, 1);
             console.log(selectedItems);
         });
+
+        $(document).on("change", ".quantity", function () {
+            var quantity = $(this).val();
+            var row = $(this).closest("tr");
+            var index = row.index();
+            var product_price = selectedItems[index].product_price;
+            var discount = selectedItems[index].discount;
+
+            // Update the selected items array with the new quantity
+            selectedItems[index].qty = quantity;
+
+            // Recalculate the total price
+            total_price = 0;
+            for (var i = 0; i < selectedItems.length; i++) {
+                total_price += selectedItems[i].product_price * selectedItems[i].qty * (1 - (selectedItems[i].discount / 100));
+            }
+
+            // Update the total price display
+            $("#totPrice").html('<p>Total Price: <b>Rs. ' + total_price.toFixed(2) + '</b></p>');
+        });
+
 
     </script>
 </body>
