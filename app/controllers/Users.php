@@ -565,6 +565,8 @@ class Users extends Controller
             }
         }
     }
+    
+    
     public function delete()
     {
         // var_dump($_POST);

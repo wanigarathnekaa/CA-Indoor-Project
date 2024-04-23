@@ -174,6 +174,7 @@ class M_Users
 
         return $this->db->single();
     }
+    
     public function updatePassword($email, $hashedPassword)
     {
 

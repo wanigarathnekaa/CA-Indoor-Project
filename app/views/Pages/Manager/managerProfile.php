@@ -50,7 +50,7 @@
                               <div class="btnrow">
                               <a href="<?php echo URLROOT;?>/Pages/Manager_Edit_Profile/manager" type="button" class="button">Edit Profile</a>
                               <div class="Change Password">
-                                    <a class="button" href="<?php echo URLROOT; ?>/Pages/changePassword/user">Change Password</a>
+                                    <a class="button" href="<?php echo URLROOT; ?>/Pages/ManagerchangePassword/<?php echo $role ?>">Change Password</a>
                               </div>
                                     <!-- <button type="button" class="button">Change Password</button> -->
                                     <button type="button" class="button" onclick="openDeletePopup()">Delete Profile</button>
