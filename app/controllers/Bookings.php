@@ -67,7 +67,7 @@ class Bookings extends Controller
             if (empty($data['name_err']) && empty($data['net_err']) && empty($data['email_err'])) {
                 $bookingId = $this->bookingModel->last_inserted_id();
                 //create user
-                if ($this->bookingModel->Make_Reservation($data)) {
+                if ($this->bookingModel->Make_Reservation($data) && $this->bookingModel->SendEmailToCoach($data)) {
                     $_SESSION['booking_success'] = true;
                     $bookingId = $this->bookingModel->last_inserted_id();
                     foreach ($arrayData as $timeSlotAndNetType) {
@@ -75,6 +75,8 @@ class Bookings extends Controller
                         $netType = $timeSlotAndNetType['netType'];
                         $this->bookingModel->addTimeSlots($bookingId, $timeSlot, $netType);
                     }
+                  
+
 
                     redirect("Pages/Manager_Booking/{$role}?fulldate={$data['date']}");
                 } else {
