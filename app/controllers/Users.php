@@ -515,7 +515,56 @@ class Users extends Controller
             }
         }
     }
+    
+    public function companychangePassword()
+    {   $user=$this->userModel->findCompanyUserByEmail($_SESSION['user_email']) ;
+       
+             
 
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'oldPassword' => trim($_POST['old_password']),
+                'newPassword' => trim($_POST['new_password']),
+                'confirmPassword' => trim($_POST['confirm_password']),
+
+                'old_password_err' => "",
+                'new_password_err' => "",
+                'confirm_password_err' => ""
+
+            ];
+
+
+
+
+            if (empty($data['oldPassword']) || empty($data['newPassword']) || empty($data['confirmPassword'])) {
+                $this->view('Pages/CompanyUser/companyUserProfile');
+            } else {
+                $hashedPassword = $user->password;
+                if (password_verify($data['oldPassword'], $hashedPassword)) {
+                    if ($data['oldPassword'] == $data['newPassword']) {
+                        $data['new_password_err'] = "Please enter a password different from the old one.";
+                        $this->view('Pages/CompanyUser/changepassword', $data);//C:\xampp\htdocs\C&A_Indoor_Project\app\views\Pages\CompanyUser\.php
+
+                    } else if ($data['newPassword'] != $data['confirmPassword']) {
+                        $data['confirm_password_err'] = "Passwords do not match. Please try again.";
+                        $this->view('Pages/CompanyUser/changepassword', $data);
+
+                    } else {
+                        $hashedNewPassword = password_hash($data['newPassword'], PASSWORD_DEFAULT);
+                        $this->userModel->updateCompanyUserPassword($user->email, $hashedNewPassword);
+                        $this->view('Pages/CompanyUser/companyUserProfile', $user);
+                    }
+                } else {
+                    $data['old_password_err'] = "Current Password is incorrect.";
+                    $this->view('Pages/CompanyUser/changepassword', $data);
+                    $this->view('Pages/CompanyUser/changepassword');
+                }
+            }
+        }
+    }
     public function delete()
     {
         // var_dump($_POST);
