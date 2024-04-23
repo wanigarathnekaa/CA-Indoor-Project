@@ -105,6 +105,15 @@
                 return false;
             }
         }
+
+        public function getItem($cat_id, $brand_id)
+        {
+            $this->db->query('SELECT * FROM product WHERE category_id = :category_id AND brand_id = :brand_id');
+            $this->db->bind(':category_id', $cat_id);
+            $this->db->bind(':brand_id', $brand_id);
+            $result = $this->db->resultSet();
+            return $result;
+        }
         
     }
 ?>

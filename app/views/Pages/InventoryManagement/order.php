@@ -37,14 +37,44 @@
         </section>
         <div class="header">
             <h2>Orders</h2>
-            <!-- <button type="button" id="addCategory" onclick="openModal()">Add New Order</button>
+            <button type="button" id="addOrder" onclick="openModal()">Add New Order</button>
             <div id="myModal" class="modal">
                 <div class="modal-content">
-                    <h2 class="modal-title">Add New Category</h2>
-                    <form method="POST" id="categoryForm">
-                        <label for="categoryName">Category Name</label>
-                        <input type="text" id="categoryName" name="categoryName" placeholder="Enter category name">
-                        <span class="form-invalid"></span>
+                    <h2 class="modal-title">Add New Order</h2>
+                    <form method="POST" id="orderForm">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="category_name">Category Name</label>
+                                <select name="category_name" id="category_name" class="form-control">
+                                    <option value="0">Select Category</option>
+                                    <?php foreach ($data['categories'] as $category): ?>
+                                        <option value="<?php echo $category->category_id; ?>">
+                                            <?php echo $category->category_name; ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <span class="form-invalid-2"></span>
+                            </div>
+                            <!-- Product Brand Name -->
+                            <div class="form-group">
+                                <label for="brand_name">Brand Name</label>
+                                <select name="brand_name" id="brand_name" class="form-control">
+                                    <option value="0">Select a Category first</option>
+                                </select>
+                                <span class="form-invalid-3"></span>
+                            </div>
+                            <!-- Product Item Name -->
+                            <div class="form-group">
+                                <label for="brand_name">Select Item</label>
+                                <select name="item_name" id="item_name" class="form-control">
+                                    <option value="0">Select a Brand first</option>
+                                </select>
+                                <span class="form-invalid-3"></span>
+                            </div>
+                            <div class="btn">
+                                <button type="button" id="addItem">Add</button>
+                            </div>
+                        </div>
                         <div class="btn">
                             <input type="hidden" id="form_type" name="form_type">
                             <button type="submit" id="submit">Save</button>
@@ -52,7 +82,7 @@
                         </div>
                     </form>
                 </div>
-            </div> -->
+            </div>
         </div>
 
         <div class="table-container">
@@ -226,6 +256,42 @@
                         }
                     }
                 });
+            });
+
+            $("#category_name").change(function (e) {
+                e.preventDefault();
+                var id = $("#category_name").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo URLROOT; ?>/Brand/getBrandCategoryById",
+                    data: {
+                        id: id
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        $("#brand_name").html(response.output);
+                    }
+                })
+            });
+
+            $("#brand_name").change(function (e) {
+                e.preventDefault();
+                var id = $("#category_name").val();
+                var brand_id=$("#brand_name").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo URLROOT; ?>/Product/getItemByCategoryBrand",
+                    data: {
+                        cat_id: id,
+                        brand_id: brand_id
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        $("#item_name").html(response.output);
+                    }
+                })
             });
         });
 

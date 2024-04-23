@@ -773,8 +773,12 @@ class Pages extends Controller
     public function Order($name)
     {
         $orders = $this->pagesModel->getOrder();
+        $products = $this->pagesModel->getProducts();
+        $categories = $this->pagesModel->getCategories();
         $data = [
             'orders' => $orders,
+            'products' => $products,
+            'categories' => $categories,
         ];
         $this->view('Pages/InventoryManagement/order', $data);
     }
