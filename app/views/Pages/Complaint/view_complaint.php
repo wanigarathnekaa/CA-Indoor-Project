@@ -46,7 +46,7 @@
             </div>
             <div class="card-content">
             
-            <h2 class="name"></h2>
+            <h2 class="name">Contact users</h2>
             <p class="description"></p>
 
             <div><a href="<?php echo URLROOT; ?>/Complaint/SendMessage" class="button2" ><i class="fas fa-plus"></i></a></div>
