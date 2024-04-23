@@ -98,9 +98,23 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                         response = JSON.parse(response);
                         console.log(response);
                         if (response.status == 'error') {
-                            alert(response.message);
+                            // alert(response.message);
+                            var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">'+response.message+'</h3></div><div class="notification_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            // Remove the notification after a certain time (e.g., 5 seconds)
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 5000);
                         }else{
-                            location.reload();
+                            var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Update the item quantity</h3></div><div class="notification_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            // Remove the notification after a certain time (e.g., 5 seconds)
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 5000);
+                            setTimeout(function() {
+                                    location.reload();
+                            }, 3000);
                         }
                     }
                 });
@@ -120,10 +134,24 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                         response = JSON.parse(response);
                         console.log(response);
                         if (response.status == 'error') {
-                            alert(response.message);
+                            // alert(response.message);
+                            var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">'+response.message+'</h3></div><div class="notification_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            // Remove the notification after a certain time (e.g., 5 seconds)
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 3000);
                         }else{
-                            alert(response.message);
-                            location.reload();
+                            // alert(response.message);
+                            var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">'+response.message+'</h3></div><div class="notification_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            // Remove the notification after a certain time (e.g., 5 seconds)
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 5000);
+                            setTimeout(function() {
+                                    location.reload();
+                            }, 3000);
                         }
                     }
                 });

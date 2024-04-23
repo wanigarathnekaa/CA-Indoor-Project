@@ -89,7 +89,13 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
             var totalAmount = product_price * qty * discount; 
 
             if (qty > '<?= $data['SProduct']->qty; ?>') {
-                $('#quantity').html("We don't have enough " + product_title + " stock on hand for the quantity you selected. Please try again.");
+                // $('#quantity').html("We don't have enough " + product_title + " stock on hand for the quantity you selected. Please try again.");
+                var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">We don\'t have enough ' + product_title + ' stock on hand for the quantity you selected. Please try again.</h3></div><div class="notification_progress"></div></div>');
+                $('body').append(notificationDiv);
+                // Remove the notification after a certain time (e.g., 5 seconds)
+                setTimeout(function() {
+                    notificationDiv.remove();
+                }, 5000);
             } else {
                 $('#quantity').html("");
                 if (flag == 0) {
@@ -108,11 +114,23 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                         success: function (response) {
                             var jsonData = JSON.parse(response);
                             if (jsonData.status == 'success') {
-                                $('#quantity').html("Item added to cart");
+                                // $('#quantity').html("Item added to cart");
+                                var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Item added to cart</h3></div><div class="notification_progress"></div></div>');
+                                $('body').append(notificationDiv);
+                                // Remove the notification after a certain time (e.g., 5 seconds)
+                                setTimeout(function() {
+                                    notificationDiv.remove();
+                                }, 5000);
                                 var updatedCartCount = parseInt(cartCount) + 1;
                                 $('#cartCount').html(updatedCartCount);
                             } else {
-                                $('#quantity').html("Item not added to cart");
+                                var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Item not added to cart</h3></div><div class="notification_progress"></div></div>');
+                                $('body').append(notificationDiv);
+                                // Remove the notification after a certain time (e.g., 5 seconds)
+                                setTimeout(function() {
+                                    notificationDiv.remove();
+                                }, 5000);
+                                // $('#quantity').html("Item not added to cart");
                             }
                         }
                     });
@@ -129,11 +147,23 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                         success: function (response) {
                             var jsonData = JSON.parse(response);
                             if (jsonData.status == 'success') {
-                                $('#quantity').html("Item added to cart");
+                                // $('#quantity').html("Item added to cart");
+                                var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Item added to cart</h3></div><div class="notification_progress"></div></div>');
+                                $('body').append(notificationDiv);
+                                // Remove the notification after a certain time (e.g., 5 seconds)
+                                setTimeout(function() {
+                                    notificationDiv.remove();
+                                }, 5000);
                                 var updatedCartCount = parseInt(cartCount) + 1;
                                 $('#cartCount').html(updatedCartCount);
                             } else {
-                                $('#quantity').html("Item not added to cart");
+                                // $('#quantity').html("Item not added to cart");
+                                var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Item not added to cart</h3></div><div class="notification_progress"></div></div>');
+                                $('body').append(notificationDiv);
+                                // Remove the notification after a certain time (e.g., 5 seconds)
+                                setTimeout(function() {
+                                    notificationDiv.remove();
+                                }, 5000);
                             }
                         }
                     });
