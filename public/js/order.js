@@ -1,8 +1,9 @@
 // JavaScript for Modal
 var modal = document.getElementById("orderDetailsModal");
+var modal1 = document.getElementById("myModal");
 
 function openModal() {
-    modal.style.display = "block";
+    modal1.style.display = "block";
     document.getElementById("form_type").value = "save";
 }
 

@@ -1,104 +1,104 @@
 :root {
-    --color01: #2e8a99;
-    --color02: #4f9da9;
-    --color03: #a7d8d7;
-    --color04: #eaf3f4;
-    --white: #fff;
-    --gray: #f5f5f5;
-    --black1: #222;
-    --black2: #000000;
-  }
-  
-  .working-panel {
-    display: flex;
-    flex-wrap: wrap; /* Allow items to wrap to the next line */
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .fluid-panel {
-    text-align: left;
-    flex: 1; /* Take up remaining space */
-  }
-  
-  .display-4 {
-    font-size: 44px;
-    font-weight: 175;
-    color: var(--color01);
-    margin-bottom: 10px;
-  }
-  
-  hr {
-    border: none;
-    border-top: 1px solid #ccc;
-    margin: 20px 0;
-    width: 100%; /* Make the horizontal line span the full width */
-  }
-  
-  .working-panel .image-text {
-    display: flex;
-    align-items: center;
-  }
-  
-  .working-panel .image-text .image {
-    margin-left: auto; /* Move the image to the right */
-  }
-  
-  .working-panel .image-text img {
-    width: 100px; /* Adjust the width as needed */
-    height: auto;
-  }
-  
-  .header h2 {
-    position: relative;
-    padding: 20px;
-    font-size: 30px;
-    font-weight: 500;
-    margin-bottom: 15px;
-    color: var(--black1);
-  }
-  
-  .header h2::after {
-    content: "";
-    position: absolute;
-    left: 20px;
-    bottom: 010px;
-    width: 5%;
-    height: 3px;
-    background: var(--color01);
-  }
-  
-  .header button {
-    background-color: var(--color01);
-    color: var(--white);
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 20px;
-  }
-  
-  /* Modal Styles */
-  .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    overflow-y: auto;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-  }
-  
-  .modal-content {
-    /* max-width: 700px; */
-  width: 800px;
+  --color01: #2e8a99;
+  --color02: #4f9da9;
+  --color03: #a7d8d7;
+  --color04: #eaf3f4;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #000000;
+}
+
+.working-panel {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.fluid-panel {
+  text-align: left;
+  flex: 1; /* Take up remaining space */
+}
+
+.display-4 {
+  font-size: 44px;
+  font-weight: 175;
+  color: var(--color01);
+  margin-bottom: 10px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+  width: 100%; /* Make the horizontal line span the full width */
+}
+
+.working-panel .image-text {
+  display: flex;
+  align-items: center;
+}
+
+.working-panel .image-text .image {
+  margin-left: auto; /* Move the image to the right */
+}
+
+.working-panel .image-text img {
+  width: 100px; /* Adjust the width as needed */
+  height: auto;
+}
+
+.header h2 {
+  position: relative;
+  padding: 20px;
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  color: var(--black1);
+}
+
+.header h2::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  bottom: 010px;
+  width: 5%;
+  height: 3px;
+  background: var(--color01);
+}
+
+.header button {
+  background-color: var(--color01);
+  color: var(--white);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  overflow-y: auto;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  max-width: 700px;
+  width: 100%;
   background-color: #fff;
   padding: 25px 30px;
   border-radius: 15px;
@@ -110,309 +110,329 @@
   justify-content: center;
   align-items: center;
   justify-items: center;
-  }
-
-  .modal-content .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
 }
 
-  .modal-content .title {
-    font-size: 20px;
-    /* font-weight: 800; */
-    margin-bottom: 5px;
-    color: var(--color01);
-  }
-  
+.modal-content .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.modal-content .title {
+  font-size: 20px;
+  /* font-weight: 800; */
+  margin-bottom: 5px;
+  color: var(--color01);
+}
+
 .modal-content .customerDetails,
 .modal-content .orderItems,
-.modal-content .orderStatus{
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    /* justify-content: center; */
-    align-items: left;
-    margin-bottom: 10px;
-  }
-
-  .modal-content #orderItemsTable{
-    width: 100%;
-    border-collapse: collapse;
-
+.modal-content .orderStatus {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  /* justify-content: center; */
+  align-items: left;
+  margin-bottom: 10px;
 }
 
-.modal-content #orderItemsTable tbody{
-    /* display: table; */
-    height: 200px;
-    overflow: scroll;
-    justify-content: flex-start;
-
+.modal-content .customerDetails h3,
+.modal-content .orderItems h3,
+.modal-content .orderStatus h3 {
+  font-size: 18px;
+  font-weight: 500;
+  /* margin-bottom: 5px; */
+  color: var(--color01);
+  /* text-decoration: underline var(--color01); */
 }
 
-.modal-content #orderItemsTable th{
-    padding: 10px;
-    border-bottom: 1px solid #636363;
+.modal-content .orderStatus button {
+  background-color: var(--color02);
+  color: var(--white);
+  border: none;
+  padding: 2px;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 25%;
 }
 
-.modal-content #orderItemsTable td{
-    padding: 0px;
-    text-align: center;
+.modal-content .orderStatus button:hover {
+  background-color: var(--color01);
 }
 
-.modal-content #orderItemsTable td img{
-    /* width: 50px;
-    height: 50px; */
+.modal-content .btn {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
-  .modal-content .customerDetails h3,
-  .modal-content .orderItems h3,
-  .modal-content .orderStatus h3{
-    font-size: 18px;
-    font-weight: 500;
-    /* margin-bottom: 5px; */
-    color: var(--color01);
-    /* text-decoration: underline var(--color01); */
-  }
+.modal-content .btn button {
+  background-color: var(--color01);
+  color: var(--white);
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 25%;
+}
 
-  .modal-content .orderStatus button {
-    background-color: var(--color02);
-    color: var(--white);
-    border: none;
-    padding: 2px;
-    border-radius: 12px;
-    cursor: pointer;
-    width: 25%;
-  }
+.modal-content .btn button:hover {
+  background-color: var(--color02);
+}
 
-  .modal-content .orderStatus button:hover {
-    background-color: var(--color01);
-  }
+.modal-content .close:hover,
+.modal-content .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 
-  .modal-content .btn{
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
+.modal .modal-content .col-md-6 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
 
-  .modal-content .btn button {
-    background-color: var(--color01);
-    color: var(--white);
-    border: none;
-    padding: 10px;
-    border-radius: 20px;
-    cursor: pointer;
-    width: 25%;
-  }
+.modal .modal-content .form-group {
+  display: flex;
+  flex-direction: column;
+}
 
-  .modal-content .btn button:hover {
-    background-color: var(--color02);
-  }
+.modal .modal-content .form-group label {
+  width: 100%;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--black1);
+  /* padding: 10px; */
+}
+
+.modal .modal-content .btn {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* margin-top: 10px; */
+}
+
+#orderForm select,
+#orderForm input,
+#orderForm textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  /* margin-bottom: 10px; */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: all 0.3s ease-in;
+  overflow-y: scroll;
+  background-color: var(--white);
+  outline: none;
+  font-size: 10px;
+  /* padding-left: 15px; */
+}
 
 
 
+#orderForm button {
+  background-color: var(--color01);
+  color: var(--white);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+}
 
-  .modal-content .close:hover,
-  .modal-content .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
+#orderForm button:hover {
+  background-color: var(--color02);
+}
 
+#orderForm .btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-top: 10px; */
+}
 
-  #categoryForm {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: left;
-  }
-
-  #categoryForm .btn {
-      position: relative;
-      /* bottom: 0; */
-      right: 0;
-      float: right;
-      margin-top: -18px;
-      margin-left: 210px;
+#orderForm .btn button {
+  width: 48%;
+}
+@media (max-width: 584px) {
+    .modal-content {
+      max-width: 100%;
     }
-    
-    #categoryForm .btn button {
-      width: 35%;
-      margin-right: 0px; 
-      margin-top: 30px;
+    form .col-md-6 .form-group,
+    form .col-md-12 .form-group{
+      margin-bottom: 10px;
+      width: 100%;
     }
-  
-  #categoryForm label {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  #categoryForm input {
-    width: 80%;
-    padding: 10px 15px;
-    box-sizing: border-box;
-  }
-  
-  .table-container {
-    /* width: 100%; */
-    position: relative;
-    display: block;
-    /* overflow-y: scroll; */
-    /* height: 100%;   */
-    border-radius: 12px;
-    /* background-color: #A7D8D7; */
-    align-items: center;
-    justify-content: center;
-    /* background-color: #A7D8D7; */
-    /* width: 94%; */
-    margin: 30px;
-    margin-top: 50px;
-  }
-  
-  .table-container h2 {
-    font-size: 30px;
-    font-weight: 500;
-    margin-bottom: 15px;
-    color: var(--black1);
-  }
-  
-  table {
-    width: 100%;
-    display: table;
-    border-collapse: collapse;
-    /* margin-top: 10px; */
-    margin-bottom: 10px;
-    /* padding-bottom: 20px; */
-    overflow-y: scroll;
-    min-width: 80%;
-  }
-  
-  table thead {
-    display: table-header-group;
-    /* vertical-align: middle; */
-    border-color: inherit;
-    background-color: var(--color02);
-  }
-  
-  table thead th {
-    font-weight: 600;
-    font-size: 14px;
-    text-align: left;
-  }
-  
-  table tr {
-    color: var(--black1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-  }
-  table tbody td {
-    font-size: 14px;
-    padding-top: 5px;
-    padding-bottom: 15px;
-    text-align: left;
-  }
-  
-  table tbody tr:hover {
-    background: var(--color03);
-    color: var(--black1);
-  }
-  table tr td,
-  table tr th {
-    padding: 10px;
-  }
-  
-  tbody a {
-    text-decoration: none;
-    /* color: var(--black1); */
-  }
-  #coachTable td a {
-      text-decoration: none;
-      color: var(--black1);
-      font-size: 1.4em; /* Adjust the font size */
-      margin-right: 20px; /* Add space to the right */
-    }
-  
-  #coachTable td button {
-      background-color: transparent;
-      border: none;
-      color: var(--black1);
-      font-size: 1.4em; /* Adjust the font size */
-      margin-right: 20px; /* Add space to the right */
-      cursor: pointer;
-    }
-  
-  tbody td .icon {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* padding-left: 10px;      */
-  }
-  
-  tbody td .icon:hover {
-    cursor: pointer;
-  }
-  
-  #coachTable {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  #coachTable th,
-  #coachTable td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left; 
-  }
-  
-  .pagination-container {
-      margin-top: 20px;
-      margin-left: 24px;
-      display: flex;
-      justify-content: left;
-  }
-  
-  .pagination {
-      list-style: none;
-      display: flex;
-      gap: 10px;
-  }
-  
-  .page-link {
-      padding: 8px 12px;
-      text-decoration: none;
-      color: var(--color01);
-      background-color: var(--color04);
-      border: 1px solid var(--color01);
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-  }
-  
-  .page-link:hover {
-      background-color: var(--color01);
-      color: var(--white);
-  }
-  
-  .form-invalid{
-      color: rgb(172,5,5);
-      font-size: 0.85em;
-    }
-  
-  
-  @media screen and (max-width: 768px) {
-    .display-4 {
-      font-size: 28px; /* Reduce font size for smaller screens */
-    }
-  
-    .working-panel .image-text {
-      width: 10%; /* Make the image take up the full width on smaller screens */
-      justify-content: flex-end; /* Align the image to the right */
-      margin-top: 10px; /* Add some space between text and image */
-    }
-  
-    .working-panel .image-text img {
-      width: 100%; /* Make the image take up the full width */
+    .modal-content form .col-md-6,
+    .modal-content form .col-md-12 {
+      max-height: 220px;
+      overflow-y: scroll;
+      /* border: 2px solid #9b59b6; */
+      /* padding: 10px; */
+      /* margin: 5px; */
+      /* border-radius:10px ; */
     }
   }
-  
+
+.table-container {
+  /* width: 100%; */
+  position: relative;
+  display: block;
+  /* overflow-y: scroll; */
+  /* height: 100%;   */
+  border-radius: 12px;
+  /* background-color: #A7D8D7; */
+  align-items: center;
+  justify-content: center;
+  /* background-color: #A7D8D7; */
+  /* width: 94%; */
+  margin: 30px;
+  margin-top: 50px;
+}
+
+.table-container h2 {
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  color: var(--black1);
+}
+
+table {
+  width: 100%;
+  display: table;
+  border-collapse: collapse;
+  /* margin-top: 10px; */
+  margin-bottom: 10px;
+  /* padding-bottom: 20px; */
+  overflow-y: scroll;
+  min-width: 80%;
+}
+
+table thead {
+  display: table-header-group;
+  /* vertical-align: middle; */
+  border-color: inherit;
+  background-color: var(--color02);
+}
+
+table thead th {
+  font-weight: 600;
+  font-size: 14px;
+  text-align: left;
+}
+
+table tr {
+  color: var(--black1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+table tbody td {
+  font-size: 14px;
+  padding-top: 5px;
+  padding-bottom: 15px;
+  text-align: left;
+}
+
+table tbody tr:hover {
+  background: var(--color03);
+  color: var(--black1);
+}
+table tr td,
+table tr th {
+  padding: 10px;
+}
+
+tbody a {
+  text-decoration: none;
+  /* color: var(--black1); */
+}
+#coachTable td a {
+  text-decoration: none;
+  color: var(--black1);
+  font-size: 1.4em; /* Adjust the font size */
+  margin-right: 20px; /* Add space to the right */
+}
+
+#coachTable td button {
+  background-color: transparent;
+  border: none;
+  color: var(--black1);
+  font-size: 1.4em; /* Adjust the font size */
+  margin-right: 20px; /* Add space to the right */
+  cursor: pointer;
+}
+
+tbody td .icon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding-left: 10px;      */
+}
+
+tbody td .icon:hover {
+  cursor: pointer;
+}
+
+#coachTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#coachTable th,
+#coachTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.pagination-container {
+  margin-top: 20px;
+  margin-left: 24px;
+  display: flex;
+  justify-content: left;
+}
+
+.pagination {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+}
+
+.page-link {
+  padding: 8px 12px;
+  text-decoration: none;
+  color: var(--color01);
+  background-color: var(--color04);
+  border: 1px solid var(--color01);
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.page-link:hover {
+  background-color: var(--color01);
+  color: var(--white);
+}
+
+.form-invalid {
+  color: rgb(172, 5, 5);
+  font-size: 0.85em;
+}
+
+@media screen and (max-width: 768px) {
+  .display-4 {
+    font-size: 28px; /* Reduce font size for smaller screens */
+  }
+
+  .working-panel .image-text {
+    width: 10%; /* Make the image take up the full width on smaller screens */
+    justify-content: flex-end; /* Align the image to the right */
+    margin-top: 10px; /* Add some space between text and image */
+  }
+
+  .working-panel .image-text img {
+    width: 100%; /* Make the image take up the full width */
+  }
+}
