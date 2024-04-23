@@ -316,7 +316,7 @@ class M_Bookings
     }
 
         
-    public function SendEmailToCoach($data)
+    public function SendEmailToCoach($data,$admin)
 {   
     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -324,6 +324,11 @@ class M_Bookings
     $name = $data['name'];
     $phoneNumber = $data['phoneNumber'];
     $date = $data['date']; 
+
+    $adminEMAIL = $admin->email; // Retrieve email
+    $adminNAME = $admin->name; // Retrieve name
+    $adminPNO = $admin->phoneNumber;
+
    
     require_once APPROOT . '/libraries/phpmailer/src/PHPMailer.php';
     require_once APPROOT . '/libraries/phpmailer/src/SMTP.php';
@@ -348,10 +353,16 @@ class M_Bookings
     $mail->isHTML(true);
     $mail->Subject = 'About your appointment';
     $mail->Body = "Hello $name,<br><br>
-    You have a time slot on $date, assigned to the player $name. Here are their contact details:<br>
-    - Phone Number: $phoneNumber<br>
-    - Email: $email<br>
-    If you have any issues, please contact the user and inform us before $date.";
+        You have a time slot on $date, at $timeslot assigned to the player $name. Here are their contact details:<br>
+        - Phone Number: $phoneNumber<br>
+        - Email: $email<br>
+        If you have any issues, please contact the user or administrator before $date.<br><br>
+        Admin Details:<br>
+        - Name: $adminNAME<br>
+        - Phone Number: $adminPNO<br>
+        - Email: $adminEMAIL<br>
+        If you need further assistance, please contact the administrator.";
+    
 
     // Attempt to send email
     try {
@@ -373,7 +384,13 @@ class M_Bookings
 
     
 }
+public function getADMINdetails(){
+    $this->db->query('SELECT * FROM company_users WHERE role = 2');
+    $this->db->execute();
+    $resultSet = $this->db->single();
 
+    return $resultSet;    
+}
 
     public function sendEmail($reservation)
     {

@@ -23,7 +23,8 @@ class Bookings extends Controller
 
             // Decode the JSON string into an associative array
             $arrayData = json_decode($jsonString, true);
-
+            
+            $admin=$this->bookingModel->getADMINdetails();
             $bookingPrice = $_POST['bookingPrice'];
             $decimalBookingPrice = number_format((float) $bookingPrice, 2, '.', '');
 
@@ -67,7 +68,7 @@ class Bookings extends Controller
             if (empty($data['name_err']) && empty($data['net_err']) && empty($data['email_err'])) {
                 $bookingId = $this->bookingModel->last_inserted_id();
                 //create user
-                if ($this->bookingModel->Make_Reservation($data) && $this->bookingModel->SendEmailToCoach($data)) {
+                if ($this->bookingModel->Make_Reservation($data) && $this->bookingModel->SendEmailToCoach($data,$admin)) {
                     $_SESSION['booking_success'] = true;
                     $bookingId = $this->bookingModel->last_inserted_id();
                     foreach ($arrayData as $timeSlotAndNetType) {
