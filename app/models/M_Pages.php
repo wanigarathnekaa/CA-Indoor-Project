@@ -180,6 +180,12 @@ class M_Pages
         return $result;
     }
 
+    public function getCancelOrder(){
+        $this->db->query('SELECT * FROM cancel_orders');
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
 
     public function getOrders($customerID){
         $this->db->query('SELECT * FROM orders WHERE customer_id = :customer_id');

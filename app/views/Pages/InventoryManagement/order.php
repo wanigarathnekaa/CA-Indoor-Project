@@ -234,8 +234,23 @@
 
                 <div class="btn">
                     <input type="hidden" id="form_type" name="form_type">
-                    <!-- <button type="button">Okay</button> -->
                     <button type="button" onclick="closeModal()">Okay</button>
+                    <button type="button" onclick="openCancelModal()">Cancel Order</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="cancelModal" class="modal">
+            <div class="modal-content">
+                <div class="title">
+                    <h2 class="modal-title">Cancel Order</h2>
+                </div>
+                <hr>
+
+                <div class="btn">
+                    <input type="hidden" id="form_type" name="form_type">
+                    <button type="button" id="cancelOrder">Yes</button>
+                    <button type="button" onclick="closeCancelModal()">No</button>
                 </div>
             </div>
         </div>
@@ -482,6 +497,27 @@
                             $("#invalid6").text(response.email_err);
                             $("#invalid7").text(response.adr_err);
                             $("#invalid8").text(response.city_err);
+                        }
+                    }
+                });
+            });
+
+            $("#cancelOrder").click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "<?= URLROOT; ?>/Order/cancelOrder",
+                    data: {
+                        order_id: $('#orderTable tr.selected td:first').text()
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log(response);
+                        if (response.status == "success") {
+                            alert("Order cancelled successfully");
+                            location.reload();
+                        } else {
+                            alert("Order cancellation failed");
                         }
                     }
                 });

@@ -48,7 +48,7 @@ class Order extends Controller
             if ($data["payment"] == "pay_online") {
                 $amount = intval($data['price']);
                 $merchant_id = "1225484";
-                $order_id = $orderId+1;
+                $order_id = $orderId + 1;
                 $merchant_secret = "MTI0NjM0MDI4NjM5MDE0NzA0NzIxMTU4ODM1OTEwMTE3MDk0NDk4Mw==";
                 $currency = "LKR";
                 //Calculate the hash using MD5 and concatenate various pieces of data
@@ -65,7 +65,7 @@ class Order extends Controller
                 $array = [];
                 $array["pickup"] = $data["pickup"];
                 $array["payment"] = $data["payment"];
-                $array["amount"] = $amount; 
+                $array["amount"] = $amount;
                 $array['merchant_id'] = $merchant_id;
                 $array['order_id'] = $order_id;
                 $array['hash'] = $hash;
@@ -186,7 +186,7 @@ class Order extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            
+
             $data = [
                 "pickup" => trim($_POST['pickup']),
                 "payment" => trim($_POST['payment']),
@@ -392,6 +392,52 @@ class Order extends Controller
             exit();
         }
     }
+
+    public function cancelOrder()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $order_id = $_POST['order_id'];
+
+            $data = $this->orderModel->getOrder($order_id);
+
+            // Convert $data to an array
+            $dataArray = [
+                'order_id' => $data->order_id,
+                'full_name' => $data->full_name,
+                'mobile_number' => $data->mobile_number,
+                'email' => $data->email,
+                'address' => $data->address,
+                'city' => $data->city,
+                'customer_id' => $data->customer_id,
+                'order_date' => $data->order_date,
+                'order_status' => "Cancelled",
+                'payment_method' => $data->payment_method,
+                'pickup_mode' => $data->pickup_mode,
+                'payment_status' => $data->payment_status,
+                'price' => $data->price
+            ];
+
+            if ($this->orderModel->insertCancelOrder($dataArray) && $this->orderModel->deleteOrder($order_id)) {
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Order Cancelled Successfully'
+                ];
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Something went wrong. Please try again'
+                ];
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+    }
+
+
 }
 
 
