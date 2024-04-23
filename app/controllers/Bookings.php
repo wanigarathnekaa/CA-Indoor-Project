@@ -228,34 +228,6 @@ class Bookings extends Controller
             echo "Invalid request method";
         }
     }
-
-    public function SendInvoice($reservationID)
-    {
-
-
-
-        if (isset($_POST["OKAY"])) {
-            // $this->reportmodel->filterBookingsAndGeneratePDF($data);
-            $reservation = $this->bookingModel->GetReservInfo($reservationID);
-            $invoice_name = $this->bookingModel->sendEmail($reservation);
-            if ($this->bookingModel->sendingemail($invoice_name, $reservation)) {
-                $response = [
-                    'status' => 'success',
-                ];
-            } else {
-                $response = [
-                    'status' => 'error',
-                    'message' => 'Something went wrong',
-                ];
-            }
-    
-            header('Content-Type: application/json');
-            echo json_encode($response);
-            exit();
-
-
-
-    }}
     public function sendingInvoice()
     {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);

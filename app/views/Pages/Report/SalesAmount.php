@@ -32,9 +32,6 @@
             </form>
         </div>
     </div>
-    <?php if (isset($filteredBookings)) {
-        echo $filteredBookings;
-    } ?>
 </div>
 </section>
 <script>

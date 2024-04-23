@@ -92,6 +92,11 @@ class Complaint extends Controller{
                          ];
                          $this->view('Pages/Complaint/complaintDetails', $data);
                      }
+                     public function SendMessage()
+                     {
+                         
+                         $this->view('Pages/Complaint/SendMessage');//C:\xampp\htdocs\C&A_Indoor_Project\app\views\Pages\Complaint\SendMessage.php
+                     }
                        
         // //Get  user image
         
@@ -162,7 +167,57 @@ class Complaint extends Controller{
             }
         } 
 
-    }}
-                         
+    }
+    
+    
+    public function sendMsgEmail()
+{   
+    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+    $email = $_POST['email'];
+    $name = $_POST['name'];
+    $message = $_POST['message'];
+    require_once APPROOT . '/libraries/phpmailer/src/PHPMailer.php';
+    require_once APPROOT . '/libraries/phpmailer/src/SMTP.php';
+    require_once APPROOT . '/libraries/phpmailer/src/Exception.php';
+
+    $mail = new PHPMailer(true);
+
+    //Server settings
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'nivodya2001@gmail.com';
+    $mail->Password = 'wupbxphjicpfidgj';
+    $mail->SMTPSecure = 'ssl';
+    $mail->Port = 465;
+    
+    //Recipients
+    $mail->setFrom('nivodya2001@gmail.com', 'Hasini Hewa');
+    $mail->addAddress($email);
+
+    //Content
+    $mail->isHTML(true);
+    $mail->Subject = 'About your complaint';
+    $mail->Body = $message;
+
+    // Attempt to send email
+    try {
+        $mail->send();
+        $response = [
+            'status' => 'success',
+        ];
+    } catch (Exception $e) {
+        $response = [
+            'status' => 'error',
+            'message' => 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo,
+        ];
+    }
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
+    exit();
+}
+}                 
 
 ?>

@@ -37,6 +37,22 @@
             </div>
           </div>
           <?php endforeach; ?>
+          <div class="card swiper-slide">
+            <div class="image-content">
+              <span class="overlay"></span>
+              <div class="card-image">
+              <img class="profile-image card-img" src="<?= URLROOT ?>/public/profilepic/avatar.jpg" style="max-width: 100%; max-height: 100%;" alt="" />
+              </div>
+            </div>
+            <div class="card-content">
+            
+            <h2 class="name"></h2>
+            <p class="description"></p>
+
+            <div><a href="<?php echo URLROOT; ?>/Complaint/SendMessage" class="button2" ><i class="fas fa-plus"></i></a></div>
+            
+            </div>
+          </div>
 
          
         </div>

@@ -39,6 +39,26 @@ function openPopup(reservation) {
   const r_payment = document.querySelector(".r_payment");
   r_payment.textContent = reservation.paymentStatus;
 }
+function openLogPopup(log) {
+  popup.classList.add("open-popup");
+  popupcontainer.classList.add("open-popupcontainer");
+
+  const l_id = document.querySelector(".l_id");
+  l_id.textContent = log.uid;
+
+  const l_name = document.querySelector(".l_name");
+  l_name.textContent = log.user_name;
+
+  const l_date = document.querySelector(".l_date");
+  l_date.textContent = log.create_date;
+
+  const l_last_login = document.querySelector(".l_last_login");
+  l_last_login.textContent = log.last_login;
+
+  const l_last_logout = document.querySelector(".l_last_logout");
+  l_last_logout.textContent = log.last_logout;
+}
+
 
 function closePopup() {
   popup.classList.remove("open-popup");
