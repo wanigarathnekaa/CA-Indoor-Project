@@ -30,9 +30,11 @@
                 </h1>
             </div>
 
-            <!-- <div class="add-btn">
-                        <a href="#"><i class="fa-solid fa-calendar-plus icon"></i></i></a>
-                  </div> -->
+            <?php if ($role == "Cashier"): ?>
+                <div class="add-btn">
+                    <a href="http://localhost/C&A_Indoor_Project/Pages/Order/cashier"><i class="fa-solid fa-user-plus  icon"></i></a>
+                </div>
+            <?php endif; ?>
         </div>
 
         <!-- Table Sort -->
@@ -75,13 +77,13 @@
                     </tr>
                 </thead>
                 <tbody id="orderTable">
-                        <?php foreach ($data as $order): 
+                    <?php foreach ($data as $order):
                         $payment_status_color = '';
                         if ($order->payment_status == 'Paid') {
                             $payment_status_color = '#00ff00';
                         } else if ($order->payment_status == 'Not Paid') {
                             $payment_status_color = '#ff0000';
-                        }else if ($order->payment_status == 'Pending') {
+                        } else if ($order->payment_status == 'Pending') {
                             $payment_status_color = '#ffe100';
                         }
 
@@ -117,12 +119,12 @@
                             </td>
                             <td>
                                 <span class="status" style="background-color: <?php echo $order_status_color; ?>">
-                                <?php echo str_replace('_', ' ', $order->order_status); ?>
+                                    <?php echo str_replace('_', ' ', $order->order_status); ?>
                                 </span>
                             </td>
                             <td>
                                 <span class="status" style="background-color: <?php echo $payment_status_color; ?>">
-                                <?php echo str_replace('_', ' ', $order->payment_status); ?>
+                                    <?php echo str_replace('_', ' ', $order->payment_status); ?>
                                 </span>
                             </td>
                         </tr>
@@ -178,7 +180,7 @@
                         <span id="PaymentStatus" class="PaymentStatus"></span>
                         <button id="Change_Payment">Paid</button>
                     </div>
-                    
+
                 </div>
 
                 <hr>
@@ -264,8 +266,8 @@
                         $("#PaymentStatus").text("Payment Status: " + order.payment_status);
                         orderId = order.order_id;
 
-                        if(order.payment_status == "Paid"){
-                            $("#Change_Payment").prop("disabled", true);   
+                        if (order.payment_status == "Paid") {
+                            $("#Change_Payment").prop("disabled", true);
                         }
 
                         var itemsTable = $("#orderItemsTable tbody");
@@ -275,7 +277,7 @@
                             var item = orderItems[i];
                             var product = products[i];
                             var row = '<tr>';
-                            row += '<td><img width="60px" height="50px" src="<?= URLROOT ?>/CricketShop/'+ product.product_thumbnail +'">'+'</td>';                                 
+                            row += '<td><img width="60px" height="50px" src="<?= URLROOT ?>/CricketShop/' + product.product_thumbnail + '">' + '</td>';
                             row += '<td>' + product.product_title + '</td>';
                             row += '<td>' + item.quantity + '</td>';
                             row += '<td>' + item.price_per_unit + '</td>';
