@@ -77,8 +77,13 @@
 } */
 
 .today {
-  background-color: #4f9da9 !important;
+  background-color: #1a605e;
 }
+
+.today > .btn-success{
+  background-color: #1a605e
+}
+
 
 /* .empty {
   background-color: #ffffff;

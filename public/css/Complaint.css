@@ -14,15 +14,15 @@ body {
   padding: 3px;
 }
 .card-wrapper {
-  padding-top: 80px;
+  /* padding-top: 80px; */
   display: flex; /* Display children in a row */
   overflow-x: auto; /* Allow horizontal scrolling */
   scroll-snap-type: x mandatory; /* Enable snapping for horizontal scrolling */
 }
 
 .card {
-  flex: 0 0 auto; /* Don't grow or shrink, maintain initial size */
-  width: 300px; /* Adjust width as needed */
+  flex: 0 0 auto; 
+  width: 200px; 
   margin-right: 20px; /* Add some space between cards */
   scroll-snap-align: start; /* Snap card to the start of the container */
 }
@@ -31,17 +31,18 @@ body {
 }
 
 .slider-container {
-  max-width: 2020px;
+  max-width: 100%;
   width: 100%;
-  padding: 100px 0;
+  padding-top: 20px;
 }
 .slider-content {
   overflow: hidden;
-  border-radius: 25px;
-  margin: 0 40px;
+  /* border-radius: 25px; */
+  margin: 0 20px;
+ 
 }
 .card {
-  width: 700px;
+  width: 200px;
   border-radius: 25px;
   background-color: #fff;
 }
@@ -53,12 +54,15 @@ body {
   align-items: center;
 }
 .card-content {
-  height: 200px;
+  /* height: 200px; */
+  background-color: #eaeaea;
+  border-radius: 0 0 25px 25px;
 }
 .image-content {
   position: relative;
   row-gap: 5px;
   padding: 25px 0;
+
 }
 .overlay {
   position: absolute;
@@ -67,9 +71,9 @@ body {
   width: 100%;
   height: 100%;
   background-color: #4f9da9;
-  border-radius: 25px 25px 0px 25px;
+  border-radius: 25px 25px 0px 0px;
 }
-.overlay::before,
+/* .overlay::before,
 .overlay::after {
   content: "";
   position: absolute;
@@ -82,11 +86,11 @@ body {
 .overlay::after {
   border-radius: 0 25px 0 0;
   background-color: #fff;
-}
+} */
 .card-image {
   position: relative;
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
   background-color: #fff;
   border-radius: 50%;
 }
@@ -116,15 +120,7 @@ body {
   word-wrap: break-word; /* Allow wrapping of long words */
   max-height: 300px; /* Adjust the maximum height as needed */
   overflow-y: auto; /* Add vertical scrollbar if content overflows */
-  margin-bottom: 50px;
-  .description {
-    width: 200px;
-    font-size: 14px;
-    color: #707070;
-    text-align: center;
-    word-wrap: break-word; /* Allow wrapping of long words */
-    margin-bottom: 50px;
-  }
+  margin-bottom: 20px;
 }
 /* .button {
   border: none;
@@ -143,40 +139,30 @@ body {
   word-wrap: break-word; /* Allow wrapping of long words */
 }
 .description {
-  max-width: 200px; /* Adjust as needed */
-  max-height: 100px; /* Adjust as needed */
+  width: 100%;
+  max-height: max-content;
   overflow: auto;
-  overflow-wrap: break-word;
+  /* overflow-wrap: break-word; */
 }
 
-.button1 {
-  padding-top: 20px;
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #4f9da9;
-  color: #fff;
-  text-decoration: none;
-  border: none;
-  border-radius: 5px;
-  margin: 14px;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-weight: 400;
-}
+.button1,
 .button2 {
-  padding-top: 20px;
+  /* padding-top: 20px; */
   display: inline-block;
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
   background-color: #4f9da9;
   color: #fff;
   text-decoration: none;
   border: none;
-  border-radius: 5px;
-  margin: 14px;
+  /* border-radius: 5px; */
+  /* margin: 14px; */
+  /* padding: 8px 16px; */
+  padding: 10px 20px;
   border-radius: 6px;
-  font-weight: 400;
-  padding: 15px 30px; /* Adjust padding as needed */
+  font-size: 10px;
+  /* font-weight: 400; */
 }
+
 
 .button:hover {
   background-color: #2e8a99;

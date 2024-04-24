@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- <title>Document</title> -->
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/Complaint.css">
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/order.css">
 </head>
 
 <body>
@@ -25,8 +26,13 @@
               <div class="image-content">
                 <span class="overlay"></span>
                 <div class="card-image">
-                  <img class="profile-image card-img" src="<?= URLROOT ?>/public/profilepic/avatar.jpg"
-                    style="max-width: 100%; max-height: 100%;" alt="" />
+                  <?php if ($complaints->img) : ?>
+                    <img class="profile-image card-img" src="<?= URLROOT ?>/public/profilepic/<?php echo $complaints->img; ?>"
+                      style="max-width: 100%; max-height: 100%;" alt="" />
+                  <?php else : ?>
+                    <img class="profile-image card-img" src="<?= URLROOT ?>/public/profilepic/avatar.jpg"
+                      style="max-width: 100%; max-height: 100%;" alt="" />
+                  <?php endif; ?>
                 </div>
               </div>
               <div class="card-content">
@@ -41,6 +47,7 @@
               </div>
             </div>
           <?php endforeach; ?>
+          
           <div class="card swiper-slide">
             <div class="image-content">
               <span class="overlay"></span>
@@ -67,6 +74,7 @@
       <div class="swiper-button-prev swiper-navBtn"></div>
       <div class="swiper-pagination"></div>
     </div>
+
     <div class="table-container">
       <table id="coachTable">
         <thead>

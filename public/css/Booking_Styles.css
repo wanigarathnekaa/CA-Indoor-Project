@@ -90,6 +90,7 @@ body {
 
 .ID {
   overflow: scroll;
+
 }
 
 .container form .form.second {
@@ -381,7 +382,7 @@ label.btn:hover {
 } */
 
 input[type="checkbox"]:checked + label.btn {
-  background-color: #007bff;
+  background-color: var(--color01);
   color: #fff;
 }
 
@@ -412,13 +413,33 @@ input[type="checkbox"]:checked + label.btn {
   .form {
     flex-direction: column;
   }
+  .netbtnbar {
+    flex-direction: column;
+  }
+  .netbtnbar .net {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .ID{
+    height: max-content;
+    position: relative;
+    /* overflow: scroll; */
+    
+  }
 }
 
 /* ===== Media Queries ===== */
 @media (max-width: 750px) {
+  .container{
+    padding: 10px;
+    height: max-content;
+
+  }
   .container form {
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     width: 100%;
+    overflow: visible;
   }
   .container form::-webkit-scrollbar {
     display: none;

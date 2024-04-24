@@ -54,9 +54,11 @@ class M_Complaint
 
     public function getUserImg($user_id)
     {
-        $image = $this->db->query('SELECT img FROM user WHERE uid = :uid');
-        if ($image) {
-            return $image;
+        $this->db->query('SELECT img FROM user WHERE uid = :uid');
+        $this->db->bind(':uid', $user_id);
+        $result = $this->db->single();
+        if ($result) {
+            return $result->img;
         } else {
             return null;
         }
