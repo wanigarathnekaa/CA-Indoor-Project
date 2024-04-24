@@ -9,6 +9,8 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/managerDashboard.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/order.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/notification.css">
+
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
@@ -38,105 +40,127 @@
         <div class="header">
             <h2>Orders</h2>
             <button type="button" id="addOrder" onclick="openModal()">Add New Order</button>
+            
+            <!-- add order popup -->
             <div id="myModal" class="modal">
                 <div class="modal-content">
-                    <h2 class="modal-title">Add New Order</h2>
+                    
                     <form method="POST" id="orderForm">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="category_name">Category Name</label>
-                                <select name="category_name" id="category_name" class="form-control">
-                                    <option value="0">Select Category</option>
-                                    <?php foreach ($data['categories'] as $category): ?>
-                                        <option value="<?php echo $category->category_id; ?>">
-                                            <?php echo $category->category_name; ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <!-- Product Brand Name -->
-                            <div class="form-group">
-                                <label for="brand_name">Brand Name</label>
-                                <select name="brand_name" id="brand_name" class="form-control">
-                                    <option value="0">Select a Category first</option>
-                                </select>
-                            </div>
-                            <!-- Product Item Name -->
-                            <div class="form-group">
-                                <label for="brand_name">Select Item</label>
-                                <select name="item_name" id="item_name" class="form-control">
-                                    <option value="0">Select a Brand first</option>
-                                </select>
-                                <span class="form-invalid-3"></span>
-                            </div>
-                            <div class="btn">
-                                <button type="button" id="addItem">Add</button>
-                            </div>
-                        </div>
-                        <span id="invalid1" style="color:red;"></span>
-
-                        <div style="margin-top:20px;" class="orderItems">
-                            <h3>Added Items</h3>
-                            <table id="orderItemsTable">
-                                <thead>
-                                    <tr>
-                                        <th>Product</th>
-                                        <th>Product Name</th>
-                                        <th>Quantity</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="items">
-                                    <!-- Order items will be appended here -->
-                                </tbody>
-                            </table>
-                        </div>
-                        <span id="totPrice"></span>
-
-                        <div class="col-50" id="customer_details" style="display: none;">
-                            <h2 class="topic">Order Details</h2>
-
-                            <div class="col-md-6">
-                                <!-- Pickup mode -->
-                                <div class="form-group">
-                                    <label for="pickup">Pickup Mode</label>
-                                    <select id="pickup" name="pickup">
-                                        <option disabled selected>Select Pickup Mode</option>
-                                        <option value="pickup_at_store">Pickup at the Store</option>
-                                        <option value="online_delivery">Online Delivery</option>
-                                    </select>
-                                    <span id="invalid2" style="color:red;"></span>
+                        <div class="maindiv">
+                            <div class="left">
+                                <h2 class="modal-title">Add New Order</h2>  
+                                <div class="col-md-6">
+                                    <!-- Product category names -->
+                                    <div class="form-group">
+                                        <label for="category_name">Category Name</label>
+                                        <select name="category_name" id="category_name" class="form-control">
+                                            <option value="0">Select Category</option>
+                                            <?php foreach ($data['categories'] as $category): ?>
+                                                <option value="<?php echo $category->category_id; ?>">
+                                                    <?php echo $category->category_name; ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <!-- Product Brand Name -->
+                                    <div class="form-group">
+                                        <label for="brand_name">Brand Name</label>
+                                        <select name="brand_name" id="brand_name" class="form-control">
+                                            <option value="0">Select a Category first</option>
+                                        </select>
+                                    </div>
+                                    <!-- Product Item Name -->
+                                    <div class="form-group">
+                                        <label for="brand_name">Select Item</label>
+                                        <select name="item_name" id="item_name" class="form-control">
+                                            <option value="0">Select a Brand first</option>
+                                        </select>
+                                        <span class="form-invalid-3"></span>
+                                    </div>
+                                    <div class="btn add">
+                                        <button type="button" id="addItem" class="addbtn">Add</button>
+                                    </div>
                                 </div>
+                                <span id="invalid1" style="color:red;"></span>
 
-                                <!-- Payment method -->
-                                <div class="form-group">
-                                    <label for="payment">Payment Method</label>
-                                    <select id="payment" name="payment">
-                                        <option disabled selected>Select Pickup Mode First</option>
-                                    </select>
-                                    <span id="invalid3" style="color:red;"></span>
+                                <div style="margin-top:20px;" class="orderItems">
+                                    <h3>Added Items</h3>
+                                    <table id="orderItemsTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Product Name</th>
+                                                <th>Quantity</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="items">
+                                            <!-- Order items will be appended here -->
+                                        </tbody>
+                                    </table>
                                 </div>
+                                <span id="totPrice"></span>
                             </div>
 
-                            <label for="fname">Full Name</label>
-                            <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
-                            <span id="invalid4" style="color:red;"></span>
+                            <div class="col-50" id="customer_details" style="display: none;">
+                                <div class="right">
+                                    <h2 class="modal-title">Order Details</h2>
 
-                            <label for="phone">Mobile Number</label>
-                            <input type="text" id="phone" name="phone" placeholder="0712345678">
-                            <span id="invalid5" style="color:red;"></span>
+                                    <div class="inputdivrow">
+                                        <!-- Pickup mode -->
+                                        <div class="input">
+                                            <label for="pickup">Pickup Mode</label>
+                                            <select id="pickup" name="pickup">
+                                                <option disabled selected>Select Pickup Mode</option>
+                                                <option value="pickup_at_store">Pickup at the Store</option>
+                                                <option value="online_delivery">Online Delivery</option>
+                                            </select>
+                                            <span id="invalid2" style="color:red;"></span>
+                                        </div>
 
-                            <label for="email">Email</label>
-                            <input type="text" id="email" name="email" placeholder="john@example.com">
-                            <span id="invalid6" style="color:red;"></span>
+                                        <!-- Payment method -->
+                                        <div class="input">
+                                            <label for="payment">Payment Method</label>
+                                            <select id="payment" name="payment">
+                                                <option disabled selected>Select Pickup Mode First</option>
+                                            </select>
+                                            <span id="invalid3" style="color:red;"></span>
+                                        </div>
+                                    </div>
 
-                            <label for="adr">Address</label>
-                            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
-                            <span id="invalid7" style="color:red;"></span>
-
-                            <label for="city">City</label>
-                            <input type="text" id="city" name="city" placeholder="New York">
-                            <span id="invalid8" style="color:red;"></span>
+                                    <div class="inputdivrow">
+                                        <div class="input">
+                                            <label for="fname">Full Name</label>
+                                            <input type="text" id="fname" name="fname" placeholder="John Doe">
+                                            <span id="invalid4" style="color:red;"></span>
+                                        </div>
+                                        <div class="input">
+                                            <label for="phone">Mobile Number</label>
+                                            <input type="text" id="phone" name="phone" placeholder="0712345678">
+                                            <span id="invalid5" style="color:red;"></span>
+                                        </div>
+                                    </div>
+                                    <div class="inputdivrow">
+                                        <div class="input">
+                                            <label for="email">Email</label>
+                                            <input type="text" id="email" name="email" placeholder="john@example.com">
+                                            <span id="invalid6" style="color:red;"></span>
+                                        </div>
+                                        <div class="input">
+                                            <label for="adr">Address</label>
+                                            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+                                            <span id="invalid7" style="color:red;"></span>
+                                        </div>
+                                    </div>
+                                    <div class="inputdivrow">
+                                        <div class="input">
+                                            <label for="city">City</label>
+                                            <input type="text" id="city" name="city" placeholder="New York">
+                                            <span id="invalid8" style="color:red;"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="btn">
@@ -149,6 +173,7 @@
             </div>
         </div>
 
+        <!-- Orders Table -->
         <div class="table-container">
             <table id="coachTable">
                 <thead>
@@ -234,12 +259,13 @@
 
                 <div class="btn">
                     <input type="hidden" id="form_type" name="form_type">
-                    <button type="button" onclick="closeModal()">Okay</button>
-                    <button type="button" onclick="openCancelModal()">Cancel Order</button>
+                    <button type="button" onclick="closeModal()" class="btn1">Okay</button>
+                    <button type="button" onclick="openCancelModal()" class="btn1">Cancel Order</button>
                 </div>
             </div>
         </div>
 
+        <!-- cancel orders -->
         <div id="cancelModal" class="modal">
             <div class="modal-content">
                 <div class="title">
@@ -338,8 +364,21 @@
                         console.log(response);
                         if (response.status == "success") {
                             $("#status").text("Status: " + $stat);
+                            // alert("Status changed successfully");
+                            var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Status changed successfully</h3></div><div class="notification_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            // Remove the notification after a certain time (e.g., 5 seconds)
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 5000);
                         } else {
-                            alert("Status change failed");
+                            // alert("Status change failed");
+                            var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Status change failed</h3></div><div class="notification_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            // Remove the notification after a certain time (e.g., 5 seconds)
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 5000);
                         }
                     }
                 });
@@ -453,7 +492,13 @@
                 $("#placeOrder").css("display", "none");
                 $("#saveOrder").css("display", "block");
                 if (selectedItems.length == 0) {
-                    $("#invalid1").text("Please add items to the order");
+                    // $("#invalid1").text("Please add items to the order");
+                    var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Please add items to the order</h3></div><div class="notification_progress"></div></div>');
+                    $('body').append(notificationDiv);
+                    // Remove the notification after a certain time (e.g., 5 seconds)
+                    setTimeout(function() {
+                        notificationDiv.remove();
+                    }, 5000);
                     return;
                 }
             });
@@ -487,11 +532,32 @@
                     success: function (response) {
                         console.log(response);
                         if (response.status == "success") {
-                            alert("Order placed successfully");
-                            location.reload();
+                            // alert("Order placed successfully");
+                            // location.reload();
+                            var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Order placed successfully</h3></div><div class="notification_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            // Remove the notification after a certain time (e.g., 5 seconds)
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 5000);
+                            setTimeout(function() {
+                                    location.reload();
+                            }, 3000);
                         } else if(response.status == "error"){
-                            alert(response.message)
+                            // alert(response.message)
+                            var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">'+response.message+'</h3></div><div class="notification_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            // Remove the notification after a certain time (e.g., 5 seconds)
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 5000);
                         }else {
+                            var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Order placement failed</h3></div><div class="notification_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            // Remove the notification after a certain time (e.g., 5 seconds)
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 5000);
                             $("#invalid2").text(response.pickup_err);
                             $("#invalid3").text(response.payment_err);
                             $("#invalid4").text(response.fname_err);
@@ -516,10 +582,25 @@
                     success: function (response) {
                         console.log(response);
                         if (response.status == "success") {
-                            alert("Order cancelled successfully");
-                            location.reload();
+                            // alert("Order cancelled successfully");
+                            // location.reload();
+                            var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Order cancellation successful</h3></div><div class="notification_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            // Remove the notification after a certain time (e.g., 5 seconds)
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 5000);
+                            setTimeout(function() {
+                                    location.reload();
+                            }, 3000);
                         } else {
-                            alert("Order cancellation failed");
+                            // alert("Order cancellation failed");
+                            var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Order cancellation failed</h3></div><div class="notification_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            // Remove the notification after a certain time (e.g., 5 seconds)
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 5000);
                         }
                     }
                 });
