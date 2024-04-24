@@ -59,10 +59,11 @@ $new_data = array_filter($data['logs'], function ($item) use ($filter_date) {
                  $status_colorr = '';
 
                  
-                if (!empty($log->last_login) && !empty($log->last_logout)) {
+                if (!empty($log->last_login) || !empty($log->last_logout)) {
                     $status_color = '#00ff00'; // Green
                     $status_colorr = '#ff0000'; // Red
                 }
+                
                   
              ?>                     
 
@@ -72,6 +73,8 @@ $new_data = array_filter($data['logs'], function ($item) use ($filter_date) {
     <td><?php echo date('Y-m-d', strtotime($log->create_date)); ?></td>
     <td><span class="status" style="background-color: <?php echo $status_color; ?>;"><?php echo $log->last_login ?></span></td>
     <td><span class="status" style="background-color: <?php echo $status_colorr; ?>;"><?php echo $log->last_logout ?></span></td>
+    <!-- <td><button onclick="viewCustomer()">View Customer</button></td> -->
+
 </tr>
 <?php endforeach; ?>
 <?php endif; ?>

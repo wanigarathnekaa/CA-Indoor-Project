@@ -38,7 +38,7 @@
 
         <a class="card" href="<?php echo URLROOT; ?>/Reports/SalesMonthly">
         <div>
-        <div class="cardName">Monthly Booking Report</div>
+        <div class="cardName">Monthly Income Report: Booking Analysis</div>
 
         </div>
         <div class="iconBx">
@@ -49,6 +49,16 @@
         <a class="card" href="<?php echo URLROOT; ?>/Reports/OrderReport">
         <div>
         <div class="cardName">Order Filtering Report</div>
+
+        </div>
+        <div class="iconBx">
+            <i class='bx bxs-report'></i>
+        </div> 
+        </a>
+
+        <a class="card" href="<?php echo URLROOT; ?>/Reports/MonthlyOrderReport">
+        <div>
+        <div class="cardName">Monthly Income Report: Order Analysis</div>
 
         </div>
         <div class="iconBx">

@@ -121,6 +121,34 @@ if(isset($_POST["download_pdf"])) {
 
 
     }
+    
+    public function MonthlyOrderReport(){
+        $this->view('Pages/Report/monthlyORDERreport');
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Valid input
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            // Input data
+            $data = [
+                'Selected_month' => trim($_POST['Selected_month']),
+            ];
+            
+           
+        }
+        
+if(isset($_POST["Filter"])){
+    $this->reportmodel->displayMonthlyFilteredOrders($data);
+}
+
+if(isset($_POST["download_pdf"])) {
+    $this->reportmodel->MonthlyOrdersGeneratePDF($data);
+
+}
+
+
+
+    }
     public function Userlogs(){
         $this->view('Pages/Report/userlogreport');
 
