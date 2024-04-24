@@ -7,8 +7,9 @@
   
   
   .notification{
-        position: absolute;
+        position: fixed;
         width: max-content;
+        display: flex;
         /* left: 0; */
         /* right: 20px; */
         bottom: 20px;
@@ -23,6 +24,7 @@
         visibility: hidden;
         animation: fade-in 3s linear;
         font-size: 14px;
+
   }
   
   .notification_icon{

@@ -32,8 +32,10 @@
 
             <?php if ($role == "Cashier"): ?>
                 <div class="add-btn">
-                    <a href="http://localhost/C&A_Indoor_Project/Pages/Order/cashier"><i
-                            class="fa-solid fa-user-plus  icon"></i></a>
+                    <a href="http://localhost/C&A_Indoor_Project/Pages/Order/cashier">
+                        <i class="fa-solid fa-cart-plus icon"></i>
+                        Add Order
+                    </a>
                 </div>
             <?php endif; ?>
         </div>

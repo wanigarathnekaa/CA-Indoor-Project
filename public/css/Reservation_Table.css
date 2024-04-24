@@ -36,6 +36,11 @@
   cursor: pointer;
 }
 
+.table-topic .add-btn:hover .icon ,
+.table-topic .add-btn:hover a{
+  color: #ffffff;
+}
+
 .table-topic .add-btn .icon {
   color: #000000;
   font-size: large;
@@ -47,8 +52,12 @@
 
 .table-topic .add-btn a {
   text-decoration: none;
-  /* color: var(--black1); */
+  color: var(--black1);
 }
+
+
+
+
 /* Modal Styles */
 .modal {
   display: none;
