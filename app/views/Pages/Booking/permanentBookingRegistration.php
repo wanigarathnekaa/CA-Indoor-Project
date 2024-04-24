@@ -39,6 +39,7 @@ function time_slot($duration, $cleanup, $start, $end)
 
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/Booking_Styles.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/notification.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -361,7 +362,13 @@ function time_slot($duration, $cleanup, $start, $end)
 
                 // Check if the user has selected any time slots
                 if (selectedTimeSlotsA.length === 0 && selectedTimeSlotsB.length === 0 && selectedTimeSlotsM.length === 0) {
-                    alert("Please select a time slot");
+                    // alert("Please select a time slot");
+                    var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Please select a time slot</h3></div><div class="notification_progress"></div></div>');
+                    $('body').append(notificationDiv);
+                    // Remove the notification after a certain time (e.g., 5 seconds)
+                    setTimeout(function() {
+                        notificationDiv.remove();
+                    }, 3000);
                     return;
                 }
 
@@ -384,7 +391,13 @@ function time_slot($duration, $cleanup, $start, $end)
                         console.log(response);
                         response = JSON.parse(response);
                         if (response.status.trim() === "success") {
-                            alert("Booking successful");
+                            // alert("Booking successful");
+                            var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Booking successful</h3></div><div class="notification_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            // Remove the notification after a certain time (e.g., 5 seconds)
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 3000);
                             window.location.href = "http://localhost/C&A_Indoor_Project/Pages/Dashboard/manager";
                         } else {
                             $("#invalid1").html(response.messageNameError);
@@ -431,7 +444,13 @@ function time_slot($duration, $cleanup, $start, $end)
                                     console.log(bookingEndDate <= endDateForSelectedDate);
 
                                     if(selectedDate < new Date()){
-                                        alert("Please select a valid date");
+                                        // alert("Please select a valid date");
+                                        var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Please select a valid date</h3></div><div class="notification_progress"></div></div>');
+                                        $('body').append(notificationDiv);
+                                        // Remove the notification after a certain time (e.g., 5 seconds)
+                                        setTimeout(function() {
+                                            notificationDiv.remove();
+                                        }, 3000);
                                         return;
                                     }
 

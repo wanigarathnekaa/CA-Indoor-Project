@@ -7,6 +7,8 @@
     <!-- <title>Document</title> -->
     <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/Coachcard.css"> -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/ComplaintDetails.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/notification.css">
+
 
 </head>
 
@@ -79,17 +81,32 @@
                         success: function (response) {
                             console.log("Response:", response);
                             if (response.status == "success") {
-                                alert("Message sent successfully");
+                                // alert("Message sent successfully");
+                                var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Message sent successfully</h3><p class="notification_message">Thank you for your message</p></div><div class="notification_progress"></div></div>');
+                                $('body').append(notificationDiv);
+                                setTimeout(function() {
+                                    notificationDiv.remove();
+                                }, 3000);
                                 closeModal();
                             } else {
-                                alert("Failed to send message");
+                                // alert("Failed to send message");
+                                var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Failed to send message</h3><p class="notification_message">Please try again later</p></div><div class="notification_progress"></div></div>');
+                                $('body').append(notificationDiv);
+                                setTimeout(function() {
+                                    notificationDiv.remove();
+                                }, 3000);
                             }
                         },
                         error: function (xhr, status, error) {
                             console.log("XHR:", xhr);
                             console.log("Status:", status);
                             console.log("Error:", error);
-                            alert("Failed to send message");
+                            // alert("Failed to send message");
+                            var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Fill all the fields</h3><p class="notification_message">Please try again later</p></div><div class="notification_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 3000);
                         }
                     });
                 });

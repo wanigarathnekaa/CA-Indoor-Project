@@ -104,17 +104,17 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                             // Remove the notification after a certain time (e.g., 5 seconds)
                             setTimeout(function() {
                                 notificationDiv.remove();
-                            }, 5000);
+                            }, 3000);
                         }else{
                             var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Update the item quantity</h3></div><div class="notification_progress"></div></div>');
                             $('body').append(notificationDiv);
                             // Remove the notification after a certain time (e.g., 5 seconds)
                             setTimeout(function() {
                                 notificationDiv.remove();
-                            }, 5000);
+                            }, 3000);
                             setTimeout(function() {
                                     location.reload();
-                            }, 3000);
+                            }, 2000);
                         }
                     }
                 });

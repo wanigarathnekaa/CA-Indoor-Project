@@ -77,9 +77,16 @@ class Complaint extends Controller
         $complaints = $this->complaintModel->getComplaintsWithoutReplies();
         $allComplaints = $this->complaintModel->getComplaints();
 
+        // Get user image
+        foreach ($complaints as $complaint) {
+            $image = $this->complaintModel->getUserImg($complaint->user_id);
+            $complaint->img = $image;
+        }
+
         $data = [
             'complaints' => $complaints,
-            'allComplaints' => $allComplaints
+            'allComplaints' => $allComplaints,
+            'image' => $image,
         ];
         $this->view('Pages/Complaint/view_complaint', $data);
     }
@@ -98,17 +105,7 @@ class Complaint extends Controller
         $this->view('Pages/Complaint/SendMessage');//C:\xampp\htdocs\C&A_Indoor_Project\app\views\Pages\Complaint\SendMessage.php
     }
 
-    // //Get  user image
-
-    // Other methods and properties...
-
-    public function getUserImg($user_id)
-    {
-        // Logic to fetch and return image URL
-        $image = $this->complaintModel->getUserImgById($user_id);
-        // Construct the URL with URLROOT and image path
-        return $image;
-    }
+    
 
 
 
