@@ -51,11 +51,7 @@
                               <a href="<?php echo URLROOT;?>/Pages/CompanyUser_Edit_Profile/<?php echo $role ?>" type="button" class="button">Edit Profile</a>
                               <div class="Change Password">
                                     <a class="button" href="<?php echo URLROOT; ?>/Pages/CompanyUserchangePassword/<?php echo $role ?>">Change Password</a>
-                              </div>
-                                    <!-- <button type="button" class="button">Change Password</button> -->
-                                    <button type="button" class="button" onclick="openDeletePopup()">Delete Profile</button>
-                              </div>
-                              
+                              </div>                              
                         </div>
                   </div>
             </div>
