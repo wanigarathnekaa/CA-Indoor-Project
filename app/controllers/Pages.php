@@ -336,9 +336,14 @@ class Pages extends Controller
     }
 
     //landing page
-    public function LandingPage($name)
+    public function LandingPage()
     {
-        $this->view('Pages/LandingPage/landingPage');
+        $advertisement = $this->pagesModel->getAdvertisement();
+        $data = [
+            'adverts' => $advertisement,
+        ];
+
+        $this->view('Pages/LandingPage/landingPage', $data);
     }
 
     //login page
