@@ -87,7 +87,18 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                           <p class="product-name">
                             <?php echo $brand->brand_name; ?>
                           </p>
-                          <data value="300" class="stock" title="Available Stock">300</data>
+                          <?php
+                          $quantity = 0;
+                          $brandId = $brand->brand_id;
+                          $cat_Id = $category->category_id;
+                          foreach ($data['products'] as $product) {
+                            if ($product->brand_id == $brandId && $product->category_id == $cat_Id) {
+                              $quantity = $product->qty;
+                              break;
+                            }
+                          }
+                          ?>
+                          <data value="300" class="stock" title="Available Stock"><?=$quantity;?></data>
                         </a>
                       </li>
                       <?php
