@@ -118,7 +118,7 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
           <h2 class="title">New Products</h2>
           <div class="product-grid">
 
-            <?php foreach ($data['products'] as $product): ?>
+            <?php foreach (array_reverse($data['products']) as $product): ?>
               <div class="showcase">
                 <div class="showcase-banner">
                   <img src="<?php echo URLROOT; ?>/CricketShop/<?php echo $product->product_thumbnail ?>" alt="bat01"
@@ -242,5 +242,14 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
             cartCount = 0;
         }
         $('#cartCount').html(cartCount);
+    });
+
+    $(document).ready(function(){
+        $("#searchField").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".showcase-content").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
     });
 </script>
