@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Owner Dashboard</title>
-    <link rel="stylesheet" href="<?php echo URLROOT;?>/css/ownerDashboard.css">
+    <link rel="stylesheet" href="<?php echo URLROOT;?>/css/managerDashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 </head>
 
@@ -23,9 +23,9 @@
 
         <!-- Cards -->
         <div class="cardBox">
-            <a class="card" href="#">
+            <a class="card" href="C&A_Indoor_Project/Pages/managerTable/owner">
                 <div>
-                    <div class="numbers">3</div>
+                    <div class="numbers"><?php echo $data["ManagerCount"]?></div>
                     <div class="cardName">Managers</div>
                 </div>
                 <div class="iconBx">
@@ -33,9 +33,9 @@
                 </div>
             </a>
 
-            <a class="card" href=#>
+            <a class="card" href="C&A_Indoor_Project/Pages/coachTable/owner">
                 <div>
-                    <div class="numbers">15</div>
+                    <div class="numbers"><?php echo $data["CoachCount"]?></div>
                     <div class="cardName">Coaches</div>
                 </div>
                 <div class="iconBx">
@@ -43,9 +43,9 @@
                 </div>
             </a>
 
-            <a class="card" href="#">
+            <a class="card" href="C&A_Indoor_Project/Pages/playerTable/owner">
                 <div>
-                    <div class="numbers">80</div>
+                    <div class="numbers"><?php echo $data["UserCount"]?></div>
                     <div class="cardName">Players</div>
                 </div>
                 <div class="iconBx">
@@ -53,9 +53,9 @@
                 </div>
             </a>
 
-            <a class="card" href="#">
+            <a class="card" href="C&A_Indoor_Project/Pages/View_Advertisement/owner">
                 <div>
-                    <div class="numbers">284</div>
+                    <div class="numbers"><?php echo $data["advertCount"]?></div>
                     <div class="cardName">Advertisement</div>
                 </div>
                 <div class="iconBx">
@@ -63,7 +63,7 @@
                 </div>
             </a>
 
-            <a class="card" href="#">
+            <a class="card"  href="C&A_Indoor_Project/Reports/SelectReport">
                 <div>
                     <div class="numbers"></div>
                     <div class="cardName">Reports</div>
@@ -73,7 +73,7 @@
                 </div>
             </a>
 
-            <a class="card" href="#">
+            <a class="card" href="<?php echo URLROOT;?>/Pages/Manager_Registration/manager">
                 <div>
                     <div class="numbers"></div>
                     <div class="cardName">Registration</div>
@@ -83,17 +83,40 @@
                     <i class="fa-solid fa-user-plus"></i>
                 </div>
             </a>
+        </div>
 
-            <a class="card" href="#">
-                <div>
-                    <div class="numbers"></div>
-                    <div class="cardName">Confirmation Fee</div>
-                </div>
+        <!--Reservation Details -->
+        <div class="details">
+            <!-- Recent Reservations -->
+            <div class="tablediv">
+                <?php
+                        require APPROOT . '/views/Pages/Tables/dailyReservation.php';
+                ?>
+            </div>
+            
+            <!-- Calander -->
+            <div class="calanderdiv">
+                <iframe src="http://localhost/C&A_Indoor_Project/Pages/Calendar/User" frameborder="0"></iframe>                        
+            </div>
+        </div>
+        
 
-                <div class="iconBx">
-                    <i class="fa-solid fa-comments-dollar"></i>
-                </div>
-            </a>
+        <!-- chart -->
+        <div class="charts">
+            <!-- Weekly Reservations chart -->
+            <?php
+                require APPROOT . '/views/Pages/Charts/weeklyReservationsChart.php';
+            ?>
+
+            <!-- Customers Count chart -->
+            <?php
+                require APPROOT . '/views/Pages/Charts/customersCountChart.php';
+            ?>
+
+            <!-- Reservations Net chart -->
+            <?php
+                require APPROOT . '/views/Pages/Charts/reservationsNetChart.php';
+            ?>
         </div>
 
 

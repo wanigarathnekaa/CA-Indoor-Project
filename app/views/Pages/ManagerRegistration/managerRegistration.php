@@ -1,58 +1,76 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <title>Responsive Registration Form</title>
-    <meta name="viewport" content="width=device-width,
-      initial-scale=1.0" />
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!---<title> Responsive Registration Form | CodingLab </title>--->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/coachRegistration.css" />
-</head>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+ 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Manage Registration</title>
+   </head>
 <body>
-    <div class="container">
-        <h1 class="form-title">REGISTRATION FORM</h1>
-        <form action="<?php echo URLROOT;?>/Manager/register" method="POST">
-            <div class="main-user-info">
-                <div class="user-input-box">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter Full Name" />
-                </div>
+    <!-- Sidebar -->
+    <?php
+        $role = $_SESSION['user_role'];
+        require APPROOT . '/views/Pages/Dashboard/header.php';
+        require APPROOT . '/views/Components/Side Bars/sideBar.php';
+    ?>
 
-                <div class="user-input-box">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter Email" />
-                </div>
-                <div class="user-input-box">
-                    <label for="phoneNumber">Phone Number</label>
-                    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Enter Phone Number" />
-                </div>
-                <div class="user-input-box">
-                    <label for="NIC">NIC</label>
-                    <input type="text" id="nic" name="nic" placeholder="Enter NIC" />
-                </div>
-                <div class="user-input-box">
-                    <label for="Address">Address</label>
-                    <input type="Address" id="address" name="address" placeholder="Enter Address" />
-                </div>
 
+    <!-- Content -->
+    <section class="home registerformhome">
+        <div class="container">
+            <div class="title">Manager Registration Form</div>
+
+            <div class="content">
+                <form action="<?php echo URLROOT;?>/Manager/register" method="POST">
+                    
+                    <div class="user-details">
+                        <div class="input-box">
+                            <span class="details">Full Name</span>
+                            <input type="text" placeholder="Enter Your Name"  name="name" value="<?php echo $data['name']; ?>">
+                            <span class="form-invalid"><?php echo $data['name_err']; ?></span>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">Email</span>
+                            <input type="email" placeholder="Enter Your Email" name="email" value="<?php echo $data['email']; ?>">
+                            <span class="form-invalid"><?php echo $data['email_err']; ?></span>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">Phone Number</span>
+                            <input type="tel" placeholder="Enter Your Phone Number" name="phoneNumber" value="<?php echo $data['phoneNumber']; ?>">
+                            <span class="form-invalid"><?php echo $data['phoneNumber_err']; ?></span>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">NIC</span>
+                            <input type="text" placeholder="Enter Your NIC Number" name="nic" value="<?php echo $data['nic']; ?>">
+                            <span class="form-invalid"><?php echo $data['nic_err']; ?></span>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">Street Address</span>
+                            <input type="text" placeholder="Enter Your Street Address" name="strAddress" value="<?php echo $data['strAddress']; ?>">
+                            <span class="form-invalid"><?php echo $data['strAddress_err']; ?></span>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">City</span>
+                            <input type="text" placeholder="Enter Your City" name="city" value="<?php echo $data['city']; ?>">
+                            <span class="form-invalid"><?php echo $data['city_err']; ?></span>
+                        </div>
+                    </div>
+
+                    <div class="button">
+                        <input type="submit" value="Register">
+                    </div>
+                </form>
             </div>
-            <div class="gender-details-box">
-                <span class="gender-title">Gender</span>
-                <div class="gender-category">
-                    <input type="radio" name="gender" id="male">
-                    <label for="male">Male</label>
-                    <input type="radio" name="gender" id="female">
-                    <label for="female">Female</label>
-                    <input type="radio" name="gender" id="other">
-                    <label for="other">Other</label>
-                </div>
-            </div>
-            <div class="form-submit-btn">
-                <input type="submit" value="Register">
-            </div>
-        </form>
-    </div>
+        </div>
+    </section>
 </body>
 
 </html>

@@ -1,0 +1,99 @@
+/* Reservation Details---------------------------------------------------------------------------------------------------------------- */
+.sec-reservation{
+      margin-bottom: 20px;
+}
+.row1 {
+      position: relative;
+      /* width: 100%; */
+      /* padding: 20px; */
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      grid-gap: 30px;
+      /* margin-top: 10px; */
+      /* box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08); */
+      margin-left: 20px;
+      margin-right: 20px;
+}
+
+.row2{
+      position: relative;
+      /* width: 100%; */
+      /* padding: 20px; */
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 30px;
+      /* margin-top: 10px; */
+      /* box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08); */
+      margin-left: 20px;
+      margin-right: 20px;
+      margin-bottom: 20px;
+}
+
+.row3{
+      position: relative;
+      /* width: 100%; */
+      /* padding: 20px; */
+      display: grid;
+      grid-template-columns: 1fr;
+      /* grid-gap: 30px; */
+      /* margin-top: 10px; */
+      /* box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08); */
+      margin-left: 20px;
+      margin-right: 20px;
+      margin-bottom: 20px;
+}
+
+
+.calanderdiv{
+      position: relative;
+      display: grid;
+      min-height: 500px;
+      background: var(--white);
+      padding: 20px;
+      box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+      border-radius: 20px;
+
+}
+
+.calanderdiv iframe{
+      width: 100%;
+      height: 100%;
+      border: none;
+}
+
+/* topic */
+.tagrow{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      
+
+}
+
+.tagrow h2{
+      font-size: 30px;
+      font-weight: 600;
+      color: var(--color01);
+      text-align: center;
+      text-decoration: dashed;
+      text-decoration-color: var(--color01);
+}
+
+
+/* responsive media queries _______________________________________________________________________________________________________________ */
+@media (max-width: 1024px) {
+      .details {
+            grid-template-columns: 1fr;
+            grid-gap: 20px;
+      }
+
+      .details2 {
+            grid-template-columns: 1fr;
+            grid-gap: 20px;
+      }
+      
+}

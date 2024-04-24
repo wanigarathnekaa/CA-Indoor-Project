@@ -87,7 +87,18 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                           <p class="product-name">
                             <?php echo $brand->brand_name; ?>
                           </p>
-                          <data value="300" class="stock" title="Available Stock">300</data>
+                          <?php
+                          $quantity = 0;
+                          $brandId = $brand->brand_id;
+                          $cat_Id = $category->category_id;
+                          foreach ($data['products'] as $product) {
+                            if ($product->brand_id == $brandId && $product->category_id == $cat_Id) {
+                              $quantity = $product->qty;
+                              break;
+                            }
+                          }
+                          ?>
+                          <data value="300" class="stock" title="Available Stock"><?=$quantity;?></data>
                         </a>
                       </li>
                       <?php
@@ -107,12 +118,12 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
           <h2 class="title">New Products</h2>
           <div class="product-grid">
 
-            <?php foreach ($data['products'] as $product): ?>
+            <?php foreach (array_reverse($data['products']) as $product): ?>
               <div class="showcase">
                 <div class="showcase-banner">
                   <img src="<?php echo URLROOT; ?>/CricketShop/<?php echo $product->product_thumbnail ?>" alt="bat01"
                     width="300" class="product-img">
-                  <div class="showcase-actions">
+                  <!-- <div class="showcase-actions">
                     <button class="btn-action">
                       <ion-icon name="heart-outline"></ion-icon>
                     </button>
@@ -122,17 +133,21 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                     <button class="btn-action">
                       <ion-icon name="bag-add-outline"></ion-icon>
                     </button>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="showcase-content">
-                  <a href="#" class="showcase-category">
+                  <a href="http://localhost/C&A_Indoor_Project/Pages/Item_Detail/<?= $product->product_id;?>" class="showcase-category">
                     <?php echo $product->product_title; ?>
                   </a>
-                  <a href="#">
+                  <a href="http://localhost/C&A_Indoor_Project/Pages/Item_Detail/<?= $product->product_id;?>">
                     <h3 class="showcase-title">
-                      <?php echo $product->product_title; ?>
+                      <?php
+                      $shortDescription = $product->short_description;
+                      echo strlen($shortDescription) > 25 ? substr($shortDescription, 0, 25) . '...' : $shortDescription;
+                      ?>
                     </h3>
                   </a>
+
                   <div class="showcase-rating">
                     <ion-icon name="star"></ion-icon>
                     <ion-icon name="star"></ion-icon>
@@ -220,3 +235,21 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
 <?php
 include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
 ?>
+<script>
+    $(document).ready(function () {
+        var cartCount = '<?= count($data['cartItems']) ?>';
+        if (cartCount == 0) {
+            cartCount = 0;
+        }
+        $('#cartCount').html(cartCount);
+    });
+
+    $(document).ready(function(){
+        $("#searchField").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".showcase-content").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

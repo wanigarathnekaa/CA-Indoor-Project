@@ -1,8 +1,6 @@
 let popup = document.getElementById("popup");
 let popupcontainer = document.getElementById("popupcontainer");
-let reschedulePopupContainer = document.getElementById(
-  "reschedulePopupContainer"
-);
+let reschedulePopupContainer = document.getElementById("reschedulePopupContainer");
 let cancelReschedule = document.getElementById("cancelReschedule");
 let cancelReschedulePopup = document.getElementById("cancelReschedulePopup");
 
@@ -48,6 +46,12 @@ function openPopup(reservation) {
 
   const r_payment = document.querySelector(".r_payment");
   r_payment.textContent = reservation.paymentStatus;
+
+  const r_price = document.querySelector(".r_price");
+  r_price.textContent = reservation.bookingPrice;
+
+  const r_paid = document.querySelector(".r_paid");
+  r_paid.textContent = reservation.paidPrice;
 }
 
 function closePopup() {
@@ -147,3 +151,6 @@ function confirmReschedule() {
     bookingID;
   window.location.href = redirectURL;
 }
+
+
+

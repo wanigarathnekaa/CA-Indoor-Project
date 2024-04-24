@@ -23,6 +23,7 @@ class Product extends Controller
                     'selling_price' => trim($_POST['selling_price']),
                     'short_description' => trim($_POST['short_description']),
                     'quantity' => trim($_POST['quantity']),
+                    'discount' => trim($_POST['discount']),
                     'status' => 1,
                     'created_at' => date('Y-m-d H:i:s'),
 
@@ -34,6 +35,7 @@ class Product extends Controller
                     'product_thumbnail_err' => "",
                     'short_description_err' => "",
                     'quantity_err' => "",
+                    'discount_err' => '',
                 ];
 
                 // Validate product
@@ -63,6 +65,9 @@ class Product extends Controller
                 if (empty($data['short_description'])) {
                     $data['short_description_err'] = "Enter Description";
                 }
+                if (empty($data['discount'])) {
+                    $data['discount_err'] = "Enter Discount";
+                }
 
                 $allowed_types = array('jpg', 'jpeg', 'png');
                 $max_size = 5 * 1024 * 1024; // 5MB
@@ -87,9 +92,11 @@ class Product extends Controller
                 }
 
                 // If validation is completed and no error, then register the user
-                if (empty($data['productName_err']) && empty($data['category_name_err']) && empty($data['brand_name_err']) 
-                && empty($data['regular_price_err']) && empty($data['selling_price_err']) && empty($data['short_description_err']) 
-                && empty($data['product_thumbnail_err']) && empty($data['quantity_err'])) {
+                if (
+                    empty($data['productName_err']) && empty($data['category_name_err']) && empty($data['brand_name_err'])
+                    && empty($data['regular_price_err']) && empty($data['selling_price_err']) && empty($data['short_description_err'])
+                    && empty($data['product_thumbnail_err']) && empty($data['quantity_err']) && empty($data['discount_err'])
+                ) {
                     if ($this->productModel->insertProduct($data)) {
                         $response = [
                             'status' => 'success',
@@ -112,6 +119,7 @@ class Product extends Controller
                         'messageShortDescription' => $data['short_description_err'],
                         'messageProductThumbnail' => $data['product_thumbnail_err'],
                         'messageQuantity' => $data['quantity_err'],
+                        'messageDiscount' => $data['discount_err'],
                     ];
                 }
 
@@ -218,9 +226,11 @@ class Product extends Controller
             }
 
             // If validation is completed and no error, then register the user
-            if (empty($data['productName_err']) && empty($data['category_name_err']) && empty($data['brand_name_err']) 
-            && empty($data['regular_price_err']) && empty($data['selling_price_err']) && empty($data['short_description_err']) 
-            && empty($data['product_thumbnail_err']) && empty($data['quantity_err'])) {
+            if (
+                empty($data['productName_err']) && empty($data['category_name_err']) && empty($data['brand_name_err'])
+                && empty($data['regular_price_err']) && empty($data['selling_price_err']) && empty($data['short_description_err'])
+                && empty($data['product_thumbnail_err']) && empty($data['quantity_err'])
+            ) {
                 if ($this->productModel->updateProduct($data)) {
                     $response = [
                         'status' => 'success',
@@ -259,6 +269,111 @@ class Product extends Controller
         } else {
             die('Something went wrong');
         }
+    }
+
+    public function updateQuantity()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'product_id' => trim($_POST['id']),
+                'quantity' => trim($_POST['quantity']),
+
+                'quantity_err' => '',
+            ];
+
+            if (empty($data['quantity']) || $data['quantity'] < 1) {
+                $data['quantity_err'] = 'Please enter a valid quantity';
+            }
+
+            if (empty($data['quantity_err'])) {
+                if ($this->productModel->updateQuantity($data)) {
+                    $response = [
+                        'status' => 'success',
+                        'message' => 'Quantity updated successfully',
+                    ];
+                } else {
+                    $response = [
+                        'status' => 'error',
+                        'message' => 'Something went wrong',
+                    ];
+                }
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => $data['quantity_err'],
+                ];
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+    }
+
+    public function updateDiscount()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'product_id' => trim($_POST['id']),
+                'discount' => trim($_POST['discount']),
+
+                'discount_err' => '',
+            ];
+
+            if (empty($data['discount']) || $data['discount'] < 1) {
+                $data['discount_err'] = 'Please enter a valid discount';
+            }
+
+            if (empty($data['discount_err'])) {
+                if ($this->productModel->updateDiscount($data)) {
+                    $response = [
+                        'status' => 'success',
+                        'message' => 'Discount updated successfully',
+                    ];
+                } else {
+                    $response = [
+                        'status' => 'error',
+                        'message' => 'Something went wrong',
+                    ];
+                }
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => $data['discount_err'],
+                ];
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+    }
+
+    public function getItemByCategoryBrand()
+    {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $cat_id = trim($_POST['cat_id']);
+        $brand_id = trim($_POST['brand_id']);
+
+        $Items = $this->productModel->getItem($cat_id, $brand_id);
+
+        $output = '<option selected disabled>--Select Your Brand Name--</option>';
+        foreach ($Items as $item) {
+            $output .= '<option value="' . $item->product_id . '">' . $item->product_title . '</option>';
+        }
+
+        $response = [
+            'output' => $output,
+        ];
+
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit();
     }
 
 }

@@ -1,210 +1,271 @@
-
 /* ........................................................ */
-.popupcontainer{
-      background-color: rgba(0,0,0,0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: fixed;
-      opacity: 0;
-      pointer-events: none;
-      top: 0;
-      left: 0;
-      width:100vw;
-      height: 100vh;
-      transition: all 0.3s ease;
+.popupcontainer {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  transition: all 0.3s ease;
 }
 
-.open-popupcontainer{
-      opacity: 1;
-      pointer-events: auto;
-      z-index: 100;
+.open-popupcontainer {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 100;
 }
 
-.popup{
-      width: 700px;
-      background: #fff;
-      border-radius: 6px;
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.1);
-      text-align: center;
-      padding: 10px;
-      color: #333;
-      visibility: hidden;
-      transition: transform 0.4s;  
+.popup {
+  width: 700px;
+  background: #fff;
+  border-radius: 6px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  text-align: center;
+  padding: 10px;
+  color: #333;
+  visibility: hidden;
+  transition: transform 0.4s;
 }
 
-.open-popup{
-      visibility: visible;
-      top: 50%;
-      transform: translate(-50%, -50%) scale(1);
+.open-popup {
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
 }
 
 /* close icon */
 .popup .close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      cursor: pointer;
-
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
 
 /* ........................................................ */
 
-
-.popup h2{
-      font-size: 25px;
-      font-weight: 500;
-      /* margin: 30px 0 10px; */
+.popup h2 {
+  font-size: 25px;
+  font-weight: 500;
+  /* margin: 30px 0 10px; */
 }
 
-.btns{
-      display: flex;
-      justify-content: space-between;
-      margin: 10px;
+.btns {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
 }
 
-.btns button{
-      background: #109289;
-      color: #f8f8f8;
-      width: 150px;
-      font-family: inherit;
-      padding: 8px;
-      font-size: 11px;
-      border-radius: 40px;
-      cursor: pointer;
-      border: none;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+.btns button {
+  background: #109289;
+  color: #f8f8f8;
+  width: 150px;
+  font-family: inherit;
+  padding: 8px;
+  font-size: 11px;
+  border-radius: 40px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
 
-.btns button:hover{
-      background: #0d6e7a;
-      cursor: pointer;
+.btns button:hover {
+  background: #0d6e7a;
+  cursor: pointer;
 }
-
 
 /* ........................................................ */
 
-.popup .popupdetails{
-      display: flex;
-      justify-content: center;
-      margin-top: 15px;
-
+.popup .popupdetails {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
 }
 
-.popup .popupdetails .popupdetailtable{
-      width: 100%;
-      border-collapse: collapse;
-      border-spacing: 0;
-      border: 1px solid #0d6e7a;
-      margin: 20px;
-      margin-top: 10px;
-      text-align: center;
+.popup .popupdetails .popupdetailtable {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #0d6e7a;
+  margin: 20px;
+  margin-top: 10px;
+  text-align: center;
 }
 
-.popup .popupdetails .popupdetailtable th{
-      background: #109289;
-      color: #f8f8f8;
-      padding: 5px;
-      /* font-size: 12px; */
-      /* font-weight: 500; */
-      text-transform: uppercase;
-      border: 1px solid #0d6e7a;
+.popup .popupdetails .popupdetailtable th {
+  background: #109289;
+  color: #f8f8f8;
+  padding: 5px;
+  /* font-size: 12px; */
+  /* font-weight: 500; */
+  text-transform: uppercase;
+  border: 1px solid #0d6e7a;
 }
 
-.popup .popupdetails .popupdetailtable td{
-      padding: 5px;
-      border: 1px solid #0d6e7a;
-      /* font-size: 12px; */
-      /* font-weight: 500; */
+.popup .popupdetails .popupdetailtable td {
+  padding: 5px;
+  border: 1px solid #0d6e7a;
+  /* font-size: 12px; */
+  /* font-weight: 500; */
 }
 
-.paymentamount{
-      /* display: flex; */
-      justify-content: center;
-      margin-top: 15px;
-      margin-bottom: 10px;
-
+.paymentamount {
+  /* display: flex; */
+  justify-content: center;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
+/* ........................................................ */
 
-@media screen and (max-width: 768px){
-      .popup{
-            width: 500px;
-      }
-      .popup h2{
-            font-size: 20px;
-            
-      }
-
-      .popup .popupdetails .popupdetail h2{
-            font-size: 13px;
-      }
-      
+.SuccessContainer {
+  width: 100%;
+  height: 100vh;
+  background: 109289;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.SuccessPopup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  justify-content: center;
+  align-items: center;
+}
 
+/* .open-popup {
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+} */
 
-@media screen and (max-device-width: 480px){
-      .popupcontainer{
-            width:100%;
-            height: 100%;
+.SuccessPopup img {
 
-      }
-      .popup{
-            width: 300px;
-      }
-      .popup h2{
-            font-size: 20px;
-            
-      }
+  width: 100px;
+  height: 100px;
+  margin-top: -60px;
+  margin-left: -50px;
+  border-radius: 50%;
+  position: relative;
+  left:50%;
+  /* box-shadow: 0 2px 5px rgba(0,0,0,0.2); */
+}
 
-      .popup .popupdetails .popupdetail h2{
-            font-size: 13px;
-      }
+.SuccessPopup h2 {
+  font-size: 38px;
+  font-weight: 500;
+  margin: 30px 0 10px;
+}
 
-      .btns{
-            /* background: #5a3434; */
-            display: grid;
-            grid-template-columns: 1fr;
-            justify-content: center;
-            align-items: center;
-            margin-left: 20%;
-            margin-right: 20%;
-            gap: 10px;
-      }
+.SuccessPopup p {
+  text-align: center;
+}
 
-      .btns button{
-            width: 100%;
-            font-size: 12px;
-      }
+.SuccessPopup button {
+  width: 100%;
+  margin-top: 50px;
+  padding: 10px 0;
+  background: #6fd649;
+  border: 0;
+  outline: none;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
 
-      .popup .popupdetails .popupdetailtable{
-            width: 100%;
-            border-collapse: collapse;
-            border-spacing: 0;
-            border: 1px solid #0d6e7a;
-            margin: 10px;
-            margin-top: 10px;
-            text-align: center;
-      }
+@media screen and (max-device-width: 480px) {
+  .SuccessPopup {
+    width: 300px;
+  }
+  .SuccessPopup h2 {
+    font-size: 30px;
+  }
+}
 
-      .popup .popupdetails .popupdetailtable th{
-            font-size: 12px;
-      }
+@media screen and (max-width: 768px) {
+  .popup {
+    width: 500px;
+  }
+  .popup h2 {
+    font-size: 20px;
+  }
 
-      .popup .popupdetails .popupdetailtable td{
-            font-size: 12px;
-      }
+  .popup .popupdetails .popupdetail h2 {
+    font-size: 13px;
+  }
+}
 
-      .paymentamount h2{
-            font-size: 14px;
-      }
+@media screen and (max-device-width: 480px) {
+  .popupcontainer {
+    width: 100%;
+    height: 100%;
+  }
+  .popup {
+    width: 300px;
+  }
+  .popup h2 {
+    font-size: 20px;
+  }
 
-      .paymentamount h4{
-            font-size: 12px;
-      }
-      
+  .popup .popupdetails .popupdetail h2 {
+    font-size: 13px;
+  }
+
+  .btns {
+    /* background: #5a3434; */
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20%;
+    margin-right: 20%;
+    gap: 10px;
+  }
+
+  .btns button {
+    width: 100%;
+    font-size: 12px;
+  }
+
+  .popup .popupdetails .popupdetailtable {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #0d6e7a;
+    margin: 10px;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .popup .popupdetails .popupdetailtable th {
+    font-size: 12px;
+  }
+
+  .popup .popupdetails .popupdetailtable td {
+    font-size: 12px;
+  }
+
+  .paymentamount h2 {
+    font-size: 14px;
+  }
+
+  .paymentamount h4 {
+    font-size: 12px;
+  }
 }

@@ -36,9 +36,9 @@
                         </h1>
                   </div>
             
-                  <!-- <div class="add-btn">
-                        <a href="<?php echo URLROOT; ?>/Coach/register"><i class="fa-solid fa-user-plus  icon"></i></a>
-                  </div> -->
+                  <div class="add-btn">
+                        <a href="<?php echo URLROOT; ?>/Pages/Manager_Registration/manager"><i class="fa-solid fa-user-plus  icon"></i></a>
+                  </div>
             </div>
 
             <!-- Table Sort -->
@@ -73,7 +73,7 @@
                                     <th>NIC</th>
                                     <th>Address</th>
                                     <th></th>
-                                    <th></th>
+                                    <!-- <th></th> -->
 
                                     
                                    
@@ -99,11 +99,9 @@
                                                 <?php echo $manager->nic; ?>
                                           </td>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($manager)); ?>)">
-                                                <?php echo $manager->address; ?>
+                                                <?php echo $manager->strAddress; ?>, <?php echo $manager->city; ?>
                                           </td>
-                                          
-                                          <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
-                                          <td onclick="openDeletePopup()"><i class="fa-solid fa-user-slash delete icon"></i></td>
+                                          <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($manager)); ?>)"><i class="fa-solid fa-user-slash delete icon"></i></td>
                                     </tr>
                                     <?php $i = $i + 1;
                               endforeach; ?>
@@ -121,26 +119,20 @@
 
                         <hr>
                         <div class="popupdetails">
-           
-                             
-
                               <div class="popupdetail">
-                                    <h2><b>Email :</b><span class="m_email"></span></h2>
+                                    <h2><b>Email : </b><span class="m_email"></span></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Contact Number :</b><span class="m_number"></span></h2>
+                                    <h2><b>Contact Number : </b><span class="m_number"></span></h2>
                               </div>
                               <div class="popupdetail">
-                                    <h2><b>NIC :</b><span class="m_nic"></span></h2>
+                                    <h2><b>NIC : </b><span class="m_nic"></span></h2>
                               </div>
 
                               <div class="popupdetail">
-                                    <h2><b>Address :</b><span class="m_address"></span></h2>
+                                    <h2><b>Address : </b><span class="m_address"></span></h2>
                               </div>
-
-
-                             
                         </div>
 
                         
@@ -153,10 +145,13 @@
                         <span class="close" onclick="closeDeletePopup()"><i class="fa-solid fa-xmark"></i></span>
                         <h2>confirm delete</h2>
 
-                        <div class="btns">
-                              <button type="button">Delete</button>
-                              <button type="button" onclick="closeDeletePopup()">Cancel</button>
-                        </div>
+                        <form action="<?php echo URLROOT; ?>/Manager/delete" method="POST">     
+                              <div class="btns">                        
+                                    <button type="submit" class="button">Delete</button>
+                                    <button type="button" onclick="closeDeletePopup()">Cancel</button>
+                              </div>                 
+                              <input hidden name='submit' id="hid_input">
+                        </form>
                   </div>
             </div>
 

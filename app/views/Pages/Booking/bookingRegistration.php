@@ -85,7 +85,7 @@ $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
                             <option disabled selected>Select the coach</option>
                             <?php foreach ($data as $coach): ?>
                                 <option>
-                                    <?php echo "Mr.{$coach->name}" ?>
+                                    <?php echo "{$coach->name}" ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>

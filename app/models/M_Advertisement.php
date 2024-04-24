@@ -69,5 +69,20 @@
             
         }
 
+
+        //get existing advertisement image.............................................
+        public function getExistingImageFilename($advertisement_id){
+            $this->db->query('SELECT img FROM advert WHERE advertisement_id = :advertisement_id');
+            $this->db->bind(':advertisement_id', $advertisement_id);
+
+            $row = $this->db->single();
+
+            if($row){
+                return $row->img;
+            }else{
+                return null;
+            }
+        }
+
     }
 ?>

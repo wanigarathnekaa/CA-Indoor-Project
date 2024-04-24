@@ -1,5 +1,7 @@
 /* ........................................................ */
-.popupcontainer {
+.popupcontainer,
+.popupcontainer2,
+.popupcontainer3 {
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -14,15 +16,19 @@
   transition: all 0.3s ease;
 }
 
-.open-popupcontainer {
+.open-popupcontainer,
+.open-popupcontainer2,
+.open-popupcontainer3 {
   opacity: 1;
   pointer-events: auto;
   z-index: 100;
 }
 
 .popup,
+.popup2,
 .reschedulePopup,
-.deletepopup {
+.deletepopup,
+.coachpopup {
   width: 500px;
   background: #fff;
   border-radius: 6px;
@@ -38,8 +44,10 @@
 }
 
 .open-popup,
+.open-popup2,
 .open-reschedulePopup,
-.open-deletepopup {
+.open-deletepopup,
+.open-coachpopup {
   visibility: visible;
   top: 50%;
   transform: translate(-50%, -50%) scale(1);
@@ -47,8 +55,10 @@
 
 /* close icon */
 .popup .close,
+.popup2 .close,
 .deletepopup .close,
-.reschedulePopup .close {
+.reschedulePopup .close ,
+.coachpopup .close{
   position: absolute;
   top: 10px;
   right: 10px;
@@ -57,7 +67,9 @@
 
 /* ........................................................ */
 
-.popup h2 {
+.popup h2,
+.popup2 h2,
+.coachpopup h2{
   font-size: 25px;
   font-weight: 500;
   /* margin: 30px 0 10px; */
@@ -95,31 +107,43 @@
 
 /* ........................................................ */
 
-.popup .popupdetails {
+.popup .popupdetails,
+.popup2 .popupdetails,
+.coachpopup .popupdetails {
   justify-content: center;
   margin-top: 15px;
 }
 
-.popup .popupdetails .popupdetail {
+.popup .popupdetails .popupdetail ,
+.popup2 .popupdetails .popupdetail,
+.coachpopup .popupdetails .popupdetail {
   /* background-color: #b8b8b8; */
   margin-bottom: 5px;
 }
 
-.popup .popupdetails .popupdetail h2 {
+.popup .popupdetails .popupdetail h2 ,
+.popup2 .popupdetails .popupdetail h2,
+.coachpopup .popupdetails .popupdetail h2 {
   font-size: 15px;
 }
 
 @media screen and (max-device-width: 480px) {
   .popup,
+  .popup2,
   .deletepopup,
-  .reschedulePopup {
+  .reschedulePopup,
+  .coachpopup{
     width: 300px;
   }
-  .popup h2 {
+  .popup h2 ,
+  .popup2 h2 ,
+  .coachpopup h2{
     font-size: 20px;
   }
 
-  .popup .popupdetails .popupdetail h2 {
+  .popup .popupdetails .popupdetail h2,
+  .popup2 .popupdetails .popupdetail h2,
+  .coachpopup .popupdetails .popupdetail h2{
     font-size: 13px;
   }
 }

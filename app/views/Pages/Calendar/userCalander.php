@@ -19,6 +19,11 @@ function build_calendar($month, $year)
     $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender'>Current Month</a> ";
     $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $next_month . "&year=" . $next_year . "'>NextMonth</a></center> ";
 
+    $today_date = new DateTime(); // Current date and time
+    $today_date->modify('+2 weeks'); // Add two weeks
+
+    $dateAfterTwoWeeks = $today_date->format('Y-m-d'); // Format date as 'Y-m-d'
+
     $calendar .= "<br><table class='calander'> ";
     $calendar .= "<tr>";
     foreach ($daysOfWeek as $day) {
@@ -50,9 +55,11 @@ function build_calendar($month, $year)
         if ($date < date('Y-m-d')) {
             $calendar .= "<a class = 'btn btn-danger btn-xs'><td class='$today'><h4>$currentDay</h4></td></a>";
         }
-        else {
+        else if($date <= $dateAfterTwoWeeks) {
             // $calendar .= "<td class='$today'><h4>$currentDay</h4><a href='http://localhost/C&A_Indoor_Project/Pages/Booking/user' class = 'btn btn-success btn-xs' target='_top'>Book</a></td>";
             $calendar .= "<td class='$today'><a href='http://localhost/C&A_Indoor_Project/Pages/User_Booking/user?fulldate=$date' class = 'btn btn-success btn-xs' target='_top'><h4>$currentDay</h4></a></td>";
+        }else{
+            $calendar .= "<a class = 'btn btn-danger btn-xs'><td class='$today'><h4>$currentDay</h4></td></a>";
         }
         // echo $today;
  

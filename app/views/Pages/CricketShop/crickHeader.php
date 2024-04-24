@@ -9,74 +9,35 @@
     <!--custom css link-->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/style-prefix.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/cricketitem.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/ItemDetail.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/cart.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/checkout.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/orders.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/notification.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 
 </head>
 
 <body>
+
+    <!-- side bar -->
+    <?php
+        $role = $_SESSION['user_role'];
+        $linkRole = "";
+            if($role == "User"){
+                $linkRole = "user";
+            }
+            else if($role == "Coach"){
+                $linkRole = "coach";
+            }
+    ?>
+
     <div class="overlay" data-overlay></div>
-
-    <!--MODAL-->
-
-
-    <!-- <div class="modal" data-modal>
-    <div class="modal-close-overlay" data-modal-overlay></div>
-    <div class="modal-content">
-      <button class="modal-close-btn" data-modal-close> -->
-    <!-- <ion-icon name="close-outline"></ion-icon> -->
-    <!-- </button> -->
-    <!-- <div class="newsletter-img">
-        <img src="./assets/images/newsletter.png" alt="subscribe newsletter" width="400" height="400">
-      </div> -->
-
-    <!-- <div class="newsletter">
-
-        <form action="#">
-
-          <div class="newsletter-header">
-
-            <h3 class="newsletter-title">Subscribe Newsletter.</h3>
-
-            <p class="newsletter-desc">
-              Subscribe the <b>Anon</b> to get latest products and discount update.
-            </p>
-
-          </div>
-
-          <input type="email" name="email" class="email-field" placeholder="Email Address" required>
-
-          <button type="submit" class="btn-newsletter">Subscribe</button>
-
-        </form>
-
-      </div> -->
-
-    <!-- </div>
-
-  </div> -->
-
-
-    <!--NOTIFICATION TOAST-->
-    <!-- <div class="notification-toast" data-toast>
-    <button class="toast-close-btn" data-toast-close> -->
-    <!-- <ion-icon name="close-outline"></ion-icon> -->
-    <!-- </button> -->
-    <!-- <div class="toast-banner">
-      <img src="./assets/images/products/jewellery-1.jpg" alt="Rose Gold Earrings" width="80" height="70">
-    </div> -->
-    <!-- <div class="toast-detail">
-      <p class="toast-message">
-        Someone in new just bought
-      </p>
-      <p class="toast-title">
-        Rose Gold Earrings
-      </p>
-      <p class="toast-meta">
-        <time datetime="PT2M">2 Minutes</time> ago
-      </p>
-
-    </div> -->
-
-    <!-- </div> -->
 
 
 
@@ -84,34 +45,26 @@
     <header>
         <div class="header-main">
             <div class="container">
-                <a href="#" class="header-logo">
+                <a href="<?php echo URLROOT; ?>/Pages/Dashboard/<?php echo $linkRole?>" class="header-logo">
                     <img src="<?php echo URLROOT; ?>/Crick_Images/logo/logo.png" alt="Anon's logo" width="120"
                         height="36">
                 </a>
 
                 <div class="header-search-container">
-                    <input type="search" name="search" class="search-field" placeholder="Enter your product name...">
+                    <input type="search" name="search" id="searchField" class="search-field" placeholder="Enter your product name...">
                     <button class="search-btn">
                         <ion-icon name="search-outline"></ion-icon>
                     </button>
                 </div>
 
                 <div class="header-user-actions">
-                    <button class="action-btn" id="personBtn">
-                        <ion-icon name="person-outline"></ion-icon>
-                        <div class="dropdown-content">
-                            <a href="#">Profile</a>
-                            <a href="#">Your Orders</a>
-                            <a href="#">Logout</a>
-                        </div>
+                    <button class="action-btn" id="personBtn"onclick="window.location.href='<?php echo URLROOT; ?>/Pages/Orders/<?php echo $_SESSION['user_email']; ?>'">
+                        <ion-icon name="bag-handle"></ion-icon>
                     </button>
-                    <button class="action-btn">
-                        <ion-icon name="heart-outline"></ion-icon>
-                        <span class="count">0</span>
-                    </button>
-                    <button class="action-btn">
-                        <ion-icon name="bag-handle-outline"></ion-icon>
-                        <span class="count">0</span>
+                    <button class="action-btn" onclick="window.location.href='<?php echo URLROOT; ?>/Pages/Cricket_Cart/cart'">
+                        <!-- <ion-icon name="bag-handle-outline"></ion-icon> -->
+                        <ion-icon name='cart'></ion-icon>
+                        <span class="count" id="cartCount"></span>
                     </button>
                 </div>
             </div>
@@ -121,7 +74,7 @@
             <div class="container">
                 <ul class="desktop-menu-category-list">
                     <li class="menu-category">
-                        <a href="http://localhost/C&A_Indoor_Project/Pages/Cricket_Shop/manager"
+                        <a href="<?php echo URLROOT; ?>/Pages/Cricket_Shop/User"
                             class="menu-title">Home</a>
                     </li>
                     <li class="menu-category">
@@ -187,19 +140,13 @@
             <button class="action-btn" data-mobile-menu-open-btn>
                 <ion-icon name="menu-outline"></ion-icon>
             </button>
-            <button class="action-btn">
-                <ion-icon name="bag-handle-outline"></ion-icon>
-                <span class="count">0</span>
+            <button class="action-btn" onclick="window.location.href='<?php echo URLROOT; ?>/Pages/Cricket_Shop/User'">
+                <ion-icon name='home'></ion-icon>
             </button>
-            <button class="action-btn">
-                <ion-icon name="home-outline"></ion-icon>
-            </button>
-            <button class="action-btn">
-                <ion-icon name="heart-outline"></ion-icon>
-                <span class="count">0</span>
-            </button>
-            <button class="action-btn" data-mobile-menu-open-btn>
-                <ion-icon name="grid-outline"></ion-icon>
+            <button class="action-btn" onclick="window.location.href='<?php echo URLROOT; ?>/Pages/Cricket_Cart/cart'">
+                <ion-icon name='cart'></ion-icon>
+                <!-- <span class="count">0</span> -->
+                <span class="count" id="cartCount"></span>
             </button>
         </div>
 

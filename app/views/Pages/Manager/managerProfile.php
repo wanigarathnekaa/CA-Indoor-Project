@@ -26,12 +26,12 @@
 
                               <div class="imgBox">
                                     <?php
-                                          // if($data->img == null){
+                                          if($data->img == null){
                                                 echo '<img class="profile-image" src="'.URLROOT.'/public/profilepic/avatar.jpg">';
-                                          // }
-                                          // else{
-                                          //       echo '<img class="profile-image" src="'.URLROOT.'/public/profilepic/'.$data->img.'">';
-                                          // }
+                                          }
+                                          else{
+                                                echo '<img class="profile-image" src="'.URLROOT.'/public/profilepic/'.$data->img.'">';
+                                          }
                                     ?>
                               </div>
                               <?php if ($data !== null): ?>
@@ -45,12 +45,12 @@
                                     <div class="infor"><b>Email</b> : <?php echo $data->email?> </div>
                                     <div class="infor"><b>Mobile Number</b> : <?php echo $data->phoneNumber?></div> 
                                     <div class="infor"><b>nic</b> : <?php echo $data->nic?></div>
-                                    <div class="infor"><b>Address</b> : <?php echo $data->address?></div>                             
+                                    <div class="infor"><b>Address</b> : <?php echo $data->strAddress?>,<?php echo $data->city ?></div>                            
                               </div>
                               <div class="btnrow">
                               <a href="<?php echo URLROOT;?>/Pages/Manager_Edit_Profile/manager" type="button" class="button">Edit Profile</a>
                               <div class="Change Password">
-                                    <a class="button" href="<?php echo URLROOT; ?>/Pages/changePassword/user">Change Password</a>
+                                    <a class="button" href="<?php echo URLROOT; ?>/Pages/ManagerchangePassword/<?php echo $role ?>">Change Password</a>
                               </div>
                                     <!-- <button type="button" class="button">Change Password</button> -->
                                     <button type="button" class="button" onclick="openDeletePopup()">Delete Profile</button>

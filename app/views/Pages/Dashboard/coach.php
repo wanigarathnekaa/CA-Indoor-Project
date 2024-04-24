@@ -44,7 +44,7 @@
             </div>
 
             <div class="service-cards">
-                <a class="card" href="#">
+                <a class="card" href="<?php echo URLROOT; ?>/Pages/userSchedule/coach">
                     <div class="card-icon">
                         <i class="fa-solid fa-users"></i>
                     </div>
@@ -53,7 +53,7 @@
                     </div>    
                 </a>
 
-                <a class="card" href="#">
+                <a class="card" href="<?php echo URLROOT; ?>/Pages/userSchedule/coach">
                     <div class="card-icon">
                         <i class="fa-solid fa-globe"></i>
                     </div>
@@ -62,7 +62,7 @@
                     </div>    
                 </a>
 
-                <a class="card" href="#">
+                <a class="card" href="<?php echo URLROOT; ?>/Pages/Cricket_Shop/Coach">
                     <div class="card-icon">
                         <i class="fa-solid fa-cart-shopping"></i>
                     </div>
@@ -71,7 +71,7 @@
                     </div>    
                 </a>
 
-                <a class="card" href="#">
+                <a class="card" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/coach">
                     <div class="card-icon">
                         <i class="fa-solid fa-address-card"></i>
                     </div>
@@ -126,6 +126,15 @@
                 <?php endforeach; ?>
             </div>
         </section>
+
+
+        <!-- Cricket Shop banner -->
+        <div class="hero-image">
+            <div class="hero-text">
+                <h1>Buy High Quality Cricket Equipments</h1>
+                <a href="C&A_Indoor_Project/Pages/Cricket_Shop/Coach" class="btn">Shop Now</a>
+            </div>
+        </div>
 
 
         <!-- ABOUT US -->
@@ -192,7 +201,7 @@
                         <div class="aboutDetails">
                             <div class="detail">
                                 <i class="fa-solid fa-circle-check tick"></i>
-                                <p>Rs. 1000 per hour for noemal net</p>
+                                <p>Rs. 1000 per hour for normal net</p>
                             </div>
     
                             <div class="detail">

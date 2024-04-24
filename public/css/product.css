@@ -89,78 +89,107 @@ hr {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 6px;
   z-index: 999;
-  overflow-y: auto;
+  /* overflow-y: auto; */
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 .modal-content {
   max-width: 700px;
   width: 100%;
   background-color: #fff;
-  padding: 25px 30px;
+  padding: 20px;
   border-radius: 15px;
-
   margin: 5% auto;
   border: 1px solid #888;
   box-sizing: border-box;
   z-index: 1000;
-  overflow: hidden;
+  overflow: scroll;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
 }
 
 .modal .modal-content .modal-title {
-  font-size: 25px;
+  /* font-size: 25px; */
   font-weight: 500;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   position: relative;
+  font-size: 20px;
+    /* font-weight: 800; */
+    /* margin-bottom: 5px; */
+    color: var(--color01);
+    /* background-color: var(--color02); */
 }
 
-/* Add your specific styles for the form */
-.modal-content form .col-md-12,
-.modal-content form .col-md-6 {
+
+
+.modal .modal-content .col-md-6{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  
+}
+
+.modal .modal-content .form-group {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 10px 0 12px 0;
+  flex-direction: column;
 }
 
-form .col-md-6 .form-group {
-  margin-bottom: 10px;
-  width: calc(100% / 2 - 20px);
-}
-
-form .col-md-12 .form-group{
-  margin-bottom: 10px;
+.modal .modal-content .form-group label {
   width: 100%;
-}
-
-
-#productForm label {
-  display: block;
-  margin-bottom: 4px;
-  color: var(--black1);
+  font-size: 12px;
   font-weight: 500;
+  color: var(--black1);
+  /* padding: 10px; */
 }
+
+
+
+.modal .modal-content .btn{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* margin-top: 10px; */
+
+}
+
+.modal .modal-content .btn button{
+  width: 25%;
+  background-color: var(--color02);
+  color: var(--white);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  /* margin-top: 15px; */
+}
+
+.modal .modal-content .btn button:hover{
+  background-color: var(--color01);
+}
+
 
 #productForm select,
 #productForm input,
 #productForm textarea {
   width: 100%;
-  padding: 10px;
+  padding: 8px;
   box-sizing: border-box;
-  margin-bottom: 15px;
+  /* margin-bottom: 10px; */
   border: 1px solid #ccc;
   border-radius: 5px;
   transition: all 0.3s ease-in;
-  border-bottom-width: 2px;
   overflow-y: scroll;
   background-color: var(--white);
-
-  
   outline: none;
-  padding-left: 15px;
-  
+  font-size: 12px;
+  /* padding-left: 15px; */
 }
+
+
 
 #productForm button {
   background-color: var(--color01);
@@ -180,7 +209,7 @@ form .col-md-12 .form-group{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
 #productForm .btn button {
@@ -273,6 +302,22 @@ table tr th {
   padding: 10px;
 }
 
+table tbody tr td .Change_Quantity,
+table tbody tr td .Change_Discount{
+  background-color: var(--color02);
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  margin: 5px 1px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 14px;
+}
+
 tbody a {
   text-decoration: none;
   /* color: var(--black1); */
@@ -284,7 +329,7 @@ tbody a {
   margin-right: 20px; /* Add space to the right */
 }
 
-#coachTable td button {
+#coachTable td .edit {
   background-color: transparent;
   border: none;
   color: var(--black1);
@@ -297,11 +342,25 @@ tbody td .icon {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   /* padding-left: 10px;      */
 }
 
 tbody td .icon:hover {
   cursor: pointer;
+}
+
+.form-group input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: all 0.3s ease-in;
+  overflow-y: scroll;
+  background-color: var(--white);
+  outline: none;
+  font-size: 12px;
 }
 
 #coachTable {
@@ -350,7 +409,8 @@ tbody td .icon:hover {
 .form-invalid-6, .form-invalid-7, 
 .form-invalid-8{
   color: rgb(172, 5, 5);
-  font-size: 0.85em;
+  font-size: 12px;
+  margin-bottom: 10px;
 }
 
 @media screen and (max-width: 768px) {
@@ -359,7 +419,7 @@ tbody td .icon:hover {
   }
 
   .working-panel .image-text {
-    width: 100%; /* Make the image take up the full width on smaller screens */
+    width: 10%; /* Make the image take up the full width on smaller screens */
     justify-content: flex-end; /* Align the image to the right */
     margin-top: 10px; /* Add some space between text and image */
   }

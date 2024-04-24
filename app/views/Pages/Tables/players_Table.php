@@ -49,16 +49,6 @@
 
             <!-- Table Sort -->
             <div class="tableSort">
-                  <!-- <div class="sort">
-                        <label>Status :</label>
-                        <select name="filter" id="filter">
-                              <option value="all">All</option>
-                              <option value="paid">Paid</option>
-                              <option value="unpaid">Unpaid</option>
-                              <option value="cancelled">Cancelled</option>
-                        </select>
-                  </div> -->
-
                   <div class="search">
                         <label>
                               <input type="text" placeholder="Search here" id="searchInput" onkeyup="search()">
@@ -79,13 +69,21 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Mobile Number</th>
+                                    <th>Player Status</th>
                                     <th></th>
-                                    <th></th>
+                                    <!-- <th></th> -->
                               </tr>
                         </thead>
                         <!-- table body -->
                         <tbody>
-                              <?php foreach ($players as $player): ?>
+                              <?php foreach ($players as $player):
+                                    $status_color = '';
+                                    if ($player->is_blacklist == 0) {
+                                          $status_color = '#30c030';
+                                    } else {
+                                          $status_color = '#e03333';
+                                    }
+                                    ?>
                                     <tr>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($player)); ?>)">
                                                 <?php echo $player->uid ?>      
@@ -99,8 +97,12 @@
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($player)); ?>)">
                                                 <?php echo $player->phoneNumber ?>
                                           </td>
-                                          <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
-                                          <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($player)); ?>)"><i class="fa-solid fa-user-slash delete icon"></i>
+                                          <?php if($player->is_blacklist == 0){?>
+                                                <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($player)); ?>)"><span class="status" style="background-color: <?php echo $status_color; ?>;">Activated</span></td>
+                                          <?php }else{?>
+                                                <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($player)); ?>)"> <span class="status" style="background-color: <?php echo $status_color; ?>;">Deactivated</span></td>
+                                          <?php }?>
+                                          <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($player)); ?>)"><i class="fa-solid fa-rotate edit icon"></i></td>
                                           </td>
                                     </tr>
                                     <?php
@@ -138,10 +140,10 @@
                   <!-- confirm delete popup window -->
                   <div class="deletepopup" id=deletepopup>
                         <span class="close" onclick="closeDeletePopup()"><i class="fa-solid fa-xmark"></i></span>
-                        <h2>confirm delete</h2>
+                        <h2>Change the Status</h2>
                         <form action="<?php echo URLROOT; ?>/Coach/delete" method="POST">
                               <div class="btns">
-                                    <button type="submit" class="button">Delete</button>
+                                    <button type="submit" class="button">Change Status</button>
                                     <button type="button" onclick="closeDeletePopup()">Cancel</button>
                               </div>
                               <!-- <div hidden name="submit"><span class="pd_email"></span></div> -->

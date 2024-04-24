@@ -384,7 +384,53 @@
       color: var(--color01);
 }
 
+/* banner.......................... */
+.hero-image {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/shopbanner.jpg");
+      height: 50%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      margin: 20px;
+      border-radius: 20px;
+      box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+    
+.hero-text {
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+}
 
+.hero-text h1{
+      display: flex;
+      font-size: 40px;
+      margin-bottom: 20px;
+}
+
+.hero-text a{
+      text-decoration: none;
+}
+
+.hero-text .btn{
+      padding: 10px 20px;
+      background: var(--color01);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 20px;
+      margin-top: 50px;
+
+}
+
+.hero-text .btn:hover{
+      background: var(--color02);
+}
 
 
 

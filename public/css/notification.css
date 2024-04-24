@@ -1,0 +1,86 @@
+:root{
+      --notification-background : #a8dfcf;
+      --notification-primary : #196b5f;
+      --notification-secondary : #f5c6cb;
+      --background-color : #f8f9fa;
+  }
+  
+  
+  .notification{
+        position: fixed;
+        width: max-content;
+        display: flex;
+        /* left: 0; */
+        /* right: 20px; */
+        bottom: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+        border-radius: 6px;
+        background-color: var(--notification-background);
+        color: var(--notification-primary);
+        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+        transform: translateY(30px);
+        opacity: 0;
+        visibility: hidden;
+        animation: fade-in 3s linear;
+        font-size: 14px;
+        z-index: 10000;
+
+  }
+  
+  .notification_icon{
+      /* height: 26px;
+      width: 26px; */
+      margin-right: 10px;
+      font-size: large;
+  }
+  
+  .notification_title{
+      font-size: 16px;
+      font-weight: 500;
+  }
+  
+  .notification_body{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 16px 8px;
+      margin-left: 10px;
+        margin-right: 10px;
+      text-align: center;
+  }
+  
+  .notification_progress{
+      position: absolute;
+      left: 4px;
+      bottom: 4px;
+      width: calc(100% - 8px);
+      height: 4px;
+      transform: scaleX(0);
+      transform-origin: left;
+      background: linear-gradient(
+          to right,
+          var(--notification-background),
+          var(--notification-primary)
+      );
+      border-radius: inherit;
+      animation: progress 2.5s 0.3s linear;
+  }
+  
+  @keyframes fade-in{
+      0%{
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+      }
+      95%{
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+  
+  @keyframes progress{
+      to{
+          transform: scaleX(1);
+      }
+  }

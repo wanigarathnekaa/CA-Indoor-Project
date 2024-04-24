@@ -46,6 +46,7 @@ body {
   color: #333;
   display: block;
   margin: 6px 0;
+  margin-bottom: 20px;
 }
 .container header::before {
   content: "";
@@ -87,7 +88,7 @@ body {
   background-color: var(--color04);
 }
 
-.ID{
+.ID {
   overflow: scroll;
 }
 
@@ -122,7 +123,7 @@ form.secActive .form.first {
 }
 form .input-field {
   display: flex;
-  width: 80%;
+  width: 100%;
   flex-direction: column;
   /* margin: 4px 0; */
   margin-bottom: 15px;
@@ -130,7 +131,7 @@ form .input-field {
 
 .input-field label {
   font-size: 16px;
-  font-weight: 400;
+  /* font-weight: 400; */
   color: #2e2e2e;
 }
 .input-field input,
@@ -145,7 +146,7 @@ select {
   border-bottom-width: 2px;
   padding: 0 15px;
   height: 42px;
-  margin: 8px 0;
+  /* margin: 8px 0; */
 }
 
 .input-field input:user-invalid {
@@ -157,7 +158,8 @@ select {
   border-color: #2d8491;
 }
 
-select:focus {
+select:focus,
+select:valid {
   border-color: #2e8a99;
 }
 
@@ -244,6 +246,165 @@ form .buttons button,
 form .form-invalid {
   color: rgb(172, 5, 5);
   font-size: 10px;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  overflow-y: auto;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  max-width: 700px;
+  width: 500px;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 15px;
+  margin: 5% auto;
+  border: 1px solid #888;
+  box-sizing: border-box;
+  z-index: 1000;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+.modal-content .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.modal-content .title {
+  font-size: 20px;
+  /* font-weight: 800; */
+  margin-bottom: 20px;
+  color: var(--color01);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.col-md-2 {
+  flex: 0 0 calc(50% - 10px);
+  margin: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+}
+
+/* Style for the default checkbox */
+input[type="checkbox"] {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.customClass{
+
+  background-color: rgb(238, 83, 83);
+  color: white;
+}
+
+/* Style for the label associated with the checkbox */
+label {
+  display: block; /* Change from inline-block to block */
+  margin-bottom: 10px; /* Optional: Adds some space below each label */
+  cursor: pointer;
+}
+
+#invalid1,
+#invalid2,
+#invalid3,
+#invalid4,
+#invalid5,
+#invalid6 {
+  color: red;
+  font-size: 13px;
+}
+
+.modal-content .btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.modal-content .btn button {
+  background-color: var(--color01);
+  color: var(--white);
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 25%;
+}
+
+/* label.btn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  text-align: center;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+label.btn:hover {
+  background-color: #e0e0e0;
+} */
+
+input[type="checkbox"]:checked + label.btn {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.netbtnbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.netbtnbar .net {
+  background-color: var(--white);
+  color: var(--black2);
+  border: solid 1px var(--color01);
+  padding: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  width: 25%;
+}
+
+.netbtnbar .net:hover {
+  background-color: var(--color01);
+  color: var(--white);
 }
 
 /* Media query to make the layout responsive */

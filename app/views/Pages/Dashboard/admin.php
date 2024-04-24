@@ -24,9 +24,21 @@
 
     <!-- Content -->
     <section class="home">
-
+    
+    
         <!-- Cards -->
         <div class="cardBox">
+        
+        
+           <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/CompanyUserTable/user">
+                <div>
+                    <div class="numbers"><?php echo $data["CompanyUserCount"]?></div>
+                    <div class="cardName">Company Users</div>
+                </div>
+                <div class="iconBx">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                </div>
+            </a>
             <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/managerTable/user">
                 <div>
                     <div class="numbers"><?php echo $data["ManagerCount"]?></div>
@@ -60,6 +72,8 @@
                 </div>
             </a>
 
+            
+
             <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/reservationTable/user">
                         <div>
                               <div class="numbers"><?php echo $data["Reserve_Count"]?></div>
@@ -70,7 +84,7 @@
                               <i class="fa-solid fa-calendar-days"></i>
                         </div>
                   </a>
-             <a class="card" href="C&A_Indoor_Project/Pages/View_Advertisement/manager">
+             <a class="card" href="C&A_Indoor_Project/Pages/View_Advertisement/admin">
                         <div>
                               <div class="numbers"><?php echo $data["advertCount"]?></div>
                               <div class="cardName">Advertisements</div>
@@ -82,7 +96,7 @@
                         </div>
               </a>
 
-            <a class="card" href="#">
+            <a class="card" href="C&A_Indoor_Project/Reports/SelectReport">
                 <div>
                     <div class="numbers"></div>
                     <div class="cardName">Reports</div>
@@ -103,11 +117,29 @@
                     <i class="fa-solid fa-comments"></i>
                 </div>
             </a>
+
+            
+            
         </div>
-         
+        <div class="spacer"></div>
+
+     <!--Reservation Details -->
+     <div class="details">
+         <!-- Recent Reservations -->
+        <div class="tablediv">
+        <?php require APPROOT . '/views/Pages/Tables/accountlog_Table.php'; ?>
+    </div>
+    </div>
+
+    <div class="spacer"></div>
+
+
+        
+
+
             <div class="charts">
-                  <!-- Weekly Reservations chart -->
-                  <?php
+                <!-- Weekly Reservations chart -->
+                <?php
                         require APPROOT . '/views/Pages/Charts/weeklyReservationsChart.php';
                   ?>
 
@@ -120,6 +152,7 @@
                   <?php
                         require APPROOT . '/views/Pages/Charts/reservationsNetChart.php';
                   ?>
+                 
             </div>
 
 
@@ -132,3 +165,5 @@
 
 </body>
 </html>
+
+

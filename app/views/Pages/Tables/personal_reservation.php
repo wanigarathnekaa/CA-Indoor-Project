@@ -31,8 +31,15 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
                   <h2>
                         Upcoming Reservations
                   </h2>
-                  <!-- veiw all button -->
-                  <a href="#" class="btn">View All</a>
+                  <div class="serachselect">
+                        <i class="fa-solid fa-magnifying-glass icon"></i>
+                        <select id="liveSearch" class="btn">
+                              <option value="All">All</option>
+                              <option value="Normal Net A">Normal Net A</option>
+                              <option value="Normal Net B">Normal Net B</option>
+                              <option value="Machine Net">Machine Net</option>
+                        </select> <!-- <a href="#" class="btn">View All</a> -->
+                  </div>
             </div>
 
             <div class="table-container">
@@ -51,7 +58,16 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
                         <tbody>
                               <?php
                               foreach ($personal_reservations as $reservation) {
-                                    ?>
+                                    $status_color = '';
+                                    if ($reservation->paymentStatus == 'Paid') {
+                                          $status_color = '#00ff00';
+                                    } else if ($reservation->paymentStatus == 'Pending') {
+                                          $status_color = '#ffcc00';
+                                    } else {
+                                          $status_color = '#ff0000';
+                                    }
+                              ?>
+
                                     <tr onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
                                           <td>
                                                 <?php echo $reservation->date; ?>
@@ -62,9 +78,9 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
                                           <td>
                                                 <?php echo $reservation->netType; ?>
                                           </td>
-                                          <td><span class="status paid">Pending</span></td>
+                                          <td><span class="status" style="background-color: <?php echo $status_color; ?>;"><?php echo $reservation->paymentStatus ?></span></td>
                                     </tr>
-                                    <?php
+                              <?php
                               }
                               ?>
 
@@ -102,6 +118,14 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
 
                         <div class="popupdetail">
                               <h2><b>Status :</b> <span class="r_payment"></span></h2>
+                        </div>
+
+                        <div class="popupdetail">
+                              <h2><b>Booking Price :</b> <span class="r_price"></span></h2>
+                        </div>
+
+                        <div class="popupdetail">
+                              <h2><b>Paid Amount :</b> <span class="r_paid"></span></h2>
                         </div>
                   </div>
 
@@ -153,7 +177,24 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
       </div>
 
       <!-- JavaScript -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
       <script src="<?php echo URLROOT; ?>/js/personalPopup.js"></script>
+      <script>
+            $(document).ready(function () {
+                  $("#liveSearch").on("change", function () {
+                        selectedValue = $(this).val();
+                        // alert(selectedValue);
+                        if (selectedValue != "All") {
+                              $("table tbody tr").filter(function () {
+                                    $(this).toggle($(this).text().indexOf(selectedValue) > -1);
+                              });
+                        }else{
+                              $("table tbody tr").show();
+                        }
+
+                  });
+            });
+      </script>
 </body>
 
 </html>

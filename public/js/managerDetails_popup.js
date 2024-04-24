@@ -5,6 +5,7 @@ let deletePopup = document.getElementById('deletepopup');
 
 // details popup
 function openPopup(manager) {
+      console.log(manager);
       popup.classList.add("open-popup");
       popupcontainer.classList.add("open-popupcontainer");
 
@@ -21,7 +22,7 @@ function openPopup(manager) {
       m_nic.textContent = manager.nic;
 
       const m_address = document.querySelector(".m_address");
-      m_address.textContent = manager.address;
+      m_address.textContent = manager.strAddress + "," + manager.city;
 
    
 }
@@ -38,7 +39,7 @@ function openDeletePopup(manager){
       popupcontainer.classList.add("open-popupcontainer");
 
       var input = document.getElementById("hid_input");
-      input.value = manager.manager_Id;
+      input.value = manager.email;
 }
 
 function closeDeletePopup(){

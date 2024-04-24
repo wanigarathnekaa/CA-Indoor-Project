@@ -1,0 +1,105 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Rancho&display=swap');
+
+:root {
+    --primary: #2e8a99;
+    --secondary: #4f9da9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    margin-top: 50px; /* Adjust margin-top as needed */
+}
+
+.text-primary {
+    color: #2e8a99 !important;
+    font-size: 28px; /* Increase font size */
+}
+
+.text-success {
+    color: #4F9DA9;
+    font-size: 24px; /* Increase font size */
+}
+
+.btn-primary {
+    background-color: #2e8a99;
+    border-color: #2e8a99;
+    font-size: 20px; /* Increase font size */
+    padding: 5px 5px; /* Increase padding */
+    border-radius: 30px; /* Increase border radius */
+}
+
+.form-control {
+    border-color: #A7D8D7;
+    font-size: 20px; /* Increase font size */
+    padding: 15px; /* Increase padding */
+    border-radius: 10px; /* Increase border radius */
+}
+
+.alert {
+    font-size: 24px; /* Increase font size */
+    padding: 20px; /* Increase padding */
+    border-radius: 10px; /* Increase border radius */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 20px; /* Increase padding */
+    text-align: left;
+    border-bottom: 2px solid #EAF3F4; /* Increase border thickness */
+}
+
+th {
+    background-color: #2e8a99;
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #EAF3F4;
+}
+
+tr:hover {
+    background-color: #A7D8D7;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    width: 100%;
+    max-width: 400px; /* Adjust maximum width as needed */
+    margin-bottom: 20px;
+}
+
+
+.btn-container .btn-primary,
+.btn-container input[type="submit"] {
+    width: 120px;
+    height: 50px;
+    max-width: 120px; /* Adjust maximum width as needed */
+    border-radius: 30px;
+    margin-right: 10px; /* Add margin between buttons */
+}
+
+.btn-primary:last-child {
+    margin-right: 0; /* Remove margin from last button */
+}

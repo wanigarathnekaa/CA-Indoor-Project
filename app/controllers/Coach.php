@@ -1,6 +1,7 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
 class Coach extends Controller
 {
     private $coachModel;
@@ -36,11 +37,7 @@ class Coach extends Controller
                 'specialty' => trim($_POST['specialty']),
                 'certificate' => trim($_POST['certificate']),
 
-                'filename' => trim($_FILES['file']['name']),
-                'filetmp' => trim($_FILES['file']['tmp_name']),
-
                 'name_err' => "",
-                'user_name_err' => "",
                 'email_err' => "",
                 'phoneNumber_err' => "",
                 'nic_err' => "",
@@ -50,24 +47,11 @@ class Coach extends Controller
                 'experience_err' => "",
                 'specialty_err' => "",
                 'certificate_err' => "",
-                'filename_err' => "",
-                'filetmp_err' => ""
             ];
-
-
-            $newfilename = uniqid() . "-" . $data['filename'];
-            move_uploaded_file($data['filetmp'], "../public/profilepic/" . $newfilename);
-            $data['filename'] = $newfilename;
-            print_r($data);
 
             //validate name
             if (empty($data['name'])) {
                 $data['name_err'] = "Please enter a name";
-            }
-
-            //validate user_name
-            if (empty($data['user_name'])) {
-                $data['user_name_err'] = "Please enter an user_name";
             }
 
             //validate email
@@ -85,10 +69,6 @@ class Coach extends Controller
                 $data['phoneNumber_err'] = "Please enter a phone number";
             }
 
-            //validate password
-            if (empty($data['pwd'])) {
-                $data['pwd_err'] = "Please enter a password";
-            }
 
             // validate nic
             if (empty($data['nic'])) {
@@ -97,22 +77,22 @@ class Coach extends Controller
 
             // validate address
             if (empty($data['srtAddress'])) {
-                $data['address_err'] = "Please enter the Street Address";
+                $data['srtAddress_err'] = "Please enter the Street Address";
             }
 
             // validate city
             if (empty($data['city'])) {
-                $data['address_err'] = "Please enter the City";
+                $data['city_err'] = "Please enter the City";
             }
 
             // validate achivements
             if (empty($data['achivements'])) {
-                $data['address_err'] = "Please enter the Achievements of the ";
+                $data['achivements_err'] = "Please enter your Achievements";
             }
 
             // validate experience
             if (empty($data['experience'])) {
-                $data['experiences_err'] = "Please enter the Experience";
+                $data['experience_err'] = "Please enter the Experience";
             }
 
             // validate specialty
@@ -125,44 +105,46 @@ class Coach extends Controller
                 $data['certificate_err'] = "Please enter certifications";
             }
 
-            // validate fie
-            if (empty($data['filename'])) {
-                $data['filename_err'] = "Please upload profile picture";
-            }
+            
 
-            //generate random password
-            $password=$this->coachModel->generateRandomPassword();
-
-            //check whether the  password is sent to the coach via email
-            if($this->coachModel->SendPasswordViaEmail($_POST['email'],$password)){
-                $data['pwd'] = $password;
-
-            }
-            else {
-                    
-                die('Something Went wrong');
-            }
+            
 
             //If validation is completed and no error, then register the user
-            if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err']) && empty($data['nic_err'])) {
+            if (empty($data['name_err']) && empty($data['email_err']) 
+            && empty($data['nic_err']) && empty($data['phoneNumber_err']) && empty($data['srtAddress_err'])
+            && empty($data['city_err']) && empty($data['achivements_err']) && empty($data['experience_err']) 
+            && empty($data['specialty_err']) && empty($data['certificate_err'])){
+
+                //generate random password
+                $password=$this->coachModel->generateRandomPassword();
+
+                //check whether the  password is sent to the coach via email
+                if($this->coachModel->SendPasswordViaEmail($_POST['email'],$password)){
+                    $data['pwd'] = $password;
+                }
+                else {      
+                    die('Something Went wrong');
+                }
+
                 // //Hash the password
                 $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
+                
                 //create user
-                if ($this->coachModel->coachRegister($data) && $this->coachUserModel->register($data)) { 
+                if ($this->coachModel->coachRegister($data) && $this->coachUserModel->register($data) && $this->coachUserModel->createlog($data)) { 
                     echo "User Registered";
                     redirect('Pages/Dashboard/manager');
                 } else {
-                    
                     die('Something Went wrong');
                 }
             } else {
                 //Load the view
                 $this->view('Pages/CoachRegistration/coachRegistration', $data);
             }
+
         } else {
             //initial form
             $data = [
-                'name' =>"",
+                'name' => "",
                 'user_name' => "",
                 'email' => "",
                 'phoneNumber' => "",
@@ -174,8 +156,6 @@ class Coach extends Controller
                 'experience' => "",
                 'specialty' => "",
                 'certificate' => "",
-                'filename' => "",
-                'filetmp' => "",
 
                 'name_err' => "",
                 'user_name_err' => "",
@@ -188,13 +168,11 @@ class Coach extends Controller
                 'experience_err' => "",
                 'specialty_err' => "",
                 'certificate_err' => "",
-                'filename_err' => "",
-                'filetmp_err' => ""
             ];
         }
 
-        //Load the view
-        $this->view('Pages/CoachRegistration/coachRegistration', $data);
+            //Load the view
+            $this->view('Pages/CoachRegistration/coachRegistration', $data);
     }
 
 
@@ -215,7 +193,7 @@ class Coach extends Controller
                 'user_name' => trim($_POST['name']),
                 'email' => trim($_POST['email']),
                 'phoneNumber' => trim($_POST['phoneNumber']),
-                'pwd' => "12345678",
+                // 'pwd' => "12345678",
                 'nic' => trim($_POST['nic']),
                 'srtAddress' => trim($_POST['srtAddress']),
                 'city' => trim($_POST['city']),
@@ -247,10 +225,11 @@ class Coach extends Controller
                 $newfilename = uniqid() . "-" . $_FILES['file']['name'];
                 move_uploaded_file($_FILES['file']['tmp_name'], "../public/profilepic/" . $newfilename);
                 $data['filename'] = $newfilename;
-            }else {
+            } else {
                 // No new file uploaded, retain the existing image value
                 $existingFilename = $this->coachUserModel->getExistingImageFilename($data['email']); // Replace $userId with the actual user ID
                 $data['filename'] = $existingFilename;
+                $data['img'] = $existingFilename;
             }
 
 
@@ -274,11 +253,6 @@ class Coach extends Controller
                 $data['phoneNumber_err'] = "Please enter a phone number";
             }
 
-            //validate password
-            if (empty($data['pwd'])) {
-                $data['pwd_err'] = "Please enter a password";
-            }
-
             // validate nic
             if (empty($data['nic'])) {
                 $data['nic_err'] = "Please enter the NIC number";
@@ -286,17 +260,17 @@ class Coach extends Controller
 
             // validate address
             if (empty($data['srtAddress'])) {
-                $data['address_err'] = "Please enter the Street Address";
+                $data['srtAddress_err'] = "Please enter the Street Address";
             }
 
             // validate city
             if (empty($data['city'])) {
-                $data['address_err'] = "Please enter the City";
+                $data['city_err'] = "Please enter the City";
             }
 
             // validate achivements
             if (empty($data['achivements'])) {
-                $data['address_err'] = "Please enter the Achievements of the ";
+                $data['achivements_err'] = "Please enter your Achievements";
             }
 
             // validate experience
@@ -316,9 +290,9 @@ class Coach extends Controller
 
 
             //If validation is completed and no error, then register the user
-            if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err']) && empty($data['nic_err'])) {
+            if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err']) && empty($data['nic_err']) && empty($data['phoneNumber_err']) && empty($data['srtAddress_err']) && empty($data['city_err']) && empty($data['achivements_err']) && empty($data['experience_err']) && empty($data['specialty_err']) && empty($data['certificate_err'])) {
                 //Hash the password
-                $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
+                // $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
 
                 //create user
                 if ($this->coachModel->updateCoach($data) && $this->coachUserModel->updateUser($data)) {
@@ -338,17 +312,17 @@ class Coach extends Controller
 
 
 
-    
+
     // delete function.....................................................
     public function delete()
     {
         // var_dump($_POST);
-        if($this->coachModel->deleteCoach($_POST["submit"]) && $this->coachUserModel->deleteUser($_POST["submit"])) {  
-            redirect("Users/register");
-        }else{
+        if ($this->coachUserModel->deleteUser($_POST["submit"])) {
+            redirect("Pages/Dashboard/manager");
+        } else {
             die("Something Went Wrong");
         }
-        
+
     }
 
 

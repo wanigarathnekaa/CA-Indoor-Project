@@ -1,6 +1,7 @@
 <?php 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
     class M_Coach{
         private $db;
         public function __construct(){
@@ -41,6 +42,9 @@ use PHPMailer\PHPMailer\Exception;
             }
             
         }
+
+        
+
         public function generateRandomPassword($length = 12) {
             // Define characters to use in the password
             $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+';
@@ -62,6 +66,7 @@ use PHPMailer\PHPMailer\Exception;
         
             return $password;
         }
+        
         public function SendPasswordViaEmail($email,$password) {
             require_once APPROOT . '/libraries/phpmailer/src/PHPMailer.php';
             require_once APPROOT . '/libraries/phpmailer/src/SMTP.php';
@@ -76,7 +81,7 @@ use PHPMailer\PHPMailer\Exception;
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
                 $mail->Username = 'nivodya2001@gmail.com';
-                $mail->Password = 'ndvpqhmangzegxhn';
+                $mail->Password = 'wupbxphjicpfidgj';
                 $mail->SMTPSecure = 'ssl';
                 $mail->Port = 465;
                 

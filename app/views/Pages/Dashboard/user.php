@@ -58,7 +58,7 @@
                         <div class="cardName">Coaches</div>
                     </div>    
                 </a>
-                <a class="card" href="#">
+                <a class="card" href="C&A_Indoor_Project/Pages/userSchedule/user">
                     <div class="card-icon">
                         <i class="fa-solid fa-globe"></i>
                     </div>
@@ -67,7 +67,7 @@
                     </div>    
                 </a>
 
-                <a class="card" href="#">
+                <a class="card" href="C&A_Indoor_Project/Pages/Cricket_Shop/User">
                     <div class="card-icon">
                         <i class="fa-solid fa-cart-shopping"></i>
                     </div>
@@ -113,7 +113,11 @@
                 <?php foreach($data["userCoach"] as $coach): ?>
                 <div class="coach-card">
                     <div class="coach-img">
-                        <img src="<?php echo URLROOT; ?>/public/profilepic/<?php echo $coach->img; ?>" class="coach-thum" alt="">
+                        <?php if($coach->img == NULL):?>
+                            <img src="<?php echo URLROOT; ?>/public/profilepic/avatar.jpg" class="coach-thum" alt="">
+                        <?php else:?>
+                            <img src="<?php echo URLROOT; ?>/public/profilepic/<?php echo $coach->img; ?>" class="coach-thum" alt="">
+                        <?php endif;?>
                     </div>
                     <div class="coach-details">
                         <h3 class="coach-name"><?php echo $coach->name;?></h3>
@@ -142,6 +146,15 @@
                 <?php endforeach; ?>
             </div>
         </section>
+
+
+        <!-- Cricket Shop banner -->
+        <div class="hero-image">
+            <div class="hero-text">
+                <h1>Buy High Quality Cricket Equipments</h1>
+                <a href="C&A_Indoor_Project/Pages/Cricket_Shop/User" class="btn">Shop Now</a>
+            </div>
+        </div>
 
 
         <!-- ABOUT US -->
@@ -213,7 +226,7 @@
                         <div class="aboutDetails">
                             <div class="detail">
                                 <i class="fa-solid fa-circle-check tick"></i>
-                                <p>Rs. 1000 per hour for noemal net</p>
+                                <p>Rs. 1000 per hour for normal net</p>
                             </div>
     
                             <div class="detail">

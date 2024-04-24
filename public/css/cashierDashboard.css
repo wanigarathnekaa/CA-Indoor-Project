@@ -50,6 +50,7 @@
 
 }
 
+<<<<<<< HEAD
 
 
 .charts{
@@ -82,12 +83,15 @@
 
 
 
+=======
+>>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
 @media (max-width: 1024px) {
       .details {
         grid-template-columns: 1fr;
         grid-gap: 20px;
       }
 
+<<<<<<< HEAD
       .charts {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -111,6 +115,8 @@
             grid-area: 2 / 2 / 3 / 3;
       }
 
+=======
+>>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
 }
 
 @media (max-width: 768px) {
@@ -126,6 +132,7 @@
         grid-template-columns: 1fr;
         grid-gap: 20px;
       }
+<<<<<<< HEAD
       .charts{
             display: grid;
             grid-template-columns: 1fr;
@@ -145,4 +152,6 @@
       .charts .chart3{
             grid-area: 3 / 1 / 4 / 2;
       }
+=======
+>>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
 }

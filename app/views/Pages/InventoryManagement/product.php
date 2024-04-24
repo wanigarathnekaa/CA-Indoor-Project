@@ -65,7 +65,7 @@
                                             <?php echo $category->category_name; ?>
                                         </option>
                                     <?php endforeach; ?>
-                                </select><br>
+                                </select>
                                 <span class="form-invalid-2"></span>
                             </div>
                             <!-- Product Brand Name -->
@@ -73,7 +73,7 @@
                                 <label for="brand_name">Brand Name</label>
                                 <select name="brand_name" id="brand_name" class="form-control">
                                     <option value="0">Select a Category first</option>
-                                </select><br>
+                                </select>
                                 <span class="form-invalid-3"></span>
                             </div>
                         </div>
@@ -92,12 +92,22 @@
                                 <span class="form-invalid-5"></span>
                             </div>
                         </div>
-                        <!-- Quantity -->
-                        <div class="col-md-12">
+
+                        <div class="col-md-6">
+                            <!-- Quantity -->
                             <div class="form-group">
                                 <label for="productName">Quantity</label>
-                                <input type="text" id="productQty" name="productQty" placeholder="Enter Product quantity">
+                                <input type="text" id="productQty" name="productQty"
+                                    placeholder="Enter Product quantity">
                                 <span class="form-invalid-8"></span>
+                            </div>
+
+                            <!-- Discount -->
+                            <div class="form-group">
+                                <label for="productName">Discount</label>
+                                <input type="number" step="0.01" id="productDiscount" name="productDiscount"
+                                    placeholder="Enter Product discount" min="0" value="0.00">
+                                <span class="form-invalid-9"></span>
                             </div>
                         </div>
 
@@ -140,6 +150,7 @@
                         <th>Product Name</th>
                         <th>Category Name</th>
                         <th>Quantity</th>
+                        <th>Discount</th>
                         <th>Date</th>
                         <th>Actions</th>
                     </tr>
@@ -171,21 +182,78 @@
                             </td>
                             <td>
                                 <?php echo $product->qty; ?>
+                                <button type="button" id="Change_Quantity" class="Change_Quantity"
+                                    p_id="<?php echo $product->product_id; ?>"><i class="fa-solid fa-pen"></i></button>
+                            </td>
+                            <td>
+                                <?php echo $product->discount; ?>
+                                <?php echo "%"; ?>
+                                <button type="button" id="Change_Discount" class="Change_Discount"
+                                    p_id="<?php echo $product->product_id; ?>"><i class="fa-solid fa-pen"></i></button>
                             </td>
                             <td>
                                 <?php echo $product->created_at; ?>
                             </td>
                             <td>
-                                <button type="button" class="edit" id="<?php echo $product->product_id; ?>"><i
-                                        class="fas fa-edit"></i></button>
-                                <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>"><i
-                                        class="fas fa-trash-alt"></i></a>
+                                <button type="button" class="edit" id="<?php echo $product->product_id; ?>">
+                                    <i class="fas fa-edit icon"></i></button>
+                                <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>">
+                                    <i class="fas fa-trash-alt icon"></i></a>
                             </td>
                         </tr>
                         <?php
                     endforeach; ?>
                 </tbody>
             </table>
+        </div>
+
+
+        <!-- popup -->
+        <div id="quantityChange" class="modal">
+            <div class="modal-content">
+                <div class="title">
+                    <h2 class="modal-title">Update Product Quantity</h2>
+                </div>
+                <hr>
+
+                <div class="form-group">
+                    <label for="productName">New Quantity :</label>
+                    <input type="number" id="productQuantity" class="productQuantity" name="productQuantity"
+                        placeholder="Enter New Product quantity"><br>
+                    <span class="form-invalid-8"></span>
+                </div>
+
+                <hr>
+
+                <div class="btn">
+                    <button type="button" id="updateQuantity">Update</button>
+                    <button type="button" onclick="closeModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- popup -->
+        <div id="discountChange" class="modal">
+            <div class="modal-content">
+                <div class="title">
+                    <h2 class="modal-title">Update Product Discount</h2>
+                </div>
+                <hr>
+
+                <div class="form-group">
+                    <label for="productName">New Discount</label>
+                    <input type="number" step="0.01" id="productDisc" name="productDisc"
+                        placeholder="Enter Product discount" min="0" value="0.00">
+                    <span class="form-invalid-9"></span>
+                </div>
+
+                <hr>
+
+                <div class="btn">
+                    <button type="button" id="updateDiscount">Update</button>
+                    <button type="button" onclick="closeModal()">Cancel</button>
+                </div>
+            </div>
         </div>
 
         <!-- Pagination -->
@@ -218,6 +286,7 @@
                 var selling_price = $('#selling_price').val();
                 var short_description = $('#short_description').val();
                 var quantity = $('#productQty').val();
+                var discount = $('#productDiscount').val();
 
                 // Create FormData object
                 var formData = new FormData(this);
@@ -239,6 +308,7 @@
                 formData.append('short_description', short_description);
                 formData.append('id', id);
                 formData.append('quantity', quantity);
+                formData.append('discount', discount);
 
                 // Get the file input element
                 var fileInput = $('#product_thumbnail')[0];
@@ -267,6 +337,7 @@
                             $('.form-invalid-6').html(response.messageShortDescription);
                             $('.form-invalid-7').html(response.messageProductThumbnail);
                             $('.form-invalid-8').html(response.messageQuantity);
+                            $('.form-invalid-9').html(response.messageDiscount);
                         }
                     },
                     error: function (xhr, status, error) {
@@ -298,6 +369,7 @@
                         $('#selling_price').val(response.selling_price);
                         $('#short_description').val(response.short_description);
                         $('#productQty').val(response.qty);
+                        $('#productDiscount').val(response.discount);
 
                         $("#category_name").val(response.category_id);
 
@@ -328,6 +400,79 @@
                     }
                 })
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.Change_Quantity').forEach(item => {
+                item.addEventListener('click', event => {
+                    $('#quantityChange').css("display", "block");
+                    $('#updateQuantity').click(function (e) {
+                        var id = $(item).attr('p_id');
+                        e.preventDefault();
+                        var quantity = parseInt($('#productQuantity').val());
+                        if (isNaN(quantity)) { // Check if quantity is NaN
+                            quantity = 0; // Set quantity to 0 if NaN
+                        }
+                        console.log(quantity);
+                        $.ajax({
+                            type: "POST",
+                            url: "<?php echo URLROOT; ?>/Product/updateQuantity",
+                            data: {
+                                id: id,
+                                quantity: quantity
+                            },
+                            dataType: 'json',
+                            success: function (response) {
+                                if (response.status == "success") {
+                                    location.reload();
+                                } else {
+                                    $('.form-invalid-8').html(response.message);
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                console.error("AJAX request failed:", error);
+                            }
+                        });
+                    });
+                })
+            })
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.Change_Discount').forEach(item => {
+                item.addEventListener('click', event => {
+                    $('#discountChange').css("display", "block");
+                    $('#updateDiscount').click(function (e) {
+                        var id = $(item).attr('p_id');
+                        e.preventDefault();
+                        var discount = $('#productDisc').val();
+                        console.log(discount);
+                        if (isNaN(discount)) { // Check if Discount is NaN
+                            discount = 0; // Set Discount to 0 if NaN
+                        }
+                        console.log(discount);
+                        $.ajax({
+                            type: "POST",
+                            url: "<?php echo URLROOT; ?>/Product/updateDiscount",
+                            data: {
+                                id: id,
+                                discount: discount
+                            },
+                            dataType: 'json',
+                            success: function (response) {
+                                if (response.status == "success") {
+                                    location.reload();
+                                } else {
+                                    $('.form-invalid-9').html(response.message);
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                console.error("AJAX request failed:", error);
+                            }
+                        });
+                    });
+                })
+            })
         });
     </script>
 

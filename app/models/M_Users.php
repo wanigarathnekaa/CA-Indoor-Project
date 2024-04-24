@@ -10,13 +10,27 @@ class M_Users
     //Register User
     public function register($data)
     {
-        $this->db->query('INSERT INTO user (name, user_name, email, phoneNumber,password,img) VALUES (:name, :user_name, :email, :phoneNumber,:password,:img)');
+        $this->db->query('INSERT INTO user (name, user_name, email, phoneNumber,password) VALUES (:name, :user_name, :email, :phoneNumber,:password)');
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':user_name', $data['user_name']);
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':phoneNumber', $data['phoneNumber']);
         $this->db->bind(':password', $data['pwd']);
-        $this->db->bind(':img', $data['filename']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function createlog($data)
+    {
+        $this->db->query('INSERT INTO userlog (user_name, email, create_date) VALUES (:user_name, :email, NOW())');
+        $this->db->bind(':user_name', $data['user_name']);
+        $this->db->bind(':email', $data['email']);
+
 
         if ($this->db->execute()) {
             return true;
@@ -27,8 +41,9 @@ class M_Users
     }
     public function findUserByEmail($email)
     {
-        $this->db->query('SELECT * FROM user WHERE email = :email');
+        $this->db->query('SELECT * FROM user WHERE email = :email AND is_blacklist = 0');
         $this->db->bind(':email', $email);
+
 
 
         $row = $this->db->single();
@@ -40,10 +55,17 @@ class M_Users
         }
 
     }
+    public function findCompanyUserByEmail($email)
+{
+    $this->db->query('SELECT * FROM company_users WHERE email = :email');
+    $this->db->bind(':email', $email);
+
+    return $this->db->single();
+}
 
     public function getUserByEmail($email)
     {
-        $this->db->query('SELECT * FROM user WHERE email = :email');
+        $this->db->query('SELECT * FROM user WHERE email = :email AND is_blacklist = 0');
         $this->db->bind(':email', $email);
 
 
@@ -55,7 +77,7 @@ class M_Users
     //Login Users
     public function login($email, $password)
     {
-        $this->db->query('SELECT * FROM user WHERE email = :email');
+        $this->db->query('SELECT * FROM user WHERE email = :email AND is_blacklist = 0');
         $this->db->bind(':email', $email);
 
         $row = $this->db->single();
@@ -68,6 +90,35 @@ class M_Users
         }
 
     }
+
+    public function updateLastLogin($user_email)
+    {
+        $sql = "UPDATE userlog SET last_login = CURRENT_TIMESTAMP() WHERE email = :user_email";
+        $this->db->query($sql);
+        $this->db->bind(':user_email', $user_email);
+
+        // Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateLastLogout($user_email)
+    {
+        $sql = "UPDATE userlog SET last_logout = CURRENT_TIMESTAMP() WHERE email = :user_email";
+        $this->db->query($sql);
+        $this->db->bind(':user_email', $user_email);
+
+        // Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function loginCoach($email, $password)
     {
         $this->db->query('SELECT * FROM coaches WHERE email = :email');
@@ -117,12 +168,11 @@ class M_Users
 
     public function updateUser($data)
     {
-        $this->db->query('UPDATE user SET name = :name, user_name= :user_name, email= :email, phoneNumber= :phoneNumber, password= :password ,img = :img WHERE email = :email');
+        $this->db->query('UPDATE user SET name = :name, user_name= :user_name, email= :email, phoneNumber= :phoneNumber,img = :img WHERE email = :email');
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':user_name', $data['user_name']);
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':phoneNumber', $data['phoneNumber']);
-        $this->db->bind(':password', $data['pwd']);
         $this->db->bind(':img', $data['filename']);
 
 
@@ -135,33 +185,50 @@ class M_Users
     }
     public function findUser($email)
     {
-        $this->db->query('SELECT * FROM user WHERE email = :email');
+        $this->db->query('SELECT * FROM user WHERE email = :email AND is_blacklist = 0');
         $this->db->bind(':email', $email);
 
         return $this->db->single();
     }
-    public function updatePassword($email, $hashedPassword) {
     
+    public function updatePassword($email, $hashedPassword)
+    {
+
         $this->db->query('UPDATE user SET password = :password WHERE email = :email');
         $this->db->bind(':email', $email);
         $this->db->bind(':password', $hashedPassword);
 
         if ($this->db->execute()) {
-            return true; 
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function updateCompanyUserPassword($email, $hashedPassword)
+    {
+
+        $this->db->query('UPDATE company_users SET password = :password WHERE email = :email');
+        $this->db->bind(':email', $email);
+        $this->db->bind(':password', $hashedPassword);
+
+        if ($this->db->execute()) {
+            return true;
         } else {
             return false;
         }
     }
 
-    
-    public function deleteUser($email){
-        $this->db->query('DELETE FROM user WHERE email=:email');
+
+    public function deleteUser($email)
+    {
+        $this->db->query('UPDATE user SET is_blacklist = CASE WHEN is_blacklist = 0 THEN 1 ELSE 0 END WHERE email = :email');
         $this->db->bind(':email', $email);
 
-        if($this->db->execute()){
+
+
+        if ($this->db->execute()) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -169,28 +236,30 @@ class M_Users
 
 
     // get user progile pic
-    public function getExistingImageFilename($email){
+    public function getExistingImageFilename($email)
+    {
         $this->db->query('SELECT img FROM user WHERE email = :email');
         $this->db->bind(':email', $email);
 
         $row = $this->db->single();
 
         if ($row) {
-            return $row->img; 
+            return $row->img;
         } else {
-            return null; 
+            return null;
         }
     }
-    public function generateRandomPassword($length = 12) {
+    public function generateRandomPassword($length = 12)
+    {
         $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+';
         $charLength = strlen($chars);
         $password = '';
-    
+
         for ($i = 0; $i < $length; $i++) {
             $randomIndex = mt_rand(0, $charLength - 1);
             $password .= $chars[$randomIndex];
         }
-    
+
         return $password;
     }
 

@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--color04);
+}
+
+:root {
+    --color01: #2e8a99;
+    --color02: #4f9da9;
+    --color03: #a7d8d7;
+    --color04: #eaf3f4;
+    --white: #fff;
+    --gray: #f5f5f5;
+    --black1: #222;
+    --black2: #000000;
+}
+
+.home {
+    padding: 20px;
+}
+
+.cardHeader {
+    background-color: var(--color01);
+    color: var(--white);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.cardHeader h2 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.table-container {
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+thead tr {
+    background-color: var(--color01);
+    color: var(--white);
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--gray);
+}
+
+tbody tr:hover {
+    background-color: var(--color03);
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: var(--white);
+}
+
+.status.green {
+    background-color: #00ff00;
+}
+
+.status.red {
+    background-color: #ff0000;
+}

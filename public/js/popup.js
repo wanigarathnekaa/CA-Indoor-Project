@@ -37,8 +37,28 @@ function openPopup(reservation) {
   console.log(numberOfDays);
 
   const r_payment = document.querySelector(".r_payment");
-  r_payment.textContent = "Pending";
+  r_payment.textContent = reservation.paymentStatus;
 }
+function openLogPopup(log) {
+  popup.classList.add("open-popup");
+  popupcontainer.classList.add("open-popupcontainer");
+
+  const l_id = document.querySelector(".l_id");
+  l_id.textContent = log.uid;
+
+  const l_name = document.querySelector(".l_name");
+  l_name.textContent = log.user_name;
+
+  const l_date = document.querySelector(".l_date");
+  l_date.textContent = log.create_date;
+
+  const l_last_login = document.querySelector(".l_last_login");
+  l_last_login.textContent = log.last_login;
+
+  const l_last_logout = document.querySelector(".l_last_logout");
+  l_last_logout.textContent = log.last_logout;
+}
+
 
 function closePopup() {
   popup.classList.remove("open-popup");
@@ -65,7 +85,28 @@ function closeReschedulePopup() {
 }
 
 function confirmReschedule() {
-      // Add your redirection URL
-      var redirectURL = "http://localhost/C&A_Indoor_Project/Pages/Calendar/manager?bookingID="+bookingID;
-      window.location.href = redirectURL;
-  }
+  // Add your redirection URL
+  var redirectURL =
+    "http://localhost/C&A_Indoor_Project/Pages/Calendar/manager?bookingID=" +
+    bookingID;
+  window.location.href = redirectURL;
+}
+
+function openCancelPopup() {
+  // Hide the original popup and show the reschedulePopup
+  console.log("Cancel button clicked");
+  cancelPopup.classList.add("open-popup");
+  cancelPopupContainer.classList.add("open-popupcontainer");
+
+  popupcontainer.style.display = "none";
+  cancelPopupContainer.style.display = "block";
+  const cancel_bookingId = document.querySelector(".cancel_bookingId");
+  cancel_bookingId.textContent = bookingID;
+}
+
+function closeCancelPopup() {
+  cancelPopup.classList.remove("open-popup");
+  cancelPopupContainer.classList.remove("open-popupcontainer");
+  popupcontainer.style.display = "block";
+  cancelPopupContainer.style.display = "none";
+}

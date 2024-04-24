@@ -8,7 +8,10 @@
 
       <!-- Stylesheets -->
       <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/cashierDashboard.css">
+<<<<<<< HEAD
       <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/components/charts.css">
+=======
+>>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
       
       <!-- Font Awesome -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">      
@@ -27,7 +30,11 @@
 
             <!-- Cards -->
             <div class="cardBox">
+<<<<<<< HEAD
                   <a class="card" href="C&A_Indoor_Project/Pages/coachTable/user">
+=======
+                  <a class="card" href="C&A_Indoor_Project/Pages/coachTable/cashier">
+>>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
                         <div class="infor">
                               <div class="numbers"><?php echo $data1["CoachCount"]?></div>
                               <div class="cardName">Coaches</div>
@@ -37,7 +44,11 @@
                         </div>
                   </a>
 
+<<<<<<< HEAD
                   <a class="card" href="C&A_Indoor_Project/Pages/playerTable/user">
+=======
+                  <a class="card" href="C&A_Indoor_Project/Pages/playerTable/cashier">
+>>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
                         <div>
                               <div class="numbers"><?php echo $data1["UserCount"]?></div>
                               <div class="cardName">Players</div>
@@ -47,6 +58,7 @@
                         </div>
                   </a>
 
+<<<<<<< HEAD
                   <a class="card" href="C&A_Indoor_Project/Pages/View_Advertisement/manager">
                         <div>
                               <div class="numbers"><?php echo $data1["advertCount"]?></div>
@@ -62,6 +74,12 @@
                         <div>
                               <div class="numbers"><?php echo $data1["Reserve_Count"]?></div>
                               <div class="cardName">Reservations</div>
+=======
+                  <a class="card" href="C&A_Indoor_Project/Pages/reservationTable/cashier">
+                        <div>
+                              <div class="numbers"><?php echo $data1["Reserve_Count"]?></div>
+                              <div class="cardName">Time Slot<br>Reservations</div>
+>>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
                         </div>
 
                         <div class="iconBx">
@@ -69,6 +87,7 @@
                         </div>
                   </a>
 
+<<<<<<< HEAD
                   <a class="card" href="#">
                         <div>
                               <div class="numbers"></div>
@@ -97,6 +116,38 @@
 
                         <div class="iconBx">
                               <i class="fa-solid fa-user-plus"></i>
+=======
+                  <a class="card" href="C&A_Indoor_Project/Pages/bookingTable/cashier">
+                        <div>
+                              <div class="numbers"><?php echo $data1["bookingCount"]?></div>
+                              <div class="cardName">All Bookings</div>
+                        </div>
+
+                        <div class="iconBx">
+                              <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                  </a>
+
+                  <a class="card" href="C&A_Indoor_Project/Pages/orderTable/cashier">
+                        <div>
+                              <div class="numbers"><?php echo $data1["orderCount"]?></div>
+                              <div class="cardName">All Orders</div>
+                        </div>
+
+                        <div class="iconBx">
+                              <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                  </a>
+
+                  <a class="card" href="C&A_Indoor_Project/Pages/Cancel_Order_Table/cashier">
+                        <div>
+                              <div class="numbers"><?php echo $data1["cancelOrderCount"]?></div>
+                              <div class="cardName">Cancelled Orders</div>
+                        </div>
+
+                        <div class="iconBx">
+                              <i class="fa-solid fa-calendar-days"></i>
+>>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
                         </div>
                   </a>
             </div>
@@ -108,7 +159,11 @@
                   <!-- Recent Reservations -->
                   <div class="tablediv">
                         <?php
+<<<<<<< HEAD
                               require APPROOT . '/views/Pages/Tables/dailyReservation.php';
+=======
+                              require APPROOT . '/views/Pages/Tables/cashierReservation.php';
+>>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
                         ?>
                   </div>
                   
@@ -117,6 +172,7 @@
                         <iframe src="http://localhost/C&A_Indoor_Project/Pages/Calendar/User" frameborder="0"></iframe>                        
                   </div>
             </div> 
+<<<<<<< HEAD
 
             
 
@@ -138,13 +194,18 @@
                   ?>
             </div>
 
+=======
+>>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
       </section>
 
 
       <!-- javascripts -->
       <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
+<<<<<<< HEAD
 
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+=======
+>>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
 </body>
 
 </html>

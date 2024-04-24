@@ -1,7 +1,7 @@
 <?php
 //print_r($data);
 $filter_date = date('Y-m-d');
-$new_data = array_filter($data, function ($item) use ($filter_date) {
+$new_data = array_filter($data['bookings'], function ($item) use ($filter_date) {
     return $item->date === $filter_date;
 });
 
@@ -23,8 +23,16 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
             <h2>
                 <?php echo date('Y-m-d'); ?>
             </h2>
-            <!-- veiw all button -->
-            <a href="#" class="btn">View All</a>
+            <div class="serachselect">
+                <i class="fa-solid fa-magnifying-glass icon"></i>
+                <select id="liveSearch" class="btn">
+                    <option value="All">All</option>
+                    <option value="Normal Net A">Normal Net A</option>
+                    <option value="Normal Net B">Normal Net B</option>
+                    <option value="Machine Net">Machine Net</option>
+                </select>
+            </div>
+            
         </div>
 
         <div class="table-container">
@@ -43,6 +51,14 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
                 <tbody>
                     <?php
                     foreach ($new_data as $reservation) {
+                        $status_color = '';
+                        if ($reservation->paymentStatus == 'Paid') {
+                                $status_color = '#00ff00';
+                        } else if ($reservation->paymentStatus == 'Pending') {
+                                $status_color = '#ffcc00';
+                        } else {
+                                $status_color = '#ff0000';
+                        }
                     ?>
                         <tr onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
                             <td>
@@ -54,9 +70,9 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
                             <td>
                                 <?php echo $reservation->netType; ?>
                             </td>
-                            <td><span class="status paid">Pending</span></td>
+                            <td><span class="status" style="background-color: <?php echo $status_color; ?>;"><?php echo $reservation->paymentStatus ?></span></td>
                         </tr>
-                    <?php
+                        <?php
                     }
                     ?>
 
@@ -93,13 +109,13 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
                 </div>
 
                 <div class="popupdetail">
-                    <h2><b>Status :</b> <span class="r_payment">Pending</span></h2>
+                    <h2><b>Status :</b> <span class="r_payment"></span></h2>
                 </div>
             </div>
 
             <div class="btns">
                 <button type="button" onclick="openReschedulePopup()">Reschedule</button>
-                <button type="button">Cancel</button>
+                <button type="button" onclick="openCancelPopup()">Cancel</button>
             </div>
         </div>
     </div>
@@ -112,7 +128,8 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
             <hr>
             <div class="rescheduleDetails">
                 <h4>Are You Sure You Want To Reschedule?</h4>
-                <h4 class="day">Reservation is at Today - <span class="r_timeSlot_r" style="font-weight:bold"></span></h4>
+                <h4 class="day">Reservation is at Today - <span class="r_timeSlot_r" style="font-weight:bold"></span>
+                </h4>
             </div>
 
             <div class="btns">
@@ -122,8 +139,62 @@ $new_data = array_filter($data, function ($item) use ($filter_date) {
         </div>
     </div>
 
+    <!-- Popup message for Cancelling -->
+    <div class="popupcontainer" id="cancelPopupContainer" style="display: none;">
+        <div class="popup" id="cancelPopup">
+            <span class="close" onclick="closeCancelPopup()"><i class="fa-solid fa-xmark"></i></span>
+            <h2>Cancel Reservation</h2>
+            <hr>
+            <div class="cancelDetails">
+                <h4>Are You Sure You Want To Cancel The Reservation?</h4>
+                <h4 class="day" style="font-weight:450">All Time Slots Will Be Cancelled.</h4>
+            </div>
+            <span class="cancel_bookingId" style="font-weight:bold"></span>
+
+            <div class="btns">
+                <button type="button" id="cancelReservation">Yes</button>
+                <button type="button" onclick="closeCancelPopup()">No</button>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="<?php echo URLROOT; ?>/js/popup.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#liveSearch").on("change", function () {
+                selectedValue = $(this).val();
+                if (selectedValue != "All") {
+                    $("table tbody tr").filter(function () {
+                        $(this).toggle($(this).text().indexOf(selectedValue) > -1);
+                    });
+                } else {
+                    $("table tbody tr").show();
+                }
+
+            }); 
+
+            $("#cancelReservation").on("click", function () {
+                var bookingId = $(".cancel_bookingId").text();
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo URLROOT; ?>/Bookings/cancelReservation",
+                    data: {
+                        bookingId: bookingId
+                    },
+                    success: function (response) {
+                        if (response.status == "success") {
+                            alert("Reservation Cancelled Successfully");
+                            location.reload();
+                        } else {
+                            alert("Failed to Cancel the Reservation");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

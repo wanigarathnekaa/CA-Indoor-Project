@@ -70,23 +70,13 @@
                 </div>
             </a>
 
-            <a class="card" href="#">
+            <a class="card" href="C&A_Indoor_Project/Pages/Order/manager">
                 <div>
                     <div class="numbers">13</div>
                     <div class="cardName">Orders</div>
                 </div>
                 <div class="iconBx">
                     <i class="fas fa-truck"></i>
-                </div>
-            </a>
-
-            <a class="card" href="#">
-                <div>
-                    <div class="numbers">14</div>
-                    <div class="cardName">Deliveries</div>
-                </div>
-                <div class="iconBx">
-                    <i class="fas fa-truck-loading"></i>
                 </div>
             </a>
         </div>
@@ -109,61 +99,94 @@
 
                 <!-- table body -->
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Order_01</td>
-                        <td>2024-01-28</td>
-                        <td>paid</td>
-                        <td>complete</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Order_02</td>
-                        <td>2024-01-28</td>
-                        <td>Unpaid</td>
-                        <td>Incomplete</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Order_03</td>
-                        <td>2024-01-28</td>
-                        <td>paid</td>
-                        <td>complete</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Order_04</td>
-                        <td>2024-01-28</td>
-                        <td>paid</td>
-                        <td>Incomplete</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Order_05</td>
-                        <td>2024-01-28</td>
-                        <td>Unpaid</td>
-                        <td>complete</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Order_06</td>
-                        <td>2024-01-28</td>
-                        <td>Unpaid</td>
-                        <td>complete</td>
-                    </tr>
+                    <?php foreach (array_reverse($data) as $order):
+                        $payment_status_color = '';
+                        if ($order->payment_status == 'Paid') {
+                            $payment_status_color = '#00ff00';
+                        } else if ($order->payment_status == 'Not Paid') {
+                            $payment_status_color = '#ff0000';
+                        }
+
+
+                        $order_status_color = '';
+                        if ($order->order_status == 'Complete') {
+                            $order_status_color = '#00ff00';
+                        } else if ($order->order_status == 'Not Complete') {
+                            $order_status_color = '#ff0000';
+                        }
+                        ?>
+                        <tr>
+                            <td><?php echo $order->order_id; ?></td>
+                            <td><?php echo $order->full_name; ?></td>
+                            <td><?php echo $order->order_date; ?></td>
+                            <td><span class="status" style="background-color: <?php echo $payment_status_color; ?>;"><?php echo $order->payment_status; ?></span></td>
+                            <td><span class="status" style="background-color: <?php echo $order_status_color; ?>;"><?php echo $order->order_status; ?></span></td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
+
+            <!-- OrderDetails -->
+            <div id="orderDetailsModal" class="modal">
+                <div class="modal-content">
+                    <div class="title">
+                        <h2 class="modal-title">Order Details</h2>
+                    </div>
+                    <hr>
+
+                    <div class="customerDetails">
+                        <h3>Customer Details</h3>
+                        <div>
+                            <span id="name" class="name"></span><br>
+                            <span id="email" class="email"></span><br>
+                            <span id="phone" class="phone"></span><br>
+                            <span id="addr" class="addr"></span><br>
+                        </div>
+                    </div>
+
+                    <div class="orderItems">
+                        <h3>Order Items</h3>
+                        <table id="orderItemsTable">
+                            <thead>
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Quantity</th>
+                                    <th>Price per Unit</th>
+                                </tr>
+                            </thead>
+                            <tbody id="items">
+                                <!-- Order items will be appended here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <div class="orderStatus">
+                        <h3>Order Status</h3>
+                        <span id="status" class="status"></span>
+                        <button id="Change_Status">Change Status</button>
+                    </div>
+
+                    <hr>
+
+                    <div class="btn">
+                        <input type="hidden" id="form_type" name="form_type">
+                        <!-- <button type="button">Okay</button> -->
+                        <button type="button" onclick="closeModal()">Okay</button>
+                    </div>
+                </div>
+            </div>
 
             <!-- Pagination -->
             <div class="pagination-container">
                 <ul class="pagination">
-                    <li><a href="#" class="page-link">&laquo; Prev</a></li>
+                    <li><a href="#" class="page-link" id="prevLink">&laquo; Prev</a></li>
                     <li><a href="#" class="page-link">1</a></li>
                     <li><a href="#" class="page-link">2</a></li>
                     <li><a href="#" class="page-link">3</a></li>
                     <li><a href="#" class="page-link">4</a></li>
                     <li><a href="#" class="page-link">5</a></li>
-                    <li><a href="#" class="page-link">Next &raquo;</a></li>
+                    <li><a href="#" class="page-link" id="nextLink">Next &raquo;</a></li>
                 </ul>
             </div>
     </section>
@@ -172,6 +195,74 @@
     <!-- javascripts -->
     <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
     <script src="<?php echo URLROOT; ?>/js/InventoryDashboard.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        //Select the table row when clicked
+        $(document).ready(function () {
+            $('#coachTable tbody tr').click(function () {
+                $(this).addClass('selected').siblings().removeClass('selected');
+                console.log($(this).find('td:first').text());
+                $("#orderDetailsModal").css("display", "block");
+                $.ajax({
+                    url: "<?php echo URLROOT; ?>/Order/getOrderDetails",
+                    type: "POST",
+                    data: {
+                        order_id: $(this).find('td:first').text()
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        var order = response.order; // Access the order object from the response
+                        var orderItems = response.orderItems; // Access the orderItems array from the response
+                        $("#name").text("Name: " + order.full_name);
+                        $("#email").text("Email: " + order.email);
+                        $("#phone").text("Phone: " + order.mobile_number);
+                        $("#addr").text("Address: " + order.address);
+                        $("#status").text("Status: " + order.order_status);
+                        // Loop through orderItems and append them to the items element
+                        var itemsTable = $("#orderItemsTable tbody");
+                        itemsTable.empty(); // Clear previous entries
+
+                        for (var i = 0; i < orderItems.length; i++) {
+                            var row = "<tr>" +
+                                "<td>" + orderItems[i].product_id + "</td>" +
+                                "<td>" + orderItems[i].quantity + "</td>" +
+                                "<td>" + orderItems[i].price_per_unit + "</td>" +
+                                "</tr>";
+                            itemsTable.append(row);
+                        }
+                        $("#items").html(itemsText);
+                    }
+                });
+            });
+
+            $('#Change_Status').click(function () {
+                $stat = "";
+                if ($("#status").text() == "Status: Not Complete") {
+                    $stat = "Complete";
+                } else {
+                    $stat = "Not Complete";
+                }
+                var orderId = $("#coachTable tbody tr.selected td:first").text();
+                $.ajax({
+                    url: "<?php echo URLROOT; ?>/Order/changeOrderStatus",
+                    type: "POST",
+                    data: {
+                        order_id: orderId,
+                        new_status: $stat
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        if (response.status == "success") {
+                            $("#status").text("Status: " + $stat);
+                        } else {
+                            alert("Status change failed");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -92,7 +92,7 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                                     <div class="showcase-banner">
                                         <img src="<?php echo URLROOT; ?>/CricketShop/<?php echo $product->product_thumbnail ?>"
                                             alt="bat01" width="300" class="product-img">
-                                        <div class="showcase-actions">
+                                        <!-- <div class="showcase-actions">
                                             <button class="btn-action">
                                                 <ion-icon name="heart-outline"></ion-icon>
                                             </button>
@@ -102,13 +102,13 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                                             <button class="btn-action">
                                                 <ion-icon name="bag-add-outline"></ion-icon>
                                             </button>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="showcase-content">
-                                        <a href="#" class="showcase-category">
+                                        <a href="http://localhost/C&A_Indoor_Project/Pages/Item_Detail/<?= $product->product_id;?>" class="showcase-category">
                                             <?php echo $product->product_title; ?>
                                         </a>
-                                        <a href="#">
+                                        <a href="http://localhost/C&A_Indoor_Project/Pages/Item_Detail/<?= $product->product_id;?>">
                                             <h3 class="showcase-title">
                                                 <?php echo $product->product_title; ?>
                                             </h3>
@@ -132,7 +132,7 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                                         <div class="showcase-banner">
                                             <img src="<?php echo URLROOT; ?>/CricketShop/<?php echo $product->product_thumbnail ?>"
                                                 alt="bat01" width="300" class="product-img">
-                                            <div class="showcase-actions">
+                                            <!-- <div class="showcase-actions">
                                                 <button class="btn-action">
                                                     <ion-icon name="heart-outline"></ion-icon>
                                                 </button>
@@ -142,13 +142,13 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                                                 <button class="btn-action">
                                                     <ion-icon name="bag-add-outline"></ion-icon>
                                                 </button>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="showcase-content">
-                                            <a href="#" class="showcase-category">
+                                            <a href="http://localhost/C&A_Indoor_Project/Pages/Item_Detail/<?= $product->product_id;?>" class="showcase-category">
                                             <?php echo $product->product_title; ?>
                                             </a>
-                                            <a href="#">
+                                            <a href="http://localhost/C&A_Indoor_Project/Pages/Item_Detail/<?= $product->product_id;?>">
                                                 <h3 class="showcase-title">
                                                 <?php echo $product->product_title; ?>
                                                 </h3>
@@ -178,3 +178,13 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
 <?php
 include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
 ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var cartCount = '<?= count($data['cartItems']) ?>';
+        if (cartCount == 0) {
+            cartCount = 0;
+        }
+        $('#cartCount').html(cartCount);
+    });
+</script>
