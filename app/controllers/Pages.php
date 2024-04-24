@@ -268,7 +268,7 @@ class Pages extends Controller
         $logs = $this->pagesModel->getAccLog();
         $data = [
             'logs' => $logs]; // Pass $logs as an associative array
-        $this->view('Pages/Tables/AccountLOG', $data);
+        $this->view('Pages/Tables/AccountLOG', $data);//C:\xampp\htdocs\C&A_Indoor_Project\app\views\Pages\Tables\accountlog_Table.php
     }
     
 

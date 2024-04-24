@@ -323,7 +323,8 @@ class M_Bookings
     $email = $data['email'];
     $name = $data['name'];
     $phoneNumber = $data['phoneNumber'];
-    $date = $data['date']; 
+    $date = $data['date'];
+    $timeSlots=$data['timeSlots']; 
 
     $adminEMAIL = $admin->email; // Retrieve email
     $adminNAME = $admin->name; // Retrieve name
@@ -353,15 +354,15 @@ class M_Bookings
     $mail->isHTML(true);
     $mail->Subject = 'About your appointment';
     $mail->Body = "Hello $name,<br><br>
-        You have a time slot on $date, at $timeslot assigned to the player $name. Here are their contact details:<br>
+        You have a time slot on $date, at $timeSlots assigned to the player $name. Here are their contact details:<br>
         - Phone Number: $phoneNumber<br>
         - Email: $email<br>
-        If you have any issues, please contact the user or administrator before $date.<br><br>
+        If you have any issues, please contact administrator before $date.<br><br>
         Admin Details:<br>
         - Name: $adminNAME<br>
         - Phone Number: $adminPNO<br>
         - Email: $adminEMAIL<br>
-        If you need further assistance, please contact the administrator.";
+        Thank you.";
     
 
     // Attempt to send email

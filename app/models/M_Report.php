@@ -120,6 +120,55 @@ class MYPDFSixColumns extends TCPDF {
 
 
 }
+class MYPDFSixColumnss extends TCPDF {
+
+    public function ColoredTableSixColumns($header, $data) {
+
+        // Colors, line width, and bold font
+        $this->SetFillColor(211, 211, 211);
+        $this->SetTextColor(255);
+        $this->SetDrawColor(128, 128, 128);
+        $this->SetLineWidth(0.3);
+        $this->SetFont('');
+
+        // Header
+        $w = array(15, 100, 12, 25, 20, 20); // Column widths
+        $this->SetTextColor(0); // Column names
+        $num_headers = count($header);
+        for ($i = 0; $i < $num_headers; ++$i) {
+            $this->Cell($w[$i], 7, $header[$i], 1, 0, 'C', 1);
+        }
+        $this->Ln();
+
+        // Color and font restoration
+        $this->SetFillColor(224, 235, 255);
+        $this->SetTextColor(0);
+
+        // Data
+        $fill = 0;
+        foreach ($data as $row) {
+            // Convert $row[3] to float before passing it to number_format()
+
+            $this->SetFillColor(255, 255, 255); // White
+
+            // Output the data
+            $this->Cell($w[0], 6, $row[0], 'LR', 0, 'L', $fill);
+            $this->Cell($w[1], 6, $row[1], 'LR', 0, 'L', $fill);
+            $this->Cell($w[2], 6, $row[2], 'LR', 0, 'L', $fill);
+            $this->Cell($w[3], 6, $row[3], 'LR', 0, 'L', $fill);
+            $this->Cell($w[4], 6, $row[4], 'LR', 0, 'L', $fill);
+            $this->Cell($w[5], 6, $row[5], 'LR', 0, 'L', $fill);
+            $this->Ln();
+            $fill = !$fill;
+        }
+
+        // Last line
+        $this->Cell(array_sum($w), 0, '', 'T');
+        $this->Ln(10); // Add space before total amounts
+    }
+
+
+}
 
 
 
@@ -283,9 +332,8 @@ class M_Report
             
             $pdf->SetFont('', 'B'); //bold
             $pdf->Write(0, ' Monthly Booking Report', '', 0, 'C', true, 0, false, false, 0);
-            $pdf->Cell(0, 10, 'OF', 0, 1, 'C');
-            $pdf->Cell(0, 10, $input_month, 0, 1, 'C');
- 
+            $input_month = date("F", strtotime("01-$input_month-2024"));
+            $pdf->Cell(0, 10, 'Month :'.$input_month, 0, 1, 'C'); 
           
             
             // prepare data
@@ -465,6 +513,97 @@ class M_Report
             // Output PDF
             $pdf->Output('User_log_report.pdf', 'D');
         }
+
+        public function MonthlyOrdersGeneratePDF($data) {
+            $input_month = $data['Selected_month'];
+        
+            $this->db->query('SELECT orders.*, orderitems.product_id, orderitems.quantity, product.product_title
+                      FROM orders
+                      INNER JOIN orderitems ON orders.order_id = orderitems.order_id
+                      INNER JOIN product ON orderitems.product_id = product.product_id
+                      WHERE MONTH(orders.order_date) = :input_month');
+        
+            $this->db->bind(':input_month', $input_month);
+            $result = $this->db->resultSet();
+            
+            // Create PDF object
+            $pdf = new MYPDFSixColumnss(); // Assuming MYPDFSixColumnss is defined somewhere
+        
+            // Set PDF information
+            $pdf->SetCreator('Your Creator');
+            $pdf->SetAuthor('admin');
+            $pdf->SetTitle('Monthly Order Report');
+            $pdf->SetSubject('Monthly Order Report');
+            $pdf->SetKeywords('Order, Report');
+            
+            // Add a page to the PDF
+            $pdf->AddPage();
+            $pdf->SetFont('helvetica', '', 16);
+        
+            // Add title to the PDF
+            $pdf->SetFont('', 'B');
+            $pdf->Write(0, 'Monthly Order Income Analysis:', '', 0, 'L', true, 0, false, false, 0);
+            $pdf->SetFont('helvetica', '', 10);
+            $input_month_name = date("F", strtotime("01-$input_month-2024"));
+            $pdf->Cell(0, 10, 'Month: ' . $input_month_name, 0, 1, 'L');
+            $pdf->Ln(15); 
+            
+            // Prepare table data
+            $tableHeader = array('Name', 'Product', 'Quantity', 'Order Date', 'Status', 'Amount');
+            $tableData = array();
+            
+            $totalIncome = 0;
+            $totalPaid = 0;
+            $totalNotPaid = 0;
+        
+            // Populate table data
+            foreach ($result as $row) {
+                $full_name = $row->full_name;
+                $names = explode(" ", $full_name);
+                $first_name = $names[0];
+        
+                $tableData[] = array(
+                    $first_name,
+                    $row->product_title,
+                    $row->quantity,
+                    date('Y-m-d', strtotime($row->order_date)), // Format the date
+                    $row->payment_status,
+                    $row->price
+                );
+        
+                $totalIncome += $row->price;
+                switch ($row->payment_status) {
+                    case 'Paid':
+                        $totalPaid += $row->price;
+                        break;
+                    case 'Not Paid':
+                        $totalNotPaid += $row->price;
+                        break;
+                }
+            }
+        
+            // Add colored table to the PDF
+            $pdf->ColoredTableSixColumns($tableHeader, $tableData);
+           
+            // Print total income
+            $pdf->Ln(10);
+            $pdf->Cell(130); 
+            $pdf->SetFont('', 'B', 12);
+            $pdf->Write(0, 'Total Paid    : ' . number_format($totalPaid, 2));
+            $pdf->Ln(); 
+        
+            $pdf->Cell(130);
+            $pdf->Write(0, 'Total Not Paid: ' . number_format($totalNotPaid, 2));
+            $pdf->Ln(); 
+            
+            $pdf->Cell(130); 
+            $pdf->Write(0, 'Total Income  : ' . number_format($totalIncome, 2));
+            $pdf->Ln(); 
+        
+            // Output PDF
+            $pdf->Output('Monthly_Order_report.pdf', 'D');
+        }
+        
             
         
         public function displayFilteredBookings($data) {
@@ -508,8 +647,7 @@ class M_Report
                             $totalNotPaid += $row->bookingPrice;
                             break;
                     }
-                }
-        
+                                }            
                 echo "<tr><td colspan='3' style='text-align:right; font-size: 20px;'><b>Total Paid:</b></td><td style='font-size: 20px;'><b>$totalPaid</td></tr>";
                 echo "<tr><td colspan='3' style='text-align:right; font-size: 20px;'><b>Total Pending:</b></td><td style='font-size: 20px;'><b>$totalPending</td></tr>";
                 echo "<tr><td colspan='3' style='text-align:right; font-size: 20px;'><b>Total Not Paid:</b></td><td style='font-size: 20px;'><b>$totalNotPaid</td></tr>";
@@ -526,6 +664,7 @@ class M_Report
                 echo "<input type='hidden' name='invoice_due_date' value='$invoice_due_date'>";
                 echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download</button>";
                 echo "</form>";
+             
             } else {
                 echo "<div class='alert alert-warning'>No bookings found between the selected dates.</div>";
             }
@@ -645,6 +784,75 @@ foreach ($result as $order) {
                 echo "<div class='alert alert-warning'>No bookings found between the selected dates.</div>";
             }
         }
+        public function displayMonthlyFilteredOrders($data) {
+            $input_month = $data['Selected_month'];
+
+            $this->db->query('SELECT orders.*, orderitems.product_id, orderitems.quantity, product.product_title
+                  FROM orders
+                  INNER JOIN orderitems ON orders.order_id = orderitems.order_id
+                  INNER JOIN product ON orderitems.product_id = product.product_id
+                  WHERE MONTH(orders.order_date) = :input_month');
+
+            $this->db->bind(':input_month', $input_month);
+
+            
+            $this->db->bind(':input_month', $input_month);
+            $result = $this->db->resultSet();
+        
+            if ($result && count($result) > 0) {
+                echo "<div class='alert alert-success'>Filtered Orders:</div>";
+                echo "<table class='table table-bordered'>";
+                echo "<thead><tr><th>Customer Name</th><th>Product Name</th><th>Quantity</th><th>order_date</th><th>Payment Status</th><th>Amount</th></tr></thead>";
+                echo "<tbody>";
+                $totalPrice = 0;
+                $totalPaid = 0;
+                $totalNotPaid = 0;
+        
+                // Fetching results as associative array
+                foreach ($result as $row) {
+                    echo "<tr>";
+                    echo "<td>" . $row->full_name . "</td>";
+                    echo "<td>" . $row->product_title . "</td>";
+                    echo "<td>" . $row->quantity . "</td>";//                    $order->quantity,
+
+                    echo "<td>" . $row->order_date . "</td>";
+                    echo "<td>" . $row->payment_status . "</td>";
+                    echo "<td>" . $row->price . "</td>";
+
+                    echo "</tr>";
+                    $totalPrice += $row->price;
+        
+                    //Increment appropriate total based on payment status
+                    switch ($row->payment_status) {
+                        case 'Paid':
+                            $totalPaid += $row->price;
+                            break;
+                        case 'Not Paid':
+                            $totalNotPaid += $row->price;
+                            break;
+                    }
+                }
+        
+                echo "<tr><td colspan='5' style='text-align:right; font-size: 20px;'><b>Total Paid:</b></td><td style='font-size: 20px;'><b>$totalPaid</td></tr>";
+                echo "<tr><td colspan='5' style='text-align:right; font-size: 20px;'><b>Total Not Paid:</b></td><td style='font-size: 20px;'><b>$totalNotPaid</td></tr>";
+                // Calculate the expected total amount
+                $expectedTotal = $totalPaid  + $totalNotPaid;
+                echo "<tr><td colspan='5' style='text-align:right; font-size: 20px;'><b>Total Income:</b></td><td style='font-size: 20px;'><b>$expectedTotal</td></tr>";
+                
+        
+                echo "</tbody>";
+                echo "</table>";
+        
+                echo "<form method='post'>";
+                echo "<input type='hidden' name='Selected_month' value='$input_month'>";
+                echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download</button>";
+                
+                echo "</form>";
+            } else {
+                echo "<div class='alert alert-warning'>No bookings found between the selected dates.</div>";
+            }
+        }
+
         public function displayLogs($data) {
             $invoice_date = $data['invoice_date'];
             $invoice_due_date = $data['invoice_due_date'];

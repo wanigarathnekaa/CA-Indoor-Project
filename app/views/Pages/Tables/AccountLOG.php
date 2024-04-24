@@ -17,7 +17,7 @@ $new_data = array_filter($data['logs'], function ($item) use ($filter_date) {
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/Accountlog.css">
+      <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/Reservation_Table.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_reservation.css">      <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_coaches.css">
       <title>Coaches</title>
 </head>
@@ -41,14 +41,49 @@ $new_data = array_filter($data['logs'], function ($item) use ($filter_date) {
       <!-- Content -->
       <section class="home">
 
-    <div class="recentOrders">
-    <div class="cardHeader">
-        <!-- date -->
-        <h2>
-                <?php echo date('Y-m-d'); ?>
-            </h2>
-    <h2>User Account Logs</h2>
-    </div>
+      <div class="table-topic">
+                  <div class="topic-name">
+                        <h1>User Account Logs :
+                        <?php echo date('Y-m-d'); ?>
+                        </h1>
+                  </div>
+
+                  <!-- <div class="add-btn">
+                        <a href="#"><i class="fa-solid fa-calendar-plus icon"></i></i></a>
+                  </div> -->
+            </div>
+
+            <div class="tableSort">
+                  <!-- <div class="sort">
+                        <label for="payfilter">Status :</label>
+                        <select name="filter" id="payfilter">
+                              <option value="All">All</option>
+                              <option value="Pending">Pending</option>
+                              <option value="Paid">Paid</option>
+                              <option value="Not Paid">Not Paid</option>
+                        </select>
+                  </div> -->
+                  <!-- <div class="sort">
+                        <label for="netfilter">Net :</label>
+                        <select name="filter" id="netfilter">
+                              <option value="All">All</option>
+                              <option value="Normal Net A">Normal Net A</option>
+                              <option value="Normal Net B">Normal Net B</option>
+                              <option value="Machine Net">Machine Net</option>
+                        </select>
+                  </div> -->
+                  <div class="sort">
+                        <label>Date :</label>
+                        <input type="date" id="date" name="date">
+                  </div>
+                  <div class="search">
+                        <label>
+                              <input type="text" placeholder="Search here" id="searchInput">
+                              <i class="fa-solid fa-magnifying-glass icon"></i>
+                        </label>
+                  </div>
+            </div>
+
 
 
         <div class="table-container">
@@ -80,13 +115,13 @@ $new_data = array_filter($data['logs'], function ($item) use ($filter_date) {
                  $status_colorr = '';
 
                  
-                if (!empty($log->last_login) && !empty($log->last_logout)) {
+                if (!empty($log->last_login) || !empty($log->last_logout)) {
                     $status_color = '#00ff00'; // Green
                     $status_colorr = '#ff0000'; // Red
                 }
                   
              ?>
-            <tr onclick="openPopupCoachSession(<?php echo htmlspecialchars(json_encode($log)); ?>)" style="text-align: center;">
+            <tr onclick="openLogPopup(<?php echo htmlspecialchars(json_encode($log)); ?>)" style="text-align: center;">
             <td><?php echo $log->user_name; ?></td>
             <td class="left-align"><?php echo $log->email; ?></td>
             <td><?php echo date('Y-m-d', strtotime($log->create_date)); ?></td>
@@ -103,44 +138,35 @@ $new_data = array_filter($data['logs'], function ($item) use ($filter_date) {
         </div>
     </div>
 
-    <!-- Popup message -->
-    <div class="popupcontainer" id="popupcontainer">
-        <div class="popup" id="popup">
-            <span class="close" onclick="closePopup()"><i class="fa-solid fa-xmark"></i></span>
-            <h2>Reservation</h2>
-            <hr>
-            <div class="popupdetails">
-                <div class="popupdetail">
-                    <h2><b>Reservation ID :</b> <span class="r_id"></span></h2>
-                </div>
-
-                <div class="popupdetail">
-                    <h2><b>Customer Name :</b> <span class="r_name"></span></h2>
-                </div>
-
-                <div class="popupdetail">
-                    <h2><b>Reservation Date :</b> <span class="r_date"></span></h2>
-                </div>
-
-                <div class="popupdetail">
-                    <h2><b>Reservation Time :</b> <span class="r_timeSlot"></span></h2>
-                </div>
-
-                <div class="popupdetail">
-                    <h2><b>Net :</b> <span class="r_net"></span></h2>
-                </div>
-
-                <div class="popupdetail">
-                    <h2><b>Status :</b> <span class="r_payment"></span></h2>
-                </div>
+  <!-- Popup message -->
+<div class="popupcontainer" id="popupcontainer">
+    <div class="popup" id="popup">
+        <span class="close" onclick="closePopup()"><i class="fa-solid fa-xmark"></i></span>
+        <h2>User Log</h2>
+        <hr>
+        <div class="popupdetails">
+            <div class="popupdetail">
+                <h2><b>User ID :</b> <span class="l_id"></span></h2>
             </div>
 
-            <div class="btns">
-                <button type="button" onclick="openReschedulePopup()">Reschedule</button>
-                <button type="button" onclick="openCancelPopup()">Cancel</button>
+            <div class="popupdetail">
+                <h2><b>User Name :</b> <span class="l_name"></span></h2>
+            </div>
+
+            <div class="popupdetail">
+                <h2><b>Creation Date :</b> <span class="l_date"></span></h2>
+            </div>
+
+            <div class="popupdetail">
+                <h2><b>Last LOGIN Time :</b> <span class="l_last_login"></span></h2>
+            </div>
+
+            <div class="popupdetail">
+                <h2><b>Last LOGOUT Time :</b> <span class="l_last_logout"></span></h2>
             </div>
         </div>
     </div>
+</div>
 
     <!-- Popup message for rescheduling -->
     <!-- <div class="popupcontainer" id="reschedulePopupContainer" style="display: none;">

@@ -36,6 +36,7 @@ class Bookings extends Controller
                 'date' => trim($_POST['date']),
                 'coach' => trim($_POST['coach']),
                 'bookingPrice' => $decimalBookingPrice,
+                'timeSlots' => $jsonString,
                 'paymentStatus' => 'Not Paid',
                 'paidPrice' => 0,
 
