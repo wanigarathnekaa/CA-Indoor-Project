@@ -75,6 +75,16 @@
             <i class='bx bxs-report'></i>
         </div> 
         </a>
+
+        <a class="card" href="<?php echo URLROOT; ?>/Reports/Weekly_Rservation">
+        <div>
+        <div class="cardName">Weekly Rservation Chart</div>
+
+        </div>
+        <div class="iconBx">
+            <i class='bx bxs-report'></i>
+        </div> 
+        </a>
     </div>
          
            

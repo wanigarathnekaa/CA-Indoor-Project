@@ -176,6 +176,35 @@ if(isset($_POST["download_pdf"])) {
 
         }
     }
+
+    
+    public function Weekly_Rservation(){
+        $this->view('Pages/Report/Weekly_Reservation');
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Valid input
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            // Input data
+            $data = [
+                'invoice_date' => trim($_POST['invoice_date']),
+                'invoice_due_date' => trim($_POST['invoice_due_date']),   
+            ];
+  
+        }
+        
+        if(isset($_POST["filter"])){
+
+            $this->reportmodel->displayReservationChart($data);
+        }
+
+        if(isset($_POST["download_pdf"])) {
+            $this->reportmodel->LogsGeneratePDF($data);
+            
+            
+
+        }
+    }
     
   
     

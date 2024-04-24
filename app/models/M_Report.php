@@ -669,7 +669,111 @@ class M_Report
                 echo "<div class='alert alert-warning'>No bookings found between the selected dates.</div>";
             }
         }
+        
+        public function displayReservationChart($data) {
+            $invoice_date = isset($_POST['invoice_date']) ? $_POST['invoice_date'] : '';
+            $invoice_due_date = isset($_POST['invoice_due_date']) ? $_POST['invoice_due_date'] : '';
+            
+            // Fetch booking data based on invoice dates and payment status
+            $sql = "SELECT COUNT(*) AS count, paymentStatus FROM bookings WHERE date >= :invoice_date AND date <= :invoice_due_date GROUP BY paymentStatus";
+            $this->db->query($sql);
+            $this->db->bind(':invoice_date', $invoice_date);
+            $this->db->bind(':invoice_due_date', $invoice_due_date);
+            $this->db->execute();
+            $bookingData = $this->db->resultSet();
+            
+            // Prepare data for the pie chart
+            $bookingCounts = array();
+            foreach ($bookingData as $row) {
+                $bookingCounts[$row->paymentStatus] = $row->count;
+            }
+            
+            // ---------------------------------------------------------
+            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        
+            // set font
+            $pdf->SetFont('helvetica', 'B', 17);
+            
+            // add a page
+            $pdf->AddPage();
+            
+            $pdf->Write(10, "Payment Status of Reservations\n");
+            $pdf->SetFont('helvetica', '', 13);
 
+            $pdf->Write(10, "Between: " . $invoice_date . " and " . $invoice_due_date);
+            
+
+            
+            // Pie chart parameters
+            $xc = 105;
+            $yc = 100;
+            $r = 50;
+            
+            // Pie chart colors
+            $colors = array(
+                'Paid' => array(51, 153, 102),    // Matte Green for Paid
+                'Pending' => array(255, 204, 102),  // Matte Yellow for Pending
+                'Not Paid' => array(204, 102, 102)  // Matte Red for Not Paid
+            );
+            
+        
+            // Color descriptions
+            $colorDescriptions = array(
+                'Paid' => 'Green',
+                'Pending' => 'Yellow',
+                'Not Paid' => 'Red'
+            );
+            
+            $startAngle = 0;
+            foreach ($bookingCounts as $status => $count) {
+                $endAngle = $startAngle + ($count / array_sum($bookingCounts)) * 360;
+                $pdf->SetFillColor($colors[$status][0], $colors[$status][1], $colors[$status][2]);
+                $pdf->PieSector($xc, $yc, $r, $startAngle, $endAngle, 'FD', false, 0, 2);
+                $startAngle = $endAngle;
+            }
+            
+            // Write labels and color descriptions
+            // $pdf->SetTextColor(255, 255, 255);
+            // $pdf->Text(105, 65, 'Paid');
+            // $pdf->Text(60, 95, 'Pending');
+            // $pdf->Text(120, 115, 'Not Paid');
+        
+            // Color descriptions
+            // $pdf->Text(140, 65, ' - ' . $colorDescriptions['Paid']);
+            // $pdf->Text(140, 95, ' - ' . $colorDescriptions['Pending']);
+            // $pdf->Text(140, 115, ' - ' . $colorDescriptions['Not Paid']);
+            
+            // ---------------------------------------------------------
+            // set font size and color for text
+$pdf->SetFont('helvetica', '', 12);
+$pdf->SetTextColor(0, 0, 0);
+
+// Draw squares and color descriptions
+$xSquare = 70;
+$ySquare = 150;
+$colorWidth = 10;
+$colorHeight = 10;
+$colorGap = 5;
+$colorTextGap = 3;
+
+foreach ($colors as $status => $color) {
+    // Set color for square
+    $pdf->SetFillColor($color[0], $color[1], $color[2]);
+    
+    // Draw square
+    $pdf->Rect($xSquare, $ySquare, $colorWidth, $colorHeight, 'F');
+    
+    // Write color description
+    $pdf->Text($xSquare + $colorWidth + $colorTextGap, $ySquare + ($colorHeight / 2), $status);
+    
+    // Move to the next position
+    $ySquare += $colorHeight + $colorGap;
+}
+
+            //Close and output PDF document
+            $pdf->Output('example_031.pdf', 'D');
+        }
+        
         public function displayFilteredOrders($data) {
             $Product = $data['Product'];
     
@@ -816,14 +920,14 @@ foreach ($result as $order) {
                     echo "<td>" . $row->quantity . "</td>";//                    $order->quantity,
 
                     echo "<td>" . $row->order_date . "</td>";
-                    echo "<td>" . $row->payment_status . "</td>";
+                    echo "<td>" . $row->paymentStatus . "</td>";
                     echo "<td>" . $row->price . "</td>";
 
                     echo "</tr>";
                     $totalPrice += $row->price;
         
                     //Increment appropriate total based on payment status
-                    switch ($row->payment_status) {
+                    switch ($row->paymentStatus) {
                         case 'Paid':
                             $totalPaid += $row->price;
                             break;
