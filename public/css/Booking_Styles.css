@@ -325,6 +325,12 @@ input[type="checkbox"] {
   vertical-align: middle;
 }
 
+.customClass{
+
+  background-color: rgb(238, 83, 83);
+  color: white;
+}
+
 /* Style for the label associated with the checkbox */
 label {
   display: block; /* Change from inline-block to block */

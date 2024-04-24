@@ -430,37 +430,48 @@ function time_slot($duration, $cleanup, $start, $end)
                                     timeSlotsM = JSON.parse(element.timeSlotM);
                                     console.log(bookingEndDate <= endDateForSelectedDate);
 
+                                    if(selectedDate < new Date()){
+                                        alert("Please select a valid date");
+                                        return;
+                                    }
+
                                     if ((selectedDate >= new Date(element.date) && selectedDate <= endDate && day === element.day) ||
                                         (selectedDate <= new Date(element.date) && bookingEndDate <= endDateForSelectedDate && day === element.day)) {
 
                                         // Disable time slots for net A
                                         timeSlotsA.forEach(slot => {
                                             $("input[name='timeSlotA'][value='" + slot + "']").prop("disabled", true);
+                                            $("input[name='timeSlotA'][value='" + slot + "']").closest('.form-group').addClass("customClass");
                                         });
 
                                         // Disable time slots for net B
                                         timeSlotsB.forEach(slot => {
                                             $("input[name='timeSlotB'][value='" + slot + "']").prop("disabled", true);
+                                            $("input[name='timeSlotB'][value='" + slot + "']").closest('.form-group').addClass("customClass");
                                         });
 
                                         // Disable time slots for machine net
                                         timeSlotsM.forEach(slot => {
                                             $("input[name='timeSlotM'][value='" + slot + "']").prop("disabled", true);
+                                            $("input[name='timeSlotM'][value='" + slot + "']").closest('.form-group').addClass("customClass");
                                         });
 
                                     } else {
                                         timeSlotsA.forEach(slot => {
                                             $("input[name='timeSlotA'][value='" + slot + "']").prop("disabled", false);
+                                            $("input[name='timeSlotA'][value='" + slot + "']").closest('.form-group').removeClass("customClass");
                                         });
 
                                         // Disable time slots for net B
                                         timeSlotsB.forEach(slot => {
                                             $("input[name='timeSlotB'][value='" + slot + "']").prop("disabled", false);
+                                            $("input[name='timeSlotB'][value='" + slot + "']").closest('.form-group').removeClass("customClass");
                                         });
 
                                         // Disable time slots for machine net
                                         timeSlotsM.forEach(slot => {
                                             $("input[name='timeSlotM'][value='" + slot + "']").prop("disabled", false);
+                                            $("input[name='timeSlotM'][value='" + slot + "']").closest('.form-group').removeClass("customClass");
                                         });
                                     }
                                 });
