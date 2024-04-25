@@ -36,7 +36,7 @@
         </div>  
         </a>
 
-        <a class="card" href="<?php echo URLROOT; ?>/Reports/SalesMonthly">
+        <a class="card" href="<?php echo URLROOT; ?>/Pages/SalesMonthlyy">
         <div>
         <div class="cardName">Monthly Income Report: Booking Analysis</div>
 
@@ -47,7 +47,7 @@
         </div>  
         </a>
      
-        <a class="card" href="<?php echo URLROOT; ?>/Reports/OrderReport">
+        <a class="card" href="<?php echo URLROOT; ?>/Pages/OrderReportt">
         <div>
         <div class="cardName">Order Filtering Report</div>
 
@@ -58,7 +58,7 @@
         </div> 
         </a>
 
-        <a class="card" href="<?php echo URLROOT; ?>/Reports/MonthlyOrderReport">
+        <a class="card" href="<?php echo URLROOT; ?>/Pages/MonthlyOrderReportt">
         <div>
         <div class="cardName">Monthly Income Report: Order Analysis</div>
 
@@ -70,7 +70,7 @@
         </div> 
         </a>
 
-        <a class="card" href="<?php echo URLROOT; ?>/Reports/Userlogs">
+        <a class="card" href="<?php echo URLROOT; ?>/Pages/Userlogss">
         <div>
         <div class="cardName">User Account Activity Report</div>
 
@@ -81,7 +81,7 @@
         </div> 
         </a>
 
-        <a class="card" href="<?php echo URLROOT; ?>/Reports/Weekly_Reservation">
+        <a class="card" href="<?php echo URLROOT; ?>/Pages/Weekly_Reservationn">
         <div>
         <div class="cardName">Weekly Rservation<br> Chart</div>
 

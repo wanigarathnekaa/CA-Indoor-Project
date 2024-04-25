@@ -17,14 +17,9 @@ class Reports extends Controller
 
                      }
 
-    public function Bookingreport()
-                     {
-                         
-                        $this->view('Pages/Report/bookingreport');
-                        
+  
+    public function SalesAmount(){
 
-                     }
-                     public function SalesAmount(){
                         if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             // Valid input
                             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -33,10 +28,15 @@ class Reports extends Controller
                             $data = [
                                 'invoice_date' => trim($_POST['invoice_date']),
                                 'invoice_due_date' => trim($_POST['invoice_due_date']),   
-                            ];
+                            ];   
+                            if(isset($_POST["download_pdf"])) {
+                                $this->reportmodel->filterBookingsAndGeneratePDF($data);}
+                            else if(isset($_POST["view_pdf"])){
+                                $this->reportmodel->filterBookingsAndGeneratePDF1($data);
+                            }
                     
                             // Debugging: Check the data being sent
-                   
+                            else{
                             // Get bookings data
                             $bookings = $this->reportmodel->getBookingDetails($data);
                     
@@ -45,27 +45,21 @@ class Reports extends Controller
                             $data1 = [
                                 'bookings' => $bookings
                             ];
-                            $this->view('Pages/Report/SalesAmountview', $data1);
+                            $this->view('Pages/Report/SalesAmount', $data1,$data);
+                        }
+                         
                         }
                     
                     
-        // if(isset($_POST["filter"])){
-        //     // $this->view('Pages/Report/SalesAmount', $data1);
-
-        //     $this->reportmodel->displayFilteredBookings($data);
-        // }
-
-        // if(isset($_POST["download_pdf"])) {
-        //     $this->reportmodel->filterBookingsAndGeneratePDF($data);
+     
             
         }
 
-        // }
+        
 
 
     
     public function SalesMonthly(){
-        $this->view('Pages/Report/bookingreport');
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Valid input
@@ -75,60 +69,76 @@ class Reports extends Controller
             $data = [
                 'Selected_month' => trim($_POST['Selected_month']),
             ];
+            if(isset($_POST["download_pdf"])) {
+                $this->reportmodel->MonthlyfilterBookingsAndGeneratePDF($data);}
+            else if(isset($_POST["view_pdf"])){
+                $this->reportmodel->MonthlyfilterBookingsAndGeneratePDF1($data);
+            }
             
             $bookings = $this->reportmodel->getMonthlyBookingDetails($data);
-            $data2 = [
+            $data1 = [
                 'bookings' => $bookings
             ];
-            $this->view('Pages/Report/bookingreport', $data2);
+            $this->view('Pages/Report/bookingreport', $data1,$data);
         }
         
-if(isset($_POST["Filter"])){
-    $this->reportmodel->displayMonthlyFilteredBookings($data);
-}
+// if(isset($_POST["Filter"])){
+//     $this->reportmodel->displayMonthlyFilteredBookings($data);
+// }
 
-if(isset($_POST["download_pdf"])) {
-    $this->reportmodel->MonthlyfilterBookingsAndGeneratePDF($data);
+// if(isset($_POST["download_pdf"])) {
+//     $this->reportmodel->MonthlyfilterBookingsAndGeneratePDF($data);
 
-}
+// }
 
 
 
     }
 
+    // public function getUserLogs($data){
+        
+    // $invoice_date = $data['invoice_date'];
+    // $invoice_due_date = $data['invoice_due_date'];
 
+    // $this->reportmodel->query("SELECT * FROM userlog WHERE create_date >= :start_date AND create_date <= :end_date");
+
+    // $this->reportmodel->bind(':start_date', $invoice_date);
+    // $this->reportmodel->bind(':end_date', $invoice_due_date);
+    // return $this->reportmodel->resultSet();}
 
     public function OrderReport(){
-        $this->view('Pages/Report/orderReport');
-
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Valid input
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
+    
             // Input data
             $data = [
                 'Product' => trim($_POST['Product']),
             ];
-  
-            
+            $orders = $this->reportmodel->getOrderDetails($data);
+                    
+            $data1 = [
+                'orders' => $orders
+            ]; 
+            $this->view('Pages/Report/orderReport', $data1, $data);
         }
-        
-        if(isset($_POST["filter"])){
-            $this->reportmodel->displayFilteredOrders($data);
-        }
-
-        if(isset($_POST["download_pdf"])) {
-            $this->reportmodel->OrderGeneratePDF($data);
-            
-            
-
-        }
-
-
     }
     
+        
+        // if(isset($_POST["filter"])){
+        //     $this->reportmodel->displayFilteredOrders($data);
+        // }
+
+        // if(isset($_POST["download_pdf"])) {
+        //     $this->reportmodel->OrderGeneratePDF($data);
+            
+            
+        
+
+
+    
+    
     public function MonthlyOrderReport(){
-        $this->view('Pages/Report/monthlyORDERreport');
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Valid input
@@ -138,24 +148,37 @@ if(isset($_POST["download_pdf"])) {
             $data = [
                 'Selected_month' => trim($_POST['Selected_month']),
             ];
+            if(isset($_POST["download_pdf"])) {
+                $this->reportmodel->MonthlyOrdersGeneratePDF($data);}
+            else if(isset($_POST["view_pdf"])){
+                $this->reportmodel->MonthlyOrdersGeneratePDF1($data);
+            }
+            $monthlyOrders = $this->reportmodel->getMonthlyOrders($data);
+                    
+            // Debugging: Check the bookings data
+    
+            $data1 = [
+                'monthlyOrders' => $monthlyOrders
+            ];
+            $this->view('Pages/Report/monthlyORDERreport', $data1);
+
             
            
         }
         
-if(isset($_POST["Filter"])){
-    $this->reportmodel->displayMonthlyFilteredOrders($data);
-}
+// if(isset($_POST["Filter"])){
+//     $this->reportmodel->displayMonthlyFilteredOrders($data);
+// }
 
-if(isset($_POST["download_pdf"])) {
-    $this->reportmodel->MonthlyOrdersGeneratePDF($data);
+// if(isset($_POST["download_pdf"])) {
+//     $this->reportmodel->MonthlyOrdersGeneratePDF($data);
 
-}
+// }
 
 
 
     }
     public function Userlogs(){
-        $this->view('Pages/Report/userlogreport');
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Valid input
@@ -166,26 +189,35 @@ if(isset($_POST["download_pdf"])) {
                 'invoice_date' => trim($_POST['invoice_date']),
                 'invoice_due_date' => trim($_POST['invoice_due_date']),   
             ];
+            if(isset($_POST["download_pdf"])) {
+                $this->reportmodel->LogsGeneratePDF($data);}
+            else if(isset($_POST["view_pdf"])){
+                $this->reportmodel->LogsGeneratePDF1($data);
+            }
+            $bookings = $this->reportmodel->getUserLogs($data);
+            $data1 = [
+                'bookings' => $bookings
+            ];
+            $this->view('Pages/Report/bookingreport', $data1,$data);
+
   
         }
-        
-        if(isset($_POST["filter"])){
-
-            $this->reportmodel->displayLogs($data);
-        }
-
-        if(isset($_POST["download_pdf"])) {
-            $this->reportmodel->LogsGeneratePDF($data);
-            
-            
-
-        }
     }
+        // if(isset($_POST["filter"])){
+
+        //     $this->reportmodel->displayLogs($data);
+        // }
+
+        // if(isset($_POST["download_pdf"])) {
+        //     $this->reportmodel->LogsGeneratePDF($data);
+            
+            
+
+    
 
     
     public function Weekly_Reservation() {
         // Load the view for the Weekly Reservation report
-        $this->view('Pages/Report/Weekly_Reservation');
     
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Valid input
