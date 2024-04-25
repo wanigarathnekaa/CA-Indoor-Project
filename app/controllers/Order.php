@@ -125,7 +125,7 @@ class Order extends Controller
                     exit();
                 }
 
-                if ($this->orderModel->updateQuantity($product_id, $qty)) {
+                if ($this->orderModel->updateQuantity($product_id, $qty) && $this->orderModel->sendEmailManager($_SESSION['user_email'])) {
                     continue;
                 } else {
                     $response = [
