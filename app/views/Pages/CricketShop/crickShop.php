@@ -148,13 +148,13 @@ include APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                     </h3>
                   </a>
 
-                  <div class="showcase-rating">
+                  <!-- <div class="showcase-rating">
                     <ion-icon name="star"></ion-icon>
                     <ion-icon name="star"></ion-icon>
                     <ion-icon name="star"></ion-icon>
                     <ion-icon name="star-outline"></ion-icon>
                     <ion-icon name="star-outline"></ion-icon>
-                  </div>
+                  </div> -->
                   <div class="price-box">
                     <p class="price">
                       <?php echo $product->selling_price; ?>
