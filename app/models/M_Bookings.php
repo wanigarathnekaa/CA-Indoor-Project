@@ -474,7 +474,7 @@ public function getADMINdetails(){
 
     public function getPermanentBookings()
     {
-        $this->db->query('SELECT * FROM permanent_booking');
+        $this->db->query('SELECT * FROM permanent_booking WHERE status = "ongoing"');
         return $this->db->resultSet();
     }
 
@@ -485,9 +485,30 @@ public function getADMINdetails(){
         return $this->db->resultSet(); // Return the result set
     }
 
+    public function getBookingId($date, $netType, $timeSlot)
+    {
+        $this->db->query('SELECT bookings.id FROM bookings JOIN time_slots ON bookings.id = time_slots.booking_id WHERE bookings.date = :date AND time_slots.netType = :netType AND  time_slots.timeSlot = :timeSlot;');
+        $this->db->bind(':date', $date);
+        $this->db->bind(':netType', $netType);
+        $this->db->bind(':timeSlot', $timeSlot);
+        $this->db->execute();
+        return $this->db->resultSet();
+    }
+
     public function updateReservation($bookingId){
         $this->db->query('UPDATE bookings SET paymentStatus = :paymentStatus, paidPrice = bookingPrice WHERE id = :bookingId');
         $this->db->bind(':paymentStatus', 'Paid');
+        $this->db->bind(':bookingId', $bookingId);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updatePermanentBookingStatus($bookingId){
+        $this->db->query('UPDATE permanent_booking SET status="Cancelled" WHERE id = :bookingId');
         $this->db->bind(':bookingId', $bookingId);
 
         if ($this->db->execute()) {

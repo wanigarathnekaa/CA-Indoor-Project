@@ -118,19 +118,16 @@ hr {
   /* margin-bottom: 30px; */
   position: relative;
   font-size: 20px;
-    /* font-weight: 800; */
-    /* margin-bottom: 5px; */
-    color: var(--color01);
-    /* background-color: var(--color02); */
+  /* font-weight: 800; */
+  /* margin-bottom: 5px; */
+  color: var(--color01);
+  /* background-color: var(--color02); */
 }
 
-
-
-.modal .modal-content .col-md-6{
+.modal .modal-content .col-md-6 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  
 }
 
 .modal .modal-content .form-group {
@@ -146,17 +143,14 @@ hr {
   /* padding: 10px; */
 }
 
-
-
-.modal .modal-content .btn{
+.modal .modal-content .btn {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   /* margin-top: 10px; */
-
 }
 
-.modal .modal-content .btn button{
+.modal .modal-content .btn button {
   width: 25%;
   background-color: var(--color02);
   color: var(--white);
@@ -167,10 +161,9 @@ hr {
   /* margin-top: 15px; */
 }
 
-.modal .modal-content .btn button:hover{
+.modal .modal-content .btn button:hover {
   background-color: var(--color01);
 }
-
 
 #productForm select,
 #productForm input,
@@ -188,8 +181,6 @@ hr {
   font-size: 12px;
   /* padding-left: 15px; */
 }
-
-
 
 #productForm button {
   background-color: var(--color01);
@@ -216,24 +207,44 @@ hr {
   width: 48%;
 }
 @media (max-width: 584px) {
-    .modal-content {
-      max-width: 100%;
-    }
-    form .col-md-6 .form-group,
-    form .col-md-12 .form-group{
-      margin-bottom: 10px;
-      width: 100%;
-    }
-    .modal-content form .col-md-6,
-    .modal-content form .col-md-12 {
-      max-height: 220px;
-      overflow-y: scroll;
-      /* border: 2px solid #9b59b6; */
-      /* padding: 10px; */
-      /* margin: 5px; */
-      /* border-radius:10px ; */
-    }
+  .modal-content {
+    max-width: 100%;
   }
+  form .col-md-6 .form-group,
+  form .col-md-12 .form-group {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  .modal-content form .col-md-6,
+  .modal-content form .col-md-12 {
+    max-height: 220px;
+    overflow-y: scroll;
+    /* border: 2px solid #9b59b6; */
+    /* padding: 10px; */
+    /* margin: 5px; */
+    /* border-radius:10px ; */
+  }
+}
+
+.serachselect {
+  background: var(--color01);
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+
+.fa-solid,
+.fas {
+  font-weight: 900;
+}
+
+.serachselect .btn {
+  position: relative;
+  padding: 5px;
+  background: var(--color01);
+  text-decoration: none;
+  color: var(--black1);
+  border: none;
+}
 
 .table-container {
   /* width: 100%; */
@@ -303,7 +314,7 @@ table tr th {
 }
 
 table tbody tr td .Change_Quantity,
-table tbody tr td .Change_Discount{
+table tbody tr td .Change_Discount {
   background-color: var(--color02);
   border: none;
   color: rgb(0, 0, 0);
@@ -404,10 +415,13 @@ tbody td .icon:hover {
 }
 
 .form-invalid-1,
-.form-invalid-2,.form-invalid-3,
-.form-invalid-4,.form-invalid-5, 
-.form-invalid-6, .form-invalid-7, 
-.form-invalid-8{
+.form-invalid-2,
+.form-invalid-3,
+.form-invalid-4,
+.form-invalid-5,
+.form-invalid-6,
+.form-invalid-7,
+.form-invalid-8 {
   color: rgb(172, 5, 5);
   font-size: 12px;
   margin-bottom: 10px;

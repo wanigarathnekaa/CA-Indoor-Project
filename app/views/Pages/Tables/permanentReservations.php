@@ -1,14 +1,3 @@
-<!-- <?php
-$filter_date = date('Y-m-d');
-$email = $_SESSION['user_email'];
-
-$personal_reservations = array_filter($data['bookings'], function ($item) use ($email, $filter_date) {
-      $reservation_date = date('Y-m-d', strtotime($item->date));
-
-      return $item->email === $email && $reservation_date >= $filter_date;
-});
-?> -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,20 +34,26 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
                         <!-- table header -->
                         <thead>
                               <tr>
+                                    <th>ID</th>
                                     <th>Customer</th>
                                     <th>Email</th>
                                     <th>Starting Date</th>
                                     <th>Time Duration</th>
                                     <th>Day</th>
+                                    <th>Status</th>
                               </tr>
                         </thead>
 
                         <!-- table body -->
                         <tbody>
                               <?php
-                              foreach ($data['permanentBookings'] as $permanentBookings) {?>
+                              foreach ($data['permanentBookings'] as $permanentBookings) { ?>
 
-                                    <tr onclick="openPermanentPopup(<?php echo htmlspecialchars(json_encode($permanentBookings)); ?>)">
+                                    <tr
+                                          onclick="openPermanentPopup(<?php echo htmlspecialchars(json_encode($permanentBookings)); ?>)">
+                                          <td>
+                                                <?php echo $permanentBookings->id; ?>
+                                          </td>
                                           <td>
                                                 <?php echo $permanentBookings->name; ?>
                                           </td>
@@ -74,8 +69,11 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
                                           <td>
                                                 <?php echo $permanentBookings->day; ?>
                                           </td>
+                                          <td>
+                                                <?php echo $permanentBookings->status; ?>
+                                          </td>
                                     </tr>
-                              <?php
+                                    <?php
                               }
                               ?>
 
@@ -91,6 +89,10 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
                   <h2>Permanent Reservation</h2>
                   <hr>
                   <div class="popupdetails">
+                        <div class="popupdetail">
+                              <h2><b>Reservation ID :</b> <span class="p_id"></span></h2>
+                        </div>
+
                         <div class="popupdetail">
                               <h2><b>Customer Name :</b> <span class="p_name"></span></h2>
                         </div>
@@ -112,25 +114,72 @@ $personal_reservations = array_filter($data['bookings'], function ($item) use ($
                         </div>
 
                         <div class="popupdetail">
+                              <h2><b>Time Slot A :</b> <span class="p_timeSlotA"></span></h2>
+                        </div>
+
+                        <div class="popupdetail">
+                              <h2><b>Time Slot B :</b> <span class="p_timeSlotB"></span></h2>
+                        </div>
+
+                        <div class="popupdetail">
+                              <h2><b>Machine Net :</b> <span class="p_timeSlotM"></span></h2>
+                        </div>
+
+                        <div class="popupdetail">
                               <h2><b>Day :</b> <span class="p_day"></span></h2>
                         </div>
 
-                        
+                        <div class="btns">
 
-                        
-
-                        
+                              <button type="button" onclick="cancelReservation()">Cancel Reservation</button>
+                              <button type="button" onclick="closePermanentPopup()">Close</button>
+                        </div>
                   </div>
-
-                  
             </div>
       </div>
 
-      
+
 
       <!-- JavaScript -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
       <script src="<?php echo URLROOT; ?>/js/permanetPopup.js"></script>
+      <script>
+            function cancelReservation() {
+                  var pId = document.querySelector('.p_id').innerText;
+                  var pDate = document.querySelector('.p_date').innerText;
+                  var pTimeDuration = document.querySelector('.p_timeDuration').innerText;
+                  var pDay = document.querySelector('.p_day').innerText;
+                  var timeSlotA = JSON.parse(document.querySelector('.p_timeSlotA').innerText);
+                  var timeSlotB = JSON.parse(document.querySelector('.p_timeSlotB').innerText);
+                  var timeSlotM = JSON.parse(document.querySelector('.p_timeSlotM').innerText);
+
+                  $.ajax({
+                        type: 'POST',
+                        url: '<?php echo URLROOT; ?>/Bookings/cancelPermanentReservation',
+                        data: {
+                              pId: pId,
+                              pDate: pDate,
+                              pTimeDuration: pTimeDuration,
+                              pDay: pDay,
+                              timeSlotA: JSON.stringify(timeSlotA),
+                              timeSlotB: JSON.stringify(timeSlotB),
+                              timeSlotM: JSON.stringify(timeSlotM)
+                        },
+                        success: function (response) {
+                              console.log(response);
+                              if(response.status == 'success'){
+                                    alert('Reservation Cancelled Successfully');
+                                    location.reload();
+                              }else{
+                                    alert('Failed to Cancel Reservation');
+                              }
+                        }
+                  });
+            }
+
+
+      </script>
+
 </body>
 
 </html>

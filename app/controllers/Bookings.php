@@ -23,8 +23,8 @@ class Bookings extends Controller
 
             // Decode the JSON string into an associative array
             $arrayData = json_decode($jsonString, true);
-            
-            $admin=$this->bookingModel->getADMINdetails();
+
+            $admin = $this->bookingModel->getADMINdetails();
             $bookingPrice = $_POST['bookingPrice'];
             $decimalBookingPrice = number_format((float) $bookingPrice, 2, '.', '');
 
@@ -68,7 +68,7 @@ class Bookings extends Controller
             if (empty($data['name_err']) && empty($data['net_err']) && empty($data['email_err'])) {
                 $bookingId = $this->bookingModel->last_inserted_id();
                 //create user
-                if ($this->bookingModel->Make_Reservation($data) && $this->bookingModel->SendEmailToCoach($data,$admin)) {
+                if ($this->bookingModel->Make_Reservation($data) && $this->bookingModel->SendEmailToCoach($data, $admin)) {
                     $_SESSION['booking_success'] = true;
                     $bookingId = $this->bookingModel->last_inserted_id();
                     foreach ($arrayData as $timeSlotAndNetType) {
@@ -76,7 +76,7 @@ class Bookings extends Controller
                         $netType = $timeSlotAndNetType['netType'];
                         $this->bookingModel->addTimeSlots($bookingId, $timeSlot, $netType);
                     }
-                  
+
 
 
                     redirect("Pages/Manager_Booking/{$role}?fulldate={$data['date']}");
@@ -236,23 +236,23 @@ class Bookings extends Controller
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         $reservationID = trim($_POST['id']);
-            
-            $reservation = $this->bookingModel->GetReservInfo($reservationID);
-            $invoice_name = $this->bookingModel->sendEmail($reservation);
-            if ($this->bookingModel->sendingemail($invoice_name, $reservation)) {
-                $response = [
-                    'status' => 'success',
-                ];
-            } else {
-                $response = [
-                    'status' => 'error',
-                    'message' => 'Something went wrong',
-                ];
-            }
-    
-            header('Content-Type: application/json');
-            echo json_encode($response);
-            exit();
+
+        $reservation = $this->bookingModel->GetReservInfo($reservationID);
+        $invoice_name = $this->bookingModel->sendEmail($reservation);
+        if ($this->bookingModel->sendingemail($invoice_name, $reservation)) {
+            $response = [
+                'status' => 'success',
+            ];
+        } else {
+            $response = [
+                'status' => 'error',
+                'message' => 'Something went wrong',
+            ];
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit();
 
 
 
@@ -536,6 +536,102 @@ class Bookings extends Controller
         exit();
 
     }
+
+    public function cancelPermanentReservation()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'pbookingId' => trim($_POST['pId']),
+                'date' => trim($_POST['pDate']),
+                'timeDuration' => trim($_POST['pTimeDuration']),
+                'day' => trim($_POST['pDay']),
+                'timeSlotA' => json_decode(html_entity_decode($_POST['timeSlotA']), true),
+                'timeSlotB' => json_decode(html_entity_decode($_POST['timeSlotB']), true),
+                'timeSlotM' => json_decode(html_entity_decode($_POST['timeSlotM']), true),
+            ];
+
+            $startDate = strtotime($data['date']);
+            $timeDuration = $data['timeDuration'];
+
+            // Calculate end date based on time duration
+            if (strpos($timeDuration, 'Months') !== false) {
+                $months = (int) filter_var($timeDuration, FILTER_SANITIZE_NUMBER_INT);
+                $endDate = date('Y-m-d', strtotime("+$months months", $startDate));
+            }
+
+            $data['endDate'] = $endDate;
+
+            $desiredDay = $data["day"];
+
+            // Get all specified days between start and end date
+            $specifiedDays = [];
+            $currentDate = strtotime('today');
+
+            // Find the first occurrence of the desired day
+            while (date('l', $currentDate) != $desiredDay && $currentDate <= strtotime($endDate)) {
+                $currentDate = strtotime('+1 day', $currentDate);
+            }
+
+            // Collect all the specified days
+            while ($currentDate <= strtotime($endDate)) {
+                $specifiedDays[] = date('Y-m-d', $currentDate);
+                $currentDate = strtotime('+7 days', $currentDate);
+            }
+
+            $flag = 0;
+
+            foreach ($specifiedDays as $date) {
+                $netType = '';
+                $timeSlot = '';
+                if (!empty($data['timeSlotA'])) {
+                    $timeSlot = $data['timeSlotA'][0];
+                    $netType = 'Normal Net A';
+                } else if (!empty($data['timeSlotB'])) {
+                    $timeSlot = $data['timeSlotB'][0];
+                    $netType = 'Normal Net B';
+                } else if (!empty($data['timeSlotM'])) {
+                    $timeSlot = $data['timeSlotM'][0];
+                    $netType = 'Machine Net';
+                }
+                
+                $bookingId = $this->bookingModel->getBookingId($date, $netType, $timeSlot);
+                if ($this->bookingModel->deleteReservation($bookingId[0]->id)) {
+                    $flag = 1;
+                } else {
+                    $flag = 0;
+                    break;
+                }
+
+            }
+
+            if ($flag == 1) {
+                if($this->bookingModel->updatePermanentBookingStatus($data['pbookingId'])){
+                    $response = [
+                        'status' => 'success',
+                    ];
+                } else {
+                    $response = [
+                        'status' => 'error',
+                        'message' => 'Something went wrong',
+                    ];
+                }
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Something went wrong',
+                ];
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+    }
+
+
 
 }
 
