@@ -24,41 +24,46 @@ class Reports extends Controller
                         
 
                      }
-    public function SalesAmount(){
-        $this->view('Pages/Report/SalesAmount');
+                     public function SalesAmount(){
+                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                            // Valid input
+                            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                    
+                            // Input data
+                            $data = [
+                                'invoice_date' => trim($_POST['invoice_date']),
+                                'invoice_due_date' => trim($_POST['invoice_due_date']),   
+                            ];
+                    
+                            // Debugging: Check the data being sent
+                   
+                            // Get bookings data
+                            $bookings = $this->reportmodel->getBookingDetails($data);
+                    
+                            // Debugging: Check the bookings data
+                    
+                            $data1 = [
+                                'bookings' => $bookings
+                            ];
+                            $this->view('Pages/Report/SalesAmountview', $data1);
+                        }
+                    
+                    
+        // if(isset($_POST["filter"])){
+        //     // $this->view('Pages/Report/SalesAmount', $data1);
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Valid input
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        //     $this->reportmodel->displayFilteredBookings($data);
+        // }
 
-            // Input data
-            $data = [
-                'invoice_date' => trim($_POST['invoice_date']),
-                'invoice_due_date' => trim($_POST['invoice_due_date']),   
-            ];
-  
-            $bookings = $this->reportmodel->getBookingDetails($data);
-            $data1 = [
-                'bookings' => $bookings
-            ];
-            $this->view('Pages/Report/SalesAmount', $data1);
-        }
-        
-        if(isset($_POST["filter"])){
-            // $this->view('Pages/Report/SalesAmount', $data1);
-
-            $this->reportmodel->displayFilteredBookings($data);
-        }
-
-        if(isset($_POST["download_pdf"])) {
-            $this->reportmodel->filterBookingsAndGeneratePDF($data);
+        // if(isset($_POST["download_pdf"])) {
+        //     $this->reportmodel->filterBookingsAndGeneratePDF($data);
             
-            
-
         }
 
+        // }
 
-    }
+
+    
     public function SalesMonthly(){
         $this->view('Pages/Report/bookingreport');
 

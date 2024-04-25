@@ -425,8 +425,7 @@ public function getADMINdetails(){
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'nivodya2001@gmail.com';
-        $mail->Password = 'wupbxphjicpfidgj
-                ';
+        $mail->Password = 'wupbxphjicpfidgj';
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
 
