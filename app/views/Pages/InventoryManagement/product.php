@@ -326,14 +326,14 @@
                 // Filter rows based on the selected option
                 if (filterValue === 'Insufficient Quantity') {
                     $('#categoryTable tr').each(function () {
-                        var quantity = parseInt($(this).find('td:eq(4)').text(), 10);
+                        var quantity = parseInt($(this).find('td:eq(5)').text(), 10);
                         if (quantity > 3) {
                             $(this).hide();
                         }
                     });
                 } else if (filterValue === 'Sufficient Quantity') {
                     $('#categoryTable tr').each(function () {
-                        var quantity = parseInt($(this).find('td:eq(4)').text(), 10);
+                        var quantity = parseInt($(this).find('td:eq(5)').text(), 10);
                         if (quantity <= 3) {
                             $(this).hide();
                         }
