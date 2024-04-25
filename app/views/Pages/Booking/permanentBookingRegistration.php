@@ -137,15 +137,15 @@ function time_slot($duration, $cleanup, $start, $end)
                     </div>
 
                     <div class="netbtnbar">
-                        <button id="timeSlotA" name="booking" class="net">
+                        <button id="timeSlotA" name="booking" class="net" disabled>
                             <span class="btnText">Normal Net A</span>
                         </button>
 
-                        <button id="timeSlotB" name="booking" class="net">
+                        <button id="timeSlotB" name="booking" class="net" disabled>
                             <span class="btnText">Normal Net B</span>
                         </button>
 
-                        <button id="timeSlotM" name="booking" class="net">
+                        <button id="timeSlotM" name="booking" class="net" disabled>
                             <span class="btnText">Machine Net</span>
                         </button>
                     </div>
@@ -411,6 +411,9 @@ function time_slot($duration, $cleanup, $start, $end)
             });
 
             $("#date, select[name='timeDuration'], select[name='day']").on("change", function () {
+                $("#timeSlotA").prop("disabled", false);
+                $("#timeSlotB").prop("disabled", false);
+                $("#timeSlotM").prop("disabled", false);
                 var date = $("#date").val();
                 var timeDuration = $("select[name='timeDuration']").val();
                 var day = $("select[name='day']").val();
