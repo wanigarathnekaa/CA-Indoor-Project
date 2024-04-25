@@ -140,6 +140,14 @@
                 </div>
             </div>
         </div>
+        <div class="serachselect">
+            <i class="fa-solid fa-magnifying-glass icon"></i>
+            <select id="filterProduct" class="btn">
+                <option value="All">All</option>
+                <option value="Insufficient Quantity">Low Quantity</option>
+                <option value="Sufficient Quantity">High Quantity</option>
+            </select>
+        </div>
 
         <div class="table-container">
             <table id="coachTable">
@@ -276,6 +284,31 @@
     <script src="<?php echo URLROOT; ?>/js/product.js"></script>
     <script>
         $(document).ready(function () {
+            $('#filterProduct').change(function () {
+                var filterValue = $(this).val();
+
+                // Show all rows initially
+                $('#categoryTable tr').show();
+
+                // Filter rows based on the selected option
+                if (filterValue === 'Insufficient Quantity') {
+                    $('#categoryTable tr').each(function () {
+                        var quantity = parseInt($(this).find('td:eq(4)').text(), 10);
+                        if (quantity > 3) {
+                            $(this).hide();
+                        }
+                    });
+                } else if (filterValue === 'Sufficient Quantity') {
+                    $('#categoryTable tr').each(function () {
+                        var quantity = parseInt($(this).find('td:eq(4)').text(), 10);
+                        if (quantity <= 3) {
+                            $(this).hide();
+                        }
+                    });
+                }else{
+                    location.reload();
+                }
+            });
             $('#productForm').submit(function (e) {
                 e.preventDefault();
                 var formType = $('#form_type').val();

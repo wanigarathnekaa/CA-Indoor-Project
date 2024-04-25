@@ -214,12 +214,6 @@
                                             <span class="text nav-text">Registration</span>
                                         </a>
                                     </li>
-                                    <li class="nav-link">
-                                        <a href="#">
-                                            <i class="bx bxs-report icon"></i>
-                                            <span class="text nav-text">Report</span>
-                                        </a>
-                                    </li>
                                     <li class="profile">
                                         <a href="C&A_Indoor_Project/Pages/Manager_Profile/manager">
                                             <i class="bx bx-user-circle icon"></i>
