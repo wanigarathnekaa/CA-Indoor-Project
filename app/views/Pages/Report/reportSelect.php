@@ -26,7 +26,7 @@
 
     <!-- Cards -->
     <div class="cardBox">
-        <a class="card" href="<?php echo URLROOT; ?>/Reports/SalesAmount">
+        <a class="card" href="<?php echo URLROOT; ?>/Pages/SalesAmountt">
         <div>
         <div class="cardName">Filtered Booking Report</div>
 
