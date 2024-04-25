@@ -140,13 +140,16 @@
                 </div>
             </div>
         </div>
-        <div class="serachselect">
-            <i class="fa-solid fa-magnifying-glass icon"></i>
-            <select id="filterProduct" class="btn">
-                <option value="All">All</option>
-                <option value="Insufficient Quantity">Low Quantity</option>
-                <option value="Sufficient Quantity">High Quantity</option>
-            </select>
+        
+        <div class="searchbar">  
+            <div class="serachselect">
+                <i class="fa-solid fa-magnifying-glass icon"></i>
+                <select id="filterProduct" class="btn">
+                    <option value="All">All</option>
+                    <option value="Insufficient Quantity">Low Quantity</option>
+                    <option value="Sufficient Quantity">High Quantity</option>
+                </select>
+            </div>
         </div>
 
         <div class="table-container">
