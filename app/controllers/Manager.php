@@ -6,9 +6,15 @@ use PHPMailer\PHPMailer\Exception;
 class Manager extends Controller
 {
     private $managerModel;
+    private $userModel;
+    private $userCoachModel;
+    private $companyUserModel;
     public function __construct()
     {
+        $this->userModel = $this->model('M_Users');
         $this->managerModel = $this->model('M_Manager');
+        $this->userCoachModel = $this->model('M_Coach');
+        $this->companyUserModel = $this->model('M_CompanyUsers');
     }
 
     public function register()
@@ -146,7 +152,6 @@ class Manager extends Controller
                 'nic' => trim($_POST['nic']),
                 'strAddress' => trim($_POST['strAddress']),
                 'city' => trim($_POST['city']),
-                // 'pwd' => "12345678",
                 'filename' => $_FILES['file']['name'],
                 'filetmp' => $_FILES['file']['tmp_name'],
 
@@ -178,16 +183,40 @@ class Manager extends Controller
             //validate name
             if (empty($data['name'])) {
                 $data['name_err'] = "Please enter a name";
+            }elseif (!preg_match("/^[a-zA-Z-' ]*$/", $data['name'])) {
+                $data['name_err'] = "Only letters and white space allowed";
             }
 
             //validate email
             if (empty($data['email'])) {
                 $data['email_err'] = "Please enter an email";
+            }else {
+                $userdata = $this->managerModel->findManager($_SESSION['user_email']);
+                if ($data['email'] != $userdata->email) {
+                    // check email already registered or not
+                    if ($this->userModel->findUserByEmail($data['email'])) {
+                        $data['email_err'] = "This email is already in use";
+                    }
+                    if ($this->managerModel->findUserByEmail($data['email'])) {
+                        $data['email_err'] = "This email is already in use";
+                    }
+                    if ($this->companyUserModel->findUserByEmail($data['email'])) {
+                        $data['email_err'] = "This email is already in use";
+                    }
+                }
+                //check the email format is correct or not
+                if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                    $data['email_err'] = "Please enter a valid email";
+                }
             }
 
             //validate phone number
             if (empty($data['phoneNumber'])) {
                 $data['phoneNumber_err'] = "Please enter a phone number";
+            } elseif (strlen($data['phoneNumber']) != 10) {
+                $data['phoneNumber_err'] = "Please enter a valid phone number";     
+            } elseif (!preg_match("/^[0-9]*$/", $data['phoneNumber'])) {
+                $data['phoneNumber_err'] = "Please enter a valid phone number";
             }
 
             if (empty($data['nic'])) {
