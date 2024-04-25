@@ -26,12 +26,11 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
             <label for="product">Product</label>
             <select name="Product" id="product" class="form-control" required>
                 <option value="">Select a product...</option>
-                <option value="SS Ton Power Plus English Willow Cricket Bat Size ...">SS Ton Power Plus English Willow Cricket Bat Size ...</option>
-                <option value="SS Blast English Willow Cricket Bat Size SH">SS Blast English Willow Cricket Bat Size SH</option>
-                <option value="SS Vintage Green 4.0 English Willow Cricket Bat Si...">SS Vintage Green 4.0 English Willow Cricket Bat Si...</option>
-                <option value="SG Savage Plus Kashmir Willow Cricket">SG Savage Plus Kashmir Willow Cricket</option>
-                <option value="Kookaburra Jos Buttler Classic Kashmir Willow Cric...">Kookaburra Jos Buttler Classic Kashmir Willow Cric...</option>
-                <option value="SS Super Test Cricket Batting Gloves">SS Super Test Cricket Batting Gloves</option>
+                <option value="SS Vintage Green 4.0 English Willow Cricket Bat Size SH">SS Ton Power Plus English Willow Cricket Bat Size ...</option>
+                <option value="SG Savage Plus Kashmir Willow Cricket">SS Blast English Willow Cricket Bat Size SH</option>
+                <option value="Kookaburra Jos Buttler Classic Kashmir Willow Cricket Bat Size">SS Vintage Green 4.0 English Willow Cricket Bat Si...</option>
+                <option value="EM GT 1.0 Cricket Batting Leg Guard Pads">EM GT 1.0 Cricket Batting Leg Guard Pads</option>
+                <option value="SS Super Test Cricket Batting Gloves">Kookaburra Jos Buttler Classic Kashmir Willow Cric...</option>
                 <option value="DSC Intense Passion Cricket Batting Gloves">DSC Intense Passion Cricket Batting Gloves</option>
                 <option value="EM GT 1.0 Cricket Batting Leg Guard Pads">EM GT 1.0 Cricket Batting Leg Guard Pads</option>
                 <option value="SS Test Opener Cricket Batting Leg Guard Pads">SS Test Opener Cricket Batting Leg Guard Pads</option>
@@ -42,17 +41,20 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
 
                
             <div class="btn-container">
-                    <input type="submit" name="filter" value="View" class="btn btn-primary">
-                    <input type="submit" name="download_pdf" value="Download" class="btn btn-primary">
+                        <input type="submit" name="filter" value="Filter" class="btn btn-primary">
+                        <input type="submit" name="view_pdf" value="View" class="btn btn-primary">
+                        <input type="submit" name="download_pdf" value="Download" class="btn btn-primary">
                 </div>
             </form>
         </div>
     </div>
+</div>
+    
     <?php if ($data && isset($data['orders']) ) {
         if(count($data['orders']) > 0){
             echo "<div class='alert alert-success'>Filtered Orders:</div>";
             echo "<table class='table table-bordered'>";
-            echo "<thead><tr><th>Customer Name</th><th>Product Name</th><th>Quantity</th><th>order_date</th><th>Payment Status</th><th>Amount</th></tr></thead>";
+            echo "<thead><tr><th>Customer Name</th><th>Quantity</th><th>order_date</th><th>Payment Status</th><th>Amount</th></tr></thead>";
             echo "<tbody>";
             $totalPrice = 0;
             $totalPaid = 0;
@@ -62,18 +64,17 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
             foreach ($data['orders'] as $row) {
                 echo "<tr>";
                 echo "<td>" . $row->full_name . "</td>";
-                echo "<td>" . $row->product_title . "</td>";
                 echo "<td>" . $row->quantity . "</td>";
 
                 echo "<td>" . $row->order_date . "</td>";
-                echo "<td>" . $row->paymentStatus . "</td>";
+                echo "<td>" . $row->payment_status . "</td>";
                 echo "<td>" . $row->price . "</td>";
 
                 echo "</tr>";
                 $totalPrice += $row->price;
     
                 //Increment appropriate total based on payment status
-                switch ($row->paymentStatus) {
+                switch ($row->payment_status) {
                     case 'Paid':
                         $totalPaid += $row->price;
                         break;
@@ -83,11 +84,11 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
                 }
             }
     
-            echo "<tr><td colspan='5' style='text-align:right; font-size: 20px;'><b>Total Paid:</b></td><td style='font-size: 20px;'><b>$totalPaid</td></tr>";
-            echo "<tr><td colspan='5' style='text-align:right; font-size: 20px;'><b>Total Not Paid:</b></td><td style='font-size: 20px;'><b>$totalNotPaid</td></tr>";
+            echo "<tr><td colspan='4' style='text-align:right; font-size: 20px;'><b>Total Paid:</b></td><td style='font-size: 20px;'><b>$totalPaid</td></tr>";
+            echo "<tr><td colspan='4' style='text-align:right; font-size: 20px;'><b>Total Not Paid:</b></td><td style='font-size: 20px;'><b>$totalNotPaid</td></tr>";
             // Calculate the expected total amount
             $expectedTotal = $totalPaid  + $totalNotPaid;
-            echo "<tr><td colspan='5' style='text-align:right; font-size: 20px;'><b>Total Income:</b></td><td style='font-size: 20px;'><b>$expectedTotal</td></tr>";
+            echo "<tr><td colspan='4' style='text-align:right; font-size: 20px;'><b>Total Income:</b></td><td style='font-size: 20px;'><b>$expectedTotal</td></tr>";
             
     
             echo "</tbody>";
@@ -105,7 +106,6 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
 
    
     ?>
-</div>
 </section>
 <script>
     $(document).ready(function(){
