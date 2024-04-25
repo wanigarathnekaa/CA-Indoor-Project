@@ -16,7 +16,7 @@
 
     <!-- Sidebar -->
     <?php
-        $role = "Admin";
+        $role = $_SESSION['user_role'];
         require APPROOT.'/views/Pages/Dashboard/header.php';
         require APPROOT.'/views/Components/Side Bars/sideBar.php';
     ?>
@@ -42,7 +42,8 @@
 
         </div>
         <div class="iconBx">
-            <i class='bx bxs-report'></i>
+            <!-- <i class='bx bxs-report'></i> -->
+            <i class="fa-solid fa-file-invoice-dollar"></i>
         </div>  
         </a>
      
@@ -52,7 +53,8 @@
 
         </div>
         <div class="iconBx">
-            <i class='bx bxs-report'></i>
+            <!-- <i class='bx bxs-report'></i> -->
+            <i class="fa-solid fa-arrow-down-wide-short"></i>
         </div> 
         </a>
 
@@ -62,7 +64,9 @@
 
         </div>
         <div class="iconBx">
-            <i class='bx bxs-report'></i>
+            <!-- <i class='bx bxs-report'></i> -->
+            <!-- <i class="fa-solid fa-file-invoice-dollar"></i> -->
+            <i class="fa-solid fa-hand-holding-dollar"></i>
         </div> 
         </a>
 
@@ -72,17 +76,19 @@
 
         </div>
         <div class="iconBx">
-            <i class='bx bxs-report'></i>
+            <!-- <i class='bx bxs-report'></i> -->
+            <i class="fa-solid fa-user-clock"></i>
         </div> 
         </a>
 
         <a class="card" href="<?php echo URLROOT; ?>/Reports/Weekly_Reservation">
         <div>
-        <div class="cardName">Weekly Rservation Chart</div>
+        <div class="cardName">Weekly Rservation<br> Chart</div>
 
         </div>
         <div class="iconBx">
-            <i class='bx bxs-report'></i>
+            <!-- <i class='bx bxs-report'></i> -->
+            <i class="fa-solid fa-chart-area"></i>
         </div> 
         </a>
     </div>
