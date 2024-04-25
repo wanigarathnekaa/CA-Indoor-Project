@@ -1,4 +1,7 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 class M_Users
 {
     private $db;
@@ -89,6 +92,59 @@ class M_Users
             return false;
         }
 
+    }
+    
+    public function sendNewPassword($email,$password)
+    {   
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+     
+    
+       
+        require_once APPROOT . '/libraries/phpmailer/src/PHPMailer.php';
+        require_once APPROOT . '/libraries/phpmailer/src/SMTP.php';
+        require_once APPROOT . '/libraries/phpmailer/src/Exception.php';
+    
+        $mail = new PHPMailer(true);
+    
+        //Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'nivodya2001@gmail.com';
+        $mail->Password = 'wupbxphjicpfidgj';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+        
+        //Recipients
+        $mail->setFrom('nivodya2001@gmail.com', 'Hasini Hewa');
+        $mail->addAddress($email);
+    
+        //Content
+        $mail->isHTML(true);
+        $mail->Subject = 'About your appointment';
+        $mail->Body = $password;
+
+        
+    
+        // Attempt to send email
+        try {
+            $mail->send();
+            $response = [
+                'status' => 'success',
+                'message' => 'Email sent to coach.'
+            ];
+            return true;
+    
+        } catch (Exception $e) {
+            $response = [
+                'status' => 'error',
+                'message' => 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo,
+            ];
+            return false;
+    
+        }
+    
+        
     }
 
     public function updateLastLogin($user_email)

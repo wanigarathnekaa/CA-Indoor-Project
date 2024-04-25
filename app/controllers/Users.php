@@ -278,10 +278,17 @@ class Users extends Controller
             }
             if (empty($data['email_err'])) {
                 if ($this->userModel->findUserByEmail($email)) {
+                    $user=$this->userModel->findUserByEmail($email);
                     // flash('complaint_created');
                     $password = $this->userModel->generateRandomPassword();
+                    if($this->userModel->sendNewPassword($email,$password)){
+                        $this->view('Users/login');
 
-                    redirect('Users/sendNewPassword/' . urlencode($email) . '/' . urlencode($password));
+                    }
+
+
+
+                    // redirect('Users/sendNewPassword/' . urlencode($email) . '/' . urlencode($password));
 
                 } else {
                     $this->view('Pages/LoginPage/forgotPassword');
