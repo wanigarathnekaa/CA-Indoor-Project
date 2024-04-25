@@ -81,11 +81,11 @@
                     foreach ($data as $reservation) {
                         $status_color = '';
                         if ($reservation->paymentStatus == 'Paid') {
-                            $status_color = '#00ff00';
+                            $status_color = '#33c030';
                         } elseif ($reservation->paymentStatus == 'Pending') {
                             $status_color = '#ffcc00';
                         } else {
-                            $status_color = '#ff0000';
+                            $status_color = '#e03333';
                         }
                         ?>
                         <tr>

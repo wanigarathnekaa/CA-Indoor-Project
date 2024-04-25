@@ -94,16 +94,7 @@ body {
 }
 
 
-.status {
-  display: inline-block;
-  padding: 5px 10px;
-  background: var(--color01);
-  color: var(--black2);
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
-  width: 70%;
-}
+
 
 
 
