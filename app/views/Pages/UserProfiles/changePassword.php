@@ -35,70 +35,31 @@
                   <!-- form details -->
                   <div class="formbox">
                         <form action="<?php echo URLROOT;?>/Users/changePassword" method="POST" enctype="multipart/form-data">
-                              <!-- profile picture
-                              <div class="profilepic">
-                                    <label for="file" class="propiclabel">
-                                          <div class="profile-pic">
-                                                <span class="camicon"><i class="fa-solid fa-camera"></i></span>
-                                                <?php
-                                                      if($data["img"] == null){
-                                                            echo '<img class="profile-image" id="output" src="'.URLROOT.'/public/profilepic/avatar.jpg" width="150">' ;
-                                                      }
-                                                      else{
-                                                            echo '<img class="profile-image" id="output" src="'.URLROOT.'/public/profilepic/'.$data["img"].'" width="150">'; 
-                                                      }
-                                                ?>
-                                          </div>
-                                    </label>
-                                    <input type="file" hidden name="file" id="file" onchange="loadFile(event)" value="<?= URLROOT ?>/public/profilepic/<?= $data["img"] ?>" />     
-                              </div> -->
-
-                              <!-- profile details -->
                               <div class="profileDetails">
-                                    <?php if ($role == "User" || $role == "Coach"): ?>
-                                          <div class="box">
+                                    <div class="box">
+                                          <label for="name">Current Password</label>
+                                          <input type="password" id="old_password" name="old_password" value="<?php echo $data['oldPassword']; ?>" />
+                                          <span class="form-invalid"><?php echo $data['old_password_err']; ?></span>
+                                    </div>
 
-                                          
-                                                <label for="name">Current Password</label>
-                                                <input type="password" id="old_password" name="old_password"  value="" required/>
-                                                <span class="form-invalid" style="color: #2e8a99" ><?php echo isset($data['old_password_err']) ? $data['old_password_err'] : ''; ?></span>
+                                    <div class="box">
+                                          <label for="user_name">New Password</label>
+                                          <input type="password" name='new_password' id="new_password" value="<?php echo $data['newPassword']; ?>" />
+                                          <span class="form-invalid"><?php echo $data['new_password_err']; ?></span>
+                                                                             
+                                    </div>
 
-                                          </div>
-                                          <div class="box">
-                                                <!-- <label for="user_name">New Password</label>
-                                                <input type="text" name='user_name' id="user_name" value=""/> -->
-                                          </div>
-                                          <div class="box">
-                                                <label for="user_name">New Password</label>
-                                                <input type="password" name='new_password' id="new_password" value="" required/>
-                                                <span class="form-invalid"style="color: #2e8a99"><?php echo isset($data['new_password_err']) ? $data['new_password_err'] : ''; ?></span>
-
-
-                                          </div>
-                                          <div class="box">
-                                                <!-- <label for="user_name">New Password</label>
-                                                <input type="text" name='user_name' id="user_name" value=""/> -->
-                                          </div>
-                                          <div class="box">
-                                                <label for="email">Confirm Password</label>
-                                                <input type="password" id="confirm_password" name="confirm_password" value="" required/>
-                                                <span class="form-invalid" style="color: #2e8a99"><?php echo isset($data['confirm_password_err']) ? $data['confirm_password_err'] : ''; ?></span>
-
-
-                                          </div>
-                                          
-
-                                    <?php endif ?>
-                  
-
+                                    <div class="box">
+                                          <label for="email">Confirm Password</label>
+                                          <input type="password" id="confirm_password" name="confirm_password" value="<?php echo $data['confirmPassword']; ?>"/>
+                                          <span class="form-invalid"><?php echo $data['confirm_password_err']; ?></span>
+                                    </div>
                               </div>
-                              <?php if ($role == "User" || $role == "Coach"): 
-                                    ?>
                               <div class="buttons">
                                     <input type="submit" name="submit" class="button" value="Update" href="<?php echo URLROOT;?>/Pages/Profile/user">
                                     <a href="<?php echo URLROOT;?>/Pages/Profile/user" type="button" class="button">Cancel</a>
                               </div>
-                              <?php endif ?>     
+    
                         </form>
                   </div>    
             </div>

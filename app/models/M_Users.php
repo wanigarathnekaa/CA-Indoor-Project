@@ -55,13 +55,7 @@ class M_Users
         }
 
     }
-    public function findCompanyUserByEmail($email)
-{
-    $this->db->query('SELECT * FROM company_users WHERE email = :email');
-    $this->db->bind(':email', $email);
-
-    return $this->db->single();
-}
+    
 
     public function getUserByEmail($email)
     {
@@ -188,19 +182,7 @@ class M_Users
             return false;
         }
     }
-    public function updateCompanyUserPassword($email, $hashedPassword)
-    {
-
-        $this->db->query('UPDATE company_users SET password = :password WHERE email = :email');
-        $this->db->bind(':email', $email);
-        $this->db->bind(':password', $hashedPassword);
-
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    
 
 
     public function deleteUser($email)

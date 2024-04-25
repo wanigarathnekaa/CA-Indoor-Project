@@ -43,6 +43,15 @@ class M_CompanyUsers
             }
       }
 
+      public function findUser($email)
+      {
+            $this->db->query('SELECT * FROM company_users WHERE email = :email');
+            $this->db->bind(':email', $email);
+
+            return $this->db->single();
+      }
+
+
       //get user role by email
       public function getUserRoleByEmail($email)
       {
@@ -91,6 +100,21 @@ class M_CompanyUsers
       {
             $this->db->query('DELETE FROM company_users WHERE email=:email');
             $this->db->bind(':email', $email);
+
+            if ($this->db->execute()) {
+                  return true;
+            } else {
+                  return false;
+            }
+      }
+
+
+      public function updateCompanyUserPassword($email, $hashedPassword)
+      {
+
+            $this->db->query('UPDATE company_users SET password = :password WHERE email = :email');
+            $this->db->bind(':email', $email);
+            $this->db->bind(':password', $hashedPassword);
 
             if ($this->db->execute()) {
                   return true;
