@@ -16,23 +16,46 @@
         <div class="col-md-6">
             <!-- <h2 class="text-success">Filter Bookings</h2> -->
 
-            <form action="<?php echo URLROOT;?>/Reports/Weekly_Rservation" method="post">
+            <form action="<?php echo URLROOT;?>/Reports/Weekly_Reservation" method="post">
+                <div class="form-group">
+                    <label>Select Report Type</label>
+                    <select name="report_type" id="report_type" class="form-control" required>
+                        <option value=""></option>
+                        <option name="daily">payment-status</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="quarterly">Quarterly</option>
+                        <option value="yearly">Yearly</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label>Start Date</label>
-                    <input type="text" name="invoice_date" id="start_date" class="form-control" required>
+                    <input type="text" name="invoice_date" id="start_date" class="form-control datepicker" required>
+                    <span class="input-group-text">
+                         <i class="far fa-calendar-alt"></i>
+                    </span>
                 </div>
                 <div class="form-group">
                     <label>End Date</label>
-                    <input type="text" name="invoice_due_date" id="end_date" class="form-control" required>
+                    <input type="text" name="invoice_due_date" id="end_date" class="form-control datepicker" required>
                 </div>
                 <div class="btn-container">
-                    <input type="submit" name="filter" value="View" class="btn btn-primary">
-                    <input type="submit" name="download_pdf" value="Download" class="btn btn-primary">
+                    <input type="submit" name="filter" value="Download" class="btn btn-primary">
+                    <!-- <input type="submit" name="download_pdf" value="Download" class="btn btn-primary"> -->
                 </div>
             </form>
         </div>
     </div>
 </div>
 </section>
+
+<script>
+    $(function() {
+        $(".datepicker").datepicker({
+            dateFormat: 'yy-mm-dd'
+        });
+    });
+</script>
+
 </body>
 </html>

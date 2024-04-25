@@ -178,33 +178,38 @@ if(isset($_POST["download_pdf"])) {
     }
 
     
-    public function Weekly_Rservation(){
+    public function Weekly_Reservation() {
+        // Load the view for the Weekly Reservation report
         $this->view('Pages/Report/Weekly_Reservation');
-
+    
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Valid input
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
+    
             // Input data
             $data = [
                 'invoice_date' => trim($_POST['invoice_date']),
                 'invoice_due_date' => trim($_POST['invoice_due_date']),   
             ];
-  
-        }
-        
-        if(isset($_POST["filter"])){
-
-            $this->reportmodel->displayReservationChart($data);
-        }
-
-        if(isset($_POST["download_pdf"])) {
-            $this->reportmodel->LogsGeneratePDF($data);
-            
-            
-
+    
+            // Check if the report type is "payment-status"
+            if ($_POST['report_type'] === 'payment-status') {
+                if (isset($_POST["filter"])) {
+                    // Display the reservation chart
+                    $this->reportmodel->displayReservationChart($data);
+                } elseif (isset($_POST["download_pdf"])) {
+                    // Generate PDF
+                    $this->reportmodel->LogsGeneratePDF($data);
+                }
+            }
+        } else {
+            // If the form is not submitted, load the default view
+            $this->view('Pages/Report/Weekly_Reservation');
         }
     }
+    
+    
+    
     
   
     

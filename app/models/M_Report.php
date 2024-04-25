@@ -700,7 +700,8 @@ class M_Report
             $pdf->Write(10, "Payment Status of Reservations\n");
             $pdf->SetFont('helvetica', '', 13);
 
-            $pdf->Write(10, "Between: " . $invoice_date . " and " . $invoice_due_date);
+            $pdf->Write(10, "Between: " . $invoice_date . " and " . $invoice_due_date."\n\n");
+           
             
 
             
@@ -730,6 +731,11 @@ class M_Report
                 $pdf->SetFillColor($colors[$status][0], $colors[$status][1], $colors[$status][2]);
                 $pdf->PieSector($xc, $yc, $r, $startAngle, $endAngle, 'FD', false, 0, 2);
                 $startAngle = $endAngle;
+            }
+            $totalReservations = array_sum($bookingCounts);
+            foreach ($bookingCounts as $status => $count) {
+                $percentage = round(($count / $totalReservations) * 100, 2);
+                $pdf->Write(10, "{$status}: {$count} ({$percentage}%) \n");
             }
             
             // Write labels and color descriptions
@@ -771,7 +777,7 @@ foreach ($colors as $status => $color) {
 }
 
             //Close and output PDF document
-            $pdf->Output('example_031.pdf', 'D');
+            $pdf->Output('reservation_payments.pdf', 'D');
         }
         
         public function displayFilteredOrders($data) {
