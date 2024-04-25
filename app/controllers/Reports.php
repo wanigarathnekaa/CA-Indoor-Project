@@ -198,9 +198,12 @@ if(isset($_POST["download_pdf"])) {
                     // Display the reservation chart
                     $this->reportmodel->displayReservationChart($data);
                 } elseif (isset($_POST["download_pdf"])) {
-                    // Generate PDF
-                    $this->reportmodel->LogsGeneratePDF($data);
-                }
+            }}
+            else if ($_POST['report_type'] === 'weekly') {
+                if (isset($_POST["filter"])) {
+                    // Display the reservation chart
+                    $this->reportmodel->displayRevenueChart($data);
+                } elseif (isset($_POST["download_pdf"])) {
             }
         } else {
             // If the form is not submitted, load the default view
@@ -214,4 +217,4 @@ if(isset($_POST["download_pdf"])) {
   
     
     
-        }
+        }}

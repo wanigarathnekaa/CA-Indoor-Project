@@ -604,7 +604,106 @@ class M_Report
             $pdf->Output('Monthly_Order_report.pdf', 'D');
         }
         
+        public function displayRevenueChart($data) {
+            $invoice_date = isset($_POST['invoice_date']) ? $_POST['invoice_date'] : '';
+            $invoice_due_date = isset($_POST['invoice_due_date']) ? $_POST['invoice_due_date'] : '';
+        
+            // Fetch booking data based on invoice dates and payment status
+            $sql = "SELECT SUM(bookingPrice) AS total_amount, SUM(paidPrice) AS paid_amount, DATE_FORMAT(date, '%Y-%m-%d') AS booking_date FROM bookings WHERE date >= :invoice_date AND date <= :invoice_due_date GROUP BY booking_date";
+            $this->db->query($sql);
+            $this->db->bind(':invoice_date', $invoice_date);
+            $this->db->bind(':invoice_due_date', $invoice_due_date);
+            $this->db->execute();
+            $bookingData = $this->db->resultSet();
+        
+            // Prepare data for the line chart
+            $dates = array();
+            $totalAmounts = array();
+            $paidAmounts = array();
+        
+            foreach ($bookingData as $row) {
+                $dates[] = $row->booking_date; // Storing booking dates for labeling X-axis
+                $totalAmounts[] = $row->total_amount;
+                $paidAmounts[] = $row->paid_amount;
+            }
+        
+            // ---------------------------------------------------------
+            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        
+            // set font
+            $pdf->SetFont('helvetica', 'B', 17);
+        
+            // add a page
+            $pdf->AddPage();
+        
+            $pdf->Write(10, "Revenue Chart\n");
+            $pdf->SetFont('helvetica', '', 13);
+        
+            $pdf->Write(10, "Between: " . $invoice_date . " and " . $invoice_due_date . "\n\n");
+        
+            // Line chart parameters
+            $xStart = 30; // Adjusted X-axis start position
+            $yStart = 80;
+            $width = 160;
+            $height = 100;
+            $xScale = $width / (count($dates) - 1);
+            $maxAmount = max(max($totalAmounts), max($paidAmounts));
+            $yScale = $height / $maxAmount;
+        
+            // Draw the line chart for total amount
+            $pdf->SetLineWidth(0.8); // thicker line for total amount
+            $pdf->SetDrawColor(255, 0, 0); // Red color for total amount
+            $prevX = $xStart;
+            $prevY = $yStart + $height;
+            foreach ($totalAmounts as $index => $amount) {
+                $x = $xStart + ($index * $xScale);
+                $y = $yStart + ($height - ($amount * $yScale));
+                $pdf->Line($prevX, $prevY, $x, $y);
+                $prevX = $x;
+                $prevY = $y;
+            }
+        
+            // Draw the line chart for paid amount
+            $pdf->SetLineWidth(0.5); // thinner line for paid amount
+            $pdf->SetDrawColor(0, 128, 0); // Green color for paid amount
+            $prevX = $xStart;
+            $prevY = $yStart + $height;
+            foreach ($paidAmounts as $index => $amount) {
+                $x = $xStart + ($index * $xScale);
+                $y = $yStart + ($height - ($amount * $yScale));
+                $pdf->Line($prevX, $prevY, $x, $y);
+                $prevX = $x;
+                $prevY = $y;
+            }
+        
+            // Draw the X-axis and labels
+            $pdf->SetLineWidth(0.2); // thinner line for axes
+            $pdf->SetDrawColor(0, 0, 0); // Black color for axes
+            $pdf->Line($xStart, $yStart + $height, $xStart + $width, $yStart + $height);
+            $xPos = $xStart;
+            foreach ($dates as $date) {
+                $pdf->SetTextColor(0, 0, 0); // Black color for text
+                $pdf->Text($xPos, $yStart + $height + 5, $date);
+                $xPos += $xScale;
+            }
+        
+            // Draw the Y-axis and labels
+            $pdf->Line($xStart, $yStart, $xStart, $yStart + $height);
+            $yPos = $yStart + $height;
+            $yLabel = 0;
+            while ($yPos >= $yStart) {
+                $pdf->SetTextColor(0, 0, 0); // Black color for text
+                $pdf->Text($xStart - 20, $yPos, $yLabel); // Adjusted Y-axis label position
+                $yPos -= $yScale * 500; // smaller step for Y-axis labels
+                $yLabel += 250;
+            }
             
+            // Close and output PDF document
+            $pdf->Output('revenue_chart.pdf','D');
+        }
+        
+        
+        
         
         public function displayFilteredBookings($data) {
             $invoice_date = $data['invoice_date'];
@@ -894,6 +993,7 @@ foreach ($result as $order) {
                 echo "<div class='alert alert-warning'>No bookings found between the selected dates.</div>";
             }
         }
+
         public function displayMonthlyFilteredOrders($data) {
             $input_month = $data['Selected_month'];
 
