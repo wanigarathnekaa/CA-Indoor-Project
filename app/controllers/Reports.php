@@ -115,6 +115,11 @@ class Reports extends Controller
             $data = [
                 'Product' => trim($_POST['Product']),
             ];
+            if(isset($_POST["download_pdf"])) {
+                $this->reportmodel->OrderGeneratePDF($data);}
+            else if(isset($_POST["view_pdf"])){
+                $this->reportmodel->OrderGeneratePDF1($data);
+            }
             $orders = $this->reportmodel->getOrderDetails($data);
                     
             $data1 = [

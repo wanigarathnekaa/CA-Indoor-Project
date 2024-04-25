@@ -191,9 +191,6 @@ class M_Report
         }
         public function getOrderDetails($data) {
             $Product = $data['Product'];
-    
-           
-            
             $this->db->query('SELECT orders.*, orderitems.*
                   FROM orders
                   INNER JOIN orderitems ON orders.order_id = orderitems.order_id
@@ -641,6 +638,69 @@ class M_Report
         
             // Output PDF
             $pdf->Output('Order_report.pdf', 'D');
+        }
+        public function OrderGeneratePDF1($data) {
+            $Product = $data['Product'];
+        
+            // Fetch data from the database
+            $this->db->query('SELECT orders.*, orderitems.*
+                              FROM orders
+                              INNER JOIN orderitems ON orders.order_id = orderitems.order_id
+                              INNER JOIN product ON orderitems.product_id = product.product_id
+                              WHERE product.product_title = :product');
+        
+            $this->db->bind(':product', $Product);
+            $result = $this->db->resultSet();
+            
+            // Debugging: print the result to check the retrieved data
+            print_r($result);
+        
+            // Create PDF object
+            $pdf = new MYPDFSixColumns(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        
+            // Set PDF information
+            $pdf->SetCreator(PDF_CREATOR);
+            $pdf->SetAuthor('admin');
+            $pdf->SetTitle('Booking Report');
+            $pdf->SetSubject('Booking Report');
+            $pdf->SetKeywords('Booking, Report');
+            
+            // Add a page to the PDF
+            $pdf->AddPage();
+            $pdf->SetFont('helvetica', '', 16);
+            
+            // Add title to the PDF
+            $pdf->SetFont('', 'B'); //bold
+            $pdf->Write(0, 'Product Sales Analysis Report', '', 0, 'L', true, 0, false, false, 0);
+            $pdf->SetFont('helvetica', '', 10);
+            $pdf->Cell(0, 10, 'Selected Product: ' . $Product, 0, 1, 'L');
+            $pdf->Ln(15); 
+        
+            // Prepare table data
+            $tableHeader = array('Order_ID', 'Name', 'Quantity', 'Total Price', 'Order_date', 'Order_Status');
+            $tableData = array();
+            
+            // Populate table data
+            foreach ($result as $order) {
+                // Assuming the properties exist in $order, adjust the property names if needed
+                $tableData[] = array(
+                    $order->order_id,
+                    $order->full_name, // Adjust property name if needed
+                    $order->quantity,
+                    number_format($order->price_per_unit, 2),
+                    $order->order_date,
+                    $order->order_status
+                );
+            }
+        
+            // Debugging: print the table data to check if it's populated correctly
+            print_r($tableData);
+        
+            // Add colored table to the PDF
+            $pdf->ColoredTableSixColumns($tableHeader, $tableData);
+        
+            // Output PDF
+            $pdf->Output('Order_report.pdf', 'I');
         }
         public function LogsGeneratePDF($data) {
             $invoice_date = $data['invoice_date'];
