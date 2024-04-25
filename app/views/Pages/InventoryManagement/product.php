@@ -157,6 +157,7 @@
                         <th>Thumbnail</th>
                         <th>Product Name</th>
                         <th>Category Name</th>
+                        <th>Re-order Level</th>
                         <th>Quantity</th>
                         <th>Discount</th>
                         <th>Date</th>
@@ -187,6 +188,11 @@
                                 }
                                 echo $matchedCategoryName;
                                 ?>
+                            </td>
+                            <td>
+                                <?php echo $product->reorder_level; ?>
+                                <button type="button" id="Change_Level" class="Change_Level"
+                                    p_id="<?php echo $product->product_id; ?>"><i class="fa-solid fa-pen"></i></button>
                             </td>
                             <td>
                                 <?php echo $product->qty; ?>
@@ -235,6 +241,30 @@
 
                 <div class="btn">
                     <button type="button" id="updateQuantity">Update</button>
+                    <button type="button" onclick="closeModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- popup -->
+        <div id="levelChange" class="modal">
+            <div class="modal-content">
+                <div class="title">
+                    <h2 class="modal-title">Update Re-order Level</h2>
+                </div>
+                <hr>
+
+                <div class="form-group">
+                    <label for="productName">New Level :</label>
+                    <input type="number" id="productLevel" class="productLevel" name="productLevel"
+                        placeholder="Enter New Reorder Level"><br>
+                    <span class="form-invalid-10"></span>
+                </div>
+
+                <hr>
+
+                <div class="btn">
+                    <button type="button" id="updateLevel">Update</button>
                     <button type="button" onclick="closeModal()">Cancel</button>
                 </div>
             </div>
@@ -497,6 +527,42 @@
                                     location.reload();
                                 } else {
                                     $('.form-invalid-9').html(response.message);
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                console.error("AJAX request failed:", error);
+                            }
+                        });
+                    });
+                })
+            })
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.Change_Level').forEach(item => {
+                item.addEventListener('click', event => {
+                    $('#levelChange').css("display", "block");
+                    $('#updateLevel').click(function (e) {
+                        var id = $(item).attr('p_id');
+                        e.preventDefault();
+                        var level = parseInt($('#productLevel').val());
+                        if (isNaN(level)) { // Check if quantity is NaN
+                            quantity = 0; // Set quantity to 0 if NaN
+                        }
+                        console.log(level);
+                        $.ajax({
+                            type: "POST",
+                            url: "<?php echo URLROOT; ?>/Product/updateReorderLevel",
+                            data: {
+                                id: id,
+                                level: level
+                            },
+                            dataType: 'json',
+                            success: function (response) {
+                                if (response.status == "success") {
+                                    location.reload();
+                                } else {
+                                    $('.form-invalid-10').html(response.message);
                                 }
                             },
                             error: function (xhr, status, error) {
