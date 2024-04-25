@@ -13,7 +13,7 @@
                   <form  action="<?php echo URLROOT;?>/Users/login" method="POST">
                         <h2>Login</h2>
                         <div class="input-box">
-                              <input type="email"  name="email" id="email" value="<?php echo $data['email']; ?>">
+                              <input type="text"  name="email" id="email" value="<?php echo $data['email']; ?>">
                               <label>Email</label>
                               <span class="form-invalid"><?php echo $data['email_err']; ?></span>
                         </div>

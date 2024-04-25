@@ -26,12 +26,12 @@
                               <span class="form-invalid"><?php echo $data['user_name_err']; ?></span>
                         </div>
                         <div class="input-box">
-                              <input type="email" name="email" id="email" value="<?php echo $data['email'];?>">
+                              <input type="text" name="email" id="email" value="<?php echo $data['email'];?>">
                               <label>Email</label>
                               <span class="form-invalid"><?php echo $data['email_err']; ?></span>
                         </div>
                         <div class="input-box">
-                              <input type="tel" name="phoneNumber" id="phoneNumber" value= "<?php echo $data['phoneNumber'];?>">
+                              <input type="text" name="phoneNumber" id="phoneNumber" value= "<?php echo $data['phoneNumber'];?>">
                               <label>Phone Number</label>
                               <span class="form-invalid"><?php echo $data['phoneNumber_err']; ?></span>
                         </div>

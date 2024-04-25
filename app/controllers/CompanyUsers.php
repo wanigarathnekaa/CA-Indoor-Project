@@ -103,6 +103,86 @@ class CompanyUsers extends Controller
         }
         
     }
+
+    public function companychangePassword()
+    {   $user=$this->companyUserModel->findUser($_SESSION['user_email']) ;
+       
+             
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'oldPassword' => trim($_POST['old_password']),
+                'newPassword' => trim($_POST['new_password']),
+                'confirmPassword' => trim($_POST['confirm_password']),
+
+                'old_password_err' => "",
+                'new_password_err' => "",
+                'confirm_password_err' => ""
+
+            ];
+
+            // Validate old password
+            if(empty($data['oldPassword'])){
+                  $data['old_password_err'] = "Please enter the current password";
+              }
+  
+              // Validate new password
+              if(empty($data['newPassword'])){
+                  $data['new_password_err'] = "Please enter the new password";
+              } elseif(strlen($data['newPassword']) < 8){
+                  $data['new_password_err'] = "Password must be at least 8 characters";
+              }
+  
+              // Validate confirm password
+              if(empty($data['confirmPassword'])){
+                  $data['confirm_password_err'] = "Please confirm the password";
+              } elseif($data['newPassword'] != $data['confirmPassword']){
+                  $data['confirm_password_err'] = "Passwords do not match";
+              }
+
+
+            if (empty($data['oldPassword']) || empty($data['newPassword']) || empty($data['confirmPassword'])) {
+                $this->view('Pages/CompanyUser/changepassword', $data);
+            } else {
+                $hashedPassword = $user->password;
+                if (password_verify($data['oldPassword'], $hashedPassword)) {
+                    if ($data['oldPassword'] == $data['newPassword']) {
+                        $data['new_password_err'] = "Please enter a password different from the old one.";
+                        $this->view('Pages/CompanyUser/changepassword', $data);//C:\xampp\htdocs\C&A_Indoor_Project\app\views\Pages\CompanyUser\.php
+
+                    } else if ($data['newPassword'] != $data['confirmPassword']) {
+                        $data['confirm_password_err'] = "Passwords do not match. Please try again.";
+                        $this->view('Pages/CompanyUser/changepassword', $data);
+
+                    } else {
+                        $hashedNewPassword = password_hash($data['newPassword'], PASSWORD_DEFAULT);
+                        if($this->companyUserModel->updateCompanyUserPassword($user->email, $hashedNewPassword)){
+                            redirect('Pages/CompanyUser_Profile/<?php echo $role ?>');
+                        } else {
+                              die("Something went wrong.");
+                        }
+                    }
+                } else {
+                    $data['old_password_err'] = "Current Password is incorrect.";
+                    $this->view('Pages/CompanyUser/changepassword', $data);
+                  //   $this->view('Pages/CompanyUser/changepassword');
+                }
+            }
+        }else{
+            $data = [
+                'oldPassword' => '',
+                'newPassword' => '',
+                'confirmPassword' => '',
+                'old_password_err' => '',
+                'new_password_err' => '',
+                'confirm_password_err' => ''
+            ];
+        }
+       $this->view('Pages/CompanyUser/changepassword', $data);
+    }
 }
 
 
