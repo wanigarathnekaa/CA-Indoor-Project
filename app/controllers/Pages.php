@@ -267,13 +267,26 @@ class Pages extends Controller
     {
         $logs = $this->pagesModel->getAccLog();
         $data = [
-            'logs' => $logs]; // Pass $logs as an associative array
-        $this->view('Pages/Tables/AccountLOG', $data);//C:\xampp\htdocs\C&A_Indoor_Project\app\views\Pages\Tables\accountlog_Table.php
+            'logs' => $logs]; 
+        $this->view('Pages/Tables/AccountLOG', $data);
     }
+    //Report
     public function SalesAmountt(){
         $this->view('Pages/Report/SalesAmount');}
-
-
+        
+    public function SalesMonthlyy(){
+        $this->view('Pages/Report/bookingreport');}
+        
+    public function OrderReportt(){
+        $this->view('Pages/Report/orderReport');}
+    public function Userlogss(){
+        $this->view('Pages/Report/userlogreport');}
+    public function MonthlyOrderReportt(){
+        $this->view('Pages/Report/monthlyORDERreport');}    
+        
+        public function Weekly_Reservationn(){
+            $this->view('Pages/Report/Weekly_Reservation');
+        }
     // dashboard
     public function Dashboard($name)
     {

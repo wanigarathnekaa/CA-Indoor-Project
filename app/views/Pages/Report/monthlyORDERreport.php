@@ -9,8 +9,12 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
-<section class="home">
-<div class='container pt-5'>
+<?php
+$role = "Admin";
+require APPROOT.'/views/Pages/Dashboard/header.php';
+require APPROOT.'/views/Components/Side Bars/sideBar.php';
+?>
+<section class="home"><div class='container pt-5'>
     <h1 class='text-center text-primary'>Monthly Orders Report</h1><hr>
     <div class="row">
         <div class="col-md-6">
@@ -36,17 +40,70 @@
 </div>
 
                  <div class="btn-container">
-                 <input type="submit" name="Filter" value="View" class="btn btn-primary">
-                <input type="submit" name="download_pdf" value="Download" class="btn btn-primary">
-
+                   <input type="submit" name="filter" value="Filter" class="btn btn-primary">
+                   <input type="submit" name="view_pdf" value="View" class="btn btn-primary">
+                  <input type="submit" name="download_pdf" value="Download" class="btn btn-primary">
                 </div>
             </form>
         </div>
     </div>
-    <!-- <?php if (isset($filteredBookings)) {
-        echo $filteredBookings;
-    } ?> -->
-</div>
+    </div>
+    <?php 
+    
+        if ($data && isset($data['monthlyOrders']) ) {
+        if(count($data['monthlyOrders']) > 0){
+    echo "<div class='alert alert-success'>Filtered Orders:</div>";
+    echo "<table class='table table-bordered'>";
+    echo "<thead><tr><th>Customer Name</th><th>Product Name</th><th>Quantity</th><th>order_date</th><th>Payment Status</th><th>Amount</th></tr></thead>";
+    echo "<tbody>";
+    $totalPrice = 0;
+    $totalPaid = 0;
+    $totalNotPaid = 0;
+
+    // Fetching results as associative array
+    foreach ($data['monthlyOrders'] as $row) {
+        echo "<tr>";
+        echo "<td>" . $row->full_name . "</td>";
+        echo "<td>" . $row->product_title . "</td>";
+        echo "<td>" . $row->quantity . "</td>";//                    $order->quantity,
+
+        echo "<td>" . $row->order_date . "</td>";
+        echo "<td>" . $row->payment_status . "</td>";
+        echo "<td>" . $row->price . "</td>";
+
+        echo "</tr>";
+        $totalPrice += $row->price;
+
+        //Increment appropriate total based on payment status
+        switch ($row->payment_status) {
+            case 'Paid':
+                $totalPaid += $row->price;
+                break;
+            case 'Not Paid':
+                $totalNotPaid += $row->price;
+                break;
+        }
+    }
+
+    echo "<tr><td colspan='5' style='text-align:right; font-size: 20px;'><b>Total Paid:</b></td><td style='font-size: 20px;'><b>$totalPaid</td></tr>";
+    echo "<tr><td colspan='5' style='text-align:right; font-size: 20px;'><b>Total Not Paid:</b></td><td style='font-size: 20px;'><b>$totalNotPaid</td></tr>";
+    // Calculate the expected total amount
+    $expectedTotal = $totalPaid  + $totalNotPaid;
+    echo "<tr><td colspan='5' style='text-align:right; font-size: 20px;'><b>Total Income:</b></td><td style='font-size: 20px;'><b>$expectedTotal</td></tr>";
+    
+
+    echo "</tbody>";
+    echo "</table>";
+
+    echo "<form method='post'>";
+    // echo "<input type='hidden' name='Selected_month' value='$input_month'>";
+    // echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download</button>";
+    
+    echo "</form>";
+} else {
+    echo "<div class='alert alert-warning'>No Orders.</div>";
+}    } ?>
+
 </section>
 <!-- <script>
     $(document).ready(function(){
