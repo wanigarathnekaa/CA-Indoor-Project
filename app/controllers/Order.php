@@ -1,4 +1,3 @@
-
 <?php
 class Order extends Controller
 {
@@ -116,6 +115,7 @@ class Order extends Controller
             foreach ($orderItems as $item) {
                 $product_id = $item['p_id'];
                 $qty = $item['qty'];
+                $reorder_level = $this->orderModel->getProductReorderLevel($product_id);
                 if ($qty > $this->orderModel->getProductQuantity($product_id)) {
                     $response = [
                         'status' => 'error',
@@ -127,9 +127,9 @@ class Order extends Controller
                 }
 
                 if ($this->orderModel->updateQuantity($product_id, $qty)) {
-                    if($this->orderModel->getProductQuantity($product_id) <= 3){
-                        $this->orderModel->sendEmailManager($_SESSION['user_email']);            
-                          }
+                    if ($this->orderModel->getProductQuantity($product_id) <= $reorder_level) {
+                        $this->orderModel->sendEmailManager($_SESSION['user_email']);
+                    }
                     continue;
                 } else {
                     $response = [
@@ -252,6 +252,7 @@ class Order extends Controller
             foreach ($orderItems as $item) {
                 $product_id = $item['p_id'];
                 $qty = $item['qty'];
+                $reorder_level = $this->orderModel->getProductReorderLevel($product_id);
                 if ($qty > $this->orderModel->getProductQuantity($product_id)) {
                     $response = [
                         'status' => 'error',
@@ -263,6 +264,9 @@ class Order extends Controller
                 }
 
                 if ($this->orderModel->updateQuantity($product_id, $qty)) {
+                    if ($this->orderModel->getProductQuantity($product_id) <= $reorder_level) {
+                        $this->orderModel->sendEmailManager($_SESSION['user_email']);
+                    }
                     continue;
                 } else {
                     $response = [
