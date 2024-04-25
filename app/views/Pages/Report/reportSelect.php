@@ -76,7 +76,7 @@
         </div> 
         </a>
 
-        <a class="card" href="<?php echo URLROOT; ?>/Reports/Weekly_Rservation">
+        <a class="card" href="<?php echo URLROOT; ?>/Reports/Weekly_Reservation">
         <div>
         <div class="cardName">Weekly Rservation Chart</div>
 
