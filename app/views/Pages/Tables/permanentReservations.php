@@ -53,7 +53,7 @@
                                     if($permanentBookings->status == 'Cancelled')   
                                           $status_color = '#e03333';
                                     else if($permanentBookings->status == 'Finished')
-                                          $status_color = '#e0da33';
+                                          $status_color = '#ffcc00';
                                     else if($permanentBookings->status == 'ongoing')
                                           $status_color = '#30c030';     
                                     ?>
