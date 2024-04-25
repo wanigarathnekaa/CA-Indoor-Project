@@ -80,6 +80,8 @@ hr {
   margin-left: 20px;
 }
 
+
+
 /* Modal Styles */
 .modal {
   display: none;
@@ -226,10 +228,25 @@ hr {
   }
 }
 
+.searchbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 20px;
+  /* background: var(--color01); */
+}
+
 .serachselect {
+  display: flex;
   background: var(--color01);
   padding: 3px 10px;
   border-radius: 6px;
+  margin: 10px 20px;
+  width: max-content;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
 }
 
 .fa-solid,
@@ -314,7 +331,8 @@ table tr th {
 }
 
 table tbody tr td .Change_Quantity,
-table tbody tr td .Change_Discount {
+table tbody tr td .Change_Discount,
+table tbody tr td .Change_Level {
   background-color: var(--color02);
   border: none;
   color: rgb(0, 0, 0);

@@ -23,14 +23,14 @@
   
   .cardBox .card {
     position: relative;
-    background: var(--color01);
+    background: var(--white);
     padding: 30px;
     height: 150px;
     border-radius: 20px;
     display: flex;
     justify-content: space-between;
     cursor: pointer;
-    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.2);
     text-decoration: none;
 
   }
@@ -46,7 +46,7 @@
   }
   
   .cardBox .card .cardName {
-    color: var(--white);
+    color: var(--black1);
     font-size: 1.1rem;
     margin-top: 5px;
     text-decoration: none;
@@ -54,17 +54,17 @@
   
   .cardBox .card .iconBx {
     font-size: 3.5rem;
-    color: var(--white);
+    color: var(--color01);
     align-self: center;
   }
   
   .cardBox .card:hover {
-    background: var(--white);
+    background: var(--color01);
   }
   .cardBox .card:hover .numbers,
   .cardBox .card:hover .cardName,
   .cardBox .card:hover .iconBx {
-    color: var(--color01);
+    color: var(--white);
   }
 
 
