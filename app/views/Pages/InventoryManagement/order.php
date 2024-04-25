@@ -367,13 +367,12 @@
                             // alert("Status changed successfully");
                             var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Status changed successfully</h3></div><div class="notification_progress"></div></div>');
                             $('body').append(notificationDiv);
-                            // Remove the notification after a certain time (e.g., 5 seconds)
                             setTimeout(function() {
                                 notificationDiv.remove();
                             }, 5000);
                         } else {
                             // alert("Status change failed");
-                            var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Status change failed</h3></div><div class="notification_progress"></div></div>');
+                            var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title">Status change failed</h3></div><div class="notification2_progress"></div></div>');
                             $('body').append(notificationDiv);
                             // Remove the notification after a certain time (e.g., 5 seconds)
                             setTimeout(function() {
@@ -493,9 +492,8 @@
                 $("#saveOrder").css("display", "block");
                 if (selectedItems.length == 0) {
                     // $("#invalid1").text("Please add items to the order");
-                    var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Please add items to the order</h3></div><div class="notification_progress"></div></div>');
+                    var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title">Please add items to the order</h3></div><div class="notification2_progress"></div></div>');
                     $('body').append(notificationDiv);
-                    // Remove the notification after a certain time (e.g., 5 seconds)
                     setTimeout(function() {
                         notificationDiv.remove();
                     }, 5000);
@@ -536,7 +534,6 @@
                             // location.reload();
                             var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Order placed successfully</h3></div><div class="notification_progress"></div></div>');
                             $('body').append(notificationDiv);
-                            // Remove the notification after a certain time (e.g., 5 seconds)
                             setTimeout(function() {
                                 notificationDiv.remove();
                             }, 5000);
@@ -545,16 +542,14 @@
                             }, 3000);
                         } else if(response.status == "error"){
                             // alert(response.message)
-                            var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">'+response.message+'</h3></div><div class="notification_progress"></div></div>');
+                            var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title">'+response.message+'</h3></div><div class="notification2_progress"></div></div>');
                             $('body').append(notificationDiv);
-                            // Remove the notification after a certain time (e.g., 5 seconds)
                             setTimeout(function() {
                                 notificationDiv.remove();
                             }, 5000);
                         }else {
-                            var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Order placement failed</h3></div><div class="notification_progress"></div></div>');
+                            var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title">Order placement failed</h3></div><div class="notification2_progress"></div></div>');
                             $('body').append(notificationDiv);
-                            // Remove the notification after a certain time (e.g., 5 seconds)
                             setTimeout(function() {
                                 notificationDiv.remove();
                             }, 5000);

@@ -116,8 +116,8 @@ $new_data = array_filter($data['logs'], function ($item) use ($filter_date) {
 
                  
                 if (!empty($log->last_login) || !empty($log->last_logout)) {
-                    $status_color = '#00ff00'; // Green
-                    $status_colorr = '#ff0000'; // Red
+                    $status_color = '#30c030'; // Green
+                    $status_colorr = '#e03333'; // Red
                 }
                   
              ?>

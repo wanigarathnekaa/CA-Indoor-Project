@@ -57,11 +57,11 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
                             <td>
                                 <span class="status" style="background-color: <?php
                                     if ($reservation->paymentStatus == 'Paid') {
-                                        echo '#00ff00';
+                                        echo '#33c030';
                                     } elseif ($reservation->paymentStatus == 'Pending') {
                                         echo '#ffcc00';
                                     } else {
-                                        echo '#ff0000';
+                                        echo '#e03333';
                                     }
                                 ?>"><?php echo $reservation->paymentStatus ?></span>
                             </td>

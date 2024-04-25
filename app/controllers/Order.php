@@ -1,3 +1,4 @@
+
 <?php
 class Order extends Controller
 {
@@ -125,7 +126,10 @@ class Order extends Controller
                     exit();
                 }
 
-                if ($this->orderModel->updateQuantity($product_id, $qty) && $this->orderModel->sendEmailManager($_SESSION['user_email'])) {
+                if ($this->orderModel->updateQuantity($product_id, $qty)) {
+                    if($this->orderModel->getProductQuantity($product_id) <= 3){
+                        //$this->orderModel->sendEmail($product_id);
+                    }
                     continue;
                 } else {
                     $response = [

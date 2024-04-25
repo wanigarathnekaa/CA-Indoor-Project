@@ -363,9 +363,8 @@ function time_slot($duration, $cleanup, $start, $end)
                 // Check if the user has selected any time slots
                 if (selectedTimeSlotsA.length === 0 && selectedTimeSlotsB.length === 0 && selectedTimeSlotsM.length === 0) {
                     // alert("Please select a time slot");
-                    var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Please select a time slot</h3></div><div class="notification_progress"></div></div>');
+                    var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title">Please select a time slot</h3></div><div class="notification2_progress"></div></div>');
                     $('body').append(notificationDiv);
-                    // Remove the notification after a certain time (e.g., 5 seconds)
                     setTimeout(function() {
                         notificationDiv.remove();
                     }, 3000);
@@ -394,7 +393,6 @@ function time_slot($duration, $cleanup, $start, $end)
                             // alert("Booking successful");
                             var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Booking successful</h3></div><div class="notification_progress"></div></div>');
                             $('body').append(notificationDiv);
-                            // Remove the notification after a certain time (e.g., 5 seconds)
                             setTimeout(function() {
                                 notificationDiv.remove();
                             }, 3000);
@@ -445,9 +443,8 @@ function time_slot($duration, $cleanup, $start, $end)
 
                                     if(selectedDate < new Date()){
                                         // alert("Please select a valid date");
-                                        var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Please select a valid date</h3></div><div class="notification_progress"></div></div>');
+                                        var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title">Please select a valid date</h3></div><div class="notification2_progress"></div></div>');
                                         $('body').append(notificationDiv);
-                                        // Remove the notification after a certain time (e.g., 5 seconds)
                                         setTimeout(function() {
                                             notificationDiv.remove();
                                         }, 3000);

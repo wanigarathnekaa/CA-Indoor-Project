@@ -99,11 +99,11 @@
                     <?php foreach ($data as $order):
                         $payment_status_color = '';
                         if ($order->payment_status == 'Paid') {
-                            $payment_status_color = '#00ff00';
+                            $payment_status_color = '#30c030';
                         } else if ($order->payment_status == 'Not Paid') {
-                            $payment_status_color = '#ff0000';
+                            $payment_status_color = '#e03333';
                         } else if ($order->payment_status == 'Pending') {
-                            $payment_status_color = '#ffe100';
+                            $payment_status_color = '#ffcc00';
                         }
 
 
