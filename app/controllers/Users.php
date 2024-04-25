@@ -44,11 +44,13 @@ class Users extends Controller
                 'confirmPwd_err' => "",
             ];
 
-            print_r($data);
+            
 
             //validate name
             if (empty($data['name'])) {
                 $data['name_err'] = "Please enter a name";
+            }elseif (!preg_match("/^[a-zA-Z-' ]*$/", $data['name'])) {
+                $data['name_err'] = "Only letters and white space allowed";
             }
 
             //validate user_name
@@ -80,21 +82,26 @@ class Users extends Controller
             if (empty($data['phoneNumber'])) {
                 $data['phoneNumber_err'] = "Please enter a phone number";
             } elseif (strlen($data['phoneNumber']) != 10) {
+                $data['phoneNumber_err'] = "Please enter a valid phone number";     
+            } elseif (!preg_match("/^[0-9]*$/", $data['phoneNumber'])) {
                 $data['phoneNumber_err'] = "Please enter a valid phone number";
-            } else {
-                // if ($this->userModel->findUserByPhoneNumber($data['phoneNumber'])) {
-                //     $data['phoneNumber_err'] = "This phone number is already in use";
-                // }
             }
 
             //validate password
             if (empty($data['pwd'])) {
                 $data['pwd_err'] = "Please enter a password";
+            } elseif (strlen($data['pwd']) < 8) {
+                $data['pwd_err'] = "Password must be at least 8 characters";
+            } elseif (!preg_match("#[0-9]+#", $data['pwd'])) {
+                $data['pwd_err'] = "Password must include at least one number!";
+            } elseif (!preg_match("#[a-zA-Z]+#", $data['pwd'])) {
+                $data['pwd_err'] = "Password must include at least one letter!";
             } elseif (empty($data['confirmPwd'])) {
                 $data['confirmPwd_err'] = "Please confirm your password";
             } else {
                 if ($data['pwd'] != $data['confirmPwd']) {
-                    $data['confirmPwd_err'] = "Not Matching Passwords";
+                    $data['confirmPwd_err'] = "Passwords do not match";
+                    $data['pwd_err'] = "Passwords do not match";
                 }
             }
 
@@ -416,7 +423,6 @@ class Users extends Controller
                 'user_name' => trim($_POST['user_name']),
                 'email' => trim($_POST['email']),
                 'phoneNumber' => trim($_POST['phoneNumber']),
-                // 'pwd' => "12345678",
                 'filename' => trim($_FILES['file']['name']),
                 'filetmp' => trim($_FILES['file']['tmp_name']),
 
@@ -444,35 +450,52 @@ class Users extends Controller
             //validate name
             if (empty($data['name'])) {
                 $data['name_err'] = "Please enter a name";
+            }elseif (!preg_match("/^[a-zA-Z-' ]*$/", $data['name'])) {
+                $data['name_err'] = "Only letters and white space allowed";
             }
 
             //validate user_name
             if (empty($data['user_name'])) {
-                $data['user_name_err'] = "Please enter an user_name";
+                $data['user_name_err'] = "Please enter an username";
             }
 
             //validate email
             if (empty($data['email'])) {
                 $data['email_err'] = "Please enter an email";
+            }else {
+                $userdata = $this->userModel->findUser($_SESSION['user_email']);
+                if ($data['email'] != $userdata->email) {
+                    // check email already registered or not
+                    if ($this->userModel->findUserByEmail($data['email'])) {
+                        $data['email_err'] = "This email is already in use";
+                    }
+                    if ($this->userManagerModel->findUserByEmail($data['email'])) {
+                        $data['email_err'] = "This email is already in use";
+                    }
+                    if ($this->companyUserModel->findUserByEmail($data['email'])) {
+                        $data['email_err'] = "This email is already in use";
+                    }
+                }
+
+                //check the email format is correct or not
+                if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                    $data['email_err'] = "Please enter a valid email";
+                }
             }
 
             //validate phone number
             if (empty($data['phoneNumber'])) {
                 $data['phoneNumber_err'] = "Please enter a phone number";
+            } elseif (strlen($data['phoneNumber']) != 10) {
+                $data['phoneNumber_err'] = "Please enter a valid phone number";     
+            } elseif (!preg_match("/^[0-9]*$/", $data['phoneNumber'])) {
+                $data['phoneNumber_err'] = "Please enter a valid phone number";
             }
 
-            //validate password
-            // if (empty($data['pwd'])) {
-            //     $data['pwd_err'] = "Please enter a password";
-            // }
-
-
+            
             //If validation is completed and no error, then register the user
             if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err']) && empty($data['phoneNumber_err'])) {
-                //Hash the password
-                // $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
-
-                //create user
+                
                 if ($this->userModel->updateUser($data)) {
                     redirect('Pages/Profile/user');
                 } else {

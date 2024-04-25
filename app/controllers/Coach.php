@@ -6,10 +6,14 @@ class Coach extends Controller
 {
     private $coachModel;
     private $coachUserModel;
+    private $managerModel;
+    private $companyUserModel;
     public function __construct()
     {
         $this->coachModel = $this->model('M_Coach');
         $this->coachUserModel = $this->model('M_Users');
+        $this->managerModel = $this->model('M_Manager');
+        $this->companyUserModel = $this->model('M_CompanyUsers');
     }
 
 
@@ -236,21 +240,44 @@ class Coach extends Controller
             //validate name
             if (empty($data['name'])) {
                 $data['name_err'] = "Please enter a name";
+            }elseif (!preg_match("/^[a-zA-Z-' ]*$/", $data['name'])) {
+                $data['name_err'] = "Only letters and white space allowed";
             }
 
             //validate user_name
             if (empty($data['user_name'])) {
                 $data['user_name_err'] = "Please enter an user_name";
             }
-
             //validate email
             if (empty($data['email'])) {
                 $data['email_err'] = "Please enter an email";
+            }else{
+                $userdata = $this->coachUserModel->getUserByEmail($_SESSION['user_email']);
+                if ($userdata->email != $data['email']) {
+                    // check email already registered or not
+                    if ($this->coachUserModel->findUserByEmail($data['email'])) {
+                        $data['email_err'] = "This email is already in use";
+                    }
+                    if ($this->managerModel->findUserByEmail($data['email'])) {
+                        $data['email_err'] = "This email is already in use";
+                    }
+                    if ($this->companyUserModel->findUserByEmail($data['email'])) {
+                        $data['email_err'] = "This email is already in use";
+                    }
+                }
+                //check the email format is correct or not
+                if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                    $data['email_err'] = "Please enter a valid email";
+                }
             }
 
             //validate phone number
             if (empty($data['phoneNumber'])) {
                 $data['phoneNumber_err'] = "Please enter a phone number";
+            } elseif (strlen($data['phoneNumber']) != 10) {
+                $data['phoneNumber_err'] = "Please enter a valid phone number";     
+            } elseif (!preg_match("/^[0-9]*$/", $data['phoneNumber'])) {
+                $data['phoneNumber_err'] = "Please enter a valid phone number";
             }
 
             // validate nic
@@ -330,103 +357,6 @@ class Coach extends Controller
 }
 
 
-// public function login(){
-//     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-//         //submitting form
-//         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-
-//         //Input data
-//         $data = [
-//             'email' => trim($_POST['email']),
-//             'pwd' => trim($_POST['pwd']),
-
-//             'email_err' => "",
-//             'pwd_err' => "",
-//         ];
-
-//         //validate the email
-//         if(empty($data['email'])){
-//             $data['email_err'] = "Please enter an email";
-//         }
-//         else{
-//             //check email already registered or not
-//             if($this->coachModel->findUserByEmail($data['email'])){
-//                echo "user is found";
-//             }else{
-//                 $data['email_err'] = "User Not Found";
-//             }
-//         }
-
-//         //validate the user
-//         if(empty($data['pwd'])){
-//             $data['pwd_err'] = "Please enter a password";
-//         }
-
-//         //If no error found then login user
-//         if(empty($data['email_err']) && empty($data['pwd_err'])){
-//             $loginUser = $this->coachModel->login($data['email'], $data['pwd']);
-
-//             if($loginUser){
-//                 //Authenticate User
-//                 $this->createUserSession($loginUser);
-//             }
-//             else{
-//                 $data['pwd_err'] = "Invalid Password";
-//                 // echo $data['pwd_err'];
-//                 //Load View
-//                 $this->view('Pages/LoginPage/login', $data);
-//             }
-//         }
-//         else{
-//             //Load View
-//             $this->view('Pages/LoginPage/login', $data);
-//         }
-
-//     }
-//     else{
-//         //initial form
-//         $data = [
-//             'email' => "",
-//             'pwd' => "",
-
-//             'email_err' => "",
-//             'pwd_err' => "",
-//         ];
-
-//         //Load View
-//         $this->view('Pages/LoginPage/login', $data);
-
-
-//     }
-
-// }
-
-// public function createUserSession($user){
-//     $_SESSION['user_id'] = $user->uid;
-//     $_SESSION['user_name'] = $user->name;
-//     $_SESSION['user_email'] = $user->email;
-
-//     redirect('Pages/Dashboard/user');
-// }
-// public function logout(){
-//     unset($_SESSION['user_id']);
-//     unset($_SESSION['user_name']);
-//     unset($_SESSION['user_email']);
-//     session_destroy();
-
-//     redirect('Users/login');
-// }
-
-// public function isloggedin(){
-//     if(isset($_SESSION['user_id'])){
-//         return true;
-//     }else{
-//         //echo 'No Session';
-//         //redirect('Users/login');
-//         return false;
-//     }
-// }
 
 
 

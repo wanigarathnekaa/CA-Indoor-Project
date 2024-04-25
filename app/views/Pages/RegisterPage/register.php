@@ -8,7 +8,7 @@
     <title>Registration Page</title>
 </head>
 <body>
-      <script src="https://kit.fontawesome.com/f9275dded9.js" crossorigin="anonymous"></script>
+      <!-- <script src="https://kit.fontawesome.com/f9275dded9.js" crossorigin="anonymous"></script> -->
 
            
       <div class="container" id="container">

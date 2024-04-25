@@ -3,8 +3,14 @@
 class CompanyUsers extends Controller
 {
       private $companyUserModel;
+        private $userModel;
+        private $managerModel;
+        private $userCoachModel;
       public function __construct()
       {
+            $this->userModel = $this->model('M_Users');
+            $this->managerModel = $this->model('M_Manager');
+            $this->userCoachModel = $this->model('M_Coach');
             $this->companyUserModel = $this->model('M_CompanyUsers');
       }
 
@@ -48,25 +54,49 @@ class CompanyUsers extends Controller
                         $data['image'] = $existingFilename;
                   }
 
-                  //validate name
-                  if (empty($data['name'])) {
-                        $data['name_err'] = "Please enter a name";
-                  }
+                    //validate name
+                    if (empty($data['name'])) {
+                            $data['name_err'] = "Please enter a name";
+                    }elseif (!preg_match("/^[a-zA-Z-' ]*$/", $data['name'])) {
+                        $data['name_err'] = "Only letters and white space allowed";
+                    }
 
-                  //validate email
-                  if (empty($data['email'])) {
-                        $data['email_err'] = "Please enter an email";
-                  } 
+                    //validate email
+                    if (empty($data['email'])) {
+                            $data['email_err'] = "Please enter an email";
+                    }else{
+                        $userdata = $this->companyUserModel->findUserByEmail($data['email']);
+                        if ($userdata->email == $data['email']) {  
+                            // check email already registered or not
+                            if ($this->userModel->findUserByEmail($data['email'])) {
+                                $data['email_err'] = "This email is already in use";
+                            }
+                            if ($this->managerModel->findUserByEmail($data['email'])) {
+                                $data['email_err'] = "This email is already in use";
+                            }
+                            if ($this->companyUserModel->findUserByEmail($data['email'])) {
+                                $data['email_err'] = "This email is already in use";
+                            }
+                        }
+                        //check the email format is correct or not
+                        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                            $data['email_err'] = "Please enter a valid email";
+                        }
+                    }
 
                   //validate phone number
-                  if (empty($data['phoneNumber'])) {
-                        $data['phoneNumber_err'] = "Please enter a phone number";
-                  }
+                    if (empty($data['phoneNumber'])) {
+                            $data['phoneNumber_err'] = "Please enter a phone number";
+                    } elseif (strlen($data['phoneNumber']) != 10) {
+                        $data['phoneNumber_err'] = "Please enter a valid phone number";     
+                    } elseif (!preg_match("/^[0-9]*$/", $data['phoneNumber'])) {
+                        $data['phoneNumber_err'] = "Please enter a valid phone number";
+                    }
 
-                  //validate nic
-                  if (empty($data['nic'])) {
-                        $data['nic_err'] = "Please enter a NIC";
-                  }
+                    //validate nic
+                    if (empty($data['nic'])) {
+                            $data['nic_err'] = "Please enter a NIC";
+                    }
 
                   
 
