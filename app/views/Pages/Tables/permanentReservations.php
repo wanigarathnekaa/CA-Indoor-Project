@@ -7,6 +7,7 @@
       <meta name="viewport" content="width = device-width, initial-scale=1.0">
       <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/permeneReservation_Table_Style.css">
       <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_reservation.css">
+      <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/notification.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
       <title>Permanent Reservation</title>
 </head>
@@ -47,7 +48,15 @@
                         <!-- table body -->
                         <tbody>
                               <?php
-                              foreach ($data['permanentBookings'] as $permanentBookings) { ?>
+                              foreach ($data['permanentBookings'] as $permanentBookings) { 
+                                    $status_color = '';
+                                    if($permanentBookings->status == 'Cancelled')   
+                                          $status_color = '#e03333';
+                                    else if($permanentBookings->status == 'Finished')
+                                          $status_color = '#e0da33';
+                                    else if($permanentBookings->status == 'ongoing')
+                                          $status_color = '#30c030';     
+                                    ?>
 
                                     <tr
                                           onclick="openPermanentPopup(<?php echo htmlspecialchars(json_encode($permanentBookings)); ?>)">
@@ -70,7 +79,7 @@
                                                 <?php echo $permanentBookings->day; ?>
                                           </td>
                                           <td>
-                                                <?php echo $permanentBookings->status; ?>
+                                                <span style="background-color: <?php echo $status_color; ?>" class="status"><?php echo $permanentBookings->status; ?></span>
                                           </td>
                                     </tr>
                                     <?php
@@ -168,10 +177,21 @@
                         success: function (response) {
                               console.log(response);
                               if(response.status == 'success'){
-                                    alert('Reservation Cancelled Successfully');
-                                    location.reload();
+                                    var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Reservation Cancelled Successfully</h3></div><div class="notification_progress"></div></div>');
+                                    $('body').append(notificationDiv);
+                                    setTimeout(function() {
+                                          notificationDiv.remove();
+                                    }, 3000);
+                                    setTimeout(function() {
+                                                location.reload();
+                                    }, 2000);
                               }else{
-                                    alert('Failed to Cancel Reservation');
+                                    var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title">Failed to Cancel Reservation</h3></div><div class="notification_progress"></div></div>');
+                                    $('body').append(notificationDiv);
+                                    setTimeout(function() {
+                                          notificationDiv.remove();
+                                    }, 3000);
+                                    
                               }
                         }
                   });

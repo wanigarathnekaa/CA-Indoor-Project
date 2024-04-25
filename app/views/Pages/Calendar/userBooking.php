@@ -52,12 +52,24 @@ $new_array_3 = array_filter($data, function ($item) use ($filter_date, $filter_n
                 type: "POST",
                 data: { id: reservationId },
                 success: function(response) {
-                    alert("Failed to send invoice");
+                    // alert("Failed to send invoice");
+                    var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Invoice sent successfully</h3></div><div class="notification_progress"></div></div>');
+                    $('body').append(notificationDiv);
+                    setTimeout(function() {
+                        notificationDiv.remove();
+                    }, 5000);
                     console.log("Invoice sent successfully:", response);
-                    closeModal(); // Close the popup after successful invoice sending
+                    setTimeout(function() {
+                        closeModal();
+                    }, 3000); // Close the popup after successful invoice sending
                 },
                 error: function(xhr, status, error) {
-                    alert("Invoice sent successfully");
+                    // alert("Invoice sent successfully");
+                    var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title">Failed to send invoice</h3></div><div class="notification2_progress"></div></div>');
+                    $('body').append(notificationDiv);
+                    setTimeout(function() {
+                        notificationDiv.remove();
+                    }, 3000);
 
                     console.error("Failed to send invoice:", error);
                 }
@@ -119,6 +131,7 @@ function time_slot($duration, $cleanup, $start, $end)
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/userbooking_style.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_userbooking.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/notification.css">
 
     <style>
         <?php if (isset($_SESSION['booking_success']) && $_SESSION['booking_success'] === true) { ?>

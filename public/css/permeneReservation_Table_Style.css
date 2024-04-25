@@ -94,6 +94,18 @@ body {
 }
 
 
+.status {
+  display: inline-block;
+  padding: 5px 10px;
+  background: var(--color01);
+  color: var(--black2);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  width: 70%;
+}
+
+
 
 .rescheduleDetails h4 {
   margin-top: 20px;
@@ -113,6 +125,8 @@ body {
   font-size: 16px;
   margin-bottom: 20px;
 }
+
+
 
 
 
