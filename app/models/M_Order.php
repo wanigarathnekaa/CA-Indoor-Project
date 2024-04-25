@@ -176,6 +176,14 @@ class M_Order
         return $result->qty;
     }
 
+    public function getProductReorderLevel($product_id)
+    {
+        $this->db->query('SELECT reorder_level FROM product WHERE product_id = :product_id');
+        $this->db->bind(':product_id', $product_id);
+        $result = $this->db->single();
+        return $result->qty;
+    }
+
     public function updateQuantity($product_id, $qty)
     {
         $this->db->query('UPDATE product SET qty = qty - :qty WHERE product_id = :product_id');

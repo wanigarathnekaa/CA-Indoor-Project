@@ -312,6 +312,47 @@ class Product extends Controller
         }
     }
 
+    public function updateReorderLevel()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'product_id' => trim($_POST['id']),
+                'level' => trim($_POST['level']),
+
+                'level_err' => '',
+            ];
+
+            if (empty($data['level']) || $data['level'] < 1) {
+                $data['level_err'] = 'Please enter a valid reorder level';
+            }
+
+            if (empty($data['level_err'])) {
+                if ($this->productModel->updateLevel($data)) {
+                    $response = [
+                        'status' => 'success',
+                        'message' => 'Level updated successfully',
+                    ];
+                } else {
+                    $response = [
+                        'status' => 'error',
+                        'message' => 'Something went wrong',
+                    ];
+                }
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => $data['quantity_err'],
+                ];
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+    }
+
     public function updateDiscount()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

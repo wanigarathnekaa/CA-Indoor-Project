@@ -95,6 +95,17 @@
             }
         }
 
+        public function updateLevel($data){
+            $this->db->query('UPDATE product SET reorder_level = :level WHERE product_id = :product_id');
+            $this->db->bind(':level', $data['level']);
+            $this->db->bind(':product_id', $data['product_id']);
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
         public function updateDiscount($data){
             $this->db->query('UPDATE product SET discount = :discount WHERE product_id = :product_id');
             $this->db->bind(':discount', $data['discount']);
