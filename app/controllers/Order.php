@@ -126,6 +126,9 @@ class Order extends Controller
                 }
 
                 if ($this->orderModel->updateQuantity($product_id, $qty)) {
+                    if($this->orderModel->getProductQuantity($product_id) <= 3){
+                        //$this->orderModel->sendEmail($product_id);
+                    }
                     continue;
                 } else {
                     $response = [
