@@ -35,16 +35,13 @@ function time_slot($duration, $cleanup, $start, $end)
 
 <?php
 $new_array = array();
-$i = 0;
 foreach ($data['availability'] as $availability) {
     if ($availability->email == $_SESSION['user_email'] && $availability->date == $filter_date) {
         $new_array_2[] = $availability->time_slot;
-        $new_array += json_decode($new_array_2[$i]);
+        $new_array = json_decode($new_array_2[0]);
     }
-    $i++;
-}
 
-print_r($new_array);
+}
 ?>
 
 

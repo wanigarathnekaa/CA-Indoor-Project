@@ -185,5 +185,30 @@ use PHPMailer\PHPMailer\Exception;
                 return false;
             }
         }
+
+        public function getCoachAvailability($data)
+        {
+            $this->db->query('SELECT * FROM coach_availability WHERE email = :email AND date = :date');
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':date', $data['date']);
+
+            return $this->db->resultSet();
+
+        }
+
+        public function update_coach_availability($data)
+        {
+            $this->db->query('UPDATE coach_availability SET time_slot = :time_slot WHERE email = :email AND date = :date');
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':date', $data['date']);
+            $this->db->bind(':time_slot', $data['time_slot']);
+
+            if($this->db->execute()){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
     }
 ?>
