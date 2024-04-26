@@ -22,7 +22,7 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
             <h2>
                 <?php echo date('Y-m-d'); ?>
             </h2>
-            <div class="serachselect">
+            <!-- <div class="serachselect">
                 <i class="fa-solid fa-magnifying-glass icon"></i>
                 <select id="liveSearch" class="btn">
                     <option value="All">All</option>
@@ -30,7 +30,7 @@ $new_data = array_filter($data1['reservation'], function ($item) use ($filter_da
                     <option value="Normal Net B">Normal Net B</option>
                     <option value="Machine Net">Machine Net</option>
                 </select>
-            </div>
+            </div> -->
         </div>
 
         <div class="table-container">
