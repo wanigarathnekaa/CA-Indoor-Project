@@ -140,12 +140,14 @@ $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
 
             $('#coach').click(function () {
                 var timeSlots = $("#timeSlotsAndNetTypes").val();
+                var date = '<?php echo $selected_date; ?>'
 
                 $.ajax({
                     type: "POST",
                     url: "<?php echo URLROOT; ?>/Coach/getAvailableCoaches",
                     data: {
-                        timeSlots: timeSlots
+                        timeSlots: timeSlots,
+                        date: date
                     },
                     dataType: 'json',
                     success: function (response) {
