@@ -93,9 +93,16 @@ class CompanyUsers extends Controller
                         $data['phoneNumber_err'] = "Please enter a valid phone number";
                     }
 
-                    //validate nic
+                    // validate nic
                     if (empty($data['nic'])) {
-                            $data['nic_err'] = "Please enter a NIC";
+                        $data['nic_err'] = "Please enter the NIC number";
+                    }else{
+                        $nic = str_replace(' ', '', $data['nic']);
+                        if (strlen($nic) != 10 && strlen($nic) != 12) {
+                            $data['nic_err'] = "NIC format is xxxxxxxxxv or xxxxxxxxxxxx";
+                        }elseif (!preg_match("/^[0-9]{9}[vV]?$/", $nic) && !preg_match("/^[0-9]{12}?$/", $nic)) {
+                            $data['nic_err'] = "NIC number is invalid";
+                        }
                     }
 
                   
