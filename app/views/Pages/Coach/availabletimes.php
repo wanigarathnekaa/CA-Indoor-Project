@@ -33,12 +33,19 @@ function time_slot($duration, $cleanup, $start, $end)
 
 ?>
 
-<!-- <?php
+<?php
+$new_array = array();
+$i = 0;
 foreach ($data['availability'] as $availability) {
-    $new_array_2[] = $availability->time_slot;
-    print_r($new_array_2);
+    if ($availability->email == $_SESSION['user_email'] && $availability->date == $filter_date) {
+        $new_array_2[] = $availability->time_slot;
+        $new_array += json_decode($new_array_2[$i]);
+    }
+    $i++;
 }
-?> -->
+
+print_r($new_array);
+?>
 
 
 <!DOCTYPE html>
@@ -72,8 +79,8 @@ foreach ($data['availability'] as $availability) {
                             ?>
                             <?php
                             $found = false;
-                            foreach ($new_array_2 as $reservation) {
-                                if ($reservation->timeSlot === $ts) {
+                            for ($i = 0; $i < count($new_array); $i++) {
+                                if ($new_array[$i] == $ts) {
                                     $found = true;
                                     break;
                                 }
@@ -101,26 +108,30 @@ foreach ($data['availability'] as $availability) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="<?php echo URLROOT; ?>/js/coachBooking.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#submit').click(function() {
+        $(document).ready(function () {
+            $('#submit').click(function () {
                 var selected = [];
-                $('select option:selected').each(function() {
+                $('select option:selected').each(function () {
                     selected.push($(this).val());
                 });
-                var email = '<?= $_SESSION["user_email"]?>';
+                var email = '<?= $_SESSION["user_email"] ?>';
                 var date = '<?= $filter_date ?>';
                 $.ajax({
                     type: 'POST',
-                    url: "<?php echo URLROOT; ?>/Coach/saveAvailability",    
+                    url: "<?php echo URLROOT; ?>/Coach/saveAvailability",
                     data: {
                         selected: selected,
                         email: email,
                         date: date
                     },
-                    success: function(response) {
+                    success: function (response) {
                         console.log(response);
                     }
                 });
+            });
+
+            $('.select__item--selected').click(function () {
+                console.log('clicked');
             });
         });
     </script>
