@@ -120,9 +120,22 @@
       /* margin: 10px; */
       padding: 10px;
       border-radius: 5px;
-      border: 1px solid var(--color01);
+      border: 1px solid var(--color02);
       bottom: 10px;
   }
+
+    .box input[type="text"]:focus,
+    .box input[type="email"]:focus {
+      border: 2px solid var(--color01);
+    }
+
+    .box input[type="text"]:hover,
+    .box input[type="email"]:hover {
+      border: 1.5px solid var(--color01);
+    }
+
+    
+    
   
   .buttons {
     height: 100%;

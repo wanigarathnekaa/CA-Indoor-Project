@@ -45,7 +45,7 @@
     height: 100%;
     width: 250px;
     padding: 10px 14px;
-    background: var(--sidebar-color);
+    background: linear-gradient(to right, #4F9DA9 0%, #c0e8e8 100%);
     transition: var(--tran-05);
     z-index: 100;
   }
