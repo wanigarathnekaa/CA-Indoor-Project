@@ -1002,8 +1002,12 @@ class M_Report
             $invoice_date = isset($_POST['invoice_date']) ? $_POST['invoice_date'] : '';
             $invoice_due_date = isset($_POST['invoice_due_date']) ? $_POST['invoice_due_date'] : '';
         
-            // Fetch booking data based on invoice dates and payment status
-            $sql = "SELECT SUM(bookingPrice) AS total_amount, SUM(paidPrice) AS paid_amount, DATE_FORMAT(date, '%Y-%m-%d') AS booking_date FROM bookings WHERE date >= :invoice_date AND date <= :invoice_due_date GROUP BY booking_date";
+            // Fetch booking data based on invoice dates
+            $sql = "SELECT COUNT(*) AS booking_count, DATE_FORMAT(date, '%Y-%m-%d') AS booking_date 
+                    FROM bookings 
+                    WHERE date >= :invoice_date AND date <= :invoice_due_date 
+                    GROUP BY booking_date";
+        
             $this->db->query($sql);
             $this->db->bind(':invoice_date', $invoice_date);
             $this->db->bind(':invoice_due_date', $invoice_due_date);
@@ -1012,89 +1016,219 @@ class M_Report
         
             // Prepare data for the line chart
             $dates = array();
-            $totalAmounts = array();
-            $paidAmounts = array();
+            $bookingCounts = array();
         
             foreach ($bookingData as $row) {
                 $dates[] = $row->booking_date; // Storing booking dates for labeling X-axis
-                $totalAmounts[] = $row->total_amount;
-                $paidAmounts[] = $row->paid_amount;
+                $bookingCounts[] = $row->booking_count;
             }
         
             // ---------------------------------------------------------
+            // Create new TCPDF instance
             $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         
-            // set font
-            $pdf->SetFont('helvetica', 'B', 17);
+            // Set document information
+            $pdf->SetCreator(PDF_CREATOR);
+            $pdf->SetAuthor('Your Name');
+            $pdf->SetTitle('Booking Count Chart');
+            $pdf->SetSubject('Booking Count Chart');
+            $pdf->SetKeywords('Booking, Count, Chart');
         
-            // add a page
+            // Set font
+            $pdf->SetFont('helvetica', '', 10);
+        
+            // Add a page
             $pdf->AddPage();
         
-            $pdf->Write(10, "Revenue Chart\n");
-            $pdf->SetFont('helvetica', '', 13);
+            // Title
+            $pdf->SetFont('helvetica', 'B', 16);
+            $pdf->Cell(0, 10, 'Booking Count Chart', 0, 1, 'C');
         
-            $pdf->Write(10, "Between: " . $invoice_date . " and " . $invoice_due_date . "\n\n");
+            // Date range
+            $pdf->SetFont('helvetica', '', 12);
+            $pdf->Cell(0, 10, 'Date Range: ' . $invoice_date . ' to ' . $invoice_due_date, 0, 1, 'C');
+        
+            // Line break
+            $pdf->Ln(10);
         
             // Line chart parameters
             $xStart = 30; // Adjusted X-axis start position
-            $yStart = 80;
+            $yStart = $pdf->GetY(); // Get current Y position after title and date range
+        
             $width = 160;
             $height = 100;
             $xScale = $width / (count($dates) - 1);
-            $maxAmount = max(max($totalAmounts), max($paidAmounts));
-            $yScale = $height / $maxAmount;
+            
+            // Fetch the maximum count of bookings
+            $maxCount = max($bookingCounts);
         
-            // Draw the line chart for total amount
-            $pdf->SetLineWidth(0.8); // thicker line for total amount
-            $pdf->SetDrawColor(255, 0, 0); // Red color for total amount
+            // Calculate yScale
+            $yScale = $height / ceil($maxCount); // Using ceil to ensure we get a whole number
+        
+            // Draw the line chart for booking counts
+            $pdf->SetLineWidth(0.8); // thicker line for booking counts
+            $pdf->SetDrawColor(0, 128, 0); // Green color for booking counts
             $prevX = $xStart;
             $prevY = $yStart + $height;
-            foreach ($totalAmounts as $index => $amount) {
+            foreach ($bookingCounts as $index => $count) {
                 $x = $xStart + ($index * $xScale);
-                $y = $yStart + ($height - ($amount * $yScale));
+                $y = $yStart + ($height - ($count * $yScale));
                 $pdf->Line($prevX, $prevY, $x, $y);
                 $prevX = $x;
                 $prevY = $y;
             }
         
-            // Draw the line chart for paid amount
-            $pdf->SetLineWidth(0.5); // thinner line for paid amount
-            $pdf->SetDrawColor(0, 128, 0); // Green color for paid amount
-            $prevX = $xStart;
-            $prevY = $yStart + $height;
-            foreach ($paidAmounts as $index => $amount) {
-                $x = $xStart + ($index * $xScale);
-                $y = $yStart + ($height - ($amount * $yScale));
-                $pdf->Line($prevX, $prevY, $x, $y);
-                $prevX = $x;
-                $prevY = $y;
-            }
-        
-            // Draw the X-axis and labels
+            // Draw the X-axis
             $pdf->SetLineWidth(0.2); // thinner line for axes
             $pdf->SetDrawColor(0, 0, 0); // Black color for axes
             $pdf->Line($xStart, $yStart + $height, $xStart + $width, $yStart + $height);
-            $xPos = $xStart;
-            foreach ($dates as $date) {
-                $pdf->SetTextColor(0, 0, 0); // Black color for text
-                $pdf->Text($xPos, $yStart + $height + 5, $date);
-                $xPos += $xScale;
-            }
         
-            // Draw the Y-axis and labels
+            // Draw the Y-axis
             $pdf->Line($xStart, $yStart, $xStart, $yStart + $height);
+        
+            // Draw the Y-axis labels
+            $pdf->SetTextColor(0, 0, 0); // Black color for text
             $yPos = $yStart + $height;
             $yLabel = 0;
             while ($yPos >= $yStart) {
-                $pdf->SetTextColor(0, 0, 0); // Black color for text
                 $pdf->Text($xStart - 20, $yPos, $yLabel); // Adjusted Y-axis label position
-                $yPos -= $yScale * 500; // smaller step for Y-axis labels
-                $yLabel += 250;
+                $yPos -= $yScale; // smaller step for Y-axis labels
+                $yLabel += 1;
             }
-            
-            // Close and output PDF document
+        
+            // Draw the X-axis labels vertically below the axis
+            $pdf->SetTextColor(0, 0, 0); // Black color for text
+            $pdf->SetFont('helvetica', '', 10); // Adjust font size if needed
+            $xPos = $xStart + $xScale / 2; // Start xPos in the middle of the first bar
+            $yPos = $yStart + $height + 20; // Set yPos below the x-axis
+            foreach ($dates as $date) {
+                $pdf->StartTransform();
+                $pdf->Rotate(90, $xPos, $yPos); // Rotate text
+                $pdf->Text($xPos, $yPos, $date); // Display date vertically
+                $pdf->StopTransform();
+                $xPos += $xScale;
+            }
+        
+            // Output PDF
             $pdf->Output('revenue_chart.pdf','D');
         }
+        public function displayRevenueChart1() {
+            $invoice_date = isset($_POST['invoice_date']) ? $_POST['invoice_date'] : '';
+            $invoice_due_date = isset($_POST['invoice_due_date']) ? $_POST['invoice_due_date'] : '';
+        
+            // Fetch booking data based on invoice dates
+            $sql = "SELECT COUNT(*) AS booking_count, DATE_FORMAT(date, '%Y-%m-%d') AS booking_date 
+                    FROM bookings 
+                    WHERE date >= :invoice_date AND date <= :invoice_due_date 
+                    GROUP BY booking_date";
+        
+            $this->db->query($sql);
+            $this->db->bind(':invoice_date', $invoice_date);
+            $this->db->bind(':invoice_due_date', $invoice_due_date);
+            $this->db->execute();
+            $bookingData = $this->db->resultSet();
+        
+            // Prepare data for the line chart
+            $dates = array();
+            $bookingCounts = array();
+        
+            foreach ($bookingData as $row) {
+                $dates[] = $row->booking_date; // Storing booking dates for labeling X-axis
+                $bookingCounts[] = $row->booking_count;
+            }
+        
+            // ---------------------------------------------------------
+            // Create new TCPDF instance
+            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        
+            // Set document information
+            $pdf->SetCreator(PDF_CREATOR);
+            $pdf->SetAuthor('Your Name');
+            $pdf->SetTitle('Booking Count Chart');
+            $pdf->SetSubject('Booking Count Chart');
+            $pdf->SetKeywords('Booking, Count, Chart');
+        
+            // Set font
+            $pdf->SetFont('helvetica', '', 10);
+        
+            // Add a page
+            $pdf->AddPage();
+        
+            // Title
+            $pdf->SetFont('helvetica', 'B', 16);
+            $pdf->Cell(0, 10, 'Booking Count Chart', 0, 1, 'C');
+        
+            // Date range
+            $pdf->SetFont('helvetica', '', 12);
+            $pdf->Cell(0, 10, 'Date Range: ' . $invoice_date . ' to ' . $invoice_due_date, 0, 1, 'C');
+        
+            // Line break
+            $pdf->Ln(10);
+        
+            // Line chart parameters
+            $xStart = 30; // Adjusted X-axis start position
+            $yStart = $pdf->GetY(); // Get current Y position after title and date range
+        
+            $width = 160;
+            $height = 100;
+            $xScale = $width / (count($dates) - 1);
+            
+            // Fetch the maximum count of bookings
+            $maxCount = max($bookingCounts);
+        
+            // Calculate yScale
+            $yScale = $height / ceil($maxCount); // Using ceil to ensure we get a whole number
+        
+            // Draw the line chart for booking counts
+            $pdf->SetLineWidth(0.8); // thicker line for booking counts
+            $pdf->SetDrawColor(0, 128, 0); // Green color for booking counts
+            $prevX = $xStart;
+            $prevY = $yStart + $height;
+            foreach ($bookingCounts as $index => $count) {
+                $x = $xStart + ($index * $xScale);
+                $y = $yStart + ($height - ($count * $yScale));
+                $pdf->Line($prevX, $prevY, $x, $y);
+                $prevX = $x;
+                $prevY = $y;
+            }
+        
+            // Draw the X-axis
+            $pdf->SetLineWidth(0.2); // thinner line for axes
+            $pdf->SetDrawColor(0, 0, 0); // Black color for axes
+            $pdf->Line($xStart, $yStart + $height, $xStart + $width, $yStart + $height);
+        
+            // Draw the Y-axis
+            $pdf->Line($xStart, $yStart, $xStart, $yStart + $height);
+        
+            // Draw the Y-axis labels
+            $pdf->SetTextColor(0, 0, 0); // Black color for text
+            $yPos = $yStart + $height;
+            $yLabel = 0;
+            while ($yPos >= $yStart) {
+                $pdf->Text($xStart - 20, $yPos, $yLabel); // Adjusted Y-axis label position
+                $yPos -= $yScale; // smaller step for Y-axis labels
+                $yLabel += 1;
+            }
+        
+            // Draw the X-axis labels vertically below the axis
+            $pdf->SetTextColor(0, 0, 0); // Black color for text
+            $pdf->SetFont('helvetica', '', 10); // Adjust font size if needed
+            $xPos = $xStart + $xScale / 2; // Start xPos in the middle of the first bar
+            $yPos = $yStart + $height + 20; // Set yPos below the x-axis
+            foreach ($dates as $date) {
+                $pdf->StartTransform();
+                $pdf->Rotate(90, $xPos, $yPos); // Rotate text
+                $pdf->Text($xPos, $yPos, $date); // Display date vertically
+                $pdf->StopTransform();
+                $xPos += $xScale;
+            }
+        
+            // Output PDF
+            $pdf->Output('booking_count_chart.pdf', 'I');
+        }
+        
+        
+        
         
         
         
@@ -1162,9 +1296,9 @@ class M_Report
                 echo "<div class='alert alert-warning'>No bookings found between the selected dates.</div>";
             }
         }
-        
-        public function displayReservationChart($data) {
-            $invoice_date = isset($_POST['invoice_date']) ? $_POST['invoice_date'] : '';
+        public function getReservationChart($data) {
+
+        $invoice_date = isset($_POST['invoice_date']) ? $_POST['invoice_date'] : '';
             $invoice_due_date = isset($_POST['invoice_due_date']) ? $_POST['invoice_due_date'] : '';
             
             // Fetch booking data based on invoice dates and payment status
@@ -1172,12 +1306,12 @@ class M_Report
             $this->db->query($sql);
             $this->db->bind(':invoice_date', $invoice_date);
             $this->db->bind(':invoice_due_date', $invoice_due_date);
-            $this->db->execute();
-            $bookingData = $this->db->resultSet();
+            return $this->db->resultSet();}
+        public function displayReservationChart($data,$data1) {
             
             // Prepare data for the pie chart
             $bookingCounts = array();
-            foreach ($bookingData as $row) {
+            foreach ($data['bookings'] as $row) {
                 $bookingCounts[$row->paymentStatus] = $row->count;
             }
             
@@ -1193,7 +1327,7 @@ class M_Report
             $pdf->Write(10, "Payment Status of Reservations\n");
             $pdf->SetFont('helvetica', '', 13);
 
-            $pdf->Write(10, "Between: " . $invoice_date . " and " . $invoice_due_date."\n\n");
+            $pdf->Write(10, "Between: " . $data1['invoice_date'] . " and " . $data1['invoice_due_date']."\n\n");
            
             
 
@@ -1271,6 +1405,105 @@ foreach ($colors as $status => $color) {
 
             //Close and output PDF document
             $pdf->Output('reservation_payments.pdf', 'D');
+        }
+        public function displayReservationChart1($data,$data1) {
+            
+            // Prepare data for the pie chart
+            $bookingCounts = array();
+            foreach ($data['bookings'] as $row) {
+                $bookingCounts[$row->paymentStatus] = $row->count;
+            }
+            
+            // ---------------------------------------------------------
+            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        
+            // set font
+            $pdf->SetFont('helvetica', 'B', 17);
+            
+            // add a page
+            $pdf->AddPage();
+            
+            $pdf->Write(10, "Payment Status of Reservations\n");
+            $pdf->SetFont('helvetica', '', 13);
+
+            $pdf->Write(10, "Between: " . $data1['invoice_date'] . " and " . $data1['invoice_due_date']."\n\n");
+           
+            
+
+            
+            // Pie chart parameters
+            $xc = 105;
+            $yc = 100;
+            $r = 50;
+            
+            // Pie chart colors
+            $colors = array(
+                'Paid' => array(51, 153, 102),    // Matte Green for Paid
+                'Pending' => array(255, 204, 102),  // Matte Yellow for Pending
+                'Not Paid' => array(204, 102, 102)  // Matte Red for Not Paid
+            );
+            
+        
+            // Color descriptions
+            $colorDescriptions = array(
+                'Paid' => 'Green',
+                'Pending' => 'Yellow',
+                'Not Paid' => 'Red'
+            );
+            
+            $startAngle = 0;
+            foreach ($bookingCounts as $status => $count) {
+                $endAngle = $startAngle + ($count / array_sum($bookingCounts)) * 360;
+                $pdf->SetFillColor($colors[$status][0], $colors[$status][1], $colors[$status][2]);
+                $pdf->PieSector($xc, $yc, $r, $startAngle, $endAngle, 'FD', false, 0, 2);
+                $startAngle = $endAngle;
+            }
+            $totalReservations = array_sum($bookingCounts);
+            foreach ($bookingCounts as $status => $count) {
+                $percentage = round(($count / $totalReservations) * 100, 2);
+                $pdf->Write(10, "{$status}: {$count} ({$percentage}%) \n");
+            }
+            
+            // Write labels and color descriptions
+            // $pdf->SetTextColor(255, 255, 255);
+            // $pdf->Text(105, 65, 'Paid');
+            // $pdf->Text(60, 95, 'Pending');
+            // $pdf->Text(120, 115, 'Not Paid');
+        
+            // Color descriptions
+            // $pdf->Text(140, 65, ' - ' . $colorDescriptions['Paid']);
+            // $pdf->Text(140, 95, ' - ' . $colorDescriptions['Pending']);
+            // $pdf->Text(140, 115, ' - ' . $colorDescriptions['Not Paid']);
+            
+            // ---------------------------------------------------------
+            // set font size and color for text
+$pdf->SetFont('helvetica', '', 12);
+$pdf->SetTextColor(0, 0, 0);
+
+// Draw squares and color descriptions
+$xSquare = 70;
+$ySquare = 150;
+$colorWidth = 10;
+$colorHeight = 10;
+$colorGap = 5;
+$colorTextGap = 3;
+
+foreach ($colors as $status => $color) {
+    // Set color for square
+    $pdf->SetFillColor($color[0], $color[1], $color[2]);
+    
+    // Draw square
+    $pdf->Rect($xSquare, $ySquare, $colorWidth, $colorHeight, 'F');
+    
+    // Write color description
+    $pdf->Text($xSquare + $colorWidth + $colorTextGap, $ySquare + ($colorHeight / 2), $status);
+    
+    // Move to the next position
+    $ySquare += $colorHeight + $colorGap;
+}
+
+            //Close and output PDF document
+            $pdf->Output('reservation_payments.pdf', 'I');
         }
         
         public function displayFilteredOrders($data) {
