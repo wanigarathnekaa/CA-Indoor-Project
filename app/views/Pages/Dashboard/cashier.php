@@ -8,7 +8,7 @@
 
       <!-- Stylesheets -->
       <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/cashierDashboard.css">
-      
+
       <!-- Font Awesome -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">      
 </head>
@@ -26,7 +26,9 @@
 
             <!-- Cards -->
             <div class="cardBox">
+
                   <a class="card" href="C&A_Indoor_Project/Pages/coachTable/cashier">
+
                         <div class="infor">
                               <div class="numbers"><?php echo $data1["CoachCount"]?></div>
                               <div class="cardName">Coaches</div>
@@ -36,7 +38,9 @@
                         </div>
                   </a>
 
+
                   <a class="card" href="C&A_Indoor_Project/Pages/playerTable/cashier">
+
                         <div>
                               <div class="numbers"><?php echo $data1["UserCount"]?></div>
                               <div class="cardName">Players</div>
@@ -46,10 +50,12 @@
                         </div>
                   </a>
 
+
                   <a class="card" href="C&A_Indoor_Project/Pages/reservationTable/cashier">
                         <div>
                               <div class="numbers"><?php echo $data1["Reserve_Count"]?></div>
                               <div class="cardName">Time Slot<br>Reservations</div>
+
                         </div>
 
                         <div class="iconBx">
@@ -57,6 +63,8 @@
                         </div>
                   </a>
 
+
+     
                   <a class="card" href="C&A_Indoor_Project/Pages/bookingTable/cashier">
                         <div>
                               <div class="numbers"><?php echo $data1["bookingCount"]?></div>
@@ -87,6 +95,7 @@
 
                         <div class="iconBx">
                               <i class="fa-solid fa-calendar-days"></i>
+
                         </div>
                   </a>
             </div>
@@ -98,7 +107,9 @@
                   <!-- Recent Reservations -->
                   <div class="tablediv">
                         <?php
+
                               require APPROOT . '/views/Pages/Tables/cashierReservation.php';
+
                         ?>
                   </div>
                   
@@ -107,11 +118,12 @@
                         <iframe src="http://localhost/C&A_Indoor_Project/Pages/Calendar/User" frameborder="0"></iframe>                        
                   </div>
             </div> 
-      </section>
+ </section>
 
 
       <!-- javascripts -->
       <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
+
 </body>
 
 </html>

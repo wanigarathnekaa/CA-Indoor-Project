@@ -50,11 +50,13 @@
 
 }
 
+
 @media (max-width: 1024px) {
       .details {
         grid-template-columns: 1fr;
         grid-gap: 20px;
       }
+
 
 }
 
@@ -71,4 +73,5 @@
         grid-template-columns: 1fr;
         grid-gap: 20px;
       }
+
 }

@@ -200,6 +200,22 @@ class M_Users
 
     }
 
+    public function loginCashier($email, $password)
+    {
+        $this->db->query('SELECT * FROM cashier WHERE email = :email');
+        $this->db->bind(':email', $email);
+
+        $row = $this->db->single();
+        
+        if ($password == $row->password) {
+            return $row;
+        } else {
+            return false;
+        }
+
+    }
+
+
     public function updateUser($data)
     {
         $this->db->query('UPDATE user SET name = :name, user_name= :user_name, email= :email, phoneNumber= :phoneNumber,img = :img WHERE email = :email');

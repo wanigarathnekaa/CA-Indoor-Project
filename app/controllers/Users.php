@@ -6,12 +6,14 @@ class Users extends Controller
 {
     private $userModel;
     private $userManagerModel;
+    private $userCashierModel;
     private $userCoachModel;
     private $companyUserModel;
     public function __construct()
     {
         $this->userModel = $this->model('M_Users');
         $this->userManagerModel = $this->model('M_Manager');
+        $this->userCashierModel = $this->model('M_Cashier');
         $this->userCoachModel = $this->model('M_Coach');
         $this->companyUserModel = $this->model('M_CompanyUsers');
     }
@@ -172,6 +174,7 @@ class Users extends Controller
             } else {
                 //check email already registered or not
                 if ($this->userManagerModel->findUserByEmail($data['email'])) {
+            
                     $role = 'Manager';
                 } elseif ($this->userModel->findUserByEmail($data['email'])) {
                     $role = 'User';
@@ -226,6 +229,7 @@ class Users extends Controller
                     if ($loginManager == false) {
                         $data['pwd_err'] = "Invalid Password";
                         $this->view('Pages/LoginPage/login', $data);
+
                     } else {
                         $this->createUserSession($loginManager, $role);
                     }
@@ -256,6 +260,7 @@ class Users extends Controller
                 } else {
                     $data['email_err'] = "User Not Found";
                     $this->view('Pages/LoginPage/login', $data);
+
                 }
             } else {
                 //Load View
@@ -375,7 +380,9 @@ class Users extends Controller
 
         if ($role == 'Manager') {
             redirect('Pages/Dashboard/manager');
+
         } elseif ($role == 'User') {
+
             redirect('Pages/Dashboard/user');
         } elseif ($role == 'Coach') {
             redirect('Pages/Dashboard/coach');
@@ -642,6 +649,7 @@ class Users extends Controller
 
 
 }
+
 
 
 ?>

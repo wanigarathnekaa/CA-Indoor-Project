@@ -191,6 +191,7 @@ class Pages extends Controller
         }
         $this->view('Pages/Tables/coaches_Table', $data, $res);
     }
+    
     //manager table
     public function managerTable($name)
     {
@@ -237,7 +238,7 @@ class Pages extends Controller
         ];
         $this->view('Pages/Tables/players_Table', $players, $data);
     }
-
+  
 
     //reservation table
     public function reservationTable($name)
@@ -245,6 +246,7 @@ class Pages extends Controller
         $bookings = $this->pagesModel->getReservations();
         $this->view('Pages/Tables/reservations_Table', $bookings);
     }
+   
 
     public function bookingTable($name)
     {
@@ -339,7 +341,9 @@ class Pages extends Controller
         } else if ($name == "admin") {
             $this->view('Pages/Dashboard/admin', $data); // Pass all data in a single array
         } else if ($name == "cashier") {
+
             $this->view('Pages/Dashboard/cashier', $data1, $data);
+
         } else if ($name == "coach") {
             $this->view('Pages/Dashboard/coach', $data1);
         } else if ($name == "manager") {

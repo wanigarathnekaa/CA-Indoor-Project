@@ -138,12 +138,12 @@
                                     <span class="text nav-text">Advertisement</span>
                                 </a>
                             </li>
-                            <li class="nav-link">
+                            <!-- <li class="nav-link">
                                 <a href="#">
                                     <i class="bx bx-money-withdraw icon"></i>
                                     <span class="text nav-text">Payment</span>
                                 </a>
-                            </li>
+                            </li> -->
                             <li class="profile">
                                 <a href="C&A_Indoor_Project/Pages/CompanyUser_Profile/Admin">
                                     <i class="bx bx-user-circle icon"></i>
