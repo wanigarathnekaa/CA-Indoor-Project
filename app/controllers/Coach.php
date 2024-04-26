@@ -109,32 +109,33 @@ class Coach extends Controller
                 $data['certificate_err'] = "Please enter certifications";
             }
 
-            
 
-            
+
+
 
             //If validation is completed and no error, then register the user
-            if (empty($data['name_err']) && empty($data['email_err']) 
-            && empty($data['nic_err']) && empty($data['phoneNumber_err']) && empty($data['srtAddress_err'])
-            && empty($data['city_err']) && empty($data['achivements_err']) && empty($data['experience_err']) 
-            && empty($data['specialty_err']) && empty($data['certificate_err'])){
+            if (
+                empty($data['name_err']) && empty($data['email_err'])
+                && empty($data['nic_err']) && empty($data['phoneNumber_err']) && empty($data['srtAddress_err'])
+                && empty($data['city_err']) && empty($data['achivements_err']) && empty($data['experience_err'])
+                && empty($data['specialty_err']) && empty($data['certificate_err'])
+            ) {
 
                 //generate random password
-                $password=$this->coachModel->generateRandomPassword();
+                $password = $this->coachModel->generateRandomPassword();
 
                 //check whether the  password is sent to the coach via email
-                if($this->coachModel->SendPasswordViaEmail($_POST['email'],$password)){
+                if ($this->coachModel->SendPasswordViaEmail($_POST['email'], $password)) {
                     $data['pwd'] = $password;
-                }
-                else {      
+                } else {
                     die('Something Went wrong');
                 }
 
                 // //Hash the password
                 $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
-                
+
                 //create user
-                if ($this->coachModel->coachRegister($data) && $this->coachUserModel->register($data) && $this->coachUserModel->createlog($data)) { 
+                if ($this->coachModel->coachRegister($data) && $this->coachUserModel->register($data) && $this->coachUserModel->createlog($data)) {
                     echo "User Registered";
                     redirect('Pages/Dashboard/manager');
                 } else {
@@ -175,8 +176,8 @@ class Coach extends Controller
             ];
         }
 
-            //Load the view
-            $this->view('Pages/CoachRegistration/coachRegistration', $data);
+        //Load the view
+        $this->view('Pages/CoachRegistration/coachRegistration', $data);
     }
 
     // edit function.....................................................
@@ -238,7 +239,7 @@ class Coach extends Controller
             //validate name
             if (empty($data['name'])) {
                 $data['name_err'] = "Please enter a name";
-            }elseif (!preg_match("/^[a-zA-Z-' ]*$/", $data['name'])) {
+            } elseif (!preg_match("/^[a-zA-Z-' ]*$/", $data['name'])) {
                 $data['name_err'] = "Only letters and white space allowed";
             }
 
@@ -249,7 +250,7 @@ class Coach extends Controller
             //validate email
             if (empty($data['email'])) {
                 $data['email_err'] = "Please enter an email";
-            }else{
+            } else {
                 $userdata = $this->coachUserModel->getUserByEmail($_SESSION['user_email']);
                 if ($userdata->email != $data['email']) {
                     // check email already registered or not
@@ -273,7 +274,7 @@ class Coach extends Controller
             if (empty($data['phoneNumber'])) {
                 $data['phoneNumber_err'] = "Please enter a phone number";
             } elseif (strlen($data['phoneNumber']) != 10) {
-                $data['phoneNumber_err'] = "Please enter a valid phone number";     
+                $data['phoneNumber_err'] = "Please enter a valid phone number";
             } elseif (!preg_match("/^[0-9]*$/", $data['phoneNumber'])) {
                 $data['phoneNumber_err'] = "Please enter a valid phone number";
             }
@@ -363,33 +364,30 @@ class Coach extends Controller
 
             $existing_availability = $this->coachModel->getCoachAvailability($data);
 
-            if($existing_availability){
+            if ($existing_availability) {
                 $existing_time_Slots = json_decode($existing_availability[0]->time_slot);
                 $mergedArray = array_unique(array_merge($existing_time_Slots, $data['time_slot']));
 
                 $data['time_slot'] = json_encode($mergedArray);
-                if($this->coachModel->update_coach_availability($data)){
+                if ($this->coachModel->update_coach_availability($data)) {
                     $response = [
                         'status' => 'success',
                         'message' => 'Data Updated Successfully'
                     ];
-                }
-                else{
+                } else {
                     $response = [
                         'status' => 'error',
                         'message' => 'Data Updation Failed'
                     ];
                 }
-            }
-            else{
+            } else {
                 $data['time_slot'] = json_encode($data['time_slot']);
-                if($this->coachModel->insert_coach_availability($data)){
+                if ($this->coachModel->insert_coach_availability($data)) {
                     $response = [
                         'status' => 'success',
                         'message' => 'Data Inserted Successfully'
                     ];
-                }
-                else{
+                } else {
                     $response = [
                         'status' => 'error',
                         'message' => 'Data Insertion Failed'
@@ -400,8 +398,48 @@ class Coach extends Controller
             header('Content-Type: application/json');
             echo json_encode($response);
             exit();
-            
+
         }
+    }
+
+    public function removeAvailability()
+    {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        //Input data
+        $data = [
+            'email' => $_SESSION['user_email'],
+            'time_slot' => $_POST['optionValue'],
+            'date' => $_POST['optionDate'],
+        ];
+        $existing_availability = $this->coachModel->getCoachAvailability($data);
+        if ($existing_availability) {
+            $existing_time_Slots = json_decode($existing_availability[0]->time_slot);
+            $mergedArray = array_diff($existing_time_Slots, array($data['time_slot']));
+            $mergedArray = array_values($mergedArray);
+
+            $data['time_slot'] = json_encode($mergedArray);
+            if ($this->coachModel->update_coach_availability($data)) {
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Data Updated Successfully'
+                ];
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Data Updation Failed'
+                ];
+            }
+        } else {
+            $response = [
+                'status' => 'error',
+                'message' => 'Data Updation Failed'
+            ];
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit();
     }
 
 
