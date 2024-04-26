@@ -41,7 +41,7 @@
                 </div>
                 <div class="input-box " id="content">
                   <span class="details">Content</span>
-                  <input type="text" name="content" placeholder="Description"value="<?php echo $data['content']; ?>">
+                  <textarea name="content" placeholder="Description"><?php echo $data['content']; ?></textarea>
                   <span class="form-invalid"><?php echo $data['content_err']; ?></span>
                 </div>
                 <div class="textbox">
