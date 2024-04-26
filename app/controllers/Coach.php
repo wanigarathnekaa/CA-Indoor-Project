@@ -282,16 +282,33 @@ class Coach extends Controller
             // validate nic
             if (empty($data['nic'])) {
                 $data['nic_err'] = "Please enter the NIC number";
+            }else{
+                $nic = str_replace(' ', '', $data['nic']);
+                if (strlen($nic) != 10 && strlen($nic) != 12) {
+                    $data['nic_err'] = "NIC format is xxxxxxxxxv or xxxxxxxxxxxx";
+                }elseif (!preg_match("/^[0-9]{9}[vV]?$/", $nic) && !preg_match("/^[0-9]{12}?$/", $nic)) {
+                    $data['nic_err'] = "NIC number is invalid";
+                }
             }
+                                  
+        
 
             // validate address
             if (empty($data['srtAddress'])) {
                 $data['srtAddress_err'] = "Please enter the Street Address";
+            }elseif(strlen($data['srtAddress']) > 100){
+                $data['srtAddress_err'] = "Street Address is too long";
+            }elseif(!preg_match("/^[a-zA-Z0-9\s,'-]*$/", $data['srtAddress'])){
+                $data['srtAddress_err'] = "Invalid Street Address";
             }
 
             // validate city
             if (empty($data['city'])) {
                 $data['city_err'] = "Please enter the City";
+            }elseif(strlen($data['city']) > 50){
+                $data['city_err'] = "City name is too long";
+            }elseif(!preg_match("/^[a-zA-Z\s]*$/", $data['city'])){
+                $data['city_err'] = "Invalid City name";
             }
 
             // validate achivements

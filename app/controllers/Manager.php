@@ -219,17 +219,33 @@ class Manager extends Controller
                 $data['phoneNumber_err'] = "Please enter a valid phone number";
             }
 
+            // validate nic
             if (empty($data['nic'])) {
-                $data['nic_err'] = "Please enter a valid NIC number";
+                $data['nic_err'] = "Please enter the NIC number";
+            }else{
+                $nic = str_replace(' ', '', $data['nic']);
+                if (strlen($nic) != 10 && strlen($nic) != 12) {
+                    $data['nic_err'] = "NIC format is xxxxxxxxxv or xxxxxxxxxxxx";
+                }elseif (!preg_match("/^[0-9]{9}[vV]?$/", $nic) && !preg_match("/^[0-9]{12}?$/", $nic)) {
+                    $data['nic_err'] = "NIC number is invalid";
+                }
             }
 
             //validate address
             if (empty($data['strAddress'])) {
                 $data['strAddress_err'] = "Please enter the Street Address";
+            }elseif(strlen($data['strAddress']) > 100){
+                $data['strAddress_err'] = "Street Address is too long";
+            }elseif(!preg_match("/^[a-zA-Z0-9\s,'-]*$/", $data['srtAddress'])){
+                $data['strAddress_err'] = "Invalid Street Address";
             }
 
             if (empty($data['city'])) {
                 $data['city_err'] = "Please enter the City";
+            }elseif(strlen($data['city']) > 50){
+                $data['city_err'] = "City name is too long";
+            }elseif(!preg_match("/^[a-zA-Z\s]*$/", $data['city'])){
+                $data['city_err'] = "Invalid City name";
             }
 
 
