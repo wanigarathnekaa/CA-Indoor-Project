@@ -51,7 +51,7 @@ foreach ($data['availability'] as $availability) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoachCard</title>
+    <title>Check Availability</title>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/availabletimes.css">
 
 </head>
@@ -67,6 +67,10 @@ foreach ($data['availability'] as $availability) {
     <!-- Content -->
     <section class="home">
         <div class="timeSlots">
+            <div class="head">
+                <i class="fa-solid fa-business-time icon"></i>
+                <h1 class="form-title">Available Time Slots</h1>
+            </div>
             <div class="slot">
                 <div class="form-group">
                     <select name="language" class="custom-select" multiple>
@@ -97,7 +101,7 @@ foreach ($data['availability'] as $availability) {
                 </div>
             </div>
             <div id="confirmationForm">
-                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                <button type="submit" class="btn btn-primary" id="submit"><i class="fa-solid fa-clock-rotate-left icon"></i>Change Availability</button>
             </div>
         </div>
 

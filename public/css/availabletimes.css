@@ -46,15 +46,37 @@ body {
   padding-bottom: 10px;
   width: 100%;
   height: 100%;
-  background-color: #2b6c76;
+  /* background-color: #2b6c76; */
+  justify-content: center;
+  /* align-items: center; */
   /* margin-left: 10%;
   margin-right: 10%; */
 }
+
+.head{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 20px 20px 20px;
+  /*background-color: var(--color01);*/
+  color: var(--black2);
+  
+  margin-bottom: 10px;
+  margin-left: 10px;
+  font-size: 1.5em;
+  border-bottom: 1px solid var(--color01);
+}
+
+.head .icon{
+  margin-right: 20px;
+  font-size: 30px;
+}
+
 .slot{
-      display: flex;
-  background-color: var(--color04);
-  padding: 10px 20px 20px 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  /* display: flex; */
+  /* background-color: var(--color04); */
+  padding: 20px 20px 20px 20px;
+  /* box-shadow: 0 0 10px rgba(0,0,0,0.1); */
   border-radius: 10px;
   margin-bottom: 10px;
   margin-left: 10px;
@@ -100,29 +122,73 @@ body {
 .select {
   margin-top: 5px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 5px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 
 .select__item {
-  padding: 10px;
+  padding: 20px 10px;
   cursor: pointer;
   text-align: center;
-  border-radius: 3px;
-  background: var(--color02);
-  color: #fff;
+  border-radius: 10px;
+  background: var(--color03);
+  color: #000000;
   transition: background 0.1s;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.select__item--selected {
+.select__item:hover {
   background: var(--color01);
+}
+
+
+
+.select__item--selected {
+  background: var(--color02);
   color: var(--gray);
 }
 
 .select__item--booked {
-  background-color: #aa3434;
+  background-color: var(--color01);
   color: #fff;
-  text-decoration: line-through;
+  /*text-decoration: line-through;*/
+}
+
+.select__item--booked:hover {
+  background-color: var(--color02)
+}
+
+
+#confirmationForm{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+
+}
+
+
+.btn-primary{
+  background-color: var(--color02);
+  color: var(--black1);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 25%;
+}
+
+.btn-primary:hover{
+  background-color: var(--color01);
+  color: var(--white);
+}
+
+.btn-primary .icon{
+  margin-right: 10px;
 }
 
 @media (max-width: 768px) {
