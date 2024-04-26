@@ -10,7 +10,7 @@
 </head>
 <body>
 <?php
-$role = "Admin";
+$role = $_SESSION['user_role'];
 require APPROOT.'/views/Pages/Dashboard/header.php';
 require APPROOT.'/views/Components/Side Bars/sideBar.php';
 ?>
@@ -18,31 +18,30 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
     <h1 class='text-center text-primary'>Monthly Orders Report</h1><hr>
     <div class="row">
         <div class="col-md-6">
-
             <form action="<?php echo URLROOT;?>/Reports/MonthlyOrderReport" method="post">
-            <div class="form-group">
-    <label>Select the Month</label>
-    <select name="Selected_month" id="Selected_month" class="form-control" required>
-        <option value="">Select Month</option>
-        <option value="01">January</option>
-        <option value="02">February</option>
-        <option value="03">March</option>
-        <option value="04">April</option>
-        <option value="05">May</option>
-        <option value="06">June</option>
-        <option value="07">July</option>
-        <option value="08">August</option>
-        <option value="09">September</option>
-        <option value="10">October</option>
-        <option value="11">November</option>
-        <option value="12">December</option>
-    </select>
-</div>
+                <div class="form-group">
+                    <label>Select the Month</label>
+                    <select name="Selected_month" id="Selected_month" class="form-control" required>
+                        <option value="">Select Month</option>
+                        <option value="01">January</option>
+                        <option value="02">February</option>
+                        <option value="03">March</option>
+                        <option value="04">April</option>
+                        <option value="05">May</option>
+                        <option value="06">June</option>
+                        <option value="07">July</option>
+                        <option value="08">August</option>
+                        <option value="09">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
 
-                 <div class="btn-container">
-                   <input type="submit" name="filter" value="Filter" class="btn btn-primary">
-                   <input type="submit" name="view_pdf" value="View" class="btn btn-primary">
-                  <input type="submit" name="download_pdf" value="Download" class="btn btn-primary">
+                <div class="btn-container">
+                    <input type="submit" name="filter" value="Filter" class="btn btn-primary">
+                    <input type="submit" name="view_pdf" value="View" class="btn btn-primary">
+                    <input type="submit" name="download_pdf" value="Download" class="btn btn-primary">
                 </div>
             </form>
         </div>

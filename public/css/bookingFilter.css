@@ -68,6 +68,7 @@ body {
     margin-top: 20px;
 }
 .btn-primary {
+    
     background-color: var(--primary);
     border: none;
     color: #ffffff; /* White text */
