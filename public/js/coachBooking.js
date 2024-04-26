@@ -35,18 +35,6 @@ class CustomSelect {
         this._storeSelectedDetails(optionElement);
       }
 
-      //   itemElement.addEventListener("click", () => {
-      //     if (
-      //       this.originalSelect.multiple &&
-      //       itemElement.classList.contains("select__item--selected")
-      //     ) {
-      //       this._deselect(itemElement, optionElement);
-      //     } else if (!isBooked) {
-      //       this._select(itemElement, optionElement);
-      //       this._storeSelectedDetails(optionElement);
-      //     }
-      //   });
-
       itemElement.onclick = function () {
         if (
           this.originalSelect.multiple &&
@@ -64,6 +52,21 @@ class CustomSelect {
             console.log("Option Value:", optionValue);
             var optionDate = optionElement.getAttribute("date");
             console.log("Option Date:", optionDate);
+            $.ajax({
+                url: "http://localhost/C&A_Indoor_Project/Coach/removeAvailability",
+                method: "POST",
+                data: {
+                    optionValue: optionValue,
+                    optionDate: optionDate,
+                },
+                success: function (data) {
+                    console.log("Data:", data);
+                    location.reload();
+                },
+                error: function (error) {
+                    console.log("Error:", error);
+                },
+            });
         }
       }.bind(this);
     });
