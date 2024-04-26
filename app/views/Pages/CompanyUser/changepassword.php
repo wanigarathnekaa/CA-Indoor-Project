@@ -30,7 +30,7 @@
 
       <!-- content -->
       <section class="home">
-            <?php print_r($data); ?>
+            
             <div class="container">
                   <div class="head">
                         <h1 class="form-title">Change Password</h1> 

@@ -135,10 +135,9 @@ class CompanyUsers extends Controller
     }
 
     public function companychangePassword()
-    {   $user=$this->companyUserModel->findUser($_SESSION['user_email']) ;
+    {   
+        $user=$this->companyUserModel->findUser($_SESSION['user_email']) ;
        
-             
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);

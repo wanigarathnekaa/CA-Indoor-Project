@@ -296,7 +296,7 @@ class Pages extends Controller
         $orderCount = count($this->pagesModel->getOrder());
         $cancelOrderCount = count($this->pagesModel->getCancelOrder());
         $users = $this->pagesModel->getUserCount();
-        $coach = $this->pagesModel->getCoaches();
+        $coach = $this->pagesModel->getActivatedCoaches();
         $advertisement = $this->pagesModel->getAdvertisement();
         $managers = $this->pagesModel->getManagerCount();
         $companyUsers = $this->pagesModel->getCompanyUserCount();
@@ -323,7 +323,7 @@ class Pages extends Controller
         ];
         $res = [];
         foreach ($data['coach'] as $user) {
-            $res[] = $this->pagesModel->findUser($user->email);
+            $res[] = $this->pagesModel->getActivatedUser($user->email);
         }
 
         $data1 = [
@@ -618,13 +618,13 @@ class Pages extends Controller
 
     public function Coach($name)
     {
-        $coaches = $this->pagesModel->getCoaches();
+        $coaches = $this->pagesModel->getActivatedCoaches();
         $data = [
             'users' => $coaches,
         ];
         $res = [];
         foreach ($data['users'] as $user) {
-            $res[] = $this->pagesModel->findUser($user->email);
+            $res[] = $this->pagesModel->getActivatedUser($user->email);
 
         }
 
