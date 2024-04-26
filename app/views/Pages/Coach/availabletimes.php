@@ -83,7 +83,7 @@ foreach ($data['availability'] as $availability) {
                                 }
                             }
                             if ($found) { ?>
-                                <option value="<?php echo $ts; ?>" data-booked="true">
+                                <option value="<?php echo $ts; ?>" date = "<?php echo $filter_date; ?>" data-booked="true">
                                     <?php echo $ts; ?>
                                 </option>
                             <?php } else { ?>
@@ -125,10 +125,6 @@ foreach ($data['availability'] as $availability) {
                         console.log(response);
                     }
                 });
-            });
-
-            $('.select__item--selected').click(function () {
-                console.log('clicked');
             });
         });
     </script>
