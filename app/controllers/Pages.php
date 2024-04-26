@@ -297,15 +297,25 @@ class Pages extends Controller
     }
         
     public function OrderReportt(){
-        $this->view('Pages/Report/orderReport');}
+        $data = [
+            'Product' => '',
+            'Product_error' => ''
+        ];
+        $this->view('Pages/Report/orderReport', $data);
+    }
+
     public function Userlogss(){
-        $this->view('Pages/Report/userlogreport');}
+        $this->view('Pages/Report/userlogreport');
+    }
+
     public function MonthlyOrderReportt(){
-        $this->view('Pages/Report/monthlyORDERreport');}    
+        $this->view('Pages/Report/monthlyORDERreport');
+    }    
         
-        public function Weekly_Reservationn(){
-            $this->view('Pages/Report/Weekly_Reservation');
-        }
+    public function Weekly_Reservationn(){
+        $this->view('Pages/Report/Weekly_Reservation');
+    }
+
     // dashboard
     public function Dashboard($name)
     {

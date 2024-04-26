@@ -129,16 +129,7 @@ class Reports extends Controller
 
     }
 
-    // public function getUserLogs($data){
-        
-    // $invoice_date = $data['invoice_date'];
-    // $invoice_due_date = $data['invoice_due_date'];
-
-    // $this->reportmodel->query("SELECT * FROM userlog WHERE create_date >= :start_date AND create_date <= :end_date");
-
-    // $this->reportmodel->bind(':start_date', $invoice_date);
-    // $this->reportmodel->bind(':end_date', $invoice_due_date);
-    // return $this->reportmodel->resultSet();}
+    
 
     public function OrderReport(){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -148,6 +139,8 @@ class Reports extends Controller
             // Input data
             $data = [
                 'Product' => trim($_POST['Product']),
+
+                'Product_error' => ''
             ];
             if(isset($_POST["download_pdf"])) {
                 $this->reportmodel->OrderGeneratePDF($data);}
