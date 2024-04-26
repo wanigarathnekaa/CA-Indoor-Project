@@ -357,21 +357,44 @@ class Coach extends Controller
             //Input data
             $data = [
                 'email' => trim($_POST['email']),
-                'time_slot' => json_encode($_POST['selected']),
+                'time_slot' => $_POST['selected'],
                 'date' => $_POST['date'],
             ];
 
-            if($this->coachModel->insert_coach_availability($data)){
-                $response = [
-                    'status' => 'success',
-                    'message' => 'Data Inserted Successfully'
-                ];
+            $existing_availability = $this->coachModel->getCoachAvailability($data);
+
+            if($existing_availability){
+                $existing_time_Slots = json_decode($existing_availability[0]->time_slot);
+                $mergedArray = array_unique(array_merge($existing_time_Slots, $data['time_slot']));
+
+                $data['time_slot'] = json_encode($mergedArray);
+                if($this->coachModel->update_coach_availability($data)){
+                    $response = [
+                        'status' => 'success',
+                        'message' => 'Data Updated Successfully'
+                    ];
+                }
+                else{
+                    $response = [
+                        'status' => 'error',
+                        'message' => 'Data Updation Failed'
+                    ];
+                }
             }
             else{
-                $response = [
-                    'status' => 'error',
-                    'message' => 'Data Insertion Failed'
-                ];
+                $data['time_slot'] = json_encode($data['time_slot']);
+                if($this->coachModel->insert_coach_availability($data)){
+                    $response = [
+                        'status' => 'success',
+                        'message' => 'Data Inserted Successfully'
+                    ];
+                }
+                else{
+                    $response = [
+                        'status' => 'error',
+                        'message' => 'Data Insertion Failed'
+                    ];
+                }
             }
 
             header('Content-Type: application/json');
