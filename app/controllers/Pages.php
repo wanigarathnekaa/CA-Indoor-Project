@@ -39,6 +39,11 @@ class Pages extends Controller
         $this->view('Pages/Calendar/calender');
     }
 
+    public function CoachCalendar($name)
+    {
+        $this->view('Pages/Calendar/coachAvailability');
+    }
+
     //booking calender for users(Players, Coaches)
     public function userCalendar($name)
     {
