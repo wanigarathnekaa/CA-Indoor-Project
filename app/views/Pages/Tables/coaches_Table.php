@@ -183,9 +183,10 @@
       <script>
             $(document).ready(function () {
                   $("#searchInput").on("keyup", function () {
-                        var value = $(this).val();
+                        var value = $(this).val().toLowerCase();
                         $("table tbody tr").filter(function () {
-                              $(this).toggle($(this).text().indexOf(value) > -1);
+                              var rowText = $(this).text().toLowerCase();
+                              $(this).toggle(rowText.indexOf(value) > -1);
                         });
                   });
             });
