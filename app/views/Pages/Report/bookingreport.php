@@ -21,30 +21,30 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
         <div class="col-md-6">
 
             <form action="<?php echo URLROOT;?>/Reports/SalesMonthly" method="post">
-            <div class="form-group">
-    <label>Select the Month</label>
-    <select name="Selected_month" id="Selected_month" class="form-control" required>
-        <option value="">Select Month</option>
-        <option value="01">January</option>
-        <option value="02">February</option>
-        <option value="03">March</option>
-        <option value="04">April</option>
-        <option value="05">May</option>
-        <option value="06">June</option>
-        <option value="07">July</option>
-        <option value="08">August</option>
-        <option value="09">September</option>
-        <option value="10">October</option>
-        <option value="11">November</option>
-        <option value="12">December</option>
-    </select>
-</div>
+                <div class="form-group">
+                    <label>Select the Month</label>
+                    <select name="Selected_month" id="Selected_month" class="form-control" >
+                        <option value="">Select Month</option>
+                        <option value="01">January</option>
+                        <option value="02">February</option>
+                        <option value="03">March</option>
+                        <option value="04">April</option>
+                        <option value="05">May</option>
+                        <option value="06">June</option>
+                        <option value="07">July</option>
+                        <option value="08">August</option>
+                        <option value="09">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                    <span class="form-invalid"><?php echo $data['Selected_month_error']; ?></span>
+                </div>
 
                 <div class="btn-container">
-                 <input type="submit" name="filter" value="Filter" class="btn btn-primary">
-                 <input type="submit" name="view_pdf" value="View" class="btn btn-primary">
-                 <input type="submit" name="download_pdf" value="Download" class="btn btn-primary">
-
+                    <input type="submit" name="filter" value="Filter" class="btn btn-primary">
+                    <input type="submit" name="view_pdf" value="View" class="btn btn-primary">
+                    <input type="submit" name="download_pdf" value="Download" class="btn btn-primary">
                 </div>
             </form>
         </div>
@@ -52,8 +52,8 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
     
 </div>
 <?php
-    if ($data && isset($data['bookings']) ) {
-    if(count($data['bookings']) > 0){    
+    if (empty($data['Selected_month_error']) && isset($data1['bookings']) ) {
+    if(count($data1['bookings']) > 0){    
     echo "<div class='alert alert-success'>Filtered bookings:</div>";
     echo "<table class='table table-bordered'>";
     echo "<thead><tr><th>Customer Name</th><th>Booking Date</th><th>Booking Price</th><th>Payment Status</th></tr></thead>";
@@ -64,7 +64,7 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
     $totalNotPaid = 0;
 
     // Fetching results as associative array
-    foreach ($data['bookings'] as $row) {
+    foreach ($data1['bookings'] as $row) {
         echo "<tr>";
         echo "<td>" . $row->name . "</td>";
         echo "<td>" . $row->date . "</td>";
@@ -99,12 +99,13 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
     echo "</table>";
 
     echo "<form method='post'>";
-    echo "<input type='hidden' name='Selected_month' value='" . $data1['Selected_month'] . "'>";
+    echo "<input type='hidden' name='Selected_month' value='" . $data['Selected_month'] . "'>";
     
     echo "</form>";
-} else {
+    } else {
     echo "<div class='alert alert-warning'>No bookings found between the selected dates.</div>";
-}}
+    }
+}
 ?>
 </section>
 <script>

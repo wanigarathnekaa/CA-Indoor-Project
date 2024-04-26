@@ -9,67 +9,67 @@ class Reports extends Controller
         $this->reportmodel = $this->model('M_Report');
 
     }
-    public function SelectReport()
-                     {
-                         
-                         $this->view('Pages/Report/reportSelect');
-                        
 
-                     }
+    // Load the report selection page
+    public function SelectReport()
+    {    
+        $this->view('Pages/Report/reportSelect');
+    }
 
   
     public function SalesAmount(){
 
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                // Valid input
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        
-                // Input data
-                $data = [
-                    'invoice_date' => trim($_POST['invoice_date']),
-                    'invoice_due_date' => trim($_POST['invoice_due_date']), 
-                    
-                    'invoice_date_error' => '',
-                    'invoice_due_date_error' => ''
-                    
-                ];  
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Valid input
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    
+            // Input data
+            $data = [
+                'invoice_date' => trim($_POST['invoice_date']),
+                'invoice_due_date' => trim($_POST['invoice_due_date']), 
                 
-                if (empty($data['invoice_date'])) {
-                    $data['invoice_date_error'] = 'Please enter a start date';
-                }
+                'invoice_date_error' => '',
+                'invoice_due_date_error' => ''
+                
+            ];  
+            
+            // Validate start date
+            if (empty($data['invoice_date'])) {
+                $data['invoice_date_error'] = 'Please enter a start date';
+            }elseif($data['invoice_date'] > date('Y-m-d')){
+                $data['invoice_date_error'] = 'Start date must be less than or equal to today';
+            }
 
-                if (empty($data['invoice_due_date'])) {
-                    $data['invoice_due_date_error'] = 'Please enter an end date';
-                }
-                
+            // Validate end date
+            if (empty($data['invoice_due_date'])) {
+                $data['invoice_due_date_error'] = 'Please enter an end date';
+            }elseif($data['invoice_due_date'] < $data['invoice_date']){
+                $data['invoice_due_date_error'] = 'End date must be greater than start date';
+            }elseif($data['invoice_due_date'] > date('Y-m-d')){
+                $data['invoice_due_date_error'] = 'End date must be less than or equal to today';
+            }
+            
+
+            if(empty($data['invoice_date_error']) && empty($data['invoice_due_date_error'])){
+
                 if(isset($_POST["download_pdf"])) {
                     $this->reportmodel->filterBookingsAndGeneratePDF($data);}
                 else if(isset($_POST["view_pdf"])){
-                    $this->reportmodel->filterBookingsAndGeneratePDF1($data);
-                }
-        
-                // Debugging: Check the data being sent
-                else{
-                // Get bookings data
+                    $this->reportmodel->filterBookingsAndGeneratePDF1($data);}
+                elseif(isset($_POST["filter"])){
+                    // Get bookings data
                     $bookings = $this->reportmodel->getBookingDetails($data);
-            
-                    // Debugging: Check the bookings data
-            
                     $data1 = [
                         'bookings' => $bookings
                     ];
-                    $this->view('Pages/Report/SalesAmount', $data1,$data);
+                    $this->view('Pages/Report/SalesAmount', $data,$data1);
                 }
-                
-            }else{
-                $data = [
-                    'invoice_date' => '',
-                    'invoice_due_date' => '',
-                    'invoice_date_error' => '',
-                    'invoice_due_date_error' => ''
-                ];
+            
+            }
+            else{
                 $this->view('Pages/Report/SalesAmount', $data);
-            } 
+            }
+        }
             
             
         }
@@ -87,18 +87,33 @@ class Reports extends Controller
             // Input data
             $data = [
                 'Selected_month' => trim($_POST['Selected_month']),
+
+                'Selected_month_error' => ''
             ];
-            if(isset($_POST["download_pdf"])) {
-                $this->reportmodel->MonthlyfilterBookingsAndGeneratePDF($data);}
-            else if(isset($_POST["view_pdf"])){
-                $this->reportmodel->MonthlyfilterBookingsAndGeneratePDF1($data);
+
+            // Validate selected month
+            if (empty($data['Selected_month'])) {
+                $data['Selected_month_error'] = 'Please select a month';
+            }elseif($data['Selected_month'] > date('m')){
+                $data['Selected_month_error'] = 'Selected month must be less than or equal to current month';
             }
-            
-            $bookings = $this->reportmodel->getMonthlyBookingDetails($data);
-            $data1 = [
-                'bookings' => $bookings
-            ];
-            $this->view('Pages/Report/bookingreport', $data1,$data);
+
+            if(empty($data['Selected_month_error'])){
+                if(isset($_POST["download_pdf"])) {
+                    $this->reportmodel->MonthlyfilterBookingsAndGeneratePDF($data);}
+                else if(isset($_POST["view_pdf"])){
+                    $this->reportmodel->MonthlyfilterBookingsAndGeneratePDF1($data);
+                }elseif(isset($_POST["filter"])){
+                    $bookings = $this->reportmodel->getMonthlyBookingDetails($data);
+                    $data1 = [
+                        'bookings' => $bookings
+                    ];
+                    $this->view('Pages/Report/bookingreport', $data,$data1);
+                }
+            }
+            else{
+                $this->view('Pages/Report/bookingreport', $data);
+            }
         }
         
 // if(isset($_POST["Filter"])){

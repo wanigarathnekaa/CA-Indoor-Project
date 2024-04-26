@@ -23,13 +23,13 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
                 <form action="<?php echo URLROOT;?>/Reports/SalesAmount" method="post">
                     <div class="form-group">
                         <label>Start Date</label>
-                        <input type="text" name="invoice_date" id="start_date" class="form-control datepicker" value="<?php echo $data1['invoice_date']; ?>" >
-                        <span class="form-invalid"><?php echo $data1['invoice_date_error']; ?></span>
+                        <input type="text" name="invoice_date" id="start_date" class="form-control datepicker" value="<?php echo $data['invoice_date']; ?>" >
+                        <span class="form-invalid"><?php echo $data['invoice_date_error']; ?></span>
                     </div>
                     <div class="form-group">
                         <label>End Date</label>
-                        <input type="text" name="invoice_due_date" id="end_date" class="form-control datepicker" value="<?php echo $data1['invoice_due_date']; ?>" >
-                        <span class="form-invalid"><?php echo $data1['invoice_due_date_error']; ?></span>
+                        <input type="text" name="invoice_due_date" id="end_date" class="form-control datepicker" value="<?php echo $data['invoice_due_date']; ?>" >
+                        <span class="form-invalid"><?php echo $data['invoice_due_date_error']; ?></span>
                     </div>
                     <div class="btn-container">
                         <input type="submit" name="filter" value="Filter" class="btn btn-primary">
@@ -40,8 +40,8 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
             </div>
         </div>
     </div>
-    <?php if ($data && isset($data['bookings']) ) {
-        if(count($data['bookings']) > 0){
+    <?php if (empty($data['invoice_date_error']) && empty($data['invoice_due_date_error']) && isset($data1['bookings'])) {
+        if(count($data1['bookings']) > 0){
             echo "<div class='alert alert-success'>Filtered bookings:</div>";
             echo "<table class='table table-bordered'>";
             echo "<thead><tr><th>Customer Name</th><th>Booking Date</th><th>Booking Price</th><th>Payment Status</th></tr></thead>";
@@ -52,7 +52,7 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
             $totalNotPaid = 0;
 
             // Fetching results as associative array
-            foreach ($data['bookings'] as $row) {
+            foreach ($data1['bookings'] as $row) {
                 echo "<tr>";
                 echo "<td>" . $row->name . "</td>";
                 echo "<td>" . $row->date . "</td>";
@@ -86,8 +86,8 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
             echo "</table>";
 
             echo "<form method='post'>";
-            echo "<input type='hidden' name='invoice_date' value='" . $data1['invoice_date'] . "'>";
-            echo "<input type='hidden' name='invoice_due_date' value='".$data1['invoice_date']."'>";
+            echo "<input type='hidden' name='invoice_date' value='" . $data['invoice_date'] . "'>";
+            echo "<input type='hidden' name='invoice_due_date' value='".$data['invoice_date']."'>";
             echo "</form>";
         } 
         else {
