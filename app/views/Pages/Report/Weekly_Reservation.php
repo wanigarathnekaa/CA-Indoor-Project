@@ -9,8 +9,12 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
-<section class="home">
-<div class='container pt-5'>
+<?php
+$role = "Admin";
+require APPROOT.'/views/Pages/Dashboard/header.php';
+require APPROOT.'/views/Components/Side Bars/sideBar.php';
+?>
+<section class="home"><div class='container pt-5'>
     <h1 class='text-center text-primary'>Booking Report for Selected Date Range</h1><hr>
     <div class="row">
         <div class="col-md-6">
@@ -75,8 +79,8 @@
 </div> -->
 
                 <div class="btn-container">
-                    <input type="submit" name="filter" value="Download" class="btn btn-primary">
-                    <!-- <input type="submit" name="download_pdf" value="Download" class="btn btn-primary"> -->
+                        <input type="submit" name="view_pdf" value="View" class="btn btn-primary">
+                        <input type="submit" name="download_pdf" value="Download" class="btn btn-primary">                    <!-- <input type="submit" name="download_pdf" value="Download" class="btn btn-primary"> -->
                 </div>
             </form>
         </div>

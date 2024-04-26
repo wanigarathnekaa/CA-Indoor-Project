@@ -203,7 +203,7 @@ class Reports extends Controller
             $data1 = [
                 'bookings' => $bookings
             ];
-            $this->view('Pages/Report/bookingreport', $data1,$data);
+            $this->view('Pages/Report/userlogreport', $data1,$data);
 
   
         }
@@ -233,19 +233,29 @@ class Reports extends Controller
                 'invoice_date' => trim($_POST['invoice_date']),
                 'invoice_due_date' => trim($_POST['invoice_due_date']),   
             ];
+            $bookings=$this->reportmodel->getReservationChart($data);}
+
+            $data1 = [
+                'bookings' => $bookings
+            ];
+
+            
     
             // Check if the report type is "payment-status"
             if ($_POST['report_type'] === 'payment-status') {
-                if (isset($_POST["filter"])) {
+                if (isset($_POST["view_pdf"])) {
                     // Display the reservation chart
-                    $this->reportmodel->displayReservationChart($data);
+                    $this->reportmodel->displayReservationChart1($data1,$data);
                 } elseif (isset($_POST["download_pdf"])) {
+                    $this->reportmodel->displayReservationChart($data1,$data);
+
             }}
             else if ($_POST['report_type'] === 'weekly') {
-                if (isset($_POST["filter"])) {
+                if (isset($_POST["view_pdf"])) {
                     // Display the reservation chart
-                    $this->reportmodel->displayRevenueChart($data);
+                    $this->reportmodel->displayRevenueChart1($data);
                 } elseif (isset($_POST["download_pdf"])) {
+                    $this->reportmodel->displayRevenueChart($data);
             }
         } else {
             // If the form is not submitted, load the default view
@@ -258,5 +268,5 @@ class Reports extends Controller
     
   
     
-    
-        }}
+
+        }
