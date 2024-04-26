@@ -289,7 +289,12 @@ class Pages extends Controller
     }
         
     public function SalesMonthlyy(){
-        $this->view('Pages/Report/bookingreport');}
+        $data = [
+            'Selected_month' => '',
+            'Selected_month_error' => ''
+        ];
+        $this->view('Pages/Report/bookingreport', $data);
+    }
         
     public function OrderReportt(){
         $this->view('Pages/Report/orderReport');}

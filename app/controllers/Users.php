@@ -46,12 +46,12 @@ class Users extends Controller
                 'confirmPwd_err' => "",
             ];
 
-            
+
 
             //validate name
             if (empty($data['name'])) {
                 $data['name_err'] = "Please enter a name";
-            }elseif (!preg_match("/^[a-zA-Z-' ]*$/", $data['name'])) {
+            } elseif (!preg_match("/^[a-zA-Z-' ]*$/", $data['name'])) {
                 $data['name_err'] = "Only letters and white space allowed";
             }
 
@@ -84,7 +84,7 @@ class Users extends Controller
             if (empty($data['phoneNumber'])) {
                 $data['phoneNumber_err'] = "Please enter a phone number";
             } elseif (strlen($data['phoneNumber']) != 10) {
-                $data['phoneNumber_err'] = "Please enter a valid phone number";     
+                $data['phoneNumber_err'] = "Please enter a valid phone number";
             } elseif (!preg_match("/^[0-9]*$/", $data['phoneNumber'])) {
                 $data['phoneNumber_err'] = "Please enter a valid phone number";
             }
@@ -174,7 +174,7 @@ class Users extends Controller
             } else {
                 //check email already registered or not
                 if ($this->userManagerModel->findUserByEmail($data['email'])) {
-            
+
                     $role = 'Manager';
                 } elseif ($this->userModel->findUserByEmail($data['email'])) {
                     $role = 'User';
@@ -305,10 +305,10 @@ class Users extends Controller
             }
             if (empty($data['email_err'])) {
                 if ($this->userModel->findUserByEmail($email)) {
-                    $user=$this->userModel->findUserByEmail($email);
+                    $user = $this->userModel->findUserByEmail($email);
                     // flash('complaint_created');
                     $password = $this->userModel->generateRandomPassword();
-                    if($this->userModel->sendNewPassword($email,$password)){
+                    if ($this->userModel->sendNewPassword($email, $password)) {
                         $this->view('Users/login');
 
                     }
@@ -457,7 +457,7 @@ class Users extends Controller
             //validate name
             if (empty($data['name'])) {
                 $data['name_err'] = "Please enter a name";
-            }elseif (!preg_match("/^[a-zA-Z-' ]*$/", $data['name'])) {
+            } elseif (!preg_match("/^[a-zA-Z-' ]*$/", $data['name'])) {
                 $data['name_err'] = "Only letters and white space allowed";
             }
 
@@ -469,7 +469,7 @@ class Users extends Controller
             //validate email
             if (empty($data['email'])) {
                 $data['email_err'] = "Please enter an email";
-            }else {
+            } else {
                 $userdata = $this->userModel->findUser($_SESSION['user_email']);
                 if ($data['email'] != $userdata->email) {
                     // check email already registered or not
@@ -494,15 +494,15 @@ class Users extends Controller
             if (empty($data['phoneNumber'])) {
                 $data['phoneNumber_err'] = "Please enter a phone number";
             } elseif (strlen($data['phoneNumber']) != 10) {
-                $data['phoneNumber_err'] = "Please enter a valid phone number";     
+                $data['phoneNumber_err'] = "Please enter a valid phone number";
             } elseif (!preg_match("/^[0-9]*$/", $data['phoneNumber'])) {
                 $data['phoneNumber_err'] = "Please enter a valid phone number";
             }
 
-            
+
             //If validation is completed and no error, then register the user
             if (empty($data['name_err']) && empty($data['user_name_err']) && empty($data['email_err']) && empty($data['phoneNumber_err'])) {
-                
+
                 if ($this->userModel->updateUser($data)) {
                     redirect('Pages/Profile/user');
                 } else {
@@ -537,21 +537,21 @@ class Users extends Controller
             ];
 
             // Validate old password
-            if(empty($data['oldPassword'])){
+            if (empty($data['oldPassword'])) {
                 $data['old_password_err'] = "Please enter the current password";
             }
 
             // Validate new password
-            if(empty($data['newPassword'])){
+            if (empty($data['newPassword'])) {
                 $data['new_password_err'] = "Please enter the new password";
-            } elseif(strlen($data['newPassword']) < 8){
+            } elseif (strlen($data['newPassword']) < 8) {
                 $data['new_password_err'] = "Password must be at least 8 characters";
             }
 
             // Validate confirm password
-            if(empty($data['confirmPassword'])){
+            if (empty($data['confirmPassword'])) {
                 $data['confirm_password_err'] = "Please confirm the password";
-            } elseif($data['newPassword'] != $data['confirmPassword']){
+            } elseif ($data['newPassword'] != $data['confirmPassword']) {
                 $data['confirm_password_err'] = "Passwords do not match";
             }
 
@@ -574,12 +574,12 @@ class Users extends Controller
 
                     } else {
                         $hashedNewPassword = password_hash($data['newPassword'], PASSWORD_DEFAULT);
-                        if($this->userModel->updatePassword($user->email, $hashedNewPassword)){
+                        if ($this->userModel->updatePassword($user->email, $hashedNewPassword)) {
                             redirect('Pages/Profile/user');
                         } else {
                             die('Something Went wrong');
                         }
-                        
+
                     }
                 } else {
                     $data['old_password_err'] = "Current Password is incorrect.";
@@ -587,7 +587,7 @@ class Users extends Controller
                     // $this->view('Pages/UserProfiles/changePassword');
                 }
             }
-        }else{
+        } else {
             $data = [
                 'oldPassword' => '',
                 'newPassword' => '',
@@ -603,10 +603,10 @@ class Users extends Controller
 
         $this->view('Pages/UserProfiles/changePassword', $data);
     }
-    
-   
-    
-    
+
+
+
+
     public function delete()
     {
         // var_dump($_POST);
