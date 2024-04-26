@@ -989,7 +989,11 @@ class Pages extends Controller
 
     public function coachAvailability($name)
     {
-        $this->view('Pages/Coach/availabletimes');
+        $availability = $this->pagesModel->getCoachAvailability();
+        $data = [
+            'availability' => $availability,
+        ];
+        $this->view('Pages/Coach/availabletimes', $data);
     }
 
 }
