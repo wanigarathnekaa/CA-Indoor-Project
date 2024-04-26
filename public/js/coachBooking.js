@@ -35,7 +35,19 @@ class CustomSelect {
         this._storeSelectedDetails(optionElement);
       }
 
-      itemElement.addEventListener("click", () => {
+      //   itemElement.addEventListener("click", () => {
+      //     if (
+      //       this.originalSelect.multiple &&
+      //       itemElement.classList.contains("select__item--selected")
+      //     ) {
+      //       this._deselect(itemElement, optionElement);
+      //     } else if (!isBooked) {
+      //       this._select(itemElement, optionElement);
+      //       this._storeSelectedDetails(optionElement);
+      //     }
+      //   });
+
+      itemElement.onclick = function () {
         if (
           this.originalSelect.multiple &&
           itemElement.classList.contains("select__item--selected")
@@ -45,7 +57,15 @@ class CustomSelect {
           this._select(itemElement, optionElement);
           this._storeSelectedDetails(optionElement);
         }
-      });
+
+        // Add your onclick logic here
+        if (isBooked) {
+            var optionValue = optionElement.getAttribute("value");
+            console.log("Option Value:", optionValue);
+            var optionDate = optionElement.getAttribute("date");
+            console.log("Option Date:", optionDate);
+        }
+      }.bind(this);
     });
 
     this.originalSelect.insertAdjacentElement("afterend", this.customSelect);
@@ -119,7 +139,3 @@ class CustomSelect {
 document.querySelectorAll(".custom-select").forEach((selectElement) => {
   new CustomSelect(selectElement);
 });
-
-
-
-
