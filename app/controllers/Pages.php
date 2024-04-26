@@ -272,7 +272,14 @@ class Pages extends Controller
     }
     //Report
     public function SalesAmountt(){
-        $this->view('Pages/Report/SalesAmount');}
+        $data = [
+            'invoice_date' => '',
+            'invoice_due_date' => '',
+            'invoice_date_error' => '',
+            'invoice_due_date_error' => ''
+        ];
+        $this->view('Pages/Report/SalesAmount', $data);
+    }
         
     public function SalesMonthlyy(){
         $this->view('Pages/Report/bookingreport');}
