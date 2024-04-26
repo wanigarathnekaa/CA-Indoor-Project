@@ -20,38 +20,57 @@ class Reports extends Controller
   
     public function SalesAmount(){
 
-                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                            // Valid input
-                            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                // Valid input
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        
+                // Input data
+                $data = [
+                    'invoice_date' => trim($_POST['invoice_date']),
+                    'invoice_due_date' => trim($_POST['invoice_due_date']), 
                     
-                            // Input data
-                            $data = [
-                                'invoice_date' => trim($_POST['invoice_date']),
-                                'invoice_due_date' => trim($_POST['invoice_due_date']),   
-                            ];   
-                            if(isset($_POST["download_pdf"])) {
-                                $this->reportmodel->filterBookingsAndGeneratePDF($data);}
-                            else if(isset($_POST["view_pdf"])){
-                                $this->reportmodel->filterBookingsAndGeneratePDF1($data);
-                            }
+                    'invoice_date_error' => '',
+                    'invoice_due_date_error' => ''
                     
-                            // Debugging: Check the data being sent
-                            else{
-                            // Get bookings data
-                            $bookings = $this->reportmodel->getBookingDetails($data);
-                    
-                            // Debugging: Check the bookings data
-                    
-                            $data1 = [
-                                'bookings' => $bookings
-                            ];
-                            $this->view('Pages/Report/SalesAmount', $data1,$data);
-                        }
-                         
-                        }
-                    
-                    
-     
+                ];  
+                
+                if (empty($data['invoice_date'])) {
+                    $data['invoice_date_error'] = 'Please enter a start date';
+                }
+
+                if (empty($data['invoice_due_date'])) {
+                    $data['invoice_due_date_error'] = 'Please enter an end date';
+                }
+                
+                if(isset($_POST["download_pdf"])) {
+                    $this->reportmodel->filterBookingsAndGeneratePDF($data);}
+                else if(isset($_POST["view_pdf"])){
+                    $this->reportmodel->filterBookingsAndGeneratePDF1($data);
+                }
+        
+                // Debugging: Check the data being sent
+                else{
+                // Get bookings data
+                    $bookings = $this->reportmodel->getBookingDetails($data);
+            
+                    // Debugging: Check the bookings data
+            
+                    $data1 = [
+                        'bookings' => $bookings
+                    ];
+                    $this->view('Pages/Report/SalesAmount', $data1,$data);
+                }
+                
+            }else{
+                $data = [
+                    'invoice_date' => '',
+                    'invoice_due_date' => '',
+                    'invoice_date_error' => '',
+                    'invoice_due_date_error' => ''
+                ];
+                $this->view('Pages/Report/SalesAmount', $data);
+            } 
+            
             
         }
 

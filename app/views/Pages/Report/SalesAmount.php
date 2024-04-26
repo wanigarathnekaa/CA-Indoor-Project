@@ -5,12 +5,13 @@
     <title>Booking Report for Selected Date Range</title>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/bookingFilter.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 <?php
-$role = "Admin";
+$role = $_SESSION['user_role'];
 require APPROOT.'/views/Pages/Dashboard/header.php';
 require APPROOT.'/views/Components/Side Bars/sideBar.php';
 ?>
@@ -22,11 +23,13 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
                 <form action="<?php echo URLROOT;?>/Reports/SalesAmount" method="post">
                     <div class="form-group">
                         <label>Start Date</label>
-                        <input type="text" name="invoice_date" id="start_date" class="form-control datepicker" required>
+                        <input type="text" name="invoice_date" id="start_date" class="form-control datepicker" value="<?php echo $data1['invoice_date']; ?>" >
+                        <span class="form-invalid"><?php echo $data1['invoice_date_error']; ?></span>
                     </div>
                     <div class="form-group">
                         <label>End Date</label>
-                        <input type="text" name="invoice_due_date" id="end_date" class="form-control datepicker" required >
+                        <input type="text" name="invoice_due_date" id="end_date" class="form-control datepicker" value="<?php echo $data1['invoice_due_date']; ?>" >
+                        <span class="form-invalid"><?php echo $data1['invoice_due_date_error']; ?></span>
                     </div>
                     <div class="btn-container">
                         <input type="submit" name="filter" value="Filter" class="btn btn-primary">
