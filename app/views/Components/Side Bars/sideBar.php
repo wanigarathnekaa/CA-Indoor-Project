@@ -164,6 +164,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-link">
+                                    <a href="<?php echo URLROOT; ?>/Pages/CoachCalendar/coach">
+                                        <i class="bx bxs-calendar icon"></i>
+                                        <span class="text nav-text">Availability</span>
+                                    </a>
+                                </li>
+                                <li class="nav-link">
                                     <a href="<?php echo URLROOT; ?>/Pages/View_Advertisement/coach">
 
                                         <i class="fa-brands fa-adversal icon"></i>
