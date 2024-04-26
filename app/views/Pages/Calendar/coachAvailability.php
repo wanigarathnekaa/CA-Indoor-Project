@@ -72,7 +72,7 @@ function build_calendar($month, $year)
             $calendar .= "<a class = 'btn btn-danger btn-xs'><td class='$today'><h4>$currentDay</h4></td></a>";
         } else if ($date <= $last_date_of_month) {
             $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : '';
-            $calendar .= "<td class='$today'><a href='http://localhost/C&A_Indoor_Project/Pages/Manager_Booking/manager?fulldate=$date&bookingID=" . $bookingId . "' class = 'btn btn-success btn-xs' target='_top'><h4>$currentDay</h4></a></td>";
+            $calendar .= "<td class='$today'><a href='http://localhost/C&A_Indoor_Project/Pages/coachAvailability/coach?fulldate=$date&bookingID=" . $bookingId . "' class = 'btn btn-success btn-xs' target='_top'><h4>$currentDay</h4></a></td>";
         } else {
             $calendar .= "<a class = 'btn btn-danger btn-xs'><td class='$today'><h4>$currentDay</h4></td></a>";
         }
