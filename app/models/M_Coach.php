@@ -171,5 +171,19 @@ use PHPMailer\PHPMailer\Exception;
                 return false;
             }
         }
+
+        public function insert_coach_availability($data){
+            $this->db->query('INSERT INTO coach_availability (email, date, time_slot) VALUES (:email, :date, :time_slot)');
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':date', $data['date']);
+            $this->db->bind(':time_slot', $data['time_slot']);
+
+            if($this->db->execute()){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
     }
 ?>

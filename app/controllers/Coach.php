@@ -179,8 +179,6 @@ class Coach extends Controller
             $this->view('Pages/CoachRegistration/coachRegistration', $data);
     }
 
-
-
     // edit function.....................................................
     public function edit()
     {
@@ -336,10 +334,6 @@ class Coach extends Controller
         $this->view('Pages/UserProfiles/editProfile', $data);
     }
 
-
-
-
-
     // delete function.....................................................
     public function delete()
     {
@@ -350,6 +344,41 @@ class Coach extends Controller
             die("Something Went Wrong");
         }
 
+    }
+
+    public function saveAvailability()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //form is submitting
+
+            //Valid input
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            //Input data
+            $data = [
+                'email' => trim($_POST['email']),
+                'time_slot' => json_encode($_POST['selected']),
+                'date' => $_POST['date'],
+            ];
+
+            if($this->coachModel->insert_coach_availability($data)){
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Data Inserted Successfully'
+                ];
+            }
+            else{
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Data Insertion Failed'
+                ];
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+            
+        }
     }
 
 

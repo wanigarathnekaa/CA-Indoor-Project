@@ -67,6 +67,13 @@ class M_Pages
 
         return $this->db->resultSet();
     }
+
+    public function getCoachAvailability()
+    {
+        $this->db->query('SELECT * FROM coach_availability');
+
+        return $this->db->resultSet();
+    }
     public function getManagers()
     {
         $this->db->query('SELECT * FROM managers');
