@@ -8,11 +8,7 @@
 
       <!-- Stylesheets -->
       <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/cashierDashboard.css">
-<<<<<<< HEAD
-      <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/components/charts.css">
-=======
->>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
-      
+
       <!-- Font Awesome -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">      
 </head>
@@ -30,11 +26,9 @@
 
             <!-- Cards -->
             <div class="cardBox">
-<<<<<<< HEAD
-                  <a class="card" href="C&A_Indoor_Project/Pages/coachTable/user">
-=======
+
                   <a class="card" href="C&A_Indoor_Project/Pages/coachTable/cashier">
->>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
+
                         <div class="infor">
                               <div class="numbers"><?php echo $data1["CoachCount"]?></div>
                               <div class="cardName">Coaches</div>
@@ -44,11 +38,9 @@
                         </div>
                   </a>
 
-<<<<<<< HEAD
-                  <a class="card" href="C&A_Indoor_Project/Pages/playerTable/user">
-=======
+
                   <a class="card" href="C&A_Indoor_Project/Pages/playerTable/cashier">
->>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
+
                         <div>
                               <div class="numbers"><?php echo $data1["UserCount"]?></div>
                               <div class="cardName">Players</div>
@@ -58,28 +50,12 @@
                         </div>
                   </a>
 
-<<<<<<< HEAD
-                  <a class="card" href="C&A_Indoor_Project/Pages/View_Advertisement/manager">
-                        <div>
-                              <div class="numbers"><?php echo $data1["advertCount"]?></div>
-                              <div class="cardName">Advertisement</div>
-                        </div>
-                        <div class="iconBx">
-                              <i class="fa-brands fa-adversal"></i>
-                              <!-- <i class="fa-solid fa-file-contract"></i> -->
-                        </div>
-                  </a>
 
-                  <a class="card" href="C&A_Indoor_Project/Pages/reservationTable/manager">
-                        <div>
-                              <div class="numbers"><?php echo $data1["Reserve_Count"]?></div>
-                              <div class="cardName">Reservations</div>
-=======
                   <a class="card" href="C&A_Indoor_Project/Pages/reservationTable/cashier">
                         <div>
                               <div class="numbers"><?php echo $data1["Reserve_Count"]?></div>
                               <div class="cardName">Time Slot<br>Reservations</div>
->>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
+
                         </div>
 
                         <div class="iconBx">
@@ -87,36 +63,8 @@
                         </div>
                   </a>
 
-<<<<<<< HEAD
-                  <a class="card" href="#">
-                        <div>
-                              <div class="numbers"></div>
-                              <div class="cardName">Reports</div>
-                        </div>
-                        <div class="iconBx">
-                              <i class='bx bxs-report'></i>
-                        </div>
-                  </a>
 
-                  <a class="card" href="C&A_Indoor_Project/Pages/Inventory_Management/manager">
-                        <div>
-                              <div class="numbers"></div>
-                              <div class="cardName">Inventory Management</div>
-                        </div>
-                        <div class="iconBx">
-                              <i class="fa-solid fa-store"></i>
-                        </div>
-                  </a>
-
-                  <a class="card" href="http://localhost/C&A_Indoor_Project/Pages/Coach_Registration/coach">
-                        <div>
-                              <div class="numbers"></div>
-                              <div class="cardName">Registration</div>
-                        </div>
-
-                        <div class="iconBx">
-                              <i class="fa-solid fa-user-plus"></i>
-=======
+     
                   <a class="card" href="C&A_Indoor_Project/Pages/bookingTable/cashier">
                         <div>
                               <div class="numbers"><?php echo $data1["bookingCount"]?></div>
@@ -147,7 +95,7 @@
 
                         <div class="iconBx">
                               <i class="fa-solid fa-calendar-days"></i>
->>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
+
                         </div>
                   </a>
             </div>
@@ -159,11 +107,9 @@
                   <!-- Recent Reservations -->
                   <div class="tablediv">
                         <?php
-<<<<<<< HEAD
-                              require APPROOT . '/views/Pages/Tables/dailyReservation.php';
-=======
+
                               require APPROOT . '/views/Pages/Tables/cashierReservation.php';
->>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
+
                         ?>
                   </div>
                   
@@ -172,40 +118,12 @@
                         <iframe src="http://localhost/C&A_Indoor_Project/Pages/Calendar/User" frameborder="0"></iframe>                        
                   </div>
             </div> 
-<<<<<<< HEAD
-
-            
-
-            <!-- chart -->
-            <div class="charts">
-                  <!-- Weekly Reservations chart -->
-                  <?php
-                        require APPROOT . '/views/Pages/Charts/weeklyReservationsChart.php';
-                  ?>
-
-                  <!-- Customers Count chart -->
-                  <?php
-                        require APPROOT . '/views/Pages/Charts/customersCountChart.php';
-                  ?>
-
-                  <!-- Reservations Net chart -->
-                  <?php
-                        require APPROOT . '/views/Pages/Charts/reservationsNetChart.php';
-                  ?>
-            </div>
-
-=======
->>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
-      </section>
+ </section>
 
 
       <!-- javascripts -->
       <script src="<?php echo URLROOT; ?>/js/sideBar.js"></script>
-<<<<<<< HEAD
 
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-=======
->>>>>>> c7fe152c98711b399b473054f9c6ee90e09b9ea7
 </body>
 
 </html>

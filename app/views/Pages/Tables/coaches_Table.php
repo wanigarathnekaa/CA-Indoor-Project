@@ -72,7 +72,8 @@
                                     <!-- <th></th> -->
                               </tr>
                         </thead>
-
+<!-- <?php print_r($data1); ?> -->
+<!-- <?php print_r($data); ?> -->
                         <!-- table body -->
                         <tbody>
                               <?php $i = 0; ?>
