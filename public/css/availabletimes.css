@@ -1,0 +1,179 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
+:root {
+  --color01: #2b6c76;
+  --color02: #4f9da9;
+  --color03: #a7d8d7;
+  --color04: #eaf3f4;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #000000;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "poppins", sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+  font-family: "popins";
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  justify-content: center;
+  align-items: center;
+}
+.container{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.text-center {
+  margin-top: 20px;
+  text-align: center;
+  padding-bottom: 10px;
+  font-size: 25px;
+  color: var(--color01);
+}
+
+.timeSlots{
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  height: 100%;
+  background-color: #2b6c76;
+  /* margin-left: 10%;
+  margin-right: 10%; */
+}
+.slot{
+      display: flex;
+  background-color: var(--color04);
+  padding: 10px 20px 20px 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  font-size: 1em;
+}
+
+
+
+.netType {
+  font-size: 20px;
+  text-align: center;
+}
+
+#confirmationForm {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.confBut {
+    background-color: var(--color01); 
+    color: var(--white);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.confBut:hover {
+    background-color: var(--color02);
+}
+
+/* .form-group {
+    background-color: var(--color02);
+    color: #fff;
+    cursor: pointer;
+  } */
+
+.select {
+  margin-top: 5px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+}
+
+.select__item {
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 3px;
+  background: var(--color02);
+  color: #fff;
+  transition: background 0.1s;
+}
+
+.select__item--selected {
+  background: var(--color01);
+  color: var(--gray);
+}
+
+.select__item--booked {
+  background-color: #aa3434;
+  color: #fff;
+  text-decoration: line-through;
+}
+
+@media (max-width: 768px) {
+  .container{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .timeSlots{
+    grid-template-columns: repeat(1, 1fr);
+    /* margin-left: 5%;
+    margin-right: 5%; */
+  }
+  .timeSlots .slot{
+    padding:20px 20px 10px 20px ;
+  }
+  .timeSlots .slot .row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .netType {
+    font-size: 16px;
+  }
+  .select {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+@media (max-width: 480px){
+  .container{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .timeSlots{
+    grid-template-columns: repeat(1, 1fr);
+    /* margin-left: 5%;
+    margin-right: 5%; */
+  }
+  .timeSlots .slot{
+    padding:20px 20px 10px 20px ;
+  }
+ 
+  .netType {
+    font-size: 16px;
+  }
+  .select {
+    grid-template-columns: repeat(3, 1fr);
+    font-size: 9px;
+  }
+}
+
+
+
+
+

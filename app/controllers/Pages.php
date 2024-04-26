@@ -962,6 +962,12 @@ class Pages extends Controller
     //     $this->view('Components/contactUs');
     // }
 
+
+    public function coachAvailability($name)
+    {
+        $this->view('Pages/Coach/availabletimes');
+    }
+
 }
 
 ?>
