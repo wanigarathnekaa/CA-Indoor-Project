@@ -71,6 +71,14 @@ foreach ($data['availability'] as $availability) {
                 <i class="fa-solid fa-business-time icon"></i>
                 <h1 class="form-title">Available Time Slots</h1>
             </div>
+            <div class="header">
+                <div class="date">
+                    <h2><?php echo $filter_date; ?></h2>
+                </div>
+                <div class="day">
+                    <h2><?php echo date('l', strtotime($filter_date)); ?></h2>
+                </div>
+            </div>
             <div class="slot">
                 <div class="form-group">
                     <select name="language" class="custom-select" multiple>
