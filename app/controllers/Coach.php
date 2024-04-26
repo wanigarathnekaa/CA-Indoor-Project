@@ -442,8 +442,48 @@ class Coach extends Controller
         exit();
     }
 
+    public function getAvailableCoaches()
+    {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+        $timeSlots = $_POST['timeSlots'];
 
+        $time_slot_array = json_decode(html_entity_decode($timeSlots));
+        $ts_array = [];
+        foreach ($time_slot_array as $ts) {
+            $ts_array[] = $ts->timeSlot;
+        }
+
+        $coaches = $this->coachModel->getCoachesAvailable();
+        $coaches_email = [];
+        foreach ($coaches as $coach) {
+            $available_time_slots = json_decode($coach->time_slot);
+            $ts_array = array_map('trim', $ts_array);
+            if (array_diff($ts_array, $available_time_slots) === array()) {
+                // $ts_array is a subset of $available_time_slots
+                // Add your desired logic here
+                $coaches_email[] = $coach->email;
+            } else {
+                // $ts_array is not a subset of $available_time_slots
+                // Add your desired logic here
+            }
+        }
+
+        $output = '<option selected disabled>--Available Coaches--</option>';
+        for ($i = 0; $i < count($coaches_email); $i++) {
+            $email = $coaches_email[$i];
+            $coaches_details = $this->coachModel->getCoachUserByEmail($email);
+            $output .= '<option value="' . $coaches_email[$i] . '">' . $coaches_details->uid . " - Mr." . $coaches_details->name . '</option>';
+        }
+
+        $response = [
+            'output' => $output,
+        ];
+
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit();
+    }
 }
 
 

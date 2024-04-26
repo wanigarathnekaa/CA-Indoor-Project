@@ -81,19 +81,14 @@ $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
 
                     <div class="input-field">
                         <label>Who is the coach?</label>
-                        <select name="coach" required>
+                        <select name="coach" id="coach" required>
                             <option disabled selected>Select the coach</option>
-                            <?php foreach ($data as $coach): ?>
-                                <option>
-                                    <?php echo "{$coach->name}" ?>
-                                </option>
-                            <?php endforeach; ?>
                         </select>
                     </div>
 
                     <input type="hidden" name="timeSlotsAndNetTypes" id="timeSlotsAndNetTypes">
 
-                    <input type="hidden" name="booking_delete_id" id="booking_delete_id" value=<?php echo $bookingId;?>>
+                    <input type="hidden" name="booking_delete_id" id="booking_delete_id" value=<?php echo $bookingId; ?>>
 
                     <!-- net price -->
                     <div class="input-field">
@@ -103,7 +98,7 @@ $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
                     </div>
 
                     <input type="hidden" name="bookingPrice" id="bookingPrice">
-                    
+
 
                     <button type="submit" name="booking">
                         <span class="btnText">Confirm</span>
@@ -118,29 +113,50 @@ $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
     <!-- Script -->
     <script src="<?php echo URLROOT; ?>/js/bookingScript.js"></script>
     <script>
-        $("#email").change(function (e) {
-            e.preventDefault();
-            var email = $("#email").val();
+        $(document).ready(function () {
+            $("#email").change(function (e) {
+                e.preventDefault();
+                var email = $("#email").val();
 
-            $.ajax({
-                type: "POST",
-                url: "<?php echo URLROOT; ?>/Users/getUserByEmail",
-                data: {
-                    email: email
-                },
-                dataType: 'json',
-                success: function (response) {
-                    console.log(response);
-                    if (response == false) {
-                        $(".user-invalid").text("User not found");
-                    } else {
-                        $(".user-invalid").text("");
-                        $("#name").val(response.name);
-                        $("#phoneNumber").val(response.phoneNumber);
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo URLROOT; ?>/Users/getUserByEmail",
+                    data: {
+                        email: email
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log(response);
+                        if (response == false) {
+                            $(".user-invalid").text("User not found");
+                        } else {
+                            $(".user-invalid").text("");
+                            $("#name").val(response.name);
+                            $("#phoneNumber").val(response.phoneNumber);
+                        }
                     }
-                }
-            })
+                })
+            });
+
+            $('#coach').click(function () {
+                var timeSlots = $("#timeSlotsAndNetTypes").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo URLROOT; ?>/Coach/getAvailableCoaches",
+                    data: {
+                        timeSlots: timeSlots
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log(response);
+                        $("#coach").html(response.output);
+                    }
+                });
+            });
+
         });
+
     </script>
 </body>
 

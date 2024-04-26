@@ -62,7 +62,6 @@ body {
   color: var(--black2);
   
   margin-bottom: 10px;
-  
   font-size: 1.5em;
   /*border-bottom: 1px solid var(--color01);*/
 }
@@ -84,7 +83,6 @@ body {
   border-top: 1px solid var(--black1);
   font-size: 1em;
 }
-
 .slot{
   /* display: flex; */
   /* background-color: var(--color04); */

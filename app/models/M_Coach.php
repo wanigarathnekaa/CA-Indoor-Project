@@ -210,5 +210,20 @@ use PHPMailer\PHPMailer\Exception;
                 return false;
             }
         }
+
+        public function getCoachesAvailable()
+        {
+            $this->db->query('SELECT * FROM coach_availability');
+
+            return $this->db->resultSet();
+        }
+
+        public function getCoachUserByEmail($email){
+            $this->db->query('SELECT * FROM user WHERE email =:email');
+            $this->db->bind(':email', $email);
+
+            return $this->db->single();
+
+        }   
     }
 ?>

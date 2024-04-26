@@ -79,7 +79,6 @@ foreach ($data['availability'] as $availability) {
                     <h2><?php echo date('l', strtotime($filter_date)); ?></h2>
                 </div>
             </div>
-
             <div class="slot">
                 <div class="form-group">
                     <select name="language" class="custom-select" multiple>
