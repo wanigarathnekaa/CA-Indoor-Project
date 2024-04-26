@@ -211,9 +211,10 @@ use PHPMailer\PHPMailer\Exception;
             }
         }
 
-        public function getCoachesAvailable()
+        public function getCoachesAvailable($date)
         {
-            $this->db->query('SELECT * FROM coach_availability');
+            $this->db->query('SELECT * FROM coach_availability where date = :date');
+            $this->db->bind(':date', $date);
 
             return $this->db->resultSet();
         }
