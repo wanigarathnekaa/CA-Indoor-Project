@@ -48,7 +48,7 @@
 
                   <div class="search">
                         <label>
-                              <input type="text" placeholder="Search here" id="searchInput" onkeyup="search()">
+                              <input type="text" placeholder="Search here" id="searchInput" >
                               <i class="fa-solid fa-magnifying-glass icon"></i>
                         </label>
                   </div>
@@ -178,5 +178,18 @@
 
       <!-- javascript -->
       <script src="<?php echo URLROOT; ?>/js/coachDetails_popup.js"></script>
-      <script src="<?php echo URLROOT; ?>/js/coach_Table.js"></script>
+      <!-- <script src="<?php echo URLROOT; ?>/js/coach_Table.js"></script> -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script>
+            $(document).ready(function () {
+                  $("#searchInput").on("keyup", function () {
+                        var value = $(this).val().toLowerCase();
+                        $("table tbody tr").filter(function () {
+                              var rowText = $(this).text().toLowerCase();
+                              $(this).toggle(rowText.indexOf(value) > -1);
+                        });
+                  });
+            });
+      </script>
+
 </body>
