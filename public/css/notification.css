@@ -23,7 +23,7 @@
         transform: translateY(30px);
         opacity: 0;
         visibility: hidden;
-        animation: fade-in 2s linear;
+        animation: fade-in 1s linear;
         font-size: 14px;
         z-index: 10000;
   }
@@ -44,7 +44,7 @@
     transform: translateY(30px);
     opacity: 0;
     visibility: hidden;
-    animation: fade-in 2s linear;
+    animation: fade-in 1s linear;
     font-size: 14px;
     z-index: 10000;
 }
@@ -85,7 +85,7 @@
           var(--notification-primary)
       );
       border-radius: inherit;
-      animation: progress 2s 0.1s linear;
+      animation: progress 1s 0.1s linear;
   }
 
     .notification2_progress{
@@ -102,7 +102,7 @@
             var(--notification2-primary)
         );
         border-radius: inherit;
-        animation: progress 2s 0.1s linear;
+        animation: progress 1s 0.1s linear;
     }
   
   @keyframes fade-in{

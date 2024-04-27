@@ -963,6 +963,12 @@ class Pages extends Controller
         $this->view('Components/404');
     }
 
+
+    public function availabilityPage($name)
+    {
+        $this->view('Pages/Coach/availabilitypage');
+    }
+
 }
 
 ?>
