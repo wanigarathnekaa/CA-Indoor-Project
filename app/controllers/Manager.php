@@ -236,7 +236,7 @@ class Manager extends Controller
                 $data['strAddress_err'] = "Please enter the Street Address";
             }elseif(strlen($data['strAddress']) > 100){
                 $data['strAddress_err'] = "Street Address is too long";
-            }elseif(!preg_match("/^[a-zA-Z0-9\s,'-]*$/", $data['srtAddress'])){
+            }elseif(!preg_match("/^[a-zA-Z0-9\s,.'-]*$/", $data['srtAddress'])){
                 $data['strAddress_err'] = "Invalid Street Address";
             }
 
@@ -296,17 +296,19 @@ class Manager extends Controller
             }
 
             // Validate new password
-            if(empty($data['newPassword'])){
+            if (empty($data['newPassword'])) {
                 $data['new_password_err'] = "Please enter the new password";
-            } elseif(strlen($data['newPassword']) < 8){
+            } elseif (strlen($data['newPassword']) < 8) {
                 $data['new_password_err'] = "Password must be at least 8 characters";
-            }
-
-            // Validate confirm password
-            if(empty($data['confirmPassword'])){
+            }elseif (!preg_match("#[0-9]+#", $data['newPassword'])) {
+                $data['new_password_err'] = "Password must include at least one number!";
+            } elseif (!preg_match("#[a-zA-Z]+#", $data['newPassword'])) {
+                $data['new_password_err'] = "Password must include at least one letter!";
+            }elseif (empty($data['confirmPassword'])) {
                 $data['confirm_password_err'] = "Please confirm the password";
-            } elseif($data['newPassword'] != $data['confirmPassword']){
-                $data['confirm_password_err'] = "Passwords do not match";
+            } elseif ($data['newPassword'] != $data['confirmPassword']) {
+                    $data['confirm_password_err'] = "Passwords do not match";
+                    $data['new_password_err'] = "Passwords do not match";
             }
 
             // Check if all errors are empty
@@ -326,7 +328,7 @@ class Manager extends Controller
                     } else {
                         $hashedNewPassword = password_hash($data['newPassword'], PASSWORD_DEFAULT);
                         if($this->managerModel->updateManagerPassword($user->email, $hashedNewPassword)){
-                            redirect('Pages/Manager_Profile/manager');
+                            redirect('Users/logout');
                         } else {
                             die('Something went wrong');
                         }

@@ -546,14 +546,19 @@ class Users extends Controller
                 $data['new_password_err'] = "Please enter the new password";
             } elseif (strlen($data['newPassword']) < 8) {
                 $data['new_password_err'] = "Password must be at least 8 characters";
-            }
-
-            // Validate confirm password
-            if (empty($data['confirmPassword'])) {
+            }elseif (!preg_match("#[0-9]+#", $data['newPassword'])) {
+                $data['new_password_err'] = "Password must include at least one number!";
+            } elseif (!preg_match("#[a-zA-Z]+#", $data['newPassword'])) {
+                $data['new_password_err'] = "Password must include at least one letter!";
+            }elseif (empty($data['confirmPassword'])) {
                 $data['confirm_password_err'] = "Please confirm the password";
             } elseif ($data['newPassword'] != $data['confirmPassword']) {
-                $data['confirm_password_err'] = "Passwords do not match";
+                    $data['confirm_password_err'] = "Passwords do not match";
+                    $data['new_password_err'] = "Passwords do not match";
             }
+            
+
+            
 
 
 
@@ -575,7 +580,7 @@ class Users extends Controller
                     } else {
                         $hashedNewPassword = password_hash($data['newPassword'], PASSWORD_DEFAULT);
                         if ($this->userModel->updatePassword($user->email, $hashedNewPassword)) {
-                            redirect('Pages/Profile/user');
+                            redirect('Users/logout');
                         } else {
                             die('Something Went wrong');
                         }
