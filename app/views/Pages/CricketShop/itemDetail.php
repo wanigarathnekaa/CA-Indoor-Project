@@ -44,6 +44,14 @@ $discount = 1 - ($data['SProduct']->discount / 100);
             </div>
         </div>
 
+        <div class="reorder_level">
+            <?php 
+            if($data['SProduct']->qty < $data['SProduct']->reorder_level){
+                echo "<p style='color:red;'>Only " . $data['SProduct']->qty . " items left in stock</p>";
+            }
+            ?>
+        </div>
+
         <button class="btn cart-btn" id="add">add to cart</button>
         <span id="quantity"></span>
     </div>
