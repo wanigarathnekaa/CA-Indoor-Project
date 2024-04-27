@@ -1,9 +1,11 @@
 <?php
 
+
 require_once ('C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/TCPDF-main/tcpdf.php');
 require 'C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/phpmailer/src/PHPMailer.php';
 require 'C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/phpmailer/src/Exception.php';
 require 'C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/phpmailer/src/SMTP.php';
+
 
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -21,7 +23,7 @@ class MYPDF extends TCPDF {
         $this->SetKeywords('Invoice, Payment');
         $this->AddPage();
 
-       
+
 
   
         $this->SetFont('helvetica', 'B', 15);
@@ -33,6 +35,7 @@ class MYPDF extends TCPDF {
         $this->SetFont('helvetica', 'B', 12);
         $this->Cell(0, 10, 'INVOICE', 0, 1, 'R');
 
+
         $this->Ln(5);
 
 
@@ -40,12 +43,14 @@ class MYPDF extends TCPDF {
         $this->Cell(0, 10, 'ORDER PLACED SUCCESSFULLY', 0, 1, 'L');
         
 
+
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
         $this->SetXY($receiverDetailsX, $this->GetY() - 10); 
         $this->SetFont('helvetica', 'B', 12);
         $this->Cell(0, 10, 'INV_NO : #' . $id, 0, 1, 'R');
 
         $this->Ln(5); 
+
 
         $this->SetFont('helvetica', 'B', 12);
         $this->Cell(0, 10, 'SENDER DETAILS', 0, 1, 'L');
@@ -56,9 +61,11 @@ class MYPDF extends TCPDF {
         $this->SetFont('helvetica', 'B', 12);
         $this->Cell(0, 10, 'RECEIVER DETAILS', 0, 1, 'R');
 
-        
+
+
 
         $this->Ln(5); 
+
 
 
 
@@ -71,6 +78,7 @@ class MYPDF extends TCPDF {
         $this->SetXY($receiverDetailsX, $this->GetY() - 6); 
         $this->SetFont('helvetica', '', 12);
         $this->Cell(0, 6, $customerName, 0, 1, 'R');
+
 
 
         $this->Ln(1);
@@ -98,7 +106,7 @@ class MYPDF extends TCPDF {
         $this->Ln(3);
 
 
-    
+
 
         // Special notes
         $this->SetFont('helvetica', 'B', 12);
@@ -315,45 +323,45 @@ class M_Bookings
 
     }
 
-        
-    public function SendEmailToCoach($data,$admin)
-{   
-    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-    $email = $data['email'];
-    $name = $data['name'];
-    $phoneNumber = $data['phoneNumber'];
-    $date = $data['date'];
-    $timeSlots=$data['timeSlots']; 
+    public function SendEmailToCoach($data, $admin)
+    {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-    $adminEMAIL = $admin->email; // Retrieve email
-    $adminNAME = $admin->name; // Retrieve name
-    $adminPNO = $admin->phoneNumber;
+        $email = $data['email'];
+        $name = $data['name'];
+        $phoneNumber = $data['phoneNumber'];
+        $date = $data['date'];
+        $timeSlots = $data['timeSlots'];
 
-   
-    require_once APPROOT . '/libraries/phpmailer/src/PHPMailer.php';
-    require_once APPROOT . '/libraries/phpmailer/src/SMTP.php';
-    require_once APPROOT . '/libraries/phpmailer/src/Exception.php';
+        $adminEMAIL = $admin->email; // Retrieve email
+        $adminNAME = $admin->name; // Retrieve name
+        $adminPNO = $admin->phoneNumber;
 
-    $mail = new PHPMailer(true);
 
-    //Server settings
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
-    $mail->SMTPAuth = true;
-    $mail->Username = 'nivodya2001@gmail.com';
-    $mail->Password = 'wupbxphjicpfidgj';
-    $mail->SMTPSecure = 'ssl';
-    $mail->Port = 465;
-    
-    //Recipients
-    $mail->setFrom('nivodya2001@gmail.com', 'Hasini Hewa');
-    $mail->addAddress($email);
+        require_once APPROOT . '/libraries/phpmailer/src/PHPMailer.php';
+        require_once APPROOT . '/libraries/phpmailer/src/SMTP.php';
+        require_once APPROOT . '/libraries/phpmailer/src/Exception.php';
 
-    //Content
-    $mail->isHTML(true);
-    $mail->Subject = 'About your appointment';
-    $mail->Body = "Hello $name,<br><br>
+        $mail = new PHPMailer(true);
+
+        //Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'nivodya2001@gmail.com';
+        $mail->Password = 'wupbxphjicpfidgj';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+
+        //Recipients
+        $mail->setFrom('nivodya2001@gmail.com', 'Hasini Hewa');
+        $mail->addAddress($email);
+
+        //Content
+        $mail->isHTML(true);
+        $mail->Subject = 'About your appointment';
+        $mail->Body = "Hello $name,<br><br>
         You have a time slot on $date, at $timeSlots assigned to the player $name. Here are their contact details:<br>
         - Phone Number: $phoneNumber<br>
         - Email: $email<br>
@@ -363,41 +371,42 @@ class M_Bookings
         - Phone Number: $adminPNO<br>
         - Email: $adminEMAIL<br>
         Thank you.";
-    
 
-    // Attempt to send email
-    try {
-        $mail->send();
-        $response = [
-            'status' => 'success',
-            'message' => 'Email sent to coach.'
-        ];
-        return true;
 
-    } catch (Exception $e) {
-        $response = [
-            'status' => 'error',
-            'message' => 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo,
-        ];
-        return false;
+        // Attempt to send email
+        try {
+            $mail->send();
+            $response = [
+                'status' => 'success',
+                'message' => 'Email sent to coach.'
+            ];
+            return true;
+
+        } catch (Exception $e) {
+            $response = [
+                'status' => 'error',
+                'message' => 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo,
+            ];
+            return false;
+
+        }
+
 
     }
+    public function getADMINdetails()
+    {
+        $this->db->query('SELECT * FROM company_users WHERE role = 2');
+        $this->db->execute();
+        $resultSet = $this->db->single();
 
-    
-}
-public function getADMINdetails(){
-    $this->db->query('SELECT * FROM company_users WHERE role = 2');
-    $this->db->execute();
-    $resultSet = $this->db->single();
-
-    return $resultSet;    
-}
+        return $resultSet;
+    }
 
     public function sendEmail($reservation)
     {
 
         $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf->Invoice($reservation->id,$reservation->name, $reservation->email, $reservation->bookingPrice, $reservation->paidPrice, $reservation->date, $reservation->paymentStatus,$reservation->phoneNumber);
+        $pdf->Invoice($reservation->id, $reservation->name, $reservation->email, $reservation->bookingPrice, $reservation->paidPrice, $reservation->date, $reservation->paymentStatus, $reservation->phoneNumber);
 
 
 
@@ -478,7 +487,8 @@ public function getADMINdetails(){
         return $this->db->resultSet();
     }
 
-    public function getReservationDetailsByID($bookingId) {
+    public function getReservationDetailsByID($bookingId)
+    {
         $this->db->query('SELECT * FROM bookings JOIN time_slots ON bookings.id = time_slots.booking_id WHERE time_slots.booking_id = :bookingId ORDER BY bookings.date ASC;');
         $this->db->bind(':bookingId', $bookingId);
         $this->db->execute();
@@ -495,7 +505,8 @@ public function getADMINdetails(){
         return $this->db->resultSet();
     }
 
-    public function updateReservation($bookingId){
+    public function updateReservation($bookingId)
+    {
         $this->db->query('UPDATE bookings SET paymentStatus = :paymentStatus, paidPrice = bookingPrice WHERE id = :bookingId');
         $this->db->bind(':paymentStatus', 'Paid');
         $this->db->bind(':bookingId', $bookingId);
@@ -507,7 +518,8 @@ public function getADMINdetails(){
         }
     }
 
-    public function updatePermanentBookingStatus($bookingId){
+    public function updatePermanentBookingStatus($bookingId)
+    {
         $this->db->query('UPDATE permanent_booking SET status="Cancelled" WHERE id = :bookingId');
         $this->db->bind(':bookingId', $bookingId);
 
@@ -517,9 +529,47 @@ public function getADMINdetails(){
             return false;
         }
     }
-    
 
-        
+    public function getCoachesAvailable($date)
+    {
+        $this->db->query('SELECT * FROM coach_availability where date = :date');
+        $this->db->bind(':date', $date);
+
+        return $this->db->resultSet();
+    }
+
+    public function update_coach_availability($data)
+    {
+        $this->db->query('UPDATE coach_availability SET time_slot = :time_slot WHERE email = :email AND date = :date');
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':date', $data['date']);
+        $this->db->bind(':time_slot', $data['time_slot']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function update_reserved_timeSlots($data)
+    {
+        $this->db->query('UPDATE coach_availability SET reserved_slots = :reserved_slots WHERE email = :email AND date = :date');
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':date', $data['date']);
+        $this->db->bind(':reserved_slots', $data['reserved_time_slot']);
+
+        $this->db->execute();
+    }
+
+    public function getCoachAvailability($data)
+    {
+        $this->db->query('SELECT time_slot FROM coach_availability WHERE email = :email AND date = :date');
+        $this->db->bind(':email', $data['coach']);
+        $this->db->bind(':date', $data['date']);
+
+        return $this->db->resultSet();
+    }
 
 
 }

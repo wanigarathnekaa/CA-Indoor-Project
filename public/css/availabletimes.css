@@ -169,6 +169,11 @@ body {
   background-color: var(--color02)
 }
 
+.select__item--reserved{
+  background-color: red;
+  color: #ffffff;
+}
+
 
 #confirmationForm{
   display: flex;

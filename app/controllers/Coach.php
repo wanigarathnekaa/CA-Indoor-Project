@@ -464,6 +464,7 @@ class Coach extends Controller
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         $timeSlots = $_POST['timeSlots'];
+        $date = $_POST['date'];
 
         $time_slot_array = json_decode(html_entity_decode($timeSlots));
         $ts_array = [];
@@ -471,18 +472,13 @@ class Coach extends Controller
             $ts_array[] = $ts->timeSlot;
         }
 
-        $coaches = $this->coachModel->getCoachesAvailable();
+        $coaches = $this->coachModel->getCoachesAvailable($date);
         $coaches_email = [];
         foreach ($coaches as $coach) {
             $available_time_slots = json_decode($coach->time_slot);
             $ts_array = array_map('trim', $ts_array);
             if (array_diff($ts_array, $available_time_slots) === array()) {
-                // $ts_array is a subset of $available_time_slots
-                // Add your desired logic here
                 $coaches_email[] = $coach->email;
-            } else {
-                // $ts_array is not a subset of $available_time_slots
-                // Add your desired logic here
             }
         }
 

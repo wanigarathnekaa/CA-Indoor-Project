@@ -22,10 +22,16 @@ class CustomSelect {
       itemElement.classList.add("select__item");
       itemElement.textContent = optionElement.textContent;
 
+      const isReserved = optionElement.hasAttribute("data-reserved");
       const isBooked = optionElement.hasAttribute("data-booked");
       if (isBooked) {
         itemElement.classList.add("select__item--booked");
         itemElement.setAttribute("data-booked", "true");
+      }
+
+      if (isReserved) {
+        itemElement.classList.add("select__item--reserved");
+        itemElement.setAttribute("data-reserved", "true");
       }
 
       this.customSelect.appendChild(itemElement);
@@ -41,7 +47,7 @@ class CustomSelect {
           itemElement.classList.contains("select__item--selected")
         ) {
           this._deselect(itemElement, optionElement);
-        } else if (!isBooked) {
+        } else if (!isBooked && !isReserved) {
           this._select(itemElement, optionElement);
           this._storeSelectedDetails(optionElement);
         }

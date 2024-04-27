@@ -260,21 +260,22 @@ class Reports extends Controller
                 'invoice_date' => trim($_POST['invoice_date']),
                 'invoice_due_date' => trim($_POST['invoice_due_date']),   
             ];
-            $bookings=$this->reportmodel->getReservationChart($data);}
+            // $bookings=$this->reportmodel->getReservationChart($data);}
 
-            $data1 = [
-                'bookings' => $bookings
-            ];
+            // $data1 = [
+            //     'bookings' => $bookings
+            // ];
+        
 
             
     
             // Check if the report type is "payment-status"
-            if ($_POST['report_type'] === 'payment-status') {
+            if ($_POST['report_type'] === 'net-Types') {
                 if (isset($_POST["view_pdf"])) {
                     // Display the reservation chart
-                    $this->reportmodel->displayReservationChart1($data1,$data);
+                    $this->reportmodel->displayReservationChart1($data);
                 } elseif (isset($_POST["download_pdf"])) {
-                    $this->reportmodel->displayReservationChart($data1,$data);
+                    $this->reportmodel->displayReservationChart($data);
 
             }}
             else if ($_POST['report_type'] === 'weekly') {
@@ -293,7 +294,5 @@ class Reports extends Controller
     
     
     
-  
-    
-
+    }
         }
