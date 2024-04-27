@@ -26,7 +26,8 @@
                   <div class="details row1">                  
                         <!-- Calander -->
                         <div class="calanderdiv">
-                              <iframe src="http://localhost/C&A_Indoor_Project/Pages/userCalendar/user" frameborder="0"></iframe>                        
+                              <!-- <iframe src="http://localhost/C&A_Indoor_Project/Pages/Calendar/C&A" frameborder="0"></iframe>-->
+                                    <iframe src="<?php echo URLROOT; ?>/Pages/Calendar/C&A" frameborder="0"></iframe>
                         </div>
                         <!-- daily Reservations -->
                         <div class="tablediv">

@@ -70,8 +70,27 @@
       border-radius: 5px;
       border: 1px solid var(--color01);
       bottom: 10px;
+      border-bottom-width: 2px;
 
 
+}
+.user-details .input-box input:focus,
+.user-details .input-box input:valid,
+.user-details .input-box textarea:focus,
+.user-details .input-box textarea:valid{
+  border-color: #2E8A99;
+}
+
+.container .content .top .user-details .input-box textarea{
+      /* display: flex; */
+      /* width: 100%; */
+      /* margin: 10px; */
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid var(--color01);
+      bottom: 10px;
+      resize: none;
+      border-bottom-width: 2px;
 }
 
 .container .content .top .img{

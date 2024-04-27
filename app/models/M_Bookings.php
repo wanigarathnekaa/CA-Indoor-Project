@@ -1,9 +1,11 @@
 <?php
 
+
 require_once ('C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/TCPDF-main/tcpdf.php');
 require 'C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/phpmailer/src/PHPMailer.php';
 require 'C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/phpmailer/src/Exception.php';
 require 'C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/phpmailer/src/SMTP.php';
+
 
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -23,21 +25,23 @@ class MYPDF extends TCPDF {
 
 
 
-
+  
         $this->SetFont('helvetica', 'B', 15);
         $this->Cell(0, 10, 'C & A Cricket Net', 0, 1, 'L');
-
+        
         // RECEIVER & SENDER DETAILS 
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
         $this->SetXY($receiverDetailsX, $this->GetY() - 10); // Set position to the same line
         $this->SetFont('helvetica', 'B', 12);
         $this->Cell(0, 10, 'INVOICE', 0, 1, 'R');
 
+
         $this->Ln(5);
 
 
         $this->SetFont('helvetica', 'B', 12);
         $this->Cell(0, 10, 'ORDER PLACED SUCCESSFULLY', 0, 1, 'L');
+        
 
 
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
@@ -47,14 +51,16 @@ class MYPDF extends TCPDF {
 
         $this->Ln(5); 
 
+
         $this->SetFont('helvetica', 'B', 12);
         $this->Cell(0, 10, 'SENDER DETAILS', 0, 1, 'L');
-
-
+        
+        
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
         $this->SetXY($receiverDetailsX, $this->GetY() - 10);
         $this->SetFont('helvetica', 'B', 12);
         $this->Cell(0, 10, 'RECEIVER DETAILS', 0, 1, 'R');
+
 
 
 
@@ -63,14 +69,16 @@ class MYPDF extends TCPDF {
 
 
 
+
         $this->SetFont('helvetica', '', 12);
         $this->Cell(0, 6,'Kaveesha Wanigarathne', 0, 1, 'L');
-
-
+        
+        
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
         $this->SetXY($receiverDetailsX, $this->GetY() - 6); 
         $this->SetFont('helvetica', '', 12);
         $this->Cell(0, 6, $customerName, 0, 1, 'R');
+
 
 
         $this->Ln(1);
@@ -354,30 +362,15 @@ class M_Bookings
         $mail->isHTML(true);
         $mail->Subject = 'About your appointment';
         $mail->Body = "Hello $name,<br><br>
-        ";
-    
-    // Assuming $timeSlots is your array of objects
-    $timeSlots = '[{"timeSlot":"20:00PM-21:00PM","netType":"Normal Net B","date":"2024-04-26"}]';
-    $timeSlotsArray = json_decode($timeSlots, true);
-    
-    foreach ($timeSlotsArray as $slot) {
-        $timeSlot = $slot['timeSlot'];
-        $netType = $slot['netType'];
-        $date = $slot['date'];
-    
-        $mail->Body .= "You have a time slot on $date, at $timeSlot assigned to the player $name. Here are their contact details:<br>
-            - Phone Number: $phoneNumber<br>
-            - Email: $email<br>
-            If you have any issues, please contact the administrator before $date.<br><br>
-        ";
-    }
-    
-    $mail->Body .= "Admin Details:<br>
+        You have a time slot on $date, at $timeSlots assigned to the player $name. Here are their contact details:<br>
+        - Phone Number: $phoneNumber<br>
+        - Email: $email<br>
+        If you have any issues, please contact administrator before $date.<br><br>
+        Admin Details:<br>
         - Name: $adminNAME<br>
         - Phone Number: $adminPNO<br>
         - Email: $adminEMAIL<br>
         Thank you.";
-    
 
 
         // Attempt to send email

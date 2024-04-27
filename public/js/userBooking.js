@@ -23,9 +23,16 @@ class CustomSelect {
       itemElement.textContent = optionElement.textContent;
 
       const isBooked = optionElement.hasAttribute("data-booked");
+      const isToday = optionElement.hasAttribute("today-slot");
+
       if (isBooked) {
         itemElement.classList.add("select__item--booked");
         itemElement.setAttribute("data-booked", "true");
+      }
+
+      if (isToday) {
+        itemElement.classList.add("select__item--today");
+        itemElement.setAttribute("today-slot", "true");
       }
 
       this.customSelect.appendChild(itemElement);
@@ -41,7 +48,7 @@ class CustomSelect {
           itemElement.classList.contains("select__item--selected")
         ) {
           this._deselect(itemElement, optionElement);
-        } else if (!isBooked) {
+        } else if (!isBooked && !isToday) {
           this._select(itemElement, optionElement);
           this._storeSelectedDetails(optionElement);
         }
