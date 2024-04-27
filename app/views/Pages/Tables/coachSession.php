@@ -1,6 +1,7 @@
 <?php
 $filter_date = date('Y-m-d');
-$coach = $_SESSION['user_name'];
+$coach = $_SESSION['user_email'];
+
 
 $coach_sessions = array_filter($data['bookings'], function ($item) use ($coach, $filter_date) {
       // Assuming $item->reservation_date contains the reservation date
@@ -8,6 +9,7 @@ $coach_sessions = array_filter($data['bookings'], function ($item) use ($coach, 
 
       return $item->coach === $coach && $reservation_date >= $filter_date;
 });
+
 
 ?>
 
