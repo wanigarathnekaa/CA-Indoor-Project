@@ -23,13 +23,15 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
                 <!-- <h2 class="text-success">Filter Bookings</h2> -->
 
                 <form action="<?php echo URLROOT;?>/Reports/Userlogs" method="post">
-                    <div class="form-group">
-                        <label for="start_date">Start Date</label>
-                        <input type="text" name="invoice_date" id="start_date" class="form-control datepicker" required>
+                <div class="form-group">
+                        <label>Start Date</label>
+                        <input type="text" name="invoice_date" id="start_date" class="form-control datepicker" value="" >
+                        <span class="form-invalid"><?php echo isset($data['invoice_date_error']) ? $data['invoice_date_error'] : ''; ?></span>
                     </div>
                     <div class="form-group">
-                        <label for="end_date">End Date</label>
-                        <input type="text" name="invoice_due_date" id="end_date" class="form-control datepicker" required>
+                        <label>End Date</label>
+                        <input type="text" name="invoice_due_date" id="end_date" class="form-control datepicker" value="" >
+                        <span class="form-invalid"><?php echo isset($data['invoice_due_date_error'])? $data['invoice_due_date_error'] : '';?></span>
                     </div>
                     <div class="btn-container">
                         <input type="submit" name="filter" value="Filter" class="btn btn-primary">

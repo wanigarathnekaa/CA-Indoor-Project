@@ -24,7 +24,7 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
             <form action="<?php echo URLROOT;?>/Reports/OrderReport" method="post">
             <div class="form-group">
             <label for="product">Product</label>
-            <select name="Product" id="product" class="form-control" required>
+            <select name="Product" id="product" class="form-control">
                 <option value="">Select a product...</option>
                 <option value="SS Vintage Green 4.0 English Willow Cricket Bat Size SH">SS Ton Power Plus English Willow Cricket Bat Size ...</option>
                 <option value="SG Savage Plus Kashmir Willow Cricket">SS Blast English Willow Cricket Bat Size SH</option>
@@ -37,6 +37,8 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
                 <option value="Masuri Pro Premium Cricket Helmet">Masuri Pro Premium Cricket Helmet</option>
                 <option value="Kookaburra Pace Cricket Ball">Kookaburra Pace Cricket Ball</option>
             </select>
+            <span class="form-invalid"><?php echo isset($data['Product_error'])? $data['Product_error'] : '';?></span>
+
             </div>
 
                

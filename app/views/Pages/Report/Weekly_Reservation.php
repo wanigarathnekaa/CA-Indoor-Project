@@ -27,9 +27,7 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
                         <option value=""></option>
                         <option value="net-Types">Net Types</option>
                         <option value="weekly">Reservation-chart</option>
-                        <option value="monthly">Monthly</option>
-                        <option value="quarterly">Quarterly</option>
-                        <option value="yearly">Yearly</option>
+                      
                     </select>
                 </div>
                 <div class="form-group">
@@ -41,42 +39,8 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
                     <label>End Date</label>
                     <input type="text" name="invoice_due_date" id="end_date" class="form-control datepicker" required>
                 </div>
-                <!-- <div class="form-group">
-    <label>Month1</label>
-    <select name="month1" id="month1" class="form-control" required>
-        <option value="">Select Month</option>
-        <option value="01">January</option>
-        <option value="02">February</option>
-        <option value="03">March</option>
-        <option value="04">April</option>
-        <option value="05">May</option>
-        <option value="06">June</option>
-        <option value="07">July</option>
-        <option value="08">August</option>
-        <option value="09">September</option>
-        <option value="10">October</option>
-        <option value="11">November</option>
-        <option value="12">December</option>
-    </select>
-</div>
-<div class="form-group">
-    <label>Month1</label>
-    <select name="month2" id="month1" class="form-control" required>
-        <option value="">Select Month</option>
-        <option value="01">January</option>
-        <option value="02">February</option>
-        <option value="03">March</option>
-        <option value="04">April</option>
-        <option value="05">May</option>
-        <option value="06">June</option>
-        <option value="07">July</option>
-        <option value="08">August</option>
-        <option value="09">September</option>
-        <option value="10">October</option>
-        <option value="11">November</option>
-        <option value="12">December</option>
-    </select>
-</div> -->
+
+                
 
                 <div class="btn-container">
                         <input type="submit" name="view_pdf" value="View" class="btn btn-primary">
