@@ -99,31 +99,34 @@ foreach ($data['availability'] as $availability) {
                                 }
                             }
 
-                            for ($i = 0; $i < count($reserved_new_array); $i++) {
-                                if ($reserved_new_array[$i] == $ts) {
-                                    $reserved = true;
-                                    break;
+                            if ($reserved_new_array != null) {
+                                for ($i = 0; $i < count($reserved_new_array); $i++) {
+                                    if ($reserved_new_array[$i] == $ts) {
+                                        $reserved = true;
+                                        break;
+                                    }
                                 }
                             }
                             if ($found) { ?>
-                                <option value="<?php echo $ts; ?>" date = "<?php echo $filter_date; ?>" data-booked="true">
+                                <option value="<?php echo $ts; ?>" date="<?php echo $filter_date; ?>" data-booked="true">
                                     <?php echo $ts; ?>
                                 </option>
-                            <?php } else if($reserved) { ?>
-                                <option value="<?php echo $ts; ?>" date = "<?php echo $filter_date; ?>" data-reserved="true">
+                            <?php } else if ($reserved) { ?>
+                                    <option value="<?php echo $ts; ?>" date="<?php echo $filter_date; ?>" data-reserved="true">
                                     <?php echo $ts; ?>
-                                </option>
+                                    </option>
                             <?php } else { ?>
-                                <option value="<?php echo $ts; ?>" data-date="<?php echo $filter_date; ?>">
+                                    <option value="<?php echo $ts; ?>" data-date="<?php echo $filter_date; ?>">
                                     <?php echo $ts; ?>
-                                </option>
+                                    </option>
                             <?php } ?>
                         <?php } ?>
                     </select>
                 </div>
             </div>
             <div id="confirmationForm">
-                <button type="submit" class="btn btn-primary" id="submit"><i class="fa-solid fa-clock-rotate-left icon"></i>Change Availability</button>
+                <button type="submit" class="btn btn-primary" id="submit"><i
+                        class="fa-solid fa-clock-rotate-left icon"></i>Change Availability</button>
             </div>
         </div>
 
