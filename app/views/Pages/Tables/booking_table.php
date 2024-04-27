@@ -87,7 +87,7 @@
                         } else {
                             $status_color = '#e03333';
                         }
-                        ?>
+                    ?>
                         <tr>
                             <td>
                                 <?php echo $reservation->id; ?>
@@ -110,11 +110,10 @@
                             <td>
                                 <?php echo $reservation->paidPrice; ?>
                             </td>
-                            <td><span class="status"
-                                    style="background-color: <?php echo $status_color; ?>;"><?php echo $reservation->paymentStatus ?></span>
+                            <td><span class="status" style="background-color: <?php echo $status_color; ?>;"><?php echo $reservation->paymentStatus ?></span>
                             </td>
                         </tr>
-                        <?php
+                    <?php
                     }
                     ?>
                 </tbody>
@@ -181,34 +180,38 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         var modal = document.getElementById("reservationModal");
+
         function closeModal() {
             modal.style.display = "none";
             location.reload();
         }
 
-        $(document).ready(function () {
+        $(document).ready(function() {
 
-            $("#payfilter").on("change", function () {
-                selectedValue = $(this).val();
-                // alert(selectedValue);
+            $("#payfilter").on("change", function() {
+                var selectedValue = $(this).val();
                 if (selectedValue != "All") {
-                    $("table tbody tr").hide().filter(function () {
-                        if (selectedValue === "Not Paid") {
-                            return $(this).text().indexOf(selectedValue) > -1 && $(this).text().indexOf("NOT Paid") === -1;
-                        } else {
-                            return $(this).text().indexOf(selectedValue) > -1;
-                        }
+                    $("table tbody tr").hide().filter(function() {
+                        // Check if the row contains the selected value
+                        return $(this).text().indexOf(selectedValue) > -1;
                     }).show();
+                    // Hide rows with "Not Paid" if "Paid" is selected
+                    if (selectedValue === "Paid") {
+                        $("table tbody tr").filter(function() {
+                            return $(this).text().indexOf("Not Paid") > -1;
+                        }).hide();
+                    }
                 } else {
+                    // Show all rows when "All" is selected
                     $("table tbody tr").show();
                 }
             });
 
 
-            $("#date").on("change", function () {
+            $("#date").on("change", function() {
                 selectedValue = $(this).val();
                 if (selectedValue != "All") {
-                    $("table tbody tr").filter(function () {
+                    $("table tbody tr").filter(function() {
                         $(this).toggle($(this).text().indexOf(selectedValue) > -1);
                     });
                 } else {
@@ -216,17 +219,18 @@
                 }
 
             });
-            $("#searchInput").on("keyup", function () {
-                var value = $(this).val();
-                $("table tbody tr").filter(function () {
-                    $(this).toggle($(this).text().indexOf(value) > -1);
+            $("#searchInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("table tbody tr").filter(function() {
+                    var rowText = $(this).text().toLowerCase();
+                    $(this).toggle(rowText.indexOf(value) > -1);
                 });
             });
 
             var payment_status = "";
             var id_reserve = "";
 
-            $('#reservationTable tbody tr').click(function () {
+            $('#reservationTable tbody tr').click(function() {
                 console.log("clicked");
                 var id = $(this).find('td').eq(0).text();
                 id_reserve = id;
@@ -238,7 +242,7 @@
                     data: {
                         id: id
                     },
-                    success: function (response) {
+                    success: function(response) {
                         console.log(response);
 
                         // Assuming the response is an array and you want to use the first item
@@ -307,7 +311,7 @@
                 });
             });
 
-            $("#paid").click(function () {
+            $("#paid").click(function() {
                 var id = id_reserve;
                 console.log(id);
                 console.log(payment_status);
@@ -322,7 +326,7 @@
                     data: {
                         id: id
                     },
-                    success: function (response) {
+                    success: function(response) {
                         console.log(response);
                         if (response.status == "success") {
                             alert("Payment successful");

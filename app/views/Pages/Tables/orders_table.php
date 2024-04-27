@@ -227,17 +227,20 @@
         $(document).ready(function () {
 
             $("#payfilter").on("change", function () {
-                selectedValue = $(this).val();
-                // alert(selectedValue);
+                var selectedValue = $(this).val();
                 if (selectedValue != "All") {
-                    $("table tbody tr").hide().filter(function () {
-                        if (selectedValue === "Not Paid") {
-                            return $(this).text().indexOf(selectedValue) > -1 && $(this).text().indexOf("NOT Paid") === -1;
-                        } else {
-                            return $(this).text().indexOf(selectedValue) > -1;
-                        }
+                    $("table tbody tr").hide().filter(function() {
+                        // Check if the row contains the selected value
+                        return $(this).text().indexOf(selectedValue) > -1;
                     }).show();
+                    // Hide rows with "Not Paid" if "Paid" is selected
+                    if (selectedValue === "Paid") {
+                        $("table tbody tr").filter(function() {
+                            return $(this).text().indexOf("Not Paid") > -1;
+                        }).hide();
+                    }
                 } else {
+                    // Show all rows when "All" is selected
                     $("table tbody tr").show();
                 }
             });
@@ -254,12 +257,20 @@
             });
 
             $("#orderStatus").on("change", function () { // Corrected ID here
-                selectedValue = $(this).val();
+                var selectedValue = $(this).val();
                 if (selectedValue != "All") {
-                    $("table tbody tr").hide().filter(function () {
-                        $(this).toggle($(this).text().indexOf(selectedValue) > -1);
+                    $("table tbody tr").hide().filter(function() {
+                        
+                        return $(this).text().indexOf(selectedValue) > -1;
                     }).show();
+                    
+                    if (selectedValue === "Complete") {
+                        $("table tbody tr").filter(function() {
+                            return $(this).text().indexOf("Not Complete") > -1;
+                        }).hide();
+                    }
                 } else {
+                    // Show all rows when "All" is selected
                     $("table tbody tr").show();
                 }
             });
@@ -277,9 +288,10 @@
 
             });
             $("#searchInput").on("keyup", function () {
-                var value = $(this).val();
+                var value = $(this).val().toLowerCase();
                 $("table tbody tr").filter(function () {
-                    $(this).toggle($(this).text().indexOf(value) > -1);
+                    var rowText = $(this).text().toLowerCase();
+                    $(this).toggle(rowText.indexOf(value) > -1);
                 });
             });
 
