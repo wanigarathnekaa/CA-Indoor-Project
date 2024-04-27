@@ -1,9 +1,11 @@
 <?php
 
+
 require_once ('C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/TCPDF-main/tcpdf.php');
 require 'C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/phpmailer/src/PHPMailer.php';
 require 'C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/phpmailer/src/Exception.php';
 require 'C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/phpmailer/src/SMTP.php';
+
 
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -27,11 +29,13 @@ class MYPDF extends TCPDF {
         $this->SetFont('helvetica', 'B', 15);
         $this->Cell(0, 10, 'C & A Cricket Net', 0, 1, 'L');
 
+        
         // RECEIVER & SENDER DETAILS 
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
         $this->SetXY($receiverDetailsX, $this->GetY() - 10); // Set position to the same line
         $this->SetFont('helvetica', 'B', 12);
         $this->Cell(0, 10, 'INVOICE', 0, 1, 'R');
+
 
         $this->Ln(5);
 
@@ -51,10 +55,24 @@ class MYPDF extends TCPDF {
         $this->Cell(0, 10, 'SENDER DETAILS', 0, 1, 'L');
 
 
+
+        $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
+        $this->SetXY($receiverDetailsX, $this->GetY() - 10); 
+        $this->SetFont('helvetica', 'B', 12);
+        $this->Cell(0, 10, 'INV_NO : #' . $id, 0, 1, 'R');
+
+        $this->Ln(5); 
+
+
+        $this->SetFont('helvetica', 'B', 12);
+        $this->Cell(0, 10, 'SENDER DETAILS', 0, 1, 'L');
+        
+        
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
         $this->SetXY($receiverDetailsX, $this->GetY() - 10);
         $this->SetFont('helvetica', 'B', 12);
         $this->Cell(0, 10, 'RECEIVER DETAILS', 0, 1, 'R');
+
 
 
 
@@ -63,8 +81,10 @@ class MYPDF extends TCPDF {
 
 
 
+
         $this->SetFont('helvetica', '', 12);
         $this->Cell(0, 6,'Kaveesha Wanigarathne', 0, 1, 'L');
+        
 
 
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
