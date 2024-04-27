@@ -36,9 +36,17 @@ class Advertisement extends Controller
                 'filetmp_err' => "",
             ];
 
-            $newfilename = uniqid() . "-" . $data['filename'];
-            move_uploaded_file($data['filetmp'], "../public/uploads/" . $newfilename);
-            $data['filename'] = $newfilename;
+            if (!empty($_FILES['file']['name'])) {
+                $newfilename = uniqid() . "-" . $data['filename'];
+                move_uploaded_file($data['filetmp'], "../public/uploads/" . $newfilename);
+                $data['filename'] = $newfilename;
+            } else {
+                $data['filename'] = "";
+                $data['filename_err'] = "Please upload the image";
+            }
+            // $newfilename = uniqid() . "-" . $data['filename'];
+            // move_uploaded_file($data['filetmp'], "../public/uploads/" . $newfilename);
+            // $data['filename'] = $newfilename;
 
             //validate name
             if (empty($data['name'])) {
@@ -53,22 +61,19 @@ class Advertisement extends Controller
             //validate date
             if (empty($data['date'])) {
                 $data['date_err'] = "Please enter the date";
-            }
+            }elseif($data['date'] < date("Y-m-d")){
+                    $data['date_err'] = "Please enter a valid date";
+            }          
 
             //validate content
             if (empty($data['content'])) {
                 $data['content_err'] = "Please enter the Description";
             }
 
-            //validate file
-            if (empty($data['filename'])) {
-                $data['filename_err'] = "Please upload the image";
-            }
-
 
 
             //If validation is completed and no error, then register the user
-            if (empty($data['title_err']) && empty($data['content_err'])) {
+            if (empty($data['title_err']) && empty($data['content_err']) && empty($data['date_err']) && empty($data['name_err']) && empty($data['filename_err'])) {
                 if ($this->advertiseModel->addAdvertisement($data)) {
                     // $this->view('Pages/Advertisement/advertisement');
                     redirect('Pages/View_Advertisement/advertisement');
@@ -170,6 +175,8 @@ class Advertisement extends Controller
             //validate date
             if (empty($data['date'])) {
                 $data['date_err'] = "Please enter the date";
+            }elseif($data['date'] < date("Y-m-d")){
+                    $data['date_err'] = "Please enter a valid date";
             }
 
             //validate content

@@ -164,20 +164,23 @@ class CompanyUsers extends Controller
             if(empty($data['oldPassword'])){
                   $data['old_password_err'] = "Please enter the current password";
               }
+                // Validate new password
+            if (empty($data['newPassword'])) {
+                $data['new_password_err'] = "Please enter the new password";
+            } elseif (strlen($data['newPassword']) < 8) {
+                $data['new_password_err'] = "Password must be at least 8 characters";
+            }elseif (!preg_match("#[0-9]+#", $data['newPassword'])) {
+                $data['new_password_err'] = "Password must include at least one number!";
+            } elseif (!preg_match("#[a-zA-Z]+#", $data['newPassword'])) {
+                $data['new_password_err'] = "Password must include at least one letter!";
+            }elseif (empty($data['confirmPassword'])) {
+                $data['confirm_password_err'] = "Please confirm the password";
+            } elseif ($data['newPassword'] != $data['confirmPassword']) {
+                    $data['confirm_password_err'] = "Passwords do not match";
+                    $data['new_password_err'] = "Passwords do not match";
+            }
   
-              // Validate new password
-              if(empty($data['newPassword'])){
-                  $data['new_password_err'] = "Please enter the new password";
-              } elseif(strlen($data['newPassword']) < 8){
-                  $data['new_password_err'] = "Password must be at least 8 characters";
-              }
-  
-              // Validate confirm password
-              if(empty($data['confirmPassword'])){
-                  $data['confirm_password_err'] = "Please confirm the password";
-              } elseif($data['newPassword'] != $data['confirmPassword']){
-                  $data['confirm_password_err'] = "Passwords do not match";
-              }
+              
 
 
             if (empty($data['oldPassword']) || empty($data['newPassword']) || empty($data['confirmPassword'])) {
@@ -196,7 +199,7 @@ class CompanyUsers extends Controller
                     } else {
                         $hashedNewPassword = password_hash($data['newPassword'], PASSWORD_DEFAULT);
                         if($this->companyUserModel->updateCompanyUserPassword($user->email, $hashedNewPassword)){
-                            redirect('Pages/CompanyUser_Profile/<?php echo $role ?>');
+                            redirect('Users/logout');
                         } else {
                               die("Something went wrong.");
                         }

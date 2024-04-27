@@ -58,7 +58,7 @@
                         <img id="output" src="<?php echo URLROOT; ?>/public/uploads/<?php echo $data['filename']; ?>" />
                         <span class="camicon"><i class='bx bxs-camera-plus'></i></span>
                       </div>
-                      <input type="file" name="file" id="file" hidden onchange="loadFile(event)" value="<?php echo URLROOT; ?>/public/uploads/<?php echo $data['filename']; ?>" />
+                      <input type="file" name="file" id="file" hidden onchange="loadFile(event)" value="<?php echo URLROOT; ?>/public/uploads/<?php echo $data['filename']; ?>" accept="image/*" >
                     </div>
                   </label>              
                 </div>
