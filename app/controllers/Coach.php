@@ -298,7 +298,7 @@ class Coach extends Controller
                 $data['srtAddress_err'] = "Please enter the Street Address";
             }elseif(strlen($data['srtAddress']) > 100){
                 $data['srtAddress_err'] = "Street Address is too long";
-            }elseif(!preg_match("/^[a-zA-Z0-9\s,'-]*$/", $data['srtAddress'])){
+            }elseif(!preg_match("/^[a-zA-Z0-9\s,.'-]*$/", $data['srtAddress'])){
                 $data['srtAddress_err'] = "Invalid Street Address";
             }
 
@@ -486,7 +486,8 @@ class Coach extends Controller
             }
         }
 
-        $output = '<option selected disabled>--Available Coaches--</option>';
+        // $output = '<option selected disabled>--Available Coaches--</option>';
+        $output = '';
         for ($i = 0; $i < count($coaches_email); $i++) {
             $email = $coaches_email[$i];
             $coaches_details = $this->coachModel->getCoachUserByEmail($email);
