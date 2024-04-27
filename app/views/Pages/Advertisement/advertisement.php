@@ -34,7 +34,9 @@
                     <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/manager"><i class="fa-solid fa-file-circle-plus icon"></i></a>
                 <?php } else if ($role == "Cashier") { ?>
                     <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/cashier"><i class="fa-solid fa-file-circle-plus icon"></i></a>   
-            <?php } ?>
+                <?php } else if ($role == "Owner") { ?>
+                    <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/owner"><i class="fa-solid fa-file-circle-plus icon"></i></a>
+                <?php } ?>
             <?php } ?>
 
         </div>
@@ -50,10 +52,6 @@
                             <h2>
                                 <?php echo $advert->title ?>
                             </h2>
-
-                            <h4>
-                                <?php echo $advert->name ?>
-                            </h4>
                             <div class="viewmore">
                                 <a class="btn1"
                                     href="<?php echo URLROOT; ?>/Pages/AdvertisementDetails/coach?advert_id=<?php echo $advert->advertisement_id; ?>">View

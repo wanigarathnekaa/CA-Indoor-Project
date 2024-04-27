@@ -564,16 +564,12 @@ class Pages extends Controller
             'role' => $role,
             'email' => $_SESSION['user_email'],
             'title' => "",
-            'name' => "",
-            'date' => "",
             'content' => "",
             'filename' => "",
             'filetmp' => "",
 
 
             'title_err' => "",
-            'name_err' => "",
-            'date_err' => "",
             'content_err' => "",
             'filename_err' => "",
             'filetmp_err' => "",
@@ -589,60 +585,26 @@ class Pages extends Controller
     // view advertisement
     public function View_Advertisement($name)
     {
-        $role = "User";
-        $user = $this->pagesModel->findUser($_SESSION['user_email']);
-        $coach = $this->pagesModel->findCoach($_SESSION['user_email']);
-        $manager = $this->pagesModel->findManager($_SESSION['user_email']);
-        if (!empty($user)) {
-            $role = "User";
-        } else if (!empty($coach)) {
-            $role = "Coach";
-        } else if (!empty($manager)) {
-            $role = "Manager";
-        }
         $advertisement = $this->pagesModel->getAdvertisement();
         $data = [
-            'role' => $role,
             'adverts' => $advertisement,
         ];
         $this->view('Pages/Advertisement/advertisement', $data);
     }
 
-    // public function Advertisements($name)
-    // {
-    //     $role = "User";
-    //     $user = $this->pagesModel->findUser($_SESSION['user_email']);
-    //     $coach = $this->pagesModel->findCoach($_SESSION['user_email']);
-    //     $manager = $this->pagesModel->findManager($_SESSION['user_email']); 
-    //     if(!empty($user)){
-    //         $role = "User";
-    //     } 
-    //     else if(!empty($coach)){
-    //         $role = "Coach";
-    //     }
-    //     else if(!empty($manager)){
-    //         $role = "Manager";
-    //     }
-    //     $advertisement = $this->pagesModel->getAdvertisement();
-    //     $data = [
-    //         'role' => $role,
-    //         'adverts' => $advertisement,
-    //     ];
-
-    //     $this->view('Pages/Advertisement/advertisement', $data);
-    // }
+    
 
     public function AdvertisementDetails()
     {
         $flag = 0;
         $advertisement = $this->pagesModel->getAdvertisement();
-        $user = $this->pagesModel->findUser($_SESSION['user_email']);
-        if (empty($user)) {
-            $flag = 1;
-        }
+        // $user = $this->pagesModel->findUser($_SESSION['user_email']);
+        // if (empty($user)) {
+        //     $flag = 1;
+        // }
         $data = [
             'adverts' => $advertisement,
-            'flag' => $flag,
+            // 'flag' => $flag,
         ];
         $this->view('Pages/Advertisement/advertisementDetails', $data);
     }

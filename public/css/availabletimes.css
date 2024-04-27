@@ -149,7 +149,7 @@ body {
 }
 
 .select__item:hover {
-  background: var(--color01);
+  background: var(--color02);
 }
 
 
@@ -159,10 +159,23 @@ body {
   color: var(--gray);
 }
 
+.select__item--selected::after {
+  content: "✔";
+  color: var(--white);
+  font-size: 20px;
+}
+
 .select__item--booked {
   background-color: var(--color01);
   color: #fff;
   /*text-decoration: line-through;*/
+}
+
+.select__item--booked::before {
+  content: "Available : ";
+  color: #fff;
+  font-size: 14px;
+  margin-left: 5px;
 }
 
 .select__item--booked:hover {
@@ -172,6 +185,13 @@ body {
 .select__item--reserved{
   background-color: red;
   color: #ffffff;
+}
+
+.select__item--reserved::before {
+  content: "Reserved : ";
+  color: #fff;
+  font-size: 14px;
+  margin-left: 5px;
 }
 
 

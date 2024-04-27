@@ -20,32 +20,26 @@
       <!-- Content -->
       <section class="home">
         <div class="container">
+          
+          <div class="center">
           <div class="title">ADD advertisement</div>
           <div class="content">
             <form action="<?php echo URLROOT; ?>/Advertisement/add_Advertisement" method="POST" enctype="multipart/form-data">
               <div class="user-details">
-                <div class="input-box">
-                  <span class="details">Coach Name</span>
-                  <input type="text" name="name" placeholder="Enter your name" value="<?php echo $data['name']; ?>">
-                  <span class="form-invalid"><?php echo $data['name_err']; ?></span>
-                </div>
+                
                 <div class="input-box">
                   <span class="details">Advertisement Title</span>
                   <input type="text" name="title" placeholder="Title" value="<?php echo $data['title']; ?>">
                   <span class="form-invalid"><?php echo $data['title_err']; ?></span>
                 </div>   
-                <div class="input-box">
-                  <span class="details">Date</span> 
-                  <input type="date" name="date" placeholder="Date" value="<?php echo $data['date']; ?>">
-                  <span class="form-invalid"><?php echo $data['date_err']; ?></span>
-                </div>
+                
                 <div class="input-box " id="content">
                   <span class="details">Content</span>
                   <textarea name="content" placeholder="Description"><?php echo $data['content']; ?></textarea>
                   <span class="form-invalid"><?php echo $data['content_err']; ?></span>
                 </div>
                 <div class="textbox">
-                  <label for="img" class="upload-label">Post:</label><br>
+                  <label for="img" class="upload-label">Attachment</label><br>
                   <input type="file" name="file" id="file" value="<?php echo $data['filetmp']; ?>" accept="image/*" ><br>
                   <span class="form-invalid"><?php echo $data['filename_err']; ?></span>
                 </div>
@@ -60,6 +54,7 @@
                 <input type="submit" value="Publish" >
               </div>
             </form>
+          </div>
           </div>
         </div>
       </section>
