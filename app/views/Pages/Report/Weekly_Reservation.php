@@ -25,8 +25,8 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
                     <label>Select Report Type</label>
                     <select name="report_type" id="report_type" class="form-control" required>
                         <option value=""></option>
-                        <option name="daily">payment-status</option>
-                        <option value="weekly">reservation-chart</option>
+                        <option value="net-Types">Net Types</option>
+                        <option value="weekly">Reservation-chart</option>
                         <option value="monthly">Monthly</option>
                         <option value="quarterly">Quarterly</option>
                         <option value="yearly">Yearly</option>
