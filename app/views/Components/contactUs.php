@@ -48,12 +48,12 @@
           <p>If you have any help or any types of issues related our company, you can send me message from here. It's my
             pleasure to help you.</p>
           <form action="<?php echo URLROOT; ?>/Complaint/create" method="POST">
-            <div class="input-box">
-              <input type="text" id="name" name="name" placeholder="Enter your name"
+            <div class="input-box hidden">
+              <input hidden type="text" id="name" name="name" placeholder="Enter your name"
                 value="<?php echo $_SESSION['user_name']; ?>">
             </div>
-            <div class="input-box">
-              <input type="text" id="email" name="email" placeholder="Enter your email"
+            <div class="input-box hidden">
+              <input hidden type="text" id="email" name="email" placeholder="Enter your email"
                 value="<?php echo $_SESSION['user_email']; ?>">
             </div>
             <div class="input-box">

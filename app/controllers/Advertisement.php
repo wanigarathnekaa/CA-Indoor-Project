@@ -20,8 +20,6 @@ class Advertisement extends Controller
             $data = [
                 'title' => trim($_POST['title']),
                 'email' => trim($_POST['email']),
-                'name' => trim($_POST['name']),
-                'date' => trim($_POST['date']),
                 'content' => trim($_POST['content']),
                 'filename' => trim($_FILES['file']['name']),
                 'filetmp' => trim($_FILES['file']['tmp_name']),
@@ -29,8 +27,6 @@ class Advertisement extends Controller
 
                 'title_err' => "",
                 'email_err' => "",
-                'name_err' => "",
-                'date_err' => "",
                 'content_err' => "",
                 'filename_err' => "",
                 'filetmp_err' => "",
@@ -44,26 +40,14 @@ class Advertisement extends Controller
                 $data['filename'] = "";
                 $data['filename_err'] = "Please upload the image";
             }
-            // $newfilename = uniqid() . "-" . $data['filename'];
-            // move_uploaded_file($data['filetmp'], "../public/uploads/" . $newfilename);
-            // $data['filename'] = $newfilename;
-
-            //validate name
-            if (empty($data['name'])) {
-                $data['name_err'] = "Please enter a name";
-            }
+            
 
             //validate title
             if (empty($data['title'])) {
                 $data['title_err'] = "Please enter a title";
             }
 
-            //validate date
-            if (empty($data['date'])) {
-                $data['date_err'] = "Please enter the date";
-            }elseif($data['date'] < date("Y-m-d")){
-                    $data['date_err'] = "Please enter a valid date";
-            }          
+                     
 
             //validate content
             if (empty($data['content'])) {
@@ -73,7 +57,7 @@ class Advertisement extends Controller
 
 
             //If validation is completed and no error, then register the user
-            if (empty($data['title_err']) && empty($data['content_err']) && empty($data['date_err']) && empty($data['name_err']) && empty($data['filename_err'])) {
+            if (empty($data['title_err']) && empty($data['content_err'])&& empty($data['filename_err'])) {
                 if ($this->advertiseModel->addAdvertisement($data)) {
                     // $this->view('Pages/Advertisement/advertisement');
                     redirect('Pages/View_Advertisement/advertisement');
@@ -89,8 +73,6 @@ class Advertisement extends Controller
             $data = [
                 'title' => "",
                 'email' => "",
-                'name' => "",
-                'date' => "",
                 'content' => "",
                 'filename' => "",
                 'filetmp' => "",
@@ -98,8 +80,6 @@ class Advertisement extends Controller
 
                 'title_err' => "",
                 'email_err' => "",
-                'name_err' => "",
-                'date_err' => "",
                 'content_err' => "",
                 'filename_err' => "",
                 'filetmp_err' => "",
@@ -137,16 +117,12 @@ class Advertisement extends Controller
                 'advertisement_id' => $advertisement_id,
                 'title' => trim($_POST['title']),
                 'email' => trim($_POST['email']),
-                'name' => trim($_POST['name']),
-                'date' => trim($_POST['date']),
                 'content' => trim($_POST['content']),
                 'filename' => trim($_FILES['file']['name']),
                 'filetmp' => trim($_FILES['file']['tmp_name']),
 
                 'title_err' => "",
                 'email_err' => "",
-                'name_err' => "",
-                'date_err' => "",
                 'content_err' => "",
                 'filename_err' => "",
                 'filetmp_err' => "",
@@ -162,21 +138,11 @@ class Advertisement extends Controller
                 $data['img'] = $existingFilename;
             }
 
-            //validate name
-            if (empty($data['name'])) {
-                $data['name_err'] = "Please enter a name";
-            }
+            
 
             //validate title
             if (empty($data['title'])) {
                 $data['title_err'] = "Please enter a title";
-            }
-
-            //validate date
-            if (empty($data['date'])) {
-                $data['date_err'] = "Please enter the date";
-            }elseif($data['date'] < date("Y-m-d")){
-                    $data['date_err'] = "Please enter a valid date";
             }
 
             //validate content
@@ -205,16 +171,12 @@ class Advertisement extends Controller
                 'advertisement_id' => $advertisement_id,
                 'title' => $advertisement->title,
                 'email' => $advertisement->email,
-                'name' => $advertisement->name,
-                'date' => $advertisement->date,
                 'content' => $advertisement->content,
                 'filename' => $advertisement->img,
                 'filetmp' => "",
 
                 'title_err' => "",
                 'email_err' => "",
-                'name_err' => "",
-                'date_err' => "",
                 'content_err' => "",
                 'filename_err' => "",
                 'filetmp_err' => "",

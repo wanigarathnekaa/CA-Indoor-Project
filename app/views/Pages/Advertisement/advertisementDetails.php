@@ -59,11 +59,7 @@ foreach ($data['adverts'] as $advert) {
           <h2 class="product-title">
             <?php echo $advertisement[0]->title; ?>
           </h2>
-          <div class="date">
-            <p class="event-date">Date: <span>
-                <?php echo $advertisement[0]->date; ?>
-              </span></p>
-          </div>
+          
           <div class="product-detail">
             <h2>about this event: </h2>
             <p>
@@ -71,7 +67,7 @@ foreach ($data['adverts'] as $advert) {
             </p>
           </div>
 
-          <?php if ($advertisement[0]->email == $_SESSION['user_email'] || $data['flag'] || $role == 'Manager') { ?>
+          <?php if ($advertisement[0]->email == $_SESSION['user_email'] ||  $role == 'Manager') { ?>
             <div class="event-info">
               <a href="<?php echo URLROOT?>/Advertisement/editAdvertisement/<?php echo $advertisement[0]->advertisement_id?>">
               <button type="button" class="btn">Edit</button>

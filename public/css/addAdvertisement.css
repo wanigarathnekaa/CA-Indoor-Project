@@ -14,7 +14,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins',sans-serif;
+  font-family: 'Poppins';
 }
 body{
   height: 100vh;
@@ -24,23 +24,31 @@ body{
   padding: 10px;
   background: linear-gradient(135deg);
 }
+
+
+
 .container{
-  margin-top: 50px;
-  margin-left: 200px;
-  max-width: 700px;
-  width: 90%;
+  /* margin-top: 50px; */
+  /* margin-left: 200px; */
+  width: 100%;
   /* background-color: #fff; */
   padding: 25px 30px;
   border-radius: 5px;
+  
+  
+
   /* box-shadow: 0 5px 10px rgba(0,0,0,0.15); */
 }
-.container .title{
-  font-size: 25px;
-  font-weight: 500;
-  position: relative;
-  margin-bottom: 20px;
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-.container .title::before{
+
+
+/* .container .title::before{
   content: "";
   position: absolute;
   left: 0;
@@ -49,16 +57,22 @@ body{
   width: 30px;
   border-radius: 5px;
   background: linear-gradient(135deg, #A7D8D7, #2E8A99);
-}
-.container {
+} */
+/* .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
+  
+} */
 
 .title {
-  margin-bottom: 20px;
+  font-size: 2em;
+      /* font-weight: bold; */
+      margin-bottom: 20px;
+      color: var(--color01);
+      text-align: center;
+      direction: ltr;
 }
 
 .upload {
@@ -67,49 +81,25 @@ body{
 }
 
 
-.btn {
-  margin-left: 10px;
-  border-radius: 60%;
-}
-.btn{
-  position: relative;
-  padding:35px 5px 35px 5px;
-  font-size: 15px;
-  line-height: 1.5;
-  color: #A7D8D7;
-  background-color: #2E8A99;
-  overflow: hidden;
 
-}
-.btn input[type="file"]{
-  cursor: pointer;
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform: scale(3);
-  opacity:0 ;
-}
 .content form .user-details{
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: space-between;
   margin: 20px 0 12px 0;
 }
 
 form .user-details .input-box
 {  margin-bottom: 15px;
-  width: calc(100% / 2 - 20px);
-}
-
-#content{
-  width: 600px;
-
+    width: 600px;
+    /* max-width: 400px; */
+  /* width: calc(100% / 2 - 20px); */
 }
 
 
-.input-box.last .details {
-  width: 150px; /* Adjust the width as needed */
-}
+
+
+
 form .input-box span.details{
   display: block;
   font-weight: 500;
@@ -125,6 +115,7 @@ form .input-box span.details{
   border: 1px solid #ccc;
   border-bottom-width: 2px;
   transition: all 0.3s ease;
+  /* background-color: var(--color04); */
 }
 .user-details .input-box input:focus,
 .user-details .input-box input:valid,
@@ -144,6 +135,7 @@ form .input-box span.details{
   border-bottom-width: 2px;
   transition: all 0.3s ease;
   resize: none;
+    /* background-color: var(--color04); */
 }
  
  form .category{
@@ -175,8 +167,9 @@ form .input-box span.details{
  .formbox .textbox{
 
   width: 100%;
-  position: relative;
+  /* position: relative; */
   align-items: center;
+  background-color: #222;
 }
 
  form input[type="radio"]{

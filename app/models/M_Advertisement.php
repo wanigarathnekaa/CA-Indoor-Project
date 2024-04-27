@@ -7,12 +7,12 @@
 
         // add advertisement.............................................
         public function addAdvertisement($data){
-            $this->db->query('INSERT INTO advert (title, email, date, content, name, img) VALUES (:title, :email, :date, :content, :name, :img)');
+            $this->db->query('INSERT INTO advert (title, email, content,img) VALUES (:title, :email, :content, :img)');
             $this->db->bind(':title', $data['title']);
             $this->db->bind(':email', $data['email']);
-            $this->db->bind(':date', $data['date']);
+            
             $this->db->bind(':content', $data['content']);
-            $this->db->bind(':name', $data['name']);
+           
             $this->db->bind(':img', $data['filename']);
 
             if($this->db->execute()){
@@ -40,13 +40,11 @@
 
         // edit advertisement.............................................
         public function editAdvertisement($data){
-            $this->db->query('UPDATE advert SET title = :title, email = :email, date = :date, content = :content, name = :name, img = :img WHERE advertisement_id = :advertisement_id');
+            $this->db->query('UPDATE advert SET title = :title, email = :email, content = :content, img = :img WHERE advertisement_id = :advertisement_id');
             $this->db->bind(':advertisement_id', $data['advertisement_id']);
             $this->db->bind(':title', $data['title']);
             $this->db->bind(':email', $data['email']);
-            $this->db->bind(':date', $data['date']);
             $this->db->bind(':content', $data['content']);
-            $this->db->bind(':name', $data['name']);
             $this->db->bind(':img', $data['filename']);
 
             if($this->db->execute()){
