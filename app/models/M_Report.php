@@ -1296,23 +1296,25 @@ class M_Report
                 echo "<div class='alert alert-warning'>No bookings found between the selected dates.</div>";
             }
         }
-        public function getReservationChart($data) {
 
-        $invoice_date = isset($_POST['invoice_date']) ? $_POST['invoice_date'] : '';
+        public function displayReservationChart($data) {
+            $invoice_date = isset($_POST['invoice_date']) ? $_POST['invoice_date'] : '';
             $invoice_due_date = isset($_POST['invoice_due_date']) ? $_POST['invoice_due_date'] : '';
             
             // Fetch booking data based on invoice dates and payment status
-            $sql = "SELECT COUNT(*) AS count, paymentStatus FROM bookings WHERE date >= :invoice_date AND date <= :invoice_due_date GROUP BY paymentStatus";
+            $sql = "SELECT COUNT(*) AS count, time_slots.netType FROM bookings 
+                    INNER JOIN time_slots ON bookings.id = time_slots.booking_id
+                    WHERE bookings.date >= :invoice_date AND bookings.date <= :invoice_due_date 
+                    GROUP BY time_slots.netType";
             $this->db->query($sql);
             $this->db->bind(':invoice_date', $invoice_date);
             $this->db->bind(':invoice_due_date', $invoice_due_date);
-            return $this->db->resultSet();}
-        public function displayReservationChart($data,$data1) {
+            $result = $this->db->resultSet();
             
             // Prepare data for the pie chart
-            $bookingCounts = array();
-            foreach ($data['bookings'] as $row) {
-                $bookingCounts[$row->paymentStatus] = $row->count;
+            $netTypeCounts = array();
+            foreach ($result as $row) {
+                $netTypeCounts[$row->netType] = $row->count;
             }
             
             // ---------------------------------------------------------
@@ -1324,14 +1326,11 @@ class M_Report
             // add a page
             $pdf->AddPage();
             
-            $pdf->Write(10, "Payment Status of Reservations\n");
+            $pdf->Write(10, "NetType Distribution of Reservations\n");
             $pdf->SetFont('helvetica', '', 13);
-
-            $pdf->Write(10, "Between: " . $data1['invoice_date'] . " and " . $data1['invoice_due_date']."\n\n");
-           
-            
-
-            
+        
+            $pdf->Write(10, "Between: " . $data['invoice_date'] . " and " . $data['invoice_due_date']."\n\n");
+        
             // Pie chart parameters
             $xc = 105;
             $yc = 100;
@@ -1339,49 +1338,24 @@ class M_Report
             
             // Pie chart colors
             $colors = array(
-                'Paid' => array(51, 153, 102),    // Matte Green for Paid
-                'Pending' => array(255, 204, 102),  // Matte Yellow for Pending
-                'Not Paid' => array(204, 102, 102)  // Matte Red for Not Paid
-            );
-            
-        
-            // Color descriptions
-            $colorDescriptions = array(
-                'Paid' => 'Green',
-                'Pending' => 'Yellow',
-                'Not Paid' => 'Red'
+                'Machine Net' => array(51, 153, 102),    // Green
+                'Normal Net A' => array(255, 204, 102),  // Yellow
+                'Normal Net B' => array(204, 102, 102)   // Red
             );
             
             $startAngle = 0;
-            foreach ($bookingCounts as $status => $count) {
-                $endAngle = $startAngle + ($count / array_sum($bookingCounts)) * 360;
-                $pdf->SetFillColor($colors[$status][0], $colors[$status][1], $colors[$status][2]);
+            foreach ($netTypeCounts as $netType => $count) {
+                $endAngle = $startAngle + ($count / array_sum($netTypeCounts)) * 360;
+                $pdf->SetFillColor($colors[$netType][0], $colors[$netType][1], $colors[$netType][2]);
                 $pdf->PieSector($xc, $yc, $r, $startAngle, $endAngle, 'FD', false, 0, 2);
                 $startAngle = $endAngle;
             }
-            $totalReservations = array_sum($bookingCounts);
-            foreach ($bookingCounts as $status => $count) {
+            $totalReservations = array_sum($netTypeCounts);
+            foreach ($netTypeCounts as $netType => $count) {
                 $percentage = round(($count / $totalReservations) * 100, 2);
-                $pdf->Write(10, "{$status}: {$count} ({$percentage}%) \n");
+                $pdf->Write(10, "{$netType}: {$count} ({$percentage}%) \n");
             }
-            
-            // Write labels and color descriptions
-            // $pdf->SetTextColor(255, 255, 255);
-            // $pdf->Text(105, 65, 'Paid');
-            // $pdf->Text(60, 95, 'Pending');
-            // $pdf->Text(120, 115, 'Not Paid');
-        
-            // Color descriptions
-            // $pdf->Text(140, 65, ' - ' . $colorDescriptions['Paid']);
-            // $pdf->Text(140, 95, ' - ' . $colorDescriptions['Pending']);
-            // $pdf->Text(140, 115, ' - ' . $colorDescriptions['Not Paid']);
-            
-            // ---------------------------------------------------------
-            // set font size and color for text
-$pdf->SetFont('helvetica', '', 12);
-$pdf->SetTextColor(0, 0, 0);
-
-// Draw squares and color descriptions
+            // Draw squares and color descriptions
 $xSquare = 70;
 $ySquare = 150;
 $colorWidth = 10;
@@ -1402,16 +1376,29 @@ foreach ($colors as $status => $color) {
     // Move to the next position
     $ySquare += $colorHeight + $colorGap;
 }
-
-            //Close and output PDF document
-            $pdf->Output('reservation_payments.pdf', 'D');
+            // Close and output PDF document
+            $pdf->Output('net_type_distribution.pdf', 'D');
         }
-        public function displayReservationChart1($data,$data1) {
+        
+        
+        public function displayReservationChart1($data) {
+            $invoice_date = isset($_POST['invoice_date']) ? $_POST['invoice_date'] : '';
+            $invoice_due_date = isset($_POST['invoice_due_date']) ? $_POST['invoice_due_date'] : '';
+            
+            // Fetch booking data based on invoice dates and payment status
+            $sql = "SELECT COUNT(*) AS count, time_slots.netType FROM bookings 
+                    INNER JOIN time_slots ON bookings.id = time_slots.booking_id
+                    WHERE bookings.date >= :invoice_date AND bookings.date <= :invoice_due_date 
+                    GROUP BY time_slots.netType";
+            $this->db->query($sql);
+            $this->db->bind(':invoice_date', $invoice_date);
+            $this->db->bind(':invoice_due_date', $invoice_due_date);
+            $result = $this->db->resultSet();
             
             // Prepare data for the pie chart
-            $bookingCounts = array();
-            foreach ($data['bookings'] as $row) {
-                $bookingCounts[$row->paymentStatus] = $row->count;
+            $netTypeCounts = array();
+            foreach ($result as $row) {
+                $netTypeCounts[$row->netType] = $row->count;
             }
             
             // ---------------------------------------------------------
@@ -1423,14 +1410,11 @@ foreach ($colors as $status => $color) {
             // add a page
             $pdf->AddPage();
             
-            $pdf->Write(10, "Payment Status of Reservations\n");
+            $pdf->Write(10, "NetType Distribution of Reservations\n");
             $pdf->SetFont('helvetica', '', 13);
-
-            $pdf->Write(10, "Between: " . $data1['invoice_date'] . " and " . $data1['invoice_due_date']."\n\n");
-           
-            
-
-            
+        
+            $pdf->Write(10, "Between: " . $data['invoice_date'] . " and " . $data['invoice_due_date']."\n\n");
+        
             // Pie chart parameters
             $xc = 105;
             $yc = 100;
@@ -1438,49 +1422,24 @@ foreach ($colors as $status => $color) {
             
             // Pie chart colors
             $colors = array(
-                'Paid' => array(51, 153, 102),    // Matte Green for Paid
-                'Pending' => array(255, 204, 102),  // Matte Yellow for Pending
-                'Not Paid' => array(204, 102, 102)  // Matte Red for Not Paid
-            );
-            
-        
-            // Color descriptions
-            $colorDescriptions = array(
-                'Paid' => 'Green',
-                'Pending' => 'Yellow',
-                'Not Paid' => 'Red'
+                'Machine Net' => array(51, 153, 102),    // Green
+                'Normal Net A' => array(255, 204, 102),  // Yellow
+                'Normal Net B' => array(204, 102, 102)   // Red
             );
             
             $startAngle = 0;
-            foreach ($bookingCounts as $status => $count) {
-                $endAngle = $startAngle + ($count / array_sum($bookingCounts)) * 360;
-                $pdf->SetFillColor($colors[$status][0], $colors[$status][1], $colors[$status][2]);
+            foreach ($netTypeCounts as $netType => $count) {
+                $endAngle = $startAngle + ($count / array_sum($netTypeCounts)) * 360;
+                $pdf->SetFillColor($colors[$netType][0], $colors[$netType][1], $colors[$netType][2]);
                 $pdf->PieSector($xc, $yc, $r, $startAngle, $endAngle, 'FD', false, 0, 2);
                 $startAngle = $endAngle;
             }
-            $totalReservations = array_sum($bookingCounts);
-            foreach ($bookingCounts as $status => $count) {
+            $totalReservations = array_sum($netTypeCounts);
+            foreach ($netTypeCounts as $netType => $count) {
                 $percentage = round(($count / $totalReservations) * 100, 2);
-                $pdf->Write(10, "{$status}: {$count} ({$percentage}%) \n");
+                $pdf->Write(10, "{$netType}: {$count} ({$percentage}%) \n");
             }
-            
-            // Write labels and color descriptions
-            // $pdf->SetTextColor(255, 255, 255);
-            // $pdf->Text(105, 65, 'Paid');
-            // $pdf->Text(60, 95, 'Pending');
-            // $pdf->Text(120, 115, 'Not Paid');
-        
-            // Color descriptions
-            // $pdf->Text(140, 65, ' - ' . $colorDescriptions['Paid']);
-            // $pdf->Text(140, 95, ' - ' . $colorDescriptions['Pending']);
-            // $pdf->Text(140, 115, ' - ' . $colorDescriptions['Not Paid']);
-            
-            // ---------------------------------------------------------
-            // set font size and color for text
-$pdf->SetFont('helvetica', '', 12);
-$pdf->SetTextColor(0, 0, 0);
-
-// Draw squares and color descriptions
+            // Draw squares and color descriptions
 $xSquare = 70;
 $ySquare = 150;
 $colorWidth = 10;
@@ -1501,10 +1460,14 @@ foreach ($colors as $status => $color) {
     // Move to the next position
     $ySquare += $colorHeight + $colorGap;
 }
-
-            //Close and output PDF document
-            $pdf->Output('reservation_payments.pdf', 'I');
+            
+            // Close and output PDF document
+            $pdf->Output('net_type_distribution.pdf', 'I');
         }
+        
+        
+        
+        
         
         public function displayFilteredOrders($data) {
             $Product = $data['Product'];
