@@ -35,10 +35,13 @@ function time_slot($duration, $cleanup, $start, $end)
 
 <?php
 $new_array = array();
+$reserved_new_array = array();
 foreach ($data['availability'] as $availability) {
     if ($availability->email == $_SESSION['user_email'] && $availability->date == $filter_date) {
         $new_array_2[] = $availability->time_slot;
+        $new_array3[] = $availability->reserved_slots;
         $new_array = json_decode($new_array_2[0]);
+        $reserved_new_array = json_decode($new_array3[0]);
     }
 
 }
@@ -88,9 +91,17 @@ foreach ($data['availability'] as $availability) {
                             ?>
                             <?php
                             $found = false;
+                            $reserved = false;
                             for ($i = 0; $i < count($new_array); $i++) {
                                 if ($new_array[$i] == $ts) {
                                     $found = true;
+                                    break;
+                                }
+                            }
+
+                            for ($i = 0; $i < count($reserved_new_array); $i++) {
+                                if ($reserved_new_array[$i] == $ts) {
+                                    $reserved = true;
                                     break;
                                 }
                             }
@@ -98,9 +109,12 @@ foreach ($data['availability'] as $availability) {
                                 <option value="<?php echo $ts; ?>" date = "<?php echo $filter_date; ?>" data-booked="true">
                                     <?php echo $ts; ?>
                                 </option>
+                            <?php } else if($reserved) { ?>
+                                <option value="<?php echo $ts; ?>" date = "<?php echo $filter_date; ?>" data-reserved="true">
+                                    <?php echo $ts; ?>
+                                </option>
                             <?php } else { ?>
-                                <option value="<?php echo $ts; ?>" data-net-type="Normal Net A"
-                                    data-date="<?php echo $filter_date; ?>">
+                                <option value="<?php echo $ts; ?>" data-date="<?php echo $filter_date; ?>">
                                     <?php echo $ts; ?>
                                 </option>
                             <?php } ?>
