@@ -99,23 +99,35 @@ class Reports extends Controller
             }
 
             if(empty($data['Selected_month_error'])){
-                if(isset($_POST["download_pdf"])) {
-                    $this->reportmodel->MonthlyfilterBookingsAndGeneratePDF($data);}
-                else if(isset($_POST["view_pdf"])){
-                    $this->reportmodel->MonthlyfilterBookingsAndGeneratePDF1($data);
-                }elseif(isset($_POST["filter"])){
+                if ($_POST['report_type'] === 'booking') {
+                    if (isset($_POST["view_pdf"])) {
+                        // Display the reservation chart
+                        $this->reportmodel->MonthlyfilterBookingsAndGeneratePDF1($data);
+                    } elseif (isset($_POST["download_pdf"])) {
+                        $this->reportmodel->MonthlyfilterBookingsAndGeneratePDF($data);
+                   }elseif(isset($_POST["filter"])){
                     $bookings = $this->reportmodel->getMonthlyBookingDetails($data);
                     $data1 = [
                         'bookings' => $bookings
                     ];
                     $this->view('Pages/Report/bookingreport', $data,$data1);
-                }
-            }
-            else{
-                $this->view('Pages/Report/bookingreport', $data);
-            }
-        }
-            }
+            }}  else if ($_POST['report_type'] === 'order') {
+                if (isset($_POST["view_pdf"])) {
+                    // Display the reservation chart
+                    $this->reportmodel->MonthlyOrdersGeneratePDF1($data);
+                } elseif (isset($_POST["download_pdf"])) {
+                    $this->reportmodel->displayReservationChart($data);
+                }elseif(isset($_POST["filter"])){
+                    $bookings = $this->reportmodel->getMonthlyBookingDetails($data);
+                    $data1 = [
+                        'bookings' => $bookings
+                    ];
+                $this->view('Pages/Report/bookingreport', $data,$data1);
+            }}
+        
+        }}}
+        
+     
 
     
 
@@ -157,46 +169,46 @@ class Reports extends Controller
         }
     
     
-    public function MonthlyOrderReport(){
+    // public function MonthlyOrderReport(){
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Valid input
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    //     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //         // Valid input
+    //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-            $data = [
-                'Selected_month' => trim($_POST['Selected_month']),
+    //         $data = [
+    //             'Selected_month' => trim($_POST['Selected_month']),
 
-                'Selected_month_error' => ''
-            ];
+    //             'Selected_month_error' => ''
+    //         ];
 
-            // Validate selected month
-            if (empty($data['Selected_month'])) {
-                $data['Selected_month_error'] = 'Please select a month';
-            }elseif($data['Selected_month'] > date('m')){
-                $data['Selected_month_error'] = 'Selected month must be less than or equal to current month';
-            }
+    //         // Validate selected month
+    //         if (empty($data['Selected_month'])) {
+    //             $data['Selected_month_error'] = 'Please select a month';
+    //         }elseif($data['Selected_month'] > date('m')){
+    //             $data['Selected_month_error'] = 'Selected month must be less than or equal to current month';
+    //         }
 
-            if(empty($data['Selected_month_error'])){
-                if(isset($_POST["download_pdf"])) {
-                $this->reportmodel->MonthlyOrdersGeneratePDF($data);}
-            else if(isset($_POST["view_pdf"])){
-                $this->reportmodel->MonthlyOrdersGeneratePDF1($data);
-            }
-            $monthlyOrders = $this->reportmodel->getMonthlyOrders($data);
+    //         if(empty($data['Selected_month_error'])){
+    //             if(isset($_POST["download_pdf"])) {
+    //             $this->reportmodel->MonthlyOrdersGeneratePDF($data);}
+    //         else if(isset($_POST["view_pdf"])){
+    //             $this->reportmodel->MonthlyOrdersGeneratePDF1($data);
+    //         }
+    //         $monthlyOrders = $this->reportmodel->getMonthlyOrders($data);
                     
-            $data1 = [
-                'monthlyOrders' => $monthlyOrders
-            ];
-            $this->view('Pages/Report/monthlyORDERreport', $data1);
-        }
-            else{
-                $this->view('Pages/Report/monthlyORDERreport', $data);}
+    //         $data1 = [
+    //             'monthlyOrders' => $monthlyOrders
+    //         ];
+    //         $this->view('Pages/Report/monthlyORDERreport', $data1);
+    //     }
+    //         else{
+    //             $this->view('Pages/Report/monthlyORDERreport', $data);}
 
-            }
+    //         }
 
             
            
-        }
+    //     }
     
     public function Userlogs(){
 
@@ -272,8 +284,15 @@ class Reports extends Controller
                     $this->reportmodel->displayRevenueChart1($data);
                 } elseif (isset($_POST["download_pdf"])) {
                     $this->reportmodel->displayRevenueChart($data);
-            }
-        } else {
+            }} 
+            else if ($_POST['report_type'] === 'timeALO') {
+                if (isset($_POST["view_pdf"])) {
+                    // Display the reservation chart
+                    $this->reportmodel->displayTimeChart1($data);
+                } elseif (isset($_POST["download_pdf"])) {
+                    $this->reportmodel->displayTimeChart($data);
+            }}
+        else {
             $this->view('Pages/Report/Weekly_Reservation');
         }
     }

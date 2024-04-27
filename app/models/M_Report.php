@@ -1381,6 +1381,183 @@ foreach ($colors as $status => $color) {
         }
         
         
+        public function displayTimeChart($data) {
+            $invoice_date = isset($_POST['invoice_date']) ? $_POST['invoice_date'] : '';
+            $invoice_due_date = isset($_POST['invoice_due_date']) ? $_POST['invoice_due_date'] : '';
+            
+            // Fetch booking data based on invoice dates and payment status
+            $sql = "SELECT 
+                        COUNT(*) AS count, 
+                        CASE 
+                            WHEN HOUR(time_slots.timeslot) BETWEEN 7 AND 11 THEN '07:00AM-12:00PM'
+                            WHEN HOUR(time_slots.timeslot) BETWEEN 12 AND 16 THEN '12:00PM-05:00PM'
+                            WHEN HOUR(time_slots.timeslot) BETWEEN 17 AND 21 THEN '05:00PM-10:00PM'
+                        END AS hour_range
+                    FROM 
+                        bookings 
+                    INNER JOIN 
+                        time_slots ON bookings.id = time_slots.booking_id
+                    WHERE 
+                        bookings.date >= :invoice_date AND bookings.date <= :invoice_due_date 
+                    GROUP BY 
+                        hour_range";
+            
+            $this->db->query($sql);
+            $this->db->bind(':invoice_date', $invoice_date);
+            $this->db->bind(':invoice_due_date', $invoice_due_date);
+            $result = $this->db->resultSet();
+            
+            // Prepare data for the pie chart
+            $netTypeCounts = array();
+            foreach ($result as $row) {
+                $netTypeCounts[$row->hour_range] = $row->count; // Changed from $row->timeslot
+            }
+            
+            // Initialize PDF
+            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+            $pdf->SetFont('helvetica', 'B', 13);
+            $pdf->AddPage();
+            
+            // Title and date range
+            $pdf->Write(10, "Time Allocation of Reservations\n");
+            $pdf->SetFont('helvetica', '', 13);
+            $pdf->Write(10, "Between: " . $data['invoice_date'] . " and " . $data['invoice_due_date'] . "\n\n");
+            
+            // Pie chart parameters
+            $xc = 105;
+            $yc = 100;
+            $r = 50;
+            
+            // Pie chart colors and time range labels
+            $colors = array(
+                '07:00AM-12:00PM' => array(51, 153, 102),    // Green
+                '12:00PM-05:00PM' => array(255, 204, 102),  // Yellow
+                '05:00PM-10:00PM' => array(204, 102, 102)   // Red
+            );
+            
+            // Draw pie chart and calculate percentages
+            $startAngle = 0;
+            foreach ($netTypeCounts as $hourRange => $count) {
+                $endAngle = $startAngle + ($count / array_sum($netTypeCounts)) * 360;
+                $pdf->SetFillColor($colors[$hourRange][0], $colors[$hourRange][1], $colors[$hourRange][2]);
+                $pdf->PieSector($xc, $yc, $r, $startAngle, $endAngle, 'FD', false, 0, 2);
+                $startAngle = $endAngle;
+            }
+            
+            // Display reservation counts and percentages
+            $totalReservations = array_sum($netTypeCounts);
+            foreach ($netTypeCounts as $hourRange => $count) {
+                $percentage = round(($count / $totalReservations) * 100, 2);
+                $pdf->Write(10, "{$hourRange}: {$count} ({$percentage}%) \n");
+            }
+            
+            // Draw color squares and labels
+            $xSquare = 70;
+            $ySquare = 150;
+            $colorWidth = 10;
+            $colorHeight = 10;
+            $colorGap = 5;
+            $colorTextGap = 3;
+        
+            foreach ($colors as $rangeLabel => $color) {
+                $pdf->SetFillColor($color[0], $color[1], $color[2]);
+                $pdf->Rect($xSquare, $ySquare, $colorWidth, $colorHeight, 'F');
+                $pdf->Text($xSquare + $colorWidth + $colorTextGap, $ySquare + ($colorHeight / 2), $rangeLabel);
+                $ySquare += $colorHeight + $colorGap;
+            }
+            
+            // Output PDF
+            $pdf->Output('net_type_distribution.pdf', 'D');
+        }
+        public function displayTimeChart1($data) {
+            $invoice_date = isset($_POST['invoice_date']) ? $_POST['invoice_date'] : '';
+            $invoice_due_date = isset($_POST['invoice_due_date']) ? $_POST['invoice_due_date'] : '';
+            
+            // Fetch booking data based on invoice dates and payment status
+            $sql = "SELECT 
+                        COUNT(*) AS count, 
+                        CASE 
+                            WHEN HOUR(time_slots.timeslot) BETWEEN 7 AND 11 THEN '07:00AM-12:00PM'
+                            WHEN HOUR(time_slots.timeslot) BETWEEN 12 AND 16 THEN '12:00PM-05:00PM'
+                            WHEN HOUR(time_slots.timeslot) BETWEEN 17 AND 21 THEN '05:00PM-10:00PM'
+                        END AS hour_range
+                    FROM 
+                        bookings 
+                    INNER JOIN 
+                        time_slots ON bookings.id = time_slots.booking_id
+                    WHERE 
+                        bookings.date >= :invoice_date AND bookings.date <= :invoice_due_date 
+                    GROUP BY 
+                        hour_range";
+            
+            $this->db->query($sql);
+            $this->db->bind(':invoice_date', $invoice_date);
+            $this->db->bind(':invoice_due_date', $invoice_due_date);
+            $result = $this->db->resultSet();
+            
+            // Prepare data for the pie chart
+            $netTypeCounts = array();
+            foreach ($result as $row) {
+                $netTypeCounts[$row->hour_range] = $row->count; // Changed from $row->timeslot
+            }
+            
+            // Initialize PDF
+            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+            $pdf->SetFont('helvetica', 'B', 13);
+            $pdf->AddPage();
+            
+            // Title and date range
+            $pdf->Write(10, "Time Allocation of Reservations\n");
+            $pdf->SetFont('helvetica', '', 13);
+            $pdf->Write(10, "Between: " . $data['invoice_date'] . " and " . $data['invoice_due_date'] . "\n\n");
+            
+            // Pie chart parameters
+            $xc = 105;
+            $yc = 100;
+            $r = 50;
+            
+            // Pie chart colors and time range labels
+            $colors = array(
+                '07:00AM-12:00PM' => array(51, 153, 102),    // Green
+                '12:00PM-05:00PM' => array(255, 204, 102),  // Yellow
+                '05:00PM-10:00PM' => array(204, 102, 102)   // Red
+            );
+            
+            // Draw pie chart and calculate percentages
+            $startAngle = 0;
+            foreach ($netTypeCounts as $hourRange => $count) {
+                $endAngle = $startAngle + ($count / array_sum($netTypeCounts)) * 360;
+                $pdf->SetFillColor($colors[$hourRange][0], $colors[$hourRange][1], $colors[$hourRange][2]);
+                $pdf->PieSector($xc, $yc, $r, $startAngle, $endAngle, 'FD', false, 0, 2);
+                $startAngle = $endAngle;
+            }
+            
+            // Display reservation counts and percentages
+            $totalReservations = array_sum($netTypeCounts);
+            foreach ($netTypeCounts as $hourRange => $count) {
+                $percentage = round(($count / $totalReservations) * 100, 2);
+                $pdf->Write(10, "{$hourRange}: {$count} ({$percentage}%) \n");
+            }
+            
+            // Draw color squares and labels
+            $xSquare = 70;
+            $ySquare = 150;
+            $colorWidth = 10;
+            $colorHeight = 10;
+            $colorGap = 5;
+            $colorTextGap = 3;
+        
+            foreach ($colors as $rangeLabel => $color) {
+                $pdf->SetFillColor($color[0], $color[1], $color[2]);
+                $pdf->Rect($xSquare, $ySquare, $colorWidth, $colorHeight, 'F');
+                $pdf->Text($xSquare + $colorWidth + $colorTextGap, $ySquare + ($colorHeight / 2), $rangeLabel);
+                $ySquare += $colorHeight + $colorGap;
+            }
+            
+            // Output PDF
+            $pdf->Output('net_type_distribution.pdf', 'I');
+        }
+        
         public function displayReservationChart1($data) {
             $invoice_date = isset($_POST['invoice_date']) ? $_POST['invoice_date'] : '';
             $invoice_due_date = isset($_POST['invoice_due_date']) ? $_POST['invoice_due_date'] : '';

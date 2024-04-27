@@ -27,6 +27,8 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
                         <option value=""></option>
                         <option value="net-Types">Net Types</option>
                         <option value="weekly">Reservation-chart</option>
+                        <option value="timeALO">Time-Allocation</option>
+
                       
                     </select>
                 </div>

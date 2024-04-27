@@ -38,12 +38,13 @@
 
         <a class="card" href="<?php echo URLROOT; ?>/Pages/SalesMonthlyy">
         <div>
-        <div class="cardName">Monthly Income Report: Booking Analysis</div>
+        <div class="cardName">Monthly Reports</div>
 
         </div>
         <div class="iconBx">
             <!-- <i class='bx bxs-report'></i> -->
-            <i class="fa-solid fa-file-invoice-dollar"></i>
+            <!-- <i class="fa-solid fa-file-invoice-dollar"></i> -->
+            <i class="fa-solid fa-hand-holding-dollar"></i>
         </div>  
         </a>
      
@@ -58,17 +59,7 @@
         </div> 
         </a>
 
-        <a class="card" href="<?php echo URLROOT; ?>/Pages/MonthlyOrderReportt">
-        <div>
-        <div class="cardName">Monthly Income Report: Order Analysis</div>
-
-        </div>
-        <div class="iconBx">
-            <!-- <i class='bx bxs-report'></i> -->
-            <!-- <i class="fa-solid fa-file-invoice-dollar"></i> -->
-            <i class="fa-solid fa-hand-holding-dollar"></i>
-        </div> 
-        </a>
+       
 
         <a class="card" href="<?php echo URLROOT; ?>/Pages/Userlogss">
         <div>
@@ -83,7 +74,7 @@
 
         <a class="card" href="<?php echo URLROOT; ?>/Pages/Weekly_Reservationn">
         <div>
-        <div class="cardName">Weekly Rservation<br> Chart</div>
+        <div class="cardName">Filtered Charts</div>
 
         </div>
         <div class="iconBx">
