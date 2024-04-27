@@ -156,6 +156,7 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                                 }, 5000);
                                 var updatedCartCount = parseInt(cartCount) + 1;
                                 $('#cartCount').html(updatedCartCount);
+                                location.reload();
                             } else {
                                 // $('#quantity').html("Item not added to cart");
                                 var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Item not added to cart</h3></div><div class="notification_progress"></div></div>');
@@ -168,6 +169,15 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                         }
                     });
                 }
+            }
+        });
+
+        $("#qty\\[\\]").on('input', function () {
+            var qty = parseInt($('#qty\\[\\]').val());
+            if(qty < 1){
+                $('#qty\\[\\]').val(1);
+            }else if(qty == NaN){
+                $('#qty\\[\\]').val(1);
             }
         });
     });

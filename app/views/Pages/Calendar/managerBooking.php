@@ -48,6 +48,15 @@ $new_array_3 = array_filter($data, function ($item) use ($filter_date, $filter_n
 if (isset($_GET['date'])) {
     $date = $_GET['date'];
 }
+// Get the current hour in the format "HH:MM" (24-hour clock)
+$currentHour = date('H:i');
+$timestamp = strtotime($currentHour);
+
+// Round up the minutes to the nearest hour
+$roundedTimestamp = ceil($timestamp / (60 * 60)) * (60 * 60);
+
+// Format the rounded timestamp to output the hour and minute in "HH:00" format
+$formattedTime = date('H:00', $roundedTimestamp);
 
 $duration = 60;
 $cleanup = 0;
@@ -77,6 +86,7 @@ function time_slot($duration, $cleanup, $start, $end)
     return $slots;
 }
 
+$current_timeslots = time_slot($duration, $cleanup, $formattedTime, $end);
 ?>
 
 <!DOCTYPE html>
@@ -140,12 +150,17 @@ function time_slot($duration, $cleanup, $start, $end)
                                     <option value="<?php echo $ts; ?>" data-booked="true">
                                         <?php echo $ts; ?>
                                     </option>
+                                <?php } else if($filter_date == date('Y-m-d') && !in_array($ts, $current_timeslots)) { ?>
+                                    <option value="<?php echo $ts; ?>" data-net-type="Normal Net A"
+                                        data-date="<?php echo $filter_date; ?>" today-slot="true">
+                                        <?php echo $ts; ?>
+                                    </option>
                                 <?php } else { ?>
                                     <option value="<?php echo $ts; ?>" data-net-type="Normal Net A"
                                         data-date="<?php echo $filter_date; ?>">
                                         <?php echo $ts; ?>
                                     </option>
-                                <?php } ?>
+                                <?php }?> 
                             <?php } ?>
                         </select>
                     </div>
@@ -171,12 +186,17 @@ function time_slot($duration, $cleanup, $start, $end)
                                     <option value="<?php echo $ts; ?>" data-booked="true">
                                         <?php echo $ts; ?>
                                     </option>
+                                <?php } else if($filter_date == date('Y-m-d') && !in_array($ts, $current_timeslots)) { ?>
+                                    <option value="<?php echo $ts; ?>" data-net-type="Normal Net B"
+                                        data-date="<?php echo $filter_date; ?>" today-slot="true">
+                                        <?php echo $ts; ?>
+                                    </option>
                                 <?php } else { ?>
                                     <option value="<?php echo $ts; ?>" data-net-type="Normal Net B"
                                         data-date="<?php echo $filter_date; ?>">
                                         <?php echo $ts; ?>
                                     </option>
-                                <?php } ?>
+                                <?php }?> 
                             <?php } ?>
                         </select>
                     </div>
@@ -202,12 +222,17 @@ function time_slot($duration, $cleanup, $start, $end)
                                     <option value="<?php echo $ts; ?>" data-booked="true">
                                         <?php echo $ts; ?>
                                     </option>
+                                <?php } else if($filter_date == date('Y-m-d') && !in_array($ts, $current_timeslots)) { ?>
+                                    <option value="<?php echo $ts; ?>" data-net-type="Machine Net"
+                                        data-date="<?php echo $filter_date; ?>" today-slot="true">
+                                        <?php echo $ts; ?>
+                                    </option>
                                 <?php } else { ?>
                                     <option value="<?php echo $ts; ?>" data-net-type="Machine Net"
                                         data-date="<?php echo $filter_date; ?>">
                                         <?php echo $ts; ?>
                                     </option>
-                                <?php } ?>
+                                <?php }?> 
                             <?php } ?>
                         </select>
                     </div>

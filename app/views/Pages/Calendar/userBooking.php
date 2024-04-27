@@ -238,7 +238,7 @@ $current_timeslots = time_slot($duration, $cleanup, $formattedTime, $end);
                                         <?php echo $ts; ?>
                                     </option>
                                 <?php } else { ?>
-                                    <option value="<?php echo $ts; ?>" data-net-type="Normal Net A"
+                                    <option value="<?php echo $ts; ?>" data-net-type="Normal Net B"
                                         data-date="<?php echo $filter_date; ?>">
                                         <?php echo $ts; ?>
                                     </option>
@@ -274,7 +274,7 @@ $current_timeslots = time_slot($duration, $cleanup, $formattedTime, $end);
                                         <?php echo $ts; ?>
                                     </option>
                                 <?php } else { ?>
-                                    <option value="<?php echo $ts; ?>" data-net-type="Normal Net A"
+                                    <option value="<?php echo $ts; ?>" data-net-type="Machine Net"
                                         data-date="<?php echo $filter_date; ?>">
                                         <?php echo $ts; ?>
                                     </option>
