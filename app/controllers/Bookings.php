@@ -66,6 +66,41 @@ class Bookings extends Controller
                 $role = 'user';
             }
 
+            //Managing Coach Available Time Slots
+            $data1 = [
+                'date' => $data['date'],
+                'email' => $data['coach'],
+                'time_slot' => "",
+                'reserved_time_slot' => '',
+            ];
+            
+            $time_slots_coach_available = $this->bookingModel->getCoachAvailability($data);
+            $array_time_slots = json_decode($time_slots_coach_available[0]->time_slot, true);
+            print_r($array_time_slots);
+            $ts_array = array();
+            for ($i = 0; $i < count($arrayData); $i++) {
+                $ts_array[] = $arrayData[$i]['timeSlot'];
+            }
+            print_r($ts_array);
+
+            $resultArray = array_diff($array_time_slots, $ts_array);
+            $result = array_values($resultArray);
+
+            print_r($result);
+
+            if(!empty($result))
+            {
+                $data1["time_slot"] = json_encode($result);
+                $data1['reserved_time_slot'] = json_encode($ts_array);
+            }
+            else{
+                $data1["time_slot"] = NULL;
+                $data1['reserved_time_slot'] = json_encode($ts_array);
+            }
+            $this->bookingModel-> update_coach_availability($data1);
+            $this->bookingModel-> update_reserved_timeSlots($data1);
+
+
             if (empty($data['name_err']) && empty($data['net_err']) && empty($data['email_err'])) {
                 $bookingId = $this->bookingModel->last_inserted_id();
                 //create user
@@ -597,7 +632,7 @@ class Bookings extends Controller
                     $timeSlot = $data['timeSlotM'][0];
                     $netType = 'Machine Net';
                 }
-                
+
                 $bookingId = $this->bookingModel->getBookingId($date, $netType, $timeSlot);
                 if ($this->bookingModel->deleteReservation($bookingId[0]->id)) {
                     $flag = 1;
@@ -609,7 +644,7 @@ class Bookings extends Controller
             }
 
             if ($flag == 1) {
-                if($this->bookingModel->updatePermanentBookingStatus($data['pbookingId'])){
+                if ($this->bookingModel->updatePermanentBookingStatus($data['pbookingId'])) {
                     $response = [
                         'status' => 'success',
                     ];
