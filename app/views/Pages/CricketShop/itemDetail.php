@@ -90,9 +90,8 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
 
             if (qty > '<?= $data['SProduct']->qty; ?>') {
                 // $('#quantity').html("We don't have enough " + product_title + " stock on hand for the quantity you selected. Please try again.");
-                var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">We don\'t have enough ' + product_title + ' stock on hand for the quantity you selected. Please try again.</h3></div><div class="notification_progress"></div></div>');
+                var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title">We don\'t have enough ' + product_title + ' stock on hand for the quantity you selected. Please try again.</h3></div><div class="notification2_progress"></div></div>');
                 $('body').append(notificationDiv);
-                // Remove the notification after a certain time (e.g., 5 seconds)
                 setTimeout(function() {
                     notificationDiv.remove();
                 }, 5000);
@@ -117,7 +116,6 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                                 // $('#quantity').html("Item added to cart");
                                 var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Item added to cart</h3></div><div class="notification_progress"></div></div>');
                                 $('body').append(notificationDiv);
-                                // Remove the notification after a certain time (e.g., 5 seconds)
                                 setTimeout(function() {
                                     notificationDiv.remove();
                                 }, 5000);
@@ -126,7 +124,6 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                             } else {
                                 var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Item not added to cart</h3></div><div class="notification_progress"></div></div>');
                                 $('body').append(notificationDiv);
-                                // Remove the notification after a certain time (e.g., 5 seconds)
                                 setTimeout(function() {
                                     notificationDiv.remove();
                                 }, 5000);

@@ -228,6 +228,7 @@ class Coach extends Controller
                 $newfilename = uniqid() . "-" . $_FILES['file']['name'];
                 move_uploaded_file($_FILES['file']['tmp_name'], "../public/profilepic/" . $newfilename);
                 $data['filename'] = $newfilename;
+                $data['img'] = $newfilename;
             } else {
                 // No new file uploaded, retain the existing image value
                 $existingFilename = $this->coachUserModel->getExistingImageFilename($data['email']); // Replace $userId with the actual user ID

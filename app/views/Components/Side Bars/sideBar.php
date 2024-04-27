@@ -184,8 +184,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-link">
-                                    <a href="<?php echo URLROOT; ?>/Pages/CoachCalendar/coach">
-                                        <i class="bx bxs-calendar icon"></i>
+                                    <a href="<?php echo URLROOT; ?>/Pages/availabilityPage/coach">
+                                        <!-- <i class="bx bxs-calendar icon"></i> -->
+                                        <i class="fa-solid fa-business-time icon"></i>
                                         <span class="text nav-text">Availability</span>
                                     </a>
                                 </li>

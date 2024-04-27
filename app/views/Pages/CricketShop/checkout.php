@@ -153,7 +153,12 @@ include_once APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                 dataType: 'json',
                 success: function (response) {
                     if (response.status === "success") {
-                        alert("Order placed successfully");
+                        // alert("Order placed successfully");
+                        var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Order placed successfully</h3></div><div class="notification_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 3000);
                         window.location.href = "http://localhost/C&A_Indoor_Project/Pages/Cricket_Shop/User";
                     } else if(response.status === "error") {
                         $("#invalid-1").html(response.fname_err);
@@ -219,7 +224,12 @@ include_once APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                                 dataType: 'json',
                                 success: function (response) {
                                     if (response.status === "success") {
-                                        alert("Order placed successfully");
+                                        // alert("Order placed successfully");
+                                        var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Order placed successfully</h3></div><div class="notification_progress"></div></div>');
+                                        $('body').append(notificationDiv);
+                                        setTimeout(function() {
+                                            notificationDiv.remove();
+                                        }, 3000);
                                         window.location.href = "http://localhost/C&A_Indoor_Project/Pages/Cricket_Shop/User";
                                     } else {
                                         console.log(response);
