@@ -18,6 +18,11 @@
             <ul class="menu-links">
 
                 <?php if ($role == "User") { ?>
+                    <?php
+                    if ($_SESSION['user_role'] != "User") {
+                        redirect('Pages/ErrorPage/404');
+                    }
+                    ?>
                     <li class="nav-link">
                         <a href="<?php echo URLROOT; ?>/Pages/Dashboard/user">
                             <i class="bx bx-home-alt icon"></i>
@@ -63,8 +68,13 @@
                             <span class="text nav-text">Profile</span>
                         </a>
                     </li>
-                    
+
                 <?php } else if ($role == "Admin") { ?>
+                        <?php
+                        if ($_SESSION['user_role'] != "Admin") {
+                            redirect('Pages/ErrorPage/404');
+                        }
+                        ?>
                         <li class="nav-link">
                             <a href="C&A_Indoor_Project/Pages/Dashboard/admin">
                                 <i class="bx bx-home-alt icon"></i>
@@ -90,14 +100,14 @@
                                 <span class="text nav-text">Advertisement</span>
                             </a>
                         </li>
-                        
+
                         <li class="nav-link">
                             <a href="C&A_Indoor_Project/Reports/SelectReport">
-                                <i class="bx bxs-report icon"></i>                    
+                                <i class="bx bxs-report icon"></i>
 
                                 <span class="text nav-text">Reports</span>
                             </a>
-                        
+
                         </li>
 
                         <li class="nav-link">
@@ -108,7 +118,7 @@
                         </li>
                         <li class="nav-link">
                             <a href="C&A_Indoor_Project/Complaint/viewComplaints">
-                                <i class="fa-solid fa-comments icon"></i>                   
+                                <i class="fa-solid fa-comments icon"></i>
 
                                 <span class="text nav-text">Complaints</span>
                             </a>
@@ -120,6 +130,11 @@
                             </a>
                         </li>
                 <?php } else if ($role == "Cashier") { ?>
+                        <?php
+                        if ($_SESSION['user_role'] != "Cashier") {
+                            redirect('Pages/ErrorPage/404');
+                        }
+                        ?>
                             <li class="nav-link">
                                 <a href="<?php echo URLROOT; ?>/Pages/Dashboard/cashier">
                                     <i class="bx bx-home-alt icon"></i>
@@ -151,6 +166,11 @@
                                 </a>
                             </li>
                 <?php } else if ($role == "Coach") { ?>
+                        <?php
+                        if ($_SESSION['user_role'] != "Coach") {
+                            redirect('Pages/ErrorPage/404');
+                        }
+                        ?>
                                 <li class="nav-link">
                                     <a href="<?php echo URLROOT; ?>/Pages/Dashboard/coach">
                                         <i class="bx bx-home-alt icon"></i>
@@ -184,7 +204,7 @@
                                 </li>
                                 <li class="nav-link">
                                     <a href="<?php echo URLROOT; ?>/Complaint/create">
-                                    <i class="fa-regular fa-comments icon"></i>
+                                        <i class="fa-regular fa-comments icon"></i>
                                         <span class="text nav-text">Feedback</span>
                                     </a>
                                 </li>
@@ -194,8 +214,13 @@
                                         <span class="text nav-text">Profile</span>
                                     </a>
                                 </li>
-                                
+
                 <?php } else if ($role == "Manager") { ?>
+                        <?php
+                        if ($_SESSION['user_role'] != "Manager") {
+                            redirect('Pages/ErrorPage/404');
+                        }
+                        ?>
                                     <li class="nav-link">
                                         <a href="<?php echo URLROOT; ?>/Pages/Dashboard/manager">
                                             <i class="bx bx-home-alt icon"></i>
@@ -227,6 +252,11 @@
                                         </a>
                                     </li>
                 <?php } else if ($role == "Owner") { ?>
+                        <?php
+                        if ($_SESSION['user_role'] != "Owner") {
+                            redirect('Pages/ErrorPage/404');
+                        }
+                        ?>
                                         <li class="nav-link">
                                             <a href="<?php echo URLROOT; ?>/Pages/Dashboard/owner">
                                                 <i class="bx bx-home-alt icon"></i>

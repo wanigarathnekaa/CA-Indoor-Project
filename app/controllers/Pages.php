@@ -996,6 +996,11 @@ class Pages extends Controller
         $this->view('Pages/Coach/availabletimes', $data);
     }
 
+    public function ErrorPage()
+    {
+        $this->view('Components/404');
+    }
+
 }
 
 ?>
