@@ -53,25 +53,25 @@ $new_array_3 = array_filter($data, function ($item) use ($filter_date, $filter_n
                 data: { id: reservationId },
                 success: function(response) {
                     // alert("Failed to send invoice");
-                    var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Invoice sent successfully</h3></div><div class="notification_progress"></div></div>');
+                    var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title"> Failed to send invoice</h3></div><div class="notification2_progress"></div></div>');
                     $('body').append(notificationDiv);
                     setTimeout(function() {
                         notificationDiv.remove();
                     }, 5000);
-                    console.log("Invoice sent successfully:", response);
+                    console.log("Failed to send invoice:", response);
                     setTimeout(function() {
                         closeModal();
                     }, 3000); // Close the popup after successful invoice sending
                 },
                 error: function(xhr, status, error) {
                     // alert("Invoice sent successfully");
-                    var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title">Failed to send invoice</h3></div><div class="notification2_progress"></div></div>');
+                    var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Invoice sent successfully</h3></div><div class="notification_progress"></div></div>');
                     $('body').append(notificationDiv);
                     setTimeout(function() {
                         notificationDiv.remove();
                     }, 3000);
 
-                    console.error("Failed to send invoice:", error);
+                    console.error("Invoice sent successfully:", error);
                 }
             });
         }
