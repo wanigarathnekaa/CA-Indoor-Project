@@ -21,7 +21,7 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
             <form action="<?php echo URLROOT;?>/Reports/MonthlyOrderReport" method="post">
                 <div class="form-group">
                     <label>Select the Month</label>
-                    <select name="Selected_month" id="Selected_month" class="form-control" required>
+                    <select name="Selected_month" id="Selected_month" class="form-control">
                         <option value="">Select Month</option>
                         <option value="01">January</option>
                         <option value="02">February</option>
@@ -36,6 +36,9 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
                         <option value="11">November</option>
                         <option value="12">December</option>
                     </select>
+                    <span class="form-invalid"><?php echo isset($data['Selected_month_error'])? $data['Selected_month_error'] : '';?></span>
+
+
                 </div>
 
                 <div class="btn-container">
