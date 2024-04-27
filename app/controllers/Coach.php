@@ -478,12 +478,7 @@ class Coach extends Controller
             $available_time_slots = json_decode($coach->time_slot);
             $ts_array = array_map('trim', $ts_array);
             if (array_diff($ts_array, $available_time_slots) === array()) {
-                // $ts_array is a subset of $available_time_slots
-                // Add your desired logic here
                 $coaches_email[] = $coach->email;
-            } else {
-                // $ts_array is not a subset of $available_time_slots
-                // Add your desired logic here
             }
         }
 

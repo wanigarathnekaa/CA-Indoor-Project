@@ -157,6 +157,7 @@ $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
                 });
             });
 
+            
         });
 
     </script>
