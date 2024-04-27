@@ -21,6 +21,16 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
         <div class="col-md-6">
 
             <form action="<?php echo URLROOT;?>/Reports/SalesMonthly" method="post">
+               <div class="form-group">
+                    <label>Select Report Type</label>
+                    <select name="report_type" id="report_type" class="form-control" required>
+                        <option value=""></option>
+                        <option value="booking">Booking Report</option>
+                        <option value="order">Order Report</option></option>
+
+                      
+                    </select>
+                </div>
                 <div class="form-group">
                     <label>Select the Month</label>
                     <select name="Selected_month" id="Selected_month" class="form-control" >
