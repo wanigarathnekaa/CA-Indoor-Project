@@ -88,7 +88,7 @@
 
                         <!-- table body -->
                         <tbody>
-                              <?php foreach ($data as $reservation): 
+                              <?php foreach ($data as $reservation) :
                                     $status_color = '';
                                     if ($reservation->paymentStatus == 'Paid') {
                                           $status_color = '#33c030';
@@ -97,7 +97,7 @@
                                     } else {
                                           $status_color = '#e03333';
                                     }
-                                    ?>
+                              ?>
                                     <tr>
                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($reservation)); ?>)">
                                                 <?php echo $reservation->id; ?>
@@ -128,7 +128,7 @@
                                                 <i class="fa-solid fa-trash-can delete icon"></i>
                                           </td>
                                     </tr>
-                                    <?php
+                              <?php
                               endforeach; ?>
                         </tbody>
                   </table>
@@ -188,8 +188,7 @@
                         <hr>
                         <div class="rescheduleDetails">
                               <h4>Are You Sure You Want To Reschedule?</h4>
-                              <h4 class="day">Time For Reservation - <span class="r_timeSlot_r"
-                                          style="font-weight: bold;"></span></h4>
+                              <h4 class="day">Time For Reservation - <span class="r_timeSlot_r" style="font-weight: bold;"></span></h4>
                         </div>
 
                         <div class="btns" id="rescheduleButtons">
@@ -205,8 +204,7 @@
                         <hr>
                         <div class="CancelDetails">
                               <h4>Are You Sure You Want To Cancel The Reservation?</h4>
-                              <h4 class="day">Time For Your Reservation - <span class="cancel_timeSlot"
-                                          style="font-weight: bold;"></span></h4>
+                              <h4 class="day">Time For Your Reservation - <span class="cancel_timeSlot" style="font-weight: bold;"></span></h4>
                               <span class="cancel_bookingId" style="font-weight:bold"></span>
                         </div>
 
@@ -238,12 +236,12 @@
       <script src="<?php echo URLROOT; ?>/js/reservationDetails_Popup.js"></script>
       <script src="<?php echo URLROOT; ?>/js/reservation_Table.js"></script>
       <script>
-            $(document).ready(function () {
-                  $("#netfilter").on("change", function () {
+            $(document).ready(function() {
+                  $("#netfilter").on("change", function() {
                         selectedValue = $(this).val();
                         // alert(selectedValue);
                         if (selectedValue != "All") {
-                              $("table tbody tr").filter(function () {
+                              $("table tbody tr").filter(function() {
                                     $(this).toggle($(this).text().indexOf(selectedValue) > -1);
                               });
                         } else {
@@ -252,23 +250,30 @@
 
                   });
 
-                  $("#payfilter").on("change", function () {
-                        selectedValue = $(this).val();
-                        // alert(selectedValue);
+                  $("#payfilter").on("change", function() {
+                        var selectedValue = $(this).val();
                         if (selectedValue != "All") {
-                              $("table tbody tr").filter(function () {
-                                    $(this).toggle($(this).text().indexOf(selectedValue) > -1);
-                              });
+                              $("table tbody tr").hide().filter(function() {
+                                    // Check if the row contains the selected value
+                                    return $(this).text().indexOf(selectedValue) > -1;
+                              }).show();
+                              // Hide rows with "Not Paid" if "Paid" is selected
+                              if (selectedValue === "Paid") {
+                                    $("table tbody tr").filter(function() {
+                                          return $(this).text().indexOf("Not Paid") > -1;
+                                    }).hide();
+                              }
                         } else {
+                              // Show all rows when "All" is selected
                               $("table tbody tr").show();
                         }
 
                   });
 
-                  $("#date").on("change", function () {
+                  $("#date").on("change", function() {
                         selectedValue = $(this).val();
                         if (selectedValue != "All") {
-                              $("table tbody tr").filter(function () {
+                              $("table tbody tr").filter(function() {
                                     $(this).toggle($(this).text().indexOf(selectedValue) > -1);
                               });
                         } else {
@@ -276,13 +281,14 @@
                         }
 
                   });
-                  $("#searchInput").on("keyup", function () {
-                        var value = $(this).val();
-                        $("table tbody tr").filter(function () {
-                              $(this).toggle($(this).text().indexOf(value) > -1);
+                  $("#searchInput").on("keyup", function() {
+                        var value = $(this).val().toLowerCase();
+                        $("table tbody tr").filter(function() {
+                              var rowText = $(this).text().toLowerCase();
+                              $(this).toggle(rowText.indexOf(value) > -1);
                         });
                   });
-                  $("#cancelReservation").on("click", function () {
+                  $("#cancelReservation").on("click", function() {
                         var bookingId = $(".cancel_bookingId").text();
                         $.ajax({
                               type: "POST",
@@ -290,7 +296,7 @@
                               data: {
                                     bookingId: bookingId
                               },
-                              success: function (response) {
+                              success: function(response) {
                                     if (response.status == "success") {
                                           alert("Reservation Cancelled Successfully");
                                           location.reload();
