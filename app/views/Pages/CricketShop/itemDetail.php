@@ -44,6 +44,14 @@ $discount = 1 - ($data['SProduct']->discount / 100);
             </div>
         </div>
 
+        <div class="reorder_level">
+            <?php 
+            if($data['SProduct']->qty < $data['SProduct']->reorder_level){
+                echo "<p style='color:red;'>Only " . $data['SProduct']->qty . " items left in stock</p>";
+            }
+            ?>
+        </div>
+
         <button class="btn cart-btn" id="add">add to cart</button>
         <span id="quantity"></span>
     </div>
@@ -90,9 +98,8 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
 
             if (qty > '<?= $data['SProduct']->qty; ?>') {
                 // $('#quantity').html("We don't have enough " + product_title + " stock on hand for the quantity you selected. Please try again.");
-                var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">We don\'t have enough ' + product_title + ' stock on hand for the quantity you selected. Please try again.</h3></div><div class="notification_progress"></div></div>');
+                var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title">We don\'t have enough ' + product_title + ' stock on hand for the quantity you selected. Please try again.</h3></div><div class="notification2_progress"></div></div>');
                 $('body').append(notificationDiv);
-                // Remove the notification after a certain time (e.g., 5 seconds)
                 setTimeout(function() {
                     notificationDiv.remove();
                 }, 5000);
@@ -117,7 +124,6 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                                 // $('#quantity').html("Item added to cart");
                                 var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Item added to cart</h3></div><div class="notification_progress"></div></div>');
                                 $('body').append(notificationDiv);
-                                // Remove the notification after a certain time (e.g., 5 seconds)
                                 setTimeout(function() {
                                     notificationDiv.remove();
                                 }, 5000);
@@ -126,7 +132,6 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                             } else {
                                 var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Item not added to cart</h3></div><div class="notification_progress"></div></div>');
                                 $('body').append(notificationDiv);
-                                // Remove the notification after a certain time (e.g., 5 seconds)
                                 setTimeout(function() {
                                     notificationDiv.remove();
                                 }, 5000);
@@ -156,6 +161,7 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                                 }, 5000);
                                 var updatedCartCount = parseInt(cartCount) + 1;
                                 $('#cartCount').html(updatedCartCount);
+                                location.reload();
                             } else {
                                 // $('#quantity').html("Item not added to cart");
                                 var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Item not added to cart</h3></div><div class="notification_progress"></div></div>');
@@ -168,6 +174,15 @@ include APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                         }
                     });
                 }
+            }
+        });
+
+        $("#qty\\[\\]").on('input', function () {
+            var qty = parseInt($('#qty\\[\\]').val());
+            if(qty < 1){
+                $('#qty\\[\\]').val(1);
+            }else if(qty == NaN){
+                $('#qty\\[\\]').val(1);
             }
         });
     });

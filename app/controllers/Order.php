@@ -41,49 +41,8 @@ class Order extends Controller
             $orderId = $this->orderModel->last_inserted_id();
 
             if ($data["pickup"] == "pickup_at_store") {
-                $data["adr"] = "Store_Address";
-                $data["city"] = "Store_City";
-            }
-
-            if ($data["payment"] == "pay_online") {
-                $amount = intval($data['price']);
-                $merchant_id = "1225484";
-                $order_id = $orderId + 1;
-                $merchant_secret = "MTI0NjM0MDI4NjM5MDE0NzA0NzIxMTU4ODM1OTEwMTE3MDk0NDk4Mw==";
-                $currency = "LKR";
-                //Calculate the hash using MD5 and concatenate various pieces of data
-                $hash = strtoupper(
-                    md5(
-                        $merchant_id .
-                        $order_id .
-                        number_format($amount, 2, '.', '') .
-                        $currency .
-                        strtoupper(md5($merchant_secret))
-                    )
-                );
-                // Create an associative array with payment-related data
-                $array = [];
-                $array["pickup"] = $data["pickup"];
-                $array["payment"] = $data["payment"];
-                $array["amount"] = $amount;
-                $array['merchant_id'] = $merchant_id;
-                $array['order_id'] = $order_id;
-                $array['hash'] = $hash;
-                $array['currency'] = $currency;
-                $array['first_name'] = $data["fname"];
-                $array['last_name'] = $data["fname"];
-                $array['email'] = $data['email'];
-                $array['phone'] = $data['phone'];
-                $array['address'] = $data['adr'];
-                $array['city'] = $data['city'];
-                $array['items'] = "Order Payment";
-
-                // Convert the array to a JSON string
-                $jsObj = json_encode($array);
-
-                // Output the JSON string
-                echo $jsObj;
-                exit();
+                $data["adr"] = "No 37, Rohina Mawatha, Palawatta";
+                $data["city"] = "Battaramulla";
             }
 
             // Validate Order
@@ -107,6 +66,52 @@ class Order extends Controller
             }
             if (empty($data['city'])) {
                 $data['city_err'] = "Please Enter the City";
+            }
+
+            if (
+                empty($data['pickup_err']) && empty($data['payment_err']) && empty($data['fname_err']) && empty($data['email_err'])
+                && empty($data['adr_err']) && empty($data['phone_err']) && empty($data['city_err'])
+            ) {
+                if ($data["payment"] == "pay_online") {
+                    $amount = intval($data['price']);
+                    $merchant_id = "1225484";
+                    $order_id = $orderId + 1;
+                    $merchant_secret = "MTI0NjM0MDI4NjM5MDE0NzA0NzIxMTU4ODM1OTEwMTE3MDk0NDk4Mw==";
+                    $currency = "LKR";
+                    //Calculate the hash using MD5 and concatenate various pieces of data
+                    $hash = strtoupper(
+                        md5(
+                            $merchant_id .
+                            $order_id .
+                            number_format($amount, 2, '.', '') .
+                            $currency .
+                            strtoupper(md5($merchant_secret))
+                        )
+                    );
+                    // Create an associative array with payment-related data
+                    $array = [];
+                    $array["pickup"] = $data["pickup"];
+                    $array["payment"] = $data["payment"];
+                    $array["amount"] = $amount;
+                    $array['merchant_id'] = $merchant_id;
+                    $array['order_id'] = $order_id;
+                    $array['hash'] = $hash;
+                    $array['currency'] = $currency;
+                    $array['first_name'] = $data["fname"];
+                    $array['last_name'] = $data["fname"];
+                    $array['email'] = $data['email'];
+                    $array['phone'] = $data['phone'];
+                    $array['address'] = $data['adr'];
+                    $array['city'] = $data['city'];
+                    $array['items'] = "Order Payment";
+
+                    // Convert the array to a JSON string
+                    $jsObj = json_encode($array);
+
+                    // Output the JSON string
+                    echo $jsObj;
+                    exit();
+                }
             }
 
             $response = [];
@@ -148,7 +153,7 @@ class Order extends Controller
                 && empty($data['adr_err']) && empty($data['phone_err']) && empty($data['city_err'])
             ) {
                 if ($this->orderModel->insertOrder($data) && $this->orderModel->deleteCart($_SESSION['user_email'])) {
-
+                    $this->orderModel->insertOrderPersonalDetail($data);
                     $orderId = $this->orderModel->last_inserted_id();
                     foreach ($orderItems as $item) {
                         $product_id = $item['p_id'];
@@ -445,6 +450,23 @@ class Order extends Controller
         }
     }
 
+    public function getOrderPersonDetails()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $email = $_POST['email'];
+            $orderPersonDetails = $this->orderModel->getOrderPersonDetails($email);
+
+            $response = [
+                'orderPersonDetails' => $orderPersonDetails
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+    }
 
 }
 

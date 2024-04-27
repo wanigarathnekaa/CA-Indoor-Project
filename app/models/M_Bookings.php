@@ -25,9 +25,10 @@ class MYPDF extends TCPDF {
 
 
 
-  
+
         $this->SetFont('helvetica', 'B', 15);
         $this->Cell(0, 10, 'C & A Cricket Net', 0, 1, 'L');
+
         
         // RECEIVER & SENDER DETAILS 
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
@@ -41,7 +42,18 @@ class MYPDF extends TCPDF {
 
         $this->SetFont('helvetica', 'B', 12);
         $this->Cell(0, 10, 'ORDER PLACED SUCCESSFULLY', 0, 1, 'L');
-        
+
+
+        $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
+        $this->SetXY($receiverDetailsX, $this->GetY() - 10); 
+        $this->SetFont('helvetica', 'B', 12);
+        $this->Cell(0, 10, 'INV_NO : #' . $id, 0, 1, 'R');
+
+        $this->Ln(5); 
+
+        $this->SetFont('helvetica', 'B', 12);
+        $this->Cell(0, 10, 'SENDER DETAILS', 0, 1, 'L');
+
 
 
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
@@ -73,12 +85,12 @@ class MYPDF extends TCPDF {
         $this->SetFont('helvetica', '', 12);
         $this->Cell(0, 6,'Kaveesha Wanigarathne', 0, 1, 'L');
         
-        
+
+
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
         $this->SetXY($receiverDetailsX, $this->GetY() - 6); 
         $this->SetFont('helvetica', '', 12);
         $this->Cell(0, 6, $customerName, 0, 1, 'R');
-
 
 
         $this->Ln(1);
@@ -362,15 +374,30 @@ class M_Bookings
         $mail->isHTML(true);
         $mail->Subject = 'About your appointment';
         $mail->Body = "Hello $name,<br><br>
-        You have a time slot on $date, at $timeSlots assigned to the player $name. Here are their contact details:<br>
-        - Phone Number: $phoneNumber<br>
-        - Email: $email<br>
-        If you have any issues, please contact administrator before $date.<br><br>
-        Admin Details:<br>
+        ";
+    
+    // Assuming $timeSlots is your array of objects
+    $timeSlots = '[{"timeSlot":"20:00PM-21:00PM","netType":"Normal Net B","date":"2024-04-26"}]';
+    $timeSlotsArray = json_decode($timeSlots, true);
+    
+    foreach ($timeSlotsArray as $slot) {
+        $timeSlot = $slot['timeSlot'];
+        $netType = $slot['netType'];
+        $date = $slot['date'];
+    
+        $mail->Body .= "You have a time slot on $date, at $timeSlot assigned to the player $name. Here are their contact details:<br>
+            - Phone Number: $phoneNumber<br>
+            - Email: $email<br>
+            If you have any issues, please contact the administrator before $date.<br><br>
+        ";
+    }
+    
+    $mail->Body .= "Admin Details:<br>
         - Name: $adminNAME<br>
         - Phone Number: $adminPNO<br>
         - Email: $adminEMAIL<br>
         Thank you.";
+    
 
 
         // Attempt to send email

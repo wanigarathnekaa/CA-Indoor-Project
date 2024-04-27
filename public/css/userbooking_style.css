@@ -117,16 +117,47 @@ body {
   transition: background 0.1s;
 }
 
+
+
 .select__item--selected {
   background: var(--color01);
   color: var(--gray);
 }
 
+.select__item--selected::after {
+  content: "✓";
+  font-size: 14px;
+  color: #fff;
+}
+
 .select__item--booked {
   background-color: #aa3434;
   color: #fff;
+  /* text-decoration: line-through; */
+}
+
+
+
+.select__item--booked::before {
+  content: "Reserved : ";
+  font-size: 14px;
+  color: #fff;
+}
+
+.select__item--today {
+  background-color: var(--color03);
+  color: #fff;
   text-decoration: line-through;
 }
+
+
+/* .select__item--today::before {
+  content: "Today";
+  font-size: 10px;
+  color: #fff;
+} */
+
+
 
 @media (max-width: 768px) {
   .container{

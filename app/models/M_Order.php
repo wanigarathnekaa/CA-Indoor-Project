@@ -181,7 +181,7 @@ class M_Order
         $this->db->query('SELECT reorder_level FROM product WHERE product_id = :product_id');
         $this->db->bind(':product_id', $product_id);
         $result = $this->db->single();
-        return $result->qty;
+        return $result->reorder_level; 
     }
 
     public function updateQuantity($product_id, $qty)
@@ -237,6 +237,29 @@ class M_Order
         } else {
             return false;
         }
+    }
+
+    public function insertOrderPersonalDetail($data)
+    {
+        $this->db->query('INSERT INTO order_person_detail (full_name, mobile_number, email, address, city) VALUES(:fname, :phone, :email, :adr, :city)');
+        $this->db->bind(':fname', $data['fname']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':adr', $data['adr']);
+        $this->db->bind(':phone', $data['phone']);
+        $this->db->bind(':city', $data['city']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getOrderPersonDetails($email)
+    {
+        $this->db->query('SELECT * FROM order_person_detail WHERE email = :email');
+        $this->db->bind(':email', $email);
+        return $this->db->single();
     }
 
 

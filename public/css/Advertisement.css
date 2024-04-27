@@ -57,21 +57,23 @@
   display: flex;
   flex-wrap: wrap;
   margin: 10px;
-  justify-content:space-evenly
+  justify-content:space-between;
 }
 
 .ads{
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
   margin: 10px;
-  justify-content:start;
+  justify-content:center;
+  /* background-color: #000000; */
 }
 
 .ads-card{
   flex:0 0 auto;
   width: 400px;
   height: 450px;
-  margin: 20px;
+  /* margin: 20px; */
   background: #ffffff;
   border-radius: 20px;
   display: flex;
@@ -86,6 +88,7 @@
 
 .ads-card .img{
   position: relative;
+  display: flex;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -93,7 +96,13 @@
   background-size: cover;
   object-fit: cover;
   background-position: center;
+}
 
+.ads-card .img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px 20px 0 0;
 }
 
 .ads-card .ads-info{
@@ -108,9 +117,10 @@
 }
 
 .ads-card .ads-info h2{
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 400;
   text-align: center;
+  margin-bottom: 5px;
 }
 
 .ads-card .ads-info h4{

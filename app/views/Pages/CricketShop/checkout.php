@@ -29,20 +29,29 @@ include_once APPROOT . '/views/Pages/CricketShop/crickHeader.php';
                         </div>
                     </div>
 
+                    <div class="notice">
+                        <p>Enter Email If You Have Add Orders Previously!</p>
+                    </div>
+
                     <label for="fname">Full Name</label>
                     <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
+                    <span id="invalid-1" style="color:red; margin-bottom:13px;"></span>
 
                     <label for="phone">Mobile Number</label>
                     <input type="text" id="phone" name="phone" placeholder="0712345678">
+                    <span id="invalid-2" style="color:red; margin-bottom:13px;"></span>
 
                     <label for="email">Email</label>
                     <input type="text" id="email" name="email" placeholder="john@example.com">
+                    <span id="invalid-3" style="color:red; margin-bottom:13px;"></span>
 
                     <label for="adr">Address</label>
                     <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+                    <span id="invalid-4" style="color:red; margin-bottom:13px;"></span>
 
                     <label for="city">City</label>
                     <input type="text" id="city" name="city" placeholder="New York">
+                    <span id="invalid-5" style="color:red; margin-bottom:13px;"></span>
                 </div>
                 <div class="check">
                     <input type="submit" value="Continue to checkout" class="btn">
@@ -122,6 +131,11 @@ include_once APPROOT . '/views/Pages/CricketShop/crickFooter.php';
             var city = $('#city').val();
             var price = '<?= $total_price; ?>';
 
+            if(pickup == "pickup_at_store"){
+                adr = "No 37, Rohina Mawatha, Palawatta";
+                city = "Battaramulla";
+            }
+
             $.ajax({
                 type: "POST",
                 url: "<?= URLROOT; ?>/Order/saveOrder",
@@ -139,8 +153,20 @@ include_once APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                 dataType: 'json',
                 success: function (response) {
                     if (response.status === "success") {
-                        alert("Order placed successfully");
+                        // alert("Order placed successfully");
+                        var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Order placed successfully</h3></div><div class="notification_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 3000);
                         window.location.href = "http://localhost/C&A_Indoor_Project/Pages/Cricket_Shop/User";
+                    } else if(response.status === "error") {
+                        $("#invalid-1").html(response.fname_err);
+                        $("#invalid-2").html(response.phone_err);
+                        $("#invalid-3").html(response.email_err);
+                        $("#invalid-4").html(response.adr_err);
+                        $("#invalid-5").html(response.city_err);
+                        alert(response.message);
                     } else {
                         console.log(response);
                         obj = response;
@@ -198,7 +224,12 @@ include_once APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                                 dataType: 'json',
                                 success: function (response) {
                                     if (response.status === "success") {
-                                        alert("Order placed successfully");
+                                        // alert("Order placed successfully");
+                                        var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Order placed successfully</h3></div><div class="notification_progress"></div></div>');
+                                        $('body').append(notificationDiv);
+                                        setTimeout(function() {
+                                            notificationDiv.remove();
+                                        }, 3000);
                                         window.location.href = "http://localhost/C&A_Indoor_Project/Pages/Cricket_Shop/User";
                                     } else {
                                         console.log(response);
@@ -218,5 +249,27 @@ include_once APPROOT . '/views/Pages/CricketShop/crickFooter.php';
             });
         });
 
+        $("#email").change(function (e) {
+                e.preventDefault();
+                var email = $("#email").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo URLROOT; ?>/Order/getOrderPersonDetails",
+                    data: {
+                        email: email
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log(response);
+                        response = response.orderPersonDetails;
+                        $("#fname").val(response.full_name);
+                        $("#phone").val(response.mobile_number);
+                        $("#adr").val(response.address);
+                        $("#city").val(response.city);
+                            
+                    }
+                })
+            });
     });
 </script>
