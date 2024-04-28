@@ -148,7 +148,8 @@ include_once APPROOT . '/views/Pages/CricketShop/crickFooter.php';
                     phone: phone,
                     city: city,
                     price: price,
-                    items: <?= json_encode($data["cartItems"]); ?>
+                    items: <?= json_encode($data["cartItems"]); ?>,
+                    person:""
                 },
                 dataType: 'json',
                 success: function (response) {

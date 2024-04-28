@@ -19,7 +19,12 @@
 <body>
     <!-- Sidebar -->
     <?php
-    $role = "Manager";
+    if($_SESSION['user_role'] == "Manager"){
+        $role = "Manager";
+    }else{
+        $role = "Cashier";
+    }
+    
     require APPROOT . '/views/Pages/Dashboard/header.php';
     require APPROOT . '/views/Components/Side Bars/sideBar.php';
     ?>
@@ -623,6 +628,12 @@
 
         $(document).on("change", ".quantity", function () {
             var quantity = $(this).val();
+            // Ensure quantity is a non-negative integer
+            if (quantity < 0 || isNaN(quantity) || !Number.isInteger(parseFloat(quantity))) {
+                quantity = 1;
+                $(this).val(quantity); 
+            }
+
             var row = $(this).closest("tr");
             var index = row.index();
             var product_price = selectedItems[index].product_price;
@@ -632,7 +643,7 @@
             selectedItems[index].qty = quantity;
 
             // Recalculate the total price
-            total_price = 0;
+            var total_price = 0;
             for (var i = 0; i < selectedItems.length; i++) {
                 total_price += selectedItems[i].product_price * selectedItems[i].qty * (1 - (selectedItems[i].discount / 100));
             }
@@ -640,6 +651,7 @@
             // Update the total price display
             $("#totPrice").html('<p>Total Price: <b>Rs. ' + total_price.toFixed(2) + '</b></p>');
         });
+
 
 
     </script>

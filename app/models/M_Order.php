@@ -262,6 +262,18 @@ class M_Order
         return $this->db->single();
     }
 
+    public function findOrderPerson($email)
+    {
+        $this->db->query('SELECT * FROM order_person_detail WHERE email = :email');
+        $this->db->bind(':email', $email);
+        $this->db->execute();
+        if ($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 
 }
