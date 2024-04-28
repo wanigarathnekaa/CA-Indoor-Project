@@ -18,13 +18,7 @@
   --black2: #000000;
 }
 
-body {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* background: var(--primary-clr); */
-}
+
 .container {
   position: relative;
   /* max-width: 900px; */
