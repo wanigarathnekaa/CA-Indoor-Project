@@ -215,11 +215,9 @@
                                 <button type="button" class="edit" id="<?php echo $product->product_id; ?>">
                                     <i class="fas fa-edit icon"></i></button>
                                 <?php if ($product->active_state) { ?>
-                                    <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>">
-                                        Active</a>
+                                    <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>" class="status" style="background-color: #30c030;">Active</a>
                                 <?php } else { ?>
-                                    <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>">
-                                        De-active</a>
+                                    <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>"class="status" style="background-color: #e03333;">Inactive</a>
                                 <?php } ?>
                             </td>
                         </tr>
