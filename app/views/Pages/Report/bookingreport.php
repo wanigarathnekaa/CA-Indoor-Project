@@ -23,13 +23,17 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
             <form action="<?php echo URLROOT;?>/Reports/SalesMonthly" method="post">
                <div class="form-group">
                     <label>Select Report Type</label>
-                    <select name="report_type" id="report_type" class="form-control" required>
+                    <select name="report_type" id="report_type" class="form-control" >
                         <option value=""></option>
                         <option value="booking">Booking Report</option>
-                        <option value="order">Order Report</option></option>
+                        <option value="order">Order </option></option>
 
                       
                     </select>
+                    <!-- <span class="form-invalid"><?php echo $data['report_type_error']; ?></span> -->
+                    <span class="form-invalid"><?php echo isset($data['report_type_error'])? $data['report_type_error'] : '';?></span>
+
+
                 </div>
                 <div class="form-group">
                     <label>Select the Month</label>

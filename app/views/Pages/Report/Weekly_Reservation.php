@@ -23,7 +23,7 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
             <form action="<?php echo URLROOT;?>/Reports/Weekly_Reservation" method="post">
                 <div class="form-group">
                     <label>Select Report Type</label>
-                    <select name="report_type" id="report_type" class="form-control" required>
+                    <select name="report_type" id="report_type" class="form-control" >
                         <option value=""></option>
                         <option value="net-Types">Net Types</option>
                         <option value="weekly">Reservation-chart</option>
@@ -31,15 +31,21 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
 
                       
                     </select>
+                    <span class="form-invalid"><?php echo isset($data['report_type_error'])? $data['report_type_error'] : '';?></span>
+
                 </div>
                 <div class="form-group">
                     <label>Start Date</label>
-                    <input type="text" name="invoice_date" id="start_date" class="form-control datepicker" required>
+                    <input type="text" name="invoice_date" id="start_date" class="form-control datepicker" >
+                    <span class="form-invalid"><?php echo isset($data['invoice_date_error'])? $data['invoice_date_error'] : '';?></span>
+
                     
                 </div>
                 <div class="form-group">
                     <label>End Date</label>
-                    <input type="text" name="invoice_due_date" id="end_date" class="form-control datepicker" required>
+                    <input type="text" name="invoice_due_date" id="end_date" class="form-control datepicker" >
+                    <span class="form-invalid"><?php echo isset($data['invoice_due_date_error'])? $data['invoice_due_date_error'] : '';?></span>
+
                 </div>
 
                 
