@@ -283,32 +283,32 @@ class Coach extends Controller
             // validate nic
             if (empty($data['nic'])) {
                 $data['nic_err'] = "Please enter the NIC number";
-            }else{
+            } else {
                 $nic = str_replace(' ', '', $data['nic']);
                 if (strlen($nic) != 10 && strlen($nic) != 12) {
                     $data['nic_err'] = "NIC format is xxxxxxxxxv or xxxxxxxxxxxx";
-                }elseif (!preg_match("/^[0-9]{9}[vV]?$/", $nic) && !preg_match("/^[0-9]{12}?$/", $nic)) {
+                } elseif (!preg_match("/^[0-9]{9}[vV]?$/", $nic) && !preg_match("/^[0-9]{12}?$/", $nic)) {
                     $data['nic_err'] = "NIC number is invalid";
                 }
             }
-                                  
-        
+
+
 
             // validate address
             if (empty($data['srtAddress'])) {
                 $data['srtAddress_err'] = "Please enter the Street Address";
-            }elseif(strlen($data['srtAddress']) > 100){
+            } elseif (strlen($data['srtAddress']) > 100) {
                 $data['srtAddress_err'] = "Street Address is too long";
-            }elseif(!preg_match("/^[a-zA-Z0-9\s,.'-]*$/", $data['srtAddress'])){
+            } elseif (!preg_match("/^[a-zA-Z0-9\s,.'-]*$/", $data['srtAddress'])) {
                 $data['srtAddress_err'] = "Invalid Street Address";
             }
 
             // validate city
             if (empty($data['city'])) {
                 $data['city_err'] = "Please enter the City";
-            }elseif(strlen($data['city']) > 50){
+            } elseif (strlen($data['city']) > 50) {
                 $data['city_err'] = "City name is too long";
-            }elseif(!preg_match("/^[a-zA-Z\s]*$/", $data['city'])){
+            } elseif (!preg_match("/^[a-zA-Z\s]*$/", $data['city'])) {
                 $data['city_err'] = "Invalid City name";
             }
 
@@ -499,10 +499,41 @@ class Coach extends Controller
         echo json_encode($response);
         exit();
     }
+
+    public function getCoachesAvailable()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $jsonString = file_get_contents("php://input");
+            $postData = json_decode($jsonString, true);
+
+            // Log the received data for debugging
+            error_log(print_r($postData, true));
+
+            $date = $postData['date'];
+            $timeSlots = $postData['timeSlots'];
+
+            $coaches = $this->coachModel->getCoachesAvailable($date);
+            $coaches_email = [];
+            foreach ($coaches as $coach) {
+                $available_time_slots = json_decode($coach->time_slot);
+                $timeSlots = array_map('trim', $timeSlots);
+                if (array_diff($timeSlots, $available_time_slots) === array()) {
+                    $coaches_email[] = $coach->email;
+                }
+            }
+
+            $response = [];
+            for ($i = 0; $i < count($coaches_email); $i++) {
+                $email = $coaches_email[$i];
+                $coaches_details = $this->coachModel->getCoachUserByEmail($email);
+                $response[] = $coaches_details;
+            }
+    
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+    }
 }
-
-
-
-
 
 ?>

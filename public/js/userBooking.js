@@ -2,6 +2,7 @@ let selectedSlots = [];
 let totPrice = 0;
 let paidPrice = 0;
 let selected_date = "";
+let coach = "No Coach";
 
 class CustomSelect {
   constructor(originalSelect) {
@@ -151,6 +152,58 @@ function openPopup(date) {
       makePayment();
     });
 
+  document.getElementById("coach").addEventListener("click", function () {
+    var timeSlot = selectedSlots.map((slot) => slot.timeSlot);
+    var date = selected_date;
+
+    var xhr = new XMLHttpRequest();
+
+    var postData = {
+      date: date,
+      timeSlots: timeSlot,
+    };
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          console.log(xhr.responseText);
+          var responseObject = JSON.parse(xhr.responseText);
+          var selectElement = document.getElementById("coach");
+
+          // Clear existing options
+          selectElement.innerHTML = "";
+
+          // Add a default option
+          var defaultOption = document.createElement("option");
+          defaultOption.selected = true;
+          defaultOption.disabled = true;
+          defaultOption.textContent = "--Available Coaches--";
+          selectElement.appendChild(defaultOption);
+
+          // Add options returned from the server
+          responseObject.forEach(function (coach) {
+            var option = document.createElement("option");
+            option.value = coach.email; // Set the value to the coach id if needed
+            option.textContent = coach.uid + " - " + coach.name;
+            selectElement.appendChild(option);
+          });
+        } else {
+          // Handle error, show an error message, etc.
+          console.error("Error in XMLHttpRequest. Status:", xhr.status);
+        }
+      }
+    };
+
+    xhr.open("POST", "C&A_Indoor_Project/Coach/getCoachesAvailable");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(postData));
+  });
+
+  document.getElementById("coach").addEventListener("change", function () {
+    coach = document.getElementById("coach").value;
+    console.log(coach);
+  });
+
   // Set event listener for Cancel button
   document.getElementById("cancelBtn").addEventListener("click", closePopup);
 
@@ -226,7 +279,7 @@ function makePayment() {
           email: obj["email"],
           phone: obj["phone"],
           date: selected_date,
-          coach: "UserBooking",
+          coach: coach,
           timeSlots: JSON.stringify(selectedSlots),
           bookingPrice: totPrice,
           paymentStatus: "Paid",
