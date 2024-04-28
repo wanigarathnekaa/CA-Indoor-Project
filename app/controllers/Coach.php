@@ -64,6 +64,7 @@ class Coach extends Controller
             if (empty($data['email'])) {
                 $data['email_err'] = "Please enter an email";
             } else {
+                
                     // check email already registered or not
                     if ($this->coachUserModel->findUserByEmail($data['email'])) {
                         $data['email_err'] = "This email is already in use";
