@@ -32,25 +32,28 @@ $discount = 1 - ($data['SProduct']->discount / 100);
         <div class="form-field form-field--increments">
             <label class="form-label form-label--alternate" for="qty[]">Quantity:</label>
 
-            <div class="form-increment" data-quantity-change="">
-                <button class="button button--icon" data-action="dec">
-                    <span class="is-srOnly">-</span>
-                </button>
-                <input class="form-input form-input--incrementTotal" id="qty[]" name="qty[]" type="number" value="1"
-                    data-quantity-min="0" data-quantity-max="0" min="1" pattern="[0-9]*" aria-live="polite">
-                <button class="button button--icon" data-action="inc">
-                    <span class="is-srOnly">+</span>
-                </button>
+            <div class="form-incrementrow">
+                <div class="form-increment" data-quantity-change="">
+                    <button class="button button--icon" data-action="dec">
+                        <span class="is-srOnly">-</span>
+                    </button>
+                    <input class="form-input form-input--incrementTotal" id="qty[]" name="qty[]" type="number" value="1"
+                        data-quantity-min="0" data-quantity-max="0" min="1" pattern="[0-9]*" aria-live="polite">
+                    <button class="button button--icon" data-action="inc">
+                        <span class="is-srOnly">+</span>
+                    </button>
+                </div>
+                <div class="reorder_level">
+                    <?php 
+                    if($data['SProduct']->qty < $data['SProduct']->reorder_level){
+                        echo "<p style='color:red;'>Only " . $data['SProduct']->qty . " items left in stock</p>";
+                    }
+                    ?>
+                </div>
             </div>
         </div>
 
-        <div class="reorder_level">
-            <?php 
-            if($data['SProduct']->qty < $data['SProduct']->reorder_level){
-                echo "<p style='color:red;'>Only " . $data['SProduct']->qty . " items left in stock</p>";
-            }
-            ?>
-        </div>
+        
 
         <button class="btn cart-btn" id="add">add to cart</button>
         <span id="quantity"></span>

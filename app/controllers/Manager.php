@@ -31,7 +31,6 @@ class Manager extends Controller
                 'name' => trim($_POST['name']),
                 'email' => trim($_POST['email']),
                 'phoneNumber' => trim($_POST['phoneNumber']),
-                // 'password' => "12345678",
                 'nic' => trim($_POST['nic']),
                 'strAddress' => trim($_POST['strAddress']),
                 'city' => trim($_POST['city']),
@@ -50,35 +49,70 @@ class Manager extends Controller
             //validate name
             if (empty($data['name'])) {
                 $data['name_err'] = "Please enter a name";
+            }elseif (!preg_match("/^[a-zA-Z-' ]*$/", $data['name'])) {
+                $data['name_err'] = "Only letters and white space allowed";
             }
 
             //validate email
             if (empty($data['email'])) {
                 $data['email_err'] = "Please enter an email";
             } else {
-                if ($this->managerModel->findUserByEmail($data['email'])) {
-                    $data['email_err'] = "This email is already in use";
+                $userdata = $this->managerModel->findManager($_SESSION['user_email']);
+                if ($data['email'] != $userdata->email) {
+                    // check email already registered or not
+                    if ($this->userModel->findUserByEmail($data['email'])) {
+                        $data['email_err'] = "This email is already in use";
+                    }
+                    if ($this->managerModel->findUserByEmail($data['email'])) {
+                        $data['email_err'] = "This email is already in use";
+                    }
+                    if ($this->companyUserModel->findUserByEmail($data['email'])) {
+                        $data['email_err'] = "This email is already in use";
+                    }
+                }
+                //check the email format is correct or not
+                if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                    $data['email_err'] = "Please enter a valid email";
                 }
             }
 
             //validate phone number
             if (empty($data['phoneNumber'])) {
                 $data['phoneNumber_err'] = "Please enter a phone number";
+            }elseif (strlen($data['phoneNumber']) != 10) {
+                $data['phoneNumber_err'] = "Please enter a valid phone number";     
+            } elseif (!preg_match("/^[0-9]*$/", $data['phoneNumber'])) {
+                $data['phoneNumber_err'] = "Please enter a valid phone number";
             }
 
             //validate nic
             if (empty($data['nic'])) {
                 $data['nic_err'] = "Please enter the NIC number";
+            }else{
+                $nic = str_replace(' ', '', $data['nic']);
+                if (strlen($nic) != 10 && strlen($nic) != 12) {
+                    $data['nic_err'] = "NIC format is xxxxxxxxxv or xxxxxxxxxxxx";
+                }elseif (!preg_match("/^[0-9]{9}[vV]?$/", $nic) && !preg_match("/^[0-9]{12}?$/", $nic)) {
+                    $data['nic_err'] = "NIC number is invalid";
+                }
             }
 
             //validate address
             if (empty($data['strAddress'])) {
                 $data['strAddress_err'] = "Please enter the Street Address";
+            }elseif(strlen($data['strAddress']) > 100){
+                $data['strAddress_err'] = "Street Address is too long";
+            }elseif(!preg_match("/^[a-zA-Z0-9\s,.'-]*$/", $data['srtAddress'])){
+                $data['strAddress_err'] = "Invalid Street Address";
             }
 
             //validate city
             if (empty($data['city'])) {
                 $data['city_err'] = "Please enter the City";
+            }elseif(strlen($data['city']) > 50){
+                $data['city_err'] = "City name is too long";
+            }elseif(!preg_match("/^[a-zA-Z\s]*$/", $data['city'])){
+                $data['city_err'] = "Invalid City name";
             }
 
             //If validation is completed and no error, then register the user
@@ -99,7 +133,6 @@ class Manager extends Controller
 
                 //create user
                 if ($this->managerModel->managerRegister($data)) {
-                    echo "<script>alert('Manager Registered Successfully');</script>";
                     redirect('Pages/Dashboard/owner');
                 } else {
                     die('Something Went wrong');
@@ -253,9 +286,6 @@ class Manager extends Controller
 
             //If validation is completed and no error, then register the user
             if (empty($data['name_err']) && empty($data['email_err']) && empty($data['nic_err']) && empty($data['phoneNumber_err']) && empty($data['strAddress_err']) && empty($data['city_err'])) {
-                //Hash the password
-                // $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
-
                 //create user
                 if ($this->managerModel->updateManager($data)) {
                     redirect('Pages/Manager_Profile/manager');
