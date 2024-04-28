@@ -310,6 +310,13 @@ $current_timeslots = time_slot($duration, $cleanup, $formattedTime, $end);
                         </table>
                     </div>
 
+                    <div class="input-field">
+                        <label>Choose a coach?</label>
+                        <select name="coach" id="coach">
+                            <option disabled selected>Select the coach</option>
+                        </select>
+                    </div>
+
                     <div class="paymentamount">
                         <h2>Total Payment : <span class="payment"></span></h2>
                         <h4>To Confirm Your Booking : <span class="con_payment"></span></h4>
