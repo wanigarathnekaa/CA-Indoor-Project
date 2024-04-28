@@ -192,6 +192,16 @@ class Brand extends Controller
 
     public function deleteBrand($id)
     {
+        $cartItems = $this->brandModel->getCartItems();
+        if ($cartItems) {
+            foreach ($cartItems as $cartItem) {
+                $product = $this->brandModel->getProductById($cartItem->p_id);
+                if ($product->brand_id == $id) {
+                    echo "<script>alert('A product from the brand you are trying to delete is in the cart. Please remove it before deleting the brand.');</script>";
+                    exit();
+                }
+            }
+        }
         if ($this->brandModel->deleteBrand($id)) {
             redirect('Pages/Brand/manager');
         } else {
