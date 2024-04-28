@@ -93,7 +93,7 @@
                                 foreach ($data['categories'] as $category) {
                                     if ($category->category_id == $brand->brand_category_name) {
                                         $matchedCategoryName = $category->category_name;
-                                        break; 
+                                        break;
                                     }
                                 }
                                 echo $matchedCategoryName;
@@ -105,8 +105,13 @@
                             <td>
                                 <button type="button" class="edit" id="<?php echo $brand->brand_id; ?>"><i
                                         class="fas fa-edit"></i></button>
-                                <a href="<?php echo URLROOT; ?>/Brand/deleteBrand/<?php echo $brand->brand_id; ?>"><i
-                                        class="fas fa-trash-alt"></i></a>
+                                <?php if ($brand->active_state): ?>
+                                    <a
+                                        href="<?php echo URLROOT; ?>/Brand/deleteBrand/<?php echo $brand->brand_id; ?>">Active</a>
+                                <?php else: ?>
+                                    <a
+                                        href="<?php echo URLROOT; ?>/Brand/deleteBrand/<?php echo $brand->brand_id; ?>">Inactive</a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                         <?php

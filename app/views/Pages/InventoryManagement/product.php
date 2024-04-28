@@ -140,8 +140,8 @@
                 </div>
             </div>
         </div>
-        
-        <div class="searchbar">  
+
+        <div class="searchbar">
             <div class="serachselect">
                 <i class="fa-solid fa-magnifying-glass icon"></i>
                 <select id="filterProduct" class="btn">
@@ -214,8 +214,13 @@
                             <td>
                                 <button type="button" class="edit" id="<?php echo $product->product_id; ?>">
                                     <i class="fas fa-edit icon"></i></button>
-                                <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>">
-                                    <i class="fas fa-trash-alt icon"></i></a>
+                                <?php if ($product->active_state) { ?>
+                                    <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>">
+                                        Active</a>
+                                <?php } else { ?>
+                                    <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>">
+                                        De-active</a>
+                                <?php } ?>
                             </td>
                         </tr>
                         <?php
@@ -338,7 +343,7 @@
                             $(this).hide();
                         }
                     });
-                }else{
+                } else {
                     location.reload();
                 }
             });
