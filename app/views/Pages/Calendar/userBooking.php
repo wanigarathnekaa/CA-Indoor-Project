@@ -22,66 +22,66 @@ $new_array_3 = array_filter($data, function ($item) use ($filter_date, $filter_n
 
 <?php if (isset($_SESSION['booking_success']) && $_SESSION['booking_success'] === true) {
     ?>
-<form id="successForm">
-    <div class="SuccessContainer">
-        <div class="SuccessPopup" id="SuccessPopup">
-            <img src="<?= URLROOT ?>/images/tick.png">
-            <h2>Payment Successfully!</h2>
-            <p>Your payment has been successfully submitted.</p>
-            <button type="submit" id="paid" name="OKAY">OK</button>
+    <form id="successForm">
+        <div class="SuccessContainer">
+            <div class="SuccessPopup" id="SuccessPopup">
+                <img src="<?= URLROOT ?>/images/tick.png">
+                <h2>Payment Successfully!</h2>
+                <p>Your payment has been successfully submitted.</p>
+                <button type="submit" id="paid" name="OKAY">OK</button>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        var modal = document.getElementById("SuccessPopup");
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var modal = document.getElementById("SuccessPopup");
 
-        function closeModal() {
-            modal.style.display = "none";
-            location.reload();
-        }
+            function closeModal() {
+                modal.style.display = "none";
+                location.reload();
+            }
 
-        var payment_status = "";
-        var id_reserve = <?= json_encode($_SESSION['booking_id'] ?? null) ?>;
+            var payment_status = "";
+            var id_reserve = <?= json_encode($_SESSION['booking_id'] ?? null) ?>;
 
-        function sendInvoice(reservationId) {
-            $.ajax({
-                url: "<?php echo URLROOT; ?>/Bookings/sendingInvoice",
-                type: "POST",
-                data: { id: reservationId },
-                success: function(response) {
-                    // alert("Failed to send invoice");
-                    var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title"> Failed to send invoice</h3></div><div class="notification2_progress"></div></div>');
-                    $('body').append(notificationDiv);
-                    setTimeout(function() {
-                        notificationDiv.remove();
-                    }, 5000);
-                    console.log("Failed to send invoice:", response);
-                    setTimeout(function() {
-                        closeModal();
-                    }, 3000); // Close the popup after successful invoice sending
-                },
-                error: function(xhr, status, error) {
-                    // alert("Invoice sent successfully");
-                    var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Invoice sent successfully</h3></div><div class="notification_progress"></div></div>');
-                    $('body').append(notificationDiv);
-                    setTimeout(function() {
-                        notificationDiv.remove();
-                    }, 3000);
+            function sendInvoice(reservationId) {
+                $.ajax({
+                    url: "<?php echo URLROOT; ?>/Bookings/sendingInvoice",
+                    type: "POST",
+                    data: { id: reservationId },
+                    success: function (response) {
+                        // alert("Failed to send invoice");
+                        var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title"> Failed to send invoice</h3></div><div class="notification2_progress"></div></div>');
+                        $('body').append(notificationDiv);
+                        setTimeout(function () {
+                            notificationDiv.remove();
+                        }, 5000);
+                        console.log("Failed to send invoice:", response);
+                        setTimeout(function () {
+                            closeModal();
+                        }, 3000); // Close the popup after successful invoice sending
+                    },
+                    error: function (xhr, status, error) {
+                        // alert("Invoice sent successfully");
+                        var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Invoice sent successfully</h3></div><div class="notification_progress"></div></div>');
+                        $('body').append(notificationDiv);
+                        setTimeout(function () {
+                            notificationDiv.remove();
+                        }, 3000);
 
-                    console.error("Invoice sent successfully:", error);
-                }
+                        console.error("Invoice sent successfully:", error);
+                    }
+                });
+            }
+
+            $("#paid").click(function () {
+                var id = id_reserve;
+                sendInvoice(id);
             });
-        }
-
-        $("#paid").click(function() {
-            var id = id_reserve;
-            sendInvoice(id);
         });
-    });
-</script>
+    </script>
 
     <?php
 } ?>
@@ -196,17 +196,17 @@ $current_timeslots = time_slot($duration, $cleanup, $formattedTime, $end);
                                     <option value="<?php echo $ts; ?>" data-booked="true">
                                         <?php echo $ts; ?>
                                     </option>
-                                <?php } else if($filter_date == date('Y-m-d') && !in_array($ts, $current_timeslots)) { ?>
-                                    <option value="<?php echo $ts; ?>" data-net-type="Normal Net A"
-                                        data-date="<?php echo $filter_date; ?>" today-slot="true">
+                                <?php } else if ($filter_date == date('Y-m-d') && !in_array($ts, $current_timeslots)) { ?>
+                                        <option value="<?php echo $ts; ?>" data-net-type="Normal Net A"
+                                            data-date="<?php echo $filter_date; ?>" today-slot="true">
                                         <?php echo $ts; ?>
-                                    </option>
+                                        </option>
                                 <?php } else { ?>
-                                    <option value="<?php echo $ts; ?>" data-net-type="Normal Net A"
-                                        data-date="<?php echo $filter_date; ?>">
+                                        <option value="<?php echo $ts; ?>" data-net-type="Normal Net A"
+                                            data-date="<?php echo $filter_date; ?>">
                                         <?php echo $ts; ?>
-                                    </option>
-                                <?php }?>  
+                                        </option>
+                                <?php } ?>
                             <?php } ?>
                         </select>
                     </div>
@@ -232,17 +232,17 @@ $current_timeslots = time_slot($duration, $cleanup, $formattedTime, $end);
                                     <option value="<?php echo $ts; ?>" data-booked="true">
                                         <?php echo $ts; ?>
                                     </option>
-                                <?php } else if($filter_date == date('Y-m-d') && !in_array($ts, $current_timeslots)) { ?>
-                                    <option value="<?php echo $ts; ?>" data-net-type="Normal Net B"
-                                        data-date="<?php echo $filter_date; ?>" today-slot="true">
+                                <?php } else if ($filter_date == date('Y-m-d') && !in_array($ts, $current_timeslots)) { ?>
+                                        <option value="<?php echo $ts; ?>" data-net-type="Normal Net B"
+                                            data-date="<?php echo $filter_date; ?>" today-slot="true">
                                         <?php echo $ts; ?>
-                                    </option>
+                                        </option>
                                 <?php } else { ?>
-                                    <option value="<?php echo $ts; ?>" data-net-type="Normal Net B"
-                                        data-date="<?php echo $filter_date; ?>">
+                                        <option value="<?php echo $ts; ?>" data-net-type="Normal Net B"
+                                            data-date="<?php echo $filter_date; ?>">
                                         <?php echo $ts; ?>
-                                    </option>
-                                <?php }?>  
+                                        </option>
+                                <?php } ?>
                             <?php } ?>
                         </select>
                     </div>
@@ -268,17 +268,17 @@ $current_timeslots = time_slot($duration, $cleanup, $formattedTime, $end);
                                     <option value="<?php echo $ts; ?>" data-booked="true">
                                         <?php echo $ts; ?>
                                     </option>
-                                <?php } else if($filter_date == date('Y-m-d') && !in_array($ts, $current_timeslots)) { ?>
-                                    <option value="<?php echo $ts; ?>" data-net-type="Machine Net"
-                                        data-date="<?php echo $filter_date; ?>" today-slot="true">
+                                <?php } else if ($filter_date == date('Y-m-d') && !in_array($ts, $current_timeslots)) { ?>
+                                        <option value="<?php echo $ts; ?>" data-net-type="Machine Net"
+                                            data-date="<?php echo $filter_date; ?>" today-slot="true">
                                         <?php echo $ts; ?>
-                                    </option>
+                                        </option>
                                 <?php } else { ?>
-                                    <option value="<?php echo $ts; ?>" data-net-type="Machine Net"
-                                        data-date="<?php echo $filter_date; ?>">
+                                        <option value="<?php echo $ts; ?>" data-net-type="Machine Net"
+                                            data-date="<?php echo $filter_date; ?>">
                                         <?php echo $ts; ?>
-                                    </option>
-                                <?php }?>  
+                                        </option>
+                                <?php } ?>
                             <?php } ?>
                         </select>
                     </div>
@@ -310,12 +310,14 @@ $current_timeslots = time_slot($duration, $cleanup, $formattedTime, $end);
                         </table>
                     </div>
 
-                    <div class="input-field">
-                        <label>Choose a coach?</label>
-                        <select name="coach" id="coach">
-                            <option disabled selected>Select the coach</option>
-                        </select>
-                    </div>
+                    <?php if ($_SESSION == "User") { ?>
+                        <div class="input-field">
+                            <label>Choose a coach?</label>
+                            <select name="coach" id="coach">
+                                <option disabled selected>Select the coach</option>
+                            </select>
+                        </div>
+                    <?php } ?>
 
                     <div class="paymentamount">
                         <h2>Total Payment : <span class="payment"></span></h2>
