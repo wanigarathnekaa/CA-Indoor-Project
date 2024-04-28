@@ -41,12 +41,12 @@
             
               <div class="input-box">
                 <span class="details">Email</span>
-                <input type="email" placeholder="Enter your email" name="email" value="<?php echo $data['email']; ?>">
+                <input type="text" placeholder="Enter your email" name="email" value="<?php echo $data['email']; ?>">
                 <span class="form-invalid"><?php echo $data['email_err']; ?></span>
               </div>
               <div class="input-box">
                 <span class="details">Phone Number</span>
-                <input type="tel" placeholder="Enter your number" name="phoneNumber" value="<?php echo $data['phoneNumber']; ?>">
+                <input type="text" placeholder="Enter your number" name="phoneNumber" value="<?php echo $data['phoneNumber']; ?>">
                 <span class="form-invalid"><?php echo $data['phoneNumber_err']; ?></span>
               </div>
               <div class="input-box">

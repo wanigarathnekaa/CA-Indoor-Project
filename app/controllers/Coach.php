@@ -56,37 +56,72 @@ class Coach extends Controller
             //validate name
             if (empty($data['name'])) {
                 $data['name_err'] = "Please enter a name";
+            }elseif (!preg_match("/^[a-zA-Z-' ]*$/", $data['name'])) {
+                $data['name_err'] = "Only letters and white space allowed";
             }
 
             //validate email
             if (empty($data['email'])) {
                 $data['email_err'] = "Please enter an email";
             } else {
-                //check email already registered or not
-                if ($this->coachUserModel->findUserByEmail($data['email'])) {
-                    $data['email_err'] = "This email is already in use";
+                $userdata = $this->coachUserModel->getUserByEmail($_SESSION['user_email']);
+                if ($userdata->email != $data['email']) {
+                    // check email already registered or not
+                    if ($this->coachUserModel->findUserByEmail($data['email'])) {
+                        $data['email_err'] = "This email is already in use";
+                    }
+                    if ($this->managerModel->findUserByEmail($data['email'])) {
+                        $data['email_err'] = "This email is already in use";
+                    }
+                    if ($this->companyUserModel->findUserByEmail($data['email'])) {
+                        $data['email_err'] = "This email is already in use";
+                    }
+                }
+                //check the email format is correct or not
+                if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                    $data['email_err'] = "Please enter a valid email";
                 }
             }
 
             //validate phone number
             if (empty($data['phoneNumber'])) {
                 $data['phoneNumber_err'] = "Please enter a phone number";
+            }elseif (strlen($data['phoneNumber']) != 10) {
+                $data['phoneNumber_err'] = "Please enter a valid phone number";
+            }elseif (!preg_match("/^[0-9]*$/", $data['phoneNumber'])) {
+                $data['phoneNumber_err'] = "Please enter a valid phone number";
             }
+
 
 
             // validate nic
             if (empty($data['nic'])) {
                 $data['nic_err'] = "Please enter the NIC number";
+            }else{
+                $nic = str_replace(' ', '', $data['nic']);
+                if (strlen($nic) != 10 && strlen($nic) != 12) {
+                    $data['nic_err'] = "NIC format is xxxxxxxxxv or xxxxxxxxxxxx";
+                }elseif (!preg_match("/^[0-9]{9}[vV]?$/", $nic) && !preg_match("/^[0-9]{12}?$/", $nic)) {
+                    $data['nic_err'] = "NIC number is invalid";
+                }
             }
 
             // validate address
             if (empty($data['srtAddress'])) {
                 $data['srtAddress_err'] = "Please enter the Street Address";
+            }elseif(strlen($data['srtAddress']) > 100){
+                $data['srtAddress_err'] = "Street Address is too long";
+            }elseif(!preg_match("/^[a-zA-Z0-9\s,.'-]*$/", $data['srtAddress'])){
+                $data['srtAddress_err'] = "Invalid Street Address";
             }
 
             // validate city
             if (empty($data['city'])) {
                 $data['city_err'] = "Please enter the City";
+            }elseif(strlen($data['city']) > 50){
+                $data['city_err'] = "City name is too long";
+            }elseif(!preg_match("/^[a-zA-Z\s]*$/", $data['city'])){
+                $data['city_err'] = "Invalid City name";
             }
 
             // validate achivements
@@ -196,7 +231,6 @@ class Coach extends Controller
                 'user_name' => trim($_POST['name']),
                 'email' => trim($_POST['email']),
                 'phoneNumber' => trim($_POST['phoneNumber']),
-                // 'pwd' => "12345678",
                 'nic' => trim($_POST['nic']),
                 'srtAddress' => trim($_POST['srtAddress']),
                 'city' => trim($_POST['city']),

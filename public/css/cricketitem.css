@@ -945,6 +945,22 @@ footer {
   gap: 10px;
 }
 
+
+
+.form-incrementrow {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.reorder_level{
+  width: 100%;
+  margin-right: 10px;
+}
+
 /* RESPONSIVE................................................................................................................................ */
 
 /*responsive larger than 480px screen......................................................................*/
