@@ -32,6 +32,8 @@
                     <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/coach"><i class="fa-solid fa-file-circle-plus icon"></i></a>
                 <?php } else if ($role == "Manager") { ?>
                     <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/manager"><i class="fa-solid fa-file-circle-plus icon"></i></a>
+                <?php } else if ($role == "Admin") { ?>
+                    <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/admin"><i class="fa-solid fa-file-circle-plus icon"></i></a>
                 <?php } else if ($role == "Cashier") { ?>
                     <a class="btn" href="<?php echo URLROOT; ?>/Pages/Add_Advertisements/cashier"><i class="fa-solid fa-file-circle-plus icon"></i></a>   
                 <?php } else if ($role == "Owner") { ?>

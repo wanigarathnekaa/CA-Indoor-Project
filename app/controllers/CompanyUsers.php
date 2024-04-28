@@ -13,7 +13,116 @@ class CompanyUsers extends Controller
             $this->userCoachModel = $this->model('M_Coach');
             $this->companyUserModel = $this->model('M_CompanyUsers');
       }
+      public function register()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //form is submitting
 
+            //Valid input
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+
+            //Input data
+            $data = [
+                'name' => trim($_POST['name']),
+                'email' => trim($_POST['email']),
+                'phoneNumber' => trim($_POST['phoneNumber']),
+                'nic' => trim($_POST['nic']),
+                
+
+                'name_err' => "",
+                'email_err' => "",
+                'phoneNumber_err' => "",
+                'password_err' => "",
+                'nic_err' => "",
+                
+            ];
+
+
+
+            //validate name
+            if (empty($data['name'])) {
+                $data['name_err'] = "Please enter a name";
+            }elseif (!preg_match("/^[a-zA-Z-' ]*$/", $data['name'])) {
+                $data['name_err'] = "Only letters and white space allowed";
+            }
+
+            //validate email
+            if (empty($data['email'])) {
+                $data['email_err'] = "Please enter an email";
+            }
+
+            //validate phone number
+            if (empty($data['phoneNumber'])) {
+                $data['phoneNumber_err'] = "Please enter a phone number";
+            }elseif (strlen($data['phoneNumber']) != 10) {
+                $data['phoneNumber_err'] = "Please enter a valid phone number";     
+            } elseif (!preg_match("/^[0-9]*$/", $data['phoneNumber'])) {
+                $data['phoneNumber_err'] = "Please enter a valid phone number";
+            }
+
+            //validate nic
+            if (empty($data['nic'])) {
+                $data['nic_err'] = "Please enter the NIC number";
+            }else{
+                $nic = str_replace(' ', '', $data['nic']);
+                if (strlen($nic) != 10 && strlen($nic) != 12) {
+                    $data['nic_err'] = "NIC format is xxxxxxxxxv or xxxxxxxxxxxx";
+                }elseif (!preg_match("/^[0-9]{9}[vV]?$/", $nic) && !preg_match("/^[0-9]{12}?$/", $nic)) {
+                    $data['nic_err'] = "NIC number is invalid";
+                }
+            }
+
+            
+
+            //If validation is completed and no error, then register the user
+            if (empty($data['name_err']) && empty($data['email_err']) && empty($data['nic_err']) && empty($data['phoneNumber_err']) ) {
+                //generate random password
+                $password=$this->managerModel->generateRandomPassword();
+
+                //check whether the  password is sent to the coach via email
+                if($this->managerModel->SendPasswordViaEmail($_POST['email'],$password)){
+                    $data['password'] = $password;
+                }
+                else {        
+                    die('Something Went wrong');
+                }
+
+                //Hash the password
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+                //create user
+                if ($this->companyUserModel->cashierRegister($data)) {
+                    redirect('Pages/Dashboard/admin');
+                } else {
+                    die('Something Went wrong');
+                }
+
+            } else {
+                //Load the view
+                echo "Place";
+                $this->view('Pages/CashierRegistration/cashierRegistration', $data);            }
+        } else {
+            //initial form
+            $data = [
+                'name' => "",
+                'email' => "",
+                'phoneNumber' => "",
+                'password' => "",
+                'nic' => "",
+                
+
+                'name_err' => "",
+                'email_err' => "",
+                'phoneNumber_err' => "",
+                'password_err' => "",
+                'nic_err' => "",
+               
+            ];
+        }
+
+        //Load the view
+        $this->view('Pages/CashierRegistration/cashierRegistration', $data);    }
 
       public function edit()
       {

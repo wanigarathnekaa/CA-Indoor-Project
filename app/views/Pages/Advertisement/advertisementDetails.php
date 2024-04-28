@@ -67,7 +67,7 @@ foreach ($data['adverts'] as $advert) {
             </p>
           </div>
 
-          <?php if ($advertisement[0]->email == $_SESSION['user_email'] ||  $role == 'Manager') { ?>
+          <?php if ($advertisement[0]->email == $_SESSION['user_email'] ||  $role == 'Manager' || $role=='Admin') { ?>
             <div class="event-info">
               <a href="<?php echo URLROOT?>/Advertisement/editAdvertisement/<?php echo $advertisement[0]->advertisement_id?>">
               <button type="button" class="btn">Edit</button>

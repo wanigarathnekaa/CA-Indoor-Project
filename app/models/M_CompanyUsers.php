@@ -25,7 +25,26 @@ class M_CompanyUsers
             }
 
       }
+      
+      public function cashierRegister($data)
+    {
+        $this->db->query('INSERT INTO company_users (name, email, nic,phoneNumber, password,role) VALUES (:name, :email, :nic, :phoneNumber, :password,:role)');
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':nic', $data['nic']);
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':phoneNumber', $data['phoneNumber']);
+        $this->db->bind(':password', $data['password']);
+        $this->db->bind(':role', 3);
 
+
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 
       // Find user by email
       public function findUserByEmail($email)
