@@ -218,6 +218,28 @@ class Bookings extends Controller
                 $data['paymentStatus_err'] = "Payment is Unsuccessful - Payment Status is required";
             }
 
+            if ($data['coach'] != "No Coach") {
+                $time_slots_coach_available = $this->bookingModel->getCoachAvailability($data);
+                $array_time_slots = json_decode($time_slots_coach_available[0]->time_slot, true);
+                print_r($array_time_slots);
+                $ts_array = array();
+                for ($i = 0; $i < count($arrayData); $i++) {
+                    $ts_array[] = $arrayData[$i]['timeSlot'];
+                }
+                $resultArray = array_diff($array_time_slots, $ts_array);
+                $result = array_values($resultArray);
+
+                if (!empty($result)) {
+                    $data1["time_slot"] = json_encode($result);
+                    $data1['reserved_time_slot'] = json_encode($ts_array);
+                } else {
+                    $data1["time_slot"] = NULL;
+                    $data1['reserved_time_slot'] = json_encode($ts_array);
+                }
+                $this->bookingModel->update_coach_availability($data1);
+                $this->bookingModel->update_reserved_timeSlots($data1);
+            }
+
             if (
                 empty($data['name_err']) && empty($data['email_err']) && empty($data['date_err'])
                 && empty($data['coach_err']) && empty($data['phoneNumber_err'])
