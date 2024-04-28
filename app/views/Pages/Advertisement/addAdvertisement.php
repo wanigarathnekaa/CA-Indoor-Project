@@ -40,7 +40,7 @@
                 </div>
                 <div class="textbox">
                   <label for="img" class="upload-label">Attachment</label><br>
-                  <input type="file" name="file" id="file" value="<?php echo $data['filetmp']; ?>"><br>
+                  <input type="file" name="file" id="file" value="<?php echo $data['filetmp']; ?>" accept="image/*"><br>
                   <span class="form-invalid"><?php echo $data['filename_err']; ?></span>
                 </div>
                 <div class="input-box">

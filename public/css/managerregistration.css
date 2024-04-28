@@ -21,7 +21,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  /* background-color: #f1f1f1; */
+  background-color: #f1f1f1;
 }
 
 
@@ -207,31 +207,9 @@ form .button input:hover{
   }
   .container{
     /* height:90%; */
-    margin: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     overflow-y: scroll;
-  }
-  /* .container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f1f1f1;
-  }
-   */
-  
-  
-  
-  
-  .center{
-  position: relative;
-      display: grid;
-      min-height: 500px;
-      width: 100%;
-      margin: 10px 0 10px 0;
-      background: var(--white);
-      padding: 20px;
-      box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-      border-radius: 20px;
   }
   form .button {
     height: 50px;
