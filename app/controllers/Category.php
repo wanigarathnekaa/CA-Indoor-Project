@@ -154,6 +154,16 @@ class Category extends Controller
 
     public function deleteCategory($id)
     {
+        $cartItems = $this->categoryModel->getCartItems();
+        if ($cartItems) {
+            foreach ($cartItems as $cartItem) {
+                $product = $this->categoryModel->getProductById($cartItem->p_id);
+                if ($product->category_id == $id) {
+                    echo "<script>alert('A product from the brand you are trying to delete is in the cart. Please remove it before deleting the brand.');</script>";
+                    exit();
+                }
+            }
+        }
         if ($this->categoryModel->deleteCategory($id)) {
             redirect('Pages/Category/manager');
         } else {
