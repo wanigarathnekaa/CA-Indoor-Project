@@ -34,11 +34,12 @@
                         <h1>Company Users :
                               <?php echo $data["CompanyUserCount"] ?>
                         </h1>
+                        
                   </div>
             
-                  <!-- <div class="add-btn">
-                        <a href="<?php echo URLROOT; ?>/Coach/register"><i class="fa-solid fa-user-plus  icon"></i></a>
-                  </div> -->
+                  <<div class="add-btn">
+                        <a href="<?php echo URLROOT; ?>/Pages/Cashier_Registration/cashier"><i class="fa-solid fa-user-plus  icon"></i></a>
+                  </div>
             </div>
 
             <!-- Table Sort -->

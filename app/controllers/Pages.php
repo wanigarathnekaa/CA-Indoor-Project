@@ -699,6 +699,27 @@ class Pages extends Controller
         ];
         $this->view('Pages/ManagerRegistration/managerRegistration', $data);
     }
+    public function Cashier_Registration($name)
+    {
+        $data = [
+            'name' => "",
+            'email' => "",
+            'phoneNumber' => "",
+            'password' => "",
+            'nic' => "",
+            'strAddress' => "",
+            'city' => "",
+
+            'name_err' => "",
+            'email_err' => "",
+            'phoneNumber_err' => "",
+            'password_err' => "",
+            'nic_err' => "",
+            'strAddress_err' => "",
+            'city_err' => "",
+        ];
+        $this->view('Pages/CashierRegistration/cashierRegistration', $data);//C:\xampp\htdocs\C&A_Indoor_Project\app\views\Pages\CashierRegistration\cashierRegistration.php
+    }
 
     public function Manager_Profile($name)
     {

@@ -43,7 +43,7 @@ require APPROOT.'/views/Components/Side Bars/sideBar.php';
                 </div>
                 <div class="form-group">
                     <label>End Date</label>
-                    <input type="text" name="invoice_due_date" id="end_date" class="form-control datepicker" >
+                    <input type="text" name="invoice_due_date" id="end_date" class="form-control datepicker">
                     <span class="form-invalid"><?php echo isset($data['invoice_due_date_error'])? $data['invoice_due_date_error'] : '';?></span>
 
                 </div>
