@@ -25,17 +25,12 @@
         <!-- Table Topic -->
         <div class="table-topic">
             <div class="topic-name">
-                <h1>Orders :
+                <h1>Cancel Orders :
                     <?php echo count($data); ?>
                 </h1>
             </div>
 
-            <?php if ($role == "Cashier"): ?>
-                <div class="add-btn">
-                    <a href="http://localhost/C&A_Indoor_Project/Pages/Order/cashier"><i
-                            class="fa-solid fa-user-plus  icon"></i></a>
-                </div>
-            <?php endif; ?>
+            
         </div>
 
         <!-- Table Sort -->
@@ -58,14 +53,14 @@
                     <option value="online delivery">online delivery</option>
                 </select>
             </div>
-            <div class="sort">
+            <!-- <div class="sort">
                 <label for="orderStatus">Order Status :</label>
-                <select name="filter" id="orderStatus"> <!-- Changed id to orderStatus -->
+                <select name="filter" id="orderStatus"> 
                     <option value="All">All</option>
                     <option value="Complete">Complete</option>
                     <option value="Not Complete">Not Complete</option>
                 </select>
-            </div>
+            </div> -->
 
             <div class="sort">
                 <label>Date :</label>
@@ -96,7 +91,7 @@
                     </tr>
                 </thead>
                 <tbody id="orderTable">
-                    <?php foreach ($data as $order):
+                    <?php foreach ($data as $order) :
                         $payment_status_color = '';
                         if ($order->payment_status == 'Paid') {
                             $payment_status_color = '#30c030';
@@ -113,7 +108,7 @@
                         } else if ($order->order_status == 'Not Complete') {
                             $order_status_color = '#ff0000';
                         }
-                        ?>
+                    ?>
                         <tr>
                             <td>
                                 <?php echo $order->order_id; ?>
@@ -217,33 +212,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         var modal = document.getElementById("orderDetailsModal");
+
         function closeModal() {
             modal.style.display = "none";
             location.reload();
         }
 
-        $(document).ready(function () {
+        $(document).ready(function() {
 
-            $("#payfilter").on("change", function () {
-                selectedValue = $(this).val();
-                // alert(selectedValue);
+            $("#payfilter").on("change", function() {
+                var selectedValue = $(this).val();
                 if (selectedValue != "All") {
-                    $("table tbody tr").hide().filter(function () {
-                        if (selectedValue === "Not Paid") {
-                            return $(this).text().indexOf(selectedValue) > -1 && $(this).text().indexOf("NOT Paid") === -1;
-                        } else {
-                            return $(this).text().indexOf(selectedValue) > -1;
-                        }
+                    $("table tbody tr").hide().filter(function() {
+                        // Check if the row contains the selected value
+                        return $(this).text().indexOf(selectedValue) > -1;
                     }).show();
+                    // Hide rows with "Not Paid" if "Paid" is selected
+                    if (selectedValue === "Paid") {
+                        $("table tbody tr").filter(function() {
+                            return $(this).text().indexOf("Not Paid") > -1;
+                        }).hide();
+                    }
                 } else {
+                    // Show all rows when "All" is selected
                     $("table tbody tr").show();
                 }
-            });
 
-            $("#pickupModeFilter").on("change", function () { // Corrected ID here
+            });
+            $("#pickupModeFilter").on("change", function() { // Corrected ID here
                 selectedValue = $(this).val();
                 if (selectedValue != "All") {
-                    $("table tbody tr").hide().filter(function () {
+                    $("table tbody tr").hide().filter(function() {
                         $(this).toggle($(this).text().indexOf(selectedValue) > -1);
                     }).show();
                 } else {
@@ -251,22 +250,22 @@
                 }
             });
 
-            $("#orderStatus").on("change", function () { // Corrected ID here
-                selectedValue = $(this).val();
-                if (selectedValue != "All") {
-                    $("table tbody tr").hide().filter(function () {
-                        $(this).toggle($(this).text().indexOf(selectedValue) > -1);
-                    }).show();
-                } else {
-                    $("table tbody tr").show();
-                }
-            });
+            // $("#orderStatus").on("change", function () { // Corrected ID here
+            //     selectedValue = $(this).val();
+            //     if (selectedValue != "All") {
+            //         $("table tbody tr").hide().filter(function () {
+            //             $(this).toggle($(this).text().indexOf(selectedValue) > -1);
+            //         }).show();
+            //     } else {
+            //         $("table tbody tr").show();
+            //     }
+            // });
 
 
-            $("#date").on("change", function () {
+            $("#date").on("change", function() {
                 selectedValue = $(this).val();
                 if (selectedValue != "All") {
-                    $("table tbody tr").filter(function () {
+                    $("table tbody tr").filter(function() {
                         $(this).toggle($(this).text().indexOf(selectedValue) > -1);
                     });
                 } else {
@@ -274,15 +273,15 @@
                 }
 
             });
-            $("#searchInput").on("keyup", function () {
-                var value = $(this).val();
-                $("table tbody tr").filter(function () {
-                    $(this).toggle($(this).text().indexOf(value) > -1);
+            $("#searchInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("table tbody tr").filter(function() {
+                    var rowText = $(this).text().toLowerCase();
+                    $(this).toggle(rowText.indexOf(value) > -1);
                 });
             });
-
             var orderId = "";
-            $('#coachTable tbody tr').click(function () {
+            $('#coachTable tbody tr').click(function() {
                 $(this).addClass('selected').siblings().removeClass('selected');
                 console.log($(this).find('td:first').text());
                 $("#orderDetailsModal").css("display", "block");
@@ -292,7 +291,7 @@
                     data: {
                         order_id: $(this).find('td:first').text()
                     },
-                    success: function (response) {
+                    success: function(response) {
                         console.log(response);
                         var order = response.order; // Access the order object from the response
                         var orderItems = response.orderItems; // Access the orderItems array from the response
@@ -330,7 +329,7 @@
                 });
             });
 
-            $('#Change_Status').click(function () {
+            $('#Change_Status').click(function() {
                 $stat = "";
                 if ($("#OrderStatus").text() == "Status: Not Complete") {
                     $stat = "Complete";
@@ -344,7 +343,7 @@
                         order_id: $('#orderTable tr.selected td:first').text(),
                         new_status: $stat
                     },
-                    success: function (response) {
+                    success: function(response) {
                         console.log(response);
                         if (response.status == "success") {
                             $("#OrderStatus").text("Status: " + $stat);
@@ -355,14 +354,14 @@
                 });
             });
 
-            $('#Change_Payment').click(function () {
+            $('#Change_Payment').click(function() {
                 $.ajax({
                     url: "<?php echo URLROOT; ?>/Order/changePaymentStatus",
                     type: "POST",
                     data: {
                         order_id: $('#orderTable tr.selected td:first').text(),
                     },
-                    success: function (response) {
+                    success: function(response) {
                         console.log(response);
                         if (response.status == "success") {
                             $("#PaymentStatus").text("Payment Status: Paid");
