@@ -26,6 +26,7 @@ class Order extends Controller
                 "order_status" => "Not Complete",
                 "payment_status" => "Not Paid",
                 "items" => $_POST['items'], // This is an array of items in the cart
+                "person" => $_POST['person'], // This is an array of personal details
 
 
                 "pickup_err" => "",
@@ -37,6 +38,7 @@ class Order extends Controller
                 "city_err" => ""
             ];
 
+            $response = [];
             $orderItems = $data["items"];
             $orderId = $this->orderModel->last_inserted_id();
 
@@ -112,39 +114,72 @@ class Order extends Controller
                     echo $jsObj;
                     exit();
                 }
+            } else {
+                $response = [
+                    'status' => 'error_field_empty',
+                    'message' => 'Please fill in all the fields',
+                    'pickup_err' => $data['pickup_err'],
+                    'payment_err' => $data['payment_err'],
+                    'fname_err' => $data['fname_err'],
+                    'email_err' => $data['email_err'],
+                    'adr_err' => $data['adr_err'],
+                    'phone_err' => $data['phone_err'],
+                    'city_err' => $data['city_err']
+                ];
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                exit();
             }
 
-            $response = [];
-
             //Checking product quantity before placing order
-            foreach ($orderItems as $item) {
-                $product_id = $item['p_id'];
-                $qty = $item['qty'];
-                $reorder_level = $this->orderModel->getProductReorderLevel($product_id);
-                if ($qty > $this->orderModel->getProductQuantity($product_id)) {
-                    $response = [
-                        'status' => 'error',
-                        'message' => 'Product quantity is not available'
-                    ];
-                    header('Content-Type: application/json');
-                    echo json_encode($response);
-                    exit();
-                }
-
-                if ($this->orderModel->updateQuantity($product_id, $qty)) {
-                    if ($this->orderModel->getProductQuantity($product_id) <= $reorder_level) {
-                        $this->orderModel->sendEmailManager($_SESSION['user_email']);
+            if (
+                empty($data['pickup_err']) && empty($data['payment_err']) && empty($data['fname_err']) && empty($data['email_err'])
+                && empty($data['adr_err']) && empty($data['phone_err']) && empty($data['city_err'])
+            ) {
+                foreach ($orderItems as $item) {
+                    $product_id = $item['p_id'];
+                    $qty = $item['qty'];
+                    $reorder_level = $this->orderModel->getProductReorderLevel($product_id);
+                    if ($qty > $this->orderModel->getProductQuantity($product_id)) {
+                        $response = [
+                            'status' => 'error',
+                            'message' => 'Product quantity is not available'
+                        ];
+                        header('Content-Type: application/json');
+                        echo json_encode($response);
+                        exit();
                     }
-                    continue;
-                } else {
-                    $response = [
-                        'status' => 'error',
-                        'message' => 'Something went wrong. Please try again'
-                    ];
-                    header('Content-Type: application/json');
-                    echo json_encode($response);
-                    exit();
+
+                    if ($this->orderModel->updateQuantity($product_id, $qty)) {
+                        if ($this->orderModel->getProductQuantity($product_id) <= $reorder_level) {
+                            $this->orderModel->sendEmailManager($_SESSION['user_email']);
+                        }
+                        continue;
+                    } else {
+                        $response = [
+                            'status' => 'error',
+                            'message' => 'Something went wrong. Please try again'
+                        ];
+                        header('Content-Type: application/json');
+                        echo json_encode($response);
+                        exit();
+                    }
                 }
+            } else {
+                $response = [
+                    'status' => 'error_field_empty',
+                    'message' => 'Please fill in all the fields',
+                    'pickup_err' => $data['pickup_err'],
+                    'payment_err' => $data['payment_err'],
+                    'fname_err' => $data['fname_err'],
+                    'email_err' => $data['email_err'],
+                    'adr_err' => $data['adr_err'],
+                    'phone_err' => $data['phone_err'],
+                    'city_err' => $data['city_err']
+                ];
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                exit();
             }
 
             // If validation is completed and no error, then insert the order
@@ -152,28 +187,49 @@ class Order extends Controller
                 empty($data['pickup_err']) && empty($data['payment_err']) && empty($data['fname_err']) && empty($data['email_err'])
                 && empty($data['adr_err']) && empty($data['phone_err']) && empty($data['city_err'])
             ) {
-                if ($this->orderModel->insertOrder($data) && $this->orderModel->deleteCart($_SESSION['user_email'])) {
-                    $this->orderModel->insertOrderPersonalDetail($data);
-                    $orderId = $this->orderModel->last_inserted_id();
-                    foreach ($orderItems as $item) {
-                        $product_id = $item['p_id'];
-                        $qty = $item['qty'];
-                        $price_per_unit = $item['product_price'];
-                        $this->orderModel->orderItems($orderId, $product_id, $qty, $price_per_unit);
+                if (empty($data["person"])) {
+                    if ($this->orderModel->insertOrder($data) && $this->orderModel->deleteCart($_SESSION['user_email'])) {
+                        $this->orderModel->insertOrderPersonalDetail($data);
+                        $orderId = $this->orderModel->last_inserted_id();
+                        foreach ($orderItems as $item) {
+                            $product_id = $item['p_id'];
+                            $qty = $item['qty'];
+                            $price_per_unit = $item['product_price'];
+                            $this->orderModel->orderItems($orderId, $product_id, $qty, $price_per_unit);
+                        }
+                        $response = [
+                            'status' => 'success',
+                            'message' => 'Order Placed Successfully'
+                        ];
+                    } else {
+                        $response = [
+                            'status' => 'error',
+                            'message' => 'Something went wrong. Please try again'
+                        ];
                     }
-                    $response = [
-                        'status' => 'success',
-                        'message' => 'Order Placed Successfully'
-                    ];
                 } else {
-                    $response = [
-                        'status' => 'error',
-                        'message' => 'Something went wrong. Please try again'
-                    ];
+                    if ($this->orderModel->insertOrder($data)) {
+                        $orderId = $this->orderModel->last_inserted_id();
+                        foreach ($orderItems as $item) {
+                            $product_id = $item['p_id'];
+                            $qty = $item['qty'];
+                            $price_per_unit = $item['product_price'];
+                            $this->orderModel->orderItems($orderId, $product_id, $qty, $price_per_unit);
+                        }
+                        $response = [
+                            'status' => 'success',
+                            'message' => 'Order Placed Successfully'
+                        ];
+                    } else {
+                        $response = [
+                            'status' => 'error',
+                            'message' => 'Something went wrong. Please try again'
+                        ];
+                    }
                 }
             } else {
                 $response = [
-                    'status' => 'error',
+                    'status' => 'error_field_empty',
                     'message' => 'Please fill in all the fields',
                     'pickup_err' => $data['pickup_err'],
                     'payment_err' => $data['payment_err'],
