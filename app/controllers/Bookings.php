@@ -188,6 +188,8 @@ class Bookings extends Controller
                 'paymentStatus_err' => "",
             ];
 
+            
+
             //validate name
             if (empty($data['name'])) {
                 $data['name_err'] = "Payment is Unsuccessful- Name is required";
@@ -217,6 +219,14 @@ class Bookings extends Controller
             if (empty($data['paymentStatus'])) {
                 $data['paymentStatus_err'] = "Payment is Unsuccessful - Payment Status is required";
             }
+
+            //Managing Coach Available Time Slots
+            $data1 = [
+                'date' => $data['date'],
+                'email' => $data['coach'],
+                'time_slot' => "",
+                'reserved_time_slot' => '',
+            ];
 
             if ($data['coach'] != "No Coach") {
                 $time_slots_coach_available = $this->bookingModel->getCoachAvailability($data);
