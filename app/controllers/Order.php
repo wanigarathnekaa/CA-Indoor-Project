@@ -189,7 +189,9 @@ class Order extends Controller
             ) {
                 if (empty($data["person"])) {
                     if ($this->orderModel->insertOrder($data) && $this->orderModel->deleteCart($_SESSION['user_email'])) {
-                        $this->orderModel->insertOrderPersonalDetail($data);
+                        if (!($this->orderModel->findOrderPerson($data['email']))) {
+                            $this->orderModel->insertOrderPersonalDetail($data);
+                        }
                         $orderId = $this->orderModel->last_inserted_id();
                         foreach ($orderItems as $item) {
                             $product_id = $item['p_id'];
