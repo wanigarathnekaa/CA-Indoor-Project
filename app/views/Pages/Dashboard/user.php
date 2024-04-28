@@ -24,8 +24,7 @@
     require APPROOT . '/views/Components/Side Bars/sideBar.php';
     ?>
 
-    <?php print_r($data["userCoach"]); ?>
-
+    
     <!-- content -->
     <section class="home">
 

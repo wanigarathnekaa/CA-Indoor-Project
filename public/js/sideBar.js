@@ -17,3 +17,18 @@ toggle.addEventListener("click", () => {
     image.style.height = "auto";
   }
 });
+
+
+const mobileNav = document.querySelector(".hamburger");
+const navbar = document.querySelector(".menubar2");
+
+const toggleNav = () => {
+  console.log("Toggle function called.");
+  navbar.classList.toggle("active");
+  mobileNav.classList.toggle("hamburger-active");
+  console.log("Mobile nav toggled.");
+};
+mobileNav.addEventListener("click", () => toggleNav());
+
+
+
