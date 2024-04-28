@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('Asia/Colombo');
+
 $selected_date = isset($_GET['fulldate']) ? urldecode($_GET['fulldate']) : date('Y-m-d');
 $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
 
