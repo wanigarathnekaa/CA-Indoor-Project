@@ -410,6 +410,10 @@
   .nav ul {
     display: none;
   }
+  .menubar2 ul li a{
+    font-size: 1rem;
+  
+  }
 }
 
 
