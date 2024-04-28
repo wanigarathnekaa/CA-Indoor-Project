@@ -175,7 +175,7 @@ function openPopup(date) {
 
           // Add a default option
           var defaultOption = document.createElement("option");
-          defaultOption.selected = true;
+          // defaultOption.selected = true;
           defaultOption.disabled = true;
           defaultOption.textContent = "--Available Coaches--";
           selectElement.appendChild(defaultOption);
