@@ -197,7 +197,7 @@
                 var btn = "edit";
                 $('#myModal').css("display", "block");
                 $('#form_type').val(btn);
-                $('.modal-title').html("Edit Category");
+                $('.modal-title').html("Edit Brand");
                 $('#submit').html("Update").css("background-color", "goldenrod");
 
                 $.ajax({
