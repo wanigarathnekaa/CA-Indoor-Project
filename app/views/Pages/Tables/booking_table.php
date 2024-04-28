@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/Reservation_Table.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_reservation.css">
-    <title>Reservation</title>
+    <title>Booking</title>
 </head>
 
 <body>
@@ -25,7 +25,7 @@
         <!-- Table Topic -->
         <div class="table-topic">
             <div class="topic-name">
-                <h1>Reservations :
+                <h1>Booking :
                     <?php echo count($data); ?>
                 </h1>
             </div>
