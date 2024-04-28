@@ -172,6 +172,12 @@ class M_Pages
     }
 
     public function getProducts(){
+        $this->db->query('SELECT * FROM product WHERE active_state = 1');
+        $result = $this->db->resultSet();        
+        return $result;
+    }
+
+    public function getAllProducts(){
         $this->db->query('SELECT * FROM product');
         $result = $this->db->resultSet();        
         return $result;

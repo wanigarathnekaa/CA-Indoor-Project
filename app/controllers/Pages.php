@@ -789,7 +789,7 @@ class Pages extends Controller
     public function Order($name)
     {
         $orders = $this->pagesModel->getOrder();
-        $products = $this->pagesModel->getProducts();
+        $products = $this->pagesModel->getAllProducts();
         $categories = $this->pagesModel->getCategories();
         $data = [
             'orders' => $orders,
@@ -815,7 +815,7 @@ class Pages extends Controller
     {
         $categories = $this->pagesModel->getCategories();
         $brand = $this->pagesModel->getBrands();
-        $products = $this->pagesModel->getProducts();
+        $products = $this->pagesModel->getAllProducts();
         $data = [
             'categoryName_err' => "",
             'categories' => $categories,
