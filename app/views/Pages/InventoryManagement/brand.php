@@ -83,6 +83,14 @@
                 <tbody id="categoryTable">
                     <?php $i = 0; ?>
                     <?php foreach ($data['brands'] as $brand): ?>
+                        <?php
+                        $status_color = '';
+                        if ($brand->active_state) {
+                            $status_color = 'green';
+                        } else {
+                            $status_color = 'red';
+                        }
+                        ?>
                         <tr>
                             <td>
                                 <?php echo $brand->brand_id; ?>
@@ -152,9 +160,9 @@
                     var id = "";
                 }
 
-                if (brandName == '') {
-                    $('.form-invalid-1').html("Please enter Brand name");
-                } else {
+                // if (brandName == '') {
+                //     $('.form-invalid-1').html("Please enter Brand name");
+                // } else {
                     $.ajax({
                         type: "POST",
                         url: "<?php echo URLROOT; ?>/Brand/saveBrand",
@@ -179,7 +187,7 @@
                             console.error("AJAX request failed:", error);
                         }
                     });
-                }
+                // }
             });
 
             $(".edit").click(function (e) {

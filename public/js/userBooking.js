@@ -174,11 +174,11 @@ function openPopup(date) {
           selectElement.innerHTML = "";
 
           // Add a default option
-          var defaultOption = document.createElement("option");
-          defaultOption.selected = true;
-          defaultOption.disabled = true;
-          defaultOption.textContent = "--Available Coaches--";
-          selectElement.appendChild(defaultOption);
+          // var defaultOption = document.createElement("option");
+          // defaultOption.selected = true;
+          // defaultOption.disabled = true;
+          // defaultOption.textContent = "--Available Coaches--";
+          // selectElement.appendChild(defaultOption);
 
           // Add options returned from the server
           responseObject.forEach(function (coach) {
@@ -285,6 +285,8 @@ function makePayment() {
           paymentStatus: "Paid",
           paidPrice: paidPrice,
         };
+
+        console.log(postData);
 
         xhr.onreadystatechange = function () {
           if (xhr.readyState == 4) {
