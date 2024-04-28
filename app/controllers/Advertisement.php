@@ -33,9 +33,14 @@ class Advertisement extends Controller
             ];
 
             if (!empty($_FILES['file']['name'])) {
-                $newfilename = uniqid() . "-" . $data['filename'];
-                move_uploaded_file($data['filetmp'], "../public/uploads/" . $newfilename);
-                $data['filename'] = $newfilename;
+                if($_FILES['file']['type'] == "image/jpeg" || $_FILES['file']['type'] == "image/jpg" || $_FILES['file']['type'] == "image/png" || $_FILES['file']['type'] == "image/gif"){
+                    $newfilename = uniqid() . "-" . $data['filename'];
+                    move_uploaded_file($data['filetmp'], "../public/uploads/" . $newfilename);
+                    $data['filename'] = $newfilename;
+                }else{
+                    $data['filename_err'] = "Please upload the image file";
+                }
+                
             } else {
                 $data['filename'] = "";
                 $data['filename_err'] = "Please upload the image";
@@ -45,6 +50,10 @@ class Advertisement extends Controller
             //validate title
             if (empty($data['title'])) {
                 $data['title_err'] = "Please enter a title";
+            }else{
+                if(strlen($data['title']) > 50){
+                    $data['title_err'] = "Title must be less than 50 characters";
+                }
             }
 
                      
@@ -52,6 +61,8 @@ class Advertisement extends Controller
             //validate content
             if (empty($data['content'])) {
                 $data['content_err'] = "Please enter the Description";
+            }elseif(strlen($data['content']) < 50){
+                $data['content_err'] = "Description must be more than 50 characters";
             }
 
 
@@ -129,9 +140,13 @@ class Advertisement extends Controller
             ];
 
             if (!empty($_FILES['file']['name'])) {
-                $newfilename = uniqid() . "-" . $data['filename'];
-                move_uploaded_file($data['filetmp'], "../public/uploads/" . $newfilename);
-                $data['filename'] = $newfilename;
+                if($_FILES['file']['type'] == "image/jpeg" || $_FILES['file']['type'] == "image/jpg" || $_FILES['file']['type'] == "image/png" || $_FILES['file']['type'] == "image/gif"){
+                    $newfilename = uniqid() . "-" . $data['filename'];
+                    move_uploaded_file($data['filetmp'], "../public/uploads/" . $newfilename);
+                    $data['filename'] = $newfilename;
+                }else{
+                    $data['filename_err'] = "Please upload the image file";
+                }
             } else {
                 $existingFilename = $this->advertiseModel->getExistingImageFilename($advertisement_id);
                 $data['filename'] = $existingFilename;
@@ -143,11 +158,17 @@ class Advertisement extends Controller
             //validate title
             if (empty($data['title'])) {
                 $data['title_err'] = "Please enter a title";
+            }else{
+                if(strlen($data['title']) > 50){
+                    $data['title_err'] = "Title must be less than 50 characters";
+                }
             }
 
             //validate content
             if (empty($data['content'])) {
                 $data['content_err'] = "Please enter the Description";
+            }elseif(strlen($data['content']) < 50){
+                $data['content_err'] = "Description must be more than 50 characters";
             }
 
            

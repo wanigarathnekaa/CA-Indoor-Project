@@ -34,13 +34,13 @@
                 </div>   
                 
                 <div class="input-box " id="content">
-                  <span class="details">Content</span>
+                  <span class="details">Description</span>
                   <textarea name="content" placeholder="Description"><?php echo $data['content']; ?></textarea>
                   <span class="form-invalid"><?php echo $data['content_err']; ?></span>
                 </div>
                 <div class="textbox">
                   <label for="img" class="upload-label">Attachment</label><br>
-                  <input type="file" name="file" id="file" value="<?php echo $data['filetmp']; ?>" accept="image/*" ><br>
+                  <input type="file" name="file" id="file" value="<?php echo $data['filetmp']; ?>"><br>
                   <span class="form-invalid"><?php echo $data['filename_err']; ?></span>
                 </div>
                 <div class="input-box">
