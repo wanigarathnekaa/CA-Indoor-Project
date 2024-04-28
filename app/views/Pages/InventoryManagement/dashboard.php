@@ -102,17 +102,17 @@
                     <?php foreach (array_reverse($data) as $order):
                         $payment_status_color = '';
                         if ($order->payment_status == 'Paid') {
-                            $payment_status_color = '#00ff00';
+                            $payment_status_color = '#30c030';
                         } else if ($order->payment_status == 'Not Paid') {
-                            $payment_status_color = '#ff0000';
+                            $payment_status_color = '#e03333';
                         }
 
 
                         $order_status_color = '';
                         if ($order->order_status == 'Complete') {
-                            $order_status_color = '#00ff00';
+                            $order_status_color = '#30c030';
                         } else if ($order->order_status == 'Not Complete') {
-                            $order_status_color = '#ff0000';
+                            $order_status_color = '#e03333';
                         }
                         ?>
                         <tr>

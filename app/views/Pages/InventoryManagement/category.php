@@ -9,6 +9,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/managerDashboard.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/category.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/notification.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -81,10 +82,10 @@
                                         class="fas fa-edit"></i></button>
                                 <?php if ($category->active_state == 1) { ?>
                                     <a
-                                        href="<?php echo URLROOT; ?>/Category/deleteCategory/<?php echo $category->category_id; ?>">Active</a>
+                                        href="<?php echo URLROOT; ?>/Category/deleteCategory/<?php echo $category->category_id; ?>" class="status" style="background-color: #30c030;">Active</a>
                                 <?php } else { ?>
                                     <a
-                                        href="<?php echo URLROOT; ?>/Category/deleteCategory/<?php echo $category->category_id; ?>">Inactive</a>
+                                        href="<?php echo URLROOT; ?>/Category/deleteCategory/<?php echo $category->category_id; ?>" class="status" style="background-color: #e03333;">Inactive</a>
                                 <?php } ?>
                             </td>
                         </tr>

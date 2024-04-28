@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/Reservation_Table.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_reservation.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/notification.css">
+
     <title>Reservation</title>
 </head>
 
@@ -382,7 +384,12 @@
                             $("#PaymentStatus").text("Payment Status: Paid");
                             $("#Change_Payment").prop("disabled", true);
                         } else {
-                            alert("Payment status change failed");
+                            // alert("Payment status change failed");
+                            var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title">Payment status change failed</h3></div><div class="notification2_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 3000);
                         }
                     }
                 });

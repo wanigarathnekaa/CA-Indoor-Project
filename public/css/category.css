@@ -225,12 +225,7 @@ tbody a {
   text-decoration: none;
   /* color: var(--black1); */
 }
-#coachTable td a {
-    text-decoration: none;
-    color: var(--black1);
-    font-size: 1.4em; /* Adjust the font size */
-    margin-right: 20px; /* Add space to the right */
-  }
+
 
 #coachTable td button {
     background-color: transparent;
@@ -297,6 +292,16 @@ tbody td .icon:hover {
     font-size: 0.85em;
   }
 
+  .status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 40px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #000;
+  }
 
 @media screen and (max-width: 768px) {
   .display-4 {
