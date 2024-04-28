@@ -269,7 +269,7 @@ class Manager extends Controller
                 $data['strAddress_err'] = "Please enter the Street Address";
             }elseif(strlen($data['strAddress']) > 100){
                 $data['strAddress_err'] = "Street Address is too long";
-            }elseif(!preg_match("/^[a-zA-Z0-9\s,.'-]*$/", $data['srtAddress'])){
+            }elseif(!preg_match("/^[a-zA-Z0-9\s,.'-]*$/", $data['strAddress'])){
                 $data['strAddress_err'] = "Invalid Street Address";
             }
 
