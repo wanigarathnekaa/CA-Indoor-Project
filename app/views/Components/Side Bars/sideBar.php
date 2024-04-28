@@ -602,6 +602,12 @@
                                             </a>
                                         </li>
                 <?php } ?>
+                <li class="logout">
+                <a href="<?php echo URLROOT; ?>/Users/logout">
+                    <i class='bx bx-log-out icon'></i>
+                    <span class="text nav-text">logout</span>
+                </a>
+            </li>
         </ul>
     </div>
 
