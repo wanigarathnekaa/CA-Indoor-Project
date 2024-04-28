@@ -115,10 +115,10 @@
                                         class="fas fa-edit"></i></button>
                                 <?php if ($brand->active_state): ?>
                                     <a
-                                        href="<?php echo URLROOT; ?>/Brand/deleteBrand/<?php echo $brand->brand_id; ?>">Active</a>
+                                        href="<?php echo URLROOT; ?>/Brand/deleteBrand/<?php echo $brand->brand_id; ?>" class="status" style="background-color: #30c030;">Active</a>
                                 <?php else: ?>
                                     <a
-                                        href="<?php echo URLROOT; ?>/Brand/deleteBrand/<?php echo $brand->brand_id; ?>">Inactive</a>
+                                        href="<?php echo URLROOT; ?>/Brand/deleteBrand/<?php echo $brand->brand_id; ?>" class="status" style="background-color: #e03333;">Inactive</a>
                                 <?php endif; ?>
                             </td>
                         </tr>
