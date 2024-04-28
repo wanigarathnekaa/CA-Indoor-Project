@@ -17,7 +17,7 @@ function build_calendar($month, $year)
     $next_year = date('Y', mktime(0, 0, 0, $month + 1, 1, $year));
 
     $calendar = "<center><h2 class='date'>$monthName $year</h2>";
-    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $prev_month . "&year=" . $prev_year . "' target='_self'_>Prev Month</a> ";
+    //$calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $prev_month . "&year=" . $prev_year . "' target='_self'_>Prev Month</a> ";
     $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender'>Current Month</a> ";
     $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $next_month . "&year=" . $next_year . "'>NextMonth</a></center> ";
 
