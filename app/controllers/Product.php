@@ -264,6 +264,16 @@ class Product extends Controller
 
     public function deleteProduct($id)
     {
+        $cartItems = $this->productModel->getCartItems();
+        if ($cartItems) {
+            foreach ($cartItems as $cartItem) {
+                if ($cartItem->p_id == $id) {
+                    echo "<script>alert('A product from the brand you are trying to delete is in the cart. Please remove it before deleting the brand.');</script>";
+                    redirect('Pages/Product/manager');
+                    exit();
+                }
+            }
+        }
         if ($this->productModel->deleteProduct($id)) {
             redirect('Pages/Product/manager');
         } else {

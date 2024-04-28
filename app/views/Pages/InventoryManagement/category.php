@@ -79,9 +79,13 @@
                             <td>
                                 <button type="button" class="edit" id="<?php echo $category->category_id; ?>"><i
                                         class="fas fa-edit"></i></button>
-                                <a
-                                    href="<?php echo URLROOT; ?>/Category/deleteCategory/<?php echo $category->category_id; ?>"><i
-                                        class="fas fa-trash-alt"></i></a>
+                                <?php if ($category->active_state == 1) { ?>
+                                    <a
+                                        href="<?php echo URLROOT; ?>/Category/deleteCategory/<?php echo $category->category_id; ?>">Active</a>
+                                <?php } else { ?>
+                                    <a
+                                        href="<?php echo URLROOT; ?>/Category/deleteCategory/<?php echo $category->category_id; ?>">Inactive</a>
+                                <?php } ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -112,13 +116,13 @@
             $('#categoryForm').submit(function (e) {
                 e.preventDefault();
                 var categoryName = $('#categoryName').val();
-                if($('#form_type').val() === "edit"){
+                if ($('#form_type').val() === "edit") {
                     var id = $('.edit').attr('id');
                 }
-                else{
+                else {
                     var id = "";
                 }
-                
+
                 if (categoryName == '') {
                     $('.form-invalid').html("Please enter category name");
                 } else {
