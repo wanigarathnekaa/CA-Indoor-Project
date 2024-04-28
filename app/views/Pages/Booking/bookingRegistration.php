@@ -82,7 +82,7 @@ $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
                     <div class="input-field">
                         <label>Who is the coach?</label>
                         <select name="coach" id="coach">
-                            <option disabled selected>Select the coach</option>
+                            <option value="0" selected>Select the coach</option>
                         </select>
                     </div>
 

@@ -518,7 +518,7 @@ class Coach extends Controller
         }
 
         // $output = '<option selected disabled>--Available Coaches--</option>';
-        $output = '';
+        $output = '<option value="' . 0 . '">' . "--Available Coaches--" . '</option>';
         for ($i = 0; $i < count($coaches_email); $i++) {
             $email = $coaches_email[$i];
             $coaches_details = $this->coachModel->getCoachUserByEmail($email);

@@ -28,6 +28,8 @@ class Bookings extends Controller
             $bookingPrice = $_POST['bookingPrice'];
             $decimalBookingPrice = number_format((float) $bookingPrice, 2, '.', '');
 
+            print_r($_POST);
+
             //Input data
             $data = [
                 'name' => trim($_POST['name']),
@@ -45,6 +47,10 @@ class Bookings extends Controller
                 'date_err' => "",
                 'phoneNumber_err' => "",
             ];
+
+            if($data['coach'] == "No Coach" || $data['coach'] == 0){
+                $data['coach'] = "";
+            }
 
             //validate name
             if (empty($data['name'])) {

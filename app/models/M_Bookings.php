@@ -12,9 +12,11 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-class MYPDF extends TCPDF {
+class MYPDF extends TCPDF
+{
 
-    public function Invoice($id,$customerName, $email, $payment,$paidprice, $date, $paymentstatus,$phoneNumber) {
+    public function Invoice($id, $customerName, $email, $payment, $paidprice, $date, $paymentstatus, $phoneNumber)
+    {
         // Set PDF properties
         $this->SetCreator(PDF_CREATOR);
         $this->SetAuthor('Admin');
@@ -29,7 +31,7 @@ class MYPDF extends TCPDF {
         $this->SetFont('helvetica', 'B', 15);
         $this->Cell(0, 10, 'C & A Cricket Net', 0, 1, 'L');
 
-        
+
         // RECEIVER & SENDER DETAILS 
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
         $this->SetXY($receiverDetailsX, $this->GetY() - 10); // Set position to the same line
@@ -45,11 +47,11 @@ class MYPDF extends TCPDF {
 
 
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
-        $this->SetXY($receiverDetailsX, $this->GetY() - 10); 
+        $this->SetXY($receiverDetailsX, $this->GetY() - 10);
         $this->SetFont('helvetica', 'B', 12);
         $this->Cell(0, 10, 'INV_NO : #' . $id, 0, 1, 'R');
 
-        $this->Ln(5); 
+        $this->Ln(5);
 
         $this->SetFont('helvetica', 'B', 12);
         $this->Cell(0, 10, 'SENDER DETAILS', 0, 1, 'L');
@@ -57,17 +59,17 @@ class MYPDF extends TCPDF {
 
 
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
-        $this->SetXY($receiverDetailsX, $this->GetY() - 10); 
+        $this->SetXY($receiverDetailsX, $this->GetY() - 10);
         $this->SetFont('helvetica', 'B', 12);
         $this->Cell(0, 10, 'INV_NO : #' . $id, 0, 1, 'R');
 
-        $this->Ln(5); 
+        $this->Ln(5);
 
 
         $this->SetFont('helvetica', 'B', 12);
         $this->Cell(0, 10, 'SENDER DETAILS', 0, 1, 'L');
-        
-        
+
+
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
         $this->SetXY($receiverDetailsX, $this->GetY() - 10);
         $this->SetFont('helvetica', 'B', 12);
@@ -76,19 +78,19 @@ class MYPDF extends TCPDF {
 
 
 
-        $this->Ln(5); 
+        $this->Ln(5);
 
 
 
 
 
         $this->SetFont('helvetica', '', 12);
-        $this->Cell(0, 6,'Kaveesha Wanigarathne', 0, 1, 'L');
-        
+        $this->Cell(0, 6, 'Kaveesha Wanigarathne', 0, 1, 'L');
+
 
 
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
-        $this->SetXY($receiverDetailsX, $this->GetY() - 6); 
+        $this->SetXY($receiverDetailsX, $this->GetY() - 6);
         $this->SetFont('helvetica', '', 12);
         $this->Cell(0, 6, $customerName, 0, 1, 'R');
 
@@ -101,7 +103,7 @@ class MYPDF extends TCPDF {
         $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
         $this->SetXY($receiverDetailsX, $this->GetY() - 6); // Set position to the same line
         $this->SetFont('helvetica', '', 12);
-        $this->Cell(0, 6,$phoneNumber, 0, 1, 'R');
+        $this->Cell(0, 6, $phoneNumber, 0, 1, 'R');
 
 
         $this->Ln(1);
@@ -133,75 +135,75 @@ class MYPDF extends TCPDF {
         $this->SetFont('helvetica', '', 12);
         $this->MultiCell(0, 10, 'This invoice is for the time slot booking payment made on ' . $date . '.', 0, 'L');
 
-// Amounts
-$this->SetFont('helvetica', 'B', 12);
-$this->Cell(0, 10, 'Total Amount: ', 0, 1, 'L');
+        // Amounts
+        $this->SetFont('helvetica', 'B', 12);
+        $this->Cell(0, 10, 'Total Amount: ', 0, 1, 'L');
 
-$receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
-$this->SetXY($receiverDetailsX, $this->GetY() - 6); 
-$this->SetFont('helvetica', '', 12);
-$this->Cell(0, 10,  number_format($payment, 2), 0, 1, 'R');
-
-
-
-$this->SetFont('helvetica', 'B', 12);
-$this->Cell(0, 10, 'Paid Amount: ', 0, 1, 'L');
-
-$receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
-$this->SetXY($receiverDetailsX, $this->GetY() - 6); 
-$this->SetFont('helvetica', '', 12);
-$this->Cell(0, 10,  number_format($paidprice, 2), 0, 1, 'R');
+        $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
+        $this->SetXY($receiverDetailsX, $this->GetY() - 6);
+        $this->SetFont('helvetica', '', 12);
+        $this->Cell(0, 10, number_format($payment, 2), 0, 1, 'R');
 
 
 
-$lineWidth = 50; // Adjust the width as needed
+        $this->SetFont('helvetica', 'B', 12);
+        $this->Cell(0, 10, 'Paid Amount: ', 0, 1, 'L');
 
-// Calculate the X coordinates
-$startX = $this->GetPageWidth() - 10 - $lineWidth; // Starting X coordinate
-$endX = $this->GetPageWidth() - 10; // Ending X coordinate
-
-// Draw the line
-$this->Line($startX, $this->GetY(), $endX, $this->GetY());
-
-// Move to the next line
-$this->Ln(10); // You can adjust the spacing after the line as needed
-
-// SENDER DETAILS on the left
-$this->SetFont('helvetica', 'B', 12);
-$this->Cell(0, 10, 'Remaining Payment:', 0, 1, 'L');
+        $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
+        $this->SetXY($receiverDetailsX, $this->GetY() - 6);
+        $this->SetFont('helvetica', '', 12);
+        $this->Cell(0, 10, number_format($paidprice, 2), 0, 1, 'R');
 
 
 
-// RECEIVER DETAILS on the right
-$receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
-$this->SetXY($receiverDetailsX, $this->GetY() - 6); // Set position to the same line
-$this->SetFont('helvetica', '', 12);
-$remainingPayment = $paymentstatus == 'Not Paid' ? $payment : ($paymentstatus == 'Pending' ? ($payment - $paidprice) : 0);
-$this->Cell(0, 10,  number_format($remainingPayment, 2), 0, 1, 'R');
+        $lineWidth = 50; // Adjust the width as needed
 
-// Define the width of the line
-$lineWidth = 50; // Adjust the width as needed
+        // Calculate the X coordinates
+        $startX = $this->GetPageWidth() - 10 - $lineWidth; // Starting X coordinate
+        $endX = $this->GetPageWidth() - 10; // Ending X coordinate
 
-// Calculate the X coordinates
-$startX = $this->GetPageWidth() - 10 - $lineWidth; // Starting X coordinate
-$endX = $this->GetPageWidth() - 10; // Ending X coordinate
+        // Draw the line
+        $this->Line($startX, $this->GetY(), $endX, $this->GetY());
 
-// Draw the line
-$this->Line($startX, $this->GetY(), $endX, $this->GetY());
-$this->Ln(1); // You can adjust the spacing after the line as needed
+        // Move to the next line
+        $this->Ln(10); // You can adjust the spacing after the line as needed
 
-$this->Line($startX, $this->GetY(), $endX, $this->GetY());
+        // SENDER DETAILS on the left
+        $this->SetFont('helvetica', 'B', 12);
+        $this->Cell(0, 10, 'Remaining Payment:', 0, 1, 'L');
 
 
 
-$this->Ln(100); // Adjust the spacing as needed
+        // RECEIVER DETAILS on the right
+        $receiverDetailsX = $this->GetPageWidth() - 10 - $this->GetStringWidth('RECEIVER DETAILS');
+        $this->SetXY($receiverDetailsX, $this->GetY() - 6); // Set position to the same line
+        $this->SetFont('helvetica', '', 12);
+        $remainingPayment = $paymentstatus == 'Not Paid' ? $payment : ($paymentstatus == 'Pending' ? ($payment - $paidprice) : 0);
+        $this->Cell(0, 10, number_format($remainingPayment, 2), 0, 1, 'R');
+
+        // Define the width of the line
+        $lineWidth = 50; // Adjust the width as needed
+
+        // Calculate the X coordinates
+        $startX = $this->GetPageWidth() - 10 - $lineWidth; // Starting X coordinate
+        $endX = $this->GetPageWidth() - 10; // Ending X coordinate
+
+        // Draw the line
+        $this->Line($startX, $this->GetY(), $endX, $this->GetY());
+        $this->Ln(1); // You can adjust the spacing after the line as needed
+
+        $this->Line($startX, $this->GetY(), $endX, $this->GetY());
 
 
-// Add a straight line after the previous content
-$this->Line(10, $this->GetY(), $this->GetPageWidth() - 10, $this->GetY());
+
+        $this->Ln(100); // Adjust the spacing as needed
 
 
-$this->Ln(10); // You can adjust the spacing after the line as needed
+        // Add a straight line after the previous content
+        $this->Line(10, $this->GetY(), $this->GetPageWidth() - 10, $this->GetY());
+
+
+        $this->Ln(10); // You can adjust the spacing after the line as needed
 
 
     }
@@ -375,29 +377,29 @@ class M_Bookings
         $mail->Subject = 'About your appointment';
         $mail->Body = "Hello $name,<br><br>
         ";
-    
-    // Assuming $timeSlots is your array of objects
-    $timeSlots = '[{"timeSlot":"20:00PM-21:00PM","netType":"Normal Net B","date":"2024-04-26"}]';
-    $timeSlotsArray = json_decode($timeSlots, true);
-    
-    foreach ($timeSlotsArray as $slot) {
-        $timeSlot = $slot['timeSlot'];
-        $netType = $slot['netType'];
-        $date = $slot['date'];
-    
-        $mail->Body .= "You have a time slot on $date, at $timeSlot assigned to the player $name. Here are their contact details:<br>
+
+        // Assuming $timeSlots is your array of objects
+        $timeSlots = '[{"timeSlot":"20:00PM-21:00PM","netType":"Normal Net B","date":"2024-04-26"}]';
+        $timeSlotsArray = json_decode($timeSlots, true);
+
+        foreach ($timeSlotsArray as $slot) {
+            $timeSlot = $slot['timeSlot'];
+            $netType = $slot['netType'];
+            $date = $slot['date'];
+
+            $mail->Body .= "You have a time slot on $date, at $timeSlot assigned to the player $name. Here are their contact details:<br>
             - Phone Number: $phoneNumber<br>
             - Email: $email<br>
             If you have any issues, please contact the administrator before $date.<br><br>
         ";
-    }
-    
-    $mail->Body .= "Admin Details:<br>
+        }
+
+        $mail->Body .= "Admin Details:<br>
         - Name: $adminNAME<br>
         - Phone Number: $adminPNO<br>
         - Email: $adminEMAIL<br>
         Thank you.";
-    
+
 
 
         // Attempt to send email
