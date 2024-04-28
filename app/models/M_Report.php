@@ -1233,69 +1233,69 @@ class M_Report
         
         
         
-        public function displayFilteredBookings($data) {
-            $invoice_date = $data['invoice_date'];
-            $invoice_due_date = $data['invoice_due_date'];
+        // public function displayFilteredBookings($data) {
+        //     $invoice_date = $data['invoice_date'];
+        //     $invoice_due_date = $data['invoice_due_date'];
         
-            $this->db->query('SELECT * FROM bookings WHERE date >= :invoice_date AND date <= :invoice_due_date');
-            $this->db->bind(':invoice_date', $invoice_date);
-            $this->db->bind(':invoice_due_date', $invoice_due_date);
-            $result = $this->db->resultSet();
+        //     $this->db->query('SELECT * FROM bookings WHERE date >= :invoice_date AND date <= :invoice_due_date');
+        //     $this->db->bind(':invoice_date', $invoice_date);
+        //     $this->db->bind(':invoice_due_date', $invoice_due_date);
+        //     $result = $this->db->resultSet();
         
-            if ($result && count($result) > 0) {
-                echo "<div class='alert alert-success'>Filtered bookings:</div>";
-                echo "<table class='table table-bordered'>";
-                echo "<thead><tr><th>Customer Name</th><th>Booking Date</th><th>Booking Price</th><th>Payment Status</th></tr></thead>";
-                echo "<tbody>";
-                $totalPrice = 0;
-                $totalPaid = 0;
-                $totalPending = 0;
-                $totalNotPaid = 0;
+        //     if ($result && count($result) > 0) {
+        //         echo "<div class='alert alert-success'>Filtered bookings:</div>";
+        //         echo "<table class='table table-bordered'>";
+        //         echo "<thead><tr><th>Customer Name</th><th>Booking Date</th><th>Booking Price</th><th>Payment Status</th></tr></thead>";
+        //         echo "<tbody>";
+        //         $totalPrice = 0;
+        //         $totalPaid = 0;
+        //         $totalPending = 0;
+        //         $totalNotPaid = 0;
         
-                // Fetching results as associative array
-                foreach ($result as $row) {
-                    echo "<tr>";
-                    echo "<td>" . $row->name . "</td>";
-                    echo "<td>" . $row->date . "</td>";
-                    echo "<td>" . $row->bookingPrice . "</td>";
-                    echo "<td>" . $row->paymentStatus . "</td>";
-                    echo "</tr>";
-                    $totalPrice += $row->bookingPrice;
+        //         // Fetching results as associative array
+        //         foreach ($result as $row) {
+        //             echo "<tr>";
+        //             echo "<td>" . $row->name . "</td>";
+        //             echo "<td>" . $row->date . "</td>";
+        //             echo "<td>" . $row->bookingPrice . "</td>";
+        //             echo "<td>" . $row->paymentStatus . "</td>";
+        //             echo "</tr>";
+        //             $totalPrice += $row->bookingPrice;
         
-                    // Increment appropriate total based on payment status
-                    switch ($row->paymentStatus) {
-                        case 'Paid':
-                            $totalPaid += $row->bookingPrice;
-                            break;
-                        case 'Pending':
-                            $totalPending += $row->bookingPrice;
-                            break;
-                        case 'Not Paid':
-                            $totalNotPaid += $row->bookingPrice;
-                            break;
-                    }
-                                }            
-                echo "<tr><td colspan='3' style='text-align:right; font-size: 20px;'><b>Total Paid:</b></td><td style='font-size: 20px;'><b>$totalPaid</td></tr>";
-                echo "<tr><td colspan='3' style='text-align:right; font-size: 20px;'><b>Total Pending:</b></td><td style='font-size: 20px;'><b>$totalPending</td></tr>";
-                echo "<tr><td colspan='3' style='text-align:right; font-size: 20px;'><b>Total Not Paid:</b></td><td style='font-size: 20px;'><b>$totalNotPaid</td></tr>";
-                // Calculate the expected total amount
-                $expectedTotal = $totalPaid + $totalPending + $totalNotPaid;
-                echo "<tr><td colspan='3' style='text-align:right; font-size: 20px;'><b>Total Income:</b></td><td style='font-size: 20px;'><b>$expectedTotal</td></tr>";
+        //             // Increment appropriate total based on payment status
+        //             switch ($row->paymentStatus) {
+        //                 case 'Paid':
+        //                     $totalPaid += $row->bookingPrice;
+        //                     break;
+        //                 case 'Pending':
+        //                     $totalPending += $row->bookingPrice;
+        //                     break;
+        //                 case 'Not Paid':
+        //                     $totalNotPaid += $row->bookingPrice;
+        //                     break;
+        //             }
+        //                         }            
+        //         echo "<tr><td colspan='3' style='text-align:right; font-size: 20px;'><b>Total Paid:</b></td><td style='font-size: 20px;'><b>$totalPaid</td></tr>";
+        //         echo "<tr><td colspan='3' style='text-align:right; font-size: 20px;'><b>Total Pending:</b></td><td style='font-size: 20px;'><b>$totalPending</td></tr>";
+        //         echo "<tr><td colspan='3' style='text-align:right; font-size: 20px;'><b>Total Not Paid:</b></td><td style='font-size: 20px;'><b>$totalNotPaid</td></tr>";
+        //         // Calculate the expected total amount
+        //         $expectedTotal = $totalPaid + $totalPending + $totalNotPaid;
+        //         echo "<tr><td colspan='3' style='text-align:right; font-size: 20px;'><b>Total Income:</b></td><td style='font-size: 20px;'><b>$expectedTotal</td></tr>";
                 
         
-                echo "</tbody>";
-                echo "</table>";
+        //         echo "</tbody>";
+        //         echo "</table>";
         
-                echo "<form method='post'>";
-                echo "<input type='hidden' name='invoice_date' value='$invoice_date'>";
-                echo "<input type='hidden' name='invoice_due_date' value='$invoice_due_date'>";
-                echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download</button>";
-                echo "</form>";
+        //         echo "<form method='post'>";
+        //         echo "<input type='hidden' name='invoice_date' value='$invoice_date'>";
+        //         echo "<input type='hidden' name='invoice_due_date' value='$invoice_due_date'>";
+        //         echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download</button>";
+        //         echo "</form>";
              
-            } else {
-                echo "<div class='alert alert-warning'>No bookings found between the selected dates.</div>";
-            }
-        }
+        //     } else {
+        //         echo "<div class='alert alert-warning'>No bookings found between the selected dates.</div>";
+        //     }
+        // }
 
         public function displayReservationChart($data) {
             $invoice_date = isset($_POST['invoice_date']) ? $_POST['invoice_date'] : '';
@@ -1646,57 +1646,57 @@ foreach ($colors as $status => $color) {
         
         
         
-        public function displayFilteredOrders($data) {
-            $Product = $data['Product'];
+//         public function displayFilteredOrders($data) {
+//             $Product = $data['Product'];
     
            
             
-            $this->db->query('SELECT orders.*, orderitems.*
-            FROM orders
-            INNER JOIN orderitems ON orders.order_id = orderitems.order_id
-            INNER JOIN product ON orderitems.product_id = product.product_id
-            WHERE product.product_title = :product');
+//             $this->db->query('SELECT orders.*, orderitems.*
+//             FROM orders
+//             INNER JOIN orderitems ON orders.order_id = orderitems.order_id
+//             INNER JOIN product ON orderitems.product_id = product.product_id
+//             WHERE product.product_title = :product');
 
-            $this->db->bind(':product', $Product);
-            $result=$this->db->resultSet();
+//             $this->db->bind(':product', $Product);
+//             $result=$this->db->resultSet();
 
-            if ($result && count($result) > 0) {
-                echo "<div class='alert alert-success'>Filtered Orders:</div>";
-                echo "<table class='table table-bordered'>";
-                echo "<thead><tr><th>Order ID</th><th>Customer Name</th><th>Quantity</th><th>Total Price</th><th>Order Date</th><th>Order Status</th></tr></thead>";
-                echo "<tbody>";
-                // $totalPrice = 0;
-                // $totalPaid = 0;
-                // $totalPending = 0;
-                // $totalNotPaid = 0;
-        // Fetching results as objects of stdClass
-foreach ($result as $order) {
-    echo "<tr>";
-        echo "<td>" . $order->order_id . "</td>";
-        echo "<td>" . $order->full_name . "</td>";
-        echo "<td>" . $order->quantity . "</td>";
-        echo "<td>" . $order->price_per_unit . "</td>";
-        echo "<td>" . $order->order_date . "</td>";
-        echo "<td>" . $order->order_status . "</td>";
-        echo "</tr>";
-}
+//             if ($result && count($result) > 0) {
+//                 echo "<div class='alert alert-success'>Filtered Orders:</div>";
+//                 echo "<table class='table table-bordered'>";
+//                 echo "<thead><tr><th>Order ID</th><th>Customer Name</th><th>Quantity</th><th>Total Price</th><th>Order Date</th><th>Order Status</th></tr></thead>";
+//                 echo "<tbody>";
+//                 // $totalPrice = 0;
+//                 // $totalPaid = 0;
+//                 // $totalPending = 0;
+//                 // $totalNotPaid = 0;
+//         // Fetching results as objects of stdClass
+// foreach ($result as $order) {
+//     echo "<tr>";
+//         echo "<td>" . $order->order_id . "</td>";
+//         echo "<td>" . $order->full_name . "</td>";
+//         echo "<td>" . $order->quantity . "</td>";
+//         echo "<td>" . $order->price_per_unit . "</td>";
+//         echo "<td>" . $order->order_date . "</td>";
+//         echo "<td>" . $order->order_status . "</td>";
+//         echo "</tr>";
+// }
 
                 
         
                 
-                echo "</tbody>";
-                echo "</table>";
+//                 echo "</tbody>";
+//                 echo "</table>";
         
               
-                echo "<form method='post'>";
-                echo "    <input type='hidden' name='Product' value='" . $Product . "'>";
-                echo "    <button type='submit' name='download_pdf' class='btn btn-primary'>Download</button>";
-                echo "</form>";
+//                 echo "<form method='post'>";
+//                 echo "    <input type='hidden' name='Product' value='" . $Product . "'>";
+//                 echo "    <button type='submit' name='download_pdf' class='btn btn-primary'>Download</button>";
+//                 echo "</form>";
                          
-              } else {
-                echo "<div class='alert alert-warning'>No Orses Found.</div>";
-            }
-        }
+//               } else {
+//                 echo "<div class='alert alert-warning'>No Orses Found.</div>";
+//             }
+//         }
         public function getMonthlyOrders($data) {
 
         $input_month = $data['Selected_month'];
@@ -1714,116 +1714,116 @@ foreach ($result as $order) {
         return $this->db->resultSet();
     }
 
-        public function displayMonthlyFilteredOrders($data) {
-            $input_month = $data['Selected_month'];
+        // public function displayMonthlyFilteredOrders($data) {
+        //     $input_month = $data['Selected_month'];
 
-            $this->db->query('SELECT orders.*, orderitems.product_id, orderitems.quantity, product.product_title
-                  FROM orders
-                  INNER JOIN orderitems ON orders.order_id = orderitems.order_id
-                  INNER JOIN product ON orderitems.product_id = product.product_id
-                  WHERE MONTH(orders.order_date) = :input_month');
+        //     $this->db->query('SELECT orders.*, orderitems.product_id, orderitems.quantity, product.product_title
+        //           FROM orders
+        //           INNER JOIN orderitems ON orders.order_id = orderitems.order_id
+        //           INNER JOIN product ON orderitems.product_id = product.product_id
+        //           WHERE MONTH(orders.order_date) = :input_month');
 
-            $this->db->bind(':input_month', $input_month);
+        //     $this->db->bind(':input_month', $input_month);
 
             
-            $this->db->bind(':input_month', $input_month);
-            $result = $this->db->resultSet();
+        //     $this->db->bind(':input_month', $input_month);
+        //     $result = $this->db->resultSet();
         
-            if ($result && count($result) > 0) {
-                echo "<div class='alert alert-success'>Filtered Orders:</div>";
-                echo "<table class='table table-bordered'>";
-                echo "<thead><tr><th>Customer Name</th><th>Product Name</th><th>Quantity</th><th>order_date</th><th>Payment Status</th><th>Amount</th></tr></thead>";
-                echo "<tbody>";
-                $totalPrice = 0;
-                $totalPaid = 0;
-                $totalNotPaid = 0;
+        //     if ($result && count($result) > 0) {
+        //         echo "<div class='alert alert-success'>Filtered Orders:</div>";
+        //         echo "<table class='table table-bordered'>";
+        //         echo "<thead><tr><th>Customer Name</th><th>Product Name</th><th>Quantity</th><th>order_date</th><th>Payment Status</th><th>Amount</th></tr></thead>";
+        //         echo "<tbody>";
+        //         $totalPrice = 0;
+        //         $totalPaid = 0;
+        //         $totalNotPaid = 0;
         
-                // Fetching results as associative array
-                foreach ($result as $row) {
-                    echo "<tr>";
-                    echo "<td>" . $row->full_name . "</td>";
-                    echo "<td>" . $row->product_title . "</td>";
-                    echo "<td>" . $row->quantity . "</td>";//                    $order->quantity,
+        //         // Fetching results as associative array
+        //         foreach ($result as $row) {
+        //             echo "<tr>";
+        //             echo "<td>" . $row->full_name . "</td>";
+        //             echo "<td>" . $row->product_title . "</td>";
+        //             echo "<td>" . $row->quantity . "</td>";//                    $order->quantity,
 
-                    echo "<td>" . $row->order_date . "</td>";
-                    echo "<td>" . $row->payment_status . "</td>";
-                    echo "<td>" . $row->price . "</td>";
+        //             echo "<td>" . $row->order_date . "</td>";
+        //             echo "<td>" . $row->payment_status . "</td>";
+        //             echo "<td>" . $row->price . "</td>";
 
-                    echo "</tr>";
-                    $totalPrice += $row->price;
+        //             echo "</tr>";
+        //             $totalPrice += $row->price;
         
-                    //Increment appropriate total based on payment status
-                    switch ($row->payment_status) {
-                        case 'Paid':
-                            $totalPaid += $row->price;
-                            break;
-                        case 'Not Paid':
-                            $totalNotPaid += $row->price;
-                            break;
-                    }
-                }
+        //             //Increment appropriate total based on payment status
+        //             switch ($row->payment_status) {
+        //                 case 'Paid':
+        //                     $totalPaid += $row->price;
+        //                     break;
+        //                 case 'Not Paid':
+        //                     $totalNotPaid += $row->price;
+        //                     break;
+        //             }
+        //         }
         
-                echo "<tr><td colspan='5' style='text-align:right; font-size: 20px;'><b>Total Paid:</b></td><td style='font-size: 20px;'><b>$totalPaid</td></tr>";
-                echo "<tr><td colspan='5' style='text-align:right; font-size: 20px;'><b>Total Not Paid:</b></td><td style='font-size: 20px;'><b>$totalNotPaid</td></tr>";
-                // Calculate the expected total amount
-                $expectedTotal = $totalPaid  + $totalNotPaid;
-                echo "<tr><td colspan='5' style='text-align:right; font-size: 20px;'><b>Total Income:</b></td><td style='font-size: 20px;'><b>$expectedTotal</td></tr>";
+        //         echo "<tr><td colspan='5' style='text-align:right; font-size: 20px;'><b>Total Paid:</b></td><td style='font-size: 20px;'><b>$totalPaid</td></tr>";
+        //         echo "<tr><td colspan='5' style='text-align:right; font-size: 20px;'><b>Total Not Paid:</b></td><td style='font-size: 20px;'><b>$totalNotPaid</td></tr>";
+        //         // Calculate the expected total amount
+        //         $expectedTotal = $totalPaid  + $totalNotPaid;
+        //         echo "<tr><td colspan='5' style='text-align:right; font-size: 20px;'><b>Total Income:</b></td><td style='font-size: 20px;'><b>$expectedTotal</td></tr>";
                 
         
-                echo "</tbody>";
-                echo "</table>";
+        //         echo "</tbody>";
+        //         echo "</table>";
         
-                echo "<form method='post'>";
-                echo "<input type='hidden' name='Selected_month' value='$input_month'>";
-                echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download</button>";
+        //         echo "<form method='post'>";
+        //         echo "<input type='hidden' name='Selected_month' value='$input_month'>";
+        //         echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download</button>";
                 
-                echo "</form>";
-            } else {
-                echo "<div class='alert alert-warning'>No bookings found between the selected dates.</div>";
-            }
-        }
+        //         echo "</form>";
+        //     } else {
+        //         echo "<div class='alert alert-warning'>No bookings found between the selected dates.</div>";
+        //     }
+        // }
 
-        public function displayLogs($data) {
-            $invoice_date = $data['invoice_date'];
-            $invoice_due_date = $data['invoice_due_date'];
+        // public function displayLogs($data) {
+        //     $invoice_date = $data['invoice_date'];
+        //     $invoice_due_date = $data['invoice_due_date'];
         
-            $this->db->query("SELECT * FROM userlog WHERE create_date >= :start_date AND create_date <= :end_date");
+        //     $this->db->query("SELECT * FROM userlog WHERE create_date >= :start_date AND create_date <= :end_date");
 
-            $this->db->bind(':start_date', $invoice_date);
-            $this->db->bind(':end_date', $invoice_due_date);
-            $result = $this->db->resultSet();
+        //     $this->db->bind(':start_date', $invoice_date);
+        //     $this->db->bind(':end_date', $invoice_due_date);
+        //     $result = $this->db->resultSet();
         
-            if ($result && count($result) > 0) {
-                echo "<div class='alert alert-success'>Filtered User Logs:</div>";
-                echo "<table class='table table-bordered'>";
-                echo "<thead><tr><th>User ID</th><th>User Name</th><th>Email</th><th>Creation Date</th><th>Last Login</th><th>Last Logout</th></tr></thead>";
-                echo "<tbody>";
+        //     if ($result && count($result) > 0) {
+        //         echo "<div class='alert alert-success'>Filtered User Logs:</div>";
+        //         echo "<table class='table table-bordered'>";
+        //         echo "<thead><tr><th>User ID</th><th>User Name</th><th>Email</th><th>Creation Date</th><th>Last Login</th><th>Last Logout</th></tr></thead>";
+        //         echo "<tbody>";
            
         
-                // Fetching results as associative array
-                foreach ($result as $row) {
-                    echo "<tr>";
-                    echo "<td>" . $row->uid . "</td>"; // User ID
-                    echo "<td>" . $row->user_name . "</td>"; // User Name
-                    echo "<td>" . $row->email . "</td>"; // Email
-                    echo "<td>" . $row->create_date . "</td>"; // Creation Date
-                    echo "<td>" . $row->last_login . "</td>"; // Last Login
-                    echo "<td>" . $row->last_logout . "</td>"; // Last Logout
-                    echo "</tr>";}
+        //         // Fetching results as associative array
+        //         foreach ($result as $row) {
+        //             echo "<tr>";
+        //             echo "<td>" . $row->uid . "</td>"; // User ID
+        //             echo "<td>" . $row->user_name . "</td>"; // User Name
+        //             echo "<td>" . $row->email . "</td>"; // Email
+        //             echo "<td>" . $row->create_date . "</td>"; // Creation Date
+        //             echo "<td>" . $row->last_login . "</td>"; // Last Login
+        //             echo "<td>" . $row->last_logout . "</td>"; // Last Logout
+        //             echo "</tr>";}
         
                     
-                echo "</tbody>";
-                echo "</table>";
+        //         echo "</tbody>";
+        //         echo "</table>";
         
-                echo "<form method='post'>";
-                echo "<input type='hidden' name='invoice_date' value='$invoice_date'>";
-                echo "<input type='hidden' name='invoice_due_date' value='$invoice_due_date'>";
-                echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download</button>";
-                echo "</form>";
-            } else {
-                echo "<div class='alert alert-warning'>No bookings123 found between the selected dates.</div>";
-            }
-        }
+        //         echo "<form method='post'>";
+        //         echo "<input type='hidden' name='invoice_date' value='$invoice_date'>";
+        //         echo "<input type='hidden' name='invoice_due_date' value='$invoice_due_date'>";
+        //         echo "<button type='submit' name='download_pdf' class='btn btn-primary'>Download</button>";
+        //         echo "</form>";
+        //     } else {
+        //         echo "<div class='alert alert-warning'>No bookings123 found between the selected dates.</div>";
+        //     }
+        // }
         
         
         

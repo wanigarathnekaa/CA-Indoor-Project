@@ -69,7 +69,8 @@
                         <thead>
                               <tr>
                                     <th>Name</th>
-                                    <th>Role</th>                                   <th>Email</th>
+                                    <th>Role</th>                                  
+                                     <th>Email</th>
                                     <th>phoneNumber</th>
                                     <th>NIC</th>
                                     <th></th>
@@ -85,24 +86,27 @@
                               <?php $i = 0; ?>
                               <?php foreach ($data['CompanyUsers'] as $CompanyUser): ?>
                                     <tr>
-                                           <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($CompanyUser)); ?>)">
-                                                <?php echo $CompanyUser->name; ?>
+                                          <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($CompanyUser)); ?>)">
+                                          <?php echo $CompanyUser->name; ?>
                                            </td>
                                            <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($CompanyUser)); ?>)">
                                            <?php
-                                                if ($CompanyUser->role == 1) {
-                                                      echo "Owner";
-                                                  } elseif ($CompanyUser->role == 2) {
-                                                      echo "Admin";
-                                                  } elseif ($CompanyUser->role == 3) {
-                                                      echo "Cashier";
-                                                  } else {
-                                                      // Handle other roles if necessary
-                                                      echo "Unknown role";
-                                                  }
-
+                                          if ($CompanyUser->role == 1) {
+                                              echo "Owner"; 
+                                          } 
+                                          elseif ($CompanyUser->role == 2) {
+                                              $role = "Admin";
+                                              echo $role;
+                                          }
+                                          elseif ($CompanyUser->role == 3) {
+                                          echo "Cashier"; 
+                                          } else {
+                                          echo "Unknown role"; 
+                                          }
                                           ?>
-                                           </td>
+
+</td>
+
                                           
                                            <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($CompanyUser)); ?>)">
                                                 <?php echo $CompanyUser->email; ?>
@@ -117,8 +121,14 @@
                                                 <?php echo $CompanyUser->address; ?>
                                           </td> -->
                                           
-                                          <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td>
-                                          <td onclick="openDeletePopup()"><i class="fa-solid fa-user-slash delete icon"></i></td>
+                                          <!-- <td><a href="#"><i class="fa-solid fa-user-pen edit icon"></i></a></td> -->
+                                          <td onclick="openDeletePopup()">
+                                          <?php
+                                         if ($CompanyUser->role == 3) { // Check if role is Cashier
+                                         echo '<i class="fa-solid fa-user-slash delete icon"></i>'; // Display the delete icon
+                                         }
+                                         ?>
+                                         </td>
                                     </tr>
                                     <?php $i = $i + 1;
                               endforeach; ?>
@@ -137,10 +147,13 @@
                         <hr>
                         <div class="popupdetails">
            
-                             
+                              <!-- <div class="popupdetail">
+                                    <h2><b>Name :</b><span class="m_name"></span></h2>
+                              </div> -->
                               <div class="popupdetail">
                                     <h2><b>Role :</b><span class="m_role"></span></h2>
                               </div>
+
                               <div class="popupdetail">
                                     <h2><b>Email :</b><span class="m_email"></span></h2>
                               </div>
@@ -177,6 +190,6 @@
       </section>
 
       <!-- javascript -->
-      <script src="<?php echo URLROOT; ?>/js/managerDetails_Popup.js"></script>
+      <script src="<?php echo URLROOT; ?>/js/companyUserDeatails_popup.js"></script>
       <script src="<?php echo URLROOT; ?>/js/coach_Table.js"></script>
 </body>
