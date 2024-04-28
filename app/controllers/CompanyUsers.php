@@ -81,7 +81,7 @@ class CompanyUsers extends Controller
                 $password=$this->managerModel->generateRandomPassword();
 
                 //check whether the  password is sent to the coach via email
-                if($this->managerModel->SendPasswordViaEmail($_POST['email'],$password)){
+                if($this->companyUserModel->SendPasswordViaEmail($_POST['email'],$password)){
                     $data['password'] = $password;
                 }
                 else {        

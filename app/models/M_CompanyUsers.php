@@ -1,4 +1,6 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 class M_CompanyUsers
 {
@@ -45,6 +47,34 @@ class M_CompanyUsers
         }
 
     }
+    public function SendPasswordViaEmail($email,$password) {
+      require_once APPROOT . '/libraries/phpmailer/src/PHPMailer.php';
+      require_once APPROOT . '/libraries/phpmailer/src/SMTP.php';
+      require_once APPROOT . '/libraries/phpmailer/src/Exception.php';
+
+      $mail = new PHPMailer(true);
+
+          //Server settings
+          $mail->isSMTP();
+          $mail->Host = 'smtp.gmail.com';
+          $mail->SMTPAuth = true;
+          $mail->Username = 'nivodya2001@gmail.com';
+          $mail->Password = 'wupbxphjicpfidgj';
+          $mail->SMTPSecure = 'ssl';
+          $mail->Port = 465;
+          
+          //Recipients
+          $mail->setFrom('nivodya2001@gmail.com', 'C&A Indoor Cricket Net');
+          $mail->addAddress($email);
+
+          //Content
+          $mail->isHTML(true);
+          $mail->Subject = 'Your Cashier Account Details';
+          $mail->Body    = 'Your login credentials : <br>Email :  '.$email.'<br>Password : '.$password;
+          $mail->send();
+
+          return true;   
+      } 
 
       // Find user by email
       public function findUserByEmail($email)

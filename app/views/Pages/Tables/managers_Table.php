@@ -36,10 +36,12 @@
                         </h1>
                   </div>
             
+                  <?php if ($role == 'Owner'): ?>
                   <div class="add-btn">
-                        <a href="<?php echo URLROOT; ?>/Pages/Manager_Registration/manager"><i class="fa-solid fa-user-plus  icon"></i></a>
-                  </div>
-            </div>
+                  <a href="<?php echo URLROOT; ?>/Pages/Manager_Registration/manager"><i class="fa-solid fa-user-plus  icon"></i></a>
+                 </div>
+                 <?php endif; ?>
+             </div>
 
             <!-- Table Sort -->
             <div class="tableSort">
