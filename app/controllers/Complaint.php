@@ -118,49 +118,100 @@ class Complaint extends Controller
         require_once APPROOT . '/libraries/phpmailer/src/PHPMailer.php';
         require_once APPROOT . '/libraries/phpmailer/src/SMTP.php';
         require_once APPROOT . '/libraries/phpmailer/src/Exception.php';
-        if (isset($_POST["send"])) {
-
-            $mail = new PHPMailer(true);
-
-            $email = $this->complaintModel->getComplaintEmailById($complaintId);
-
-
-            //Server settings
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'nivodya2001@gmail.com';
-            $mail->Password = 'wupbxphjicpfidgj';
-            $mail->SMTPSecure = 'ssl';
-            $mail->Port = 465;
-
-            //Recipients
-            $mail->setFrom('nivodya2001@gmail.com', 'Hasini Hewa');
-            $mail->addAddress($email);
-
-            //Content
-            $mail->isHTML(true);
-            $mail->Subject = 'About your complaint';
-            $mail->Body = $_POST["message"];
-            $mail->send();
-
-            redirect('Pages/Dashboard/admin');
-
-
-            if ($mail->send()) {
-                if ($this->complaintModel->updateComplaint($complaintId)) {
-                    redirect('Complaint/viewComplaints');
+    
+    
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Valid input
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        
+            // Input data
+            $data = [
+                'name' => trim($_POST['name']),
+                'email' => trim($_POST['email']),   
+                'message1' => trim($_POST['message1']),
+                'message' => trim($_POST['message']),
+        
+                'name_error' => '',
+                'email_error' => '',
+                'message1_error' => '',
+                'message_error' => ''
+            ];
+        
+            // Validate input
+            if (empty($data['name'])) {
+                $data['name_error'] = 'Please enter a name';
+            }
+            if (empty($data['email'])) {
+                $data['email_error'] = 'Please enter an email';
+            }
+            if (empty($data['message1'])) {
+                $data['message1_error'] = 'Please enter a message';
+            }
+            if (empty($data['message'])) {
+                $data['message_error'] = 'Please enter a reply';
+            }
+        
+            // Fetch complaint details
+            $complaint = $this->complaintModel->getComplaintById($complaintId);
+        
+            // Check if complaint exists
+            if ($complaint) {
+                // Add complaint details to data array
+                $data['complaint'] = $complaint;
+        
+                // Proceed if there are no errors
+                if (empty($data['name_error']) && empty($data['email_error']) && empty($data['message1_error']) && empty($data['message_error'])) {
+                    if (isset($_POST["send"])) {
+                        // Create PHPMailer instance
+                        $mail = new PHPMailer(true);
+        
+                        // Fetch email of the complaint
+                        $email = $this->complaintModel->getComplaintEmailById($complaintId);
+        
+                        // Server settings
+                        $mail->isSMTP();
+                        $mail->Host = 'smtp.gmail.com';
+                        $mail->SMTPAuth = true;
+                        $mail->Username = 'nivodya2001@gmail.com';
+                        $mail->Password = 'wupbxphjicpfidgj';
+                        $mail->SMTPSecure = 'ssl';
+                        $mail->Port = 465;
+        
+                        // Sender and recipient
+                        $mail->setFrom('nivodya2001@gmail.com', 'Hasini Hewa');
+                        $mail->addAddress($email);
+        
+                        // Email content
+                        $mail->isHTML(true);
+                        $mail->Subject = 'About your complaint';
+                        $mail->Body = $data['message']; // Use the reply message from the form
+        
+                        try {
+                            // Attempt to send email
+                            $mail->send();
+                            // Update complaint status
+                            if ($this->complaintModel->updateComplaint($complaintId)) {
+                                redirect('Complaint/viewComplaints');
+                            } else {
+                                die('Something went wrong.');
+                            }
+                        } catch (Exception $e) {
+                            // Handle email sending exception
+                            echo 'Email could not be sent. Mailer Error: ', $mail->ErrorInfo;
+                        }
+                    }
                 } else {
-                    die('somthing wrong');
+                    // Display form with error messages
+                    $this->view('Pages/Complaint/complaintDetails', $data);
                 }
-
             } else {
-                // Handle email sending failure
-                echo 'Email could not be sent.';
+                // Complaint not found
+                echo 'Complaint not found.';
             }
         }
-
+        
     }
+    
 
 
     public function sendMsgEmail()
