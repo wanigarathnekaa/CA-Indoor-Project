@@ -21,6 +21,8 @@
     <!-- Content -->
     <section class="home registerformhome">
         <div class="container">
+        <div class="center">
+
             <div class="title">Cashier Registration Form</div>
 
             <div class="content">
@@ -59,6 +61,7 @@
                     </div>
                 </form>
             </div>
+        </div>
         </div>
     </section>
 </body>

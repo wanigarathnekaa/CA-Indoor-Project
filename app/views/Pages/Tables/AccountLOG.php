@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 $filter_date = date('Y-m-d'); 
 $new_data = array_filter($data['logs'], function ($item) use ($filter_date) {
@@ -7,7 +7,7 @@ $new_data = array_filter($data['logs'], function ($item) use ($filter_date) {
 });
 
 ?>
-
+ -->
 
 
 
@@ -44,7 +44,7 @@ $new_data = array_filter($data['logs'], function ($item) use ($filter_date) {
       <div class="table-topic">
                   <div class="topic-name">
                         <h1>User Account Logs :
-                        <?php echo date('Y-m-d'); ?>
+                        <!-- <?php echo date('Y-m-d'); ?> -->
                         </h1>
                   </div>
 
@@ -103,13 +103,13 @@ $new_data = array_filter($data['logs'], function ($item) use ($filter_date) {
 
                 <!-- table body -->
                 <tbody>
-            <?php if (empty($new_data)): ?>
+            <?php if (empty($data['logs'])): ?>
                 <tr>
                     <td colspan="5" style="text-align: center; color: red;" >No users logged in today.</td>
                 </tr>
            <?php else: ?>
             
-           <?php foreach ($new_data as $log): 
+           <?php foreach ($data['logs'] as $log): 
              
                  $status_color = '';
                  $status_colorr = '';
