@@ -13,6 +13,7 @@ $new_data = array_filter($data['bookings'], function ($item) use ($filter_date) 
     <meta name="viewport" content="width = device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/dailyReservation_Table_Style.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_reservation.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/notification.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 </head>
 
@@ -185,10 +186,23 @@ $new_data = array_filter($data['bookings'], function ($item) use ($filter_date) 
                     },
                     success: function (response) {
                         if (response.status == "success") {
-                            alert("Reservation Cancelled Successfully");
-                            location.reload();
+                            // alert("Reservation Cancelled Successfully");
+                            // location.reload();
+                            var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Reservation Cancelled Successfully</h3></div><div class="notification_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 3000);
+                            setTimeout(function() {
+                                    location.reload();
+                            }, 2000);
                         } else {
-                            alert("Failed to Cancel the Reservation");
+                            // alert("Failed to Cancel the Reservation");
+                            var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title">Failed to Cancel the Reservation</h3></div><div class="notification2_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 3000);
                         }
                     }
                 });
