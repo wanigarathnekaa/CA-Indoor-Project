@@ -568,9 +568,6 @@ class Bookings extends Controller
             $reservation = $this->bookingModel->getReservationDetailsByID($booking_Id);
             $email = $reservation[0]->coach;
             $date = $reservation[0]->date;
-            print_r($time_slot_array);
-            echo $email;
-            echo $date;
             $data = [
                 'date' => $date,
                 'coach' => $email
