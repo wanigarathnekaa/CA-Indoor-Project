@@ -118,7 +118,7 @@ function closeReschedulePopup() {
 
 function confirmReschedule() {
   // Add your redirection URL
-  var redirectURL = "http://localhost/C&A_Indoor_Project/Pages/Calendar/manager?bookingID=" + bookingID;
+  var redirectURL = "http://localhost/C&A_Indoor_Project/Pages/managerRescheduling/manager?bookingID=" + bookingID;
   window.location.href = redirectURL;
 }
 
