@@ -156,6 +156,7 @@ function openPopup(date) {
     var timeSlot = selectedSlots.map((slot) => slot.timeSlot);
     var date = selected_date;
     var selectElement = document.getElementById("coach");
+    selectElement.innerHTML = "<option value=''>--Available Coach--</option>";
 
           // Clear existing options
     selectElement.innerHTML = "<option value=''>--Availabe Coach--</option>";
@@ -172,15 +173,6 @@ function openPopup(date) {
           console.log(xhr.responseText);
           var responseObject = JSON.parse(xhr.responseText);
           
-
-          // Add a default option
-          // var defaultOption = document.createElement("option");
-          // defaultOption.selected = true;
-          // defaultOption.disabled = true;
-          // defaultOption.textContent = "--Available Coaches--";
-          // selectElement.appendChild(defaultOption);
-
-          // Add options returned from the server
           responseObject.forEach(function (coach) {
             var option = document.createElement("option");
             option.value = coach.email; // Set the value to the coach id if needed

@@ -48,7 +48,7 @@ class Bookings extends Controller
                 'phoneNumber_err' => "",
             ];
 
-            if($data['coach'] == "No Coach" || $data['coach'] == 0){
+            if ($data['coach'] == "No Coach" || $data['coach'] == 0) {
                 $data['coach'] = "";
             }
 
@@ -194,7 +194,7 @@ class Bookings extends Controller
                 'paymentStatus_err' => "",
             ];
 
-            
+
 
             //validate name
             if (empty($data['name'])) {
@@ -541,6 +541,42 @@ class Bookings extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $booking_Id = trim($_POST['bookingId']);
+
+            $timeSlots = $this->bookingModel->getTimeSlots($booking_Id);
+            $time_slot_array = [];
+            for ($i = 0; $i < count($timeSlots); $i++) {
+                $time_slot_array[] = $timeSlots[$i]->timeSlot;
+            }
+
+            $reservation = $this->bookingModel->getReservationDetailsByID($booking_Id);
+            $email = $reservation[0]->coach;
+            $date = $reservation[0]->date;
+            print_r($time_slot_array);
+            echo $email;
+            echo $date;
+            $data = [
+                'date' => $date,
+                'coach' => $email
+            ];
+
+            if ($email != "No Coach" && $email != "") {
+                $existing_availability = $this->bookingModel->getCoachAvailability($data);
+                $existing_time_Slots = json_decode($existing_availability[0]->time_slot);
+                $not_reserved = array_unique(array_merge($existing_time_Slots, $time_slot_array));
+
+                $existing_reserved_time_Slots = json_decode($existing_availability[0]->reserved_slots);
+                $reserved = array_diff($existing_reserved_time_Slots, $time_slot_array);
+                $reserved = array_values($reserved);
+
+                $data = [
+                    'date' => $date,
+                    'email' => $email,
+                    'time_slot' => json_encode($not_reserved),
+                    'reserved_time_slot' => json_encode($reserved)
+                ];
+                $this->bookingModel->update_coach_availability($data);
+                $this->bookingModel->update_reserved_timeSlots($data);
+            }
 
             if ($this->bookingModel->deleteReservation($booking_Id)) {
                 $response = [
