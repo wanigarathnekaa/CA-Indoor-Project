@@ -64,8 +64,6 @@ class Coach extends Controller
             if (empty($data['email'])) {
                 $data['email_err'] = "Please enter an email";
             } else {
-                $userdata = $this->coachUserModel->getUserByEmail($_SESSION['user_email']);
-                if ($userdata->email != $data['email']) {
                     // check email already registered or not
                     if ($this->coachUserModel->findUserByEmail($data['email'])) {
                         $data['email_err'] = "This email is already in use";
@@ -76,11 +74,10 @@ class Coach extends Controller
                     if ($this->companyUserModel->findUserByEmail($data['email'])) {
                         $data['email_err'] = "This email is already in use";
                     }
-                }
-                //check the email format is correct or not
-                if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-                    $data['email_err'] = "Please enter a valid email";
-                }
+                
+                    if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                        $data['email_err'] = "Please enter a valid email";
+                    }
             }
 
             //validate phone number
