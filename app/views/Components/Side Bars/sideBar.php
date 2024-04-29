@@ -235,6 +235,12 @@
                                         </a>
                                     </li>
                                     <li class="nav-link">
+                                        <a href="<?php echo URLROOT; ?>/Pages/Inventory_Management/manager">
+                                            <i class="fa-solid fa-shop icon"></i>
+                                            <span class="text nav-text">Inventory Management</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-link">
                                         <a href="<?php echo URLROOT; ?>/Pages/View_Advertisement/manager">
                                             <i class="fa-brands fa-adversal icon"></i>
                                             <span class="text nav-text">Advertisement</span>
@@ -539,6 +545,12 @@
                                         <a href="<?php echo URLROOT; ?>/Pages/Schedule/manager">
                                             <i class="bx bxs-calendar icon"></i>
                                             <span class="text nav-text">Schedule</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-link">
+                                        <a href="<?php echo URLROOT; ?>/Pages/Inventory_Management/manager">
+                                            <i class="fa-solid fa-shop icon"></i>
+                                            <span class="text nav-text">Inventory Management</span>
                                         </a>
                                     </li>
                                     <li class="nav-link">
