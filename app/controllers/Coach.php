@@ -387,9 +387,25 @@ class Coach extends Controller
     // delete function.....................................................
     public function delete()
     {
+        $role = $_SESSION['user_role'];
+        if ($role == 'Manager') {
+            $role = 'manager';
+        } else if ($role == 'Coach') {
+            $role = 'coach';
+        } else if ($role == 'Owner') {
+            $role = 'owner';
+        } else if ($role == 'Admin') {
+            $role = 'admin';
+        } else if ($role == 'User') {
+            $role = 'user';
+        }else if ($role == 'Cashier') {
+            $role = 'cashier';
+        }
         // var_dump($_POST);
         if ($this->coachUserModel->deleteUser($_POST["submit"])) {
-            redirect("Pages/Dashboard/manager");
+            if($role!='coach' && $role!='user'){
+                redirect("Pages/playerTable/$role");
+            }
         } else {
             die("Something Went Wrong");
         }
