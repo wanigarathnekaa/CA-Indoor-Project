@@ -155,7 +155,10 @@ function openPopup(date) {
   document.getElementById("coach").addEventListener("click", function () {
     var timeSlot = selectedSlots.map((slot) => slot.timeSlot);
     var date = selected_date;
+    var selectElement = document.getElementById("coach");
 
+          // Clear existing options
+    selectElement.innerHTML = "<option value=''>--Availabe Coach--</option>";
     var xhr = new XMLHttpRequest();
 
     var postData = {
@@ -168,10 +171,7 @@ function openPopup(date) {
         if (xhr.status == 200) {
           console.log(xhr.responseText);
           var responseObject = JSON.parse(xhr.responseText);
-          var selectElement = document.getElementById("coach");
-
-          // Clear existing options
-          selectElement.innerHTML = "<option value=''>--Availabe Coach--</option>";
+          
 
           // Add a default option
           // var defaultOption = document.createElement("option");
