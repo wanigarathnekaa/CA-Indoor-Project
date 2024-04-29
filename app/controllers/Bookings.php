@@ -83,7 +83,7 @@ class Bookings extends Controller
             if (!empty($data['coach'])) {
                 $time_slots_coach_available = $this->bookingModel->getCoachAvailability($data);
                 $array_time_slots = json_decode($time_slots_coach_available[0]->time_slot, true);
-                print_r($array_time_slots);
+                $array_already_reserved_time_slots = json_decode($time_slots_coach_available[0]->reserved_slots, true);
                 $ts_array = array();
                 for ($i = 0; $i < count($arrayData); $i++) {
                     $ts_array[] = $arrayData[$i]['timeSlot'];
@@ -91,12 +91,14 @@ class Bookings extends Controller
                 $resultArray = array_diff($array_time_slots, $ts_array);
                 $result = array_values($resultArray);
 
+                $all_reserved_time_slots = array_merge($array_already_reserved_time_slots, $ts_array);
+
                 if (!empty($result)) {
                     $data1["time_slot"] = json_encode($result);
-                    $data1['reserved_time_slot'] = json_encode($ts_array);
+                    $data1['reserved_time_slot'] = json_encode($all_reserved_time_slots);
                 } else {
                     $data1["time_slot"] = NULL;
-                    $data1['reserved_time_slot'] = json_encode($ts_array);
+                    $data1['reserved_time_slot'] = json_encode($all_reserved_time_slots);
                 }
                 $this->bookingModel->update_coach_availability($data1);
                 $this->bookingModel->update_reserved_timeSlots($data1);
@@ -237,7 +239,7 @@ class Bookings extends Controller
             if ($data['coach'] != "No Coach") {
                 $time_slots_coach_available = $this->bookingModel->getCoachAvailability($data);
                 $array_time_slots = json_decode($time_slots_coach_available[0]->time_slot, true);
-                print_r($array_time_slots);
+                $array_already_reserved_time_slots = json_decode($time_slots_coach_available[0]->reserved_slots, true);
                 $ts_array = array();
                 for ($i = 0; $i < count($arrayData); $i++) {
                     $ts_array[] = $arrayData[$i]['timeSlot'];
@@ -245,12 +247,14 @@ class Bookings extends Controller
                 $resultArray = array_diff($array_time_slots, $ts_array);
                 $result = array_values($resultArray);
 
+                $all_reserved_time_slots = array_merge($array_already_reserved_time_slots, $ts_array);
+
                 if (!empty($result)) {
                     $data1["time_slot"] = json_encode($result);
-                    $data1['reserved_time_slot'] = json_encode($ts_array);
+                    $data1['reserved_time_slot'] = json_encode($all_reserved_time_slots);
                 } else {
                     $data1["time_slot"] = NULL;
-                    $data1['reserved_time_slot'] = json_encode($ts_array);
+                    $data1['reserved_time_slot'] = json_encode($all_reserved_time_slots);
                 }
                 $this->bookingModel->update_coach_availability($data1);
                 $this->bookingModel->update_reserved_timeSlots($data1);
