@@ -141,7 +141,7 @@
                   <div class="deletepopup" id=deletepopup>
                         <span class="close" onclick="closeDeletePopup()"><i class="fa-solid fa-xmark"></i></span>
                         <h2>Change the Status</h2>
-                        <form action="<?php echo URLROOT; ?>/Coach/delete" method="POST">
+                        <form action="<?php echo URLROOT; ?>/Users/delete" method="POST">
                               <div class="btns">
                                     <button type="submit" class="button">Change Status</button>
                                     <button type="button" onclick="closeDeletePopup()">Cancel</button>

@@ -28,6 +28,13 @@ class M_Pages
 
         return $this->db->single();
     }
+
+    public function getActiveUserCount()
+    {
+        $this->db->query('SELECT * FROM user WHERE is_blacklist = 0');
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
     
 
     public function getActivatedCoaches()
@@ -35,6 +42,13 @@ class M_Pages
         $this->db->query('SELECT u.*, c.* FROM coaches c LEFT JOIN user u ON u.email = c.email WHERE u.is_blacklist = 0');
 
         return $this->db->resultSet();
+    }
+
+    public function getActiveCoachCount()
+    {
+        $this->db->query('SELECT u.*, c.* FROM coaches c LEFT JOIN user u ON u.email = c.email WHERE u.is_blacklist = 0');
+        $this->db->execute();
+        return $this->db->rowCount();
     }
 
     public function findCoach($email)

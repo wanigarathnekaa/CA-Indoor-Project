@@ -63,7 +63,7 @@ class Coach extends Controller
             //validate email
             if (empty($data['email'])) {
                 $data['email_err'] = "Please enter an email";
-            } else {   
+            } else {
                     // check email already registered or not
                     if ($this->coachUserModel->findUserByEmail($data['email'])) {
                         $data['email_err'] = "This email is already in use";
@@ -404,7 +404,7 @@ class Coach extends Controller
         // var_dump($_POST);
         if ($this->coachUserModel->deleteUser($_POST["submit"])) {
             if($role!='coach' && $role!='user'){
-                redirect("Pages/playerTable/$role");
+                redirect("Pages/coachTable/$role");
             }
         } else {
             die("Something Went Wrong");
