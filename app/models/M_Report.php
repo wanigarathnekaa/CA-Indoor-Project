@@ -1,9 +1,8 @@
 <?php
-require_once('C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/TCPDF-main/tcpdf.php');
-// Load PHPMailer class file
-require 'C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/phpmailer/src/PHPMailer.php';
-require 'C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/phpmailer/src/Exception.php';
-require 'C:/xampp/htdocs/C&A_Indoor_Project/app/libraries/phpmailer/src/SMTP.php';
+require_once APPROOT . '/libraries/TCPDF-main/tcpdf.php';
+require_once APPROOT . '/libraries/phpmailer/src/PHPMailer.php';
+require_once APPROOT . '/libraries/phpmailer/src/SMTP.php';
+require_once APPROOT . '/libraries/phpmailer/src/Exception.php';
 
 
 use PHPMailer\PHPMailer\PHPMailer;
