@@ -124,7 +124,7 @@ function time_slot($duration, $cleanup, $start, $end)
                         <span id="invalid6"></span>
                     </div>
 
-                    <div class="input-field">
+                    <!-- <div class="input-field">
                         <label>Who is the coach?</label>
                         <select name="coach" required>
                             <option disabled selected>Select the coach</option>
@@ -134,7 +134,7 @@ function time_slot($duration, $cleanup, $start, $end)
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                    </div>
+                    </div> -->
 
                     <div class="netbtnbar">
                         <button id="timeSlotA" name="booking" class="net" disabled>
@@ -353,7 +353,7 @@ function time_slot($duration, $cleanup, $start, $end)
                 var timeDuration = $("select[name='timeDuration']").val();
                 var day = $("select[name='day']").val();
                 var date = $("#date").val();
-                var coach = $("select[name='coach']").val();
+                var coach = "";
 
                 // Convert arrays to JSON strings
                 var timeSlotsA = JSON.stringify(selectedTimeSlotsA);

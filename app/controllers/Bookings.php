@@ -254,7 +254,7 @@ class Bookings extends Controller
                     $array_already_reserved_time_slots = array();
                 }
                 $all_reserved_time_slots = array_merge($array_already_reserved_time_slots, $ts_array);
-                
+
                 if (!empty($result)) {
                     $data1["time_slot"] = json_encode($result);
                     $data1['reserved_time_slot'] = json_encode($all_reserved_time_slots);
@@ -410,6 +410,13 @@ class Bookings extends Controller
             //validate date
             if (empty($data['date'])) {
                 $data['date_err'] = "Please enter a date";
+            }
+            else{
+                $date = strtotime($data['date']);
+                $today = strtotime('today');
+                if($date < $today){
+                    $data['date_err'] = "Please enter a valid date";
+                }
             }
 
             //validate phone number
