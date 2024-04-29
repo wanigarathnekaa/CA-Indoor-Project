@@ -88,7 +88,7 @@
 
                         <!-- table body -->
                         <tbody>
-                              <?php foreach ($data as $reservation) :
+                              <?php foreach (array_reverse($data) as $reservation) :
                                     $status_color = '';
                                     if ($reservation->paymentStatus == 'Paid') {
                                           $status_color = '#33c030';

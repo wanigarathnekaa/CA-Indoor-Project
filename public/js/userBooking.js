@@ -171,7 +171,7 @@ function openPopup(date) {
           var selectElement = document.getElementById("coach");
 
           // Clear existing options
-          selectElement.innerHTML = "";
+          selectElement.innerHTML = "<option value=''>--Availabe Coach--</option>";
 
           // Add a default option
           // var defaultOption = document.createElement("option");

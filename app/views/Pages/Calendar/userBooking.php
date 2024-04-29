@@ -315,7 +315,7 @@ $current_timeslots = time_slot($duration, $cleanup, $formattedTime, $end);
                     <div class="input-field">
                         <label>Choose a coach?</label>
                         <select name="coach" id="coach">
-                            <option disabled selected>Select the coach</option>
+                            <option disabled selected>Select the coach</option>                           
                         </select>
                     </div>
 
