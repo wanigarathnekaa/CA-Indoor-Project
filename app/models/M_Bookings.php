@@ -600,13 +600,20 @@ class M_Bookings
 
     public function getCoachAvailability($data)
     {
-        $this->db->query('SELECT time_slot FROM coach_availability WHERE email = :email AND date = :date');
+        $this->db->query('SELECT * FROM coach_availability WHERE email = :email AND date = :date');
         $this->db->bind(':email', $data['coach']);
         $this->db->bind(':date', $data['date']);
 
         return $this->db->resultSet();
     }
 
+    public function getTimeSlots($booking_Id)
+    {
+        $this->db->query('SELECT timeSlot FROM time_slots WHERE booking_id = :booking_Id');
+        $this->db->bind(':booking_Id', $booking_Id);
+
+        return $this->db->resultSet();
+    }
 
 }
 ?>
