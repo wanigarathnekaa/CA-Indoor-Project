@@ -58,7 +58,7 @@
                                           href="<?php echo URLROOT; ?>/Pages/changePassword/user">Change Password</a>
                               </div>
                                     <!-- <button type="button" class="button">Change Password</button> -->
-                                    <button type="button" class="button" onclick="openDeletePopup()">Delete Profile</button>
+                                    <!-- <button type="button" class="button" onclick="openDeletePopup()">Delete Profile</button> -->
                               </div>    
                         </div>
                   </div>

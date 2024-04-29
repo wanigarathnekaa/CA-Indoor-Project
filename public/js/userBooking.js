@@ -158,8 +158,7 @@ function openPopup(date) {
     var selectElement = document.getElementById("coach");
     selectElement.innerHTML = "<option value=''>--Available Coach--</option>";
 
-          // Clear existing options
-    selectElement.innerHTML = "<option value=''>--Availabe Coach--</option>";
+    
     var xhr = new XMLHttpRequest();
 
     var postData = {
