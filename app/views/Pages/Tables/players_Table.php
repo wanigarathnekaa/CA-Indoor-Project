@@ -70,7 +70,9 @@
                                     <th>Email</th>
                                     <th>Mobile Number</th>
                                     <th>Player Status</th>
+                                    <?php if($role == 'Admin' || $role == 'Manager'){?>
                                     <th></th>
+                                    <?php }?>
                                     <!-- <th></th> -->
                               </tr>
                         </thead>
@@ -102,7 +104,9 @@
                                           <?php }else{?>
                                                 <td onclick="openPopup(<?php echo htmlspecialchars(json_encode($player)); ?>)"> <span class="status" style="background-color: <?php echo $status_color; ?>;">Deactivated</span></td>
                                           <?php }?>
+                                          <?php if($role == 'Admin' || $role == 'Manager'){?>
                                           <td onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($player)); ?>)"><i class="fa-solid fa-rotate edit icon"></i></td>
+                                          <?php }?>
                                           </td>
                                     </tr>
                                     <?php

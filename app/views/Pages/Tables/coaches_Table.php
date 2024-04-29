@@ -68,12 +68,13 @@
                                     <th>Speciality</th>
                                     <th>Certificate</th>
                                     <th>Status</th>
+                                    <?php if($role == 'Admin' || $role == 'Manager'){?>
                                     <th></th>
+                                    <?php } ?>
                                     <!-- <th></th> -->
                               </tr>
                         </thead>
-<!-- <?php print_r($data1); ?> -->
-<!-- <?php print_r($data); ?> -->
+
                         <!-- table body -->
                         <tbody>
                               <?php $i = 0; ?>
@@ -121,8 +122,10 @@
                                                 </td>
                                           <?php } ?>
                                           <td
+                                          <?php if($role == 'Admin' || $role == 'Manager'){?>
                                                 onclick="openDeletePopup(<?php echo htmlspecialchars(json_encode($data1[$i])); ?>)">
                                                 <i class="fa-solid fa-rotate edit icon"></i></td>
+                                          <?php } ?>
                                     </tr>
                                     <?php $i = $i + 1;
                               endforeach; ?>
