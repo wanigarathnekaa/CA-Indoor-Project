@@ -991,6 +991,16 @@ class Pages extends Controller
         $this->view('Pages/Coach/availabilitypage');
     }
 
+    public function userRescheduling($name)
+    {
+        $this->view('Pages/Calendar/userRescheduling');
+    }
+
+    public function managerRescheduling($name)
+    {
+        $this->view('Pages/Calendar/managerRescheduling');
+    }
+
 }
 
 ?>
