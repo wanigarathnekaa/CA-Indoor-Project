@@ -6,6 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/Reservation_Table.css">
       <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/popup_reservation.css">
+      <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/notification.css">
       <title>Reservation</title>
 </head>
 
@@ -298,10 +299,23 @@
                               },
                               success: function(response) {
                                     if (response.status == "success") {
-                                          alert("Reservation Cancelled Successfully");
-                                          location.reload();
+                                          // alert("Reservation Cancelled Successfully");
+                                          // location.reload();
+                                          var notificationDiv = $('<div class="notification"><div class="notification_body"><h3 class="notification_title">Reservation Cancelled Successfully</h3></div><div class="notification_progress"></div></div>');
+                                          $('body').append(notificationDiv);
+                                          setTimeout(function() {
+                                                notificationDiv.remove();
+                                          }, 3000);
+                                          setTimeout(function() {
+                                                      location.reload();
+                                          }, 2000);
                                     } else {
-                                          alert("Failed to Cancel the Reservation");
+                                          // alert("Failed to Cancel the Reservation");
+                                          var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title">Failed to Cancel the Reservation</h3></div><div class="notification2_progress"></div></div>');
+                                          $('body').append(notificationDiv);
+                                          setTimeout(function() {
+                                                notificationDiv.remove();
+                                          }, 3000);
                                     }
                               }
                         });
