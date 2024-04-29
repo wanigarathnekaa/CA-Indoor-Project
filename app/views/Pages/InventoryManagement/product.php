@@ -215,9 +215,11 @@
                                 <button type="button" class="edit" id="<?php echo $product->product_id; ?>">
                                     <i class="fas fa-edit icon"></i></button>
                                 <?php if ($product->active_state) { ?>
-                                    <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>" class="status" style="background-color: #30c030;">Active</a>
+                                    <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>"
+                                        class="status" style="background-color: #30c030;">Active</a>
                                 <?php } else { ?>
-                                    <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>"class="status" style="background-color: #e03333;">Inactive</a>
+                                    <a href="<?php echo URLROOT; ?>/Product/deleteProduct/<?php echo $product->product_id; ?>"
+                                        class="status" style="background-color: #e03333;">Inactive</a>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -330,14 +332,18 @@
                 if (filterValue === 'Insufficient Quantity') {
                     $('#categoryTable tr').each(function () {
                         var quantity = parseInt($(this).find('td:eq(5)').text(), 10);
-                        if (quantity > 3) {
+                        var reorder_level = parseInt($(this).find('td:eq(4)').text(), 10);
+                        if (isNaN(quantity) || isNaN(reorder_level)) return;
+                        if (quantity > reorder_level) {
                             $(this).hide();
                         }
                     });
                 } else if (filterValue === 'Sufficient Quantity') {
                     $('#categoryTable tr').each(function () {
                         var quantity = parseInt($(this).find('td:eq(5)').text(), 10);
-                        if (quantity <= 3) {
+                        var reorder_level = parseInt($(this).find('td:eq(4)').text(), 10);
+                        if (isNaN(quantity) || isNaN(reorder_level)) return;
+                        if (quantity <= reorder_level) {
                             $(this).hide();
                         }
                     });
