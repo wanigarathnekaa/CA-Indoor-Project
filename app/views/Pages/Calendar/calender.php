@@ -24,7 +24,7 @@ function build_calendar($month, $year)
 
     $bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
     $calendar = "<center><h2 class='date'>$monthName $year</h2>";
-    $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $prev_month . "&year=" . $prev_year . "&bookingID=" . $bookingId . "' target='_self'_>Prev Month</a> ";
+    //$calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $prev_month . "&year=" . $prev_year . "&bookingID=" . $bookingId . "' target='_self'_>Prev Month</a> ";
     $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender&bookingID=" . $bookingId . "'>Current Month</a> ";
     $calendar .= "<a class='btn btn-primary btn-xs' href='http://localhost/C&A_Indoor_Project/Pages/Calendar/calender?month=" . $next_month . "&year=" . $next_year . "&bookingID=" . $bookingId . "'>NextMonth</a></center> ";
 
