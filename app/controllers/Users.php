@@ -626,9 +626,16 @@ class Users extends Controller
             $role = 'admin';
         } else if ($role == 'User') {
             $role = 'user';
+        }else if ($role == 'Cashier') {
+            $role = 'cashier';
         }
         if ($this->userModel->deleteUser($_POST["submit"])) {
-            redirect("Pages/Dashboard/{$role}");
+            if($role == 'user'){
+                redirect('Users/logout');
+            }else{
+                redirect("Pages/playerTable/$role");
+            }
+          
         } else {
             die("Something Went Wrong");
         }

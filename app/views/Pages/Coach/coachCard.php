@@ -51,6 +51,11 @@ $coachUser = array_values($coachUser);
                         </div>
                   </div>
             </div>
+            <div class="bottom">
+                  <div>
+                  <h2>** feel free to contact me for coaching sessions</h2>
+            </div>
+            </div>
       </section>
 </body>
 

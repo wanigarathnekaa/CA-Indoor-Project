@@ -22,7 +22,7 @@
       align-items: center;
       /* background: #A7D8D7; */
       justify-content: center;
-      height: 100%;
+      height: 95%;
       width: 100%;
 
 }
@@ -81,4 +81,16 @@
             width: 100%;
             max-width: 1000px;
       }
+}
+
+
+.bottom{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      background-color: #A7D8D7;
+      padding: 10px 0;
+      text-align: center;
+      font-size: 12px;
 }
