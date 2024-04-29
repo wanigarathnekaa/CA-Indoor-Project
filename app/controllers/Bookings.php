@@ -91,6 +91,9 @@ class Bookings extends Controller
                 $resultArray = array_diff($array_time_slots, $ts_array);
                 $result = array_values($resultArray);
 
+                if($array_already_reserved_time_slots == NULL){
+                    $array_already_reserved_time_slots = array();
+                }
                 $all_reserved_time_slots = array_merge($array_already_reserved_time_slots, $ts_array);
 
                 if (!empty($result)) {
@@ -247,7 +250,7 @@ class Bookings extends Controller
                 $resultArray = array_diff($array_time_slots, $ts_array);
                 $result = array_values($resultArray);
 
-                $all_reserved_time_slots = array_merge($array_already_reserved_time_slots, $ts_array);
+                $all_reserved_time_slots = $array_already_reserved_time_slots.concat($ts_array);
 
                 if (!empty($result)) {
                     $data1["time_slot"] = json_encode($result);
