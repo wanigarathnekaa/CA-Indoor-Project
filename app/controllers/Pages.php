@@ -320,11 +320,12 @@ class Pages extends Controller
     public function Dashboard($name)
     {
         $bookings = $this->pagesModel->getReservations();
-        $coaches = $this->pagesModel->getCoachCount();
+        // $coaches = $this->pagesModel->getCoachCount();
+        $coaches = $this->pagesModel->getActiveCoachCount();
         $bookingCount = count($this->pagesModel->getBookings());
         $orderCount = count($this->pagesModel->getOrder());
         $cancelOrderCount = count($this->pagesModel->getCancelOrder());
-        $users = $this->pagesModel->getUserCount();
+        $users = $this->pagesModel->getActiveUserCount();
         $coach = $this->pagesModel->getActivatedCoaches();
         $advertisement = $this->pagesModel->getAdvertisement();
         $managers = $this->pagesModel->getManagerCount();

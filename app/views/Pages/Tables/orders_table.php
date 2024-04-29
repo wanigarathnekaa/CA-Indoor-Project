@@ -365,7 +365,12 @@
                         if (response.status == "success") {
                             $("#OrderStatus").text("Status: " + $stat);
                         } else {
-                            alert("Status change failed");
+                            // alert("Status change failed");
+                            var notificationDiv = $('<div class="notification2"><div class="notification_body"><h3 class="notification_title">Status change failed</h3></div><div class="notification2_progress"></div></div>');
+                            $('body').append(notificationDiv);
+                            setTimeout(function() {
+                                notificationDiv.remove();
+                            }, 3000);
                         }
                     }
                 });
