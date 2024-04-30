@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Colombo');
 $filter_date = date('Y-m-d');
 $email = $_SESSION['user_email'];
 

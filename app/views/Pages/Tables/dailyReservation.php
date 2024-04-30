@@ -1,4 +1,5 @@
-<?php
+<?
+date_default_timezone_set('Asia/Colombo');
 //print_r($data);
 $filter_date = date('Y-m-d');
 $new_data = array_filter($data['bookings'], function ($item) use ($filter_date) {
