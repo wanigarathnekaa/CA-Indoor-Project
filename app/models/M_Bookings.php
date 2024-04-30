@@ -608,5 +608,13 @@ class M_Bookings
         return $this->db->resultSet();
     }
 
+    public function getPaymentStatus($booking_Id)
+    {
+        $this->db->query('SELECT * FROM bookings WHERE id = :booking_Id');
+        $this->db->bind(':booking_Id', $booking_Id);
+
+        return $this->db->single();
+    }
+
 }
 ?>

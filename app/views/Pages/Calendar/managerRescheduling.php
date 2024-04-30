@@ -1,3 +1,8 @@
+<?php
+date_default_timezone_set('Asia/Colombo');
+
+$bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +25,7 @@
             <div class="main">
                   <div class="calanderdiv">
                               <!-- <iframe src="http://localhost/C&A_Indoor_Project/Pages/Calendar/C&A" frameborder="0"></iframe>-->
-                                    <iframe src="<?php echo URLROOT; ?>/Pages/Calendar/Rescheduling" frameborder="0"></iframe>
+                                <iframe src="<?php echo URLROOT; ?>/Pages/Calendar/manager?bookingID=<?php echo $bookingId; ?>" frameborder="0"></iframe>
                   </div>
             </div>
       </section>
