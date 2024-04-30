@@ -12,10 +12,19 @@ class Bookings extends Controller
     {
         if (isset($_POST['booking']) == 'POST') {
             //form is submitting
-
+            $flag = 0;
+            $status = "";
+            $paidPrice = 0;
             if (isset($_POST['booking_delete_id']) && $_POST['booking_delete_id'] != 0) {
                 $bookingId = trim($_POST['booking_delete_id']);
                 echo $bookingId;
+                $payment_status = $this->bookingModel->getPaymentStatus($bookingId);
+                print_r($payment_status);
+                $paidPrice = $payment_status->paidPrice;
+                echo $paidPrice;
+                $status = $payment_status->paymentStatus;
+                echo $status;
+                $flag = 1;
                 $this->bookingModel->deleteReservation($bookingId);
             }
 
@@ -47,6 +56,17 @@ class Bookings extends Controller
                 'date_err' => "",
                 'phoneNumber_err' => "",
             ];
+
+            if($flag){
+                $data['paymentStatus'] = $status;
+                $data['paidPrice'] = $paidPrice;
+                if($paidPrice < $decimalBookingPrice){
+                    $data['paymentStatus'] = "Pending";
+                }
+                if($paidPrice == 0){
+                    $data['paymentStatus'] = "Not Paid";
+                }
+            }
 
             if ($data['coach'] == "No Coach" || $data['coach'] == 0) {
                 $data['coach'] = "";
