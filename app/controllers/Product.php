@@ -56,8 +56,17 @@ class Product extends Controller
                 if (empty($data['regular_price'])) {
                     $data['regular_price_err'] = "Please select a Regular Price";
                 }
+                else{
+                    if(!is_numeric($data['regular_price'])){
+                        $data['regular_price_err'] = "Please enter a valid Regular Price";
+                    }
+                }
                 if (empty($data['selling_price'])) {
                     $data['selling_price_err'] = "Please select a Selling Price";
+                }else{
+                    if(!is_numeric($data["selling_price"])){
+                        $data['selling_price_err'] = "Please enter a valid Regular Price";
+                    }
                 }
                 if (empty($data['quantity'])) {
                     $data['quantity_err'] = "Please select a Quantity";

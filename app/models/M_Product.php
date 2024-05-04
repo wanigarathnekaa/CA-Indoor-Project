@@ -9,7 +9,7 @@ class M_Product
 
     public function insertProduct($data)
     {
-        $this->db->query('INSERT INTO product (product_title, category_id, brand_id, regular_price, selling_price, product_thumbnail, short_description, status, created_at, qty, discount) VALUES (:product_title, :category_id, :brand_id, :regular_price, :selling_price, :product_thumbnail, :short_description, :status, :created_at, :qty, :discount)');
+        $this->db->query('INSERT INTO product (product_title, category_id, brand_id, regular_price, selling_price, product_thumbnail, short_description, reorder_level, created_at, qty, discount) VALUES (:product_title, :category_id, :brand_id, :regular_price, :selling_price, :product_thumbnail, :short_description, :status, :created_at, :qty, :discount)');
         $this->db->bind(':product_title', $data['productName']);
         $this->db->bind(':category_id', $data['category_name']);
         $this->db->bind(':brand_id', $data['brand_name']);

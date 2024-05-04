@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set('Asia/Colombo');
 
-$bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : 0;
+$bookingId = isset($_GET['bookingID']) ? urldecode($_GET['bookingID']) : "";
 function build_calendar($month, $year)
 {
     $daysOfWeek = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
