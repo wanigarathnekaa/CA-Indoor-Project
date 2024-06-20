@@ -4,4 +4,3 @@
 
     $init = new Core; 
 ?>
-
