@@ -11,6 +11,13 @@ services:
     volumes:
       - ./public:/var/www/public
       - ./app:/var/www/app
+    environment:
+      DB_HOST: mysql-db
+      DB_USER: root
+      DB_PASSWORD: ''
+      DB_NAME: c&a_indoor_net  # Changed database name to avoid special characters
+    depends_on:
+      - mysql-db
 
   nginx:
     image: nginx:1.19-alpine
@@ -22,3 +29,34 @@ services:
       - ./public:/var/www/public
       - ./app:/var/www/app
       - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - app
+
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: ''
+      MYSQL_DATABASE: c&a_indoor_net  # Changed database name to avoid special characters
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ''
+    ports:
+      - "3300:3300"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    platform: linux/amd64
+    links:
+      - mysql-db
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql-db
+      MYSQL_ROOT_PASSWORD: ''
+
+volumes:
+  db_data:
