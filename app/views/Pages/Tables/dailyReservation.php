@@ -1,4 +1,4 @@
-<?
+<?php
 date_default_timezone_set('Asia/Colombo');
 //print_r($data);
 $filter_date = date('Y-m-d');
